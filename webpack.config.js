@@ -2,7 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
  
 module.exports = {
-  entry: './index.js',
+  entry: './public/index.js',
   output: { path: __dirname, filename: 'bundle.js' },
   module: {
     loaders: [
@@ -16,4 +16,12 @@ module.exports = {
       }
     ]
   },
+  resolve: {
+    alias: {
+      'eventEmitter/EventEmitter': 'wolfy87-eventemitter/EventEmitter',
+      'get-style-property': 'desandro-get-style-property',
+      'matches-selector': 'desandro-matches-selector',
+      'classie': 'desandro-classie'
+    }
+  }
 };

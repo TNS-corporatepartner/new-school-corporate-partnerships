@@ -1,0 +1,71 @@
+@font-face {
+  font-family: 'Neue';
+  src: url("/fonts/NeueDisplay-Random.woff") format("woff");
+  /* Pretty Modern Browsers */
+  font-style: normal;
+  font-weight: 400; }
+
+@font-face {
+  font-family: 'NeueLight';
+  src: url("/fonts/NeueDisplay-Regular Random.woff") format("woff");
+  /* Pretty Modern Browsers */
+  font-style: normal;
+  font-weight: 400; }
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: 'NeueLight';
+  box-sizing: border-box; }
+
+body {
+  background-color: black; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Neue'; }
+
+main {
+  min-height: 500vh; }
+
+#blocksCanvas {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 100%; }
+
+section#futureOf {
+  position: relative;
+  height: 100vh; }
+  section#futureOf header, section#futureOf footer {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    padding: 2vw; }
+  section#futureOf header {
+    top: 0; }
+    section#futureOf header h1 {
+      font-size: 7vh;
+      color: white; }
+  section#futureOf footer {
+    bottom: 0;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: justify;
+        justify-content: space-between;
+    -ms-flex-align: end;
+        align-items: flex-end; }
+    section#futureOf footer .logo-container {
+      width: 100px; }
+      section#futureOf footer .logo-container img {
+        width: 100%; }
+    section#futureOf footer .loading-graphic {
+      width: 60%; }
+      section#futureOf footer .loading-graphic h1 {
+        font-size: 7vh;
+        color: white;
+        text-align: right; }
+  section#futureOf .future-of-slider .slider-cell {
+    width: 100%; }
+    section#futureOf .future-of-slider .slider-cell video {
+      width: 100%; }

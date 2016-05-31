@@ -1,0 +1,100 @@
+//@import 'normalize.scss';
+
+@font-face {
+  font-family: 'Neue';
+  src: url('/fonts/NeueDisplay-Random.woff') format('woff'); /* Pretty Modern Browsers */
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'NeueLight';
+  src: url('/fonts/NeueDisplay-Regular Random.woff') format('woff'); /* Pretty Modern Browsers */
+  font-style: normal;
+  font-weight: 400;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: 'NeueLight';
+  box-sizing: border-box;
+}            
+
+body {
+  background-color: black;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-family: 'Neue';
+}
+
+main {
+  min-height: 500vh;
+}
+
+#blocksCanvas {
+  position: fixed;
+  top: 0;
+  bottom :0;
+  width: 100%;                
+}
+
+
+
+section#futureOf {
+  position: relative;
+  height: 100vh;
+
+  header, footer {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    padding: 2vw;
+  }
+  
+  header {
+    top: 0; 
+    h1 {
+      font-size: 7vh;
+      color: white;
+    }
+  }
+  
+  footer {
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    .logo-container {
+      width: 100px;
+      img {
+        width: 100%;
+      }
+    }
+    .loading-graphic {
+      width: 60%;
+      h1 {
+        font-size: 7vh;
+        color: white;
+        text-align: right;
+      }
+    }
+  }
+
+  .content {
+    
+  }
+
+  .future-of-slider {
+    .slider-cell {
+      width: 100%;
+      video {
+        width: 100%;
+      }
+    }
+  }
+
+}
