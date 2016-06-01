@@ -36,7 +36,7 @@ gulp.task('nodemon', function (cb) {
       browser: 'google chrome'
     })
         
-    gulp.watch('public/index.js', ['webpack']);
+    gulp.watch('public/**/*.js', ['webpack']);
     return gulp.watch('scss/*.scss', ['styles'])    
   });
 })
