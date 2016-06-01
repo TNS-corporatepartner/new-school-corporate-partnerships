@@ -58,27 +58,41 @@
 
 
 	function init() {
-	  // var elem = document.querySelector('.future-of-slider');
-	  // var flkty = new Flickity( elem, {
-	  //   cellAlign: 'left',
-	  //   contain: true,
-	  //   // autoPlay: true,
-	  //   wrapAround: true
-	  // }); 
-
-	  // console.log(flkty)
-
-	  startFutureOf().then(function () {
-	    var vidEl = document.querySelector('video');
-	    console.log('show vid');
-	    Velocity(vidEl, { opacity: 1 }, {
-	      duration: 1000,
-	      display: 'block'
-	    });
+	  var elem = document.querySelector('.future-of-slider');
+	  var flkty = new _flickity2.default(elem, {
+	    cellAlign: 'left',
+	    contain: true,
+	    // autoPlay: true,
+	    wrapAround: true
 	  });
+
+	  var futureOfCells = document.querySelectorAll('.future-of-cell');
+	  var activeFutureOfCellIndex = 0;
+
+	  (function playFutureOfSlider(cell) {
+	    var imagineEl = document.querySelector('.future-of-header h1');
+	    var futureOfEl = document.querySelectorAll('.future-of-header h1')[1];
+	    var loadingEl = document.querySelector('.shuffler');
+	    var loadingWord = loadingEl.querySelector('h1');
+
+	    Velocity(imagineEl, 'reverse');
+	    Velocity(futureOfEl, 'reverse');
+	    Velocity(loadingWord, 'reverse');
+
+	    setTimeout(function () {
+	      playFutureOfCell(cell).then(function () {
+	        if (++activeFutureOfCellIndex >= futureOfCells.length) {
+	          activeFutureOfCellIndex = 0;
+	        }
+
+	        flkty.next(true);
+	        playFutureOfSlider(futureOfCells[activeFutureOfCellIndex]);
+	      });
+	    }, 1500);
+	  })(futureOfCells[activeFutureOfCellIndex]);
 	}
 
-	function startFutureOf() {
+	function playFutureOfCell(cell) {
 	  var imagineEl = document.querySelector('.future-of-header h1');
 	  var futureOfEl = document.querySelectorAll('.future-of-header h1')[1];
 
@@ -91,23 +105,63 @@
 
 	  return new Promise(function (resolve) {
 	    Velocity(imagineEl, { opacity: 1 }, {
-	      duration: 1500, display: 'block',
+	      duration: 1200, display: 'block',
 	      complete: function complete() {
 	        Velocity(futureOfEl, { opacity: 1 }, {
-	          duration: 1000,
+	          duration: 800,
 	          display: 'block',
 	          complete: function complete() {
-	            shuffler(shufflerConfig).then(resolve);
+	            shuffler(shufflerConfig).then(function () {
+	              var video = cell.querySelector('video');
+
+	              setTimeout(video.play.bind(video), 200);
+
+	              Velocity(cell, { opacity: 1 }, {
+	                duration: 1000,
+	                display: 'block',
+	                complete: function complete() {
+	                  return playVideo(video).then(function () {
+	                    Velocity(cell, 'reverse');
+	                    setTimeout(resolve, 200);
+	                  });
+	                }
+	              });
+	            });
 	          }
 	        });
 	      }
 	    });
 	  });
+
+	  function playVideo(video) {
+	    var limit = 2;
+	    var count = 0;
+	    var nextCalled = false;
+
+	    video.addEventListener('ended', function () {
+	      if (++count < limit) video.play();
+	    });
+
+	    return new Promise(function (resolve) {
+	      video.addEventListener('timeupdate', function checkProgress() {
+	        var percentComplete = video.currentTime / video.duration * 100;
+
+	        if (count + 1 == limit && percentComplete >= 50 && !nextCalled) {
+	          video.removeEventListener(video, checkProgress);
+	          nextCalled = true;
+	          resolve();
+	        }
+	      });
+	    });
+	  }
 	}
 
 	function shuffler(o) {
-	  var loadingEl = document.querySelector('.loading-graphic');
+	  var loadingEl = document.querySelector('.shuffler');
 	  var loadingWord = loadingEl.querySelector('h1');
+
+	  Velocity(loadingWord, { opacity: 1 }, { duration: 300 });
+
 	  return new Promise(function (resolve) {
 	    var wordSwitcher = setInterval(function () {
 	      loadingWord.textContent = o.words[o.index];

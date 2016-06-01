@@ -37,17 +37,17 @@ main {
 section#futureOf {
   position: relative;
   height: 100vh; }
-  section#futureOf header, section#futureOf footer {
+  section#futureOf .future-of-content header, section#futureOf .future-of-content footer {
     position: absolute;
     left: 0;
     width: 100%;
     padding: 2vw; }
-  section#futureOf header {
+  section#futureOf .future-of-content header {
     top: 0; }
-    section#futureOf header h1 {
+    section#futureOf .future-of-content header h1 {
       font-size: 7vh;
       color: white; }
-  section#futureOf footer {
+  section#futureOf .future-of-content footer {
     bottom: 0;
     display: -ms-flexbox;
     display: flex;
@@ -55,17 +55,41 @@ section#futureOf {
         justify-content: space-between;
     -ms-flex-align: end;
         align-items: flex-end; }
-    section#futureOf footer .logo-container {
+    section#futureOf .future-of-content footer .logo-container {
       width: 100px; }
-      section#futureOf footer .logo-container img {
+      section#futureOf .future-of-content footer .logo-container img {
         width: 100%; }
-    section#futureOf footer .loading-graphic {
-      width: 60%; }
-      section#futureOf footer .loading-graphic h1 {
+    section#futureOf .future-of-content footer .shuffler {
+      width: 80%; }
+      section#futureOf .future-of-content footer .shuffler h1 {
+        opacity: 0;
         font-size: 7vh;
         color: white;
         text-align: right; }
-  section#futureOf .future-of-slider .slider-cell {
-    width: 100%; }
-    section#futureOf .future-of-slider .slider-cell video {
-      width: 100%; }
+  section#futureOf .future-of-slider .future-of-cell {
+    width: 100%;
+    height: 100vh;
+    opacity: 0; }
+
+.video-fs {
+  position: absolute;
+  z-index: -1;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  overflow: hidden;
+  background-image: none;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat; }
+  .video-fs video {
+    margin: auto;
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    visibility: visible;
+    width: auto;
+    height: 100vh; }
