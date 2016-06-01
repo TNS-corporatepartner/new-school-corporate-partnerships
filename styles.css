@@ -1,0 +1,157 @@
+@font-face {
+  font-family: 'Neue';
+  src: url("/fonts/NeueDisplay-Random.woff") format("woff");
+  /* Pretty Modern Browsers */
+  font-style: normal;
+  font-weight: 400; }
+
+@font-face {
+  font-family: 'NeueLight';
+  src: url("/fonts/NeueDisplay-Regular Random.woff") format("woff");
+  /* Pretty Modern Browsers */
+  font-style: normal;
+  font-weight: 400; }
+
+section#futureOf {
+  position: relative;
+  height: 100vh;
+  background-color: black; }
+  section#futureOf .future-of-content header, section#futureOf .future-of-content footer {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    padding: 2vw; }
+  section#futureOf .future-of-content header {
+    top: 0; }
+    section#futureOf .future-of-content header h1 {
+      font-size: 7vh;
+      color: white; }
+  section#futureOf .future-of-content footer {
+    bottom: 0;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: justify;
+        justify-content: space-between;
+    -ms-flex-align: end;
+        align-items: flex-end; }
+    section#futureOf .future-of-content footer .logo-container {
+      width: 100px; }
+      section#futureOf .future-of-content footer .logo-container img {
+        width: 100%; }
+    section#futureOf .future-of-content footer .shuffler {
+      width: 80%; }
+      section#futureOf .future-of-content footer .shuffler h1 {
+        opacity: 0;
+        font-size: 7vh;
+        color: white;
+        text-align: right; }
+  section#futureOf .future-of-slider .future-of-cell {
+    width: 100%;
+    height: 100vh;
+    opacity: 0; }
+
+section#coreValues .core-values-slider {
+  height: 100vh; }
+  section#coreValues .core-values-slider.full-width .core-values-cell {
+    width: 100%; }
+  section#coreValues .core-values-slider .core-values-cell {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+        align-items: center;
+    width: 25%;
+    height: 100vh;
+    padding: 2vw; }
+    section#coreValues .core-values-slider .core-values-cell h1 {
+      font-size: 2vw;
+      text-align: center;
+      color: white; }
+    section#coreValues .core-values-slider .core-values-cell:first-of-type {
+      background-color: #222222; }
+    section#coreValues .core-values-slider .core-values-cell:nth-of-type(2) {
+      background-color: #3c3c3c; }
+    section#coreValues .core-values-slider .core-values-cell:nth-of-type(3) {
+      background-color: #6f6f6f; }
+    section#coreValues .core-values-slider .core-values-cell:last-of-type {
+      background-color: #a2a2a2; }
+
+section#ourUniversity .our-university-slider {
+  height: 100vh; }
+  section#ourUniversity .our-university-slider.full-width .our-university-cell {
+    width: 100%; }
+  section#ourUniversity .our-university-slider .our-university-cell {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+        align-items: center;
+    width: 25%;
+    height: 100vh;
+    padding: 2vw;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; }
+    section#ourUniversity .our-university-slider .our-university-cell h1 {
+      font-size: 2vw;
+      text-align: center;
+      color: white; }
+    section#ourUniversity .our-university-slider .our-university-cell:first-of-type {
+      background-image: url("http://www.owlguru.com/schools/wp-content/plugins/autoGrid/gallery/The-New-School-campus-pictures/image_20151114_162732.jpg"); }
+    section#ourUniversity .our-university-slider .our-university-cell:nth-of-type(2) {
+      background-image: url("http://www.owlguru.com/schools/wp-content/plugins/autoGrid/gallery/The-New-School-campus-pictures/image_20151114_162732.jpg"); }
+    section#ourUniversity .our-university-slider .our-university-cell:nth-of-type(3) {
+      background-image: url("http://www.owlguru.com/schools/wp-content/plugins/autoGrid/gallery/The-New-School-campus-pictures/image_20151114_162732.jpg"); }
+    section#ourUniversity .our-university-slider .our-university-cell:last-of-type {
+      background-image: url("http://www.owlguru.com/schools/wp-content/plugins/autoGrid/gallery/The-New-School-campus-pictures/image_20151114_162732.jpg"); }
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: 'NeueLight';
+  box-sizing: border-box; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Neue'; }
+
+.global-slider {
+  width: 100%;
+  overflow: hidden; }
+
+.video-fs {
+  position: absolute;
+  z-index: -1;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  overflow: hidden;
+  background-image: none;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat; }
+  .video-fs video {
+    margin: auto;
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    visibility: visible;
+    width: auto;
+    height: 100vh; }
+
+.placeholder-fs {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+  height: 100vh;
+  width: 100%; }
+  .placeholder-fs h1 {
+    font-size: 6vh;
+    text-align: center; }
+
+section > .placeholder-fs {
+  border-bottom: 1px solid gray; }

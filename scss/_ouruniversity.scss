@@ -1,0 +1,36 @@
+section#ourUniversity {
+  .our-university-slider {
+    // display: flex;
+    height: 100vh;
+    &.full-width .our-university-cell {
+      width: 100%;
+    }
+    .our-university-cell {
+      display: flex;
+      align-items: center;
+      width: 25%;
+      height: 100vh;
+      padding: 2vw;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      h1 {
+        font-size: 2vw;
+        text-align: center;
+        color: white;
+      }
+      &:first-of-type {
+        background-image: url('http://www.owlguru.com/schools/wp-content/plugins/autoGrid/gallery/The-New-School-campus-pictures/image_20151114_162732.jpg');
+      }
+      &:nth-of-type(2) {
+        background-image: url('http://www.owlguru.com/schools/wp-content/plugins/autoGrid/gallery/The-New-School-campus-pictures/image_20151114_162732.jpg');
+      }
+      &:nth-of-type(3) {
+        background-image: url('http://www.owlguru.com/schools/wp-content/plugins/autoGrid/gallery/The-New-School-campus-pictures/image_20151114_162732.jpg');
+      }
+      &:last-of-type {
+        background-image: url('http://www.owlguru.com/schools/wp-content/plugins/autoGrid/gallery/The-New-School-campus-pictures/image_20151114_162732.jpg');
+      }
+    }
+  }
+}

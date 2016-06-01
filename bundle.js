@@ -48,12 +48,18 @@
 
 	var _futureOf = __webpack_require__(1);
 
+	var _coreValues = __webpack_require__(23);
+
+	var _ourUniversity = __webpack_require__(24);
+
 	window.addEventListener('DOMContentLoaded', init); // import 'd3'
 	// import {Observable} from 'rxjs'
 	// import {frame$} from './utils.js'
 
 	function init() {
 	  new _futureOf.FutureOf();
+	  new _coreValues.CoreValues();
+	  new _ourUniversity.OurUniversity();
 	}
 
 /***/ },
@@ -4976,6 +4982,94 @@
 
 	}));
 
+
+/***/ },
+/* 23 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.CoreValues = undefined;
+
+	var _flickity = __webpack_require__(2);
+
+	var _flickity2 = _interopRequireDefault(_flickity);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var CoreValues = exports.CoreValues = function CoreValues() {
+	  var _this = this;
+
+	  _classCallCheck(this, CoreValues);
+
+	  this.slider = document.querySelector('.core-values-slider');
+	  this.flkty = new _flickity2.default(this.slider, {
+	    cellAlign: 'left',
+	    contain: true,
+	    // wrapAround: true
+	    prevNextButtons: true
+	  });
+
+	  this.flkty.on('staticClick', function () {
+	    var isFullWidth = _this.slider.classList.value.includes('full-width');
+	    if (isFullWidth) {
+	      _this.slider.classList.remove('full-width');
+	    } else {
+	      _this.slider.classList.add('full-width');
+	    }
+
+	    _this.flkty.resize();
+	  });
+	};
+
+/***/ },
+/* 24 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.OurUniversity = undefined;
+
+	var _flickity = __webpack_require__(2);
+
+	var _flickity2 = _interopRequireDefault(_flickity);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var OurUniversity = exports.OurUniversity = function OurUniversity() {
+	  var _this = this;
+
+	  _classCallCheck(this, OurUniversity);
+
+	  this.slider = document.querySelector('.our-university-slider');
+	  this.flkty = new _flickity2.default(this.slider, {
+	    cellAlign: 'left',
+	    contain: true,
+	    // wrapAround: true,
+	    prevNextButtons: true
+	  });
+
+	  this.flkty.on('staticClick', function () {
+	    var isFullWidth = _this.slider.classList.value.includes('full-width');
+	    if (isFullWidth) {
+	      _this.slider.classList.remove('full-width');
+	    } else {
+	      _this.slider.classList.add('full-width');
+	    }
+
+	    _this.flkty.resize();
+	  });
+	};
 
 /***/ }
 /******/ ]);

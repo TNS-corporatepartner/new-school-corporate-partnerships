@@ -1,18 +1,10 @@
-//@import 'normalize.scss';
-
-@font-face {
-  font-family: 'Neue';
-  src: url('/fonts/NeueDisplay-Random.woff') format('woff'); /* Pretty Modern Browsers */
-  font-style: normal;
-  font-weight: 400;
-}
-
-@font-face {
-  font-family: 'NeueLight';
-  src: url('/fonts/NeueDisplay-Regular Random.woff') format('woff'); /* Pretty Modern Browsers */
-  font-style: normal;
-  font-weight: 400;
-}
+@import 'variables.scss';
+@import 'fonts.scss';
+@import 'layout.scss';
+@import 'futureof.scss';
+@import 'corevalues.scss';
+@import 'ouruniversity.scss';
+// @import 'blocks.scss';
 
 
 * {
@@ -23,80 +15,14 @@
   box-sizing: border-box;
 }            
 
-body {
-  background-color: black;
-}
-
 h1,h2,h3,h4,h5,h6 {
   font-family: 'Neue';
 }
 
-main {
-  min-height: 500vh;
+.global-slider {
+  width: 100%;
+  overflow: hidden;
 }
-
-#blocksCanvas {
-  position: fixed;
-  top: 0;
-  bottom :0;
-  width: 100%;                
-}
-
-
-
-section#futureOf {
-  position: relative;
-  height: 100vh;
-
-  .future-of-content {
-    header, footer {
-      position: absolute;
-      left: 0;
-      width: 100%;
-      padding: 2vw;
-    }
-    
-    header {
-      top: 0; 
-      h1 {
-        font-size: 7vh;
-        color: white;
-      }
-    }
-    
-    footer {
-      bottom: 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      .logo-container {
-        width: 100px;
-        img {
-          width: 100%;
-        }
-      }
-      .shuffler {
-        width: 80%;
-        h1 {
-          opacity: 0;
-          font-size: 7vh;
-          color: white;
-          text-align: right;
-        }
-      }
-    }    
-  }
-
-  .future-of-slider {
-    .future-of-cell {
-      width: 100%;
-      height: 100vh;
-      opacity: 0;
-    }
-  }
-
-}
-
 
 .video-fs {
   position: absolute;
@@ -121,4 +47,21 @@ section#futureOf {
     width: auto;
     height: 100vh;
   }
+}
+
+.placeholder-fs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;  
+  
+  h1 {
+    font-size: 6vh;
+    text-align: center;
+  }
+}
+
+section > .placeholder-fs {
+  border-bottom: 1px solid gray;
 }
