@@ -14,7 +14,8 @@ export class FutureOf {
     this.flkty = new Flickity( slider, {
       cellAlign: 'left',
       contain: true,
-      wrapAround: true
+      wrapAround: true,
+      prevNextButtons: false
     })  
     
     this.playFutureOfSlider( this.futureOfCells[this.activeFutureOfCellIndex] ) 

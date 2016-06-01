@@ -98,7 +98,8 @@
 	    this.flkty = new _flickity2.default(slider, {
 	      cellAlign: 'left',
 	      contain: true,
-	      wrapAround: true
+	      wrapAround: true,
+	      prevNextButtons: false
 	    });
 
 	    this.playFutureOfSlider(this.futureOfCells[this.activeFutureOfCellIndex]);
@@ -5010,11 +5011,10 @@
 	  this.slider = document.querySelector('.core-values-slider');
 	  this.flkty = new _flickity2.default(this.slider, {
 	    cellAlign: 'left',
-	    contain: true,
-	    // wrapAround: true
-	    prevNextButtons: true
+	    contain: true
 	  });
 
+	  // wrapAround: true     
 	  this.flkty.on('staticClick', function () {
 	    var isFullWidth = _this.slider.classList.value.includes('full-width');
 	    if (isFullWidth) {
@@ -5054,11 +5054,10 @@
 	  this.slider = document.querySelector('.our-university-slider');
 	  this.flkty = new _flickity2.default(this.slider, {
 	    cellAlign: 'left',
-	    contain: true,
-	    // wrapAround: true,
-	    prevNextButtons: true
+	    contain: true
 	  });
 
+	  // wrapAround: true
 	  this.flkty.on('staticClick', function () {
 	    var isFullWidth = _this.slider.classList.value.includes('full-width');
 	    if (isFullWidth) {

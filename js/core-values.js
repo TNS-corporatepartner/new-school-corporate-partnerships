@@ -7,8 +7,7 @@ export class CoreValues {
     this.flkty = new Flickity( this.slider, {
       cellAlign: 'left',
       contain: true,
-      // wrapAround: true
-      prevNextButtons: true
+      // wrapAround: true      
     })
     
     this.flkty.on('staticClick', () => {

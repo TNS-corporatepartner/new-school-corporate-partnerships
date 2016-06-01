@@ -2,11 +2,16 @@ $coreValuesBaseGray: #222222;
 
 section#coreValues {
   .core-values-slider {
-    // display: flex;
     height: 100vh;
-    &.full-width .core-values-cell {
-      width: 100%;
-    }
+    &.full-width {
+      .core-values-cell {
+        width: 100%;
+      }
+      .flickity-prev-next-button {
+        opacity: 1;
+      }
+    } 
+
     .core-values-cell {
       display: flex;
       align-items: center;
@@ -30,6 +35,11 @@ section#coreValues {
       &:last-of-type {
         background-color: lighten($coreValuesBaseGray, 50%);
       }
+    }
+
+    .flickity-prev-next-button {
+      opacity: 0;
+      transition: opacity 0.4s ease-in-out;
     }
   }
 }

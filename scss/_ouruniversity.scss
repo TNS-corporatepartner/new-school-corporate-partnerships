@@ -1,9 +1,13 @@
 section#ourUniversity {
   .our-university-slider {
-    // display: flex;
     height: 100vh;
-    &.full-width .our-university-cell {
-      width: 100%;
+    &.full-width {
+      .our-university-cell {
+        width: 100%;
+      }
+      .flickity-prev-next-button {
+        opacity: 1;
+      }
     }
     .our-university-cell {
       display: flex;
@@ -31,6 +35,11 @@ section#ourUniversity {
       &:last-of-type {
         background-image: url('http://familiar-temp.s3.amazonaws.com/our-network.jpg');
       }
+    }
+  
+    .flickity-prev-next-button {
+      opacity: 0;
+      transition: opacity 0.4s ease-in-out;
     }
   }
 }
