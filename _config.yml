@@ -16,4 +16,4 @@ url: http://yourdomain.com
 twitter_username: jekyllrb
 github_username: jekyll
 markdown: kramdown
-exclude: [node_modules, scss]
+exclude: [node_modules, scss, bower_components]

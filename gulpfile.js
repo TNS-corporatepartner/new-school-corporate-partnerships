@@ -16,7 +16,7 @@ gulp.task('styles', function(){
   gulp.src(['scss/*.scss'])
     .pipe(sass())
     .pipe(autoprefixer('last 2 versions'))
-    .pipe(gulp.dest('/'))
+    .pipe(gulp.dest(__dirname))
     .pipe(concat('styles.css'))
     .pipe(browserSync.stream());
 });
