@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "gulp",
+    "start": "jekyll serve & gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Jason Pearson <jasonp.pdx@gmail.com> (jasonpearson.me)",
