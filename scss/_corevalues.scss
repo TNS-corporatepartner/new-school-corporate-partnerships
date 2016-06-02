@@ -3,25 +3,67 @@ $coreValuesBaseGray: #222222;
 section#coreValues {
   .core-values-slider {
     height: 100vh;
-    &.full-width {
+
+    &.uninitialized {
+      display: flex;
       .core-values-cell {
-        width: 100%;
+        width: auto;
+        padding: 0;
+        span.close-cell {
+          opacity: 0;
+          pointer-events: none;
+        }
       }
       .flickity-prev-next-button {
-        opacity: 1;
-      }
+        opacity: 0;
+      }      
     } 
 
     .core-values-cell {
+      position: relative;
       display: flex;
+      flex-grow: 1;
+      flex-basis: 0%;      
       align-items: center;
-      width: 25%;
+      width: 100%;
       height: 100vh;
       padding: 2vw;
-      h1 {
-        font-size: 2vw;
-        text-align: center;
-        color: white;
+      transition: flex 0.5s ease-in-out, opacity 0.5s ease-in-out;
+      span.close-cell {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        opacity: 1;
+        transition: opacity 0.4s ease-in-out;
+        &:before {
+          content: 'x';
+        }
+      }      
+      .content {
+        position: absolute;
+        overflow: hidden;
+        top: 50%;
+        width: 200px;
+        left: calc(50% - 100px);
+        h1 {
+          font-size: 2vw;
+          text-align: center;
+          color: white;
+        }        
+      }
+      &:hover {
+        flex-grow: 1.5;
+      }
+      &.sibling-is-hovered {
+        // added/removed by js
+      }
+      &.opening {
+        flex-grow: 10;
+      }
+      &.sibling-is-opening {        
+        flex-grow: 0;
+        opacity: 0;
+        padding: 0;
       }
       &:first-of-type {
         background-color: $coreValuesBaseGray;
