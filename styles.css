@@ -226,6 +226,10 @@ section#coreValues .core-values-slider {
         font-size: 2vw;
         text-align: center;
         color: white; }
+    section#coreValues .core-values-slider .core-values-cell canvas {
+      position: absolute;
+      top: 0;
+      left: 0; }
     section#coreValues .core-values-slider .core-values-cell:hover {
       -ms-flex-positive: 1.5;
           flex-grow: 1.5; }

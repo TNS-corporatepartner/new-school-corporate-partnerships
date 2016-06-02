@@ -1,4 +1,6 @@
 import Flickity from 'flickity'
+import {Canvas} from './canvas/canvas.js'
+
 
 export class CoreValues {
 
@@ -12,6 +14,23 @@ export class CoreValues {
     $(this.cells).on('mouseleave', function() { $(this.cells).removeClass('sibling-is-hovered') })
     $(this.cells).on('click', function() { instance.openCell(this) })
     $('span.close-cell').on('click', function(e) { e.stopPropagation(); instance.closeCell() })
+    
+    new Canvas({
+      canvasParentSelector: '#designDna'
+    })
+    
+    new Canvas({
+      canvasParentSelector: '#statusQuo'
+    })
+    
+    new Canvas({
+      canvasParentSelector: '#fearless'
+    })
+    
+    new Canvas({
+      canvasParentSelector: '#diversity'
+    })
+    
   }
   
   openCell(cell) {
@@ -54,8 +73,7 @@ export class CoreValues {
       cellAlign: 'left',
       contain: true,
       initialIndex: initialIndex      
-    })
-        
-  } 
+    })        
+  }  
 
 }

@@ -1,7 +1,4 @@
-
-// import 'd3'
 import {Observable} from 'rxjs'
-// import {frame$} from './utils.js'
 
 import { FutureOf } from './future-of.js'
 import { CoreValues } from './core-values.js'

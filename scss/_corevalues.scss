@@ -51,6 +51,11 @@ section#coreValues {
           color: white;
         }        
       }
+      canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
       &:hover {
         flex-grow: 1.5;
       }
