@@ -29,6 +29,13 @@ section#coreValues {
       height: 100vh;
       padding: 2vw;
       transition: flex 0.5s ease-in-out, opacity 0.5s ease-in-out;
+      #particles-js {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100vw;
+      }
       span.close-cell {
         position: absolute;
         top: 20px;

@@ -15,22 +15,26 @@ export class CoreValues {
     $(this.cells).on('click', function() { instance.openCell(this) })
     $('span.close-cell').on('click', function(e) { e.stopPropagation(); instance.closeCell() })
     
-    new Canvas({
-      canvasParentSelector: '#designDna'
-    })
+    // new Canvas({
+    //   canvasParentSelector: '#designDna'
+    // })
     
-    new Canvas({
-      canvasParentSelector: '#statusQuo'
-    })
+    // new Canvas({
+    //   canvasParentSelector: '#statusQuo'
+    // })
     
-    new Canvas({
-      canvasParentSelector: '#fearless'
-    })
+    // new Canvas({
+    //   canvasParentSelector: '#fearless'
+    // })
     
-    new Canvas({
-      canvasParentSelector: '#diversity'
-    })
+    // new Canvas({
+    //   canvasParentSelector: '#diversity'
+    // })
     
+    particlesJS.load('designDna', '/js/particles/design-dna.json')
+    particlesJS.load('statusQuo', '/js/particles/status-quo.json')    
+    particlesJS.load('fearless', '/js/particles/fearless.json')
+    particlesJS.load('diversity', '/js/particles/diversity.json')        
   }
   
   openCell(cell) {
@@ -45,6 +49,7 @@ export class CoreValues {
                         
         this.initFlkty( $(cell).index() )
         this.activeCell = cell
+        this.resizeParticles()
       }, 800)
 
     }
@@ -62,8 +67,12 @@ export class CoreValues {
       setTimeout(() => {
         $(this.cells).removeClass('sibling-is-opening')
         $(this.activeCell).removeClass('opening')
-        this.activeCell = null        
-      })      
+        this.activeCell = null                
+      })
+      
+      setTimeout( () => {
+        this.resizeParticles()
+      }, 600)
     
     }
   }
@@ -75,5 +84,11 @@ export class CoreValues {
       initialIndex: initialIndex      
     })        
   }  
+
+  resizeParticles() {
+    pJSDom.forEach(pjs => {
+      window.particlesJS.layout(null, pjs.pJS)
+    })    
+  }
 
 }

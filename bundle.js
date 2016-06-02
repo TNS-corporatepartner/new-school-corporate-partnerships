@@ -22584,21 +22584,26 @@
 	      e.stopPropagation();instance.closeCell();
 	    });
 
-	    new _canvas.Canvas({
-	      canvasParentSelector: '#designDna'
-	    });
+	    // new Canvas({
+	    //   canvasParentSelector: '#designDna'
+	    // })
 
-	    new _canvas.Canvas({
-	      canvasParentSelector: '#statusQuo'
-	    });
+	    // new Canvas({
+	    //   canvasParentSelector: '#statusQuo'
+	    // })
 
-	    new _canvas.Canvas({
-	      canvasParentSelector: '#fearless'
-	    });
+	    // new Canvas({
+	    //   canvasParentSelector: '#fearless'
+	    // })
 
-	    new _canvas.Canvas({
-	      canvasParentSelector: '#diversity'
-	    });
+	    // new Canvas({
+	    //   canvasParentSelector: '#diversity'
+	    // })
+
+	    particlesJS.load('designDna', '/js/particles/design-dna.json');
+	    particlesJS.load('statusQuo', '/js/particles/status-quo.json');
+	    particlesJS.load('fearless', '/js/particles/fearless.json');
+	    particlesJS.load('diversity', '/js/particles/diversity.json');
 	  }
 
 	  _createClass(CoreValues, [{
@@ -22617,6 +22622,7 @@
 
 	          _this.initFlkty($(cell).index());
 	          _this.activeCell = cell;
+	          _this.resizeParticles();
 	        }, 800);
 	      }
 	    }
@@ -22638,6 +22644,10 @@
 	          $(_this2.activeCell).removeClass('opening');
 	          _this2.activeCell = null;
 	        });
+
+	        setTimeout(function () {
+	          _this2.resizeParticles();
+	        }, 600);
 	      }
 	    }
 	  }, {
@@ -22647,6 +22657,13 @@
 	        cellAlign: 'left',
 	        contain: true,
 	        initialIndex: initialIndex
+	      });
+	    }
+	  }, {
+	    key: 'resizeParticles',
+	    value: function resizeParticles() {
+	      pJSDom.forEach(function (pjs) {
+	        window.particlesJS.layout(null, pjs.pJS);
 	      });
 	    }
 	  }]);
@@ -22687,42 +22704,89 @@
 	    this.draw();
 	  }
 
+	  // hostChanges() {
+	  //   // var test = [ [0, 0], [100, 0], [200, 0] ]   
+	  //   // var test = [ d3.entries({x: 0, y: 0}), d3.entries({x: 100, y: 0}), d3.entries({x: 200, y: 0}) ]
+
+	  //   function makeGrid(cols, row) {
+	  //     return function makeRows(y) {
+
+	  //     }
+
+	  //     function makeRow(y) {
+	  //       return d3.range(10).map(d => [d, y])
+	  //     }
+	  //     function makeCol(x) {
+	  //       return d3.range(x).map(d => [d, y])
+	  //     }
+	  //   }
+
+	  //   var test = makeRow(0)    
+
+	  //   console.log(fitBlocksToScreen())
+	  //   console.log(test)
+
+	  //   this.host.selectAll('rect')
+	  //     // .data(fitBlocksToScreen)
+	  //     .data( test, d => d[0] )
+	  //     .enter()
+	  //     .append('custom:rect')
+	  //     .attr('x', function(d, i) {
+	  //       console.log(d)               
+	  //       return d
+	  //     })     
+	  //     .attr('y', function(d, i) {
+	  //       return d
+	  //     })
+	  //     .attr('width', 100)
+	  //     .attr('height', 100)
+	  //     .attr('fill', 'blue')
+
+	  //   function fitBlocksToScreen() {
+	  //     const columns = window.innerWidth / 100 + 1
+	  //     const rows = window.innerHeight / 100 + 1
+
+	  //     return d3.range(rows).map(r => {
+
+	  //       // return d3.range(columns).
+
+	  //       return d3.range(columns).map(c => {
+	  //         return {
+	  //           x: r * 100,
+	  //           y: c * 100
+	  //         }
+
+	  //       })
+
+	  //     })
+	  //   }
+
+	  //   // fitBlocksToScreen().forEach(d => console.log(d))   
+	  // }
+
 	  _createClass(Canvas, [{
+	    key: 'draw',
+	    value: function draw() {
+	      var host = this.host[0][0],
+	          c = this.context;
+
+	      for (var child = host.firstChild; child; child = child.nextSibling) {
+	        c.strokeStyle = child.getAttribute('strokeStyle');
+	        c.beginPath();
+
+	        c.rect(child.getAttribute('x'), child.getAttribute('y'), child.getAttribute('width'), child.getAttribute('height'));
+
+	        // c.fillStyle = child.getAttribute('fill')           
+	        // c.fill()
+	        c.stroke();
+	      }
+
+	      requestAnimationFrame(this.draw.bind(this));
+	    }
+	  }, {
 	    key: 'hostChanges',
 	    value: function hostChanges() {
 	      var _this = this;
-
-	      //     blocks.host.selectAll('rect')
-	      //       .data(fitBlocksToScreen)
-	      //       .enter()
-	      //       .append('custom:rect')
-	      //       .attr('x', (d, i) => {
-	      //         // console.log(d[i].x, d[i].y)
-	      //         return d[i].x
-	      //       })     
-	      //       .attr('y', (d, i) => d[i].y)
-	      //       .attr('width', 100)
-	      //       .attr('height', 100)
-	      //       .attr('fill', 'blue')
-
-	      //     function fitBlocksToScreen() {
-	      //       const columns = window.innerWidth / 100 + 1
-	      //       const rows = window.innerHeight / 100 + 1
-
-	      //       return d3.range(rows).map(r => {
-
-	      //         return d3.range(columns).map(c => {
-	      //           console.log(c, r)
-	      //           return {
-	      //             x: c * 100,
-	      //             y: r * 100
-	      //           }
-	      //         })
-
-	      //       })
-	      //     }
-
-	      //     // fitBlocksToScreen().forEach(d => console.log(d))
 
 	      d3.select(this.canvas).on('mousemove', function () {
 	        _this.host.append('custom:circle').attr('x', d3.event.clientX).attr('y', d3.event.clientY).attr('radius', 0).attr('strokeStyle', 'red').transition().duration(2000).ease(Math.sqrt).attr('radius', 200).attr('strokeStyle', 'white').remove();
@@ -22738,16 +22802,6 @@
 	        c.strokeStyle = child.getAttribute('strokeStyle');
 	        c.beginPath();
 	        c.arc(child.getAttribute('x'), child.getAttribute('y'), child.getAttribute('radius'), 0, 2 * Math.PI);
-
-	        // c.rect(
-	        //   child.getAttribute('x'),
-	        //   child.getAttribute('y'),
-	        //   child.getAttribute('width'),
-	        //   child.getAttribute('height')
-	        // )     
-
-	        // c.fillStyle = child.getAttribute('fill')           
-	        // c.fill()
 	        c.stroke();
 	      }
 
@@ -22771,8 +22825,8 @@
 	// //   console.log(window.scrollY) 
 	// // })
 
-	// // blocks.frame$.subscribe(v => {
-	// //   const c = blocks.context
+	// // this.frame$.subscribe(v => {
+	// //   const c = this.context
 	// //   // console.log(v) 
 	// //   c.clearRect(0, 0, window.innerWidth, window.innerHeight)
 

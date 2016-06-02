@@ -208,6 +208,12 @@ section#coreValues .core-values-slider {
     padding: 2vw;
     transition: flex 0.5s ease-in-out, opacity 0.5s ease-in-out;
     transition: flex 0.5s ease-in-out, opacity 0.5s ease-in-out, -ms-flex 0.5s ease-in-out; }
+    section#coreValues .core-values-slider .core-values-cell #particles-js {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100vw; }
     section#coreValues .core-values-slider .core-values-cell span.close-cell {
       position: absolute;
       top: 20px;
