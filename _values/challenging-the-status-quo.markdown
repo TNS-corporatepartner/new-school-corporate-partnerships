@@ -1,11 +1,10 @@
 ---
-title: Challenging the Status Quo
+title: Values
 date: 2016-06-03 17:04:00 Z
-test:
-- Text: askjdklajsdklas
-- Text: as;dkj;lajsdklajs
+Design is in Our DNA:
+- We use design to tackle business challenges
+- We are the only comprehensive university with a world famous design school at its
+  core
+- 
 ---
 
-1. The first one
-2. the second one
-3. the third one
