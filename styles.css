@@ -242,6 +242,9 @@ section#ourUniversity .our-university-slider {
     width: 100%;
     height: 100vh;
     padding: 2vw;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
     transition: flex 0.5s ease-in-out, opacity 0.5s ease-in-out;
     transition: flex 0.5s ease-in-out, opacity 0.5s ease-in-out, -ms-flex 0.5s ease-in-out; }
     section#ourUniversity .our-university-slider .our-university-cell span.close-cell {
