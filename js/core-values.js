@@ -1,5 +1,4 @@
 import Flickity from 'flickity'
-// import {Canvas} from './canvas/canvas.js'
 import {Observable} from 'rxjs'
 
 export class CoreValues {

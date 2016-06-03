@@ -60,6 +60,23 @@
 	  new _futureOf.FutureOf();
 	  new _coreValues.CoreValues();
 	  new _ourUniversity.OurUniversity();
+
+	  $("main").onepage_scroll({
+	    sectionContainer: "section", // sectionContainer accepts any kind of selector in case you don't want to use section
+	    easing: "ease", // Easing options accepts the CSS3 easing animation such "ease", "linear", "ease-in",
+	    // "ease-out", "ease-in-out", or even cubic bezier value such as "cubic-bezier(0.175, 0.885, 0.420, 1.310)"
+	    animationTime: 750, // AnimationTime let you define how long each section takes to animate
+	    pagination: true, // You can either show or hide the pagination. Toggle true for show, false for hide.
+	    updateURL: false, // Toggle this true if you want the URL to be updated automatically when the user scroll to each page.
+	    beforeMove: function beforeMove(index) {}, // This option accepts a callback function. The function will be called before the page moves.
+	    afterMove: function afterMove(index) {}, // This option accepts a callback function. The function will be called after the page moves.
+	    loop: false, // You can have the page loop back to the top/bottom when the user navigates at up/down on the first/last page.
+	    keyboard: true, // You can activate the keyboard controls
+	    responsiveFallback: false, // You can fallback to normal page scroll by defining the width of the browser in which
+	    // you want the responsive fallback to be triggered. For example, set this to 600 and whenever
+	    // the browser's width is less than 600, the fallback will kick in.
+	    direction: "vertical" // You can now define the direction of the One Page Scroll animation. Options available are "vertical" and "horizontal". The default value is "vertical". 
+	  });
 	}
 
 /***/ },
@@ -4995,8 +5012,6 @@
 	exports.CoreValues = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	// import {Canvas} from './canvas/canvas.js'
-
 
 	var _flickity = __webpack_require__(2);
 
@@ -22690,6 +22705,8 @@
 	});
 	exports.OurUniversity = undefined;
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	var _flickity = __webpack_require__(2);
 
 	var _flickity2 = _interopRequireDefault(_flickity);
@@ -22698,30 +22715,81 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var OurUniversity = exports.OurUniversity = function OurUniversity() {
-	  var _this = this;
+	var OurUniversity = exports.OurUniversity = function () {
+	  function OurUniversity() {
+	    _classCallCheck(this, OurUniversity);
 
-	  _classCallCheck(this, OurUniversity);
+	    this.slider = document.querySelector('.our-university-slider');
+	    this.cells = this.slider.childNodes;
+	    this.activeCell = null;
+	    var instance = this;
 
-	  this.slider = document.querySelector('.our-university-slider');
-	  this.flkty = new _flickity2.default(this.slider, {
-	    cellAlign: 'left',
-	    contain: true,
-	    // wrapAround: true,
-	    prevNextButtons: true
-	  });
+	    $(this.cells).on('mouseenter', function () {
+	      $(this.cells).not(this).addClass('sibling-is-hovered');
+	    });
+	    $(this.cells).on('mouseleave', function () {
+	      $(this.cells).removeClass('sibling-is-hovered');
+	    });
+	    $(this.cells).on('click', function () {
+	      instance.openCell(this);
+	    });
+	    $('span.close-cell').on('click', function (e) {
+	      e.stopPropagation();instance.closeCell();
+	    });
+	  }
 
-	  this.flkty.on('staticClick', function () {
-	    var isFullWidth = _this.slider.classList.value.includes('full-width');
-	    if (isFullWidth) {
-	      _this.slider.classList.remove('full-width');
-	    } else {
-	      _this.slider.classList.add('full-width');
+	  _createClass(OurUniversity, [{
+	    key: 'openCell',
+	    value: function openCell(cell) {
+	      var _this = this;
+
+	      if (!this.activeCell) {
+
+	        $(this.cells).not(cell).addClass('sibling-is-opening');
+	        $(cell).addClass('opening');
+
+	        setTimeout(function () {
+	          $(_this.slider).removeClass('uninitialized');
+	          $(_this.cells).removeClass('sibling-is-opening opening');
+
+	          _this.initFlkty($(cell).index());
+	          _this.activeCell = cell;
+	        }, 800);
+	      }
 	    }
+	  }, {
+	    key: 'closeCell',
+	    value: function closeCell() {
+	      var _this2 = this;
 
-	    _this.flkty.resize();
-	  });
-	};
+	      if (this.activeCell) {
+
+	        this.flkty.destroy();
+
+	        $(this.cells).not(this.activeCell).addClass('sibling-is-opening');
+	        $(this.activeCell).addClass('opening');
+	        $(this.slider).addClass('uninitialized');
+
+	        setTimeout(function () {
+	          $(_this2.cells).removeClass('sibling-is-opening');
+	          $(_this2.activeCell).removeClass('opening');
+	          _this2.activeCell = null;
+	        });
+	      }
+	    }
+	  }, {
+	    key: 'initFlkty',
+	    value: function initFlkty(initialIndex) {
+	      this.flkty = new _flickity2.default(this.slider, {
+	        cellAlign: 'left',
+	        contain: true,
+	        initialIndex: initialIndex
+	      });
+	    }
+	  }]);
+
+	  return OurUniversity;
+	}();
 
 /***/ }
 /******/ ]);

@@ -1,3 +1,83 @@
+body, html {
+  margin: 0;
+  overflow: hidden;
+  transition: opacity 400ms; }
+
+body, .onepage-wrapper, html {
+  display: block;
+  position: static;
+  padding: 0;
+  width: 100%;
+  height: 100%; }
+
+.onepage-wrapper {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: relative;
+  padding: 0;
+  -webkit-transform-style: preserve-3d; }
+
+.onepage-wrapper .section {
+  width: 100%;
+  height: 100%; }
+
+.onepage-pagination {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  z-index: 5;
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+
+.onepage-pagination li {
+  padding: 0;
+  text-align: center; }
+
+.onepage-pagination li a {
+  padding: 10px;
+  width: 4px;
+  height: 4px;
+  display: block; }
+
+.onepage-pagination li a:before {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.85);
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px; }
+
+.onepage-pagination li a.active:before {
+  width: 10px;
+  height: 10px;
+  background: none;
+  border: 1px solid black;
+  margin-top: -4px;
+  left: 8px; }
+
+.disabled-onepage-scroll, .disabled-onepage-scroll .wrapper {
+  overflow: auto; }
+
+.disabled-onepage-scroll .onepage-wrapper .section {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important; }
+
+.disabled-onepage-scroll .onepage-wrapper {
+  transform: none !important;
+  -ms-transform: none !important;
+  min-height: 100%; }
+
+.disabled-onepage-scroll .onepage-pagination {
+  display: none; }
+
+body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
+  position: inherit; }
+
 @font-face {
   font-family: 'Neue';
   src: url("/fonts/NeueDisplay-Random.woff") format("woff");
@@ -69,19 +149,33 @@ section#coreValues .core-values-slider {
     section#coreValues .core-values-slider.content-closed .core-values-cell .content h1 {
       font-size: 2vh; }
   section#coreValues .core-values-slider .core-values-cell {
+    position: relative;
     display: -ms-flexbox;
     display: flex;
+    -ms-flex-positive: 1;
+        flex-grow: 1;
+    -ms-flex-preferred-size: 0%;
+        flex-basis: 0%;
     -ms-flex-align: center;
         align-items: center;
-    width: 25%;
+    width: 100%;
     height: 100vh;
-    padding: 2vw; }
-    section#coreValues .core-values-slider .core-values-cell h1 {
-      font-size: 2vw;
-      text-align: center;
-      color: white; }
+    padding: 2vw;
+    transition: flex 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    transition: flex 0.5s ease-in-out, opacity 0.5s ease-in-out, -ms-flex 0.5s ease-in-out; }
+    section#coreValues .core-values-slider .core-values-cell:hover {
+      -ms-flex-positive: 1.5;
+          flex-grow: 1.5; }
+    section#coreValues .core-values-slider .core-values-cell.opening {
+      -ms-flex-positive: 10;
+          flex-grow: 10; }
+    section#coreValues .core-values-slider .core-values-cell.sibling-is-opening {
+      -ms-flex-positive: 0;
+          flex-grow: 0;
+      opacity: 0;
+      padding: 0; }
     section#coreValues .core-values-slider .core-values-cell:first-of-type {
-      background-color: #222222; }
+      background-color: #3c3c3c; }
     section#coreValues .core-values-slider .core-values-cell:nth-of-type(2) {
       background-color: #3c3c3c; }
     section#coreValues .core-values-slider .core-values-cell:nth-of-type(3) {
@@ -119,34 +213,77 @@ section#coreValues .core-values-slider {
       top: 0;
       left: 0;
       width: 100vw; }
+    section#coreValues .core-values-slider .core-values-cell #statusQuo canvas {
+      cursor: url("/images/status-quo-triangle.png"), auto; }
 
 section#ourUniversity .our-university-slider {
   height: 100vh; }
-  section#ourUniversity .our-university-slider.full-width .our-university-cell {
-    width: 100%; }
+  section#ourUniversity .our-university-slider.uninitialized {
+    display: -ms-flexbox;
+    display: flex; }
+    section#ourUniversity .our-university-slider.uninitialized .our-university-cell {
+      width: auto;
+      padding: 0; }
+      section#ourUniversity .our-university-slider.uninitialized .our-university-cell span.close-cell {
+        opacity: 0;
+        pointer-events: none; }
+    section#ourUniversity .our-university-slider.uninitialized .flickity-prev-next-button {
+      opacity: 0; }
   section#ourUniversity .our-university-slider .our-university-cell {
+    position: relative;
     display: -ms-flexbox;
     display: flex;
+    -ms-flex-positive: 1;
+        flex-grow: 1;
+    -ms-flex-preferred-size: 0%;
+        flex-basis: 0%;
     -ms-flex-align: center;
         align-items: center;
-    width: 25%;
+    width: 100%;
     height: 100vh;
     padding: 2vw;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat; }
-    section#ourUniversity .our-university-slider .our-university-cell h1 {
-      font-size: 2vw;
-      text-align: center;
-      color: white; }
+    transition: flex 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    transition: flex 0.5s ease-in-out, opacity 0.5s ease-in-out, -ms-flex 0.5s ease-in-out; }
+    section#ourUniversity .our-university-slider .our-university-cell span.close-cell {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      opacity: 1;
+      transition: opacity 0.4s ease-in-out; }
+      section#ourUniversity .our-university-slider .our-university-cell span.close-cell:before {
+        content: 'x'; }
+    section#ourUniversity .our-university-slider .our-university-cell .content {
+      position: absolute;
+      overflow: hidden;
+      top: 50%;
+      width: 200px;
+      left: calc(50% - 100px); }
+      section#ourUniversity .our-university-slider .our-university-cell .content h1 {
+        font-size: 2vw;
+        text-align: center;
+        color: white; }
+    section#ourUniversity .our-university-slider .our-university-cell:hover {
+      -ms-flex-positive: 1.5;
+          flex-grow: 1.5; }
+    section#ourUniversity .our-university-slider .our-university-cell.opening {
+      -ms-flex-positive: 10;
+          flex-grow: 10; }
+    section#ourUniversity .our-university-slider .our-university-cell.sibling-is-opening {
+      -ms-flex-positive: 0;
+          flex-grow: 0;
+      opacity: 0;
+      padding: 0; }
     section#ourUniversity .our-university-slider .our-university-cell:first-of-type {
-      background-image: url("http://www.owlguru.com/schools/wp-content/plugins/autoGrid/gallery/The-New-School-campus-pictures/image_20151114_162732.jpg"); }
+      background-image: url("http://familiar-temp.s3.amazonaws.com/our-schools.jpg"); }
     section#ourUniversity .our-university-slider .our-university-cell:nth-of-type(2) {
-      background-image: url("http://www.owlguru.com/schools/wp-content/plugins/autoGrid/gallery/The-New-School-campus-pictures/image_20151114_162732.jpg"); }
+      background-image: url("http://familiar-temp.s3.amazonaws.com/our-people.jpg"); }
     section#ourUniversity .our-university-slider .our-university-cell:nth-of-type(3) {
-      background-image: url("http://www.owlguru.com/schools/wp-content/plugins/autoGrid/gallery/The-New-School-campus-pictures/image_20151114_162732.jpg"); }
+      background-image: url("http://familiar-temp.s3.amazonaws.com/the-facts.jpg"); }
     section#ourUniversity .our-university-slider .our-university-cell:last-of-type {
-      background-image: url("http://www.owlguru.com/schools/wp-content/plugins/autoGrid/gallery/The-New-School-campus-pictures/image_20151114_162732.jpg"); }
+      background-image: url("http://familiar-temp.s3.amazonaws.com/our-network.jpg"); }
+  section#ourUniversity .our-university-slider .flickity-prev-next-button {
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out; }
 
 * {
   margin: 0;

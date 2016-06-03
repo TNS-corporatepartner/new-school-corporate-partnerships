@@ -1,36 +1,87 @@
-section#ourUniversity {
+section#ourUniversity {    
+  
   .our-university-slider {
-    // display: flex;
     height: 100vh;
-    &.full-width .our-university-cell {
-      width: 100%;
-    }
-    .our-university-cell {
+
+    &.uninitialized {
       display: flex;
+      .our-university-cell {
+        width: auto;
+        padding: 0;
+        span.close-cell {
+          opacity: 0;
+          pointer-events: none;
+        }
+      }
+      .flickity-prev-next-button {
+        opacity: 0;
+      }      
+    } 
+
+    .our-university-cell {
+      position: relative;
+      display: flex;
+      flex-grow: 1;
+      flex-basis: 0%;      
       align-items: center;
-      width: 25%;
+      width: 100%;
       height: 100vh;
       padding: 2vw;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      h1 {
-        font-size: 2vw;
-        text-align: center;
-        color: white;
+      transition: flex 0.5s ease-in-out, opacity 0.5s ease-in-out;
+      span.close-cell {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        opacity: 1;
+        transition: opacity 0.4s ease-in-out;
+        &:before {
+          content: 'x';
+        }
+      }      
+      .content {
+        position: absolute;
+        overflow: hidden;
+        top: 50%;
+        width: 200px;
+        left: calc(50% - 100px);
+        h1 {
+          font-size: 2vw;
+          text-align: center;
+          color: white;
+        }        
+      }
+      &:hover {
+        flex-grow: 1.5;
+      }
+      &.sibling-is-hovered {
+        // added/removed by js
+      }
+      &.opening {
+        flex-grow: 10;
+      }
+      &.sibling-is-opening {        
+        flex-grow: 0;
+        opacity: 0;
+        padding: 0;
       }
       &:first-of-type {
-        background-image: url('http://www.owlguru.com/schools/wp-content/plugins/autoGrid/gallery/The-New-School-campus-pictures/image_20151114_162732.jpg');
+        background-image: url('http://familiar-temp.s3.amazonaws.com/our-schools.jpg');
       }
       &:nth-of-type(2) {
-        background-image: url('http://www.owlguru.com/schools/wp-content/plugins/autoGrid/gallery/The-New-School-campus-pictures/image_20151114_162732.jpg');
+        background-image: url('http://familiar-temp.s3.amazonaws.com/our-people.jpg');
       }
       &:nth-of-type(3) {
-        background-image: url('http://www.owlguru.com/schools/wp-content/plugins/autoGrid/gallery/The-New-School-campus-pictures/image_20151114_162732.jpg');
+        background-image: url('http://familiar-temp.s3.amazonaws.com/the-facts.jpg');
       }
       &:last-of-type {
-        background-image: url('http://www.owlguru.com/schools/wp-content/plugins/autoGrid/gallery/The-New-School-campus-pictures/image_20151114_162732.jpg');
+        background-image: url('http://familiar-temp.s3.amazonaws.com/our-network.jpg');
       }
+    }
+
+    .flickity-prev-next-button {
+      opacity: 0;
+      transition: opacity 0.4s ease-in-out;
     }
   }
 }
+
