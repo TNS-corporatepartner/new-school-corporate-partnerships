@@ -17,7 +17,7 @@ section#coreValues {
       .flickity-prev-next-button {
         opacity: 0;
       }      
-    } 
+    }     
 
     .core-values-cell {
       position: relative;
@@ -29,6 +29,32 @@ section#coreValues {
       height: 100vh;
       padding: 2vw;
       transition: flex 0.5s ease-in-out, opacity 0.5s ease-in-out;
+      &:hover {
+        flex-grow: 1.5;
+      }
+      &.sibling-is-hovered {
+        // added/removed by js
+      }
+      &.opening {
+        flex-grow: 10;
+      }
+      &.sibling-is-opening {        
+        flex-grow: 0;
+        opacity: 0;
+        padding: 0;
+      }
+      &:first-of-type {
+        background-color: lighten($coreValuesBaseGray, 10%);
+      }
+      &:nth-of-type(2) {
+        background-color: lighten($coreValuesBaseGray, 10%);
+      }
+      &:nth-of-type(3) {
+        background-color: lighten($coreValuesBaseGray, 30%);
+      }
+      &:last-of-type {
+        background-color: lighten($coreValuesBaseGray, 50%);
+      }      
       #particles-js {
         position: absolute;
         top: 0;
@@ -63,32 +89,10 @@ section#coreValues {
         top: 0;
         left: 0;
       }
-      &:hover {
-        flex-grow: 1.5;
+      #statusQuo canvas {
+        cursor: url('/images/status-quo-triangle.png'), auto;
       }
-      &.sibling-is-hovered {
-        // added/removed by js
-      }
-      &.opening {
-        flex-grow: 10;
-      }
-      &.sibling-is-opening {        
-        flex-grow: 0;
-        opacity: 0;
-        padding: 0;
-      }
-      &:first-of-type {
-        background-color: $coreValuesBaseGray;
-      }
-      &:nth-of-type(2) {
-        background-color: lighten($coreValuesBaseGray, 10%);
-      }
-      &:nth-of-type(3) {
-        background-color: lighten($coreValuesBaseGray, 30%);
-      }
-      &:last-of-type {
-        background-color: lighten($coreValuesBaseGray, 50%);
-      }
+
     }
 
     .flickity-prev-next-button {

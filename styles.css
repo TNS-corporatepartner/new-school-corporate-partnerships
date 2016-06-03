@@ -208,6 +208,25 @@ section#coreValues .core-values-slider {
     padding: 2vw;
     transition: flex 0.5s ease-in-out, opacity 0.5s ease-in-out;
     transition: flex 0.5s ease-in-out, opacity 0.5s ease-in-out, -ms-flex 0.5s ease-in-out; }
+    section#coreValues .core-values-slider .core-values-cell:hover {
+      -ms-flex-positive: 1.5;
+          flex-grow: 1.5; }
+    section#coreValues .core-values-slider .core-values-cell.opening {
+      -ms-flex-positive: 10;
+          flex-grow: 10; }
+    section#coreValues .core-values-slider .core-values-cell.sibling-is-opening {
+      -ms-flex-positive: 0;
+          flex-grow: 0;
+      opacity: 0;
+      padding: 0; }
+    section#coreValues .core-values-slider .core-values-cell:first-of-type {
+      background-color: #3c3c3c; }
+    section#coreValues .core-values-slider .core-values-cell:nth-of-type(2) {
+      background-color: #3c3c3c; }
+    section#coreValues .core-values-slider .core-values-cell:nth-of-type(3) {
+      background-color: #6f6f6f; }
+    section#coreValues .core-values-slider .core-values-cell:last-of-type {
+      background-color: #a2a2a2; }
     section#coreValues .core-values-slider .core-values-cell #particles-js {
       position: absolute;
       top: 0;
@@ -236,25 +255,8 @@ section#coreValues .core-values-slider {
       position: absolute;
       top: 0;
       left: 0; }
-    section#coreValues .core-values-slider .core-values-cell:hover {
-      -ms-flex-positive: 1.5;
-          flex-grow: 1.5; }
-    section#coreValues .core-values-slider .core-values-cell.opening {
-      -ms-flex-positive: 10;
-          flex-grow: 10; }
-    section#coreValues .core-values-slider .core-values-cell.sibling-is-opening {
-      -ms-flex-positive: 0;
-          flex-grow: 0;
-      opacity: 0;
-      padding: 0; }
-    section#coreValues .core-values-slider .core-values-cell:first-of-type {
-      background-color: #222222; }
-    section#coreValues .core-values-slider .core-values-cell:nth-of-type(2) {
-      background-color: #3c3c3c; }
-    section#coreValues .core-values-slider .core-values-cell:nth-of-type(3) {
-      background-color: #6f6f6f; }
-    section#coreValues .core-values-slider .core-values-cell:last-of-type {
-      background-color: #a2a2a2; }
+    section#coreValues .core-values-slider .core-values-cell #statusQuo canvas {
+      cursor: url("/images/status-quo-triangle.png"), auto; }
   section#coreValues .core-values-slider .flickity-prev-next-button {
     opacity: 0;
     transition: opacity 0.4s ease-in-out; }
