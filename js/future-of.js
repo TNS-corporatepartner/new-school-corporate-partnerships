@@ -1,5 +1,6 @@
 import Flickity from 'flickity'
 
+
 export class FutureOf {  
   
   constructor() {

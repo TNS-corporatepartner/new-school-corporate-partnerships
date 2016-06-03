@@ -8,7 +8,6 @@ import { OurUniversity } from './our-university.js'
 
 window.addEventListener('DOMContentLoaded', init)
 
-
 function init() {        
   new FutureOf()  
   new CoreValues()

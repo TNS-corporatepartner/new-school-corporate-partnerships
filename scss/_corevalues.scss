@@ -4,9 +4,28 @@ section#coreValues {
   .core-values-slider {
     // display: flex;
     height: 100vh;
-    &.full-width .core-values-cell {
-      width: 100%;
-    }
+    &.uninitialized {
+      display: flex;
+      .core-values-cell {
+        width: auto;
+        padding: 0;
+        span.close-cell {
+          opacity: 0;
+          pointer-events: none;
+        }
+      }
+      .flickity-prev-next-button {
+        opacity: 0;
+      }      
+    }     
+    &.content-closed .core-values-cell .content {
+      left: calc(50% - 110px);  
+      width: 220px;
+      h1 {
+        font-size: 2vh;
+      }      
+    }    
+
     .core-values-cell {
       display: flex;
       align-items: center;
@@ -29,6 +48,43 @@ section#coreValues {
       }
       &:last-of-type {
         background-color: lighten($coreValuesBaseGray, 50%);
+      }      
+      #particles-js {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100vw;
+      }
+      span.close-cell {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        opacity: 1;
+        transition: opacity 0.4s ease-in-out;
+        &:before {
+          content: 'x';
+        }
+      }      
+      .content {
+        position: absolute;
+        overflow: hidden;
+        top: 50%;
+        left: 4vw;
+        width: 440px;              
+        transition: all 0.4s ease-in-out;
+        h1 {
+          font-size: 4vh;  
+          text-align: left;
+          color: white;
+          transition: font-size 0.4s ease-in-out;
+        }        
+      }
+      canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
       }
     }
   }

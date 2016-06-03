@@ -52,8 +52,22 @@ section#futureOf {
 
 section#coreValues .core-values-slider {
   height: 100vh; }
-  section#coreValues .core-values-slider.full-width .core-values-cell {
-    width: 100%; }
+  section#coreValues .core-values-slider.uninitialized {
+    display: -ms-flexbox;
+    display: flex; }
+    section#coreValues .core-values-slider.uninitialized .core-values-cell {
+      width: auto;
+      padding: 0; }
+      section#coreValues .core-values-slider.uninitialized .core-values-cell span.close-cell {
+        opacity: 0;
+        pointer-events: none; }
+    section#coreValues .core-values-slider.uninitialized .flickity-prev-next-button {
+      opacity: 0; }
+  section#coreValues .core-values-slider.content-closed .core-values-cell .content {
+    left: calc(50% - 110px);
+    width: 220px; }
+    section#coreValues .core-values-slider.content-closed .core-values-cell .content h1 {
+      font-size: 2vh; }
   section#coreValues .core-values-slider .core-values-cell {
     display: -ms-flexbox;
     display: flex;
@@ -74,6 +88,37 @@ section#coreValues .core-values-slider {
       background-color: #6f6f6f; }
     section#coreValues .core-values-slider .core-values-cell:last-of-type {
       background-color: #a2a2a2; }
+    section#coreValues .core-values-slider .core-values-cell #particles-js {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100vw; }
+    section#coreValues .core-values-slider .core-values-cell span.close-cell {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      opacity: 1;
+      transition: opacity 0.4s ease-in-out; }
+      section#coreValues .core-values-slider .core-values-cell span.close-cell:before {
+        content: 'x'; }
+    section#coreValues .core-values-slider .core-values-cell .content {
+      position: absolute;
+      overflow: hidden;
+      top: 50%;
+      left: 4vw;
+      width: 440px;
+      transition: all 0.4s ease-in-out; }
+      section#coreValues .core-values-slider .core-values-cell .content h1 {
+        font-size: 4vh;
+        text-align: left;
+        color: white;
+        transition: font-size 0.4s ease-in-out; }
+    section#coreValues .core-values-slider .core-values-cell canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw; }
 
 section#ourUniversity .our-university-slider {
   height: 100vh; }
