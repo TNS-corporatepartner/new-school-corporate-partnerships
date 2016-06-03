@@ -2,9 +2,8 @@
 title: Challenging the Status Quo
 date: 2016-06-03 17:04:00 Z
 test:
-- a
-- b
-- c
+- Text: askjdklajsdklas
+- Text: as;dkj;lajsdklajs
 ---
 
 1. The first one
