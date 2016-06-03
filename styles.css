@@ -1,133 +1,3 @@
-/*! Flickity v1.2.1
-http://flickity.metafizzy.co
----------------------------------------------- */
-.flickity-enabled {
-  position: relative; }
-
-.flickity-enabled:focus {
-  outline: none; }
-
-.flickity-viewport {
-  overflow: hidden;
-  position: relative;
-  height: 100%; }
-
-.flickity-slider {
-  position: absolute;
-  width: 100%;
-  height: 100%; }
-
-/* draggable */
-.flickity-enabled.is-draggable {
-  -webkit-tap-highlight-color: transparent;
-  tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none; }
-
-.flickity-enabled.is-draggable .flickity-viewport {
-  cursor: move;
-  cursor: -webkit-grab;
-  cursor: grab; }
-
-.flickity-enabled.is-draggable .flickity-viewport.is-pointer-down {
-  cursor: -webkit-grabbing;
-  cursor: grabbing; }
-
-/* ---- previous/next buttons ---- */
-.flickity-prev-next-button {
-  position: absolute;
-  top: 50%;
-  width: 44px;
-  height: 44px;
-  border: none;
-  border-radius: 50%;
-  background: white;
-  background: rgba(255, 255, 255, 0.75);
-  cursor: pointer;
-  /* vertically center */
-  transform: translateY(-50%); }
-
-.flickity-prev-next-button:hover {
-  background: white; }
-
-.flickity-prev-next-button:focus {
-  outline: none;
-  box-shadow: 0 0 0 5px #09F; }
-
-.flickity-prev-next-button:active {
-  filter: alpha(opacity=60);
-  /* IE8 */
-  opacity: 0.6; }
-
-.flickity-prev-next-button.previous {
-  left: 10px; }
-
-.flickity-prev-next-button.next {
-  right: 10px; }
-
-/* right to left */
-.flickity-rtl .flickity-prev-next-button.previous {
-  left: auto;
-  right: 10px; }
-
-.flickity-rtl .flickity-prev-next-button.next {
-  right: auto;
-  left: 10px; }
-
-.flickity-prev-next-button:disabled {
-  filter: alpha(opacity=30);
-  /* IE8 */
-  opacity: 0.3;
-  cursor: auto; }
-
-.flickity-prev-next-button svg {
-  position: absolute;
-  left: 20%;
-  top: 20%;
-  width: 60%;
-  height: 60%; }
-
-.flickity-prev-next-button .arrow {
-  fill: #333; }
-
-/* color & size if no SVG - IE8 and Android 2.3 */
-.flickity-prev-next-button.no-svg {
-  color: #333;
-  font-size: 26px; }
-
-/* ---- page dots ---- */
-.flickity-page-dots {
-  position: absolute;
-  width: 100%;
-  bottom: -25px;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  text-align: center;
-  line-height: 1; }
-
-.flickity-rtl .flickity-page-dots {
-  direction: rtl; }
-
-.flickity-page-dots .dot {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  margin: 0 8px;
-  background: #333;
-  border-radius: 50%;
-  filter: alpha(opacity=25);
-  /* IE8 */
-  opacity: 0.25;
-  cursor: pointer; }
-
-.flickity-page-dots .dot.is-selected {
-  filter: alpha(opacity=100);
-  /* IE8 */
-  opacity: 1; }
-
 @font-face {
   font-family: 'Neue';
   src: url("/fonts/NeueDisplay-Random.woff") format("woff");
@@ -182,236 +52,56 @@ section#futureOf {
 
 section#coreValues .core-values-slider {
   height: 100vh; }
-  section#coreValues .core-values-slider.uninitialized {
-    display: -ms-flexbox;
-    display: flex; }
-    section#coreValues .core-values-slider.uninitialized .core-values-cell {
-      width: auto;
-      padding: 0; }
-      section#coreValues .core-values-slider.uninitialized .core-values-cell span.close-cell {
-        opacity: 0;
-        pointer-events: none; }
-    section#coreValues .core-values-slider.uninitialized .flickity-prev-next-button {
-      opacity: 0; }
+  section#coreValues .core-values-slider.full-width .core-values-cell {
+    width: 100%; }
   section#coreValues .core-values-slider .core-values-cell {
-    position: relative;
     display: -ms-flexbox;
     display: flex;
-    -ms-flex-positive: 1;
-        flex-grow: 1;
-    -ms-flex-preferred-size: 0%;
-        flex-basis: 0%;
     -ms-flex-align: center;
         align-items: center;
-    width: 100%;
+    width: 25%;
     height: 100vh;
-    padding: 2vw;
-    transition: flex 0.5s ease-in-out, opacity 0.5s ease-in-out;
-    transition: flex 0.5s ease-in-out, opacity 0.5s ease-in-out, -ms-flex 0.5s ease-in-out; }
-    section#coreValues .core-values-slider .core-values-cell:hover {
-      -ms-flex-positive: 1.5;
-          flex-grow: 1.5; }
-    section#coreValues .core-values-slider .core-values-cell.opening {
-      -ms-flex-positive: 10;
-          flex-grow: 10; }
-    section#coreValues .core-values-slider .core-values-cell.sibling-is-opening {
-      -ms-flex-positive: 0;
-          flex-grow: 0;
-      opacity: 0;
-      padding: 0; }
+    padding: 2vw; }
+    section#coreValues .core-values-slider .core-values-cell h1 {
+      font-size: 2vw;
+      text-align: center;
+      color: white; }
     section#coreValues .core-values-slider .core-values-cell:first-of-type {
-      background-color: #3c3c3c; }
+      background-color: #222222; }
     section#coreValues .core-values-slider .core-values-cell:nth-of-type(2) {
       background-color: #3c3c3c; }
     section#coreValues .core-values-slider .core-values-cell:nth-of-type(3) {
       background-color: #6f6f6f; }
     section#coreValues .core-values-slider .core-values-cell:last-of-type {
       background-color: #a2a2a2; }
-    section#coreValues .core-values-slider .core-values-cell #particles-js {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100vw; }
-    section#coreValues .core-values-slider .core-values-cell span.close-cell {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      opacity: 1;
-      transition: opacity 0.4s ease-in-out; }
-      section#coreValues .core-values-slider .core-values-cell span.close-cell:before {
-        content: 'x'; }
-    section#coreValues .core-values-slider .core-values-cell .content {
-      position: absolute;
-      overflow: hidden;
-      top: 50%;
-      width: 200px;
-      left: calc(50% - 100px); }
-      section#coreValues .core-values-slider .core-values-cell .content h1 {
-        font-size: 2vw;
-        text-align: center;
-        color: white; }
-    section#coreValues .core-values-slider .core-values-cell canvas {
-      position: absolute;
-      top: 0;
-      left: 0; }
-    section#coreValues .core-values-slider .core-values-cell #statusQuo canvas {
-      cursor: url("/images/status-quo-triangle.png"), auto; }
-  section#coreValues .core-values-slider .flickity-prev-next-button {
-    opacity: 0;
-    transition: opacity 0.4s ease-in-out; }
 
 section#ourUniversity .our-university-slider {
   height: 100vh; }
-  section#ourUniversity .our-university-slider.uninitialized {
-    display: -ms-flexbox;
-    display: flex; }
-    section#ourUniversity .our-university-slider.uninitialized .our-university-cell {
-      width: auto;
-      padding: 0; }
-      section#ourUniversity .our-university-slider.uninitialized .our-university-cell span.close-cell {
-        opacity: 0;
-        pointer-events: none; }
-    section#ourUniversity .our-university-slider.uninitialized .flickity-prev-next-button {
-      opacity: 0; }
+  section#ourUniversity .our-university-slider.full-width .our-university-cell {
+    width: 100%; }
   section#ourUniversity .our-university-slider .our-university-cell {
-    position: relative;
     display: -ms-flexbox;
     display: flex;
-    -ms-flex-positive: 1;
-        flex-grow: 1;
-    -ms-flex-preferred-size: 0%;
-        flex-basis: 0%;
     -ms-flex-align: center;
         align-items: center;
-    width: 100%;
+    width: 25%;
     height: 100vh;
     padding: 2vw;
-    background-position: center;
     background-size: cover;
-    background-repeat: no-repeat;
-    transition: flex 0.5s ease-in-out, opacity 0.5s ease-in-out;
-    transition: flex 0.5s ease-in-out, opacity 0.5s ease-in-out, -ms-flex 0.5s ease-in-out; }
-    section#ourUniversity .our-university-slider .our-university-cell span.close-cell {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      opacity: 1;
-      transition: opacity 0.4s ease-in-out; }
-      section#ourUniversity .our-university-slider .our-university-cell span.close-cell:before {
-        content: 'x'; }
-    section#ourUniversity .our-university-slider .our-university-cell .content {
-      position: absolute;
-      overflow: hidden;
-      top: 50%;
-      width: 200px;
-      left: calc(50% - 100px); }
-      section#ourUniversity .our-university-slider .our-university-cell .content h1 {
-        font-size: 2vw;
-        text-align: center;
-        color: white; }
-    section#ourUniversity .our-university-slider .our-university-cell:hover {
-      -ms-flex-positive: 1.5;
-          flex-grow: 1.5; }
-    section#ourUniversity .our-university-slider .our-university-cell.opening {
-      -ms-flex-positive: 10;
-          flex-grow: 10; }
-    section#ourUniversity .our-university-slider .our-university-cell.sibling-is-opening {
-      -ms-flex-positive: 0;
-          flex-grow: 0;
-      opacity: 0;
-      padding: 0; }
+    background-position: center;
+    background-repeat: no-repeat; }
+    section#ourUniversity .our-university-slider .our-university-cell h1 {
+      font-size: 2vw;
+      text-align: center;
+      color: white; }
     section#ourUniversity .our-university-slider .our-university-cell:first-of-type {
-      background-image: url("http://familiar-temp.s3.amazonaws.com/our-schools.jpg"); }
+      background-image: url("http://www.owlguru.com/schools/wp-content/plugins/autoGrid/gallery/The-New-School-campus-pictures/image_20151114_162732.jpg"); }
     section#ourUniversity .our-university-slider .our-university-cell:nth-of-type(2) {
-      background-image: url("http://familiar-temp.s3.amazonaws.com/our-people.jpg"); }
+      background-image: url("http://www.owlguru.com/schools/wp-content/plugins/autoGrid/gallery/The-New-School-campus-pictures/image_20151114_162732.jpg"); }
     section#ourUniversity .our-university-slider .our-university-cell:nth-of-type(3) {
-      background-image: url("http://familiar-temp.s3.amazonaws.com/the-facts.jpg"); }
+      background-image: url("http://www.owlguru.com/schools/wp-content/plugins/autoGrid/gallery/The-New-School-campus-pictures/image_20151114_162732.jpg"); }
     section#ourUniversity .our-university-slider .our-university-cell:last-of-type {
-      background-image: url("http://familiar-temp.s3.amazonaws.com/our-network.jpg"); }
-  section#ourUniversity .our-university-slider .flickity-prev-next-button {
-    opacity: 0;
-    transition: opacity 0.4s ease-in-out; }
-
-body, html {
-  margin: 0;
-  overflow: hidden;
-  transition: opacity 400ms; }
-
-body, .onepage-wrapper, html {
-  display: block;
-  position: static;
-  padding: 0;
-  width: 100%;
-  height: 100%; }
-
-.onepage-wrapper {
-  width: 100%;
-  height: 100%;
-  display: block;
-  position: relative;
-  padding: 0;
-  -webkit-transform-style: preserve-3d; }
-
-.onepage-wrapper .section {
-  width: 100%;
-  height: 100%; }
-
-.onepage-pagination {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  z-index: 5;
-  list-style: none;
-  margin: 0;
-  padding: 0; }
-
-.onepage-pagination li {
-  padding: 0;
-  text-align: center; }
-
-.onepage-pagination li a {
-  padding: 10px;
-  width: 4px;
-  height: 4px;
-  display: block; }
-
-.onepage-pagination li a:before {
-  content: '';
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  background: rgba(0, 0, 0, 0.85);
-  border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px; }
-
-.onepage-pagination li a.active:before {
-  width: 10px;
-  height: 10px;
-  background: none;
-  border: 1px solid black;
-  margin-top: -4px;
-  left: 8px; }
-
-.disabled-onepage-scroll, .disabled-onepage-scroll .wrapper {
-  overflow: auto; }
-
-.disabled-onepage-scroll .onepage-wrapper .section {
-  position: relative !important;
-  top: auto !important;
-  left: auto !important; }
-
-.disabled-onepage-scroll .onepage-wrapper {
-  transform: none !important;
-  -ms-transform: none !important;
-  min-height: 100%; }
-
-.disabled-onepage-scroll .onepage-pagination {
-  display: none; }
-
-body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
-  position: inherit; }
+      background-image: url("http://www.owlguru.com/schools/wp-content/plugins/autoGrid/gallery/The-New-School-campus-pictures/image_20151114_162732.jpg"); }
 
 * {
   margin: 0;

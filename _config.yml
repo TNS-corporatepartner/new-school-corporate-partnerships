@@ -1,5 +1,5 @@
 ---
-title: Your awesome title
+title: New School Corporate Partnerships
 timezone: UTC
 collections:
   posts:
@@ -7,6 +7,9 @@ collections:
     output: true
   uploads:
     title: Uploads
+    output: true
+  values:
+    title: Values
     output: true
 email: your-email@domain.com
 description: |
@@ -16,4 +19,3 @@ url: http://yourdomain.com
 twitter_username: jekyllrb
 github_username: jekyll
 markdown: kramdown
-exclude: [node_modules, scss, bower_components]
