@@ -1,6 +1,10 @@
 ---
 title: Challenging the Status Quo
 date: 2016-06-03 17:04:00 Z
+test:
+- a
+- b
+- c
 ---
 
 1. The first one
