@@ -92,6 +92,21 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
   font-style: normal;
   font-weight: 400; }
 
+footer {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  -ms-flex-align: end;
+      align-items: flex-end; }
+  footer .logo-container {
+    width: 100px; }
+    footer .logo-container img {
+      width: 100%; }
+
 section#futureOf {
   position: relative;
   height: 100vh;
@@ -106,25 +121,16 @@ section#futureOf {
     section#futureOf .future-of-content header h1 {
       font-size: 7vh;
       color: white; }
-  section#futureOf .future-of-content footer {
-    bottom: 0;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-pack: justify;
-        justify-content: space-between;
-    -ms-flex-align: end;
-        align-items: flex-end; }
-    section#futureOf .future-of-content footer .logo-container {
-      width: 100px; }
-      section#futureOf .future-of-content footer .logo-container img {
-        width: 100%; }
-    section#futureOf .future-of-content footer .shuffler {
-      width: 80%; }
-      section#futureOf .future-of-content footer .shuffler h1 {
-        opacity: 0;
-        font-size: 7vh;
-        color: white;
-        text-align: right; }
+  section#futureOf .future-of-content .shuffler {
+    width: 80%;
+    position: absolute;
+    right: 20px;
+    bottom: 20px; }
+    section#futureOf .future-of-content .shuffler h1 {
+      opacity: 0;
+      font-size: 7vh;
+      color: white;
+      text-align: right; }
   section#futureOf .future-of-slider .future-of-cell {
     width: 100%;
     height: 100vh;
@@ -214,7 +220,8 @@ section#coreValues .core-values-slider {
       left: 0;
       width: 100vw; }
     section#coreValues .core-values-slider .core-values-cell #statusQuo canvas {
-      cursor: url("/images/status-quo-triangle.png"), auto; }
+      cursor: url("/images/status-quo-triangle.png"), auto;
+      transform: rotate(90deg); }
 
 section#ourUniversity .our-university-slider {
   height: 100vh; }
@@ -277,16 +284,18 @@ section#ourUniversity .our-university-slider {
       opacity: 0;
       padding: 0; }
     section#ourUniversity .our-university-slider .our-university-cell:first-of-type {
-      background-image: url("http://familiar-temp.s3.amazonaws.com/our-schools.jpg"); }
-    section#ourUniversity .our-university-slider .our-university-cell:nth-of-type(2) {
       background-image: url("http://familiar-temp.s3.amazonaws.com/our-people.jpg"); }
-    section#ourUniversity .our-university-slider .our-university-cell:nth-of-type(3) {
-      background-image: url("http://familiar-temp.s3.amazonaws.com/the-facts.jpg"); }
+    section#ourUniversity .our-university-slider .our-university-cell:nth-of-type(2) {
+      background-image: url("http://familiar-temp.s3.amazonaws.com/our-schools.jpg"); }
     section#ourUniversity .our-university-slider .our-university-cell:last-of-type {
       background-image: url("http://familiar-temp.s3.amazonaws.com/our-network.jpg"); }
   section#ourUniversity .our-university-slider .flickity-prev-next-button {
     opacity: 0;
     transition: opacity 0.4s ease-in-out; }
+
+#corporatePartnerships .placeholder-fs {
+  -ms-flex-direction: column;
+      flex-direction: column; }
 
 * {
   margin: 0;
@@ -337,6 +346,20 @@ h1, h2, h3, h4, h5, h6 {
   .placeholder-fs h1 {
     font-size: 6vh;
     text-align: center; }
+  .placeholder-fs .half-screen {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+        justify-content: center;
+    -ms-flex-align: center;
+        align-items: center;
+    width: 50%;
+    height: 100%; }
+    .placeholder-fs .half-screen:first-of-type {
+      border-right: 1px solid gray; }
+    .placeholder-fs .half-screen h2 {
+      font-size: 3vh;
+      text-align: center; }
 
 section > .placeholder-fs {
   border-bottom: 1px solid gray; }

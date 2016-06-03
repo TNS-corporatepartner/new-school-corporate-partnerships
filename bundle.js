@@ -5166,6 +5166,10 @@
 	        height: window.innerHeight
 	      });
 
+	      $('#statusQuo canvas').css({
+	        height: window.innerWidth
+	      });
+
 	      pJSDom.forEach(function (pjs) {
 	        window.particlesJS.layout(null, pjs.pJS);
 	      });

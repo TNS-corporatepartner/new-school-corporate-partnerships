@@ -5,6 +5,7 @@
 @import 'futureof.scss';
 @import 'corevalues.scss';
 @import 'ouruniversity.scss';
+@import 'corporatepartnerships.scss';
 // @import 'blocks.scss';
 
 
@@ -55,11 +56,24 @@ h1,h2,h3,h4,h5,h6 {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  width: 100%;  
-  
+  width: 100%;    
   h1 {
     font-size: 6vh;
     text-align: center;
+  }
+  .half-screen {
+    display: flex;
+    justify-content:  center;
+    align-items: center;
+    width: 50%;
+    height: 100%;    
+    &:first-of-type {
+      border-right: 1px solid gray;
+    }
+    h2 {
+      font-size: 3vh;
+      text-align: center;
+    }
   }
 }
 

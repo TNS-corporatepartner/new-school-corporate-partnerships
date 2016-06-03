@@ -19,28 +19,19 @@ section#futureOf {
       }
     }
     
-    footer {
-      bottom: 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      .logo-container {
-        width: 100px;
-        img {
-          width: 100%;
-        }
+    .shuffler {
+      width: 80%;
+      position: absolute;
+      right: 20px;
+      bottom: 20px;
+      h1 {
+        opacity: 0;
+        font-size: 7vh;
+        color: white;
+        text-align: right;
       }
-      .shuffler {
-        width: 80%;
-        h1 {
-          opacity: 0;
-          font-size: 7vh;
-          color: white;
-          text-align: right;
-        }
-      }
-    }    
-  }
+    }
+  }    
 
   .future-of-slider {
     .future-of-cell {

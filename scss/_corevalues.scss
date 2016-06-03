@@ -101,7 +101,8 @@ section#coreValues {
       }
       #statusQuo canvas {
         cursor: url('/images/status-quo-triangle.png'), auto;
-      }      
+        transform: rotate(90deg);
+      }         
     }
   }
 }

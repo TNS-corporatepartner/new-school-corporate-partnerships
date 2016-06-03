@@ -116,14 +116,16 @@ export class CoreValues {
       })
       
     })( words.splice(0, 1)[0] )
-
-    
   }  
 
   resizeParticles() {    
     $('canvas').css({
       width: window.innerWidth,
       height: window.innerHeight
+    })   
+    
+    $('#statusQuo canvas').css({
+      height: window.innerWidth
     })   
     
     pJSDom.forEach(pjs => {

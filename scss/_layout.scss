@@ -5,3 +5,18 @@ body {
 main {
   
 }
+
+footer {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  .logo-container {
+    width: 100px;
+    img {
+      width: 100%;
+    }
+  }
+}  
