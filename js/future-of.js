@@ -9,7 +9,19 @@ export class FutureOf {
     this.imagineEl = document.querySelector('.future-of-header h1')
     this.futureOfEl = document.querySelectorAll('.future-of-header h1')[1]
     this.loadingEl = document.querySelector('.shuffler')
-    this.loadingWord = this.loadingEl.querySelector('h1')       
+    this.loadingWord = this.loadingEl.querySelector('h1')     
+    this.questionEl = document.querySelector('.question')  
+    this.questions = [
+      'How can data be human?',
+      'How is the gamification of learning reshaping the workforce?',
+      'question 3'
+    ]
+    this.words = [
+      'Big Data',
+      'Learning & Development',
+      'three'
+    ]
+
 
     var slider = document.querySelector('.future-of-slider')    
     this.flkty = new Flickity( slider, {
@@ -18,7 +30,98 @@ export class FutureOf {
       wrapAround: true
     })  
     
-    this.playFutureOfSlider( this.futureOfCells[this.activeFutureOfCellIndex] ) 
+    // this.playFutureOfSlider( this.futureOfCells[this.activeFutureOfCellIndex] )
+    
+    
+    $('video').each(function(i, vid) {
+      vid.play()
+    }) 
+    
+       
+    const shufflerConfig = {
+      limit: 26,
+      count: 0,
+      index: 0,
+      words: ['The Workforce', 'Sustainability', 'Research & Development', 'Big Data']   
+    }      
+            
+    Velocity(this.imagineEl, {opacity: 1}, {
+      duration: 1200, display: 'block',
+      complete: () => {
+        Velocity(this.futureOfEl, {opacity: 1}, {
+          duration: 800,
+          display: 'block',
+          complete: () => {
+            this.shuffler(shufflerConfig).then( () => {
+              
+              setTimeout(() => {
+                Velocity(this.imagineEl, {opacity: 0.2})
+                Velocity(this.futureOfEl, {opacity: 0.2}, {
+                  complete: () => showQuestion.call(this) 
+                })
+                Velocity(this.loadingWord, {opacity: 0.2})                
+              }, 1000)
+
+            })
+          }
+        })
+      }
+    })
+        
+    function showQuestion() {
+      this.questionEl.textContent = this.questions[this.flkty.selectedIndex]
+      Velocity(this.futureOfCells[0], { opacity: 1}, {
+        duration: 600,
+        complete: () => {
+          this.questionEl.textContent = this.questions[this.flkty.selectedIndex]
+          
+          Velocity(this.questionEl, {opacity: 1},  {
+            duration: 1000,
+            complete: () => {
+              setTimeout(() => {
+                Velocity(this.questionEl, {opacity: 0}, {
+                  complete: () => {
+                    
+                    startInterval.call(this)
+                  }
+                })
+              }, 2000)
+            }
+          })
+        }
+      })      
+    }
+    
+    
+    function startInterval() {
+      this.flkty.next()      
+      Velocity(this.loadingWord, { opacity: 0}, {
+        complete: () => {
+          this.loadingWord.textContent = this.words[this.flkty.selectedIndex]
+          this.questionEl.textContent = this.questions[this.flkty.selectedIndex]
+          
+          Velocity(this.loadingWord, {opacity: 1}, {
+            complete: () => {
+              setTimeout( () => {
+                Velocity(this.loadingWord, {opacity: 0.2})
+                setTimeout(() => {
+                  Velocity(this.questionEl, {opacity: 1}, {
+                    complete: () => {
+                      setTimeout(() => {
+                        startInterval.call(this)
+                      }, 4000)
+                    }
+                  })  
+                }, 600)
+                
+              }, 1000)
+              
+            }
+          })
+        }
+      })
+                        
+    }
   }
  
   playFutureOfSlider(cell) {

@@ -1,10 +1,23 @@
-body {
-  
+header#header {
+  position: fixed; z-index: 10;
+  top: 0;
+  right: 0;  
+  padding: 20px;
+  a {
+    // color: $red;
+    color: white;
+    text-decoration: none;
+  }
 }
 
-main {
-  
+
+body {
+  main {
+    
+  }  
 }
+
+
 
 footer {
   position: fixed;
