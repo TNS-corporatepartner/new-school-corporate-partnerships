@@ -6,9 +6,9 @@ export class CoreValues {
   constructor() {
     this.slider = document.querySelector('.core-values-slider')
     this.cells = this.slider.childNodes
-    this.activeCell = null     
+    this.activeCell = null
     const instance = this
-        
+
     $(this.cells).on('mouseenter', function() { $(this.cells).not(this).addClass('sibling-is-hovered') })
     $(this.cells).on('mouseleave', function() { $(this.cells).removeClass('sibling-is-hovered') })
     $(this.cells).on('click', function() { instance.openCell(this) })
@@ -17,10 +17,10 @@ export class CoreValues {
     Observable.fromEvent(window, 'resize').debounceTime(100).subscribe(() => this.resizeParticles())
 
     particlesJS.load('designDna', '/js/particles/design-dna.json')
-    particlesJS.load('statusQuo', '/js/particles/status-quo.json')    
+    particlesJS.load('statusQuo', '/js/particles/status-quo.json')
     particlesJS.load('fearless', '/js/particles/fearless.json')
-    particlesJS.load('diversity', '/js/particles/diversity.json')   
-    
+    particlesJS.load('diversity', '/js/particles/diversity.json')
+
     setTimeout(() => {
       this.resizeParticles()
     }, 1500)
@@ -28,44 +28,44 @@ export class CoreValues {
     // new Canvas({
     //   canvasParentSelector: '#designDna'
     // })
-    
+
     // new Canvas({
     //   canvasParentSelector: '#statusQuo'
     // })
-    
+
     // new Canvas({
     //   canvasParentSelector: '#fearless'
     // })
-    
+
     // new Canvas({
     //   canvasParentSelector: '#diversity'
-    // })        
+    // })
   }
-  
+
   openCell(cell) {
     if (!this.activeCell) {
 
       $(this.cells).not(cell).addClass('sibling-is-opening')
       $(cell).addClass('opening')
       $(cell.parentNode).removeClass('content-closed')
-      
-      setTimeout(() => {        
-        $(this.slider).removeClass('uninitialized')        
+
+      setTimeout(() => {
+        $(this.slider).removeClass('uninitialized')
         $(this.cells).removeClass('sibling-is-opening opening')
-                        
-        this.initFlkty( $(cell).index() )                
-        this.activeCell = cell        
-        this.resizeParticles()      
+
+        this.initFlkty( $(cell).index() )
+        this.activeCell = cell
+        this.resizeParticles()
       }, 800)
 
     }
-  }  
-  
+  }
+
   closeCell() {
-    if (this.activeCell) {              
+    if (this.activeCell) {
 
       $(this.activeCell).parents('.global-slider').addClass('content-closed')
-        
+
       setTimeout(() => {
         this.flkty.destroy()
         $(this.cells).not(this.activeCell).addClass('sibling-is-opening')
@@ -75,62 +75,62 @@ export class CoreValues {
         setTimeout(() => {
           $(this.cells).removeClass('sibling-is-opening')
           $(this.activeCell).removeClass('opening')
-          this.activeCell = null                
+          this.activeCell = null
         })
-        
+
         setTimeout( () => {
           this.resizeParticles()
-        }, 500)        
-      }, 250)    
+        }, 500)
+      }, 250)
     }
   }
-  
+
   initFlkty(initialIndex) {
     this.flkty = new Flickity( this.slider, {
       cellAlign: 'left',
       contain: true,
-      initialIndex: initialIndex      
-    })        
-  
+      initialIndex: initialIndex
+    })
+
     this.startCellAnimation(this.flkty)
     this.flkty.on('settle', this.startCellAnimation.bind(this, this.flkty))
   }
-  
-  startCellAnimation(flkty) {    
+
+  startCellAnimation(flkty) {
     const h1 = flkty.selectedCell.element.querySelector('h1')
-    const words = ['test', 'sample', 'something', 'else'];
-    
+    const words = ['We are driven to question everything', 'Since 1919, we have been constantly reinventing what it means to be a progressive university'];
+
 
     (function changeWord(word) {
 
-      Velocity(h1, {opacity: 0}, { 
+      Velocity(h1, {opacity: 0}, {
         complete: () => {
           h1.textContent = word
-          
+
           Velocity(h1, {opacity: 1}, {
             complete: () => {
-              if (words.length) changeWord( words.splice(0, 1)[0] ) 
+              if (words.length) changeWord( words.splice(0, 1)[0] )
             }
           })
         }
       })
-      
-    })( words.splice(0, 1)[0] )
-  }  
 
-  resizeParticles() {    
+    })( words.splice(0, 1)[0] )
+  }
+
+  resizeParticles() {
     $('canvas').css({
       width: window.innerWidth,
       height: window.innerHeight
-    })   
-    
+    })
+
     $('#statusQuo canvas').css({
       height: window.innerWidth
-    })   
-    
+    })
+
     pJSDom.forEach(pjs => {
       window.particlesJS.layout(null, pjs.pJS)
-    })     
+    })
   }
 
 }

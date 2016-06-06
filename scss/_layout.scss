@@ -1,20 +1,25 @@
 header#header {
-  position: fixed; z-index: 10;
+  position: fixed;
+  z-index: 10;
   top: 0;
-  right: 0;  
-  padding: 20px;
+  right: 20px;
+  padding: 10px;
+  background-color: $red;
+  width: 120px;
+
+
   a {
-    // color: $red;
     color: white;
     text-decoration: none;
+
   }
 }
 
 
 body {
   main {
-    
-  }  
+
+  }
 }
 
 
@@ -32,4 +37,4 @@ footer {
       width: 100%;
     }
   }
-}  
+}

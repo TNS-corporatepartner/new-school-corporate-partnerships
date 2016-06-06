@@ -24,7 +24,7 @@ body, .onepage-wrapper, html {
 
 .onepage-pagination {
   position: absolute;
-  right: 10px;
+  right: 0px;
   top: 50%;
   z-index: 5;
   list-style: none;
@@ -36,28 +36,21 @@ body, .onepage-wrapper, html {
   text-align: center; }
 
 .onepage-pagination li a {
-  padding: 10px;
-  width: 4px;
-  height: 4px;
-  display: block; }
+  padding: 2px;
+  width: 50px;
+  height: 7px;
+  margin: 10px 0px;
+  background-color: white;
+  display: block;
+  transition: height 0.5s, width 0.5s; }
+  .onepage-pagination li a:hover {
+    height: 12px; }
 
-.onepage-pagination li a:before {
-  content: '';
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  background: rgba(0, 0, 0, 0.85);
-  border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px; }
+.onepage-pagination:hover li a {
+  width: 75px; }
 
-.onepage-pagination li a.active:before {
-  width: 10px;
-  height: 10px;
-  background: none;
-  border: 1px solid black;
-  margin-top: -4px;
-  left: 8px; }
+.onepage-pagination li a.active {
+  background-color: #D64130; }
 
 .disabled-onepage-scroll, .disabled-onepage-scroll .wrapper {
   overflow: auto; }
@@ -96,8 +89,10 @@ header#header {
   position: fixed;
   z-index: 10;
   top: 0;
-  right: 0;
-  padding: 20px; }
+  right: 20px;
+  padding: 10px;
+  background-color: #D64130;
+  width: 120px; }
   header#header a {
     color: white;
     text-decoration: none; }
@@ -325,6 +320,9 @@ section#ourUniversity .our-university-slider {
 #corporatePartnerships .placeholder-fs {
   -ms-flex-direction: column;
       flex-direction: column; }
+
+body {
+  background-color: gray; }
 
 * {
   margin: 0;

@@ -5169,7 +5169,7 @@
 
 	    // new Canvas({
 	    //   canvasParentSelector: '#diversity'
-	    // })      
+	    // })
 	  }
 
 	  _createClass(CoreValues, [{
@@ -5236,7 +5236,7 @@
 	    key: 'startCellAnimation',
 	    value: function startCellAnimation(flkty) {
 	      var h1 = flkty.selectedCell.element.querySelector('h1');
-	      var words = ['test', 'sample', 'something', 'else'];
+	      var words = ['We are driven to question everything', 'Since 1919, we have been constantly reinventing what it means to be a progressive university'];
 
 	      (function changeWord(word) {
 
