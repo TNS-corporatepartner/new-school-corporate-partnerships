@@ -136,21 +136,30 @@
 
 	    this.initSplashContent().then(function () {
 
-	      _this.line1.transition().duration(2000).attr('x2', '100%');
+	      _this.line1.transition().duration(1000).attr('x2', '100%');
 
-	      _this.line2.transition().duration(2000).attr('x2', '20%');
+	      _this.line2.transition().duration(1000).attr('x2', '20%');
 
-	      _this.svgTextEl.transition().duration(2000).attr('y', -4);
+	      _this.svgTextEl.transition().duration(1000).attr('y', 71);
+
+	      _this.fixedLogo.transition().duration(1000).attr('transform', 'translate(0, 11)');
+
+	      setTimeout(function () {
+	        _this.svgTextEl.transition().duration(1000).attr('y', -150);
+
+	        _this.fixedLogo.transition().duration(1000).attr('transform', 'translate(0, 86)');
+
+	        setTimeout(function () {
+	          _this.line1.transition().duration(800).attr('x2', '0%');
+
+	          _this.line2.transition().duration(800).attr('x2', '0%');
+
+	          _this.introSvg.transition().duration(1200).attr('width', '120px').attr('height', '52px');
+	        }, 600);
+
+	        _this.playVideos();
+	      }, 2000);
 	    });
-
-	    // setTimeout(() => {
-	    //   this.redRect
-	    //     .transition()
-	    //     .duration(800)
-	    //     .attr('width', '120px')
-	    //     .attr('height', '52px')
-	    //     .attr('transform', `translate(${window.innerWidth - 120}, 0)`)
-	    // }, 3000)
 
 	    // window.addEventListener('resize', () => {
 	    //   console.log(this.introSvg)
@@ -186,28 +195,39 @@
 
 	          _this2.redRectContent = _this2.introSvg.append('svg').attr('id', '#redRectContent').attr('x', paddingLR).attr('y', midY).attr('width', '80%');
 
-	          // this.redRectContent[0][0].appendChild(xml.documentElement)
+	          _this2.redRectContent[0][0].appendChild(xml.documentElement);
+	          _this2.fixedLogo = d3.select('#fixedLogo').select('#Page-1').attr('transform', 'translate(0, 75)');
 
-	          _this2.redRectContent.append('clipPath').attr('id', 'clip1').append('rect').attr('x', 0).attr('y', 12).attr('height', 150).attr('width', '100%');
+	          _this2.redRectContent.append('clipPath').attr('id', 'clip1').append('rect').attr('x', 0).attr('y', 87).attr('height', 150).attr('width', '100%');
 
 	          /** DEBUG **/
-	          _this2.redRectContent.append('rect').attr('stroke', 'yellow').attr('fill', 'none').attr('x', 0).attr('y', 12).attr('height', 150).attr('width', '100%');
-
-	          _this2.redRectContent.append('rect').attr('stroke', 'green').attr('fill', 'none').attr('x', 0).attr('y', 0).attr('height', 150).attr('width', '20%');
-
+	          // this.redRectContent.append('rect')
+	          //   .attr('stroke', 'yellow')
+	          //   .attr('fill', 'none')     
+	          //   .attr('x', 0)
+	          //   .attr('y', 87)
+	          //   .attr('height', 150)
+	          //   .attr('width', '100%')
 	          /** END DEBUG **/
 
-	          _this2.svgTextEl = _this2.redRectContent.append('text').attr('clip-path', 'url(#clip1)').attr('x', '20%').attr('y', -150).attr('fill', 'white').attr('font-size', 70);
+	          _this2.svgTextEl = _this2.redRectContent.append('text').attr('clip-path', 'url(#clip1)').attr('x', '20%').attr('y', -75).attr('fill', 'white').attr('font-size', 70);
 
 	          _this2.svgTextEl.append('tspan').attr('x', '20%').attr('dy', '1.05em').style('font-family', 'Neue').text('Corporate');
 	          _this2.svgTextEl.append('tspan').attr('x', '20%').attr('dy', '1.05em').style('font-family', 'Neue').text('Partnerships');
 
-	          _this2.line1 = _this2.redRectContent.append('line').attr('stroke-width', '5px').attr('stroke', 'white').attr('x1', 0).attr('y1', 4).attr('x2', 0).attr('y2', 4);
+	          _this2.line1 = _this2.redRectContent.append('line').attr('stroke-width', '5px').attr('stroke', 'white').attr('x1', 0).attr('y1', 79).attr('x2', 0).attr('y2', 79);
 
-	          _this2.line2 = _this2.redRectContent.append('line').attr('stroke-width', '5px').attr('stroke', 'white').attr('x1', 0).attr('y1', 14).attr('x2', 0).attr('y2', 14);
+	          _this2.line2 = _this2.redRectContent.append('line').attr('stroke-width', '5px').attr('stroke', 'white').attr('x1', 0).attr('y1', 89).attr('x2', 0).attr('y2', 89);
 
 	          resolve();
 	        });
+	      });
+	    }
+	  }, {
+	    key: 'playVideos',
+	    value: function playVideos() {
+	      $('.future-of-slider video').each(function (i, video) {
+	        video.play();
 	      });
 	    }
 	  }, {

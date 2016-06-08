@@ -42,33 +42,59 @@ export class FutureOf {
 
       this.line1  
         .transition()
-        .duration(2000)
+        .duration(1000)
         .attr('x2', '100%')
 
       this.line2        
         .transition()
-        .duration(2000)
+        .duration(1000)
         .attr('x2', '20%')
 
       this.svgTextEl      
         .transition()
-        .duration(2000)
-        .attr('y', -4)
+        .duration(1000)
+        .attr('y', 71)
 
+
+      this.fixedLogo
+        .transition()
+        .duration(1000)
+        .attr('transform', 'translate(0, 11)')
+
+      setTimeout(() => {
+        this.svgTextEl      
+          .transition()
+          .duration(1000)
+          .attr('y', -150)
+
+        this.fixedLogo
+          .transition()
+          .duration(1000)
+          .attr('transform', 'translate(0, 86)')
+        
+        setTimeout(() => {
+          this.line1  
+            .transition()
+            .duration(800)
+            .attr('x2', '0%')
+
+          this.line2        
+            .transition()
+            .duration(800)
+            .attr('x2', '0%')
+
+          this.introSvg
+            .transition()
+            .duration(1200)
+            .attr('width', '120px')
+            .attr('height', '52px')                      
+        }, 600)
+
+        this.playVideos()
+
+      }, 2000)
     })
 
-
-
-
-
-    // setTimeout(() => {
-    //   this.redRect
-    //     .transition()
-    //     .duration(800)
-    //     .attr('width', '120px')
-    //     .attr('height', '52px')
-    //     .attr('transform', `translate(${window.innerWidth - 120}, 0)`)
-    // }, 3000)
 
 
     // window.addEventListener('resize', () => {
@@ -118,39 +144,34 @@ export class FutureOf {
           .attr('y', midY)
           .attr('width', '80%')
 
-        // this.redRectContent[0][0].appendChild(xml.documentElement)
+        this.redRectContent[0][0].appendChild(xml.documentElement)
+        this.fixedLogo = d3.select('#fixedLogo')
+          .select('#Page-1')
+          .attr('transform', 'translate(0, 75)')          
+          
       
         this.redRectContent.append('clipPath')
           .attr('id', 'clip1')
           .append('rect')
             .attr('x', 0)
-            .attr('y', 12)
+            .attr('y', 87)
             .attr('height', 150)
             .attr('width', '100%')
 
         /** DEBUG **/
-        this.redRectContent.append('rect')
-          .attr('stroke', 'yellow')
-          .attr('fill', 'none')      
-          .attr('x', 0)
-          .attr('y', 12)
-          .attr('height', 150)
-          .attr('width', '100%') 
-
-        this.redRectContent.append('rect')
-          .attr('stroke', 'green')
-          .attr('fill', 'none')      
-          .attr('x', 0)
-          .attr('y', 0)
-          .attr('height', 150)
-          .attr('width', '20%') 
-
+        // this.redRectContent.append('rect')
+        //   .attr('stroke', 'yellow')
+        //   .attr('fill', 'none')      
+        //   .attr('x', 0)
+        //   .attr('y', 87)
+        //   .attr('height', 150)
+        //   .attr('width', '100%') 
         /** END DEBUG **/
 
         this.svgTextEl = this.redRectContent.append('text')
           .attr('clip-path', 'url(#clip1)')
           .attr('x', '20%')
-          .attr('y', -150)
+          .attr('y', -75)
           .attr('fill', 'white')
           .attr('font-size', 70)        
 
@@ -162,24 +183,30 @@ export class FutureOf {
             .attr('stroke-width', '5px')
             .attr('stroke', 'white')
             .attr('x1', 0)
-            .attr('y1', 4)
+            .attr('y1', 79)
             .attr('x2', 0)
-            .attr('y2', 4)
+            .attr('y2', 79)
 
         this.line2 = this.redRectContent
           .append('line')
             .attr('stroke-width', '5px')
             .attr('stroke', 'white')
             .attr('x1', 0)
-            .attr('y1', 14)
+            .attr('y1', 89)
             .attr('x2', 0)
-            .attr('y2', 14)
+            .attr('y2', 89)
       
         resolve()
       })
 
     })
 
+  }
+
+  playVideos() {
+    $('.future-of-slider video').each(function(i, video) {
+      video.play()
+    })
   }
 
   shuffler(o) {

@@ -3,6 +3,10 @@ section#futureOf {
   height: 100vh;
   background-color: black;
 
+  #redRect {
+    right: 0;
+  }
+
   .future-of-content {
     position: absolute;
     top: 0;
@@ -42,9 +46,9 @@ section#futureOf {
     .future-of-cell {
       width: 100%;
       height: 100vh;
-      &:first-of-type {
-        opacity: 0;  
-      }      
+      // &:first-of-type {
+      //   opacity: 0;  
+      // }      
     }
   }
   
