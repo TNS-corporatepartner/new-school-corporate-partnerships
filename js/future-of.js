@@ -92,26 +92,12 @@ export class FutureOf {
 
       }, 2000)
     })
-
-
-
-    // window.addEventListener('resize', () => {
-    //   console.log(this.introSvg)
-    //   this.introSvg
-    //     .attr('viewBox', `0 0 ${window.innerWidth} ${window.innerHeight}`)
-    //     .attr('width', window.innerWidth + 'px')
-    //     .attr('height', window.innerHeight + 'px')        
-
-    //   // this.redRect      
-    //   //   .attr('width', window.innerWidth)
-    //   //   .attr('height', window.innerHeight)
-    // })
   }
 
   initSplashContent() {
     var paddingLR = (window.innerWidth * 0.10).toFixed(0)
     var contentWidth = (window.innerWidth * 0.80).toFixed(0)
-    var midY = parseInt( (window.innerHeight / 2).toFixed(0) )
+    var midY = parseInt( (window.innerHeight / 2).toFixed(0) - 125 )
     var lineY = parseInt( (window.innerHeight / 2).toFixed(0) )
 
     return new Promise(resolve => {
