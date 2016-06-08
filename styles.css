@@ -89,7 +89,7 @@ header#header {
   position: fixed;
   z-index: 10;
   top: 0;
-  right: 20px;
+  right: 0;
   padding: 10px;
   background-color: #D64130;
   width: 120px; }
