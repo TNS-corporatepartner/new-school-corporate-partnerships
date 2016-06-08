@@ -1,3 +1,4 @@
+import {app} from './index.js'
 import Flickity from 'flickity'
 import 'd3'
 
@@ -36,62 +37,64 @@ export class FutureOf {
       autoPlay: false
     })  
 
-    this.initSplashContent().then(() => {
+    if (!app.componentInstances || !app.componentInstances[0]) {    
+      this.initSplashContent().then(() => {
 
-      this.line1  
-        .transition()
-        .duration(1000)
-        .attr('x2', '100%')
+        this.line1  
+          .transition()
+          .duration(1000)
+          .attr('x2', '100%')
 
-      this.line2        
-        .transition()
-        .duration(1000)
-        .attr('x2', '20%')
+        this.line2        
+          .transition()
+          .duration(1000)
+          .attr('x2', '20%')
 
-      this.svgTextEl      
-        .transition()
-        .duration(1000)
-        .attr('y', 71)
-
-
-      this.fixedLogo
-        .transition()
-        .duration(1000)
-        .attr('transform', 'translate(0, 11)')      
-
-      setTimeout(() => {
         this.svgTextEl      
           .transition()
           .duration(1000)
-          .attr('y', -150)
+          .attr('y', 71)
+
 
         this.fixedLogo
           .transition()
           .duration(1000)
-          .attr('transform', 'translate(0, 86)')
-        
+          .attr('transform', 'translate(0, 11)')      
+
         setTimeout(() => {
-          this.line1  
+          this.svgTextEl      
             .transition()
-            .duration(800)
-            .attr('x2', '0%')
+            .duration(1000)
+            .attr('y', -150)
 
-          this.line2        
+          this.fixedLogo
             .transition()
-            .duration(800)
-            .attr('x2', '0%')
+            .duration(1000)
+            .attr('transform', 'translate(0, 86)')
+          
+          setTimeout(() => {
+            this.line1  
+              .transition()
+              .duration(800)
+              .attr('x2', '0%')
 
-          this.introSvg
-            .transition()
-            .duration(1200)
-            .attr('width', '120px')
-            .attr('height', '52px')
+            this.line2        
+              .transition()
+              .duration(800)
+              .attr('x2', '0%')
 
-          this.initVideos()                      
-        }, 600)        
+            this.introSvg
+              .transition()
+              .duration(1200)
+              .attr('width', '120px')
+              .attr('height', '52px')
 
-      }, 2000)
-    })
+            this.initVideos()                      
+          }, 600)        
+
+        }, 2000)
+      })
+    }
   }
 
   initSplashContent() {
@@ -120,7 +123,7 @@ export class FutureOf {
           .attr('y', 0)
           .attr('width', window.innerWidth + 'px')
           .attr('height', window.innerHeight + 'px')
-          .attr('fill', '#D64130')
+          .attr('fill', '#E82E21')
 
         this.redRectContent = this.introSvg.append('svg')
           .attr('id', '#redRectContent')
@@ -258,4 +261,13 @@ export class FutureOf {
     })  
   }
   
+  sleep() {
+    console.log(this)
+    console.log(app)
+    this.flkty.destroy()
+  }
+
+  awake() {
+    console.log('awake!!')    
+  }
 }

@@ -1,34 +1,70 @@
-// import 'd3'
-// import {Observable} from 'rxjs'
+import {Observable} from 'rxjs'
 // import {frame$} from './utils.js'
-
 import { FutureOf } from './future-of.js'
 import { CoreValues } from './core-values.js'
 import { OurUniversity } from './our-university.js'
 
+export let app = {}
+
 window.addEventListener('DOMContentLoaded', init)
 
-function init() {        
-  new FutureOf()  
-  new CoreValues()
-  new OurUniversity()
+function init() {   
+  app.componentInstances = {
+    0: new FutureOf,
+    1: null,
+    2: null
+  }     
+
+  app.componentConstructors = {
+    0: FutureOf,
+    1: CoreValues,
+    2: OurUniversity
+  }
+
+  app.activeScrollIndex = 0
+  app.ActiveInstance = app.componentInstances[ app.activeScrollIndex ]
   
-  $("main").onepage_scroll({
-    sectionContainer: "section",     // sectionContainer accepts any kind of selector in case you don't want to use section
-    easing: "ease",                  // Easing options accepts the CSS3 easing animation such "ease", "linear", "ease-in",
-                                     // "ease-out", "ease-in-out", or even cubic bezier value such as "cubic-bezier(0.175, 0.885, 0.420, 1.310)"
-    animationTime: 750,             // AnimationTime let you define how long each section takes to animate
-    pagination: true,                // You can either show or hide the pagination. Toggle true for show, false for hide.
-    updateURL: false,                // Toggle this true if you want the URL to be updated automatically when the user scroll to each page.
-    beforeMove: function(index) {},  // This option accepts a callback function. The function will be called before the page moves.
-    afterMove: function(index) {},   // This option accepts a callback function. The function will be called after the page moves.
-    loop: false,                     // You can have the page loop back to the top/bottom when the user navigates at up/down on the first/last page.
-    keyboard: true,                  // You can activate the keyboard controls
-    responsiveFallback: false,       // You can fallback to normal page scroll by defining the width of the browser in which
-                                     // you want the responsive fallback to be triggered. For example, set this to 600 and whenever
-                                     // the browser's width is less than 600, the fallback will kick in.
-    direction: "vertical"            // You can now define the direction of the One Page Scroll animation. Options available are "vertical" and "horizontal". The default value is "vertical".  
-  });  
+  const scroller = Observable.create(observer => {
+
+    $("main").onepage_scroll({
+      sectionContainer: "section",    
+      easing: "ease",                 
+      animationTime: 750,            
+      pagination: true,               
+      updateURL: false,               
+      beforeMove: (i) => {
+        const index = i - 1        
+        
+        observer.next({
+          direction: app.activeScrollIndex < index ? 'down' : 'up',
+          index: index,
+          lastActiveInstance: app.ActiveInstance
+        })
+      }, 
+      afterMove: function(index) {},  
+      loop: false,                    
+      keyboard: true,                 
+      responsiveFallback: false,                        
+      direction: "vertical"             
+    });
+
+  })
+
+
+  scroller.debounceTime(100).subscribe(e => {
+    if (e.lastActiveInstance.sleep) {
+      e.lastActiveInstance.sleep()
+    }
+
+    const instance = app.componentInstances[e.index]
+
+    if (!instance) {
+      app.ActiveInstance = new app.componentConstructors[e.index]()
+    } else if (app.ActiveInstance.awake) {
+      app.ActiveInstance.awake.call(app.ActiveInstance)
+    }    
+
+  }) 
 }
 
 
