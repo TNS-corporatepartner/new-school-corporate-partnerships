@@ -108,8 +108,7 @@
 
 	    _classCallCheck(this, FutureOf);
 
-	    this.futureOfCells = document.querySelectorAll('.future-of-cell');
-	    this.activeFutureOfCellIndex = 0;
+	    this.section = document.querySelector('#futureOf');
 	    this.imagineEl = document.querySelector('.future-of-header h1');
 	    this.futureOfEl = document.querySelectorAll('.future-of-header h1')[1];
 	    this.loadingEl = document.querySelector('.shuffler');
@@ -117,9 +116,9 @@
 	    this.questionEl = document.querySelector('.question');
 	    this.slider = document.querySelector('.future-of-slider');
 
-	    this.questions = ['How can data be human?', 'How is the gamification of learning reshaping the workforce?', 'question 3'];
+	    this.questions = ['How can data be human?', 'How is the gamification of learning reshaping the workforce?'];
 
-	    this.words = ['Big Data', 'Learning & Development', 'three'];
+	    this.words = ['Big Data', 'Learning & Development'];
 
 	    this.shufflerConfig = {
 	      limit: 26,
@@ -131,7 +130,8 @@
 	    this.flkty = new _flickity2.default(this.slider, {
 	      cellAlign: 'left',
 	      contain: true,
-	      wrapAround: true
+	      wrapAround: true,
+	      autoPlay: false
 	    });
 
 	    this.initSplashContent().then(function () {
@@ -155,9 +155,9 @@
 	          _this.line2.transition().duration(800).attr('x2', '0%');
 
 	          _this.introSvg.transition().duration(1200).attr('width', '120px').attr('height', '52px');
-	        }, 600);
 
-	        _this.playVideos();
+	          _this.initVideos();
+	        }, 600);
 	      }, 2000);
 	    });
 
@@ -191,7 +191,7 @@
 
 	          _this2.introSvg = d3.select('#futureOf').append('svg').attr('id', 'redRect').attr('viewBox', '0 0 ' + window.innerWidth + ' ' + window.innerHeight).attr('preserveAspectRatio', 'xMidYMid slice').attr('width', window.innerWidth + 'px').attr('height', window.innerHeight + 'px').style('position', 'absolute').style('top', 0);
 
-	          _this2.redRect = _this2.introSvg.append('rect').attr('x', 0).attr('y', 0).attr('width', window.innerWidth + 'px').attr('height', window.innerHeight + 'px').attr('fill', 'red');
+	          _this2.redRect = _this2.introSvg.append('rect').attr('x', 0).attr('y', 0).attr('width', window.innerWidth + 'px').attr('height', window.innerHeight + 'px').attr('fill', '#D64130');
 
 	          _this2.redRectContent = _this2.introSvg.append('svg').attr('id', '#redRectContent').attr('x', paddingLR).attr('y', midY).attr('width', '80%');
 
@@ -224,16 +224,60 @@
 	      });
 	    }
 	  }, {
-	    key: 'playVideos',
-	    value: function playVideos() {
-	      $('.future-of-slider video').each(function (i, video) {
-	        video.play();
+	    key: 'initVideos',
+	    value: function initVideos() {
+	      var _this3 = this;
+
+	      Velocity(this.imagineEl, { opacity: 1 }, {
+	        duration: 1200, display: 'block',
+	        complete: function complete() {
+	          Velocity(_this3.futureOfEl, { opacity: 1 }, {
+	            duration: 800,
+	            display: 'block',
+	            complete: function complete() {
+	              _this3.shuffler({
+	                limit: 26,
+	                count: 0,
+	                index: 0,
+	                words: ['The Workforce', 'Sustainability', 'Research & Development', 'Big Data']
+	              }).then(function () {
+	                var cell = _this3.flkty.cells[_this3.flkty.selectedIndex].element;
+	                Velocity(cell, { opacity: 1 });
+	                _this3.playCellSequence();
+	              });
+	            }
+	          });
+	        }
 	      });
+
+	      this.flkty.on('cellSelect', function () {
+	        _this3.playCellSequence();
+	      });
+	    }
+	  }, {
+	    key: 'playCellSequence',
+	    value: function playCellSequence() {
+	      var _this4 = this;
+
+	      var cell = this.flkty.cells[this.flkty.selectedIndex].element;
+	      var video = cell.querySelector('video');
+	      this.questionEl.textContent = this.questions[this.flkty.selectedIndex];
+
+	      video.play();
+	      $('body').addClass('show-question');
+
+	      setTimeout(function () {
+	        $('body').removeClass('show-question');
+	        setTimeout(function () {
+	          _this4.loadingWord.textContent = _this4.words[_this4.flkty.selectedIndex + 1] ? _this4.words[_this4.flkty.selectedIndex + 1] : _this4.words[0];
+	          _this4.flkty.next();
+	        }, 500);
+	      }, 4500);
 	    }
 	  }, {
 	    key: 'shuffler',
 	    value: function shuffler(o) {
-	      var _this3 = this;
+	      var _this5 = this;
 
 	      this.loadingEl = document.querySelector('.shuffler');
 	      this.loadingWord = this.loadingEl.querySelector('h1');
@@ -242,12 +286,12 @@
 
 	      return new Promise(function (resolve) {
 	        var wordSwitcher = setInterval(function () {
-	          _this3.loadingWord.textContent = o.words[o.index];
+	          _this5.loadingWord.textContent = o.words[o.index];
 	          o.index = o.index > o.words.length ? 0 : o.index;
 
 	          if (o.count === o.limit) {
 	            clearInterval(wordSwitcher);
-	            _this3.loadingWord.textContent = o.words[o.words.length - 1];
+	            _this5.loadingWord.textContent = o.words[o.words.length - 1];
 	            resolve();
 	          } else {
 	            o.count++;
@@ -260,115 +304,6 @@
 
 	  return FutureOf;
 	}();
-
-	// $('video').each(function(i, vid) {
-	//   vid.play()
-	// })
-
-	// Velocity(this.imagineEl, {opacity: 1}, {
-	//   duration: 1200, display: 'block',
-	//   complete: () => {
-	//     Velocity(this.futureOfEl, {opacity: 1}, {
-	//       duration: 800,
-	//       display: 'block',
-	//       complete: () => {
-	//         this.shuffler(shufflerConfig).then( () => {
-
-	//           setTimeout(() => {
-	//             Velocity(this.imagineEl, {opacity: 0.2})
-	//             Velocity(this.futureOfEl, {opacity: 0.2}, {
-	//               complete: () => showQuestion.call(this)
-	//             })
-	//             Velocity(this.loadingWord, {opacity: 0.2})               
-	//           }, 1000)
-
-	//         })
-	//       }
-	//     })
-	//   }
-	// })    
-
-	// $('video').each(function(i, vid) {
-	//   vid.play()
-	// })
-
-	// Velocity(this.imagineEl, {opacity: 1}, {
-	//   duration: 1200, display: 'block',
-	//   complete: () => {
-	//     Velocity(this.futureOfEl, {opacity: 1}, {
-	//       duration: 800,
-	//       display: 'block',
-	//       complete: () => {
-	//         this.shuffler(shufflerConfig).then( () => {
-
-	//           setTimeout(() => {
-	//             Velocity(this.imagineEl, {opacity: 0.2})
-	//             Velocity(this.futureOfEl, {opacity: 0.2}, {
-	//               complete: () => showQuestion.call(this)
-	//             })
-	//             Velocity(this.loadingWord, {opacity: 0.2})               
-	//           }, 1000)
-
-	//         })
-	//       }
-	//     })
-	//   }
-	// })
-
-	function showQuestion() {
-	  var _this4 = this;
-
-	  this.questionEl.textContent = this.questions[this.flkty.selectedIndex];
-	  Velocity(this.futureOfCells[0], { opacity: 1 }, {
-	    duration: 600,
-	    complete: function complete() {
-	      _this4.questionEl.textContent = _this4.questions[_this4.flkty.selectedIndex];
-
-	      Velocity(_this4.questionEl, { opacity: 1 }, {
-	        duration: 1000,
-	        complete: function complete() {
-	          setTimeout(function () {
-	            Velocity(_this4.questionEl, { opacity: 0 }, {
-	              complete: function complete() {
-
-	                startInterval.call(_this4);
-	              }
-	            });
-	          }, 2000);
-	        }
-	      });
-	    }
-	  });
-	}
-
-	function startInterval() {
-	  var _this5 = this;
-
-	  this.flkty.next();
-	  Velocity(this.loadingWord, { opacity: 0 }, {
-	    complete: function complete() {
-	      _this5.loadingWord.textContent = _this5.words[_this5.flkty.selectedIndex];
-	      _this5.questionEl.textContent = _this5.questions[_this5.flkty.selectedIndex];
-
-	      Velocity(_this5.loadingWord, { opacity: 1 }, {
-	        complete: function complete() {
-	          setTimeout(function () {
-	            Velocity(_this5.loadingWord, { opacity: 0.2 });
-	            setTimeout(function () {
-	              Velocity(_this5.questionEl, { opacity: 1 }, {
-	                complete: function complete() {
-	                  setTimeout(function () {
-	                    startInterval.call(_this5);
-	                  }, 4000);
-	                }
-	              });
-	            }, 600);
-	          }, 1000);
-	        }
-	      });
-	    }
-	  });
-	}
 
 /***/ },
 /* 2 */

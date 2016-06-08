@@ -7,7 +7,6 @@ header#header {
   background-color: $red;
   width: 120px;
 
-
   a {
     color: white;
     text-decoration: none;
@@ -22,6 +21,11 @@ body {
   }
 }
 
+.logo-container,
+header#header,
+.onepage-pagination {
+  transition: opacity 0.4s ease-in-out;
+}
 
 
 footer {

@@ -4,8 +4,7 @@ import 'd3'
 export class FutureOf {  
   
   constructor() {
-    this.futureOfCells = document.querySelectorAll('.future-of-cell')
-    this.activeFutureOfCellIndex = 0     
+    this.section = document.querySelector('#futureOf') 
     this.imagineEl = document.querySelector('.future-of-header h1')
     this.futureOfEl = document.querySelectorAll('.future-of-header h1')[1]
     this.loadingEl = document.querySelector('.shuffler')
@@ -15,14 +14,12 @@ export class FutureOf {
 
     this.questions = [
       'How can data be human?',
-      'How is the gamification of learning reshaping the workforce?',
-      'question 3'
+      'How is the gamification of learning reshaping the workforce?'
     ]
 
     this.words = [
       'Big Data',
-      'Learning & Development',
-      'three'
+      'Learning & Development'
     ]
 
     this.shufflerConfig = {
@@ -35,7 +32,8 @@ export class FutureOf {
     this.flkty = new Flickity( this.slider, {
       cellAlign: 'left',
       contain: true,
-      wrapAround: true
+      wrapAround: true,
+      autoPlay: false
     })  
 
     this.initSplashContent().then(() => {
@@ -59,7 +57,7 @@ export class FutureOf {
       this.fixedLogo
         .transition()
         .duration(1000)
-        .attr('transform', 'translate(0, 11)')
+        .attr('transform', 'translate(0, 11)')      
 
       setTimeout(() => {
         this.svgTextEl      
@@ -87,10 +85,10 @@ export class FutureOf {
             .transition()
             .duration(1200)
             .attr('width', '120px')
-            .attr('height', '52px')                      
-        }, 600)
+            .attr('height', '52px')
 
-        this.playVideos()
+          this.initVideos()                      
+        }, 600)        
 
       }, 2000)
     })
@@ -136,7 +134,7 @@ export class FutureOf {
           .attr('y', 0)
           .attr('width', window.innerWidth + 'px')
           .attr('height', window.innerHeight + 'px')
-          .attr('fill', 'red')
+          .attr('fill', '#D64130')
 
         this.redRectContent = this.introSvg.append('svg')
           .attr('id', '#redRectContent')
@@ -203,11 +201,52 @@ export class FutureOf {
 
   }
 
-  playVideos() {
-    $('.future-of-slider video').each(function(i, video) {
-      video.play()
+  initVideos() {
+
+    Velocity(this.imagineEl, {opacity: 1}, {
+      duration: 1200, display: 'block',
+      complete: () => {
+        Velocity(this.futureOfEl, {opacity: 1}, {
+          duration: 800,
+          display: 'block',
+          complete: () => {
+            this.shuffler({
+              limit: 26,
+              count: 0,
+              index: 0,
+              words: ['The Workforce', 'Sustainability', 'Research & Development', 'Big Data']                   
+            }).then(() => {
+              const cell = this.flkty.cells[ this.flkty.selectedIndex ].element
+              Velocity(cell, {opacity: 1})
+              this.playCellSequence()
+            })
+          }
+        })
+      }
+    })
+
+    this.flkty.on('cellSelect', () => {
+      this.playCellSequence()
     })
   }
+
+  playCellSequence() {
+    const cell = this.flkty.cells[ this.flkty.selectedIndex ].element
+    const video = cell.querySelector('video')          
+    this.questionEl.textContent = this.questions[this.flkty.selectedIndex]
+
+    video.play()    
+    $('body').addClass('show-question')
+
+    setTimeout(() => {        
+      $('body').removeClass('show-question')
+      setTimeout(() => {
+        this.loadingWord.textContent = this.words[ this.flkty.selectedIndex + 1 ] ? this.words[ this.flkty.selectedIndex + 1 ] : this.words[0] 
+        this.flkty.next()
+      }, 500)
+    }, 4500)
+  }
+
 
   shuffler(o) {
     this.loadingEl = document.querySelector('.shuffler')
@@ -234,120 +273,3 @@ export class FutureOf {
   }
   
 }
-
-
-    // $('video').each(function(i, vid) {
-    //   vid.play()
-    // }) 
-           
-            
-    // Velocity(this.imagineEl, {opacity: 1}, {
-    //   duration: 1200, display: 'block',
-    //   complete: () => {
-    //     Velocity(this.futureOfEl, {opacity: 1}, {
-    //       duration: 800,
-    //       display: 'block',
-    //       complete: () => {
-    //         this.shuffler(shufflerConfig).then( () => {
-              
-    //           setTimeout(() => {
-    //             Velocity(this.imagineEl, {opacity: 0.2})
-    //             Velocity(this.futureOfEl, {opacity: 0.2}, {
-    //               complete: () => showQuestion.call(this) 
-    //             })
-    //             Velocity(this.loadingWord, {opacity: 0.2})                
-    //           }, 1000)
-
-    //         })
-    //       }
-    //     })
-    //   }
-    // })     
-
-
-
-    // $('video').each(function(i, vid) {
-    //   vid.play()
-    // }) 
-           
-            
-    // Velocity(this.imagineEl, {opacity: 1}, {
-    //   duration: 1200, display: 'block',
-    //   complete: () => {
-    //     Velocity(this.futureOfEl, {opacity: 1}, {
-    //       duration: 800,
-    //       display: 'block',
-    //       complete: () => {
-    //         this.shuffler(shufflerConfig).then( () => {
-              
-    //           setTimeout(() => {
-    //             Velocity(this.imagineEl, {opacity: 0.2})
-    //             Velocity(this.futureOfEl, {opacity: 0.2}, {
-    //               complete: () => showQuestion.call(this) 
-    //             })
-    //             Velocity(this.loadingWord, {opacity: 0.2})                
-    //           }, 1000)
-
-    //         })
-    //       }
-    //     })
-    //   }
-    // })
-
-
-
-
-    function showQuestion() {
-      this.questionEl.textContent = this.questions[this.flkty.selectedIndex]
-      Velocity(this.futureOfCells[0], { opacity: 1}, {
-        duration: 600,
-        complete: () => {
-          this.questionEl.textContent = this.questions[this.flkty.selectedIndex]
-          
-          Velocity(this.questionEl, {opacity: 1},  {
-            duration: 1000,
-            complete: () => {
-              setTimeout(() => {
-                Velocity(this.questionEl, {opacity: 0}, {
-                  complete: () => {
-                    
-                    startInterval.call(this)
-                  }
-                })
-              }, 2000)
-            }
-          })
-        }
-      })      
-    }
-    
-    
-    function startInterval() {
-      this.flkty.next()      
-      Velocity(this.loadingWord, { opacity: 0}, {
-        complete: () => {
-          this.loadingWord.textContent = this.words[this.flkty.selectedIndex]
-          this.questionEl.textContent = this.questions[this.flkty.selectedIndex]
-          
-          Velocity(this.loadingWord, {opacity: 1}, {
-            complete: () => {
-              setTimeout( () => {
-                Velocity(this.loadingWord, {opacity: 0.2})
-                setTimeout(() => {
-                  Velocity(this.questionEl, {opacity: 1}, {
-                    complete: () => {
-                      setTimeout(() => {
-                        startInterval.call(this)
-                      }, 4000)
-                    }
-                  })  
-                }, 600)
-                
-              }, 1000)
-              
-            }
-          })
-        }
-      })
-                        
-    }
