@@ -53,17 +53,16 @@ function init() {
 
   scroller.debounceTime(100).subscribe(e => {
     if (e.lastActiveInstance.sleep) {
-      e.lastActiveInstance.sleep()
+      e.lastActiveInstance.sleep.call(e.lastActiveInstance)
     }
 
     const instance = app.componentInstances[e.index]
 
     if (!instance) {
       app.ActiveInstance = new app.componentConstructors[e.index]()
-    } else if (app.ActiveInstance.awake) {
-      app.ActiveInstance.awake.call(app.ActiveInstance)
+    } else if (instance.awake) {
+      instance.awake.call(instance)
     }    
-
   }) 
 }
 

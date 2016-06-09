@@ -115,15 +115,15 @@
 
 	  scroller.debounceTime(100).subscribe(function (e) {
 	    if (e.lastActiveInstance.sleep) {
-	      e.lastActiveInstance.sleep();
+	      e.lastActiveInstance.sleep.call(e.lastActiveInstance);
 	    }
 
 	    var instance = app.componentInstances[e.index];
 
 	    if (!instance) {
 	      app.ActiveInstance = new app.componentConstructors[e.index]();
-	    } else if (app.ActiveInstance.awake) {
-	      app.ActiveInstance.awake.call(app.ActiveInstance);
+	    } else if (instance.awake) {
+	      instance.awake.call(instance);
 	    }
 	  });
 	}
@@ -17819,6 +17819,7 @@
 	    value: function playCellSequence() {
 	      var _this4 = this;
 
+	      console.log('play cell');
 	      var cell = this.flkty.cells[this.flkty.selectedIndex].element;
 	      var video = cell.querySelector('video');
 	      this.questionEl.textContent = this.questions[this.flkty.selectedIndex];
@@ -17826,7 +17827,7 @@
 	      video.play();
 	      $('body').addClass('show-question');
 
-	      setTimeout(function () {
+	      this.sliderTimer = setTimeout(function () {
 	        $('body').removeClass('show-question');
 	        setTimeout(function () {
 	          _this4.loadingWord.textContent = _this4.words[_this4.flkty.selectedIndex + 1] ? _this4.words[_this4.flkty.selectedIndex + 1] : _this4.words[0];
@@ -17863,14 +17864,14 @@
 	  }, {
 	    key: 'sleep',
 	    value: function sleep() {
-	      console.log(this);
-	      console.log(_index.app);
-	      this.flkty.destroy();
+	      $('body').removeClass('show-question');
+	      window.clearTimeout(this.sliderTimer);
 	    }
 	  }, {
 	    key: 'awake',
 	    value: function awake() {
-	      console.log('awake!!');
+	      var cell = this.flkty.cells[this.flkty.selectedIndex].element;
+	      this.playCellSequence();
 	    }
 	  }]);
 

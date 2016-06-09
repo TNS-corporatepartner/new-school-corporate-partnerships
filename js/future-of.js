@@ -220,6 +220,7 @@ export class FutureOf {
   }
 
   playCellSequence() {
+    console.log('play cell')
     const cell = this.flkty.cells[ this.flkty.selectedIndex ].element
     const video = cell.querySelector('video')          
     this.questionEl.textContent = this.questions[this.flkty.selectedIndex]
@@ -227,7 +228,7 @@ export class FutureOf {
     video.play()    
     $('body').addClass('show-question')
 
-    setTimeout(() => {        
+    this.sliderTimer = setTimeout(() => {        
       $('body').removeClass('show-question')
       setTimeout(() => {
         this.loadingWord.textContent = this.words[ this.flkty.selectedIndex + 1 ] ? this.words[ this.flkty.selectedIndex + 1 ] : this.words[0] 
@@ -262,12 +263,12 @@ export class FutureOf {
   }
   
   sleep() {
-    console.log(this)
-    console.log(app)
-    this.flkty.destroy()
+    $('body').removeClass('show-question')
+    window.clearTimeout(this.sliderTimer)
   }
 
   awake() {
-    console.log('awake!!')    
+    const cell = this.flkty.cells[ this.flkty.selectedIndex ].element
+    this.playCellSequence()
   }
 }
