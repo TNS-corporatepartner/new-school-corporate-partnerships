@@ -220,7 +220,6 @@ export class FutureOf {
   }
 
   playCellSequence() {
-    console.log('play cell')
     const cell = this.flkty.cells[ this.flkty.selectedIndex ].element
     const video = cell.querySelector('video')          
     this.questionEl.textContent = this.questions[this.flkty.selectedIndex]

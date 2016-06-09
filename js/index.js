@@ -3,35 +3,44 @@ import {Observable} from 'rxjs'
 import { FutureOf } from './future-of.js'
 import { CoreValues } from './core-values.js'
 import { OurUniversity } from './our-university.js'
+import { OurPeople } from './our-people.js'
 
 export let app = {}
 
 window.addEventListener('DOMContentLoaded', init)
 
 function init() {   
-  app.componentInstances = {
-    0: new FutureOf,
-    1: null,
-    2: null
-  }     
 
   app.componentConstructors = {
     0: FutureOf,
     1: CoreValues,
-    2: OurUniversity
+    2: OurUniversity,
+    3: OurPeople
   }
 
-  app.activeScrollIndex = 0
-  app.ActiveInstance = app.componentInstances[ app.activeScrollIndex ]
+  app.componentInstances = {
+    0: null,
+    1: null,
+    2: null,
+    3: null
+  }
+
+  if (!window.location.hash) {
+    handleNav({
+      direction: null,
+      index: 0,
+      lastActiveInstance: null
+    })
+  }
   
   const scroller = Observable.create(observer => {
 
-    $("main").onepage_scroll({
-      sectionContainer: "section",    
-      easing: "ease",                 
+    $('main').onepage_scroll({
+      sectionContainer: 'section',    
+      easing: 'ease',                 
       animationTime: 750,            
       pagination: true,               
-      updateURL: false,               
+      updateURL: true,               
       beforeMove: (i) => {
         const index = i - 1        
         
@@ -45,25 +54,30 @@ function init() {
       loop: false,                    
       keyboard: true,                 
       responsiveFallback: false,                        
-      direction: "vertical"             
+      direction: 'vertical'             
     });
 
   })
 
+  scroller.debounceTime(100).subscribe(e => handleNav(e))
 
-  scroller.debounceTime(100).subscribe(e => {
-    if (e.lastActiveInstance.sleep) {
+  function handleNav(e) {
+    if (e.lastActiveInstance && e.lastActiveInstance.sleep) {
       e.lastActiveInstance.sleep.call(e.lastActiveInstance)
     }
 
+    app.activeScrollIndex = e.index
+    app.ActiveInstance = app.componentInstances[ app.activeScrollIndex ]
+
     const instance = app.componentInstances[e.index]
 
-    if (!instance) {
+    if (!instance && app.componentConstructors[e.index]) {
       app.ActiveInstance = new app.componentConstructors[e.index]()
-    } else if (instance.awake) {
+    } else if (instance && instance.awake) {
       instance.awake.call(instance)
     }    
-  }) 
+      
+  } 
 }
 
 

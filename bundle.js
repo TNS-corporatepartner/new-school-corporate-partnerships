@@ -66,36 +66,45 @@
 
 	var _ourUniversity = __webpack_require__(366);
 
-	var app = exports.app = {};
-	// import {frame$} from './utils.js'
+	var _ourPeople = __webpack_require__(367);
 
+	// import {frame$} from './utils.js'
+	var app = exports.app = {};
 
 	window.addEventListener('DOMContentLoaded', init);
 
 	function init() {
-	  app.componentInstances = {
-	    0: new _futureOf.FutureOf(),
-	    1: null,
-	    2: null
-	  };
 
 	  app.componentConstructors = {
 	    0: _futureOf.FutureOf,
 	    1: _coreValues.CoreValues,
-	    2: _ourUniversity.OurUniversity
+	    2: _ourUniversity.OurUniversity,
+	    3: _ourPeople.OurPeople
 	  };
 
-	  app.activeScrollIndex = 0;
-	  app.ActiveInstance = app.componentInstances[app.activeScrollIndex];
+	  app.componentInstances = {
+	    0: null,
+	    1: null,
+	    2: null,
+	    3: null
+	  };
+
+	  if (!window.location.hash) {
+	    handleNav({
+	      direction: null,
+	      index: 0,
+	      lastActiveInstance: null
+	    });
+	  }
 
 	  var scroller = _rxjs.Observable.create(function (observer) {
 
-	    $("main").onepage_scroll({
-	      sectionContainer: "section",
-	      easing: "ease",
+	    $('main').onepage_scroll({
+	      sectionContainer: 'section',
+	      easing: 'ease',
 	      animationTime: 750,
 	      pagination: true,
-	      updateURL: false,
+	      updateURL: true,
 	      beforeMove: function beforeMove(i) {
 	        var index = i - 1;
 
@@ -109,23 +118,30 @@
 	      loop: false,
 	      keyboard: true,
 	      responsiveFallback: false,
-	      direction: "vertical"
+	      direction: 'vertical'
 	    });
 	  });
 
 	  scroller.debounceTime(100).subscribe(function (e) {
-	    if (e.lastActiveInstance.sleep) {
+	    return handleNav(e);
+	  });
+
+	  function handleNav(e) {
+	    if (e.lastActiveInstance && e.lastActiveInstance.sleep) {
 	      e.lastActiveInstance.sleep.call(e.lastActiveInstance);
 	    }
 
+	    app.activeScrollIndex = e.index;
+	    app.ActiveInstance = app.componentInstances[app.activeScrollIndex];
+
 	    var instance = app.componentInstances[e.index];
 
-	    if (!instance) {
+	    if (!instance && app.componentConstructors[e.index]) {
 	      app.ActiveInstance = new app.componentConstructors[e.index]();
-	    } else if (instance.awake) {
+	    } else if (instance && instance.awake) {
 	      instance.awake.call(instance);
 	    }
-	  });
+	  }
 	}
 
 /***/ },
@@ -17819,7 +17835,6 @@
 	    value: function playCellSequence() {
 	      var _this4 = this;
 
-	      console.log('play cell');
 	      var cell = this.flkty.cells[this.flkty.selectedIndex].element;
 	      var video = cell.querySelector('video');
 	      this.questionEl.textContent = this.questions[this.flkty.selectedIndex];
@@ -32474,6 +32489,24 @@
 
 	  return OurUniversity;
 	}();
+
+/***/ },
+/* 367 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var OurPeople = exports.OurPeople = function OurPeople() {
+	  _classCallCheck(this, OurPeople);
+
+	  console.log('our people');
+	};
 
 /***/ }
 /******/ ]);
