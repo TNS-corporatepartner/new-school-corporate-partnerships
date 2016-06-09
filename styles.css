@@ -50,7 +50,7 @@ body, .onepage-wrapper, html {
   width: 75px; }
 
 .onepage-pagination li a.active {
-  background-color: #D64130; }
+  background-color: #E82E21; }
 
 .disabled-onepage-scroll, .disabled-onepage-scroll .wrapper {
   overflow: auto; }
@@ -91,7 +91,7 @@ header#header {
   top: 0;
   right: 0;
   padding: 10px;
-  background-color: #D64130;
+  background-color: #E82E21;
   width: 120px; }
   header#header a {
     color: white;
@@ -212,10 +212,13 @@ section#coreValues .core-values-slider {
     height: 100vh;
     padding: 2vw;
     transition: flex 0.5s ease-in-out, opacity 0.5s ease-in-out;
-    transition: flex 0.5s ease-in-out, opacity 0.5s ease-in-out, -ms-flex 0.5s ease-in-out; }
+    transition: flex 0.5s ease-in-out, opacity 0.5s ease-in-out, -ms-flex 0.5s ease-in-out;
+    background-color: #333; }
     section#coreValues .core-values-slider .core-values-cell:hover {
       -ms-flex-positive: 1.5;
           flex-grow: 1.5; }
+      section#coreValues .core-values-slider .core-values-cell:hover .content h1 {
+        border-bottom: 5px solid white; }
     section#coreValues .core-values-slider .core-values-cell.opening {
       -ms-flex-positive: 10;
           flex-grow: 10; }
@@ -224,14 +227,6 @@ section#coreValues .core-values-slider {
           flex-grow: 0;
       opacity: 0;
       padding: 0; }
-    section#coreValues .core-values-slider .core-values-cell:first-of-type {
-      background-color: #3c3c3c; }
-    section#coreValues .core-values-slider .core-values-cell:nth-of-type(2) {
-      background-color: #3c3c3c; }
-    section#coreValues .core-values-slider .core-values-cell:nth-of-type(3) {
-      background-color: #6f6f6f; }
-    section#coreValues .core-values-slider .core-values-cell:last-of-type {
-      background-color: #a2a2a2; }
     section#coreValues .core-values-slider .core-values-cell #particles-js {
       position: absolute;
       top: 0;
@@ -267,6 +262,8 @@ section#coreValues .core-values-slider {
     section#coreValues .core-values-slider .core-values-cell #statusQuo canvas {
       cursor: url("/images/status-quo-triangle.png"), auto;
       transform: rotate(90deg); }
+    section#coreValues .core-values-slider .core-values-cell #fearless canvas {
+      cursor: url("/images/down-cursor.svg"), auto; }
 
 section#ourUniversity .our-university-slider {
   height: 100vh; }
@@ -337,10 +334,6 @@ section#ourUniversity .our-university-slider {
   section#ourUniversity .our-university-slider .flickity-prev-next-button {
     opacity: 0;
     transition: opacity 0.4s ease-in-out; }
-
-#corporatePartnerships .placeholder-fs {
-  -ms-flex-direction: column;
-      flex-direction: column; }
 
 body {
   background-color: #b3b3b3; }
