@@ -89,14 +89,6 @@
 	    3: null
 	  };
 
-	  if (!window.location.hash) {
-	    handleNav({
-	      direction: null,
-	      index: 0,
-	      lastActiveInstance: null
-	    });
-	  }
-
 	  var scroller = _rxjs.Observable.create(function (observer) {
 
 	    $('main').onepage_scroll({
@@ -111,7 +103,7 @@
 	        observer.next({
 	          direction: app.activeScrollIndex < index ? 'down' : 'up',
 	          index: index,
-	          lastActiveInstance: app.ActiveInstance
+	          lastActiveInstance: app.activeInstance
 	        });
 	      },
 	      afterMove: function afterMove(index) {},
@@ -121,6 +113,14 @@
 	      direction: 'vertical'
 	    });
 	  });
+
+	  if (!window.location.hash || window.location.hash === '#1') {
+	    handleNav({
+	      direction: null,
+	      index: 0,
+	      lastActiveInstance: null
+	    });
+	  }
 
 	  scroller.debounceTime(100).subscribe(function (e) {
 	    return handleNav(e);
@@ -132,14 +132,14 @@
 	    }
 
 	    app.activeScrollIndex = e.index;
-	    app.ActiveInstance = app.componentInstances[app.activeScrollIndex];
+	    app.activeInstance = app.componentInstances[e.index];
 
-	    var instance = app.componentInstances[e.index];
-
-	    if (!instance && app.componentConstructors[e.index]) {
-	      app.ActiveInstance = new app.componentConstructors[e.index]();
-	    } else if (instance && instance.awake) {
-	      instance.awake.call(instance);
+	    if (!app.activeInstance && app.componentConstructors[e.index]) {
+	      var instance = new app.componentConstructors[e.index]();
+	      app.activeInstance = instance;
+	      app.componentInstances[e.index] = instance;
+	    } else if (app.activeInstance && app.activeInstance.awake) {
+	      app.activeInstance.awake.call(app.activeInstance);
 	    }
 	  }
 	}
@@ -17835,20 +17835,22 @@
 	    value: function playCellSequence() {
 	      var _this4 = this;
 
-	      var cell = this.flkty.cells[this.flkty.selectedIndex].element;
-	      var video = cell.querySelector('video');
-	      this.questionEl.textContent = this.questions[this.flkty.selectedIndex];
+	      if (_index.app.activeInstance == this) {
+	        var cell = this.flkty.cells[this.flkty.selectedIndex].element;
+	        var video = cell.querySelector('video');
+	        this.questionEl.textContent = this.questions[this.flkty.selectedIndex];
 
-	      video.play();
-	      $('body').addClass('show-question');
+	        video.play();
+	        $('body').addClass('show-question');
 
-	      this.sliderTimer = setTimeout(function () {
-	        $('body').removeClass('show-question');
-	        setTimeout(function () {
-	          _this4.loadingWord.textContent = _this4.words[_this4.flkty.selectedIndex + 1] ? _this4.words[_this4.flkty.selectedIndex + 1] : _this4.words[0];
-	          _this4.flkty.next();
-	        }, 500);
-	      }, 4500);
+	        this.sliderTimer = setTimeout(function () {
+	          $('body').removeClass('show-question');
+	          setTimeout(function () {
+	            _this4.loadingWord.textContent = _this4.words[_this4.flkty.selectedIndex + 1] ? _this4.words[_this4.flkty.selectedIndex + 1] : _this4.words[0];
+	            _this4.flkty.next();
+	          }, 500);
+	        }, 4500);
+	      }
 	    }
 	  }, {
 	    key: 'shuffler',

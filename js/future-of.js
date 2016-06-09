@@ -220,20 +220,22 @@ export class FutureOf {
   }
 
   playCellSequence() {
-    const cell = this.flkty.cells[ this.flkty.selectedIndex ].element
-    const video = cell.querySelector('video')          
-    this.questionEl.textContent = this.questions[this.flkty.selectedIndex]
+    if (app.activeInstance == this) {
+      const cell = this.flkty.cells[ this.flkty.selectedIndex ].element
+      const video = cell.querySelector('video')          
+      this.questionEl.textContent = this.questions[this.flkty.selectedIndex]
 
-    video.play()    
-    $('body').addClass('show-question')
+      video.play()    
+      $('body').addClass('show-question')
 
-    this.sliderTimer = setTimeout(() => {        
-      $('body').removeClass('show-question')
-      setTimeout(() => {
-        this.loadingWord.textContent = this.words[ this.flkty.selectedIndex + 1 ] ? this.words[ this.flkty.selectedIndex + 1 ] : this.words[0] 
-        this.flkty.next()
-      }, 500)
-    }, 4500)
+      this.sliderTimer = setTimeout(() => {        
+        $('body').removeClass('show-question')
+        setTimeout(() => {
+          this.loadingWord.textContent = this.words[ this.flkty.selectedIndex + 1 ] ? this.words[ this.flkty.selectedIndex + 1 ] : this.words[0] 
+          this.flkty.next()
+        }, 500)
+      }, 4500)
+    }    
   }
 
 
@@ -264,6 +266,7 @@ export class FutureOf {
   sleep() {
     $('body').removeClass('show-question')
     window.clearTimeout(this.sliderTimer)
+    
   }
 
   awake() {

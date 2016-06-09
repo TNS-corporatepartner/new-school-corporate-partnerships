@@ -24,14 +24,6 @@ function init() {
     2: null,
     3: null
   }
-
-  if (!window.location.hash) {
-    handleNav({
-      direction: null,
-      index: 0,
-      lastActiveInstance: null
-    })
-  }
   
   const scroller = Observable.create(observer => {
 
@@ -47,7 +39,7 @@ function init() {
         observer.next({
           direction: app.activeScrollIndex < index ? 'down' : 'up',
           index: index,
-          lastActiveInstance: app.ActiveInstance
+          lastActiveInstance: app.activeInstance
         })
       }, 
       afterMove: function(index) {},  
@@ -59,6 +51,14 @@ function init() {
 
   })
 
+  if (!window.location.hash || window.location.hash === '#1') {
+    handleNav({
+      direction: null,
+      index: 0,
+      lastActiveInstance: null
+    })
+  }
+
   scroller.debounceTime(100).subscribe(e => handleNav(e))
 
   function handleNav(e) {
@@ -67,15 +67,16 @@ function init() {
     }
 
     app.activeScrollIndex = e.index
-    app.ActiveInstance = app.componentInstances[ app.activeScrollIndex ]
+    app.activeInstance = app.componentInstances[ e.index ]
 
-    const instance = app.componentInstances[e.index]
 
-    if (!instance && app.componentConstructors[e.index]) {
-      app.ActiveInstance = new app.componentConstructors[e.index]()
-    } else if (instance && instance.awake) {
-      instance.awake.call(instance)
-    }    
+    if (!app.activeInstance && app.componentConstructors[e.index]) {
+      const instance = new app.componentConstructors[e.index]()
+      app.activeInstance = instance
+      app.componentInstances[ e.index ] = instance
+    } else if (app.activeInstance && app.activeInstance.awake) {
+      app.activeInstance.awake.call(app.activeInstance)
+    }   
       
   } 
 }
