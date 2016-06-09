@@ -8,7 +8,7 @@
       }
     },
     "color": {
-      "value": "#222222"
+      "value": ["#222222", "#222222", "#222222", "#111111", "#444444"]
     },
     "shape": {
       "type": "triangle",
@@ -36,12 +36,12 @@
       }
     },
     "size": {
-      "value": 12,
+      "value": 18,
       "random": false,
       "anim": {
         "enable": true,
         "speed": 2.4362316369040355,
-        "size_min": 10,
+        "size_min": 16,
         "sync": false
       }
     },
