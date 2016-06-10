@@ -4,6 +4,7 @@ import { FutureOf } from './future-of.js'
 import { CoreValues } from './core-values.js'
 import { OurUniversity } from './our-university.js'
 import { OurPeople } from './our-people.js'
+import { ContactUs } from './contact-us.js'
 
 export let app = {}
 
@@ -15,14 +16,16 @@ function init() {
     0: FutureOf,
     1: CoreValues,
     2: OurUniversity,
-    3: OurPeople
+    3: OurPeople,
+    4: ContactUs
   }
 
   app.componentInstances = {
     0: null,
     1: null,
     2: null,
-    3: null
+    3: null,
+    4: null
   }
   
   const scroller = Observable.create(observer => {

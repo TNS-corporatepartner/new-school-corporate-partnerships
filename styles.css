@@ -335,6 +335,31 @@ section#ourUniversity .our-university-slider {
     opacity: 0;
     transition: opacity 0.4s ease-in-out; }
 
+section#contactUs {
+  display: -ms-flexbox;
+  display: flex; }
+  section#contactUs > * {
+    position: relative;
+    -ms-flex-preferred-size: 50%;
+        flex-basis: 50%; }
+  section#contactUs .content {
+    background-color: #b3b3b3; }
+  section#contactUs aside#asideSlider {
+    -ms-flex-order: 2;
+        order: 2; }
+    section#contactUs aside#asideSlider ul {
+      position: relative;
+      height: 100vh; }
+      section#contactUs aside#asideSlider ul li {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center; }
+
 body {
   background-color: #b3b3b3; }
 

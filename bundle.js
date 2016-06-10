@@ -68,8 +68,11 @@
 
 	var _ourPeople = __webpack_require__(367);
 
-	// import {frame$} from './utils.js'
+	var _contactUs = __webpack_require__(368);
+
 	var app = exports.app = {};
+	// import {frame$} from './utils.js'
+
 
 	window.addEventListener('DOMContentLoaded', init);
 
@@ -79,14 +82,16 @@
 	    0: _futureOf.FutureOf,
 	    1: _coreValues.CoreValues,
 	    2: _ourUniversity.OurUniversity,
-	    3: _ourPeople.OurPeople
+	    3: _ourPeople.OurPeople,
+	    4: _contactUs.ContactUs
 	  };
 
 	  app.componentInstances = {
 	    0: null,
 	    1: null,
 	    2: null,
-	    3: null
+	    3: null,
+	    4: null
 	  };
 
 	  var scroller = _rxjs.Observable.create(function (observer) {
@@ -32509,6 +32514,73 @@
 
 	  console.log('our people');
 	};
+
+/***/ },
+/* 368 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var ContactUs = exports.ContactUs = function () {
+	  function ContactUs() {
+	    _classCallCheck(this, ContactUs);
+
+	    this.asideSlider = document.getElementById('asideSlider');
+	    this.slidesUl = this.asideSlider.querySelector('ul');
+	    this.slides = this.asideSlider.querySelectorAll('li');
+	    this.animateSlide(this.slides.length - 1);
+	  }
+
+	  _createClass(ContactUs, [{
+	    key: 'animateSlide',
+	    value: function animateSlide(index) {
+	      var _this = this;
+
+	      var slide = this.slides[index];
+
+	      Velocity(slide, { translateX: '-50vw' }, {
+	        duration: 2000,
+	        complete: function complete() {
+	          _this.slidesUl.insertBefore(slide, _this.slidesUl.firstChild);
+	          Velocity(slide, { translateX: '0vw' }, {
+	            duration: 1
+	          });
+
+	          var nextIndex = index - 1 > -1 ? index - 1 : _this.slides.length - 1;
+
+	          setTimeout(function () {
+	            if (!_this.isSleeping) {
+	              _this.animateSlide(nextIndex);
+	            }
+	          }, 2000);
+	        }
+	      });
+	    }
+	  }, {
+	    key: 'sleep',
+	    value: function sleep() {
+	      this.isSleeping = true;
+	    }
+	  }, {
+	    key: 'awake',
+	    value: function awake() {
+	      this.isSleeping = false;
+	      this.asideSlider = document.getElementById('asideSlider');
+	      this.slides = this.asideSlider.querySelectorAll('li');
+	      this.animateSlide(this.slides.length - 1);
+	    }
+	  }]);
+
+	  return ContactUs;
+	}();
 
 /***/ }
 /******/ ]);
