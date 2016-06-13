@@ -17725,32 +17725,77 @@
 	      autoPlay: false
 	    });
 
+	    var introText = document.getElementById('introText');
+
 	    if (!_index.app.componentInstances || !_index.app.componentInstances[0]) {
 	      this.initSplashContent().then(function () {
 
-	        _this.line1.transition().duration(1000).attr('x2', '100%');
+	        _this.line1.transition().duration(1000).attr('x2', '12%');
 
-	        _this.line2.transition().duration(1000).attr('x2', '20%');
+	        _this.line2.transition().duration(1000).attr('x2', '12%');
 
 	        _this.svgTextEl.transition().duration(1000).attr('y', 71);
 
 	        _this.fixedLogo.transition().duration(1000).attr('transform', 'translate(0, 11)');
 
 	        setTimeout(function () {
-	          _this.svgTextEl.transition().duration(1000).attr('y', -150);
+	          Velocity(introText, { opacity: 1 }, {
+	            duration: 600
+	          });
+	        }, 1000);
 
-	          _this.fixedLogo.transition().duration(1000).attr('transform', 'translate(0, 86)');
+	        setTimeout(function () {
+	          Velocity(introText, { opacity: 0 }, {
+	            duration: 400
+	          });
+
+	          _this.redRectContent.transition().duration(600).attr('y', 610);
+
+	          _this.line1.transition().duration(800).attr('x2', '12%');
+
+	          _this.line2.transition().duration(800).attr('x2', '12%');
 
 	          setTimeout(function () {
-	            _this.line1.transition().duration(800).attr('x2', '0%');
+	            $('#footerLogo').css('opacity', 1);
 
-	            _this.line2.transition().duration(800).attr('x2', '0%');
+	            _this.redRectContent.transition().duration(1200).attr('opacity', 0);
 
 	            _this.introSvg.transition().duration(1200).attr('width', '120px').attr('height', '52px');
-
-	            _this.initVideos();
 	          }, 600);
 	        }, 2000);
+
+	        // setTimeout(() => {
+	        //   this.svgTextEl     
+	        //     .transition()
+	        //     .duration(1000)
+	        //     .attr('y', -150)
+
+	        //   this.fixedLogo
+	        //     .transition()
+	        //     .duration(1000)
+	        //     .attr('transform', 'translate(0, 86)')
+
+	        //   setTimeout(() => {
+	        //     this.line1 
+	        //       .transition()
+	        //       .duration(800)
+	        //       .attr('x2', '0%')
+
+	        //     this.line2       
+	        //       .transition()
+	        //       .duration(800)
+	        //       .attr('x2', '0%')
+
+	        //     this.introSvg
+	        //       .transition()
+	        //       .duration(1200)
+	        //       .attr('width', '120px')
+	        //       .attr('height', '52px')
+
+	        //     this.initVideos()                     
+	        //   }, 600)       
+
+	        // }, 2000)
 	      });
 	    }
 	  }
@@ -17774,7 +17819,7 @@
 
 	          _this2.redRect = _this2.introSvg.append('rect').attr('x', 0).attr('y', 0).attr('width', window.innerWidth + 'px').attr('height', window.innerHeight + 'px').attr('fill', '#E82E21');
 
-	          _this2.redRectContent = _this2.introSvg.append('svg').attr('id', '#redRectContent').attr('x', paddingLR).attr('y', midY).attr('width', '80%');
+	          _this2.redRectContent = _this2.introSvg.append('svg').attr('id', '#redRectContent').attr('x', 20).attr('y', 20).attr('width', '80%');
 
 	          _this2.redRectContent[0][0].appendChild(xml.documentElement);
 	          _this2.fixedLogo = d3.select('#fixedLogo').select('#Page-1').attr('transform', 'translate(0, 75)');
@@ -17791,10 +17836,19 @@
 	          //   .attr('width', '100%')
 	          /** END DEBUG **/
 
-	          _this2.svgTextEl = _this2.redRectContent.append('text').attr('clip-path', 'url(#clip1)').attr('x', '20%').attr('y', -75).attr('fill', 'white').attr('font-size', 70);
+	          _this2.svgTextEl = _this2.redRectContent.append('foreignObject').attr('x', 0).attr('y', 0).attr('width', 50).attr('height', 50);
 
-	          _this2.svgTextEl.append('tspan').attr('x', '20%').attr('dy', '1.05em').style('font-family', 'Neue').text('Corporate');
-	          _this2.svgTextEl.append('tspan').attr('x', '20%').attr('dy', '1.05em').style('font-family', 'Neue').text('Partnerships');
+	          _this2.svgTextEl.append('p').text('aldjsflkajsdflksj');
+
+	          // this.svgTextEl = this.redRectContent.append('text')
+	          //   .attr('clip-path', 'url(#clip1)')
+	          //   .attr('x', '20%')
+	          //   .attr('y', -75)
+	          //   .attr('fill', 'white')
+	          //   .attr('font-size', 70)       
+
+	          // this.svgTextEl.append('tspan').attr('x', '20%').attr('dy', '1.05em').style('font-family', 'Neue')    .text('Corporate')
+	          // this.svgTextEl.append('tspan').attr('x', '20%').attr('dy', '1.05em').style('font-family', 'Neue')    .text('Partnerships')   
 
 	          _this2.line1 = _this2.redRectContent.append('line').attr('stroke-width', '5px').attr('stroke', 'white').attr('x1', 0).attr('y1', 79).attr('x2', 0).attr('y2', 79);
 

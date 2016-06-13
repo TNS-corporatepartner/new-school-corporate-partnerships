@@ -180,6 +180,16 @@ section#futureOf {
     text-align: center;
     transition: opacity 0.4s ease-in-out; }
 
+#introText {
+  position: fixed;
+  top: 40%;
+  left: 20px;
+  z-index: 999999;
+  color: white;
+  font-size: 28px;
+  width: 765px;
+  opacity: 0; }
+
 section#coreValues .core-values-slider {
   height: 100vh; }
   section#coreValues .core-values-slider.uninitialized {

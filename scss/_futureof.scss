@@ -80,3 +80,16 @@ section#futureOf {
     transition: opacity 0.4s ease-in-out;
   }
 }
+
+
+#introText {
+  position: fixed;
+  top: 40%;
+  left: 20px;
+  z-index: 999999;  
+  color: white;
+  font-size: 28px;
+  width: 765px;
+  opacity: 0;
+  // transition: opacity 0.4s ease-in-out;
+}
