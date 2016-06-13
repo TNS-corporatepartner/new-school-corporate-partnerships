@@ -1,7 +1,7 @@
 body.show-question {
   .future-of-header h1,
   .shuffler h1,
-  .logo-container,
+  #fixedLogo,
   #header,
   .onepage-pagination {
     opacity: 0.3 !important;
@@ -81,15 +81,39 @@ section#futureOf {
   }
 }
 
+#introBg {
+  position: fixed;
+  top: 0; bottom: 0;
+  right: 0;
+  width: 100%;
+  background-color: $red;
+}
 
 #introText {
   position: fixed;
   top: 40%;
   left: 20px;
-  z-index: 999999;  
+  opacity: 0;  
   color: white;
   font-size: 28px;
   width: 765px;
-  opacity: 0;
-  // transition: opacity 0.4s ease-in-out;
 }
+
+#fixedLogoText {
+  transition: transform 1s ease-in-out;
+}
+
+#fixedLogo {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 200px;
+  svg {
+    width: 100%;
+    overflow: visible;
+    // #svgLine1 {
+    //   transform: translateX(500px);
+    // }
+  }
+}
+

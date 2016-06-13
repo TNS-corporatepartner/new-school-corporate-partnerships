@@ -77,6 +77,14 @@
 	window.addEventListener('DOMContentLoaded', init);
 
 	function init() {
+	  var splashContent$ = null,
+	      initSplash = true;
+	  var fixedLogo = document.getElementById('fixedLogo');
+	  var fixedLogoText = document.getElementById('fixedLogoText');
+	  var introText = document.getElementById('introText');
+	  var introBg = document.getElementById('introBg');
+	  var line1 = document.getElementById('svgLine1');
+	  var line2 = document.getElementById('svgLine2');
 
 	  app.componentConstructors = {
 	    0: _futureOf.FutureOf,
@@ -95,7 +103,6 @@
 	  };
 
 	  var scroller = _rxjs.Observable.create(function (observer) {
-
 	    $('main').onepage_scroll({
 	      sectionContainer: 'section',
 	      easing: 'ease',
@@ -127,26 +134,121 @@
 	    });
 	  }
 
-	  scroller.debounceTime(100).subscribe(function (e) {
+	  scroller.debounceTime(700).subscribe(function (e) {
 	    return handleNav(e);
 	  });
 
 	  function handleNav(e) {
-	    if (e.lastActiveInstance && e.lastActiveInstance.sleep) {
-	      e.lastActiveInstance.sleep.call(e.lastActiveInstance);
-	    }
+	    //handle nav fired before splash animation completes
+	    if (splashContent$ && !splashContent$.isUnsubscribed) {
+	      splashContent$.complete();
+	      splashContent$.unsubscribe();
+	      skipSplashAnimation();
+	      loadComponent(e.index - 1);
+	      $('main').moveUp();
 
-	    app.activeScrollIndex = e.index;
-	    app.activeInstance = app.componentInstances[e.index];
+	      //handle nav normally
+	    } else if (splashContent$) {
 
-	    if (!app.activeInstance && app.componentConstructors[e.index]) {
-	      var instance = new app.componentConstructors[e.index]();
-	      app.activeInstance = instance;
-	      app.componentInstances[e.index] = instance;
-	    } else if (app.activeInstance && app.activeInstance.awake) {
-	      app.activeInstance.awake.call(app.activeInstance);
+	        if (e.lastActiveInstance && e.lastActiveInstance.sleep) {
+	          e.lastActiveInstance.sleep.call(e.lastActiveInstance);
+	        }
+
+	        loadComponent(e.index);
+
+	        //handle nav before splash animation initialized
+	      } else if (initSplash) {
+	          splashContent$ = initSplashContent().subscribe(function () {
+	            loadComponent(e.index);
+	            splashContent$.complete();
+	            splashContent$.unsubscribe();
+	          }, function (err) {
+	            return console.error(err);
+	          }, function () {
+	            return initSplash = false;
+	          });
+	        }
+
+	    function loadComponent(index) {
+	      console.log(index);
+	      app.activeScrollIndex = index;
+	      app.activeInstance = app.componentInstances[index];
+
+	      if (!app.activeInstance && app.componentConstructors[index]) {
+	        var instance = new app.componentConstructors[index]();
+	        app.activeInstance = instance;
+	        app.componentInstances[index] = instance;
+	      } else if (app.activeInstance && app.activeInstance.awake) {
+	        app.activeInstance.awake.call(app.activeInstance);
+	      }
 	    }
 	  }
+
+	  function initSplashContent() {
+	    return _rxjs.Observable.create(function (obs) {
+	      //logo animate in
+	      Velocity(line1, { x1: 4.501, y1: 64.81, x2: 109.524, y2: 64.81 }, { duration: 500 });
+	      Velocity(line2, { x1: 4.501, y1: 70.5, x2: 109.524, y2: 70.5 }, { duration: 500 });
+	      Velocity(fixedLogoText, { translateX: 0, translateY: 0 }, { duration: 2000 });
+
+	      //logo animate down
+	      Velocity(fixedLogo, {
+	        top: window.innerHeight - 100,
+	        width: 120
+	      }, {
+	        duration: 1000,
+	        delay: 1500
+	      });
+
+	      //intro text animate in
+	      Velocity(introText, { opacity: 1 }, {
+	        duration: 1000,
+	        delay: 2000,
+	        complete: function complete() {
+	          setTimeout(function () {
+	            Velocity(introText, { opacity: 0 }, { duration: 400 });
+	          }, 3000);
+	        }
+	      });
+
+	      //intro red-background animate to corner
+	      Velocity(introBg, {
+	        width: '120px',
+	        height: '52px'
+	      }, {
+	        duration: 800,
+	        delay: 6500
+	      });
+
+	      setTimeout(function () {
+	        obs.next();
+	      }, 7300);
+	    });
+	  }
+	}
+
+	function skipSplashAnimation() {
+	  Velocity(introText, 'stop');
+	  Velocity(introText, { opacity: 0 }, { duration: 200 });
+
+	  Velocity(introBg, 'stop');
+	  Velocity(introBg, {
+	    width: '120px',
+	    height: '52px'
+	  }, {
+	    duration: 800
+	  });
+
+	  Velocity(fixedLogoText, 'stop');
+	  Velocity(fixedLogoText, { translateX: 0, translateY: 0 }, { duration: 2000 });
+
+	  Velocity(fixedLogo, 'stop');
+	  Velocity(fixedLogo, {
+	    top: window.innerHeight - 100,
+	    width: 120
+	  }, {
+	    duration: 800
+	  });
 	}
 
 /***/ },
@@ -17723,19 +17825,10 @@
 	      autoPlay: false
 	    });
 
-	    var introText = document.getElementById('introText');
-
-	    if (!_index.app.componentInstances || !_index.app.componentInstances[0]) {
-	      this.initSplashContent();
-	    }
+	    this.initVideos();
 	  }
 
 	  _createClass(FutureOf, [{
-	    key: 'initSplashContent',
-	    value: function initSplashContent() {
-	      this.initVideos();
-	    }
-	  }, {
 	    key: 'initVideos',
 	    value: function initVideos() {
 	      var _this = this;

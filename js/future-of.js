@@ -37,19 +37,11 @@ export class FutureOf {
       autoPlay: false
     })  
 
-    var introText = document.getElementById('introText')
-
-    if (!app.componentInstances || !app.componentInstances[0]) {    
-      this.initSplashContent()  
-    }
-  }
-
-  initSplashContent() {
     this.initVideos()
   }
 
-  initVideos() {
 
+  initVideos() {
     Velocity(this.imagineEl, {opacity: 1}, {
       duration: 1200, display: 'block',
       complete: () => {

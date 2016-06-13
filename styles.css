@@ -102,24 +102,9 @@ header#header,
 .onepage-pagination {
   transition: opacity 0.4s ease-in-out; }
 
-footer {
-  position: fixed;
-  left: 20px;
-  bottom: 20px;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-pack: justify;
-      justify-content: space-between;
-  -ms-flex-align: end;
-      align-items: flex-end; }
-  footer .logo-container {
-    width: 100px; }
-    footer .logo-container img {
-      width: 100%; }
-
 body.show-question .future-of-header h1,
 body.show-question .shuffler h1,
-body.show-question .logo-container,
+body.show-question #fixedLogo,
 body.show-question #header,
 body.show-question .onepage-pagination {
   opacity: 0.3 !important; }
@@ -180,15 +165,34 @@ section#futureOf {
     text-align: center;
     transition: opacity 0.4s ease-in-out; }
 
+#introBg {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  background-color: #E82E21; }
+
 #introText {
   position: fixed;
   top: 40%;
   left: 20px;
-  z-index: 999999;
+  opacity: 0;
   color: white;
   font-size: 28px;
-  width: 765px;
-  opacity: 0; }
+  width: 765px; }
+
+#fixedLogoText {
+  transition: transform 1s ease-in-out; }
+
+#fixedLogo {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 200px; }
+  #fixedLogo svg {
+    width: 100%;
+    overflow: visible; }
 
 section#coreValues .core-values-slider {
   height: 100vh; }
