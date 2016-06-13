@@ -4,6 +4,8 @@ import {Observable} from 'rxjs'
 export class CoreValues {
 
   constructor() {
+    this.section = document.getElementById('coreValues')
+    this.sectionInto = this.section.querySelector('.section-intro')
     this.slider = document.querySelector('.core-values-slider')
     this.cells = this.slider.childNodes
     this.activeCell = null
@@ -25,21 +27,9 @@ export class CoreValues {
       this.resizeParticles()
     }, 1500)
 
-    // new Canvas({
-    //   canvasParentSelector: '#designDna'
-    // })
-
-    // new Canvas({
-    //   canvasParentSelector: '#statusQuo'
-    // })
-
-    // new Canvas({
-    //   canvasParentSelector: '#fearless'
-    // })
-
-    // new Canvas({
-    //   canvasParentSelector: '#diversity'
-    // })
+    setTimeout(() => {
+      $(this.sectionInto).addClass('hidden')
+    }, 1200)
   }
 
   openCell(cell) {

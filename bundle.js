@@ -17695,8 +17695,6 @@
 
 	var FutureOf = exports.FutureOf = function () {
 	  function FutureOf() {
-	    var _this = this;
-
 	    _classCallCheck(this, FutureOf);
 
 	    this.section = document.querySelector('#futureOf');
@@ -17728,157 +17726,36 @@
 	    var introText = document.getElementById('introText');
 
 	    if (!_index.app.componentInstances || !_index.app.componentInstances[0]) {
-	      this.initSplashContent().then(function () {
-
-	        _this.line1.transition().duration(1000).attr('x2', '12%');
-
-	        _this.line2.transition().duration(1000).attr('x2', '12%');
-
-	        _this.svgTextEl.transition().duration(1000).attr('y', 71);
-
-	        _this.fixedLogo.transition().duration(1000).attr('transform', 'translate(0, 11)');
-
-	        setTimeout(function () {
-	          Velocity(introText, { opacity: 1 }, {
-	            duration: 600
-	          });
-	        }, 1000);
-
-	        setTimeout(function () {
-	          Velocity(introText, { opacity: 0 }, {
-	            duration: 400
-	          });
-
-	          _this.redRectContent.transition().duration(600).attr('y', 610);
-
-	          _this.line1.transition().duration(800).attr('x2', '12%');
-
-	          _this.line2.transition().duration(800).attr('x2', '12%');
-
-	          setTimeout(function () {
-	            $('#footerLogo').css('opacity', 1);
-
-	            _this.redRectContent.transition().duration(1200).attr('opacity', 0);
-
-	            _this.introSvg.transition().duration(1200).attr('width', '120px').attr('height', '52px');
-	          }, 600);
-	        }, 2000);
-
-	        // setTimeout(() => {
-	        //   this.svgTextEl     
-	        //     .transition()
-	        //     .duration(1000)
-	        //     .attr('y', -150)
-
-	        //   this.fixedLogo
-	        //     .transition()
-	        //     .duration(1000)
-	        //     .attr('transform', 'translate(0, 86)')
-
-	        //   setTimeout(() => {
-	        //     this.line1 
-	        //       .transition()
-	        //       .duration(800)
-	        //       .attr('x2', '0%')
-
-	        //     this.line2       
-	        //       .transition()
-	        //       .duration(800)
-	        //       .attr('x2', '0%')
-
-	        //     this.introSvg
-	        //       .transition()
-	        //       .duration(1200)
-	        //       .attr('width', '120px')
-	        //       .attr('height', '52px')
-
-	        //     this.initVideos()                     
-	        //   }, 600)       
-
-	        // }, 2000)
-	      });
+	      this.initSplashContent();
 	    }
 	  }
 
 	  _createClass(FutureOf, [{
 	    key: 'initSplashContent',
 	    value: function initSplashContent() {
-	      var _this2 = this;
-
-	      var paddingLR = (window.innerWidth * 0.10).toFixed(0);
-	      var contentWidth = (window.innerWidth * 0.80).toFixed(0);
-	      var midY = parseInt((window.innerHeight / 2).toFixed(0) - 125);
-	      var lineY = parseInt((window.innerHeight / 2).toFixed(0));
-
-	      return new Promise(function (resolve) {
-
-	        d3.xml('/images/tns-logo.svg', 'image/svg+xml', function (error, xml) {
-	          if (error) throw error;
-
-	          _this2.introSvg = d3.select('#futureOf').append('svg').attr('id', 'redRect').attr('viewBox', '0 0 ' + window.innerWidth + ' ' + window.innerHeight).attr('preserveAspectRatio', 'xMidYMid slice').attr('width', window.innerWidth + 'px').attr('height', window.innerHeight + 'px').style('position', 'absolute').style('top', 0);
-
-	          _this2.redRect = _this2.introSvg.append('rect').attr('x', 0).attr('y', 0).attr('width', window.innerWidth + 'px').attr('height', window.innerHeight + 'px').attr('fill', '#E82E21');
-
-	          _this2.redRectContent = _this2.introSvg.append('svg').attr('id', '#redRectContent').attr('x', 20).attr('y', 20).attr('width', '80%');
-
-	          _this2.redRectContent[0][0].appendChild(xml.documentElement);
-	          _this2.fixedLogo = d3.select('#fixedLogo').select('#Page-1').attr('transform', 'translate(0, 75)');
-
-	          _this2.redRectContent.append('clipPath').attr('id', 'clip1').append('rect').attr('x', 0).attr('y', 87).attr('height', 150).attr('width', '100%');
-
-	          /** DEBUG **/
-	          // this.redRectContent.append('rect')
-	          //   .attr('stroke', 'yellow')
-	          //   .attr('fill', 'none')     
-	          //   .attr('x', 0)
-	          //   .attr('y', 87)
-	          //   .attr('height', 150)
-	          //   .attr('width', '100%')
-	          /** END DEBUG **/
-
-	          _this2.svgTextEl = _this2.redRectContent.append('foreignObject').attr('x', 0).attr('y', 0).attr('width', 50).attr('height', 50);
-
-	          _this2.svgTextEl.append('p').text('aldjsflkajsdflksj');
-
-	          // this.svgTextEl = this.redRectContent.append('text')
-	          //   .attr('clip-path', 'url(#clip1)')
-	          //   .attr('x', '20%')
-	          //   .attr('y', -75)
-	          //   .attr('fill', 'white')
-	          //   .attr('font-size', 70)       
-
-	          // this.svgTextEl.append('tspan').attr('x', '20%').attr('dy', '1.05em').style('font-family', 'Neue')    .text('Corporate')
-	          // this.svgTextEl.append('tspan').attr('x', '20%').attr('dy', '1.05em').style('font-family', 'Neue')    .text('Partnerships')   
-
-	          _this2.line1 = _this2.redRectContent.append('line').attr('stroke-width', '5px').attr('stroke', 'white').attr('x1', 0).attr('y1', 79).attr('x2', 0).attr('y2', 79);
-
-	          _this2.line2 = _this2.redRectContent.append('line').attr('stroke-width', '5px').attr('stroke', 'white').attr('x1', 0).attr('y1', 89).attr('x2', 0).attr('y2', 89);
-
-	          resolve();
-	        });
-	      });
+	      this.initVideos();
 	    }
 	  }, {
 	    key: 'initVideos',
 	    value: function initVideos() {
-	      var _this3 = this;
+	      var _this = this;
 
 	      Velocity(this.imagineEl, { opacity: 1 }, {
 	        duration: 1200, display: 'block',
 	        complete: function complete() {
-	          Velocity(_this3.futureOfEl, { opacity: 1 }, {
+	          Velocity(_this.futureOfEl, { opacity: 1 }, {
 	            duration: 800,
 	            display: 'block',
 	            complete: function complete() {
-	              _this3.shuffler({
+	              _this.shuffler({
 	                limit: 26,
 	                count: 0,
 	                index: 0,
 	                words: ['The Workforce', 'Sustainability', 'Research & Development', 'Big Data']
 	              }).then(function () {
-	                var cell = _this3.flkty.cells[_this3.flkty.selectedIndex].element;
+	                var cell = _this.flkty.cells[_this.flkty.selectedIndex].element;
 	                Velocity(cell, { opacity: 1 });
-	                _this3.playCellSequence();
+	                _this.playCellSequence();
 	              });
 	            }
 	          });
@@ -17886,13 +17763,13 @@
 	      });
 
 	      this.flkty.on('cellSelect', function () {
-	        _this3.playCellSequence();
+	        _this.playCellSequence();
 	      });
 	    }
 	  }, {
 	    key: 'playCellSequence',
 	    value: function playCellSequence() {
-	      var _this4 = this;
+	      var _this2 = this;
 
 	      if (_index.app.activeInstance == this) {
 	        var cell = this.flkty.cells[this.flkty.selectedIndex].element;
@@ -17905,8 +17782,8 @@
 	        this.sliderTimer = setTimeout(function () {
 	          $('body').removeClass('show-question');
 	          setTimeout(function () {
-	            _this4.loadingWord.textContent = _this4.words[_this4.flkty.selectedIndex + 1] ? _this4.words[_this4.flkty.selectedIndex + 1] : _this4.words[0];
-	            _this4.flkty.next();
+	            _this2.loadingWord.textContent = _this2.words[_this2.flkty.selectedIndex + 1] ? _this2.words[_this2.flkty.selectedIndex + 1] : _this2.words[0];
+	            _this2.flkty.next();
 	          }, 500);
 	        }, 4500);
 	      }
@@ -17914,7 +17791,7 @@
 	  }, {
 	    key: 'shuffler',
 	    value: function shuffler(o) {
-	      var _this5 = this;
+	      var _this3 = this;
 
 	      this.loadingEl = document.querySelector('.shuffler');
 	      this.loadingWord = this.loadingEl.querySelector('h1');
@@ -17923,12 +17800,12 @@
 
 	      return new Promise(function (resolve) {
 	        var wordSwitcher = setInterval(function () {
-	          _this5.loadingWord.textContent = o.words[o.index];
+	          _this3.loadingWord.textContent = o.words[o.index];
 	          o.index = o.index > o.words.length ? 0 : o.index;
 
 	          if (o.count === o.limit) {
 	            clearInterval(wordSwitcher);
-	            _this5.loadingWord.textContent = o.words[o.words.length - 1];
+	            _this3.loadingWord.textContent = o.words[o.words.length - 1];
 	            resolve();
 	          } else {
 	            o.count++;
@@ -32304,6 +32181,8 @@
 
 	    _classCallCheck(this, CoreValues);
 
+	    this.section = document.getElementById('coreValues');
+	    this.sectionInto = this.section.querySelector('.section-intro');
 	    this.slider = document.querySelector('.core-values-slider');
 	    this.cells = this.slider.childNodes;
 	    this.activeCell = null;
@@ -32335,21 +32214,9 @@
 	      _this.resizeParticles();
 	    }, 1500);
 
-	    // new Canvas({
-	    //   canvasParentSelector: '#designDna'
-	    // })
-
-	    // new Canvas({
-	    //   canvasParentSelector: '#statusQuo'
-	    // })
-
-	    // new Canvas({
-	    //   canvasParentSelector: '#fearless'
-	    // })
-
-	    // new Canvas({
-	    //   canvasParentSelector: '#diversity'
-	    // })
+	    setTimeout(function () {
+	      $(_this.sectionInto).addClass('hidden');
+	    }, 1200);
 	  }
 
 	  _createClass(CoreValues, [{
@@ -32477,8 +32344,12 @@
 
 	var OurUniversity = exports.OurUniversity = function () {
 	  function OurUniversity() {
+	    var _this = this;
+
 	    _classCallCheck(this, OurUniversity);
 
+	    this.section = document.getElementById('ourUniversity');
+	    this.sectionInto = this.section.querySelector('.section-intro');
 	    this.slider = document.querySelector('.our-university-slider');
 	    this.cells = this.slider.childNodes;
 	    this.activeCell = null;
@@ -32496,12 +32367,16 @@
 	    $('span.close-cell').on('click', function (e) {
 	      e.stopPropagation();instance.closeCell();
 	    });
+
+	    setTimeout(function () {
+	      $(_this.sectionInto).addClass('hidden');
+	    }, 1200);
 	  }
 
 	  _createClass(OurUniversity, [{
 	    key: 'openCell',
 	    value: function openCell(cell) {
-	      var _this = this;
+	      var _this2 = this;
 
 	      if (!this.activeCell) {
 
@@ -32509,18 +32384,18 @@
 	        $(cell).addClass('opening');
 
 	        setTimeout(function () {
-	          $(_this.slider).removeClass('uninitialized');
-	          $(_this.cells).removeClass('sibling-is-opening opening');
+	          $(_this2.slider).removeClass('uninitialized');
+	          $(_this2.cells).removeClass('sibling-is-opening opening');
 
-	          _this.initFlkty($(cell).index());
-	          _this.activeCell = cell;
+	          _this2.initFlkty($(cell).index());
+	          _this2.activeCell = cell;
 	        }, 800);
 	      }
 	    }
 	  }, {
 	    key: 'closeCell',
 	    value: function closeCell() {
-	      var _this2 = this;
+	      var _this3 = this;
 
 	      if (this.activeCell) {
 
@@ -32531,9 +32406,9 @@
 	        $(this.slider).addClass('uninitialized');
 
 	        setTimeout(function () {
-	          $(_this2.cells).removeClass('sibling-is-opening');
-	          $(_this2.activeCell).removeClass('opening');
-	          _this2.activeCell = null;
+	          $(_this3.cells).removeClass('sibling-is-opening');
+	          $(_this3.activeCell).removeClass('opening');
+	          _this3.activeCell = null;
 	        });
 	      }
 	    }
@@ -32567,27 +32442,37 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var OurPeople = exports.OurPeople = function OurPeople() {
+	  var _this = this;
+
 	  _classCallCheck(this, OurPeople);
 
+	  this.section = document.getElementById('ourPeople');
+	  this.sectionInto = this.section.querySelector('.section-intro');
 	  var slider = document.getElementById('peopleSlider');
 	  var moving = _rxjs.Observable.fromEvent(window, 'mousemove');
 	  this.scrollPos = 0;
 
-	  // const movingRight = moving
-	  //   .filter(e => e.clientX > window.innerWidth / 2)
-	  //   // .debounceTime(100)
-	  //   .subscribe(e => {       
-	  //     this.scrollPos += 10
-	  //     slider.scrollLeft = this.scrollPos
-	  //   })
+	  var movingRight = moving.filter(function (e) {
+	    return e.clientX > window.innerWidth / 2;
+	  })
+	  // .debounceTime(100)
+	  .subscribe(function (e) {
+	    _this.scrollPos += 10;
+	    slider.scrollLeft = _this.scrollPos;
+	  });
 
-	  // const movingLeft = moving
-	  //   .filter(e => e.clientX < window.innerWidth / 2)
-	  //   // .debounceTime(50)
-	  //   .subscribe(e => {       
-	  //     this.scrollPos -= 10
-	  //     slider.scrollLeft = this.scrollPos
-	  //   })
+	  var movingLeft = moving.filter(function (e) {
+	    return e.clientX < window.innerWidth / 2;
+	  })
+	  // .debounceTime(50)
+	  .subscribe(function (e) {
+	    _this.scrollPos -= 10;
+	    slider.scrollLeft = _this.scrollPos;
+	  });
+
+	  setTimeout(function () {
+	    $(_this.sectionInto).addClass('hidden');
+	  }, 1200);
 	};
 
 /***/ },

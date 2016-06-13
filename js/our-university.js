@@ -3,6 +3,8 @@ import Flickity from 'flickity'
 export class OurUniversity {
 
   constructor() {
+    this.section = document.getElementById('ourUniversity')
+    this.sectionInto = this.section.querySelector('.section-intro')
     this.slider = document.querySelector('.our-university-slider')
     this.cells = this.slider.childNodes
     this.activeCell = null     
@@ -12,6 +14,10 @@ export class OurUniversity {
     $(this.cells).on('mouseleave', function() { $(this.cells).removeClass('sibling-is-hovered') })
     $(this.cells).on('click', function() { instance.openCell(this) })
     $('span.close-cell').on('click', function(e) { e.stopPropagation(); instance.closeCell() })
+
+    setTimeout(() => {
+      $(this.sectionInto).addClass('hidden')
+    }, 1200)
   }
   
   openCell(cell) {
