@@ -9,19 +9,29 @@
 @import 'contactus.scss';
 
 body {
-  background-color: lighten(grey, 20%);
+  background-color: $gray-light;
 }
 
 * {
   margin: 0;
   padding: 0;
   border: 0;
-  font-family: 'NeueLight';
+  font-family: $font-family-base;
   box-sizing: border-box;
+  color: $gray-dark;
 }
 
 h1,h2,h3,h4,h5,h6 {
-  font-family: 'Neue';
+  font-family: $font-family-display;
+  font-weight: bold;
+}
+
+h1{
+  font-size: 5vw;
+}
+
+h2{
+  font-family: $font-family-base;
 }
 
 .global-slider {
@@ -35,7 +45,7 @@ h1,h2,h3,h4,h5,h6 {
   height: 100%;
   top: 0;
   left: 0;
-  background-color: darkgray;
+  background-color: $gray-light;
   padding: 2vw;
   transition: opacity 0.4s ease-in-out;
   &.hidden {
@@ -43,8 +53,7 @@ h1,h2,h3,h4,h5,h6 {
     pointer-events: none;
   }
   h1 {
-    font-size: 4vh;
-    max-width: 62%;
+    max-width: 60%;
     @media (max-width: $break1) {
       max-width: none;
     }

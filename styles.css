@@ -72,30 +72,64 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
   position: inherit; }
 
 @font-face {
-  font-family: 'Neue';
+  font-family: 'NeueDisplay';
   src: url("/fonts/NeueDisplay-Random.woff") format("woff");
   /* Pretty Modern Browsers */
   font-style: normal;
-  font-weight: 400; }
+  font-weight: bold; }
 
 @font-face {
-  font-family: 'NeueLight';
+  font-family: 'NeueDisplay';
   src: url("/fonts/NeueDisplay-Regular Random.woff") format("woff");
   /* Pretty Modern Browsers */
   font-style: normal;
-  font-weight: 400; }
+  font-weight: normal; }
+
+@font-face {
+  font-family: 'Neue';
+  src: url("/fonts/Neue-Bold.woff") format("woff");
+  /* Pretty Modern Browsers */
+  font-style: normal;
+  font-weight: bold; }
+
+@font-face {
+  font-family: 'Neue';
+  src: url("/fonts/Neue-BoldItalic.woff") format("woff");
+  /* Pretty Modern Browsers */
+  font-style: italic;
+  font-weight: bold; }
+
+@font-face {
+  font-family: 'Neue';
+  src: url("/fonts/Neue-Regular.woff") format("woff");
+  /* Pretty Modern Browsers */
+  font-style: normal;
+  font-weight: normal; }
+
+@font-face {
+  font-family: 'Neue';
+  src: url("/fonts/Neue-RegularItalic.woff") format("woff");
+  /* Pretty Modern Browsers */
+  font-style: italic;
+  font-weight: normal; }
 
 header#header {
   position: fixed;
   z-index: 10;
   top: 0;
   right: 0;
-  padding: 10px;
+  padding: 15px 20px;
   background-color: #E82E21;
-  width: 120px; }
+  width: 140px; }
   header#header a {
     color: white;
-    text-decoration: none; }
+    text-decoration: none;
+    font-size: 14px;
+    font-family: 'NeueDisplay';
+    font-weight: bold;
+    text-align: center;
+    -webkit-font-smoothing: antialiased;
+    display: block; }
 
 .logo-container,
 header#header,
@@ -249,7 +283,7 @@ section#coreValues .core-values-slider {
       width: 100vw; }
     section#coreValues .core-values-slider .core-values-cell span.close-cell {
       position: absolute;
-      top: 50px;
+      top: 100px;
       right: 20px;
       opacity: 1;
       transition: opacity 0.4s ease-in-out; }
@@ -394,17 +428,22 @@ section#contactUs {
         background-position: center; }
 
 body {
-  background-color: #b3b3b3; }
+  background-color: #E1E1E1; }
 
 * {
   margin: 0;
   padding: 0;
   border: 0;
-  font-family: 'NeueLight';
-  box-sizing: border-box; }
+  font-family: 'Neue';
+  box-sizing: border-box;
+  color: #333; }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Neue'; }
+  font-family: 'NeueDisplay';
+  font-weight: bold; }
+
+h1 {
+  font-size: 5vw; }
 
 .global-slider {
   width: 100%;
@@ -416,15 +455,14 @@ h1, h2, h3, h4, h5, h6 {
   height: 100%;
   top: 0;
   left: 0;
-  background-color: darkgray;
+  background-color: #E1E1E1;
   padding: 2vw;
   transition: opacity 0.4s ease-in-out; }
   .section-intro.hidden {
     opacity: 0;
     pointer-events: none; }
   .section-intro h1 {
-    font-size: 4vh;
-    max-width: 62%; }
+    max-width: 60%; }
     @media (max-width: 1000px) {
       .section-intro h1 {
         max-width: none; } }

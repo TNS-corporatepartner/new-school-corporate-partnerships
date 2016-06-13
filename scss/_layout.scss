@@ -3,13 +3,19 @@ header#header {
   z-index: 10;
   top: 0;
   right: 0;
-  padding: 10px;
+  padding: 15px 20px;
   background-color: $red;
-  width: 120px;
+  width: 140px;
 
   a {
     color: white;
     text-decoration: none;
+    font-size: 14px;
+    font-family: $font-family-display;
+    font-weight: bold;
+    text-align: center;
+    -webkit-font-smoothing: antialiased;
+    display: block;
 
   }
 }

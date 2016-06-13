@@ -1,13 +1,41 @@
 @font-face {
-  font-family: 'Neue';
+  font-family: 'NeueDisplay';
   src: url('/fonts/NeueDisplay-Random.woff') format('woff'); /* Pretty Modern Browsers */
   font-style: normal;
-  font-weight: 400;
+  font-weight: bold;
 }
 
 @font-face {
-  font-family: 'NeueLight';
+  font-family: 'NeueDisplay';
   src: url('/fonts/NeueDisplay-Regular Random.woff') format('woff'); /* Pretty Modern Browsers */
   font-style: normal;
-  font-weight: 400;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Neue';
+  src: url('/fonts/Neue-Bold.woff') format('woff'); /* Pretty Modern Browsers */
+  font-style: normal;
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'Neue';
+  src: url('/fonts/Neue-BoldItalic.woff') format('woff'); /* Pretty Modern Browsers */
+  font-style: italic;
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'Neue';
+  src: url('/fonts/Neue-Regular.woff') format('woff'); /* Pretty Modern Browsers */
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Neue';
+  src: url('/fonts/Neue-RegularItalic.woff') format('woff'); /* Pretty Modern Browsers */
+  font-style: italic;
+  font-weight: normal;
 }
