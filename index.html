@@ -1,3 +1,7 @@
+---
+---
+
+
 <!doctype html>
 <html class="no-js" lang="">
 
@@ -127,7 +131,27 @@
 		</section>
 
 		<section id="ourPeople">
-			<div class="placeholder-fs">
+
+			<ul id="peopleSlider">
+
+			{% comment %}			
+			{% for person in (1..20) %}
+
+				{% for single in (1..5) %}
+				<li class="">
+					<h4>John Cage</h4>
+				</li>			
+				{% endfor %}
+
+				<li class="x2">
+					<h4>Video</h4>
+				</li>
+			{% endfor %}
+			{% endcomment %}
+			
+			</ul>
+
+			<!--<div class="placeholder-fs">
 				<div class="half-screen">
 					<h2>Our People</h2>
 				</div>
@@ -135,7 +159,7 @@
 				<div class="half-screen">
 					<h2>Our Students</h2>
 				</div>
-			</div>
+			</div>-->
 		</section>
 
 		<section id="contactUs">

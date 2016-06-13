@@ -32499,20 +32499,41 @@
 
 /***/ },
 /* 367 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.OurPeople = undefined;
+
+	var _rxjs = __webpack_require__(2);
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var OurPeople = exports.OurPeople = function OurPeople() {
 	  _classCallCheck(this, OurPeople);
 
-	  console.log('our people');
+	  var slider = document.getElementById('peopleSlider');
+	  var moving = _rxjs.Observable.fromEvent(window, 'mousemove');
+	  this.scrollPos = 0;
+
+	  // const movingRight = moving
+	  //   .filter(e => e.clientX > window.innerWidth / 2)
+	  //   // .debounceTime(100)
+	  //   .subscribe(e => {       
+	  //     this.scrollPos += 10
+	  //     slider.scrollLeft = this.scrollPos
+	  //   })
+
+	  // const movingLeft = moving
+	  //   .filter(e => e.clientX < window.innerWidth / 2)
+	  //   // .debounceTime(50)
+	  //   .subscribe(e => {       
+	  //     this.scrollPos -= 10
+	  //     slider.scrollLeft = this.scrollPos
+	  //   })
 	};
 
 /***/ },

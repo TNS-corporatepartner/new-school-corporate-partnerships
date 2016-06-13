@@ -335,6 +335,25 @@ section#ourUniversity .our-university-slider {
     opacity: 0;
     transition: opacity 0.4s ease-in-out; }
 
+section#ourPeople ul {
+  list-style: none;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  height: 100vh;
+  width: 100vw;
+  overflow-x: scroll; }
+  section#ourPeople ul li {
+    width: 200px;
+    height: 200px;
+    background-color: lightgreen; }
+    section#ourPeople ul li.x2 {
+      background-color: blue;
+      width: 400px; }
+
 section#contactUs {
   display: -ms-flexbox;
   display: flex; }
