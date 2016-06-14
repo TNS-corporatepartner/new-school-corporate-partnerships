@@ -147,8 +147,10 @@
 					{% for person in site.people %}
 						<div class="person {% if person.video %}video{% endif %}" style="background-image:url('{{person.image}}');" data-src="{% if person.video %}{{person.video}}{% endif %}">
 							<div class="overlay"></div>
-							<h6>{{ person.title }}</h6>
-							{{ person.content }}
+							<hgroup>
+								<h6>{{ person.title }}</h6>
+								{{ person.content }}
+							</hgroup>
 						</div>
 					{% endfor %}
 				</div>
@@ -259,8 +261,8 @@
 	<script src="/bundle.js"></script>
 
 	<script id="__bs_script__">//<![CDATA[
-		document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.2.12.10.js'><\/script>".replace("HOST", location.hostname));
-	//]]></script>	
+		document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.2.13.0.js'><\/script>".replace("HOST", location.hostname));
+	//]]></script>
 
 </body>
 

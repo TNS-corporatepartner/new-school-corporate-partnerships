@@ -1,7 +1,7 @@
 ---
-title: Jasper Johns
-image: "/images/rezaian.jpg"
-video: 
+title: Ji Lee
+image: "/images/lee.jpg"
+video:
 ---
 
-WaPo journalist
+Creative Director at Facebook

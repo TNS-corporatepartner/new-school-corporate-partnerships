@@ -1,7 +1,7 @@
 ---
 title: Logan &amp; Chelsea
 image: "/images/logan-and-chelsea.jpg"
-video: https://vimeo.com/album/3889931/video/162597904
+video: http://familiar-temp.s3.amazonaws.com/full-video.mp4
 ---
 
 Sustainability
