@@ -206,7 +206,10 @@
 	        delay: 2000,
 	        complete: function complete() {
 	          setTimeout(function () {
-	            Velocity(introText, { opacity: 0 }, { duration: 400 });
+	            Velocity(introText, { opacity: 0 }, {
+	              duration: 400,
+	              display: 'none'
+	            });
 	          }, 3000);
 	        }
 	      });
@@ -32279,6 +32282,7 @@
 	    this.slider = document.querySelector('.core-values-slider');
 	    this.cells = this.slider.childNodes;
 	    this.activeCell = null;
+	    this.dynamicHeadline = this.section.querySelector('.section-headlines .dynamic-text');
 	    var instance = this;
 
 	    $(this.cells).on('mouseenter', function () {
@@ -32303,9 +32307,9 @@
 	    particlesJS.load('fearless', '/js/particles/fearless.json');
 	    particlesJS.load('diversity', '/js/particles/diversity.json');
 
-	    setTimeout(function () {
-	      _this.resizeParticles();
-	    }, 1500);
+	    // setTimeout(() => {
+	    //   this.resizeParticles()
+	    // }, 1500)
 
 	    setTimeout(function () {
 	      $(_this.sectionInto).addClass('hidden');
@@ -32318,7 +32322,7 @@
 	      var _this2 = this;
 
 	      if (!this.activeCell) {
-
+	        this.dynamicHeadline.textContent = $(cell).data('headline');
 	        $(this.cells).not(cell).addClass('sibling-is-opening');
 	        $(cell).addClass('opening');
 	        $(cell.parentNode).removeClass('content-closed');
@@ -32339,7 +32343,6 @@
 	      var _this3 = this;
 
 	      if (this.activeCell) {
-
 	        $(this.activeCell).parents('.global-slider').addClass('content-closed');
 
 	        setTimeout(function () {
@@ -32444,6 +32447,7 @@
 	    this.section = document.getElementById('ourUniversity');
 	    this.sectionInto = this.section.querySelector('.section-intro');
 	    this.slider = document.querySelector('.our-university-slider');
+	    this.dynamicHeadline = this.section.querySelector('.section-headlines .dynamic-text');
 	    this.cells = this.slider.childNodes;
 	    this.activeCell = null;
 	    var instance = this;
@@ -32472,9 +32476,10 @@
 	      var _this2 = this;
 
 	      if (!this.activeCell) {
-
+	        this.dynamicHeadline.textContent = $(cell).data('headline');
 	        $(this.cells).not(cell).addClass('sibling-is-opening');
 	        $(cell).addClass('opening');
+	        $(cell.parentNode).removeClass('content-closed');
 
 	        setTimeout(function () {
 	          $(_this2.slider).removeClass('uninitialized');
@@ -32482,6 +32487,7 @@
 
 	          _this2.initFlkty($(cell).index());
 	          _this2.activeCell = cell;
+	          _this2.resizeParticles();
 	        }, 800);
 	      }
 	    }
@@ -32491,18 +32497,24 @@
 	      var _this3 = this;
 
 	      if (this.activeCell) {
-
-	        this.flkty.destroy();
-
-	        $(this.cells).not(this.activeCell).addClass('sibling-is-opening');
-	        $(this.activeCell).addClass('opening');
-	        $(this.slider).addClass('uninitialized');
+	        $(this.activeCell).parents('.global-slider').addClass('content-closed');
 
 	        setTimeout(function () {
-	          $(_this3.cells).removeClass('sibling-is-opening');
-	          $(_this3.activeCell).removeClass('opening');
-	          _this3.activeCell = null;
-	        });
+	          _this3.flkty.destroy();
+	          $(_this3.cells).not(_this3.activeCell).addClass('sibling-is-opening');
+	          $(_this3.activeCell).addClass('opening');
+	          $(_this3.slider).addClass('uninitialized');
+
+	          setTimeout(function () {
+	            $(_this3.cells).removeClass('sibling-is-opening');
+	            $(_this3.activeCell).removeClass('opening');
+	            _this3.activeCell = null;
+	          });
+
+	          setTimeout(function () {
+	            _this3.resizeParticles();
+	          }, 500);
+	        }, 250);
 	      }
 	    }
 	  }, {

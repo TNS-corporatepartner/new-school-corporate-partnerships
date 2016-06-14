@@ -129,12 +129,15 @@ function init() {
       })
 
       //intro text animate in
-      Velocity(introText, {opacity: 1}, {
+      Velocity(introText, {opacity: 1}, {        
         duration: 1000,
         delay: 2000,
         complete: () => {
           setTimeout(() => {
-            Velocity(introText, {opacity: 0}, {duration: 400})
+            Velocity(introText, {opacity: 0}, {
+              duration: 400,
+              display: 'none'
+            })
           }, 3000)
         }
       })

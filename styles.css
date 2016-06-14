@@ -245,6 +245,8 @@ section#coreValues .core-values-slider {
     width: 220px; }
     section#coreValues .core-values-slider.content-closed .core-values-cell .content h1 {
       font-size: 2vh; }
+  section#coreValues .core-values-slider.content-closed + .section-headlines .dynamic-text {
+    opacity: 0; }
   section#coreValues .core-values-slider .core-values-cell {
     position: relative;
     display: -ms-flexbox;
@@ -325,6 +327,13 @@ section#ourUniversity .our-university-slider {
         pointer-events: none; }
     section#ourUniversity .our-university-slider.uninitialized .flickity-prev-next-button {
       opacity: 0; }
+  section#ourUniversity .our-university-slider.content-closed .our-university-cell .content {
+    left: calc(50% - 110px);
+    width: 220px; }
+    section#ourUniversity .our-university-slider.content-closed .our-university-cell .content h1 {
+      font-size: 2vh; }
+  section#ourUniversity .our-university-slider.content-closed + .section-headlines .dynamic-text {
+    opacity: 0; }
   section#ourUniversity .our-university-slider .our-university-cell {
     position: relative;
     display: -ms-flexbox;
@@ -345,12 +354,13 @@ section#ourUniversity .our-university-slider {
     transition: flex 0.5s ease-in-out, opacity 0.5s ease-in-out, -ms-flex 0.5s ease-in-out; }
     section#ourUniversity .our-university-slider .our-university-cell span.close-cell {
       position: absolute;
-      top: 20px;
+      top: 100px;
       right: 20px;
       opacity: 1;
       transition: opacity 0.4s ease-in-out; }
       section#ourUniversity .our-university-slider .our-university-cell span.close-cell:before {
-        content: 'x'; }
+        content: 'x';
+        color: white; }
     section#ourUniversity .our-university-slider .our-university-cell .content {
       position: absolute;
       overflow: hidden;
@@ -485,6 +495,8 @@ h4 {
   padding: 2vw; }
   .section-headlines h3, .section-headlines h4 {
     color: white; }
+  .section-headlines .dynamic-text {
+    transition: opacity 0.4s ease-in-out; }
 
 .video-fs {
   position: absolute;

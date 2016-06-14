@@ -2,7 +2,6 @@ $coreValuesBaseGray: #333;
 
 section#coreValues {
   .core-values-slider {
-    // display: flex;
     height: 100vh;
     &.uninitialized {
       display: flex;
@@ -18,13 +17,18 @@ section#coreValues {
         opacity: 0;
       }
     }
-    &.content-closed .core-values-cell .content {
-      left: calc(50% - 110px);
-      width: 220px;
-      h1 {
-        font-size: 2vh;
+    &.content-closed {
+      .core-values-cell .content {
+        left: calc(50% - 110px);
+        width: 220px;
+        h1 {
+          font-size: 2vh;
+        }
       }
-    }
+      +.section-headlines .dynamic-text {
+        opacity: 0;
+      } 
+    }  
 
     .core-values-cell {
       position: relative;
@@ -36,7 +40,7 @@ section#coreValues {
       height: 100vh;
       padding: 2vw;
       transition: flex 0.5s ease-in-out, opacity 0.5s ease-in-out;
-        background-color: $coreValuesBaseGray;
+      background-color: $coreValuesBaseGray;
       &:hover {
         flex-grow: 1.5;
         .content h1{

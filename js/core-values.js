@@ -9,6 +9,7 @@ export class CoreValues {
     this.slider = document.querySelector('.core-values-slider')
     this.cells = this.slider.childNodes
     this.activeCell = null
+    this.dynamicHeadline = this.section.querySelector('.section-headlines .dynamic-text')
     const instance = this
 
     $(this.cells).on('mouseenter', function() { $(this.cells).not(this).addClass('sibling-is-hovered') })
@@ -23,9 +24,9 @@ export class CoreValues {
     particlesJS.load('fearless', '/js/particles/fearless.json')
     particlesJS.load('diversity', '/js/particles/diversity.json')
 
-    setTimeout(() => {
-      this.resizeParticles()
-    }, 1500)
+    // setTimeout(() => {
+    //   this.resizeParticles()
+    // }, 1500)
 
     setTimeout(() => {
       $(this.sectionInto).addClass('hidden')
@@ -33,8 +34,8 @@ export class CoreValues {
   }
 
   openCell(cell) {
-    if (!this.activeCell) {
-
+    if (!this.activeCell) {      
+      this.dynamicHeadline.textContent = $(cell).data('headline')
       $(this.cells).not(cell).addClass('sibling-is-opening')
       $(cell).addClass('opening')
       $(cell.parentNode).removeClass('content-closed')
@@ -47,13 +48,11 @@ export class CoreValues {
         this.activeCell = cell
         this.resizeParticles()
       }, 800)
-
     }
   }
 
   closeCell() {
     if (this.activeCell) {
-
       $(this.activeCell).parents('.global-slider').addClass('content-closed')
 
       setTimeout(() => {

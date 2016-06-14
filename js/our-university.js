@@ -6,7 +6,8 @@ export class OurUniversity {
     this.section = document.getElementById('ourUniversity')
     this.sectionInto = this.section.querySelector('.section-intro')
     this.slider = document.querySelector('.our-university-slider')
-    this.cells = this.slider.childNodes
+    this.dynamicHeadline = this.section.querySelector('.section-headlines .dynamic-text')
+    this.cells = this.slider.childNodes    
     this.activeCell = null     
     const instance = this
         
@@ -21,37 +22,43 @@ export class OurUniversity {
   }
   
   openCell(cell) {
-    if (!this.activeCell) {
-
+    if (!this.activeCell) {      
+      this.dynamicHeadline.textContent = $(cell).data('headline')
       $(this.cells).not(cell).addClass('sibling-is-opening')
       $(cell).addClass('opening')
-      
-      setTimeout(() => {        
-        $(this.slider).removeClass('uninitialized')        
-        $(this.cells).removeClass('sibling-is-opening opening')
-                        
-        this.initFlkty( $(cell).index() )
-        this.activeCell = cell
-      }, 800)
-
-    }
-  }  
-  
-  closeCell() {
-    if (this.activeCell) {              
-
-      this.flkty.destroy()
-      
-      $(this.cells).not(this.activeCell).addClass('sibling-is-opening')
-      $(this.activeCell).addClass('opening')
-      $(this.slider).addClass('uninitialized')
+      $(cell.parentNode).removeClass('content-closed')
 
       setTimeout(() => {
-        $(this.cells).removeClass('sibling-is-opening')
-        $(this.activeCell).removeClass('opening')
-        this.activeCell = null        
-      })      
-    
+        $(this.slider).removeClass('uninitialized')
+        $(this.cells).removeClass('sibling-is-opening opening')
+
+        this.initFlkty( $(cell).index() )
+        this.activeCell = cell
+        this.resizeParticles()
+      }, 800)
+    }
+  }
+  
+  closeCell() {
+    if (this.activeCell) {
+      $(this.activeCell).parents('.global-slider').addClass('content-closed')
+
+      setTimeout(() => {
+        this.flkty.destroy()
+        $(this.cells).not(this.activeCell).addClass('sibling-is-opening')
+        $(this.activeCell).addClass('opening')
+        $(this.slider).addClass('uninitialized')
+
+        setTimeout(() => {
+          $(this.cells).removeClass('sibling-is-opening')
+          $(this.activeCell).removeClass('opening')
+          this.activeCell = null
+        })
+
+        setTimeout( () => {
+          this.resizeParticles()
+        }, 500)
+      }, 250)
     }
   }
   

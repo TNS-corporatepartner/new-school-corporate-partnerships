@@ -2,7 +2,6 @@ section#ourUniversity {
   
   .our-university-slider {
     height: 100vh;
-
     &.uninitialized {
       display: flex;
       .our-university-cell {
@@ -15,7 +14,19 @@ section#ourUniversity {
       }
       .flickity-prev-next-button {
         opacity: 0;
-      }      
+      }
+    }
+    &.content-closed {
+      .our-university-cell .content {
+        left: calc(50% - 110px);
+        width: 220px;
+        h1 {
+          font-size: 2vh;
+        }
+      }
+      +.section-headlines .dynamic-text {
+        opacity: 0;
+      } 
     } 
 
     .our-university-cell {
@@ -33,12 +44,13 @@ section#ourUniversity {
       transition: flex 0.5s ease-in-out, opacity 0.5s ease-in-out;
       span.close-cell {
         position: absolute;
-        top: 20px;
+        top: 100px;
         right: 20px;
         opacity: 1;
         transition: opacity 0.4s ease-in-out;
         &:before {
           content: 'x';
+          color: white;
         }
       }      
       .content {
