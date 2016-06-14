@@ -6,23 +6,24 @@ export class OurPeople {
     this.sectionInto = this.section.querySelector('.section-intro')    
     const slider = document.getElementById('peopleSlider')
     const moving = Observable.fromEvent(window, 'mousemove')
-    this.scrollPos = 0
+    this.center = slider.scrollWidth / 2 - window.innerWidth
+    slider.scrollLeft = this.center
 
 
     const movingRight = moving
       .filter(e => e.clientX > window.innerWidth / 2)
-      // .debounceTime(100)
       .subscribe(e => {        
-        this.scrollPos += 10
-        slider.scrollLeft = this.scrollPos
+        const velocity = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2)
+        const pos = e.clientX - window.innerWidth / 2          
+        slider.scrollLeft = slider.scrollLeft + pos * velocity      
       })
 
     const movingLeft = moving
       .filter(e => e.clientX < window.innerWidth / 2)
-      // .debounceTime(50)
       .subscribe(e => {        
-        this.scrollPos -= 10
-        slider.scrollLeft = this.scrollPos
+        const velocity = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2)
+        const pos = window.innerWidth / 2 - e.clientX 
+        slider.scrollLeft = slider.scrollLeft + pos * velocity      
       })
   
     setTimeout(() => {
