@@ -32570,7 +32570,8 @@
 	  var flkty = new _flickity2.default('#peopleSlider', {
 	    wrapAround: true,
 	    // cellAlign: 'left',
-	    freeScroll: true
+	    freeScroll: true,
+	    percentPosition: false
 	  });
 
 	  setTimeout(function () {

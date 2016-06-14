@@ -20,7 +20,8 @@ export class OurPeople {
     var flkty = new Flickity('#peopleSlider', {
       wrapAround: true,
       // cellAlign: 'left',
-      freeScroll: true
+      freeScroll: true,
+      percentPosition: false
     })
     
     setTimeout(() => {
