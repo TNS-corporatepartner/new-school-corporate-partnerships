@@ -12,21 +12,16 @@ export class OurPeople {
     this.modalContent = this.personModal.querySelector('.content')
     // slider.scrollLeft = this.center
 
-    // var elem = document.querySelector('.main-carousel')
-    // var flkty = new Flickity( elem, {
-    //   cellAlign: 'left',
-    //   contain: true
-    // })
-
-    // var sliderCellWidth = $('.slider-cell').get(0).childNodes.length * 300
-    // $('.slider-cell').css('width', sliderCellWidth)
+    $('.slider-cell').each(function(i, el) {
+      console.log(el)
+      // el.parentNode
+    })
 
     var flkty = new Flickity('#peopleSlider', {
       wrapAround: true,
       cellAlign: 'left',
       freeScroll: true
-    })
-    
+    })    
 
     $('.person.video').on('click', function() {    
       const personModal = document.getElementById('personModal')

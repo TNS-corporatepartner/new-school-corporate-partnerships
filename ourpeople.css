@@ -10,14 +10,11 @@
       width: 300px;
       height: 300px;
       display: inline-block;
-      background-color: lightgreen;
-      border: 1px solid black;
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover; }
       #peopleSlider .slider-cell .person.video {
-        width: 600px;
-        background-color: red; }
+        width: 604px; }
 
 #personModal {
   position: absolute;
