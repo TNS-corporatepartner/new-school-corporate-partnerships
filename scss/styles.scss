@@ -10,6 +10,7 @@
 
 body {
   background-color: $gray-light;
+  color: $gray-dark;
 }
 
 * {
@@ -18,7 +19,6 @@ body {
   border: 0;
   font-family: $font-family-base;
   box-sizing: border-box;
-  color: $gray-dark;
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -27,12 +27,12 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 h1{
-  font-size: 5.5vw;
+  font-size: 7.5vh;
 }
 
 h2{
   font-family: $font-family-base;
-  font-size: 48px;
+  font-size: 4.8vh;
   line-height: 1.3;
 }
 
@@ -46,7 +46,7 @@ h4{
 
 h5{
   font-weight: normal;
-  font-size: 24px;
+  font-size: 34px;
 }
 
 h6{
@@ -83,7 +83,9 @@ h6{
   position: absolute;
   top: 0; left: 0;
   padding: 2vw;
-  h3, h4 {
+  max-width: 70vw;
+  h3, h4, h1 {
+
     color: white;
   }
   .dynamic-text {

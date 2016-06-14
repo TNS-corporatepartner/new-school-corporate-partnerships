@@ -1,6 +1,6 @@
 body.show-question {
   section#futureOf .question {
-    transition-delay: 0.5s;
+    transition-delay: 1s;
     opacity: 1 !important;
     left: 0;
   }
@@ -10,6 +10,8 @@ section#futureOf {
   position: relative;
   height: 100vh;
   background-color: black;
+  color: white;
+
 
   .future-of-slider {
     .future-of-cell {
@@ -18,20 +20,46 @@ section#futureOf {
       &:first-of-type {
         opacity: 0;
       }
+      .video-fs{
+        opacity: .8;
+      }
     }
   }
 
   .question {
     position: absolute;
     top: 50%;
-    left: -100%;
-    color: white;
-    background-color: rgba(0,0,0,0.7);
-    font-size: 4vh;
-    padding: 0.8em;
-    padding-left: 1.2em;
-    transition: all 0.4s ease-in-out;
-    max-width: 60%;
+    left: 0;
+    transform: translateY(-50%);
+    background-color: rgba(0,0,0,0.35);
+    padding: 1.5vw;
+    padding-left: 2vw;
+    opacity: 0;
+    transition: all 1s ease-in-out;
+    max-width: 60vw;
+  }
+
+  h4{
+    animation-name: fadeIn;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    animation-delay: 8.5s;
+    opacity: 0;
+
+  }
+
+  .section-headlines .dynamic-text{
+    transition-delay: 10s;
+  }
+}
+
+@keyframes fadeIn{
+  0%{
+    opacity: 0;
+  }
+
+  100%{
+    opacity: 1;
   }
 }
 
@@ -45,11 +73,20 @@ section#futureOf {
 
 #introText {
   position: fixed;
-  top: 40%;
-  left: 20px;
+  width: calc(100vw - 140px);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  top: 0;
+  left: 0;
+  padding-left: 2vw;
   opacity: 0;
   color: white;
-  max-width: 1100px;
+  span{
+    display: block;
+    max-width: 1100px;
+    color: white;
+  }
 }
 
 #fixedLogoText {

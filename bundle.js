@@ -196,17 +196,17 @@
 	        width: 120
 	      }, {
 	        duration: 1000,
-	        delay: 1500
+	        delay: 2500
 	      });
 
 	      //intro text animate in
 	      Velocity(introText, { opacity: 1 }, {
 	        duration: 1000,
-	        delay: 2000,
+	        delay: 3300,
 	        complete: function complete() {
 	          setTimeout(function () {
 	            Velocity(introText, { opacity: 0 }, {
-	              duration: 400,
+	              duration: 500,
 	              display: 'none'
 	            });
 	          }, 3000);
@@ -219,12 +219,12 @@
 	        height: '62px'
 	      }, {
 	        duration: 800,
-	        delay: 6500
+	        delay: 8000
 	      });
 
 	      setTimeout(function () {
 	        obs.next();
-	      }, 7300);
+	      }, 8800);
 	    });
 	  }
 	}
@@ -235,8 +235,8 @@
 
 	  Velocity(introBg, 'stop');
 	  Velocity(introBg, {
-	    width: '120px',
-	    height: '52px'
+	    width: '140px',
+	    height: '62px'
 	  }, {
 	    duration: 800
 	  });
@@ -17809,15 +17809,15 @@
 	    this.questionEl = document.querySelector('.question');
 	    this.slider = document.querySelector('.future-of-slider');
 
-	    this.questions = ['How can data be human?', 'How is the gamification of learning reshaping the workforce?'];
+	    this.questions = ['How can data be empathetic?', 'How can you succeed by failing?', 'How can technology make us more human?', 'How can we create a better world through better business?'];
 
-	    this.words = ['Big Data', 'Learning & Development'];
+	    this.words = ['Big Data', 'Gamification', 'Technology', 'Sustainability'];
 
 	    this.shufflerConfig = {
 	      limit: 26,
 	      count: 0,
 	      index: 0,
-	      words: ['The Workforce', 'Sustainability', 'Research & Development', 'Big Data']
+	      words: ['The Workforce', 'Online', 'Research & Development', 'Big Data']
 	    };
 
 	    this.flkty = new _flickity2.default(this.slider, {
@@ -17836,10 +17836,10 @@
 	      var _this = this;
 
 	      this.shuffler({
-	        limit: 26,
+	        limit: 6,
 	        count: 0,
 	        index: 0,
-	        words: ['The Workforce', 'Sustainability', 'Research & Development', 'Big Data']
+	        words: ['The Workforce', 'Online', 'Research & Development', 'Personalization', 'Data Privacy', 'Big Data']
 	      }).then(function () {
 	        var cell = _this.flkty.cells[_this.flkty.selectedIndex].element;
 	        Velocity(cell, { opacity: 1 });
@@ -17868,8 +17868,8 @@
 	          setTimeout(function () {
 	            _this2.loadingWord.textContent = _this2.words[_this2.flkty.selectedIndex + 1] ? _this2.words[_this2.flkty.selectedIndex + 1] : _this2.words[0];
 	            _this2.flkty.next();
-	          }, 500);
-	        }, 4500);
+	          }, 1000);
+	        }, 5000);
 	      }
 	    }
 	  }, {
@@ -17879,7 +17879,7 @@
 
 	      this.loadingWord = this.section.querySelector('.section-headlines .dynamic-text');
 
-	      Velocity(this.loadingWord, { opacity: 1 }, { duration: 300 });
+	      Velocity(this.loadingWord, { opacity: 1 }, { duration: 1000 });
 
 	      return new Promise(function (resolve) {
 	        var wordSwitcher = setInterval(function () {
@@ -17894,7 +17894,7 @@
 	            o.count++;
 	            o.index++;
 	          }
-	        }, 100);
+	        }, 400);
 	      });
 	    }
 	  }, {
