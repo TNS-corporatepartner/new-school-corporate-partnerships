@@ -136,13 +136,6 @@ header#header,
 .onepage-pagination {
   transition: opacity 0.4s ease-in-out; }
 
-body.show-question .future-of-header h1,
-body.show-question .shuffler h1,
-body.show-question #fixedLogo,
-body.show-question #header,
-body.show-question .onepage-pagination {
-  opacity: 0.3 !important; }
-
 body.show-question section#futureOf .question {
   transition-delay: 0.5s;
   opacity: 1 !important;
