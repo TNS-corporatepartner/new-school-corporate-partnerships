@@ -17805,8 +17805,8 @@
 	    this.section = document.querySelector('#futureOf');
 	    this.imagineEl = document.querySelector('.future-of-header h1');
 	    this.futureOfEl = document.querySelectorAll('.future-of-header h1')[1];
-	    this.loadingEl = document.querySelector('.shuffler');
-	    this.loadingWord = this.loadingEl.querySelector('h1');
+	    // this.loadingEl = document.querySelector('.shuffler')
+	    this.loadingWord = this.section.querySelector('.section-headlines .dynamic-text');
 	    this.questionEl = document.querySelector('.question');
 	    this.slider = document.querySelector('.future-of-slider');
 
@@ -17836,26 +17836,15 @@
 	    value: function initVideos() {
 	      var _this = this;
 
-	      Velocity(this.imagineEl, { opacity: 1 }, {
-	        duration: 1200, display: 'block',
-	        complete: function complete() {
-	          Velocity(_this.futureOfEl, { opacity: 1 }, {
-	            duration: 800,
-	            display: 'block',
-	            complete: function complete() {
-	              _this.shuffler({
-	                limit: 26,
-	                count: 0,
-	                index: 0,
-	                words: ['The Workforce', 'Sustainability', 'Research & Development', 'Big Data']
-	              }).then(function () {
-	                var cell = _this.flkty.cells[_this.flkty.selectedIndex].element;
-	                Velocity(cell, { opacity: 1 });
-	                _this.playCellSequence();
-	              });
-	            }
-	          });
-	        }
+	      this.shuffler({
+	        limit: 26,
+	        count: 0,
+	        index: 0,
+	        words: ['The Workforce', 'Sustainability', 'Research & Development', 'Big Data']
+	      }).then(function () {
+	        var cell = _this.flkty.cells[_this.flkty.selectedIndex].element;
+	        Velocity(cell, { opacity: 1 });
+	        _this.playCellSequence();
 	      });
 
 	      this.flkty.on('cellSelect', function () {
@@ -17889,8 +17878,8 @@
 	    value: function shuffler(o) {
 	      var _this3 = this;
 
-	      this.loadingEl = document.querySelector('.shuffler');
-	      this.loadingWord = this.loadingEl.querySelector('h1');
+	      console.log('shuff');
+	      this.loadingWord = this.section.querySelector('.section-headlines .dynamic-text');
 
 	      Velocity(this.loadingWord, { opacity: 1 }, { duration: 300 });
 

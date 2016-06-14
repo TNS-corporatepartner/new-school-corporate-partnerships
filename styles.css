@@ -145,7 +145,8 @@ body.show-question .onepage-pagination {
 
 body.show-question section#futureOf .question {
   transition-delay: 0.5s;
-  opacity: 1 !important; }
+  opacity: 1 !important;
+  left: 0; }
 
 section#futureOf {
   position: relative;
@@ -153,51 +154,21 @@ section#futureOf {
   background-color: black; }
   section#futureOf .future-of-header h1 {
     transition: opacity 0.4s ease-in-out; }
-  section#futureOf #redRect {
-    right: 0; }
-  section#futureOf .future-of-content {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-pack: center;
-        justify-content: center;
-    -ms-flex-align: center;
-        align-items: center;
-    background-color: rgba(0, 0, 0, 0.2); }
-    section#futureOf .future-of-content header {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      padding: 2vw; }
-      section#futureOf .future-of-content header h1 {
-        font-size: 7vh;
-        color: white; }
-    section#futureOf .future-of-content .shuffler {
-      width: 62%;
-      position: absolute;
-      right: 20px;
-      bottom: 20px; }
-      section#futureOf .future-of-content .shuffler h1 {
-        opacity: 0;
-        font-size: 7vh;
-        color: white;
-        text-align: right; }
   section#futureOf .future-of-slider .future-of-cell {
     width: 100%;
     height: 100vh; }
     section#futureOf .future-of-slider .future-of-cell:first-of-type {
       opacity: 0; }
   section#futureOf .question {
-    width: 90%;
-    opacity: 0;
-    font-size: 4vh;
+    position: absolute;
+    top: 50%;
+    left: -100%;
     color: white;
-    text-align: center;
-    transition: opacity 0.4s ease-in-out; }
+    background-color: rgba(0, 0, 0, 0.7);
+    font-size: 4vh;
+    padding: 0.8em;
+    padding-left: 1.2em;
+    transition: all 0.4s ease-in-out; }
 
 #introBg {
   position: fixed;

@@ -8,8 +8,8 @@ export class FutureOf {
     this.section = document.querySelector('#futureOf') 
     this.imagineEl = document.querySelector('.future-of-header h1')
     this.futureOfEl = document.querySelectorAll('.future-of-header h1')[1]
-    this.loadingEl = document.querySelector('.shuffler')
-    this.loadingWord = this.loadingEl.querySelector('h1')     
+    // this.loadingEl = document.querySelector('.shuffler')
+    this.loadingWord = this.section.querySelector('.section-headlines .dynamic-text')     
     this.questionEl = document.querySelector('.question')  
     this.slider = document.querySelector('.future-of-slider')
 
@@ -42,27 +42,17 @@ export class FutureOf {
 
 
   initVideos() {
-    Velocity(this.imagineEl, {opacity: 1}, {
-      duration: 1200, display: 'block',
-      complete: () => {
-        Velocity(this.futureOfEl, {opacity: 1}, {
-          duration: 800,
-          display: 'block',
-          complete: () => {
-            this.shuffler({
-              limit: 26,
-              count: 0,
-              index: 0,
-              words: ['The Workforce', 'Sustainability', 'Research & Development', 'Big Data']                   
-            }).then(() => {
-              const cell = this.flkty.cells[ this.flkty.selectedIndex ].element
-              Velocity(cell, {opacity: 1})
-              this.playCellSequence()
-            })
-          }
-        })
-      }
+    this.shuffler({
+      limit: 26,
+      count: 0,
+      index: 0,
+      words: ['The Workforce', 'Sustainability', 'Research & Development', 'Big Data']                   
+    }).then(() => {
+      const cell = this.flkty.cells[ this.flkty.selectedIndex ].element
+      Velocity(cell, {opacity: 1})
+      this.playCellSequence()
     })
+    
 
     this.flkty.on('cellSelect', () => {
       this.playCellSequence()
@@ -90,8 +80,8 @@ export class FutureOf {
 
 
   shuffler(o) {
-    this.loadingEl = document.querySelector('.shuffler')
-    this.loadingWord = this.loadingEl.querySelector('h1')
+    console.log('shuff')
+    this.loadingWord = this.section.querySelector('.section-headlines .dynamic-text')
     
     Velocity(this.loadingWord, {opacity: 1}, {duration: 300})
     
