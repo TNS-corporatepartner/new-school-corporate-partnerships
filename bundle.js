@@ -32509,7 +32509,7 @@
 	  var slider = document.getElementById('peopleSlider');
 	  var moving = _rxjs.Observable.fromEvent(window, 'mousemove');
 	  this.center = slider.scrollWidth / 2 - window.innerWidth;
-	  // slider.scrollLeft = this.center
+	  slider.scrollLeft = this.center;
 
 	  var movingRight = moving.filter(function (e) {
 	    return e.clientX > window.innerWidth / 2;
