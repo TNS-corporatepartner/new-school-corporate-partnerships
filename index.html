@@ -125,22 +125,22 @@
 				<h1>Our University</h1>
 			</div>
 		</section>
+		
 
 		<section id="ourPeople">			
 		
 			<!--<video src="http://familiar-temp.s3.amazonaws.com/sample2.mp4" height="150" width="300"></video>-->
 			<div id="peopleSlider">
-				{% for person in site.people %}
-					{% if forloop.index % 2 == 0 %}
-						even block
-					{% else %}
-						odd block
-					{% endif %}
-					<!--<div class="carousel-cell">
-						
-						<h1>{{ person.title }}</h1>
-						<h2>{{ person.description }}</h2>
-					</div>-->
+								
+				{% for slide in (1..3) %}
+				<div class="slide">
+					{% for person in site.people %}
+						<h1>{{person.type}}</h1>
+						<div class="{{person.type}}">						
+							<h6>{{ person.title }}</h6>
+						</div>
+					{% endfor %}
+				</div>				
 				{% endfor %}				
 			</div>
 

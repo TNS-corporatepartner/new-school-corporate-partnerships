@@ -19,23 +19,23 @@
 //   }
 // }
 
-section#ourPeople {
-  display: flex;
-  align-items: center;
-  #peopleSlider {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    height: 300px;
-    width: 100vw;
-    overflow-x: scroll;
-    .img {
-      width: 150px;
-      height: 150px;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
+// section#ourPeople {
+//   display: flex;
+//   align-items: center;
+//   #peopleSlider {
+//     display: flex;
+//     flex-direction: column;
+//     flex-wrap: wrap;
+//     height: 300px;
+//     width: 100vw;
+//     overflow-x: scroll;
+//     .img {
+//       width: 150px;
+//       height: 150px;
+//       background-size: cover;
+//       background-position: center;
+//       background-repeat: no-repeat;
 
-    }
-  }
-}
+//     }
+//   }
+// }
