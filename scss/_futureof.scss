@@ -19,10 +19,6 @@ section#futureOf {
   height: 100vh;
   background-color: black;
 
-  .future-of-header h1 {
-    transition: opacity 0.4s ease-in-out;
-  }
-
   .future-of-slider {
     .future-of-cell {
       width: 100%;
@@ -43,6 +39,7 @@ section#futureOf {
     padding: 0.8em;
     padding-left: 1.2em;
     transition: all 0.4s ease-in-out;
+    max-width: 60%;
   }
 }
 

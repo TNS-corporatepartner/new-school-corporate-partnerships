@@ -215,8 +215,8 @@
 
 	      //intro red-background animate to corner
 	      Velocity(introBg, {
-	        width: '120px',
-	        height: '52px'
+	        width: '140px',
+	        height: '62px'
 	      }, {
 	        duration: 800,
 	        delay: 6500

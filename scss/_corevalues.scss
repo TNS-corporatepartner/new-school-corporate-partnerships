@@ -1,6 +1,14 @@
 $coreValuesBaseGray: #333;
 
 section#coreValues {
+
+  .section-intro {
+    background-color: $gray-dark;
+    h1 {
+      color: white;
+    }
+  }
+
   .core-values-slider {
     height: 100vh;
     &.uninitialized {
