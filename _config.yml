@@ -4,20 +4,20 @@ timezone: UTC
 collections:
   posts:
     title: Posts
-    output: true
+    output: false
   uploads:
     title: Uploads
-    output: true
+    output: false
   values:
     title: Values
-    output: true
+    output: false
   people:
     title: People
-    output: true
+    output: false
 email: your-email@domain.com
 description: |
   Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
-baseurl: 
+baseurl:
 url: http://yourdomain.com
 twitter_username: jekyllrb
 github_username: jekyll
