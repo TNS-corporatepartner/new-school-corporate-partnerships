@@ -19,9 +19,10 @@ section#coreValues {
         span.close-cell {
           opacity: 0;
           pointer-events: none;
+
         }
       }
-      .flickity-prev-next-button {
+      .flickity-canv-next-button {
         opacity: 0;
       }
     }
@@ -35,8 +36,8 @@ section#coreValues {
       }
       +.section-headlines .dynamic-text {
         opacity: 0;
-      } 
-    }  
+      }
+    }
 
     .core-values-cell {
       position: relative;
@@ -80,14 +81,20 @@ section#coreValues {
         right: 20px;
         opacity: 1;
         transition: opacity 0.4s ease-in-out;
+
+
         &:before {
-          content: 'x';
+          content: '×';
           color: white;
+          font-size: 30pt;
+          padding: 20px;
+
+
         }
       }
       .content {
         position: absolute;
-        display: flex;        
+        display: flex;
         overflow: hidden;
         top: 0; left: 0;
         height: 100%;
@@ -99,10 +106,11 @@ section#coreValues {
         .content-inner {
           position: relative;
           width: 100%;
+          margin-top: -100px;
           h1, .dynamic-text {
-            position: absolute; // so incoming text animates in place of outgoing text 
+            position: absolute; // so incoming text animates in place of outgoing text
             top: 0; left: 0;
-            width: 100%;            
+            width: 100%;
           }
           h1 {
             text-align: left;
@@ -120,6 +128,9 @@ section#coreValues {
         top: 0;
         left: 0;
         width: 100vw;
+
+
+
       }
       #statusQuo canvas {
         cursor: url('/images/status-quo-triangle.png'), auto;
@@ -130,6 +141,19 @@ section#coreValues {
         cursor: url('/images/down-cursor.svg'), auto;
       }
 
+    }
+  }
+
+  .core-values-cell  {
+
+    canvas {
+      opacity: 0.2;
+    }
+
+    &:hover {
+      canvas {
+        opacity: 1;
+      }
     }
   }
 }
