@@ -1,7 +1,7 @@
 ---
 title: bell hooks
 image: "/images/hooks.jpg"
-video:
+video: 
 ---
 
 Auhtor and activist
