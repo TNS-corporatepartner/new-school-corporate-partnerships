@@ -1,6 +1,6 @@
 ---
 title: Eleanore Roosevelt
-date: 2016-06-14 19:02:00 Z
+image: "/images/eleanor-roosevelt.jpg"
 ---
 
-First Lady
+Politician, Diplomat and Activist
