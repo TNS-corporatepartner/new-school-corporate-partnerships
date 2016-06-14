@@ -11,18 +11,28 @@ export class OurPeople {
 
     const movingRight = moving
       .filter(e => e.clientX > window.innerWidth / 2)
-      .subscribe(e => {        
-        const velocity = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2) / 2
-        const pos = e.clientX - window.innerWidth / 2          
-        slider.scrollLeft = slider.scrollLeft + pos * velocity      
+      .subscribe(e => {     
+        if (window.lastX !== e.clientX || window.lastY !== e.clientY){
+          const velocity = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2) / 2
+          const pos = e.clientX - window.innerWidth / 2          
+          slider.scrollLeft = slider.scrollLeft + pos * velocity
+        }   
+
+        window.lastX = e.clientX
+        window.lastY = e.clientY         
       })
 
     const movingLeft = moving
       .filter(e => e.clientX < window.innerWidth / 2)
-      .subscribe(e => {        
-        const velocity = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2)  / 2
-        const pos = window.innerWidth / 2 - e.clientX 
-        slider.scrollLeft = slider.scrollLeft + pos * velocity      
+      .subscribe(e => {
+        if (window.lastX !== e.clientX || window.lastY !== e.clientY){
+          const velocity = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2)  / 2
+          const pos = window.innerWidth / 2 - e.clientX 
+          slider.scrollLeft = slider.scrollLeft + pos * velocity
+        }   
+        
+        window.lastX = e.clientX
+        window.lastY = e.clientY               
       })
   
     setTimeout(() => {
