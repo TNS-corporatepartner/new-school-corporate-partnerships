@@ -32298,18 +32298,10 @@
 	      e.stopPropagation();instance.closeCell();
 	    });
 
-	    _rxjs.Observable.fromEvent(window, 'resize').debounceTime(100).subscribe(function () {
-	      return _this.resizeParticles();
-	    });
-
 	    particlesJS.load('designDna', '/js/particles/design-dna.json');
 	    particlesJS.load('statusQuo', '/js/particles/status-quo.json');
 	    particlesJS.load('fearless', '/js/particles/fearless.json');
 	    particlesJS.load('diversity', '/js/particles/diversity.json');
-
-	    // setTimeout(() => {
-	    //   this.resizeParticles()
-	    // }, 1500)
 
 	    setTimeout(function () {
 	      $(_this.sectionInto).addClass('hidden');
@@ -32333,7 +32325,6 @@
 
 	          _this2.initFlkty($(cell).index());
 	          _this2.activeCell = cell;
-	          _this2.resizeParticles();
 	        }, 800);
 	      }
 	    }
@@ -32356,10 +32347,6 @@
 	            $(_this3.activeCell).removeClass('opening');
 	            _this3.activeCell = null;
 	          });
-
-	          setTimeout(function () {
-	            _this3.resizeParticles();
-	          }, 500);
 	        }, 250);
 	      }
 	    }
@@ -32395,22 +32382,6 @@
 	          }
 	        });
 	      })(words.splice(0, 1)[0]);
-	    }
-	  }, {
-	    key: 'resizeParticles',
-	    value: function resizeParticles() {
-	      $('canvas').css({
-	        width: window.innerWidth,
-	        height: window.innerHeight
-	      });
-
-	      $('#statusQuo canvas').css({
-	        height: window.innerWidth
-	      });
-
-	      pJSDom.forEach(function (pjs) {
-	        window.particlesJS.layout(null, pjs.pJS);
-	      });
 	    }
 	  }]);
 

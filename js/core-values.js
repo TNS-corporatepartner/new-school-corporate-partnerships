@@ -17,16 +17,10 @@ export class CoreValues {
     $(this.cells).on('click', function() { instance.openCell(this) })
     $('span.close-cell').on('click', function(e) { e.stopPropagation(); instance.closeCell() })
 
-    Observable.fromEvent(window, 'resize').debounceTime(100).subscribe(() => this.resizeParticles())
-
     particlesJS.load('designDna', '/js/particles/design-dna.json')
     particlesJS.load('statusQuo', '/js/particles/status-quo.json')
     particlesJS.load('fearless', '/js/particles/fearless.json')
     particlesJS.load('diversity', '/js/particles/diversity.json')
-
-    // setTimeout(() => {
-    //   this.resizeParticles()
-    // }, 1500)
 
     setTimeout(() => {
       $(this.sectionInto).addClass('hidden')
@@ -46,7 +40,6 @@ export class CoreValues {
 
         this.initFlkty( $(cell).index() )
         this.activeCell = cell
-        this.resizeParticles()
       }, 800)
     }
   }
@@ -67,9 +60,6 @@ export class CoreValues {
           this.activeCell = null
         })
 
-        setTimeout( () => {
-          this.resizeParticles()
-        }, 500)
       }, 250)
     }
   }
@@ -106,20 +96,4 @@ export class CoreValues {
 
     })( words.splice(0, 1)[0] )
   }
-
-  resizeParticles() {
-    $('canvas').css({
-      width: window.innerWidth,
-      height: window.innerHeight
-    })
-
-    $('#statusQuo canvas').css({
-      height: window.innerWidth
-    })
-
-    pJSDom.forEach(pjs => {
-      window.particlesJS.layout(null, pjs.pJS)
-    })
-  }
-
 }
