@@ -9,7 +9,6 @@ export class OurPeople {
     this.center = slider.scrollWidth / 2 - window.innerWidth
     slider.scrollLeft = this.center
 
-
     const movingRight = moving
       .filter(e => e.clientX > window.innerWidth / 2)
       .subscribe(e => {        
