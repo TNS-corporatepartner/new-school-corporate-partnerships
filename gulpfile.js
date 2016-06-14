@@ -41,7 +41,15 @@ gulp.task('styles', function(){
 // })
 // gulp.task('default', ['nodemon'], function () {})
 
-gulp.task('default', function() {
+gulp.task('default', ['browser-sync'], function() {
   gulp.watch('js/**/*.js', ['webpack']);
   return gulp.watch('scss/*.scss', ['styles'])  
 })
+
+gulp.task('browser-sync', function() {
+ browserSync.init({
+   files : '_site/styles.css',
+   watchTask: true,
+   port: 3000
+ });
+});

@@ -32556,7 +32556,7 @@
 	  this.section = document.getElementById('ourPeople');
 	  this.sectionInto = this.section.querySelector('.section-intro');
 	  var slider = document.getElementById('peopleSlider');
-	  var moving = _rxjs.Observable.fromEvent(window, 'mousemove');
+	  var moving = _rxjs.Observable.fromEvent(slider, 'mousemove');
 	  this.center = slider.scrollWidth / 2 - window.innerWidth;
 	  this.personModal = document.getElementById('personModal');
 	  this.modalContent = this.personModal.querySelector('.content');
@@ -32569,9 +32569,14 @@
 
 	  var flkty = new _flickity2.default('#peopleSlider', {
 	    wrapAround: true,
-	    cellAlign: 'left',
+	    // cellAlign: 'left',
 	    freeScroll: true
 	  });
+
+	  setTimeout(function () {
+	    //wait for flickity to initialize
+	    _this.flktySliderEl = slider.querySelector('.flickity-slider');
+	  }, 1000);
 
 	  $('.person.video').on('click', function () {
 	    var personModal = document.getElementById('personModal');
@@ -32588,8 +32593,9 @@
 	  $('#closePersonModal').on('click', function () {
 	    $(_this.personModal).removeClass('active');
 	    _this.modalContent.innerHTML = '';
-	    console.log(_this);
 	  });
+
+	  var x = 0;
 
 	  var movingRight = moving.filter(function (e) {
 	    return e.clientX > window.innerWidth / 2;
@@ -32597,7 +32603,9 @@
 	    if (window.lastX !== e.clientX || window.lastY !== e.clientY) {
 	      var velocity = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2) / 2;
 	      var pos = e.clientX - window.innerWidth / 2;
-	      slider.scrollLeft = slider.scrollLeft + pos * velocity;
+
+	      // this.flktySliderEl.style.transform = 'translateX(' + (x += 5) + '%)'
+	      // slider.scrollLeft = slider.scrollLeft + pos * velocity
 	    }
 
 	    window.lastX = e.clientX;
@@ -32610,7 +32618,9 @@
 	    if (window.lastX !== e.clientX || window.lastY !== e.clientY) {
 	      var velocity = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2) / 2;
 	      var pos = window.innerWidth / 2 - e.clientX;
-	      slider.scrollLeft = slider.scrollLeft + pos * velocity;
+
+	      // this.flktySliderEl.style.transform = 'translateX(' + (x -= 5) + '%)'
+	      // slider.scrollLeft = slider.scrollLeft + pos * velocity
 	    }
 
 	    window.lastX = e.clientX;
