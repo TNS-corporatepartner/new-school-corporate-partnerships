@@ -233,7 +233,7 @@ section#coreValues .core-values-slider {
       section#coreValues .core-values-slider.uninitialized .core-values-cell span.close-cell {
         opacity: 0;
         pointer-events: none; }
-    section#coreValues .core-values-slider.uninitialized .flickity-prev-next-button {
+    section#coreValues .core-values-slider.uninitialized .flickity-canv-next-button {
       opacity: 0; }
   section#coreValues .core-values-slider.content-closed .core-values-cell .content {
     left: calc(50% - 110px);
@@ -325,6 +325,12 @@ section#coreValues .core-values-slider {
       transform: rotate(90deg); }
     section#coreValues .core-values-slider .core-values-cell #fearless canvas {
       cursor: url("/images/down-cursor.svg"), auto; }
+
+section#coreValues .core-values-cell canvas {
+  opacity: 0.2; }
+
+section#coreValues .core-values-cell:hover canvas {
+  opacity: 1; }
 
 section#ourUniversity .our-university-slider {
   height: 100vh; }
