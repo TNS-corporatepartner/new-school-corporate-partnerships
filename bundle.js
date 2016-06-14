@@ -32549,7 +32549,7 @@
 	  var movingRight = moving.filter(function (e) {
 	    return e.clientX > window.innerWidth / 2;
 	  }).subscribe(function (e) {
-	    var velocity = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
+	    var velocity = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2) / 2;
 	    var pos = e.clientX - window.innerWidth / 2;
 	    slider.scrollLeft = slider.scrollLeft + pos * velocity;
 	  });
@@ -32557,7 +32557,7 @@
 	  var movingLeft = moving.filter(function (e) {
 	    return e.clientX < window.innerWidth / 2;
 	  }).subscribe(function (e) {
-	    var velocity = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
+	    var velocity = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2) / 2;
 	    var pos = window.innerWidth / 2 - e.clientX;
 	    slider.scrollLeft = slider.scrollLeft + pos * velocity;
 	  });

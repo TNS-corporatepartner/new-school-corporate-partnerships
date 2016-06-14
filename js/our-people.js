@@ -12,7 +12,7 @@ export class OurPeople {
     const movingRight = moving
       .filter(e => e.clientX > window.innerWidth / 2)
       .subscribe(e => {        
-        const velocity = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2)
+        const velocity = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2) / 2
         const pos = e.clientX - window.innerWidth / 2          
         slider.scrollLeft = slider.scrollLeft + pos * velocity      
       })
@@ -20,7 +20,7 @@ export class OurPeople {
     const movingLeft = moving
       .filter(e => e.clientX < window.innerWidth / 2)
       .subscribe(e => {        
-        const velocity = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2)
+        const velocity = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2)  / 2
         const pos = window.innerWidth / 2 - e.clientX 
         slider.scrollLeft = slider.scrollLeft + pos * velocity      
       })

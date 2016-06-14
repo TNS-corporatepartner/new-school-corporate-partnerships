@@ -409,7 +409,8 @@ section#contactUs {
     -ms-flex-preferred-size: 50%;
         flex-basis: 50%; }
   section#contactUs .content {
-    background-color: #b3b3b3; }
+    background-color: #b3b3b3;
+    padding: 5vw 2vw; }
   section#contactUs aside#asideSlider {
     -ms-flex-order: 2;
         order: 2; }
@@ -476,6 +477,14 @@ h4 {
     @media (max-width: 1000px) {
       .section-intro h1 {
         max-width: none; } }
+
+.section-headlines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 2vw; }
+  .section-headlines h3, .section-headlines h4 {
+    color: white; }
 
 .video-fs {
   position: absolute;

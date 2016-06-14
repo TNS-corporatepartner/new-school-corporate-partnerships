@@ -70,6 +70,15 @@ h4{
   }
 }
 
+.section-headlines {
+  position: absolute;
+  top: 0; left: 0;
+  padding: 2vw;
+  h3, h4 {
+    color: white;
+  }
+}
+
 .video-fs {
   position: absolute;
   z-index: -1;
