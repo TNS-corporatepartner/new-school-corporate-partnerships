@@ -32594,16 +32594,18 @@
 	    var personModal = document.getElementById('personModal');
 	    var modalContent = personModal.querySelector('.content');
 	    var videoSrc = $(this).data('src');
+
 	    var video = $('<video />');
 	    video.attr('src', videoSrc);
 	    video.attr('autoplay', true);
 
-	    $(personModal).addClass('active');
+	    $(this.section).addClass('modal-open');
 	    $(modalContent).append(video);
 	  });
 
 	  $('#closePersonModal').on('click', function () {
-	    $(_this.personModal).removeClass('active');
+	    $(_this.section).removeClass('modal-open');
+
 	    _this.modalContent.innerHTML = '';
 	  });
 
