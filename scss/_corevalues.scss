@@ -106,6 +106,7 @@ section#coreValues {
         .content-inner {
           position: relative;
           width: 100%;
+          margin-top: -100px;
           h1, .dynamic-text {
             position: absolute; // so incoming text animates in place of outgoing text
             top: 0; left: 0;

@@ -305,7 +305,8 @@ section#coreValues .core-values-slider {
       transition: all 0.4s ease-in-out; }
       section#coreValues .core-values-slider .core-values-cell .content .content-inner {
         position: relative;
-        width: 100%; }
+        width: 100%;
+        margin-top: -100px; }
         section#coreValues .core-values-slider .core-values-cell .content .content-inner h1, section#coreValues .core-values-slider .core-values-cell .content .content-inner .dynamic-text {
           position: absolute;
           top: 0;
