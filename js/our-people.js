@@ -1,4 +1,5 @@
 import {Observable} from 'rxjs'
+import Flickity from 'flickity'
 
 export class OurPeople {
   constructor() {
@@ -7,7 +8,43 @@ export class OurPeople {
     const slider = document.getElementById('peopleSlider')
     const moving = Observable.fromEvent(window, 'mousemove')
     this.center = slider.scrollWidth / 2 - window.innerWidth
+    this.personModal = document.getElementById('personModal')
+    this.modalContent = this.personModal.querySelector('.content')
     // slider.scrollLeft = this.center
+
+    // var elem = document.querySelector('.main-carousel')
+    // var flkty = new Flickity( elem, {
+    //   cellAlign: 'left',
+    //   contain: true
+    // })
+
+    // var sliderCellWidth = $('.slider-cell').get(0).childNodes.length * 300
+    // $('.slider-cell').css('width', sliderCellWidth)
+
+    var flkty = new Flickity('#peopleSlider', {
+      wrapAround: true,
+      cellAlign: 'left',
+      freeScroll: true
+    })
+    
+
+    $('.person.video').on('click', function() {    
+      const personModal = document.getElementById('personModal')
+      const modalContent = personModal.querySelector('.content')
+      const videoSrc = $(this).data('src')
+      const video = $('<video />')
+      video.attr('src', videoSrc)
+      video.attr('autoplay', true)
+      
+      $(personModal).addClass('active')
+      $(modalContent).append(video)
+    })
+
+    $('#closePersonModal').on('click', () => {
+      $(this.personModal).removeClass('active')
+      this.modalContent.innerHTML = ''
+      console.log(this)
+    })
 
     const movingRight = moving
       .filter(e => e.clientX > window.innerWidth / 2)

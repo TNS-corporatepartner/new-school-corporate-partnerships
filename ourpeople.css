@@ -1,0 +1,48 @@
+#peopleSlider {
+  position: relative;
+  top: calc(50% - 300px);
+  outline: none; }
+  #peopleSlider .slider-cell {
+    width: 100%;
+    height: 600px;
+    overflow: hidden; }
+    #peopleSlider .slider-cell .person {
+      width: 300px;
+      height: 300px;
+      display: inline-block;
+      background-color: lightgreen;
+      border: 1px solid black;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover; }
+      #peopleSlider .slider-cell .person.video {
+        width: 600px;
+        background-color: red; }
+
+#personModal {
+  position: absolute;
+  height: 600px;
+  top: calc(50% - 300px);
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+  background-color: transparent;
+  transition: all 0.4s ease-in-out;
+  transform: scale(0.8); }
+  #personModal.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+    background-color: white; }
+  #personModal .content {
+    height: 100%;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+        justify-content: center; }
+    #personModal .content video {
+      height: 100%; }
+  #personModal #closePersonModal {
+    position: absolute;
+    top: 20px;
+    right: 20px; }

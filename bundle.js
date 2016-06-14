@@ -32540,6 +32540,12 @@
 
 	var _rxjs = __webpack_require__(2);
 
+	var _flickity = __webpack_require__(343);
+
+	var _flickity2 = _interopRequireDefault(_flickity);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var OurPeople = exports.OurPeople = function OurPeople() {
@@ -32552,7 +32558,42 @@
 	  var slider = document.getElementById('peopleSlider');
 	  var moving = _rxjs.Observable.fromEvent(window, 'mousemove');
 	  this.center = slider.scrollWidth / 2 - window.innerWidth;
+	  this.personModal = document.getElementById('personModal');
+	  this.modalContent = this.personModal.querySelector('.content');
 	  // slider.scrollLeft = this.center
+
+	  // var elem = document.querySelector('.main-carousel')
+	  // var flkty = new Flickity( elem, {
+	  //   cellAlign: 'left',
+	  //   contain: true
+	  // })
+
+	  // var sliderCellWidth = $('.slider-cell').get(0).childNodes.length * 300
+	  // $('.slider-cell').css('width', sliderCellWidth)
+
+	  var flkty = new _flickity2.default('#peopleSlider', {
+	    wrapAround: true,
+	    cellAlign: 'left',
+	    freeScroll: true
+	  });
+
+	  $('.person.video').on('click', function () {
+	    var personModal = document.getElementById('personModal');
+	    var modalContent = personModal.querySelector('.content');
+	    var videoSrc = $(this).data('src');
+	    var video = $('<video />');
+	    video.attr('src', videoSrc);
+	    video.attr('autoplay', true);
+
+	    $(personModal).addClass('active');
+	    $(modalContent).append(video);
+	  });
+
+	  $('#closePersonModal').on('click', function () {
+	    $(_this.personModal).removeClass('active');
+	    _this.modalContent.innerHTML = '';
+	    console.log(_this);
+	  });
 
 	  var movingRight = moving.filter(function (e) {
 	    return e.clientX > window.innerWidth / 2;
