@@ -32376,7 +32376,20 @@
 	      var dynamicText = flkty.selectedCell.element.querySelector('.dynamic-text');
 	      console.log(flkty.selectedCell.element);
 	      console.log(dynamicText);
-	      var phrases = ['We are driven to question everything', 'Since 1919, we have been constantly reinventing what it means to be a progressive university'];
+
+	      var key = $(flkty.selectedCell.element).data('headline');
+
+	      var sections = {
+
+	        "Inspiring Visionary Thinking": ['We use design to tackle the big question.', 'We are the only comprehensive university with a world-famous design school at its core.', 'We design solutions that get to the future first.'],
+
+	        "Courageously Innovative": ['We rethink the question, not just the answer.', 'We collaborate with unlikely partners to expand the possibilities.', 'We innovate with a purpose to improve the human experience.'],
+
+	        "Embodying Diversity": ['We are a microcosm of the global population and a magnet for talent from all over the world.', 'We are in and of the most creative and diverse city in the world.', 'We are a living laboratory for exploring and testing the news.']
+
+	      };
+
+	      var phrases = sections[key];
 
 	      //called recursively until phrases array is empty
 	      (function changeWord(phrase, firstPhrase) {
@@ -32441,8 +32454,6 @@
 
 	var OurUniversity = exports.OurUniversity = function () {
 	  function OurUniversity() {
-	    var _this = this;
-
 	    _classCallCheck(this, OurUniversity);
 
 	    this.section = document.getElementById('ourUniversity');
@@ -32466,15 +32477,15 @@
 	      e.stopPropagation();instance.closeCell();
 	    });
 
-	    setTimeout(function () {
-	      $(_this.sectionInto).addClass('hidden');
-	    }, 1200);
+	    // setTimeout(() => {
+	    //   $(this.sectionInto).addClass('hidden')
+	    // }, 1200)
 	  }
 
 	  _createClass(OurUniversity, [{
 	    key: 'openCell',
 	    value: function openCell(cell) {
-	      var _this2 = this;
+	      var _this = this;
 
 	      if (!this.activeCell) {
 	        this.dynamicHeadline.textContent = $(cell).data('headline');
@@ -32483,32 +32494,32 @@
 	        $(cell.parentNode).removeClass('content-closed');
 
 	        setTimeout(function () {
-	          $(_this2.slider).removeClass('uninitialized');
-	          $(_this2.cells).removeClass('sibling-is-opening opening');
+	          $(_this.slider).removeClass('uninitialized');
+	          $(_this.cells).removeClass('sibling-is-opening opening');
 
-	          _this2.initFlkty($(cell).index());
-	          _this2.activeCell = cell;
+	          _this.initFlkty($(cell).index());
+	          _this.activeCell = cell;
 	        }, 800);
 	      }
 	    }
 	  }, {
 	    key: 'closeCell',
 	    value: function closeCell() {
-	      var _this3 = this;
+	      var _this2 = this;
 
 	      if (this.activeCell) {
 	        $(this.activeCell).parents('.global-slider').addClass('content-closed');
 
 	        setTimeout(function () {
-	          _this3.flkty.destroy();
-	          $(_this3.cells).not(_this3.activeCell).addClass('sibling-is-opening');
-	          $(_this3.activeCell).addClass('opening');
-	          $(_this3.slider).addClass('uninitialized');
+	          _this2.flkty.destroy();
+	          $(_this2.cells).not(_this2.activeCell).addClass('sibling-is-opening');
+	          $(_this2.activeCell).addClass('opening');
+	          $(_this2.slider).addClass('uninitialized');
 
 	          setTimeout(function () {
-	            $(_this3.cells).removeClass('sibling-is-opening');
-	            $(_this3.activeCell).removeClass('opening');
-	            _this3.activeCell = null;
+	            $(_this2.cells).removeClass('sibling-is-opening');
+	            $(_this2.activeCell).removeClass('opening');
+	            _this2.activeCell = null;
 	          });
 	        }, 250);
 	      }

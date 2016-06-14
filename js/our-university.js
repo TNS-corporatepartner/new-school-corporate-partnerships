@@ -7,22 +7,22 @@ export class OurUniversity {
     this.sectionInto = this.section.querySelector('.section-intro')
     this.slider = document.querySelector('.our-university-slider')
     this.dynamicHeadline = this.section.querySelector('.section-headlines .dynamic-text')
-    this.cells = this.slider.childNodes    
-    this.activeCell = null     
+    this.cells = this.slider.childNodes
+    this.activeCell = null
     const instance = this
-        
+
     $(this.cells).on('mouseenter', function() { $(this.cells).not(this).addClass('sibling-is-hovered') })
     $(this.cells).on('mouseleave', function() { $(this.cells).removeClass('sibling-is-hovered') })
     $(this.cells).on('click', function() { instance.openCell(this) })
     $('span.close-cell').on('click', function(e) { e.stopPropagation(); instance.closeCell() })
 
-    setTimeout(() => {
-      $(this.sectionInto).addClass('hidden')
-    }, 1200)
+    // setTimeout(() => {
+    //   $(this.sectionInto).addClass('hidden')
+    // }, 1200)
   }
-  
+
   openCell(cell) {
-    if (!this.activeCell) {      
+    if (!this.activeCell) {
       this.dynamicHeadline.textContent = $(cell).data('headline')
       $(this.cells).not(cell).addClass('sibling-is-opening')
       $(cell).addClass('opening')
@@ -37,7 +37,7 @@ export class OurUniversity {
       }, 800)
     }
   }
-  
+
   closeCell() {
     if (this.activeCell) {
       $(this.activeCell).parents('.global-slider').addClass('content-closed')
@@ -57,14 +57,14 @@ export class OurUniversity {
       }, 250)
     }
   }
-  
+
   initFlkty(initialIndex) {
     this.flkty = new Flickity( this.slider, {
       cellAlign: 'left',
       contain: true,
-      initialIndex: initialIndex      
+      initialIndex: initialIndex
     })
-        
-  } 
+
+  }
 
 }

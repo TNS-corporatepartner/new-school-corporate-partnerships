@@ -19,6 +19,7 @@ section#coreValues {
         span.close-cell {
           opacity: 0;
           pointer-events: none;
+
         }
       }
       .flickity-canv-next-button {
@@ -80,9 +81,15 @@ section#coreValues {
         right: 20px;
         opacity: 1;
         transition: opacity 0.4s ease-in-out;
+
+
         &:before {
-          content: 'x';
+          content: '×';
           color: white;
+          font-size: 30pt;
+          padding: 20px;
+
+
         }
       }
       .content {

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 body, html {
   margin: 0;
   overflow: hidden;
@@ -284,8 +285,10 @@ section#coreValues .core-values-slider {
       opacity: 1;
       transition: opacity 0.4s ease-in-out; }
       section#coreValues .core-values-slider .core-values-cell span.close-cell:before {
-        content: 'x';
-        color: white; }
+        content: '×';
+        color: white;
+        font-size: 30pt;
+        padding: 20px; }
     section#coreValues .core-values-slider .core-values-cell .content {
       position: absolute;
       display: -ms-flexbox;
