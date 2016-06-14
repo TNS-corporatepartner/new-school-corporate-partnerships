@@ -135,6 +135,7 @@
 					{% for person in site.people %}
 						<div class="person {% if person.video %}video{% endif %}" style="background-image:url('{{person.image}}')" data-src="{% if person.video %}{{person.video}}{% endif %}">						
 							<h6>{{ person.title }}</h6>
+							<h6>{{ person.content }}</h6>
 						</div>
 					{% endfor %}
 				</div>
