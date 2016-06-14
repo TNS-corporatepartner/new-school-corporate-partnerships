@@ -31,7 +31,7 @@ section#futureOf {
     top: 50%;
     left: 0;
     transform: translateY(-50%);
-    background-color: rgba(0,0,0,0.35);
+    background-color: $black-tint;
     padding: 1.5vw;
     padding-left: 2vw;
     opacity: 0;
@@ -43,7 +43,7 @@ section#futureOf {
     animation-name: fadeIn;
     animation-duration: 2s;
     animation-fill-mode: forwards;
-    animation-delay: 8.5s;
+    animation-delay: 7.5s;
     opacity: 0;
 
   }

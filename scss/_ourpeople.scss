@@ -6,7 +6,7 @@
 //     flex-wrap: wrap;
 //     height: 100vh;
 //     width: 100vw;
-//     overflow-x: scroll;    
+//     overflow-x: scroll;
 //     li {
 //       width: 200px;
 //       height: 200px;
@@ -44,7 +44,7 @@
 
 //   #peopleSlider {
 //     display: flex;
-//     align-items: center;    
+//     align-items: center;
 //     width: 100%;
 //     .slider-cell {
 //       height: 600px;
@@ -52,7 +52,7 @@
 //       display: flex;
 //       flex-direction: column;
 //       flex-wrap: wrap;
-//       .person {        
+//       .person {
 //         width: 300px;
 //         height: 300px;
 //         margin-right: 10px;
@@ -69,6 +69,14 @@
 //   }
 // }
 
+section#ourPeople{
+  .section-headlines{
+    h3, h4, h1{
+      color: $gray-dark;
+    }
+  }
+}
+
 #peopleSlider {
   position: relative;
   top: calc(50% - 300px);
@@ -84,12 +92,34 @@
     .person {
       width: 300px;
       height: 300px;
-      display: inline-block;
+      color: white;
+      position: relative;
+      display: inline-flex;
+      align-items: flex-end;
+      flex-wrap: wrap;
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
       &.video {
         width: 604px;
+      }
+      p{
+        opacity: 0;
+      }
+
+      .overlay{
+        position: absolute;
+        background-color: $black-tint;
+        width: 100%;
+        height: 100%;
+      }
+
+      &:not(.video){
+        filter: grayscale(1);
+      }
+
+      p{
+        font-size: 16px;
       }
     }
   }
@@ -112,9 +142,9 @@
     background-color: white;
   }
   .content {
-    height: 100%;  
+    height: 100%;
     display: flex;
-    justify-content: center;  
+    justify-content: center;
     video {
       height: 100%;
     }

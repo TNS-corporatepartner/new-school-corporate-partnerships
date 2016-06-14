@@ -21,6 +21,10 @@ body {
   box-sizing: border-box;
 }
 
+p{
+  font-size: 22px;
+}
+
 h1,h2,h3,h4,h5,h6 {
   font-family: $font-family-display;
   font-weight: bold;
@@ -85,11 +89,13 @@ h6{
   padding: 2vw;
   max-width: 70vw;
   h3, h4, h1 {
-
     color: white;
   }
   .dynamic-text {
     transition: opacity 0.4s ease-in-out;
+  }
+  p{
+    font-size: 28px;
   }
 }
 

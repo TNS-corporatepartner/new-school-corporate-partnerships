@@ -158,7 +158,7 @@ section#futureOf {
     top: 50%;
     left: 0;
     transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.35);
+    background-color: rgba(0, 0, 0, 0.25);
     padding: 1.5vw;
     padding-left: 2vw;
     opacity: 0;
@@ -168,7 +168,7 @@ section#futureOf {
     animation-name: fadeIn;
     animation-duration: 2s;
     animation-fill-mode: forwards;
-    animation-delay: 8.5s;
+    animation-delay: 7.5s;
     opacity: 0; }
   section#futureOf .section-headlines .dynamic-text {
     transition-delay: 10s; }
@@ -404,6 +404,9 @@ section#ourUniversity .our-university-slider {
     opacity: 0;
     transition: opacity 0.4s ease-in-out; }
 
+section#ourPeople .section-headlines h3, section#ourPeople .section-headlines h4, section#ourPeople .section-headlines h1 {
+  color: #333; }
+
 #peopleSlider {
   position: relative;
   top: calc(50% - 300px);
@@ -415,12 +418,31 @@ section#ourUniversity .our-university-slider {
     #peopleSlider .slider-cell .person {
       width: 300px;
       height: 300px;
-      display: inline-block;
+      color: white;
+      position: relative;
+      display: -ms-inline-flexbox;
+      display: inline-flex;
+      -ms-flex-align: end;
+          align-items: flex-end;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover; }
       #peopleSlider .slider-cell .person.video {
         width: 604px; }
+      #peopleSlider .slider-cell .person p {
+        opacity: 0; }
+      #peopleSlider .slider-cell .person .overlay {
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.25);
+        width: 100%;
+        height: 100%; }
+      #peopleSlider .slider-cell .person:not(.video) {
+        -webkit-filter: grayscale(1);
+                filter: grayscale(1); }
+      #peopleSlider .slider-cell .person p {
+        font-size: 16px; }
 
 #personModal {
   position: absolute;
@@ -487,6 +509,9 @@ body {
   font-family: "Neue", sans-serif;
   box-sizing: border-box; }
 
+p {
+  font-size: 22px; }
+
 h1, h2, h3, h4, h5, h6 {
   font-family: "NeueDisplay", sans-serif;
   font-weight: bold; }
@@ -544,6 +569,8 @@ h6 {
     color: white; }
   .section-headlines .dynamic-text {
     transition: opacity 0.4s ease-in-out; }
+  .section-headlines p {
+    font-size: 28px; }
 
 .video-fs {
   position: absolute;

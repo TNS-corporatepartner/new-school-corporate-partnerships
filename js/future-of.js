@@ -19,7 +19,7 @@ export class FutureOf {
       'How can technology make us more human?',
       'How can we create a better world through better business?'
     ]
-
+    
     this.words = [
       'Big Data',
       'Gamification',
