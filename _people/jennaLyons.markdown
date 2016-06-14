@@ -1,7 +1,7 @@
 ---
-title: Jenna Lyoon
+title: Jenna Lyons
 image: url
 video: url
 ---
 
-ceo and stuff
+Creative Director & CEO
