@@ -80,7 +80,6 @@ export class FutureOf {
 
 
   shuffler(o) {
-    console.log('shuff')
     this.loadingWord = this.section.querySelector('.section-headlines .dynamic-text')
     
     Velocity(this.loadingWord, {opacity: 1}, {duration: 300})

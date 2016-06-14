@@ -170,7 +170,6 @@
 	        }
 
 	    function loadComponent(index) {
-	      console.log(index);
 	      app.activeScrollIndex = index;
 	      app.activeInstance = app.componentInstances[index];
 
@@ -17878,7 +17877,6 @@
 	    value: function shuffler(o) {
 	      var _this3 = this;
 
-	      console.log('shuff');
 	      this.loadingWord = this.section.querySelector('.section-headlines .dynamic-text');
 
 	      Velocity(this.loadingWord, { opacity: 1 }, { duration: 300 });
@@ -32447,7 +32445,6 @@
 
 	          _this2.initFlkty($(cell).index());
 	          _this2.activeCell = cell;
-	          _this2.resizeParticles();
 	        }, 800);
 	      }
 	    }
@@ -32470,10 +32467,6 @@
 	            $(_this3.activeCell).removeClass('opening');
 	            _this3.activeCell = null;
 	          });
-
-	          setTimeout(function () {
-	            _this3.resizeParticles();
-	          }, 500);
 	        }, 250);
 	      }
 	    }

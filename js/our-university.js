@@ -34,7 +34,6 @@ export class OurUniversity {
 
         this.initFlkty( $(cell).index() )
         this.activeCell = cell
-        this.resizeParticles()
       }, 800)
     }
   }
@@ -55,9 +54,6 @@ export class OurUniversity {
           this.activeCell = null
         })
 
-        setTimeout( () => {
-          this.resizeParticles()
-        }, 500)
       }, 250)
     }
   }

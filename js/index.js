@@ -96,8 +96,7 @@ function init() {
       }, err => console.error(err), () => initSplash = false)
     }
 
-    function loadComponent(index) { 
-      console.log(index)     
+    function loadComponent(index) {  
       app.activeScrollIndex = index
       app.activeInstance = app.componentInstances[ index ]
 
