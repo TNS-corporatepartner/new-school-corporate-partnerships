@@ -126,21 +126,22 @@
 			</div>
 		</section>
 
-		<section id="ourPeople">
-
+		<section id="ourPeople">			
+		
+			<!--<video src="http://familiar-temp.s3.amazonaws.com/sample2.mp4" height="150" width="300"></video>-->
 			<div id="peopleSlider">
-
-			{% for person in site.people %}
-
-				<video src="http://familiar-temp.s3.amazonaws.com/sample2.mp4" height="150" width="300"></video>
-
-
-				<h1>{{ person.title }}</h1>
-				<h2>{{ person.description }}</h2>
-
-
-			{% endfor %}
-
+				{% for person in site.people %}
+					{% if forloop.index % 2 == 0 %}
+						even block
+					{% else %}
+						odd block
+					{% endif %}
+					<!--<div class="carousel-cell">
+						
+						<h1>{{ person.title }}</h1>
+						<h2>{{ person.description }}</h2>
+					</div>-->
+				{% endfor %}				
 			</div>
 
 			<hgroup class="section-headlines">
