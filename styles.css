@@ -261,16 +261,33 @@ section#coreValues .core-values-slider {
         color: white; }
     section#coreValues .core-values-slider .core-values-cell .content {
       position: absolute;
+      display: -ms-flexbox;
+      display: flex;
       overflow: hidden;
-      top: 50%;
-      left: 4vw;
-      width: 440px;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 600px;
+      padding: 2vw;
+      overflow: visible;
+      -ms-flex-align: center;
+          align-items: center;
       transition: all 0.4s ease-in-out; }
-      section#coreValues .core-values-slider .core-values-cell .content h1 {
-        font-size: 4vh;
-        text-align: left;
-        color: white;
-        transition: font-size 0.4s ease-in-out; }
+      section#coreValues .core-values-slider .core-values-cell .content .content-inner {
+        position: relative;
+        width: 100%; }
+        section#coreValues .core-values-slider .core-values-cell .content .content-inner h1, section#coreValues .core-values-slider .core-values-cell .content .content-inner .dynamic-text {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%; }
+        section#coreValues .core-values-slider .core-values-cell .content .content-inner h1 {
+          text-align: left;
+          color: white;
+          transition: font-size 0.4s ease-in-out; }
+        section#coreValues .core-values-slider .core-values-cell .content .content-inner .dynamic-text {
+          opacity: 0;
+          color: white; }
     section#coreValues .core-values-slider .core-values-cell canvas {
       position: absolute;
       top: 0;

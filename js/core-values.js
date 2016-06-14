@@ -17,6 +17,8 @@ export class CoreValues {
     $(this.cells).on('click', function() { instance.openCell(this) })
     $('span.close-cell').on('click', function(e) { e.stopPropagation(); instance.closeCell() })
 
+    Observable.fromEvent(window, 'resize').debounceTime(100).subscribe(() => this.resizeParticles())
+    
     particlesJS.load('designDna', '/js/particles/design-dna.json')
     particlesJS.load('statusQuo', '/js/particles/status-quo.json')
     particlesJS.load('fearless', '/js/particles/fearless.json')
@@ -40,13 +42,22 @@ export class CoreValues {
 
         this.initFlkty( $(cell).index() )
         this.activeCell = cell
+        this.resizeParticles()
       }, 800)
     }
   }
 
   closeCell() {
-    if (this.activeCell) {
-      $(this.activeCell).parents('.global-slider').addClass('content-closed')
+    if (this.activeCell) {      
+      const h1 = this.flkty.selectedCell.element.querySelector('h1')
+      const dynamicText = this.flkty.selectedCell.element.querySelector('.dynamic-text')          
+      
+      Velocity(dynamicText, {opacity: 0}, {
+        duration: 250,
+        complete: () => {
+          $(this.activeCell).parents('.global-slider').addClass('content-closed')          
+        }
+      })
 
       setTimeout(() => {
         this.flkty.destroy()
@@ -58,9 +69,13 @@ export class CoreValues {
           $(this.cells).removeClass('sibling-is-opening')
           $(this.activeCell).removeClass('opening')
           this.activeCell = null
+          Velocity(h1, {opacity: 1})
         })
+      }, 300)
 
-      }, 250)
+      setTimeout( () => {
+        this.resizeParticles()
+      }, 550)
     }
   }
 
@@ -77,23 +92,43 @@ export class CoreValues {
 
   startCellAnimation(flkty) {
     const h1 = flkty.selectedCell.element.querySelector('h1')
-    const words = ['We are driven to question everything', 'Since 1919, we have been constantly reinventing what it means to be a progressive university'];
+    const dynamicText = flkty.selectedCell.element.querySelector('.dynamic-text')
+    console.log(flkty.selectedCell.element)
+    console.log(dynamicText)
+    const phrases = ['We are driven to question everything', 'Since 1919, we have been constantly reinventing what it means to be a progressive university'];    
 
+    //called recursively until phrases array is empty
+    (function changeWord(phrase, firstPhrase) {    
+      const fadeOutEl = firstPhrase ? h1 : dynamicText
 
-    (function changeWord(word) {
-
-      Velocity(h1, {opacity: 0}, {
+      Velocity(fadeOutEl, {opacity: 0}, {
+        duration: 1000,
         complete: () => {
-          h1.textContent = word
+          dynamicText.textContent = phrase
 
-          Velocity(h1, {opacity: 1}, {
+          Velocity(dynamicText, {opacity: 1}, {
+            duration: 1500,
             complete: () => {
-              if (words.length) changeWord( words.splice(0, 1)[0] )
+              if (phrases.length) changeWord( phrases.splice(0, 1)[0] )
             }
           })
         }
       })
+    })( phrases.splice(0, 1)[0], true )
+  }
 
-    })( words.splice(0, 1)[0] )
+  resizeParticles() {
+    $('canvas').css({
+      width: window.innerWidth,
+      height: window.innerHeight
+    })
+
+    $('#statusQuo canvas').css({
+      height: window.innerWidth
+    })
+
+    pJSDom.forEach(pjs => {
+      window.particlesJS.layout(null, pjs.pJS)
+    })
   }
 }

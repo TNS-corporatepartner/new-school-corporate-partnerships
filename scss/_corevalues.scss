@@ -87,16 +87,32 @@ section#coreValues {
       }
       .content {
         position: absolute;
+        display: flex;        
         overflow: hidden;
-        top: 50%;
-        left: 4vw;
-        width: 440px;
+        top: 0; left: 0;
+        height: 100%;
+        width: 600px; //must be width instead of max-width because of text positioning: absolute
+        padding: 2vw;
+        overflow: visible;
+        align-items: center;
         transition: all 0.4s ease-in-out;
-        h1 {
-          font-size: 4vh;
-          text-align: left;
-          color: white;
-          transition: font-size 0.4s ease-in-out;
+        .content-inner {
+          position: relative;
+          width: 100%;
+          h1, .dynamic-text {
+            position: absolute; // so incoming text animates in place of outgoing text 
+            top: 0; left: 0;
+            width: 100%;            
+          }
+          h1 {
+            text-align: left;
+            color: white;
+            transition: font-size 0.4s ease-in-out;
+          }
+          .dynamic-text {
+            opacity: 0;
+            color: white;
+          }
         }
       }
       canvas {

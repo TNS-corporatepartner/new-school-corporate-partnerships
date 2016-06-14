@@ -32285,6 +32285,10 @@
 	      e.stopPropagation();instance.closeCell();
 	    });
 
+	    _rxjs.Observable.fromEvent(window, 'resize').debounceTime(100).subscribe(function () {
+	      return _this.resizeParticles();
+	    });
+
 	    particlesJS.load('designDna', '/js/particles/design-dna.json');
 	    particlesJS.load('statusQuo', '/js/particles/status-quo.json');
 	    particlesJS.load('fearless', '/js/particles/fearless.json');
@@ -32312,6 +32316,7 @@
 
 	          _this2.initFlkty($(cell).index());
 	          _this2.activeCell = cell;
+	          _this2.resizeParticles();
 	        }, 800);
 	      }
 	    }
@@ -32321,20 +32326,35 @@
 	      var _this3 = this;
 
 	      if (this.activeCell) {
-	        $(this.activeCell).parents('.global-slider').addClass('content-closed');
+	        (function () {
+	          var h1 = _this3.flkty.selectedCell.element.querySelector('h1');
+	          var dynamicText = _this3.flkty.selectedCell.element.querySelector('.dynamic-text');
 
-	        setTimeout(function () {
-	          _this3.flkty.destroy();
-	          $(_this3.cells).not(_this3.activeCell).addClass('sibling-is-opening');
-	          $(_this3.activeCell).addClass('opening');
-	          $(_this3.slider).addClass('uninitialized');
+	          Velocity(dynamicText, { opacity: 0 }, {
+	            duration: 250,
+	            complete: function complete() {
+	              $(_this3.activeCell).parents('.global-slider').addClass('content-closed');
+	            }
+	          });
 
 	          setTimeout(function () {
-	            $(_this3.cells).removeClass('sibling-is-opening');
-	            $(_this3.activeCell).removeClass('opening');
-	            _this3.activeCell = null;
-	          });
-	        }, 250);
+	            _this3.flkty.destroy();
+	            $(_this3.cells).not(_this3.activeCell).addClass('sibling-is-opening');
+	            $(_this3.activeCell).addClass('opening');
+	            $(_this3.slider).addClass('uninitialized');
+
+	            setTimeout(function () {
+	              $(_this3.cells).removeClass('sibling-is-opening');
+	              $(_this3.activeCell).removeClass('opening');
+	              _this3.activeCell = null;
+	              Velocity(h1, { opacity: 1 });
+	            });
+	          }, 300);
+
+	          setTimeout(function () {
+	            _this3.resizeParticles();
+	          }, 550);
+	        })();
 	      }
 	    }
 	  }, {
@@ -32353,22 +32373,45 @@
 	    key: 'startCellAnimation',
 	    value: function startCellAnimation(flkty) {
 	      var h1 = flkty.selectedCell.element.querySelector('h1');
-	      var words = ['We are driven to question everything', 'Since 1919, we have been constantly reinventing what it means to be a progressive university'];
+	      var dynamicText = flkty.selectedCell.element.querySelector('.dynamic-text');
+	      console.log(flkty.selectedCell.element);
+	      console.log(dynamicText);
+	      var phrases = ['We are driven to question everything', 'Since 1919, we have been constantly reinventing what it means to be a progressive university'];
 
-	      (function changeWord(word) {
+	      //called recursively until phrases array is empty
+	      (function changeWord(phrase, firstPhrase) {
+	        var fadeOutEl = firstPhrase ? h1 : dynamicText;
 
-	        Velocity(h1, { opacity: 0 }, {
+	        Velocity(fadeOutEl, { opacity: 0 }, {
+	          duration: 1000,
 	          complete: function complete() {
-	            h1.textContent = word;
+	            dynamicText.textContent = phrase;
 
-	            Velocity(h1, { opacity: 1 }, {
+	            Velocity(dynamicText, { opacity: 1 }, {
+	              duration: 1500,
 	              complete: function complete() {
-	                if (words.length) changeWord(words.splice(0, 1)[0]);
+	                if (phrases.length) changeWord(phrases.splice(0, 1)[0]);
 	              }
 	            });
 	          }
 	        });
-	      })(words.splice(0, 1)[0]);
+	      })(phrases.splice(0, 1)[0], true);
+	    }
+	  }, {
+	    key: 'resizeParticles',
+	    value: function resizeParticles() {
+	      $('canvas').css({
+	        width: window.innerWidth,
+	        height: window.innerHeight
+	      });
+
+	      $('#statusQuo canvas').css({
+	        height: window.innerWidth
+	      });
+
+	      pJSDom.forEach(function (pjs) {
+	        window.particlesJS.layout(null, pjs.pJS);
+	      });
 	    }
 	  }]);
 
@@ -32509,7 +32552,7 @@
 	  var slider = document.getElementById('peopleSlider');
 	  var moving = _rxjs.Observable.fromEvent(window, 'mousemove');
 	  this.center = slider.scrollWidth / 2 - window.innerWidth;
-	  slider.scrollLeft = this.center;
+	  // slider.scrollLeft = this.center
 
 	  var movingRight = moving.filter(function (e) {
 	    return e.clientX > window.innerWidth / 2;
