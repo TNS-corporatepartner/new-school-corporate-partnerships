@@ -1,18 +1,21 @@
-section#ourPeople ul {
-  list-style: none;
+section#ourPeople {
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-direction: column;
-      flex-direction: column;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  height: 100vh;
-  width: 100vw;
-  overflow-x: scroll; }
-  section#ourPeople ul li {
-    width: 200px;
-    height: 200px;
-    background-color: lightgreen; }
-    section#ourPeople ul li.x2 {
-      background-color: blue;
-      width: 400px; }
+  -ms-flex-align: center;
+      align-items: center; }
+  section#ourPeople #peopleSlider {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+        flex-direction: column;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    height: 300px;
+    width: 100vw;
+    overflow-x: scroll; }
+    section#ourPeople #peopleSlider .img {
+      width: 150px;
+      height: 150px;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat; }

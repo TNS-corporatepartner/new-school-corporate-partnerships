@@ -120,22 +120,19 @@
 
 		<section id="ourPeople">
 
-			<ul id="peopleSlider">
+			<div id="peopleSlider">
 
-			{% for person in (1..20) %}
+			{% for person in (1..15) %}
 
 				{% for single in (1..5) %}
-				<li class="">
-					<h4>John Cage</h4>
-				</li>
+				<div class="img" style="background-image: url('/images/person1.jpg')"></div>
+				<!--<img src="/images/person1.jpg" height="150" width="150">-->
 				{% endfor %}
 
-				<li class="x2">
-					<h4>Video</h4>
-				</li>
+				<video src="http://familiar-temp.s3.amazonaws.com/sample2.mp4" height="150" width="300"></video>
 			{% endfor %}
 
-			</ul>
+			</div>
 
 			<hgroup class="section-headlines">
 				<h4>A History of Innovation</h4>

@@ -7,7 +7,7 @@ export class OurPeople {
     const slider = document.getElementById('peopleSlider')
     const moving = Observable.fromEvent(window, 'mousemove')
     this.center = slider.scrollWidth / 2 - window.innerWidth
-    slider.scrollLeft = this.center
+    // slider.scrollLeft = this.center
 
     const movingRight = moving
       .filter(e => e.clientX > window.innerWidth / 2)
