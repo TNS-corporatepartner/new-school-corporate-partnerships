@@ -32543,23 +32543,24 @@
 	  this.sectionInto = this.section.querySelector('.section-intro');
 	  var slider = document.getElementById('peopleSlider');
 	  var moving = _rxjs.Observable.fromEvent(window, 'mousemove');
-	  this.center = slider.scrollWidth / 2 - window.innerWidth;
-	  slider.scrollLeft = this.center;
+	  this.scrollPos = 0;
 
 	  var movingRight = moving.filter(function (e) {
 	    return e.clientX > window.innerWidth / 2;
-	  }).subscribe(function (e) {
-	    var velocity = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
-	    var pos = e.clientX - window.innerWidth / 2;
-	    slider.scrollLeft = slider.scrollLeft + pos * velocity;
+	  })
+	  // .debounceTime(100)
+	  .subscribe(function (e) {
+	    _this.scrollPos += 10;
+	    slider.scrollLeft = _this.scrollPos;
 	  });
 
 	  var movingLeft = moving.filter(function (e) {
 	    return e.clientX < window.innerWidth / 2;
-	  }).subscribe(function (e) {
-	    var velocity = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
-	    var pos = window.innerWidth / 2 - e.clientX;
-	    slider.scrollLeft = slider.scrollLeft + pos * velocity;
+	  })
+	  // .debounceTime(50)
+	  .subscribe(function (e) {
+	    _this.scrollPos -= 10;
+	    slider.scrollLeft = _this.scrollPos;
 	  });
 
 	  setTimeout(function () {
