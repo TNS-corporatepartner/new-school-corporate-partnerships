@@ -38,7 +38,7 @@ export class OurPeople {
       const video = $('<video />')
       video.attr('src', videoSrc)
       video.attr('autoplay', true)
-
+      
       $('#ourPeople').addClass('modal-open');
       // $(personModal).addClass('active')
       $(modalContent).append(video)

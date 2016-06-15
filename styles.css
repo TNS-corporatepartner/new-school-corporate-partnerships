@@ -414,8 +414,10 @@ section#ourUniversity .our-university-slider {
     opacity: 0;
     transition: opacity 0.4s ease-in-out; }
 
-section#ourPeople .section-headlines h3, section#ourPeople .section-headlines h4, section#ourPeople .section-headlines h1 {
-  color: #333; }
+section#ourPeople {
+  transition: background 1s ease; }
+  section#ourPeople .section-headlines h3, section#ourPeople .section-headlines h4, section#ourPeople .section-headlines h1 {
+    color: #333; }
 
 #peopleSlider {
   position: relative;
@@ -511,13 +513,19 @@ section#ourPeople .section-headlines h3, section#ourPeople .section-headlines h4
   #personModal #closePersonModal {
     position: absolute;
     top: 20px;
-    right: 20px; }
+    right: 20px;
+    color: white;
+    font-size: 30px; }
 
-section#ourPeople.modal-open #personModal {
-  opacity: 1;
-  pointer-events: auto;
-  transform: scale(1);
+section#ourPeople.modal-open {
   background-color: #333; }
+  section#ourPeople.modal-open .section-headlines h3 {
+    color: white; }
+  section#ourPeople.modal-open #personModal {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+    background-color: #333; }
 
 section#contactUs {
   display: -ms-flexbox;

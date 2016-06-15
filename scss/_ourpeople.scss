@@ -75,6 +75,7 @@ section#ourPeople{
       color: $gray-dark;
     }
   }
+  transition: background 1s ease;
 }
 
 #peopleSlider {
@@ -190,10 +191,18 @@ section#ourPeople{
     position: absolute;
     top: 20px;
     right: 20px;
+    color: white;
+    font-size: 30px;
   }
 }
 
 section#ourPeople.modal-open{
+  background-color: $gray-dark;
+  .section-headlines{
+    h3{
+      color: white;
+    }
+  }
   #personModal{
     opacity: 1;
     pointer-events: auto;
