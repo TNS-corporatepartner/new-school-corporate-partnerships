@@ -21,13 +21,20 @@ export class OurPeople {
       wrapAround: true,
       // cellAlign: 'left',
       freeScroll: true,
-      percentPosition: false
+      percentPosition: false,
+      // autoPlay: 8000,
+      selectedAttraction: 0.0001,
+      friction: 0.15
     })
+
+    
 
     setTimeout(() => {
       //wait for flickity to initialize
+      $(slider).removeClass('out')
       this.flktySliderEl = slider.querySelector('.flickity-slider')
-    }, 1000)
+      flkty.next()
+    }, 1200)
 
 
     $('.person.video').on('click', function() {

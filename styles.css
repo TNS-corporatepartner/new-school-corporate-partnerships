@@ -422,7 +422,10 @@ section#ourPeople {
 #peopleSlider {
   position: relative;
   top: calc(50% - 303px);
-  outline: none; }
+  outline: none;
+  transition: transform 0.8s ease-in-out; }
+  #peopleSlider.out {
+    transform: translateX(100vw); }
   #peopleSlider .slider-cell {
     width: 1832px;
     height: 606px;

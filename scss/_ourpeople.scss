@@ -82,6 +82,10 @@ section#ourPeople{
   position: relative;
   top: calc(50% - 303px);
   outline: none;
+  transition: transform 0.8s ease-in-out;
+  &.out {
+    transform: translateX(100vw);
+  }
   .slider-cell {
     width: 1832px;
     height: 606px;
