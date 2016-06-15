@@ -297,12 +297,13 @@ section#coreValues .core-values-slider {
       top: 0;
       left: 0;
       height: 100%;
-      width: 600px;
+      width: 65vw;
       padding: 2vw;
       overflow: visible;
       -ms-flex-align: center;
           align-items: center;
-      transition: all 0.4s ease-in-out; }
+      transition: all 0.4s ease-in-out;
+      pointer-events: none; }
       section#coreValues .core-values-slider .core-values-cell .content .content-inner {
         position: relative;
         width: 100%;
@@ -416,13 +417,14 @@ section#ourUniversity .our-university-slider {
 
 section#ourPeople {
   transition: background 1s ease; }
-  section#ourPeople .section-headlines h3, section#ourPeople .section-headlines h4, section#ourPeople .section-headlines h1 {
-    color: #333; }
 
 #peopleSlider {
   position: relative;
   top: calc(50% - 303px);
-  outline: none; }
+  outline: none;
+  transition: transform 0.8s ease-in-out; }
+  #peopleSlider.out {
+    transform: translateX(100vw); }
   #peopleSlider .slider-cell {
     width: 1832px;
     height: 606px;
@@ -442,21 +444,20 @@ section#ourPeople {
       background-repeat: no-repeat;
       background-size: cover;
       cursor: pointer; }
-      #peopleSlider .slider-cell .person hgroup {
-        position: absolute;
-        padding: 10px;
-        bottom: 0;
-        left: 0; }
-      #peopleSlider .slider-cell .person p {
-        opacity: 0;
-        height: 0;
-        transition: height 1.5s ease;
-        font-size: 18px;
-        margin-top: 5px; }
+      #peopleSlider .slider-cell .person:not(.video) {
+        -webkit-filter: grayscale(1);
+                filter: grayscale(1);
+        transition: -webkit-filter 1s ease;
+        transition: filter 1s ease;
+        transition: filter 1s ease, -webkit-filter 1s ease; }
+        #peopleSlider .slider-cell .person:not(.video):hover {
+          -webkit-filter: grayscale(0);
+                  filter: grayscale(0); }
+          #peopleSlider .slider-cell .person:not(.video):hover .overlay {
+            opacity: .7; }
       #peopleSlider .slider-cell .person:hover p {
-        height: auto;
-        opacity: 1;
-        transition: height 1.5s ease, opacity 1.5s ease; }
+        max-height: 200px;
+        opacity: 1; }
       #peopleSlider .slider-cell .person.video {
         width: 604px; }
         #peopleSlider .slider-cell .person.video .overlay {
@@ -466,6 +467,17 @@ section#ourPeople {
           background-color: rgba(232, 46, 33, 0.7); }
           #peopleSlider .slider-cell .person.video:hover .overlay:before {
             content: url(/images/play-button.svg); }
+      #peopleSlider .slider-cell .person hgroup {
+        position: absolute;
+        padding: 10px;
+        bottom: 0;
+        left: 0; }
+      #peopleSlider .slider-cell .person p {
+        opacity: 0;
+        max-height: 0;
+        font-size: 18px;
+        margin-top: 5px;
+        transition: all 0.8s ease-in-out; }
       #peopleSlider .slider-cell .person .overlay {
         position: absolute;
         background-color: rgba(0, 0, 0, 0.35);
@@ -480,17 +492,6 @@ section#ourPeople {
         height: 100%;
         opacity: 1;
         transition: all 1s ease; }
-      #peopleSlider .slider-cell .person:not(.video) {
-        -webkit-filter: grayscale(1);
-                filter: grayscale(1);
-        transition: -webkit-filter 1s ease;
-        transition: filter 1s ease;
-        transition: filter 1s ease, -webkit-filter 1s ease; }
-        #peopleSlider .slider-cell .person:not(.video):hover {
-          -webkit-filter: grayscale(0);
-                  filter: grayscale(0); }
-          #peopleSlider .slider-cell .person:not(.video):hover .overlay {
-            opacity: .7; }
 
 #personModal {
   position: absolute;
@@ -653,12 +654,13 @@ h6 {
   left: 0;
   padding: 2vw;
   max-width: 70vw; }
-  .section-headlines h3, .section-headlines h4, .section-headlines h1 {
-    color: white; }
   .section-headlines .dynamic-text {
     transition: opacity 0.4s ease-in-out; }
   .section-headlines p {
-    font-size: 28px; }
+    margin-top: 8px; }
+
+.dark-section {
+  color: white; }
 
 .video-fs {
   position: absolute;

@@ -32297,6 +32297,10 @@
 	    setTimeout(function () {
 	      $(_this.sectionInto).addClass('hidden');
 	    }, 1200);
+
+	    setTimeout(function () {
+	      _this.resizeParticles();
+	    }, 1500);
 	  }
 
 	  _createClass(CoreValues, [{
@@ -32385,7 +32389,7 @@
 
 	        "Courageously Innovative": ['We rethink the question, not just the answer.', 'We collaborate with unlikely partners to expand the possibilities.', 'We innovate with a purpose to improve the human experience.'],
 
-	        "Embodying Diversity": ['We are a microcosm of the global population and a magnet for talent from all over the world.', 'We are in and of the most creative and diverse city in the world.', 'We are a living laboratory for exploring and testing the news.']
+	        "Embodying Diversity": ['We are a microcosm of the global population and a magnet for talent from all over the world.', 'We are in one of the most creative and diverse city in the world.', 'We are a living laboratory for exploring and testing the news.']
 
 	      };
 
@@ -32401,7 +32405,7 @@
 	            dynamicText.textContent = phrase;
 
 	            Velocity(dynamicText, { opacity: 1 }, {
-	              duration: 1500,
+	              duration: 3000,
 	              complete: function complete() {
 	                if (phrases.length) changeWord(phrases.splice(0, 1)[0]);
 	              }
@@ -32582,13 +32586,18 @@
 	    wrapAround: true,
 	    // cellAlign: 'left',
 	    freeScroll: true,
-	    percentPosition: false
+	    percentPosition: false,
+	    // autoPlay: 8000,
+	    selectedAttraction: 0.0001,
+	    friction: 0.15
 	  });
 
 	  setTimeout(function () {
 	    //wait for flickity to initialize
+	    $(slider).removeClass('out');
 	    _this.flktySliderEl = slider.querySelector('.flickity-slider');
-	  }, 1000);
+	    flkty.next();
+	  }, 1200);
 
 	  $('.person.video').on('click', function () {
 	    var personModal = document.getElementById('personModal');

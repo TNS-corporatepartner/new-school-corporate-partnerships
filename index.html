@@ -30,7 +30,7 @@
 
 	<main>
 
-		<section id="futureOf">
+		<section id="futureOf" class="dark-section">
 			<div class="global-slider future-of-slider">
 				<div class="future-of-cell">
 					<div class="video-fs">
@@ -65,7 +65,7 @@
 			</hgroup>
 		</section>
 
-		<section id="coreValues">
+		<section id="coreValues" class="dark-section">
 			<div class="global-slider core-values-slider uninitialized content-closed">
 				<div class="core-values-cell" data-headline="Inspiring Visionary Thinking">
 					<div id="designDna"></div>
@@ -144,7 +144,7 @@
 
 		<section id="ourPeople">
 
-			<div id="peopleSlider">
+			<div id="peopleSlider" class="out">
 				{% for cell in (1..3) %}
 				<div class="slider-cell">
 					{% for person in site.people %}
@@ -287,7 +287,7 @@
 	<script src="/bundle.js"></script>
 
 	<script id="__bs_script__">//<![CDATA[
-		document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.2.13.0.js'><\/script>".replace("HOST", location.hostname));
+		document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.2.12.10.js'><\/script>".replace("HOST", location.hostname));
 	//]]></script>
 
 </body>
