@@ -32389,7 +32389,7 @@
 
 	        "Courageously Innovative": ['We rethink the question, not just the answer.', 'We collaborate with unlikely partners to expand the possibilities.', 'We innovate with a purpose to improve the human experience.'],
 
-	        "Embodying Diversity": ['We are a microcosm of the global population and a magnet for talent from all over the world.', 'We are in and of the most creative and diverse city in the world.', 'We are a living laboratory for exploring and testing the news.']
+	        "Embodying Diversity": ['We are a microcosm of the global population and a magnet for talent from all over the world.', 'We are in one of the most creative and diverse city in the world.', 'We are a living laboratory for exploring and testing the news.']
 
 	      };
 
@@ -32405,7 +32405,7 @@
 	            dynamicText.textContent = phrase;
 
 	            Velocity(dynamicText, { opacity: 1 }, {
-	              duration: 1500,
+	              duration: 3000,
 	              complete: function complete() {
 	                if (phrases.length) changeWord(phrases.splice(0, 1)[0]);
 	              }

@@ -297,12 +297,13 @@ section#coreValues .core-values-slider {
       top: 0;
       left: 0;
       height: 100%;
-      width: 600px;
+      width: 65vw;
       padding: 2vw;
       overflow: visible;
       -ms-flex-align: center;
           align-items: center;
-      transition: all 0.4s ease-in-out; }
+      transition: all 0.4s ease-in-out;
+      pointer-events: none; }
       section#coreValues .core-values-slider .core-values-cell .content .content-inner {
         position: relative;
         width: 100%;
@@ -416,8 +417,6 @@ section#ourUniversity .our-university-slider {
 
 section#ourPeople {
   transition: background 1s ease; }
-  section#ourPeople .section-headlines h3, section#ourPeople .section-headlines h4, section#ourPeople .section-headlines h1 {
-    color: #333; }
 
 #peopleSlider {
   position: relative;
@@ -656,12 +655,13 @@ h6 {
   left: 0;
   padding: 2vw;
   max-width: 70vw; }
-  .section-headlines h3, .section-headlines h4, .section-headlines h1 {
-    color: white; }
   .section-headlines .dynamic-text {
     transition: opacity 0.4s ease-in-out; }
   .section-headlines p {
-    font-size: 28px; }
+    margin-top: 8px; }
+
+.dark-section {
+  color: white; }
 
 .video-fs {
   position: absolute;

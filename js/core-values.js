@@ -120,7 +120,7 @@ export class CoreValues {
 
       "Embodying Diversity": [
         'We are a microcosm of the global population and a magnet for talent from all over the world.',
-        'We are in and of the most creative and diverse city in the world.',
+        'We are in one of the most creative and diverse city in the world.',
         'We are a living laboratory for exploring and testing the news.'
       ]
 
@@ -140,7 +140,7 @@ export class CoreValues {
           dynamicText.textContent = phrase
 
           Velocity(dynamicText, {opacity: 1}, {
-            duration: 1500,
+            duration: 3000,
             complete: () => {
               if (phrases.length) changeWord( phrases.splice(0, 1)[0] )
             }

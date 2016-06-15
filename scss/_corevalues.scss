@@ -98,11 +98,12 @@ section#coreValues {
         overflow: hidden;
         top: 0; left: 0;
         height: 100%;
-        width: 600px; //must be width instead of max-width because of text positioning: absolute
+        width: 65vw; //must be width instead of max-width because of text positioning: absolute
         padding: 2vw;
         overflow: visible;
         align-items: center;
         transition: all 0.4s ease-in-out;
+        pointer-events: none;
         .content-inner {
           position: relative;
           width: 100%;

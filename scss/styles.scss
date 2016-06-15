@@ -88,15 +88,16 @@ h6{
   top: 0; left: 0;
   padding: 2vw;
   max-width: 70vw;
-  h3, h4, h1 {
-    color: white;
-  }
   .dynamic-text {
     transition: opacity 0.4s ease-in-out;
   }
   p{
-    font-size: 28px;
+    margin-top: 8px;
   }
+}
+
+.dark-section{
+  color: white;
 }
 
 .video-fs {
