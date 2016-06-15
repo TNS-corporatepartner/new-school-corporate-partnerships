@@ -32297,6 +32297,10 @@
 	    setTimeout(function () {
 	      $(_this.sectionInto).addClass('hidden');
 	    }, 1200);
+
+	    setTimeout(function () {
+	      _this.resizeParticles();
+	    }, 1500);
 	  }
 
 	  _createClass(CoreValues, [{

@@ -27,6 +27,10 @@ export class CoreValues {
     setTimeout(() => {
       $(this.sectionInto).addClass('hidden')
     }, 1200)
+
+    setTimeout(() => {
+      this.resizeParticles()
+    }, 1500)    
   }
 
   openCell(cell) {
