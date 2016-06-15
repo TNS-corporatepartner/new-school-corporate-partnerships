@@ -32599,12 +32599,14 @@
 	    video.attr('src', videoSrc);
 	    video.attr('autoplay', true);
 
-	    $(this.section).addClass('modal-open');
+	    $('#ourPeople').addClass('modal-open');
+	    // $(personModal).addClass('active')
 	    $(modalContent).append(video);
 	  });
 
 	  $('#closePersonModal').on('click', function () {
-	    $(_this.section).removeClass('modal-open');
+	    // $(this.personModal).removeClass('active')
+	    $('#ourPeople').removeClass('modal-open');
 
 	    _this.modalContent.innerHTML = '';
 	  });
