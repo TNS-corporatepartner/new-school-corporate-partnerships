@@ -32752,9 +32752,9 @@
 	    key: 'awake',
 	    value: function awake() {
 	      this.isSleeping = false;
-	      this.asideSlider = document.getElementById('asideSlider');
-	      this.slides = this.asideSlider.querySelectorAll('li');
-	      this.animateSlide(this.slides.length - 1);
+	      // this.asideSlider = document.getElementById('asideSlider')
+	      // this.slides = this.asideSlider.querySelectorAll('li')
+	      // this.animateSlide(this.slides.length - 1)
 	    }
 	  }]);
 
