@@ -19,9 +19,6 @@ function init() {
   var line1 = document.getElementById('svgLine1')
   var line2 = document.getElementById('svgLine2')
 
-
-
-
   app.componentConstructors = {
     0: FutureOf,
     1: CoreValues,
@@ -199,7 +196,10 @@ function init() {
 
 function skipSplashAnimation() {
   Velocity(introText, 'stop')
-  Velocity(introText, {opacity: 0}, {duration: 200})
+  Velocity(introText, {opacity: 0}, {
+    duration: 200,
+    display: 'none'
+  })
 
   Velocity(introBg, 'stop')
   Velocity(introBg, {
