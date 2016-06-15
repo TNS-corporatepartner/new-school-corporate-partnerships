@@ -106,26 +106,20 @@ section#ourPeople{
       background-repeat: no-repeat;
       background-size: cover;
       cursor: pointer;
-
-      hgroup{
-        position: absolute;
-        padding: 10px;
-        bottom: 0;
-        left: 0;
-      }
-      p{
-        opacity: 0;
-        height: 0;
-        transition: height 1.5s ease;
-        font-size: 18px;
-        margin-top: 5px;
-      }
-
-      &:hover{
-        p{
-          height: auto;
-          opacity: 1;
-          transition: height 1.5s ease, opacity 1.5s ease;
+      &:not(.video) { 
+        filter: grayscale(1);
+        transition: filter 1s ease;
+        &:hover {
+          filter: grayscale(0);
+          .overlay {
+            opacity: .7;
+          }
+        }
+      }      
+      &:hover {
+        p {
+          max-height: 200px;
+          opacity: 1;          
         }
       }
       &.video {
@@ -134,17 +128,33 @@ section#ourPeople{
           background-color: transparentize(black, .9);
           transition: background 1s ease;
         }
-        &:hover{
-          .overlay{
+        &:hover {
+          .overlay {
             background-color: transparentize($red, .3);
-            &:before{
+            &:before {
               content:url(/images/play-button.svg);
               // position: absolute;
             }
           }
         }
       }
-      .overlay{
+
+      hgroup {
+        position: absolute;
+        padding: 10px;
+        bottom: 0;
+        left: 0;
+      }
+
+      p {
+        opacity: 0;
+        max-height: 0;        
+        font-size: 18px;
+        margin-top: 5px;
+        transition: all 0.8s ease-in-out;
+      }
+
+      .overlay {
         position: absolute;
         background-color: transparentize(black, .65);
         background-blend-mode: multiply;
@@ -156,18 +166,6 @@ section#ourPeople{
         opacity: 1;
         transition: all 1s ease;
       }
-
-      &:not(.video){
-        filter: grayscale(1);
-        transition: filter 1s ease;
-        &:hover{
-          filter: grayscale(0);
-          .overlay{
-            opacity: .7;
-          }
-        }
-      }
-
     }
   }
 }
