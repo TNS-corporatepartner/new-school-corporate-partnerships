@@ -39,12 +39,14 @@ export class OurPeople {
       video.attr('src', videoSrc)
       video.attr('autoplay', true)
 
-      $(this.section).addClass('modal-open');
+      $('#ourPeople').addClass('modal-open');
+      // $(personModal).addClass('active')
       $(modalContent).append(video)
     })
 
     $('#closePersonModal').on('click', () => {
-      $(this.section).removeClass('modal-open');
+      // $(this.personModal).removeClass('active')
+      $('#ourPeople').removeClass('modal-open');
 
       this.modalContent.innerHTML = ''
     })

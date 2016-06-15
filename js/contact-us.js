@@ -10,6 +10,8 @@ export class ContactUs {
       autoPlay: true
     });
 
+    console.log('test')
+
     $('#contactUs .content').on('mouseenter', function() {
       $(this).addClass('show-invisible')
     })
