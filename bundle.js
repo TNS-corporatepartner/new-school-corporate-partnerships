@@ -196,17 +196,17 @@
 	        width: 120
 	      }, {
 	        duration: 1000,
-	        delay: 1500
+	        delay: 2500
 	      });
 
 	      //intro text animate in
 	      Velocity(introText, { opacity: 1 }, {
 	        duration: 1000,
-	        delay: 2000,
+	        delay: 3300,
 	        complete: function complete() {
 	          setTimeout(function () {
 	            Velocity(introText, { opacity: 0 }, {
-	              duration: 400,
+	              duration: 500,
 	              display: 'none'
 	            });
 	          }, 3000);
@@ -219,12 +219,12 @@
 	        height: '62px'
 	      }, {
 	        duration: 800,
-	        delay: 6500
+	        delay: 8000
 	      });
 
 	      setTimeout(function () {
 	        obs.next();
-	      }, 7300);
+	      }, 8800);
 	    });
 	  }
 	}
@@ -235,8 +235,8 @@
 
 	  Velocity(introBg, 'stop');
 	  Velocity(introBg, {
-	    width: '120px',
-	    height: '52px'
+	    width: '140px',
+	    height: '62px'
 	  }, {
 	    duration: 800
 	  });
@@ -17809,15 +17809,15 @@
 	    this.questionEl = document.querySelector('.question');
 	    this.slider = document.querySelector('.future-of-slider');
 
-	    this.questions = ['How can data be human?', 'How is the gamification of learning reshaping the workforce?'];
+	    this.questions = ['How can data be empathetic?', 'How can you succeed by failing?', 'How can technology make us more human?', 'How can we create a better world through better business?'];
 
-	    this.words = ['Big Data', 'Learning & Development'];
+	    this.words = ['Big Data', 'Gamification', 'Technology', 'Sustainability'];
 
 	    this.shufflerConfig = {
 	      limit: 26,
 	      count: 0,
 	      index: 0,
-	      words: ['The Workforce', 'Sustainability', 'Research & Development', 'Big Data']
+	      words: ['The Workforce', 'Online', 'Research & Development', 'Big Data']
 	    };
 
 	    this.flkty = new _flickity2.default(this.slider, {
@@ -17836,10 +17836,10 @@
 	      var _this = this;
 
 	      this.shuffler({
-	        limit: 26,
+	        limit: 6,
 	        count: 0,
 	        index: 0,
-	        words: ['The Workforce', 'Sustainability', 'Research & Development', 'Big Data']
+	        words: ['The Workforce', 'Online', 'Research & Development', 'Personalization', 'Data Privacy', 'Big Data']
 	      }).then(function () {
 	        var cell = _this.flkty.cells[_this.flkty.selectedIndex].element;
 	        Velocity(cell, { opacity: 1 });
@@ -17868,8 +17868,8 @@
 	          setTimeout(function () {
 	            _this2.loadingWord.textContent = _this2.words[_this2.flkty.selectedIndex + 1] ? _this2.words[_this2.flkty.selectedIndex + 1] : _this2.words[0];
 	            _this2.flkty.next();
-	          }, 500);
-	        }, 4500);
+	          }, 1000);
+	        }, 5000);
 	      }
 	    }
 	  }, {
@@ -17879,7 +17879,7 @@
 
 	      this.loadingWord = this.section.querySelector('.section-headlines .dynamic-text');
 
-	      Velocity(this.loadingWord, { opacity: 1 }, { duration: 300 });
+	      Velocity(this.loadingWord, { opacity: 1 }, { duration: 1000 });
 
 	      return new Promise(function (resolve) {
 	        var wordSwitcher = setInterval(function () {
@@ -17894,7 +17894,7 @@
 	            o.count++;
 	            o.index++;
 	          }
-	        }, 100);
+	        }, 400);
 	      });
 	    }
 	  }, {
@@ -32376,7 +32376,20 @@
 	      var dynamicText = flkty.selectedCell.element.querySelector('.dynamic-text');
 	      console.log(flkty.selectedCell.element);
 	      console.log(dynamicText);
-	      var phrases = ['We are driven to question everything', 'Since 1919, we have been constantly reinventing what it means to be a progressive university'];
+
+	      var key = $(flkty.selectedCell.element).data('headline');
+
+	      var sections = {
+
+	        "Inspiring Visionary Thinking": ['We use design to tackle the big question.', 'We are the only comprehensive university with a world-famous design school at its core.', 'We design solutions that get to the future first.'],
+
+	        "Courageously Innovative": ['We rethink the question, not just the answer.', 'We collaborate with unlikely partners to expand the possibilities.', 'We innovate with a purpose to improve the human experience.'],
+
+	        "Embodying Diversity": ['We are a microcosm of the global population and a magnet for talent from all over the world.', 'We are in and of the most creative and diverse city in the world.', 'We are a living laboratory for exploring and testing the news.']
+
+	      };
+
+	      var phrases = sections[key];
 
 	      //called recursively until phrases array is empty
 	      (function changeWord(phrase, firstPhrase) {
@@ -32441,8 +32454,6 @@
 
 	var OurUniversity = exports.OurUniversity = function () {
 	  function OurUniversity() {
-	    var _this = this;
-
 	    _classCallCheck(this, OurUniversity);
 
 	    this.section = document.getElementById('ourUniversity');
@@ -32466,15 +32477,15 @@
 	      e.stopPropagation();instance.closeCell();
 	    });
 
-	    setTimeout(function () {
-	      $(_this.sectionInto).addClass('hidden');
-	    }, 1200);
+	    // setTimeout(() => {
+	    //   $(this.sectionInto).addClass('hidden')
+	    // }, 1200)
 	  }
 
 	  _createClass(OurUniversity, [{
 	    key: 'openCell',
 	    value: function openCell(cell) {
-	      var _this2 = this;
+	      var _this = this;
 
 	      if (!this.activeCell) {
 	        this.dynamicHeadline.textContent = $(cell).data('headline');
@@ -32483,32 +32494,32 @@
 	        $(cell.parentNode).removeClass('content-closed');
 
 	        setTimeout(function () {
-	          $(_this2.slider).removeClass('uninitialized');
-	          $(_this2.cells).removeClass('sibling-is-opening opening');
+	          $(_this.slider).removeClass('uninitialized');
+	          $(_this.cells).removeClass('sibling-is-opening opening');
 
-	          _this2.initFlkty($(cell).index());
-	          _this2.activeCell = cell;
+	          _this.initFlkty($(cell).index());
+	          _this.activeCell = cell;
 	        }, 800);
 	      }
 	    }
 	  }, {
 	    key: 'closeCell',
 	    value: function closeCell() {
-	      var _this3 = this;
+	      var _this2 = this;
 
 	      if (this.activeCell) {
 	        $(this.activeCell).parents('.global-slider').addClass('content-closed');
 
 	        setTimeout(function () {
-	          _this3.flkty.destroy();
-	          $(_this3.cells).not(_this3.activeCell).addClass('sibling-is-opening');
-	          $(_this3.activeCell).addClass('opening');
-	          $(_this3.slider).addClass('uninitialized');
+	          _this2.flkty.destroy();
+	          $(_this2.cells).not(_this2.activeCell).addClass('sibling-is-opening');
+	          $(_this2.activeCell).addClass('opening');
+	          $(_this2.slider).addClass('uninitialized');
 
 	          setTimeout(function () {
-	            $(_this3.cells).removeClass('sibling-is-opening');
-	            $(_this3.activeCell).removeClass('opening');
-	            _this3.activeCell = null;
+	            $(_this2.cells).removeClass('sibling-is-opening');
+	            $(_this2.activeCell).removeClass('opening');
+	            _this2.activeCell = null;
 	          });
 	        }, 250);
 	      }
@@ -32540,6 +32551,12 @@
 
 	var _rxjs = __webpack_require__(2);
 
+	var _flickity = __webpack_require__(343);
+
+	var _flickity2 = _interopRequireDefault(_flickity);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var OurPeople = exports.OurPeople = function OurPeople() {
@@ -32550,9 +32567,51 @@
 	  this.section = document.getElementById('ourPeople');
 	  this.sectionInto = this.section.querySelector('.section-intro');
 	  var slider = document.getElementById('peopleSlider');
-	  var moving = _rxjs.Observable.fromEvent(window, 'mousemove');
+	  var moving = _rxjs.Observable.fromEvent(slider, 'mousemove');
 	  this.center = slider.scrollWidth / 2 - window.innerWidth;
+	  this.personModal = document.getElementById('personModal');
+	  this.modalContent = this.personModal.querySelector('.content');
 	  // slider.scrollLeft = this.center
+
+	  $('.slider-cell').each(function (i, el) {
+	    console.log(el);
+	    // el.parentNode
+	  });
+
+	  var flkty = new _flickity2.default('#peopleSlider', {
+	    wrapAround: true,
+	    // cellAlign: 'left',
+	    freeScroll: true,
+	    percentPosition: false
+	  });
+
+	  setTimeout(function () {
+	    //wait for flickity to initialize
+	    _this.flktySliderEl = slider.querySelector('.flickity-slider');
+	  }, 1000);
+
+	  $('.person.video').on('click', function () {
+	    var personModal = document.getElementById('personModal');
+	    var modalContent = personModal.querySelector('.content');
+	    var videoSrc = $(this).data('src');
+
+	    var video = $('<video />');
+	    video.attr('src', videoSrc);
+	    video.attr('autoplay', true);
+
+	    $('#ourPeople').addClass('modal-open');
+	    // $(personModal).addClass('active')
+	    $(modalContent).append(video);
+	  });
+
+	  $('#closePersonModal').on('click', function () {
+	    // $(this.personModal).removeClass('active')
+	    $('#ourPeople').removeClass('modal-open');
+
+	    _this.modalContent.innerHTML = '';
+	  });
+
+	  var x = 0;
 
 	  var movingRight = moving.filter(function (e) {
 	    return e.clientX > window.innerWidth / 2;
@@ -32560,7 +32619,9 @@
 	    if (window.lastX !== e.clientX || window.lastY !== e.clientY) {
 	      var velocity = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2) / 2;
 	      var pos = e.clientX - window.innerWidth / 2;
-	      slider.scrollLeft = slider.scrollLeft + pos * velocity;
+
+	      // this.flktySliderEl.style.transform = 'translateX(' + (x += 5) + '%)'
+	      // slider.scrollLeft = slider.scrollLeft + pos * velocity
 	    }
 
 	    window.lastX = e.clientX;
@@ -32573,7 +32634,9 @@
 	    if (window.lastX !== e.clientX || window.lastY !== e.clientY) {
 	      var velocity = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2) / 2;
 	      var pos = window.innerWidth / 2 - e.clientX;
-	      slider.scrollLeft = slider.scrollLeft + pos * velocity;
+
+	      // this.flktySliderEl.style.transform = 'translateX(' + (x -= 5) + '%)'
+	      // slider.scrollLeft = slider.scrollLeft + pos * velocity
 	    }
 
 	    window.lastX = e.clientX;
@@ -32587,15 +32650,22 @@
 
 /***/ },
 /* 368 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.ContactUs = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _flickity = __webpack_require__(343);
+
+	var _flickity2 = _interopRequireDefault(_flickity);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -32606,35 +32676,23 @@
 	    this.asideSlider = document.getElementById('asideSlider');
 	    this.slidesUl = this.asideSlider.querySelector('ul');
 	    this.slides = this.asideSlider.querySelectorAll('li');
-	    this.animateSlide(this.slides.length - 1);
+
+	    var flkty = new _flickity2.default('#contactSlider', {
+	      autoPlay: true
+	    });
+
+	    console.log('test');
+
+	    $('#contactUs .content').on('mouseenter', function () {
+	      $(this).addClass('show-invisible');
+	    });
+
+	    $('#contactUs .content').on('mouseleave', function () {
+	      $(this).removeClass('show-invisible');
+	    });
 	  }
 
 	  _createClass(ContactUs, [{
-	    key: 'animateSlide',
-	    value: function animateSlide(index) {
-	      var _this = this;
-
-	      var slide = this.slides[index];
-
-	      Velocity(slide, { translateX: '-50vw' }, {
-	        duration: 2000,
-	        complete: function complete() {
-	          _this.slidesUl.insertBefore(slide, _this.slidesUl.firstChild);
-	          Velocity(slide, { translateX: '0vw' }, {
-	            duration: 1
-	          });
-
-	          var nextIndex = index - 1 > -1 ? index - 1 : _this.slides.length - 1;
-
-	          setTimeout(function () {
-	            if (!_this.isSleeping) {
-	              _this.animateSlide(nextIndex);
-	            }
-	          }, 2000);
-	        }
-	      });
-	    }
-	  }, {
 	    key: 'sleep',
 	    value: function sleep() {
 	      this.isSleeping = true;

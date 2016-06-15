@@ -1,3 +1,4 @@
+@charset "UTF-8";
 body, html {
   margin: 0;
   overflow: hidden;
@@ -137,30 +138,47 @@ header#header,
   transition: opacity 0.4s ease-in-out; }
 
 body.show-question section#futureOf .question {
-  transition-delay: 0.5s;
+  transition-delay: 1s;
   opacity: 1 !important;
   left: 0; }
 
 section#futureOf {
   position: relative;
   height: 100vh;
-  background-color: black; }
+  background-color: black;
+  color: white; }
   section#futureOf .future-of-slider .future-of-cell {
     width: 100%;
     height: 100vh; }
     section#futureOf .future-of-slider .future-of-cell:first-of-type {
       opacity: 0; }
+    section#futureOf .future-of-slider .future-of-cell .video-fs {
+      opacity: .8; }
   section#futureOf .question {
     position: absolute;
     top: 50%;
-    left: -100%;
-    color: white;
-    background-color: rgba(0, 0, 0, 0.7);
-    font-size: 4vh;
-    padding: 0.8em;
-    padding-left: 1.2em;
-    transition: all 0.4s ease-in-out;
-    max-width: 60%; }
+    left: 0;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.35);
+    padding: 1.5vw;
+    padding-left: 2vw;
+    opacity: 0;
+    transition: all 1s ease-in-out;
+    max-width: 60vw; }
+  section#futureOf h4 {
+    animation-name: fadeIn;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    animation-delay: 7.5s;
+    opacity: 0; }
+  section#futureOf .section-headlines .dynamic-text {
+    transition-delay: 10s; }
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
 
 #introBg {
   position: fixed;
@@ -172,11 +190,21 @@ section#futureOf {
 
 #introText {
   position: fixed;
-  top: 40%;
-  left: 20px;
+  width: calc(100vw - 140px);
+  height: 100vh;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  top: 0;
+  left: 0;
+  padding-left: 2vw;
   opacity: 0;
-  color: white;
-  max-width: 1100px; }
+  color: white; }
+  #introText span {
+    display: block;
+    max-width: 1100px;
+    color: white; }
 
 #fixedLogoText {
   transition: transform 1s ease-in-out; }
@@ -206,7 +234,7 @@ section#coreValues .core-values-slider {
       section#coreValues .core-values-slider.uninitialized .core-values-cell span.close-cell {
         opacity: 0;
         pointer-events: none; }
-    section#coreValues .core-values-slider.uninitialized .flickity-prev-next-button {
+    section#coreValues .core-values-slider.uninitialized .flickity-canv-next-button {
       opacity: 0; }
   section#coreValues .core-values-slider.content-closed .core-values-cell .content {
     left: calc(50% - 110px);
@@ -257,8 +285,10 @@ section#coreValues .core-values-slider {
       opacity: 1;
       transition: opacity 0.4s ease-in-out; }
       section#coreValues .core-values-slider .core-values-cell span.close-cell:before {
-        content: 'x';
-        color: white; }
+        content: '×';
+        color: white;
+        font-size: 30pt;
+        padding: 20px; }
     section#coreValues .core-values-slider .core-values-cell .content {
       position: absolute;
       display: -ms-flexbox;
@@ -275,7 +305,8 @@ section#coreValues .core-values-slider {
       transition: all 0.4s ease-in-out; }
       section#coreValues .core-values-slider .core-values-cell .content .content-inner {
         position: relative;
-        width: 100%; }
+        width: 100%;
+        margin-top: -100px; }
         section#coreValues .core-values-slider .core-values-cell .content .content-inner h1, section#coreValues .core-values-slider .core-values-cell .content .content-inner .dynamic-text {
           position: absolute;
           top: 0;
@@ -298,6 +329,12 @@ section#coreValues .core-values-slider {
       transform: rotate(90deg); }
     section#coreValues .core-values-slider .core-values-cell #fearless canvas {
       cursor: url("/images/down-cursor.svg"), auto; }
+
+section#coreValues .core-values-cell canvas {
+  opacity: 0.2; }
+
+section#coreValues .core-values-cell:hover canvas {
+  opacity: 1; }
 
 section#ourUniversity .our-university-slider {
   height: 100vh; }
@@ -378,26 +415,117 @@ section#ourUniversity .our-university-slider {
     transition: opacity 0.4s ease-in-out; }
 
 section#ourPeople {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-align: center;
-      align-items: center; }
-  section#ourPeople #peopleSlider {
+  transition: background 1s ease; }
+  section#ourPeople .section-headlines h3, section#ourPeople .section-headlines h4, section#ourPeople .section-headlines h1 {
+    color: #333; }
+
+#peopleSlider {
+  position: relative;
+  top: calc(50% - 303px);
+  outline: none; }
+  #peopleSlider .slider-cell {
+    width: 1832px;
+    height: 606px;
+    overflow: hidden; }
+    #peopleSlider .slider-cell .person {
+      width: 300px;
+      height: 300px;
+      color: white;
+      position: relative;
+      display: -ms-inline-flexbox;
+      display: inline-flex;
+      -ms-flex-align: end;
+          align-items: flex-end;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      cursor: pointer; }
+      #peopleSlider .slider-cell .person hgroup {
+        position: absolute;
+        padding: 10px;
+        bottom: 0;
+        left: 0; }
+      #peopleSlider .slider-cell .person p {
+        opacity: 0;
+        height: 0;
+        transition: height 1.5s ease;
+        font-size: 18px;
+        margin-top: 5px; }
+      #peopleSlider .slider-cell .person:hover p {
+        height: auto;
+        opacity: 1;
+        transition: height 1.5s ease, opacity 1.5s ease; }
+      #peopleSlider .slider-cell .person.video {
+        width: 604px; }
+        #peopleSlider .slider-cell .person.video .overlay {
+          background-color: rgba(0, 0, 0, 0.1);
+          transition: background 1s ease; }
+        #peopleSlider .slider-cell .person.video:hover .overlay {
+          background-color: rgba(232, 46, 33, 0.7); }
+          #peopleSlider .slider-cell .person.video:hover .overlay:before {
+            content: url(/images/play-button.svg); }
+      #peopleSlider .slider-cell .person .overlay {
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.35);
+        background-blend-mode: multiply;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-align: center;
+            align-items: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+        width: 100%;
+        height: 100%;
+        opacity: 1;
+        transition: all 1s ease; }
+      #peopleSlider .slider-cell .person:not(.video) {
+        -webkit-filter: grayscale(1);
+                filter: grayscale(1);
+        transition: -webkit-filter 1s ease;
+        transition: filter 1s ease;
+        transition: filter 1s ease, -webkit-filter 1s ease; }
+        #peopleSlider .slider-cell .person:not(.video):hover {
+          -webkit-filter: grayscale(0);
+                  filter: grayscale(0); }
+          #peopleSlider .slider-cell .person:not(.video):hover .overlay {
+            opacity: .7; }
+
+#personModal {
+  position: absolute;
+  height: 606px;
+  top: calc(50% - 303px);
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+  background-color: transparent;
+  transition: all 0.4s ease-in-out;
+  transform: scale(0.8); }
+  #personModal .content {
+    height: 100%;
     display: -ms-flexbox;
     display: flex;
-    -ms-flex-direction: column;
-        flex-direction: column;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-    height: 300px;
-    width: 100vw;
-    overflow-x: scroll; }
-    section#ourPeople #peopleSlider .img {
-      width: 150px;
-      height: 150px;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat; }
+    -ms-flex-pack: center;
+        justify-content: center; }
+    #personModal .content video {
+      height: 100%; }
+  #personModal #closePersonModal {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: white;
+    font-size: 30px; }
+
+section#ourPeople.modal-open {
+  background-color: #333; }
+  section#ourPeople.modal-open .section-headlines h3 {
+    color: white; }
+  section#ourPeople.modal-open #personModal {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+    background-color: #333; }
 
 section#contactUs {
   display: -ms-flexbox;
@@ -406,46 +534,82 @@ section#contactUs {
     position: relative;
     -ms-flex-preferred-size: 50%;
         flex-basis: 50%; }
+  section#contactUs .section-headlines h4 {
+    color: black; }
   section#contactUs .content {
-    background-color: #b3b3b3;
+    background-color: #E1E1E1;
     padding: 5vw 2vw; }
+    section#contactUs .content.show-invisible .contact-info .invisible {
+      opacity: 1;
+      max-height: 500px; }
+    section#contactUs .content .contact-info {
+      margin-top: 200px; }
+      section#contactUs .content .contact-info > p, section#contactUs .content .contact-info h4 {
+        color: #E82E21;
+        line-height: 1.6em; }
+      section#contactUs .content .contact-info p {
+        text-transform: uppercase; }
+      section#contactUs .content .contact-info .invisible {
+        opacity: 0;
+        max-height: 0;
+        transition: all 0.5s ease-in-out; }
+        section#contactUs .content .contact-info .invisible .debbie {
+          display: -ms-flexbox;
+          display: flex;
+          margin: 20px auto; }
+          section#contactUs .content .contact-info .invisible .debbie img {
+            margin-right: 20px; }
+          section#contactUs .content .contact-info .invisible .debbie .contact-details button {
+            background-color: #E82E21; }
   section#contactUs aside#asideSlider {
     -ms-flex-order: 2;
-        order: 2; }
-    section#contactUs aside#asideSlider ul {
+        order: 2;
+    background-color: #E1E1E1; }
+    section#contactUs aside#asideSlider #contactSlider .contact-cell {
       position: relative;
-      height: 100vh; }
-      section#contactUs aside#asideSlider ul li {
+      width: 100%;
+      height: 100vh;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center; }
+      section#contactUs aside#asideSlider #contactSlider .contact-cell .content {
         position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
+        bottom: 0;
         width: 100%;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center; }
+        background-color: rgba(0, 0, 0, 0.4);
+        color: white; }
+        section#contactUs aside#asideSlider #contactSlider .contact-cell .content.show-invisible .invisible {
+          opacity: 1;
+          max-height: 500px; }
+        section#contactUs aside#asideSlider #contactSlider .contact-cell .content .invisible {
+          opacity: 0;
+          max-height: 0;
+          transition: all 0.5s ease-in-out; }
 
 body {
-  background-color: #E1E1E1; }
+  background-color: #E1E1E1;
+  color: #333; }
 
 * {
   margin: 0;
   padding: 0;
   border: 0;
   font-family: "Neue", sans-serif;
-  box-sizing: border-box;
-  color: #333; }
+  box-sizing: border-box; }
+
+p {
+  font-size: 22px; }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: "NeueDisplay", sans-serif;
   font-weight: bold; }
 
 h1 {
-  font-size: 5.5vw; }
+  font-size: 7.5vh; }
 
 h2 {
   font-family: "Neue", sans-serif;
-  font-size: 48px;
+  font-size: 4.8vh;
   line-height: 1.3; }
 
 h3 {
@@ -456,7 +620,7 @@ h4 {
 
 h5 {
   font-weight: normal;
-  font-size: 24px; }
+  font-size: 34px; }
 
 h6 {
   font-size: 18px; }
@@ -487,11 +651,14 @@ h6 {
   position: absolute;
   top: 0;
   left: 0;
-  padding: 2vw; }
-  .section-headlines h3, .section-headlines h4 {
+  padding: 2vw;
+  max-width: 70vw; }
+  .section-headlines h3, .section-headlines h4, .section-headlines h1 {
     color: white; }
   .section-headlines .dynamic-text {
     transition: opacity 0.4s ease-in-out; }
+  .section-headlines p {
+    font-size: 28px; }
 
 .video-fs {
   position: absolute;

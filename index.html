@@ -40,16 +40,28 @@
 
 				<div class="future-of-cell">
 					<div class="video-fs">
-						<video loop="true" muted src="http://familiar-temp.s3.amazonaws.com/sample1.mp4"></video>
+						<video loop="true" muted src="http://familiar-temp.s3.amazonaws.com/sample1b.mp4"></video>
+					</div>
+				</div>
+
+				<div class="future-of-cell">
+					<div class="video-fs">
+						<video loop="true" muted src="http://familiar-temp.s3.amazonaws.com/sample3.mp4"></video>
+					</div>
+				</div>
+
+				<div class="future-of-cell">
+					<div class="video-fs">
+						<video loop="true" muted src="http://familiar-temp.s3.amazonaws.com/sample4.mp4"></video>
 					</div>
 				</div>
 			</div>
 
-			<div class="question">That is the qustion</div>
+			<h2 class="question">That is the qustion</h2>
 
 			<hgroup class="section-headlines">
 				<h4>Imagine <br>The Future Of</h4>
-				<h3 class="dynamic-text"></h3>
+				<h1 class="dynamic-text"></h1>
 			</hgroup>
 		</section>
 
@@ -58,21 +70,22 @@
 				<div class="core-values-cell" data-headline="Inspiring Visionary Thinking">
 					<div id="designDna"></div>
 					<span class="close-cell"></span>
+
 					<div class="content">
-						<div class="content-inner">						
+						<div class="content-inner">
 							<h1>Inspiring Visionary Thinking</h1>
-							<h4 class="dynamic-text"></h4>
+							<h2 class="dynamic-text"></h2>
 						</div>
 					</div>
 				</div>
 
-				<div class="core-values-cell" data-headline="Fearlessly Innovative">
+				<div class="core-values-cell" data-headline="Courageously Innovative">
 					<div id="fearless"></div>
 					<span class="close-cell"></span>
 					<div class="content">
 						<div class="content-inner">
-							<h1>Fearlessly Innovative</h1>
-							<h4 class="dynamic-text"></h4>
+							<h1>Courageously Innovative</h1>
+							<h2 class="dynamic-text"></h2>
 						</div>
 					</div>
 				</div>
@@ -83,7 +96,9 @@
 					<div class="content">
 						<div class="content-inner">
 							<h1>Embodying Diversity</h1>
-							<h4 class="dynamic-text"></h4>
+							<h2 class="dynamic-text">
+
+							</h2>
 						</div>
 					</div>
 				</div>
@@ -126,63 +141,93 @@
 			</div>
 		</section>
 
+
 		<section id="ourPeople">
 
 			<div id="peopleSlider">
-
-			{% for person in site.people %}
-
-				<video src="http://familiar-temp.s3.amazonaws.com/sample2.mp4" height="150" width="300"></video>
-
-
-				<h1>{{ person.title }}</h1>
-				<h2>{{ person.description }}</h2>
-
-
-			{% endfor %}
-
+				{% for cell in (1..3) %}
+				<div class="slider-cell">
+					{% for person in site.people %}
+						<div class="person {% if person.video %}video{% endif %}" style="background-image:url('{{person.image}}');" data-src="{% if person.video %}{{person.video}}{% endif %}">
+							<div class="overlay"></div>
+							<hgroup>
+								<h6>{{ person.title }}</h6>
+								{{ person.content }}
+							</hgroup>
+						</div>
+					{% endfor %}
+				</div>
+				{% endfor %}
 			</div>
 
 			<hgroup class="section-headlines">
-				<h4>A History of Innovation</h4>
-				<h3 class="dynamic-text"></h3>
+				<h3>A History of Innovation</h3>
+				<p>We’ve been a source of inspiration for pioneers and world changers</p>
 			</hgroup>
 
 			<div class="section-intro">
 				<h1>A History of Innovation</h1>
+			</div>
+
+			<div id="personModal">
+				<div class="content"></div>
+				<div id="closePersonModal">&times;</div>
 			</div>
 		</section>
 
 		<section id="contactUs">
 
 			<aside id="asideSlider">
-				<ul>
-					<li style="background-image: url('/images/contact1.jpg')">
-						<div class="aside-content">
-							<h3>Stimulating social innovation &amp; entrepreneurship</h3>
-						</div>
-					</li>
 
-					<li style="background-image: url('/images/contact2.jpg')">
-						<div class="aside-content">
-							<h3>Preparing a workforce for the gig economy</h3>
+				<div id="contactSlider">
+					<div class="contact-cell" style="background-image: url('/images/contact1.jpg')">
+						<div class="content">
+							<h2>Stimulating social innovation &amp; entrepreneurship</h2>
+							<div class="invisible">
+								<p>The New School offers opportunities to create new thinking for a new world. From incubating ideas to solving specific business challenges, The New School designs for both the issues of our time as well well as those to come.</p>
+							</div>
 						</div>
-					</li>
+					</div>
 
-					<li style="background-image: url('/images/contact3.jpg')">
-						<div class="aside-content">
-							<h3>Leveraging big data to see the future</h3>
+					<div class="contact-cell" style="background-image: url('/images/contact1.jpg')">
+						<div class="content">
+							<h2>Preparing a workforce for the gig economy</h2>
+							<div class="invisible">
+								<p>The New School offers opportunities to create new thinking for a new world. From incubating ideas to solving specific business challenges, The New School designs for both the issues of our time as well well as those to come.</p>
+							</div>
 						</div>
-					</li>
-				</ul>
+					</div>
+
+					<div class="contact-cell" style="background-image: url('/images/contact2.jpg')">
+						<div class="content">
+							<h2>Leveraging big data to see the future</h2>
+							<div class="invisible">
+								<p>The New School offers opportunities to create new thinking for a new world. From incubating ideas to solving specific business challenges, The New School designs for both the issues of our time as well well as those to come.</p>
+							</div>
+						</div>
+					</div>
+				</div>
 			</aside>
 
 			<div class="content">
-				<p class="lead">Our Partners understand the value of using design thinking to solve real-world problems.</p>
+				<p>Our Partners understand the value of using design thinking to solve real-world problems.</p>
 
 				<div class="contact-info">
-					<h2>Debbie</h2>
-					<tel>123123123123</tel>
+					<p>Ready to design the future?</p>
+					<h4>Collaborate with us</h4>
+
+					<div class="invisible">
+						<div class="debbie">
+							<img src="/images/debbie.jpg" height="120">
+							<div class="contact-details">
+								<p><strong>Debbie Gibb</strong></p>
+								<p>Vice President</p>
+								<p>Corporate Partnerships &amp; Industry Development</p>
+								<p>The New School</p>
+								<button>Email Debbie</button>
+							</div>
+						</div>
+					</div>
 				</div>
 
 				<hgroup class="section-headlines">
@@ -197,7 +242,7 @@
 	<footer>
 		<div id="introBg"></div>
 
-		<h2 id="introText">The New School, in NYC, is the only university where a world-renowned art and design school partners with acclaimed liberal arts, performing arts, and graduate schools to rethink everything.</h2>
+		<h2 id="introText"><span>The New School, in NYC, is the only university where a world-renowned art and design school partners with acclaimed liberal arts, performing arts, and graduate schools to rethink everything.<span></h2>
 
 		<div id="fixedLogo">
 			<svg viewBox="0 0 110 72" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="overflow: visible;">
@@ -240,6 +285,11 @@
 	<script src="js/onepagescroll.js"></script>
 	<script src="js/particles/particles.lib.js"></script>
 	<script src="/bundle.js"></script>
+
+	<script id="__bs_script__">//<![CDATA[
+		document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.2.13.0.js'><\/script>".replace("HOST", location.hostname));
+	//]]></script>
+
 </body>
 
 </html>

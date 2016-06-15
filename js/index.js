@@ -10,7 +10,7 @@ export let app = {}
 
 window.addEventListener('DOMContentLoaded', init)
 
-function init() {   
+function init() {
   let splashContent$ = null, initSplash = true
   var fixedLogo = document.getElementById('fixedLogo')
   var fixedLogoText = document.getElementById('fixedLogoText')
@@ -34,28 +34,28 @@ function init() {
     3: null,
     4: null
   }
-  
+
   const scroller = Observable.create(observer => {
     $('main').onepage_scroll({
-      sectionContainer: 'section',    
-      easing: 'ease',                 
-      animationTime: 750,            
-      pagination: true,               
-      updateURL: true,               
+      sectionContainer: 'section',
+      easing: 'ease',
+      animationTime: 750,
+      pagination: true,
+      updateURL: true,
       beforeMove: (i) => {
-        const index = i - 1        
-        
+        const index = i - 1
+
         observer.next({
           direction: app.activeScrollIndex < index ? 'down' : 'up',
           index: index,
           lastActiveInstance: app.activeInstance
         })
-      }, 
-      afterMove: function(index) {},  
-      loop: false,                    
-      keyboard: true,                 
-      responsiveFallback: false,                        
-      direction: 'vertical'             
+      },
+      afterMove: function(index) {},
+      loop: false,
+      keyboard: true,
+      responsiveFallback: false,
+      direction: 'vertical'
     });
   })
 
@@ -65,38 +65,38 @@ function init() {
       index: 0,
       lastActiveInstance: null
     })
-  }  
+  }
 
   scroller.debounceTime(700).subscribe(e => handleNav(e))
 
-  function handleNav(e) {                
+  function handleNav(e) {
     //handle nav fired before splash animation completes
-    if (splashContent$ && !splashContent$.isUnsubscribed) {       
+    if (splashContent$ && !splashContent$.isUnsubscribed) {
       splashContent$.complete()
       splashContent$.unsubscribe()
       skipSplashAnimation()
-      loadComponent(e.index - 1)      
+      loadComponent(e.index - 1)
       $('main').moveUp()
 
     //handle nav normally
-    } else if (splashContent$) {       
+    } else if (splashContent$) {
 
       if (e.lastActiveInstance && e.lastActiveInstance.sleep) {
         e.lastActiveInstance.sleep.call(e.lastActiveInstance)
       }
 
       loadComponent(e.index)
-    
+
     //handle nav before splash animation initialized
-    } else if (initSplash) {           
-      splashContent$ = initSplashContent().subscribe( () => {        
+    } else if (initSplash) {
+      splashContent$ = initSplashContent().subscribe( () => {
         loadComponent(e.index)
         splashContent$.complete()
         splashContent$.unsubscribe()
       }, err => console.error(err), () => initSplash = false)
     }
 
-    function loadComponent(index) {  
+    function loadComponent(index) {
       app.activeScrollIndex = index
       app.activeInstance = app.componentInstances[ index ]
 
@@ -106,12 +106,12 @@ function init() {
         app.componentInstances[ index ] = instance
       } else if (app.activeInstance && app.activeInstance.awake) {
         app.activeInstance.awake.call(app.activeInstance)
-      }      
+      }
     }
-  }   
+  }
 
 
-  function initSplashContent() {      
+  function initSplashContent() {
     return Observable.create(obs => {
       //logo animate in
       Velocity(line1, {x1: 4.501, y1: 64.81, x2: 109.524, y2: 64.81}, {duration: 500})
@@ -124,17 +124,17 @@ function init() {
         width: 120
       }, {
         duration: 1000,
-        delay: 1500
+        delay: 2500
       })
 
       //intro text animate in
-      Velocity(introText, {opacity: 1}, {        
+      Velocity(introText, {opacity: 1}, {
         duration: 1000,
-        delay: 2000,
+        delay: 3300,
         complete: () => {
           setTimeout(() => {
             Velocity(introText, {opacity: 0}, {
-              duration: 400,
+              duration: 500,
               display: 'none'
             })
           }, 3000)
@@ -147,38 +147,36 @@ function init() {
         height: '62px'
       }, {
         duration: 800,
-        delay: 6500
+        delay: 8000
       })
 
       setTimeout(() => {
         obs.next()
-      }, 7300)
-    })    
+      }, 8800)
+    })
   }
 }
 
-function skipSplashAnimation() {  
-  Velocity(introText, 'stop')            
-  Velocity(introText, {opacity: 0}, {duration: 200})      
-  
+function skipSplashAnimation() {
+  Velocity(introText, 'stop')
+  Velocity(introText, {opacity: 0}, {duration: 200})
+
   Velocity(introBg, 'stop')
   Velocity(introBg, {
-    width: '120px',
-    height: '52px'
+    width: '140px',
+    height: '62px'
   }, {
     duration: 800
   })
 
   Velocity(fixedLogoText, 'stop')
   Velocity(fixedLogoText, {translateX: 0, translateY: 0}, {duration: 2000})
-  
+
   Velocity(fixedLogo, 'stop')
   Velocity(fixedLogo, {
     top: window.innerHeight - 100,
     width: 120
   }, {
     duration: 800
-  })        
+  })
 }
-
-

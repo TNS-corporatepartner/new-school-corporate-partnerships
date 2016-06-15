@@ -1,32 +1,23 @@
-
+import Flickity from 'flickity'
 
 export class ContactUs {
   constructor() {
     this.asideSlider = document.getElementById('asideSlider')
     this.slidesUl = this.asideSlider.querySelector('ul')
     this.slides = this.asideSlider.querySelectorAll('li')
-    this.animateSlide(this.slides.length - 1)
-  }
 
-  animateSlide(index) {
-    const slide = this.slides[index]    
+    var flkty = new Flickity( '#contactSlider', {
+      autoPlay: true
+    });
 
-    Velocity(slide, {translateX: '-50vw'}, {
-      duration: 2000,
-      complete: () => { 
-        this.slidesUl.insertBefore(slide, this.slidesUl.firstChild)
-        Velocity(slide, {translateX: '0vw'}, {
-          duration: 1
-        })
+    console.log('test')
 
-        const nextIndex = index - 1 > -1 ? index - 1 : this.slides.length -1
+    $('#contactUs .content').on('mouseenter', function() {
+      $(this).addClass('show-invisible')
+    })
 
-        setTimeout(() => {
-          if (!this.isSleeping) {
-            this.animateSlide(nextIndex)
-          }
-        }, 2000)
-      }
+    $('#contactUs .content').on('mouseleave', function() {
+      $(this).removeClass('show-invisible')
     })
   }
 
