@@ -19,10 +19,7 @@ function init() {
   var line1 = document.getElementById('svgLine1')
   var line2 = document.getElementById('svgLine2')
 
-  var bodyClick$ = Observable.fromEvent(document, 'click')
-    .subscribe(e => {
-      $('main').moveDown()
-    })
+
 
 
   app.componentConstructors = {
@@ -72,6 +69,44 @@ function init() {
       lastActiveInstance: null
     })
   }
+
+  var move$ = Observable.fromEvent(window, 'mousemove') 
+  
+  var moveUp$ = move$
+    .filter(e => e.clientY < window.innerHeight / 2 )
+    .mapTo('up')
+
+  var moveDown$ = move$
+    .filter(e => e.clientY >= window.innerHeight / 2 )
+    .mapTo('down')
+
+  var cursor$ = Observable.merge(moveUp$, moveDown$).publish()
+  
+  cursor$.subscribe( d => {
+    if (d === 'up' && app.activeScrollIndex) {
+      document.body.style.cursor = 'url(/images/prev-cursor.svg), auto'
+    } else if (d === 'down' && app.activeScrollIndex !== 4) {
+      document.body.style.cursor = 'url(/images/next-cursor.svg), auto'
+    } else {
+      document.body.style.cursor = 'auto'
+    }
+  })
+
+  var click$ = Observable
+    .fromEvent(document, 'click')
+    .withLatestFrom(cursor$)
+    .subscribe(v => {
+      const event = v[0]
+      const direction = v[1]
+
+      if (direction === 'up' && app.activeScrollIndex !== 0) {
+        $('main').moveUp()
+      } else if (direction === 'down' && app.activeScrollIndex !== 4) {
+        $('main').moveDown()
+      }
+    })
+
+  cursor$.connect()
 
   scroller.debounceTime(700).subscribe(e => handleNav(e))
 

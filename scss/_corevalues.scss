@@ -66,9 +66,9 @@ section#coreValues {
         opacity: 0;
         padding: 0;
       }
-      &.is-selected {
-        cursor: url('/images/close-cursor.svg'), auto;
-      }
+      // &.is-selected {
+      //   cursor: url('/images/close-cursor.svg'), auto;
+      // }
 
       #particles-js {
         position: absolute;

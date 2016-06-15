@@ -86,10 +86,6 @@
 	  var line1 = document.getElementById('svgLine1');
 	  var line2 = document.getElementById('svgLine2');
 
-	  var bodyClick$ = _rxjs.Observable.fromEvent(document, 'click').subscribe(function (e) {
-	    $('main').moveDown();
-	  });
-
 	  app.componentConstructors = {
 	    0: _futureOf.FutureOf,
 	    1: _coreValues.CoreValues,
@@ -137,6 +133,41 @@
 	      lastActiveInstance: null
 	    });
 	  }
+
+	  var move$ = _rxjs.Observable.fromEvent(window, 'mousemove');
+
+	  var moveUp$ = move$.filter(function (e) {
+	    return e.clientY < window.innerHeight / 2;
+	  }).mapTo('up');
+
+	  var moveDown$ = move$.filter(function (e) {
+	    return e.clientY >= window.innerHeight / 2;
+	  }).mapTo('down');
+
+	  var cursor$ = _rxjs.Observable.merge(moveUp$, moveDown$).publish();
+
+	  cursor$.subscribe(function (d) {
+	    if (d === 'up' && app.activeScrollIndex) {
+	      document.body.style.cursor = 'url(/images/prev-cursor.svg), auto';
+	    } else if (d === 'down' && app.activeScrollIndex !== 4) {
+	      document.body.style.cursor = 'url(/images/next-cursor.svg), auto';
+	    } else {
+	      document.body.style.cursor = 'auto';
+	    }
+	  });
+
+	  var click$ = _rxjs.Observable.fromEvent(document, 'click').withLatestFrom(cursor$).subscribe(function (v) {
+	    var event = v[0];
+	    var direction = v[1];
+
+	    if (direction === 'up' && app.activeScrollIndex !== 0) {
+	      $('main').moveUp();
+	    } else if (direction === 'down' && app.activeScrollIndex !== 4) {
+	      $('main').moveDown();
+	    }
+	  });
+
+	  cursor$.connect();
 
 	  scroller.debounceTime(700).subscribe(function (e) {
 	    return handleNav(e);

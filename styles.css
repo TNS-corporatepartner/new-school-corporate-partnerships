@@ -114,9 +114,6 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
   font-style: italic;
   font-weight: normal; }
 
-body {
-  cursor: url("/images/next-cursor.svg"), auto; }
-
 header#header {
   position: fixed;
   z-index: 10;
@@ -276,8 +273,6 @@ section#coreValues .core-values-slider {
           flex-grow: 0;
       opacity: 0;
       padding: 0; }
-    section#coreValues .core-values-slider .core-values-cell.is-selected {
-      cursor: url("/images/close-cursor.svg"), auto; }
     section#coreValues .core-values-slider .core-values-cell #particles-js {
       position: absolute;
       top: 0;
@@ -533,8 +528,7 @@ section#ourPeople.modal-open {
 
 section#contactUs {
   display: -ms-flexbox;
-  display: flex;
-  cursor: auto; }
+  display: flex; }
   section#contactUs > * {
     position: relative;
     -ms-flex-preferred-size: 50%;
