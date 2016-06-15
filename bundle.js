@@ -86,6 +86,10 @@
 	  var line1 = document.getElementById('svgLine1');
 	  var line2 = document.getElementById('svgLine2');
 
+	  var bodyClick$ = _rxjs.Observable.fromEvent(document, 'click').subscribe(function (e) {
+	    $('main').moveDown();
+	  });
+
 	  app.componentConstructors = {
 	    0: _futureOf.FutureOf,
 	    1: _coreValues.CoreValues,
@@ -145,7 +149,6 @@
 	      splashContent$.unsubscribe();
 	      skipSplashAnimation();
 	      loadComponent(e.index - 1);
-	      $('main').moveUp();
 
 	      //handle nav normally
 	    } else if (splashContent$) {
@@ -32278,11 +32281,18 @@
 	    $(this.cells).on('mouseleave', function () {
 	      $(this.cells).removeClass('sibling-is-hovered');
 	    });
-	    $(this.cells).on('click', function () {
-	      instance.openCell(this);
-	    });
 	    $('span.close-cell').on('click', function (e) {
 	      e.stopPropagation();instance.closeCell();
+	    });
+
+	    $('.core-values-cell').on('click', function (e) {
+	      e.stopPropagation();
+	      _this.closeCell();
+	    });
+
+	    $('.content-inner h1').on('click', function (e) {
+	      e.stopPropagation();
+	      instance.openCell($(this).parents('.core-values-cell').get(0));
 	    });
 
 	    _rxjs.Observable.fromEvent(window, 'resize').debounceTime(100).subscribe(function () {
@@ -32599,25 +32609,26 @@
 	    flkty.next();
 	  }, 1200);
 
-	  $('.person.video').on('click', function () {
+	  $('.person.video').on('click', function (e) {
+	    var _this2 = this;
+
+	    e.stopPropagation();
 	    var personModal = document.getElementById('personModal');
 	    var modalContent = personModal.querySelector('.content');
 	    var videoSrc = $(this).data('src');
-
 	    var video = $('<video />');
+
 	    video.attr('src', videoSrc);
 	    video.attr('autoplay', true);
 
 	    $('#ourPeople').addClass('modal-open');
-	    // $(personModal).addClass('active')
 	    $(modalContent).append(video);
-	  });
 
-	  $('#closePersonModal').on('click', function () {
-	    // $(this.personModal).removeClass('active')
-	    $('#ourPeople').removeClass('modal-open');
-
-	    _this.modalContent.innerHTML = '';
+	    $('#ourPeople').one('click', function (e) {
+	      e.stopPropagation();
+	      $('#ourPeople').removeClass('modal-open');
+	      _this2.modalContent.innerHTML = '';
+	    });
 	  });
 
 	  var x = 0;

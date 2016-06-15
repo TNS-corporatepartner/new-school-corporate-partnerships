@@ -13,9 +13,18 @@ export class CoreValues {
     const instance = this
 
     $(this.cells).on('mouseenter', function() { $(this.cells).not(this).addClass('sibling-is-hovered') })
-    $(this.cells).on('mouseleave', function() { $(this.cells).removeClass('sibling-is-hovered') })
-    $(this.cells).on('click', function() { instance.openCell(this) })
+    $(this.cells).on('mouseleave', function() { $(this.cells).removeClass('sibling-is-hovered') })    
     $('span.close-cell').on('click', function(e) { e.stopPropagation(); instance.closeCell() })
+
+    $('.core-values-cell').on('click', (e) => {
+      e.stopPropagation()
+      this.closeCell()
+    })
+
+    $('.content-inner h1').on('click', function(e) { 
+      e.stopPropagation()
+      instance.openCell( $(this).parents('.core-values-cell').get(0) )
+    })    
 
     Observable.fromEvent(window, 'resize').debounceTime(100).subscribe(() => this.resizeParticles())
 
@@ -91,7 +100,7 @@ export class CoreValues {
     })
 
     this.startCellAnimation(this.flkty)
-    this.flkty.on('settle', this.startCellAnimation.bind(this, this.flkty))
+    this.flkty.on('settle', this.startCellAnimation.bind(this, this.flkty))    
   }
 
   startCellAnimation(flkty) {

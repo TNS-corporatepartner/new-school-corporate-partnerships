@@ -19,6 +19,12 @@ function init() {
   var line1 = document.getElementById('svgLine1')
   var line2 = document.getElementById('svgLine2')
 
+  var bodyClick$ = Observable.fromEvent(document, 'click')
+    .subscribe(e => {
+      $('main').moveDown()
+    })
+
+
   app.componentConstructors = {
     0: FutureOf,
     1: CoreValues,
@@ -76,7 +82,6 @@ function init() {
       splashContent$.unsubscribe()
       skipSplashAnimation()
       loadComponent(e.index - 1)
-      $('main').moveUp()
 
     //handle nav normally
     } else if (splashContent$) {

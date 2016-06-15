@@ -19,7 +19,6 @@ section#coreValues {
         span.close-cell {
           opacity: 0;
           pointer-events: none;
-
         }
       }
       .flickity-canv-next-button {
@@ -67,6 +66,9 @@ section#coreValues {
         opacity: 0;
         padding: 0;
       }
+      &.is-selected {
+        cursor: url('/images/close-cursor.svg'), auto;
+      }
 
       #particles-js {
         position: absolute;
@@ -81,15 +83,13 @@ section#coreValues {
         right: 20px;
         opacity: 1;
         transition: opacity 0.4s ease-in-out;
-
+        cursor: pointer;
 
         &:before {
           content: '×';
           color: white;
           font-size: 30pt;
           padding: 20px;
-
-
         }
       }
       .content {
@@ -103,7 +103,6 @@ section#coreValues {
         overflow: visible;
         align-items: center;
         transition: all 0.4s ease-in-out;
-        pointer-events: none;
         .content-inner {
           position: relative;
           width: 100%;
@@ -117,6 +116,7 @@ section#coreValues {
             text-align: left;
             color: white;
             transition: font-size 0.4s ease-in-out;
+            cursor: pointer;
           }
           .dynamic-text {
             opacity: 0;
@@ -134,12 +134,12 @@ section#coreValues {
 
       }
       #statusQuo canvas {
-        cursor: url('/images/status-quo-triangle.png'), auto;
-        transform: rotate(90deg);
+        // cursor: url('/images/status-quo-triangle.png'), auto;
+        // transform: rotate(90deg);
       }
 
       #fearless canvas {
-        cursor: url('/images/down-cursor.svg'), auto;
+        // cursor: url('/images/down-cursor.svg'), auto;
       }
 
     }

@@ -114,6 +114,9 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
   font-style: italic;
   font-weight: normal; }
 
+body {
+  cursor: url("/images/next-cursor.svg"), auto; }
+
 header#header {
   position: fixed;
   z-index: 10;
@@ -135,6 +138,7 @@ header#header {
 .logo-container,
 header#header,
 .onepage-pagination {
+  cursor: pointer;
   transition: opacity 0.4s ease-in-out; }
 
 body.show-question section#futureOf .question {
@@ -272,6 +276,8 @@ section#coreValues .core-values-slider {
           flex-grow: 0;
       opacity: 0;
       padding: 0; }
+    section#coreValues .core-values-slider .core-values-cell.is-selected {
+      cursor: url("/images/close-cursor.svg"), auto; }
     section#coreValues .core-values-slider .core-values-cell #particles-js {
       position: absolute;
       top: 0;
@@ -283,7 +289,8 @@ section#coreValues .core-values-slider {
       top: 100px;
       right: 20px;
       opacity: 1;
-      transition: opacity 0.4s ease-in-out; }
+      transition: opacity 0.4s ease-in-out;
+      cursor: pointer; }
       section#coreValues .core-values-slider .core-values-cell span.close-cell:before {
         content: '×';
         color: white;
@@ -302,8 +309,7 @@ section#coreValues .core-values-slider {
       overflow: visible;
       -ms-flex-align: center;
           align-items: center;
-      transition: all 0.4s ease-in-out;
-      pointer-events: none; }
+      transition: all 0.4s ease-in-out; }
       section#coreValues .core-values-slider .core-values-cell .content .content-inner {
         position: relative;
         width: 100%;
@@ -316,7 +322,8 @@ section#coreValues .core-values-slider {
         section#coreValues .core-values-slider .core-values-cell .content .content-inner h1 {
           text-align: left;
           color: white;
-          transition: font-size 0.4s ease-in-out; }
+          transition: font-size 0.4s ease-in-out;
+          cursor: pointer; }
         section#coreValues .core-values-slider .core-values-cell .content .content-inner .dynamic-text {
           opacity: 0;
           color: white; }
@@ -325,11 +332,6 @@ section#coreValues .core-values-slider {
       top: 0;
       left: 0;
       width: 100vw; }
-    section#coreValues .core-values-slider .core-values-cell #statusQuo canvas {
-      cursor: url("/images/status-quo-triangle.png"), auto;
-      transform: rotate(90deg); }
-    section#coreValues .core-values-slider .core-values-cell #fearless canvas {
-      cursor: url("/images/down-cursor.svg"), auto; }
 
 section#coreValues .core-values-cell canvas {
   opacity: 0.2; }
@@ -519,7 +521,8 @@ section#ourPeople {
     font-size: 30px; }
 
 section#ourPeople.modal-open {
-  background-color: #333; }
+  background-color: #333;
+  cursor: url("/images/close-cursor.svg"), auto; }
   section#ourPeople.modal-open .section-headlines h3 {
     color: white; }
   section#ourPeople.modal-open #personModal {
@@ -530,7 +533,8 @@ section#ourPeople.modal-open {
 
 section#contactUs {
   display: -ms-flexbox;
-  display: flex; }
+  display: flex;
+  cursor: auto; }
   section#contactUs > * {
     position: relative;
     -ms-flex-preferred-size: 50%;
