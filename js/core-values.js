@@ -16,7 +16,7 @@ export class CoreValues {
     $(this.cells).on('mouseleave', function() { $(this.cells).removeClass('sibling-is-hovered') })    
     $('span.close-cell').on('click', function(e) { e.stopPropagation(); instance.closeCell() })
 
-    $('.core-values-cell').on('click', (e) => {
+    $('#coreValues').on('click', '.core-values-cell.is-selected', (e) => {
       e.stopPropagation()
       this.closeCell()
     })

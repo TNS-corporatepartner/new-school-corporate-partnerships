@@ -32316,7 +32316,7 @@
 	      e.stopPropagation();instance.closeCell();
 	    });
 
-	    $('.core-values-cell').on('click', function (e) {
+	    $('#coreValues').on('click', '.core-values-cell.is-selected', function (e) {
 	      e.stopPropagation();
 	      _this.closeCell();
 	    });

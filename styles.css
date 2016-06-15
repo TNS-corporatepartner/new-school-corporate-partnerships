@@ -273,6 +273,8 @@ section#coreValues .core-values-slider {
           flex-grow: 0;
       opacity: 0;
       padding: 0; }
+    section#coreValues .core-values-slider .core-values-cell.is-selected {
+      cursor: url("/images/close-cursor.svg"), auto; }
     section#coreValues .core-values-slider .core-values-cell #particles-js {
       position: absolute;
       top: 0;
@@ -292,18 +294,14 @@ section#coreValues .core-values-slider {
         font-size: 30pt;
         padding: 20px; }
     section#coreValues .core-values-slider .core-values-cell .content {
-      position: absolute;
       display: -ms-flexbox;
       display: flex;
-      overflow: hidden;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 65vw;
-      padding: 2vw;
-      overflow: visible;
       -ms-flex-align: center;
           align-items: center;
+      height: 100%;
+      width: 100%;
+      max-width: 550px;
+      padding: 2vw;
       transition: all 0.4s ease-in-out; }
       section#coreValues .core-values-slider .core-values-cell .content .content-inner {
         position: relative;
@@ -326,7 +324,8 @@ section#coreValues .core-values-slider {
       position: absolute;
       top: 0;
       left: 0;
-      width: 100vw; }
+      width: 100vw;
+      pointer-events: none; }
 
 section#coreValues .core-values-cell canvas {
   opacity: 0.2; }
