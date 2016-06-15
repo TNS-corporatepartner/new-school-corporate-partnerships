@@ -32648,15 +32648,22 @@
 
 /***/ },
 /* 368 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.ContactUs = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _flickity = __webpack_require__(343);
+
+	var _flickity2 = _interopRequireDefault(_flickity);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -32667,35 +32674,23 @@
 	    this.asideSlider = document.getElementById('asideSlider');
 	    this.slidesUl = this.asideSlider.querySelector('ul');
 	    this.slides = this.asideSlider.querySelectorAll('li');
-	    this.animateSlide(this.slides.length - 1);
+
+	    var flkty = new _flickity2.default('#contactSlider', {
+	      autoPlay: true
+	    });
+
+	    console.log('test');
+
+	    $('#contactUs .content').on('mouseenter', function () {
+	      $(this).addClass('show-invisible');
+	    });
+
+	    $('#contactUs .content').on('mouseleave', function () {
+	      $(this).removeClass('show-invisible');
+	    });
 	  }
 
 	  _createClass(ContactUs, [{
-	    key: 'animateSlide',
-	    value: function animateSlide(index) {
-	      var _this = this;
-
-	      var slide = this.slides[index];
-
-	      Velocity(slide, { translateX: '-50vw' }, {
-	        duration: 2000,
-	        complete: function complete() {
-	          _this.slidesUl.insertBefore(slide, _this.slidesUl.firstChild);
-	          Velocity(slide, { translateX: '0vw' }, {
-	            duration: 1
-	          });
-
-	          var nextIndex = index - 1 > -1 ? index - 1 : _this.slides.length - 1;
-
-	          setTimeout(function () {
-	            if (!_this.isSleeping) {
-	              _this.animateSlide(nextIndex);
-	            }
-	          }, 2000);
-	        }
-	      });
-	    }
-	  }, {
 	    key: 'sleep',
 	    value: function sleep() {
 	      this.isSleeping = true;
