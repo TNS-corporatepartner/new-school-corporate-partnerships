@@ -126,7 +126,7 @@ section#ourPeople{
       &.video {
         width: 604px;
         .overlay{
-          background-color: $black-tint;
+          background-color: transparentize(black, .9);
           transition: background 1s ease;
         }
         &:hover{
@@ -177,12 +177,7 @@ section#ourPeople{
   background-color: transparent;
   transition: all 0.4s ease-in-out;
   transform: scale(0.8);
-  &.active {
-    opacity: 1;
-    pointer-events: auto;
-    transform: scale(1);
-    background-color: $gray-dark;
-  }
+
   .content {
     height: 100%;
     display: flex;
@@ -199,5 +194,10 @@ section#ourPeople{
 }
 
 section#ourPeople.modal-open{
-
+  #personModal{
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+    background-color: $gray-dark;
+  }
 }

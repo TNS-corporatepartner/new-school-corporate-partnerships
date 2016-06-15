@@ -1,8 +1,7 @@
 ---
-title: John Cage
-description: ceo and stuff
+title: Ezgi Ucar
+description: Wearable technology
 type: photo
-image: "/images/person1.jpg"
-video: http://familiar-temp.s3.amazonaws.com/sample2.mp4
+image: "/images/ezgi.jpg"
+video: http://familiar-temp.s3.amazonaws.com/sample3.mp4
 ---
-
