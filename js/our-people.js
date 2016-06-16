@@ -37,25 +37,24 @@ export class OurPeople {
     }, 1200)
 
 
-    $('.person.video').on('click', function() {
+    $('.person.video').on('click', function(e) {
+      e.stopPropagation()
       const personModal = document.getElementById('personModal')
       const modalContent = personModal.querySelector('.content')
       const videoSrc = $(this).data('src');
-
       const video = $('<video />')
+      
       video.attr('src', videoSrc)
       video.attr('autoplay', true)
       
       $('#ourPeople').addClass('modal-open');
-      // $(personModal).addClass('active')
       $(modalContent).append(video)
-    })
 
-    $('#closePersonModal').on('click', () => {
-      // $(this.personModal).removeClass('active')
-      $('#ourPeople').removeClass('modal-open');
-
-      this.modalContent.innerHTML = ''
+      $('#ourPeople').one('click', (e) => {
+        e.stopPropagation()
+        $('#ourPeople').removeClass('modal-open');
+        this.modalContent.innerHTML = ''
+      })      
     })
 
     let x = 0
