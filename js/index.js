@@ -2,9 +2,11 @@ import {Observable} from 'rxjs'
 // import {frame$} from './utils.js'
 import { FutureOf } from './future-of.js'
 import { CoreValues } from './core-values.js'
-import { OurUniversity } from './our-university.js'
+import { OurSchool } from './our-school.js'
 import { OurPeople } from './our-people.js'
+import { OurApproach } from './our-approach.js'
 import { ContactUs } from './contact-us.js'
+
 
 export let app = {}
 
@@ -22,9 +24,10 @@ function init() {
   app.componentConstructors = {
     0: FutureOf,
     1: CoreValues,
-    2: OurUniversity,
-    3: OurPeople,
-    4: ContactUs
+    2: OurSchool,
+    3: OurApproach,
+    4: OurPeople,
+    5: ContactUs
   }
 
   app.componentInstances = {
@@ -32,7 +35,8 @@ function init() {
     1: null,
     2: null,
     3: null,
-    4: null
+    4: null,
+    5: null
   }
 
   const scroller = Observable.create(observer => {
@@ -82,7 +86,7 @@ function init() {
   cursor$.subscribe( d => {
     if (d === 'up' && app.activeScrollIndex) {
       document.body.style.cursor = 'url(/images/prev-cursor.svg), auto'
-    } else if (d === 'down' && app.activeScrollIndex !== 4) {
+    } else if (d === 'down' && app.activeScrollIndex !== 5) {
       document.body.style.cursor = 'url(/images/next-cursor.svg), auto'
     } else {
       document.body.style.cursor = 'auto'
@@ -98,7 +102,7 @@ function init() {
 
       if (direction === 'up' && app.activeScrollIndex !== 0) {
         $('main').moveUp()
-      } else if (direction === 'down' && app.activeScrollIndex !== 4) {
+      } else if (direction === 'down' && app.activeScrollIndex !== 5) {
         $('main').moveDown()
       }
     })

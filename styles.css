@@ -318,161 +318,91 @@ section#coreValues .core-values-cell canvas {
 section#coreValues .core-values-cell:hover canvas {
   opacity: 1; }
 
-section#ourUniversity .our-university-slider {
-  height: 100vh; }
-  section#ourUniversity .our-university-slider.uninitialized {
-    display: -ms-flexbox;
-    display: flex; }
-    section#ourUniversity .our-university-slider.uninitialized .our-university-cell {
-      width: auto;
-      padding: 0; }
-      section#ourUniversity .our-university-slider.uninitialized .our-university-cell span.close-cell {
-        opacity: 0;
-        pointer-events: none; }
-    section#ourUniversity .our-university-slider.uninitialized .flickity-prev-next-button {
-      opacity: 0; }
-  section#ourUniversity .our-university-slider.content-closed .our-university-cell .content {
-    left: calc(50% - 110px);
-    width: 220px; }
-    section#ourUniversity .our-university-slider.content-closed .our-university-cell .content h1 {
-      font-size: 2vh; }
-  section#ourUniversity .our-university-slider.content-closed + .section-headlines .dynamic-text {
-    opacity: 0; }
-  section#ourUniversity .our-university-slider .our-university-cell {
-    position: relative;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-positive: 1;
-        flex-grow: 1;
-    -ms-flex-preferred-size: 0%;
-        flex-basis: 0%;
-    -ms-flex-align: center;
-        align-items: center;
-    width: 100%;
-    height: 100vh;
-    padding: 2vw;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    transition: flex 0.5s ease-in-out, opacity 0.5s ease-in-out;
-    transition: flex 0.5s ease-in-out, opacity 0.5s ease-in-out, -ms-flex 0.5s ease-in-out; }
-    section#ourUniversity .our-university-slider .our-university-cell span.close-cell {
-      position: absolute;
-      top: 100px;
-      right: 20px;
-      opacity: 1;
-      transition: opacity 0.4s ease-in-out; }
-      section#ourUniversity .our-university-slider .our-university-cell span.close-cell:before {
-        content: 'x';
-        color: white; }
-    section#ourUniversity .our-university-slider .our-university-cell .content {
-      position: absolute;
-      overflow: hidden;
-      top: 50%;
-      width: 200px;
-      left: calc(50% - 100px); }
-      section#ourUniversity .our-university-slider .our-university-cell .content h1 {
-        font-size: 2vw;
-        text-align: center;
-        color: white; }
-    section#ourUniversity .our-university-slider .our-university-cell:hover {
-      -ms-flex-positive: 1.5;
-          flex-grow: 1.5; }
-    section#ourUniversity .our-university-slider .our-university-cell.opening {
-      -ms-flex-positive: 10;
-          flex-grow: 10; }
-    section#ourUniversity .our-university-slider .our-university-cell.sibling-is-opening {
-      -ms-flex-positive: 0;
-          flex-grow: 0;
-      opacity: 0;
-      padding: 0; }
-    section#ourUniversity .our-university-slider .our-university-cell:first-of-type {
-      background-image: url("http://familiar-temp.s3.amazonaws.com/our-people.jpg"); }
-    section#ourUniversity .our-university-slider .our-university-cell:nth-of-type(2) {
-      background-image: url("http://familiar-temp.s3.amazonaws.com/our-schools.jpg"); }
-    section#ourUniversity .our-university-slider .our-university-cell:last-of-type {
-      background-image: url("http://familiar-temp.s3.amazonaws.com/our-network.jpg"); }
-  section#ourUniversity .our-university-slider .flickity-prev-next-button {
-    opacity: 0;
-    transition: opacity 0.4s ease-in-out; }
-
 section#ourPeople {
   transition: background 1s ease; }
 
 #peopleSlider {
   position: relative;
   top: calc(50% - 303px);
-  outline: none;
-  transition: transform 0.8s ease-in-out; }
-  #peopleSlider.out {
-    transform: translateX(100vw); }
-  #peopleSlider .slider-cell {
-    width: 1832px;
-    height: 606px;
-    overflow: hidden; }
-    #peopleSlider .slider-cell .person {
-      width: 300px;
-      height: 300px;
-      color: white;
-      position: relative;
-      display: -ms-inline-flexbox;
-      display: inline-flex;
-      -ms-flex-align: end;
-          align-items: flex-end;
-      -ms-flex-wrap: wrap;
-          flex-wrap: wrap;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      cursor: pointer; }
-      #peopleSlider .slider-cell .person:not(.video) {
-        -webkit-filter: grayscale(1);
-                filter: grayscale(1);
-        transition: -webkit-filter 1s ease;
-        transition: filter 1s ease;
-        transition: filter 1s ease, -webkit-filter 1s ease; }
-        #peopleSlider .slider-cell .person:not(.video):hover {
-          -webkit-filter: grayscale(0);
-                  filter: grayscale(0); }
-          #peopleSlider .slider-cell .person:not(.video):hover .overlay {
-            opacity: .7; }
-      #peopleSlider .slider-cell .person:hover p {
-        max-height: 200px;
-        opacity: 1; }
-      #peopleSlider .slider-cell .person.video {
-        width: 604px; }
-        #peopleSlider .slider-cell .person.video .overlay {
-          background-color: rgba(0, 0, 0, 0.1);
-          transition: background 1s ease; }
-        #peopleSlider .slider-cell .person.video:hover .overlay {
-          background-color: rgba(232, 46, 33, 0.7); }
-          #peopleSlider .slider-cell .person.video:hover .overlay:before {
-            content: url(/images/play-button.svg); }
-      #peopleSlider .slider-cell .person hgroup {
-        position: absolute;
-        padding: 10px;
-        bottom: 0;
-        left: 0; }
-      #peopleSlider .slider-cell .person p {
-        opacity: 0;
-        max-height: 0;
-        font-size: 18px;
-        margin-top: 5px;
-        transition: all 0.8s ease-in-out; }
-      #peopleSlider .slider-cell .person .overlay {
-        position: absolute;
-        background-color: rgba(0, 0, 0, 0.35);
-        background-blend-mode: multiply;
-        display: -ms-flexbox;
-        display: flex;
-        -ms-flex-align: center;
-            align-items: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-        width: 100%;
-        height: 100%;
-        opacity: 1;
-        transition: all 1s ease; }
+  outline: none; }
+  #peopleSlider .slider-inner {
+    position: relative;
+    height: 600px;
+    transform: translateX(0%); }
+    #peopleSlider .slider-inner .cell {
+      position: absolute;
+      top: 0;
+      left: 0; }
+      #peopleSlider .slider-inner .cell.clone:first-of-type .grid {
+        left: -100%; }
+    #peopleSlider .slider-inner .grid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 600px; }
+      #peopleSlider .slider-inner .grid .person {
+        width: 300px;
+        height: 300px;
+        color: white;
+        position: relative;
+        display: -ms-inline-flexbox;
+        display: inline-flex;
+        -ms-flex-align: end;
+            align-items: flex-end;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        cursor: pointer; }
+        #peopleSlider .slider-inner .grid .person:not(.video) {
+          -webkit-filter: grayscale(1);
+                  filter: grayscale(1);
+          transition: -webkit-filter 1s ease;
+          transition: filter 1s ease;
+          transition: filter 1s ease, -webkit-filter 1s ease; }
+          #peopleSlider .slider-inner .grid .person:not(.video):hover {
+            -webkit-filter: grayscale(0);
+                    filter: grayscale(0); }
+            #peopleSlider .slider-inner .grid .person:not(.video):hover .overlay {
+              opacity: .7; }
+        #peopleSlider .slider-inner .grid .person:hover p {
+          max-height: 200px;
+          opacity: 1; }
+        #peopleSlider .slider-inner .grid .person.video {
+          width: 604px; }
+          #peopleSlider .slider-inner .grid .person.video .overlay {
+            background-color: rgba(0, 0, 0, 0.1);
+            transition: background 1s ease; }
+          #peopleSlider .slider-inner .grid .person.video:hover .overlay {
+            background-color: rgba(232, 46, 33, 0.7); }
+            #peopleSlider .slider-inner .grid .person.video:hover .overlay:before {
+              content: url(/images/play-button.svg); }
+        #peopleSlider .slider-inner .grid .person hgroup {
+          position: absolute;
+          padding: 10px;
+          bottom: 0;
+          left: 0; }
+        #peopleSlider .slider-inner .grid .person p {
+          opacity: 0;
+          max-height: 0;
+          font-size: 18px;
+          margin-top: 5px;
+          transition: all 0.8s ease-in-out; }
+        #peopleSlider .slider-inner .grid .person .overlay {
+          position: absolute;
+          background-color: rgba(0, 0, 0, 0.35);
+          background-blend-mode: multiply;
+          display: -ms-flexbox;
+          display: flex;
+          -ms-flex-align: center;
+              align-items: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+          width: 100%;
+          height: 100%;
+          opacity: 1;
+          transition: all 1s ease; }
 
 #personModal {
   position: absolute;

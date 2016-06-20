@@ -1,95 +1,59 @@
 import {Observable} from 'rxjs'
-import Flickity from 'flickity'
+import Isotope from 'isotope-layout'
+import 'isotope-masonry-horizontal'
 
 export class OurPeople {
   constructor() {
     this.section = document.getElementById('ourPeople')
-    this.sectionInto = this.section.querySelector('.section-intro')
+    this.sectionInto = this.section.querySelector('.section-intro')    
     const slider = document.getElementById('peopleSlider')
-    const moving = Observable.fromEvent(slider, 'mousemove')
-    this.center = slider.scrollWidth / 2 - window.innerWidth
-    this.personModal = document.getElementById('personModal')
-    this.modalContent = this.personModal.querySelector('.content')
-    // slider.scrollLeft = this.center
-
-    $('.slider-cell').each(function(i, el) {
-      console.log(el)
-      // el.parentNode
-    })
-
-    var flkty = new Flickity('#peopleSlider', {
-      wrapAround: true,
-      // cellAlign: 'left',
-      freeScroll: true,
-      percentPosition: false,
-      // autoPlay: 8000,
-      selectedAttraction: 0.0001,
-      friction: 0.15
-    })
-
+    const sliderInner = slider.querySelector('.slider-inner')
     
+    this.center = slider.scrollWidth / 2 - window.innerWidth
+    this.xPos = 0
+    var sliderX = 0
+    var lastX = 0
+    var sliderPosition = 0
+    // var cellWidth = slider.querySelector('.cell .grid').offsetWidth
+    var cellWidth = 1804
+    console.log(cellWidth)
+    var slideWidth = cellWidth * 1;
 
-    setTimeout(() => {
-      //wait for flickity to initialize
-      $(slider).removeClass('out')
-      this.flktySliderEl = slider.querySelector('.flickity-slider')
-      flkty.next()
-    }, 1200)
-
-
-    $('.person.video').on('click', function(e) {
-      e.stopPropagation()
-      const personModal = document.getElementById('personModal')
-      const modalContent = personModal.querySelector('.content')
-      const videoSrc = $(this).data('src');
-      const video = $('<video />')
-      
-      video.attr('src', videoSrc)
-      video.attr('autoplay', true)
-      
-      $('#ourPeople').addClass('modal-open');
-      $(modalContent).append(video)
-
-      $('#ourPeople').one('click', (e) => {
-        e.stopPropagation()
-        $('#ourPeople').removeClass('modal-open');
-        this.modalContent.innerHTML = ''
-      })      
+    var chunks = document.querySelectorAll('.grid').forEach(chunk => {
+      new Isotope( chunk, {
+        itemSelector: '.person',
+        layoutMode: 'masonryHorizontal',
+        masonryHorizontal: {
+          rowHeight: 300
+        }
+      });
     })
 
-    let x = 0
+    const moving = Observable.fromEvent(window, 'mousemove')
 
     const movingRight = moving
       .filter(e => e.clientX > window.innerWidth / 2)
       .subscribe(e => {
-        if (window.lastX !== e.clientX || window.lastY !== e.clientY){
-          const velocity = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2) / 2
-          const pos = e.clientX - window.innerWidth / 2
+        const velocity = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2)                  
+        sliderX -= velocity * 20
 
-          // this.flktySliderEl.style.transform = 'translateX(' + (x += 5) + '%)'
-          // slider.scrollLeft = slider.scrollLeft + pos * velocity
-        }
-
-
-        window.lastX = e.clientX
-        window.lastY = e.clientY
-      })
+        var sliderPosition = ( ( ( sliderX - cellWidth ) % slideWidth ) + slideWidth ) % slideWidth;
+        sliderPosition += -slideWidth + cellWidth;        
+        console.log(sliderPosition.toFixed(0))
+        slider.style.left = sliderPosition + 'px';
+      }) 
 
     const movingLeft = moving
       .filter(e => e.clientX < window.innerWidth / 2)
       .subscribe(e => {
-        if (window.lastX !== e.clientX || window.lastY !== e.clientY){
-          const velocity = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2)  / 2
-          const pos = window.innerWidth / 2 - e.clientX
+        const velocity = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2) * -1      
+        sliderX += velocity * 20
 
-          // this.flktySliderEl.style.transform = 'translateX(' + (x -= 5) + '%)'
-          // slider.scrollLeft = slider.scrollLeft + pos * velocity
-        }
-
-        window.lastX = e.clientX
-        window.lastY = e.clientY
+        var sliderPosition = ( ( ( sliderX - cellWidth ) % slideWidth ) + slideWidth ) % slideWidth;
+        sliderPosition += -slideWidth + cellWidth;
+        slider.style.left = sliderPosition + 'px';
       })
-
+  
     setTimeout(() => {
       $(this.sectionInto).addClass('hidden')
     }, 1200)
