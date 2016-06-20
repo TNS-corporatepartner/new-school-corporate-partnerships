@@ -32620,17 +32620,32 @@
 	      return _this.scrollOnMouseMove(e);
 	    });
 
-	    var moving$ = this.buildScrollStream().takeUntil(mousing$).repeat().subscribe(function () {
+	    var moving$ = _rxjs.Observable.interval(50).takeUntil(mousing$).repeat().subscribe(function () {
 	      return _this.scrollAmbiently();
+	    });
+
+	    $('.person.video').on('click', function (e) {
+	      e.stopPropagation();
+	      var personModal = document.getElementById('personModal');
+	      var modalContent = personModal.querySelector('.content');
+	      var videoSrc = $(this).data('src');
+	      var video = $('<video />');
+
+	      video.attr('src', videoSrc);
+	      video.attr('autoplay', true);
+
+	      $('#ourPeople').addClass('modal-open');
+	      $(modalContent).append(video);
+
+	      $('#ourPeople').one('click', function (e) {
+	        e.stopPropagation();
+	        $('#ourPeople').removeClass('modal-open');
+	        modalContent.innerHTML = '';
+	      });
 	    });
 	  }
 
 	  _createClass(OurPeople, [{
-	    key: 'buildScrollStream',
-	    value: function buildScrollStream() {
-	      return _rxjs.Observable.interval(50);
-	    }
-	  }, {
 	    key: 'scrollAmbiently',
 	    value: function scrollAmbiently() {
 	      var currSliderX = parseInt(this.slider.style.left || 0);

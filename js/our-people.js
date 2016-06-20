@@ -39,14 +39,30 @@ export class OurPeople {
       .map(e => { return { e: e, direction: 'left'}})
       .subscribe((e) => this.scrollOnMouseMove(e))
 
-    const moving$ = this.buildScrollStream()
+    const moving$ = Observable.interval(50)
       .takeUntil(mousing$)
       .repeat()
       .subscribe( () => this.scrollAmbiently() )
-  }
 
-  buildScrollStream() {
-    return Observable.interval(50)
+    $('.person.video').on('click', function(e) {
+      e.stopPropagation()
+      const personModal = document.getElementById('personModal')
+      const modalContent = personModal.querySelector('.content')
+      const videoSrc = $(this).data('src');
+      const video = $('<video />')
+      
+      video.attr('src', videoSrc)
+      video.attr('autoplay', true)
+      
+      $('#ourPeople').addClass('modal-open');
+      $(modalContent).append(video)
+
+      $('#ourPeople').one('click', (e) => {
+        e.stopPropagation()
+        $('#ourPeople').removeClass('modal-open');
+        modalContent.innerHTML = ''
+      })      
+    })      
   }
 
   scrollAmbiently() {
