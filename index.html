@@ -130,29 +130,14 @@
 
 			<div id="peopleSlider">
 				<div class="slider-inner">
-					<div class="cell clone">
-						<div class="grid">
-							{% for person in site.people %}
-								<div class="person {% if person.video %}video{% endif %}" style="background-image:url('{{person.image}}');" data-src="{% if person.video %}{{person.video}}{% endif %}">
-									<div class="overlay"></div>
-									<hgroup>
-										<h2>{{forloop.length}}</h2>
-										<h6>{{ person.title }}</h6>
-										{{ person.content }}
-									</hgroup>
-								</div>
-							{% endfor %}
-						</div>
-					</div>
 
-					{% for i in (1..1) %}
-						<div class="cell">
+					{% for i in (1..2) %}
+						<div class="cell {% if forloop.index == 1 %}clone{% endif %}">
 							<div class="grid">
 								{% for person in site.people %}
 									<div class="person {% if person.video %}video{% endif %}" style="background-image:url('{{person.image}}');" data-src="{% if person.video %}{{person.video}}{% endif %}">
 										<div class="overlay"></div>
 										<hgroup>
-											<h2>{{forloop.length}}</h2>
 											<h6>{{ person.title }}</h6>
 											{{ person.content }}
 										</hgroup>
@@ -162,20 +147,6 @@
 						</div>
 					{% endfor %}
 				
-					<!--<div class="cell clone">
-						<div class="grid">
-							{% for person in site.people %}
-								<div class="person {% if person.video %}video{% endif %}" style="background-image:url('{{person.image}}');" data-src="{% if person.video %}{{person.video}}{% endif %}">
-									<div class="overlay"></div>
-									<hgroup>
-										<h2>{{forloop.length}}</h2>
-										<h6>{{ person.title }}</h6>
-										{{ person.content }}
-									</hgroup>
-								</div>
-							{% endfor %}
-						</div>
-					</div>						-->
 				</div>
 			</div>
 

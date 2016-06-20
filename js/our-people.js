@@ -4,20 +4,14 @@ import 'isotope-masonry-horizontal'
 
 export class OurPeople {
   constructor() {
+    setTimeout(() => {
+      $(this.sectionInto).addClass('hidden')
+    }, 1200)
+
     this.section = document.getElementById('ourPeople')
     this.sectionInto = this.section.querySelector('.section-intro')    
-    const slider = document.getElementById('peopleSlider')
-    const sliderInner = slider.querySelector('.slider-inner')
-    
-    this.center = slider.scrollWidth / 2 - window.innerWidth
-    this.xPos = 0
-    var sliderX = 0
-    var lastX = 0
-    var sliderPosition = 0
-    // var cellWidth = slider.querySelector('.cell .grid').offsetWidth
-    var cellWidth = 1804
-    console.log(cellWidth)
-    var slideWidth = cellWidth * 1;
+    this.slider = document.getElementById('peopleSlider')
+    this.lastDirection = 'right'        
 
     var chunks = document.querySelectorAll('.grid').forEach(chunk => {
       new Isotope( chunk, {
@@ -29,33 +23,56 @@ export class OurPeople {
       });
     })
 
-    const moving = Observable.fromEvent(window, 'mousemove')
+    this.sliderX = 0
+    this.cellWidth = this.slider.querySelector('.cell .grid').offsetWidth
+    this.slideWidth = this.cellWidth * 1;
 
-    const movingRight = moving
+    const mousing$ = Observable.fromEvent(this.slider, 'mousemove')
+
+    const mousingRight = mousing$
       .filter(e => e.clientX > window.innerWidth / 2)
-      .subscribe(e => {
-        const velocity = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2)                  
-        sliderX -= velocity * 20
+      .map(e => { return { e: e, direction: 'right'}})
+      .subscribe((e) => this.scrollOnMouseMove(e)) 
 
-        var sliderPosition = ( ( ( sliderX - cellWidth ) % slideWidth ) + slideWidth ) % slideWidth;
-        sliderPosition += -slideWidth + cellWidth;        
-        console.log(sliderPosition.toFixed(0))
-        slider.style.left = sliderPosition + 'px';
-      }) 
-
-    const movingLeft = moving
+    const mousingLeft = mousing$
       .filter(e => e.clientX < window.innerWidth / 2)
-      .subscribe(e => {
-        const velocity = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2) * -1      
-        sliderX += velocity * 20
+      .map(e => { return { e: e, direction: 'left'}})
+      .subscribe((e) => this.scrollOnMouseMove(e))
 
-        var sliderPosition = ( ( ( sliderX - cellWidth ) % slideWidth ) + slideWidth ) % slideWidth;
-        sliderPosition += -slideWidth + cellWidth;
-        slider.style.left = sliderPosition + 'px';
-      })
-  
-    setTimeout(() => {
-      $(this.sectionInto).addClass('hidden')
-    }, 1200)
+    const moving$ = this.buildScrollStream()
+      .takeUntil(mousing$)
+      .repeat()
+      .subscribe( () => this.scrollAmbiently() )
   }
+
+  buildScrollStream() {
+    return Observable.interval(50)
+  }
+
+  scrollAmbiently() {
+    const currSliderX = parseInt(this.slider.style.left || 0) 
+    const sliderX = this.lastDirection === 'right' ? currSliderX - 2 : currSliderX + 2 
+    this.updateSliderPosition(sliderX)
+  }
+
+  scrollOnMouseMove(event) {
+    const e = event.e    
+    this.lastDirection = event.direction
+    
+    const velocity = event.direction === 'right' ? 
+      (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2) : 
+      (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2) * -1 
+
+    const sliderX = event.direction === 'right' ? this.sliderX - velocity * 40 : this.sliderX + velocity * 40 
+    this.updateSliderPosition(sliderX)
+  }
+
+  updateSliderPosition(sliderX) {
+    this.sliderX = sliderX
+
+    var sliderPosition = ( ( ( this.sliderX - this.cellWidth ) % this.slideWidth ) + this.slideWidth ) % this.slideWidth;
+    sliderPosition += -this.slideWidth + this.cellWidth;        
+    this.slider.style.left = sliderPosition + 'px';    
+  }  
 }
+
