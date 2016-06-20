@@ -21,7 +21,9 @@ module.exports = {
       'eventEmitter/EventEmitter': 'wolfy87-eventemitter/EventEmitter',
       'get-style-property': 'desandro-get-style-property',
       'matches-selector': 'desandro-matches-selector',
-      'classie': 'desandro-classie'
+      'classie': 'desandro-classie',
+      'masonry': 'masonry-layout',
+      'isotope': 'isotope-layout'      
     }
   }
 };

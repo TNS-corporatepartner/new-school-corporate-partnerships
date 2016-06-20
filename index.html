@@ -114,50 +114,77 @@
 			</div>
 		</section>
 
-		<section id="ourUniversity">
-			<div class="global-slider our-university-slider uninitialized content-closed">
-				<div class="our-university-cell" data-headline="Transdisciplinary Approach">
-					<span class="close-cell"></span>
-					<div class="content">
-						<h1>Transdisciplinary Approach</h1>
-					</div>
+		<section id="ourSchool">		
+
+			<div class="school-links">
+				<div class="school parsons">
+					<img src="/images/school-preview1.png">
+					<h3>Parsons School of Design</h3>
 				</div>
 
-				<div class="our-university-cell" data-headline="Our School">
-					<span class="close-cell"></span>
-					<div class="content">
-						<h1>Our School</h1>
-					</div>
+				<div class="school lang">
+					<img src="/images/school-preview1.png">
+					<h3>Eugene Lang College of Liberal Arts</h3>
 				</div>
+
+				<div class="school public">
+					<img src="/images/school-preview1.png">
+					<h3>Schools of Public Engagement</h3>
+				</div>
+
+				<div class="school performing">
+					<img src="/images/school-preview1.png">
+					<h3>College of Performing Arts</h3>
+				</div>
+
+				<div class="school research">
+					<img src="/images/school-preview1.png">
+					<h3>The New School for Social Research</h3>
+				</div>
+			</div>
+
+			<div class="intro-paragraph">
+				<p>Our Unique structure provides the expertise of five schools collaborating to reinvent everything and approach issues holistically.</p>
 			</div>
 
 			<hgroup class="section-headlines">
 				<h4>Our University</h4>
-				<h3 class="dynamic-text"></h3>
+				<h3 class="dynamic-text">Our Schools</h3>
 			</hgroup>
 
 			<div class="section-intro">
-				<h1>Our University</h1>
+				<h1>Our Schools</h1>
+			</div>			
+		</section>
+
+		<section id="ourApproach">
+			<div class="placeholder-fs">
+				<h1>Our Approach</h1>
 			</div>
 		</section>
 
-
 		<section id="ourPeople">
 
-			<div id="peopleSlider" class="out">
-				{% for cell in (1..3) %}
-				<div class="slider-cell">
-					{% for person in site.people %}
-						<div class="person {% if person.video %}video{% endif %}" style="background-image:url('{{person.image}}');" data-src="{% if person.video %}{{person.video}}{% endif %}">
-							<div class="overlay"></div>
-							<hgroup>
-								<h6>{{ person.title }}</h6>
-								{{ person.content }}
-							</hgroup>
+			<div id="peopleSlider">
+				<div class="slider-inner">
+
+					{% for i in (1..2) %}
+						<div class="cell {% if forloop.index == 1 %}clone{% endif %}">
+							<div class="grid">
+								{% for person in site.people %}
+									<div class="person {% if person.video %}video{% endif %}" style="background-image:url('{{person.image}}');" data-src="{% if person.video %}{{person.video}}{% endif %}">
+										<div class="overlay"></div>
+										<hgroup>
+											<h6>{{ person.title }}</h6>
+											{{ person.content }}
+										</hgroup>
+									</div>
+								{% endfor %}
+							</div>
 						</div>
 					{% endfor %}
+				
 				</div>
-				{% endfor %}
 			</div>
 
 			<hgroup class="section-headlines">

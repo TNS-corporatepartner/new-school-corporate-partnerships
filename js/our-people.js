@@ -1,41 +1,48 @@
 import {Observable} from 'rxjs'
-import Flickity from 'flickity'
+import Isotope from 'isotope-layout'
+import 'isotope-masonry-horizontal'
 
 export class OurPeople {
   constructor() {
-    this.section = document.getElementById('ourPeople')
-    this.sectionInto = this.section.querySelector('.section-intro')
-    const slider = document.getElementById('peopleSlider')
-    const moving = Observable.fromEvent(slider, 'mousemove')
-    this.center = slider.scrollWidth / 2 - window.innerWidth
-    this.personModal = document.getElementById('personModal')
-    this.modalContent = this.personModal.querySelector('.content')
-    // slider.scrollLeft = this.center
-
-    $('.slider-cell').each(function(i, el) {
-      console.log(el)
-      // el.parentNode
-    })
-
-    var flkty = new Flickity('#peopleSlider', {
-      wrapAround: true,
-      // cellAlign: 'left',
-      freeScroll: true,
-      percentPosition: false,
-      // autoPlay: 8000,
-      selectedAttraction: 0.0001,
-      friction: 0.15
-    })
-
-    
-
     setTimeout(() => {
-      //wait for flickity to initialize
-      $(slider).removeClass('out')
-      this.flktySliderEl = slider.querySelector('.flickity-slider')
-      flkty.next()
+      $(this.sectionInto).addClass('hidden')
     }, 1200)
 
+    this.section = document.getElementById('ourPeople')
+    this.sectionInto = this.section.querySelector('.section-intro')    
+    this.slider = document.getElementById('peopleSlider')
+    this.lastDirection = 'right'        
+
+    var chunks = document.querySelectorAll('.grid').forEach(chunk => {
+      new Isotope( chunk, {
+        itemSelector: '.person',
+        layoutMode: 'masonryHorizontal',
+        masonryHorizontal: {
+          rowHeight: 300
+        }
+      });
+    })
+
+    this.sliderX = 0
+    this.cellWidth = this.slider.querySelector('.cell .grid').offsetWidth
+    this.slideWidth = this.cellWidth * 1;
+
+    const mousing$ = Observable.fromEvent(this.slider, 'mousemove')
+
+    const mousingRight = mousing$
+      .filter(e => e.clientX > window.innerWidth / 2)
+      .map(e => { return { e: e, direction: 'right'}})
+      .subscribe((e) => this.scrollOnMouseMove(e)) 
+
+    const mousingLeft = mousing$
+      .filter(e => e.clientX < window.innerWidth / 2)
+      .map(e => { return { e: e, direction: 'left'}})
+      .subscribe((e) => this.scrollOnMouseMove(e))
+
+    const moving$ = Observable.interval(50)
+      .takeUntil(mousing$)
+      .repeat()
+      .subscribe( () => this.scrollAmbiently() )
 
     $('.person.video').on('click', function(e) {
       e.stopPropagation()
@@ -53,45 +60,35 @@ export class OurPeople {
       $('#ourPeople').one('click', (e) => {
         e.stopPropagation()
         $('#ourPeople').removeClass('modal-open');
-        this.modalContent.innerHTML = ''
+        modalContent.innerHTML = ''
       })      
-    })
-
-    let x = 0
-
-    const movingRight = moving
-      .filter(e => e.clientX > window.innerWidth / 2)
-      .subscribe(e => {
-        if (window.lastX !== e.clientX || window.lastY !== e.clientY){
-          const velocity = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2) / 2
-          const pos = e.clientX - window.innerWidth / 2
-
-          // this.flktySliderEl.style.transform = 'translateX(' + (x += 5) + '%)'
-          // slider.scrollLeft = slider.scrollLeft + pos * velocity
-        }
-
-
-        window.lastX = e.clientX
-        window.lastY = e.clientY
-      })
-
-    const movingLeft = moving
-      .filter(e => e.clientX < window.innerWidth / 2)
-      .subscribe(e => {
-        if (window.lastX !== e.clientX || window.lastY !== e.clientY){
-          const velocity = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2)  / 2
-          const pos = window.innerWidth / 2 - e.clientX
-
-          // this.flktySliderEl.style.transform = 'translateX(' + (x -= 5) + '%)'
-          // slider.scrollLeft = slider.scrollLeft + pos * velocity
-        }
-
-        window.lastX = e.clientX
-        window.lastY = e.clientY
-      })
-
-    setTimeout(() => {
-      $(this.sectionInto).addClass('hidden')
-    }, 1200)
+    })      
   }
+
+  scrollAmbiently() {
+    const currSliderX = parseInt(this.slider.style.left || 0) 
+    const sliderX = this.lastDirection === 'right' ? currSliderX - 2 : currSliderX + 2 
+    this.updateSliderPosition(sliderX)
+  }
+
+  scrollOnMouseMove(event) {
+    const e = event.e    
+    this.lastDirection = event.direction
+    
+    const velocity = event.direction === 'right' ? 
+      (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2) : 
+      (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2) * -1 
+
+    const sliderX = event.direction === 'right' ? this.sliderX - velocity * 40 : this.sliderX + velocity * 40 
+    this.updateSliderPosition(sliderX)
+  }
+
+  updateSliderPosition(sliderX) {
+    this.sliderX = sliderX
+
+    var sliderPosition = ( ( ( this.sliderX - this.cellWidth ) % this.slideWidth ) + this.slideWidth ) % this.slideWidth;
+    sliderPosition += -this.slideWidth + this.cellWidth;        
+    this.slider.style.left = sliderPosition + 'px';    
+  }  
 }
+
