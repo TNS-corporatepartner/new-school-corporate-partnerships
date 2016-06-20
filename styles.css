@@ -187,7 +187,8 @@ section#futureOf {
   bottom: 0;
   right: 0;
   width: 100%;
-  background-color: #E82E21; }
+  background-color: #E82E21;
+  cursor: url(/images/next-cursor-black.svg), auto; }
 
 #introText {
   position: fixed;
@@ -201,7 +202,8 @@ section#futureOf {
   left: 0;
   padding-left: 2vw;
   opacity: 0;
-  color: white; }
+  color: white;
+  pointer-events: none; }
   #introText span {
     display: block;
     max-width: 1100px;
@@ -214,7 +216,7 @@ section#futureOf {
   position: fixed;
   top: 20px;
   left: 20px;
-  width: 200px; }
+  width: 400px; }
   #fixedLogo svg {
     width: 100%;
     overflow: visible; }
@@ -276,8 +278,7 @@ section#coreValues .core-values-slider {
       top: 100px;
       right: 20px;
       opacity: 1;
-      transition: opacity 0.4s ease-in-out;
-      cursor: pointer; }
+      transition: opacity 0.4s ease-in-out; }
       section#coreValues .core-values-slider .core-values-cell span.close-cell:before {
         content: '×';
         color: white;
@@ -300,8 +301,9 @@ section#coreValues .core-values-slider {
           display: inline;
           font-size: 3vh;
           color: white;
+          padding: 100px 0;
           transition: font-size 0.4s ease-in-out;
-          cursor: pointer; }
+          cursor: url(/images/click-cursor-red.svg), auto; }
         section#coreValues .core-values-slider .core-values-cell .content .content-inner .dynamic-text {
           opacity: 0;
           color: white; }
@@ -318,8 +320,60 @@ section#coreValues .core-values-cell canvas {
 section#coreValues .core-values-cell:hover canvas {
   opacity: 1; }
 
-section#ourPeople {
-  transition: background 1s ease; }
+section#ourSchool .intro-paragraph {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  padding: 2vw;
+  background-color: rgba(225, 225, 225, 0.9);
+  transition: opacity 0.7s ease-in-out; }
+  section#ourSchool .intro-paragraph.hidden {
+    opacity: 0;
+    pointer-events: none; }
+  section#ourSchool .intro-paragraph p {
+    font-size: 5vh; }
+
+section#ourSchool .school-links {
+  position: relative;
+  height: 100%; }
+  section#ourSchool .school-links .school {
+    position: absolute;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+        align-items: center;
+    cursor: url(/images/click-cursor-red.svg), auto; }
+    section#ourSchool .school-links .school:hover h3 {
+      color: black; }
+    section#ourSchool .school-links .school.parsons {
+      top: 30%;
+      left: 5%; }
+    section#ourSchool .school-links .school.lang {
+      top: 55%;
+      left: 18%; }
+    section#ourSchool .school-links .school.public {
+      top: 78%;
+      left: 35%; }
+    section#ourSchool .school-links .school.performing {
+      top: 18%;
+      left: 45%; }
+    section#ourSchool .school-links .school.research {
+      top: 40%;
+      left: 55%; }
+    section#ourSchool .school-links .school img {
+      width: 100px;
+      margin-right: 20px; }
+    section#ourSchool .school-links .school h3 {
+      font-weight: 300;
+      font-size: 2vh;
+      width: 300px;
+      color: #E82E21;
+      transition: all 0.4s ease-in-out; }
 
 #peopleSlider {
   position: relative;
@@ -354,7 +408,7 @@ section#ourPeople {
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
-        cursor: pointer; }
+        cursor: url(/images/click-cursor-black.svg), auto; }
         #peopleSlider .slider-inner .grid .person:not(.video) {
           -webkit-filter: grayscale(1);
                   filter: grayscale(1);

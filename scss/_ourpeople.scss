@@ -1,89 +1,6 @@
-// section#ourPeople {
-//   ul {
-//     list-style: none;
-//     display: flex;
-//     flex-direction: column;
-//     flex-wrap: wrap;
-//     height: 100vh;
-//     width: 100vw;
-//     overflow-x: scroll;
-//     li {
-//       width: 200px;
-//       height: 200px;
-//       background-color: lightgreen;
-//       &.x2 {
-//         background-color: blue;
-//         width: 400px;
-//       }
-//     }
-//   }
-// }
-
-// section#ourPeople {
-//   display: flex;
-//   align-items: center;
-//   #peopleSlider {
-//     display: flex;
-//     flex-direction: column;
-//     flex-wrap: wrap;
-//     height: 300px;
-//     width: 100vw;
-//     overflow-x: scroll;
-//     .img {
-//       width: 150px;
-//       height: 150px;
-//       background-size: cover;
-//       background-position: center;
-//       background-repeat: no-repeat;
-
-//     }
-//   }
-// }
-
-// section#ourPeople {
-
-//   #peopleSlider {
-//     display: flex;
-//     align-items: center;
-//     width: 100%;
-//     .slider-cell {
-//       height: 600px;
-//       width: 100%;
-//       display: flex;
-//       flex-direction: column;
-//       flex-wrap: wrap;
-//       .person {
-//         width: 300px;
-//         height: 300px;
-//         margin-right: 10px;
-//         background-size: cover;
-//         background-position: center;
-//         background-repeat: no-repeat;
-//         background-color: lightgreen;
-//         border: 1px solid black;
-//         &.video {
-//           width: 600px;
-//         }
-//       }
-//     }
-//   }
-// }
-
-section#ourPeople {
-  // width: 100%;
-  // width: auto;
-  // .section-headlines{
-  //   h3, h4, h1{
-  //     color: $gray-dark;
-  //   }
-  // }
-  transition: background 1s ease;
-}
-
 #peopleSlider {
   position: relative;
   top: calc(50% - 303px);
-  // overflow: hidden;
   outline: none;  
   .slider-inner {
     position: relative;
@@ -93,27 +10,15 @@ section#ourPeople {
       position: absolute;
       top: 0;
       left: 0;
-      // &:nth-of-type(1) {
-      //   left: 0%;
-      // }
-      // &:nth-of-type(2) {
-      //   left: 3608px;
-      // }
-      // &:nth-of-type(3) {
-      //   left: 5412px;
-      // }      
-      &.clone:first-of-type .grid { left: -100%; }
-      // &.clone:last-of-type { left: -3608px; }      
+      &.clone:first-of-type .grid { 
+        left: -100%; 
+      }      
     }
     .grid {
       position: absolute;
       top: 0;
       left: 0;
       height: 600px;
-      // display: flex;
-      // flex-direction: column;
-      // flex-wrap: wrap;
-      // align-items: flex-start;
       .person {
         width: 300px;
         height: 300px;
@@ -125,7 +30,7 @@ section#ourPeople {
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
-        cursor: pointer;
+        cursor: url(/images/click-cursor-black.svg), auto;
         &:not(.video) { 
           filter: grayscale(1);
           transition: filter 1s ease;
@@ -153,7 +58,6 @@ section#ourPeople {
               background-color: transparentize($red, .3);
               &:before {
                 content:url(/images/play-button.svg);
-                // position: absolute;
               }
             }
           }

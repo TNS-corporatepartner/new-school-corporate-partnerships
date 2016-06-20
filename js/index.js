@@ -85,9 +85,9 @@ function init() {
   
   cursor$.subscribe( d => {
     if (d === 'up' && app.activeScrollIndex) {
-      document.body.style.cursor = 'url(/images/prev-cursor.svg), auto'
+      document.body.style.cursor = 'url(/images/prev-cursor-red.svg), auto'
     } else if (d === 'down' && app.activeScrollIndex !== 5) {
-      document.body.style.cursor = 'url(/images/next-cursor.svg), auto'
+      document.body.style.cursor = 'url(/images/next-cursor-red.svg), auto'
     } else {
       document.body.style.cursor = 'auto'
     }

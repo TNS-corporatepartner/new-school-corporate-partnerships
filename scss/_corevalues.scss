@@ -75,8 +75,7 @@ section#coreValues {
         top: 100px;
         right: 20px;
         opacity: 1;
-        transition: opacity 0.4s ease-in-out;
-        cursor: pointer;
+        transition: opacity 0.4s ease-in-out;        
 
         &:before {
           content: '×';
@@ -101,8 +100,9 @@ section#coreValues {
             font-size: 3vh;
             // text-align: left;
             color: white;
+            padding: 100px 0;
             transition: font-size 0.4s ease-in-out;
-            cursor: pointer;
+            cursor: url(/images/click-cursor-red.svg), auto;
           }
           .dynamic-text {
             opacity: 0;

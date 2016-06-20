@@ -151,9 +151,9 @@
 
 	  cursor$.subscribe(function (d) {
 	    if (d === 'up' && app.activeScrollIndex) {
-	      document.body.style.cursor = 'url(/images/prev-cursor.svg), auto';
+	      document.body.style.cursor = 'url(/images/prev-cursor-red.svg), auto';
 	    } else if (d === 'down' && app.activeScrollIndex !== 5) {
-	      document.body.style.cursor = 'url(/images/next-cursor.svg), auto';
+	      document.body.style.cursor = 'url(/images/next-cursor-red.svg), auto';
 	    } else {
 	      document.body.style.cursor = 'auto';
 	    }
@@ -32542,10 +32542,21 @@
 
 	  this.section = document.getElementById('ourSchool');
 	  this.sectionInto = this.section.querySelector('.section-intro');
+	  this.paragraphIntro = this.section.querySelector('.intro-paragraph');
+	  this.schoolLinks = this.section.querySelectorAll('.school');
 
 	  setTimeout(function () {
 	    $(_this.sectionInto).addClass('hidden');
 	  }, 1200);
+
+	  setTimeout(function () {
+	    $(_this.paragraphIntro).addClass('hidden');
+	  }, 3000);
+
+	  $(this.schoolLinks).on('click', function (e) {
+	    e.stopPropagation();
+	    console.log(this);
+	  });
 	};
 
 /***/ },
