@@ -32351,8 +32351,7 @@
 	    });
 
 	    particlesJS.load('designDna', '/js/particles/design-dna.json');
-	    particlesJS.load('statusQuo', '/js/particles/status-quo.json');
-	    particlesJS.load('fearless', '/js/particles/fearless.json');
+	    // particlesJS.load('fearless', '/js/particles/fearless.json')
 	    particlesJS.load('diversity', '/js/particles/diversity.json');
 
 	    setTimeout(function () {
