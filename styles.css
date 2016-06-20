@@ -426,13 +426,13 @@ section#ourSchool #schoolModal {
     section#ourSchool #schoolModal .content-wrap .content {
       width: 50%;
       padding: 2vw;
+      text-decoration: none;
+      color: white;
+      cursor: url(/images/click-cursor-red.svg), auto;
       background-color: rgba(0, 0, 0, 0.35);
       opacity: 0; }
       section#ourSchool #schoolModal .content-wrap .content p {
         margin-bottom: 20px; }
-      section#ourSchool #schoolModal .content-wrap .content a {
-        text-decoration: none;
-        color: white; }
       section#ourSchool #schoolModal .content-wrap .content span {
         text-transform: uppercase; }
 

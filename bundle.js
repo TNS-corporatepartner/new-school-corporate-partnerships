@@ -32597,7 +32597,7 @@
 	    Velocity(modalWrapper, { opacity: 1 });
 	    Velocity(modal, openState, { duration: 500, easing: 'easeOutCubic', complete: function complete() {
 
-	        modalContent.innerHTML = '\n          <a href="google.com" target="_blank">\n            <h1>' + schoolName + '</h1>\n            <p>' + schoolDescription + '</p>\n            <br><span>Learn More &rarr;</span>\n          </a>\n        ';
+	        modalContent.innerHTML = '\n          <h1>' + schoolName + '</h1>\n          <p>' + schoolDescription + '</p>\n          <br><span>Learn More &rarr;</span>\n        ';
 
 	        Velocity(modalContent, { opacity: 1 });
 	      } });
