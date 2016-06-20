@@ -52,11 +52,9 @@ export class OurSchool {
       Velocity(modal, openState, { duration: 500, easing: 'easeOutCubic', complete: function() {
 
         modalContent.innerHTML = `
-          <a href="google.com" target="_blank">
-            <h1>${schoolName}</h1>
-            <p>${schoolDescription}</p>
-            <br><span>Learn More &rarr;</span>
-          </a>
+          <h1>${schoolName}</h1>
+          <p>${schoolDescription}</p>
+          <br><span>Learn More &rarr;</span>
         `
 
         Velocity(modalContent, {opacity: 1})        
