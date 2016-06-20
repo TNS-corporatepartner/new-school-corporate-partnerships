@@ -156,6 +156,9 @@ function init() {
 
   function initSplashContent() {
     return Observable.create(obs => {
+
+      $('body').addClass('intro-in-progress')
+
       //logo animate in
       Velocity(line1, {x1: 4.501, y1: 64.81, x2: 109.524, y2: 64.81}, {duration: 500})
       Velocity(line2, {x1: 4.501, y1: 70.5, x2: 109.524, y2: 70.5}, {duration: 500})
@@ -180,6 +183,10 @@ function init() {
               duration: 500,
               display: 'none'
             })
+
+            setTimeout(function() {
+              $('body').removeClass('intro-in-progress')
+            }, 500)            
           }, 3000)
         }
       })
@@ -194,7 +201,7 @@ function init() {
       })
 
       setTimeout(() => {
-        obs.next()
+        obs.next()        
       }, 8800)
     })
   }
