@@ -1,4 +1,16 @@
 section#ourSchool {    
+  &.modal-open {
+    cursor: url('/images/close-cursor.svg'), auto;
+    .section-headlines h4,
+    .section-headlines h3  {
+      color: white;
+    }
+  }
+
+  .section-headlines h4,
+  .section-headlines h3  {
+    transition: color 0.5s ease-in-out;
+  }
 
   .intro-paragraph {
     position: absolute;
@@ -63,5 +75,37 @@ section#ourSchool {
     }
   }
 
+  #schoolModal {
+    position: absolute;
+    // background-color: white;
+    .content-wrap {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0;            
+      .content {
+        width: 50%;
+        padding: 2vw;
+        background-color: $black-tint;        
+        opacity: 0;        
+        p {
+          margin-bottom: 20px;
+        }
+
+        a {                    
+          text-decoration: none;
+          color: white;
+        }
+
+        span {
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
 }
 

@@ -216,7 +216,8 @@ section#futureOf {
   position: fixed;
   top: 20px;
   left: 20px;
-  width: 400px; }
+  width: 400px;
+  pointer-events: none; }
   #fixedLogo svg {
     width: 100%;
     overflow: visible; }
@@ -320,6 +321,16 @@ section#coreValues .core-values-cell canvas {
 section#coreValues .core-values-cell:hover canvas {
   opacity: 1; }
 
+section#ourSchool.modal-open {
+  cursor: url("/images/close-cursor.svg"), auto; }
+  section#ourSchool.modal-open .section-headlines h4,
+  section#ourSchool.modal-open .section-headlines h3 {
+    color: white; }
+
+section#ourSchool .section-headlines h4,
+section#ourSchool .section-headlines h3 {
+  transition: color 0.5s ease-in-out; }
+
 section#ourSchool .intro-paragraph {
   position: absolute;
   top: 0;
@@ -374,6 +385,32 @@ section#ourSchool .school-links {
       width: 300px;
       color: #E82E21;
       transition: all 0.4s ease-in-out; }
+
+section#ourSchool #schoolModal {
+  position: absolute; }
+  section#ourSchool #schoolModal .content-wrap {
+    height: 100%;
+    width: 100%;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+        align-items: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0; }
+    section#ourSchool #schoolModal .content-wrap .content {
+      width: 50%;
+      padding: 2vw;
+      background-color: rgba(0, 0, 0, 0.35);
+      opacity: 0; }
+      section#ourSchool #schoolModal .content-wrap .content p {
+        margin-bottom: 20px; }
+      section#ourSchool #schoolModal .content-wrap .content a {
+        text-decoration: none;
+        color: white; }
+      section#ourSchool #schoolModal .content-wrap .content span {
+        text-transform: uppercase; }
 
 #peopleSlider {
   position: relative;
