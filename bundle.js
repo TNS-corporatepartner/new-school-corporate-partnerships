@@ -224,6 +224,9 @@
 
 	  function initSplashContent() {
 	    return _rxjs.Observable.create(function (obs) {
+
+	      $('body').addClass('intro-in-progress');
+
 	      //logo animate in
 	      Velocity(line1, { x1: 4.501, y1: 64.81, x2: 109.524, y2: 64.81 }, { duration: 500 });
 	      Velocity(line2, { x1: 4.501, y1: 70.5, x2: 109.524, y2: 70.5 }, { duration: 500 });
@@ -248,6 +251,10 @@
 	              duration: 500,
 	              display: 'none'
 	            });
+
+	            setTimeout(function () {
+	              $('body').removeClass('intro-in-progress');
+	            }, 500);
 	          }, 3000);
 	        }
 	      });
@@ -32580,7 +32587,7 @@
 	      opacity: 1
 	    };
 
-	    $(section).addClass('modal-open');
+	    $('body').addClass('school-modal-open');
 	    $(modal).css(closedState);
 
 	    var schoolName = 'Parsons';
@@ -32597,7 +32604,7 @@
 
 	    $('#ourSchool').one('click', function (e) {
 	      e.stopPropagation();
-	      $(section).removeClass('modal-open');
+	      $('body').removeClass('school-modal-open');
 
 	      Velocity(modalContent, { opacity: 0 }, {
 	        complete: function complete() {

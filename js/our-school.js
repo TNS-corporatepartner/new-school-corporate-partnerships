@@ -41,7 +41,7 @@ export class OurSchool {
         opacity: 1
       }
 
-      $(section).addClass('modal-open')
+      $('body').addClass('school-modal-open')
       $(modal).css(closedState)
 
       const schoolName = 'Parsons'
@@ -65,7 +65,7 @@ export class OurSchool {
 
       $('#ourSchool').one('click', (e) => {
         e.stopPropagation()        
-        $(section).removeClass('modal-open')
+        $('body').removeClass('school-modal-open')
 
         Velocity(modalContent, {opacity: 0}, {
           complete: function() {

@@ -1,7 +1,33 @@
 body {
-  // cursor: url('/images/next-cursor.svg'), auto;
-  main {
-    //
+
+  &.viewing-page-3,
+  &.viewing-page-4, 
+  &.viewing-page-5, 
+  &.viewing-page-6 {
+    #fixedLogo svg > g {
+      fill: $gray-dark;      
+      line {
+        stroke: $gray-dark;        
+      }
+    }
+  }
+
+  &.intro-in-progress {
+    #fixedLogo svg > g {
+      transition: none;
+      fill: white;      
+      line {
+        transition: none;
+        stroke: white;        
+      }
+    }    
+  }
+}
+
+#fixedLogo svg > g {
+  transition: fill 0.8s ease-in-out;
+  line {
+    transition: stroke 0.8s ease-in-out;
   }
 }
 

@@ -1,12 +1,22 @@
-section#ourSchool {    
-  &.modal-open {
+body.school-modal-open {
+  #fixedLogo svg > g {
+    fill: white;
+    transition: fill 0.8s ease-in-out;
+    line {
+      stroke: white;
+      transition: stroke 0.8s ease-in-out;
+    }
+  }
+
+  section#ourSchool {
     cursor: url('/images/close-cursor.svg'), auto;
     .section-headlines h4,
     .section-headlines h3  {
       color: white;
     }
   }
-
+}
+section#ourSchool {    
   .section-headlines h4,
   .section-headlines h3  {
     transition: color 0.5s ease-in-out;
