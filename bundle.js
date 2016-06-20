@@ -147,13 +147,15 @@
 	    return e.clientY >= window.innerHeight / 2;
 	  }).mapTo('down');
 
-	  var cursor$ = _rxjs.Observable.merge(moveUp$, moveDown$).publish();
+	  var cursor$ = _rxjs.Observable.merge(moveUp$, moveDown$).startWith('load').publish();
 
 	  cursor$.subscribe(function (d) {
 	    if (d === 'up' && app.activeScrollIndex) {
 	      document.body.style.cursor = 'url(/images/prev-cursor-red.svg), auto';
 	    } else if (d === 'down' && app.activeScrollIndex !== 5) {
 	      document.body.style.cursor = 'url(/images/next-cursor-red.svg), auto';
+	    } else if (d === 'load') {
+	      document.body.style.cursor = 'url(/images/next-cursor-black.svg), auto';
 	    } else {
 	      document.body.style.cursor = 'auto';
 	    }
@@ -32549,13 +32551,68 @@
 	    $(_this.sectionInto).addClass('hidden');
 	  }, 1200);
 
-	  setTimeout(function () {
-	    $(_this.paragraphIntro).addClass('hidden');
-	  }, 3000);
+	  // setTimeout(() => {
+	  $(this.paragraphIntro).addClass('hidden');
+	  // }, 3000)
 
 	  $(this.schoolLinks).on('click', function (e) {
 	    e.stopPropagation();
-	    console.log(this);
+	    var r = this.querySelector('img').getBoundingClientRect();
+	    var section = document.getElementById('ourSchool');
+	    var modal = document.getElementById('schoolModal');
+	    var modalWrapper = modal.querySelector('.content-wrap');
+	    var modalContent = modal.querySelector('.content');
+
+	    var closedState = {
+	      top: r.top,
+	      bottom: r.bottom,
+	      left: r.left,
+	      width: r.width,
+	      height: r.height,
+	      opacity: 0
+	    };
+
+	    var openState = {
+	      top: 0,
+	      left: 0,
+	      width: '100%',
+	      height: '100%',
+	      opacity: 1
+	    };
+
+	    $(section).addClass('modal-open');
+	    $(modal).css(closedState);
+
+	    var schoolName = 'Parsons';
+	    var schoolDescription = 'One of the world\'s leading art and design schools. Offers an enlightened approach to design education and sustainability.';
+
+	    modalWrapper.style.backgroundImage = 'url(/images/studentgroup.jpg)';
+	    Velocity(modalWrapper, { opacity: 1 });
+	    Velocity(modal, openState, { duration: 500, easing: 'easeOutCubic', complete: function complete() {
+
+	        modalContent.innerHTML = '\n          <a href="google.com" target="_blank">\n            <h1>' + schoolName + '</h1>\n            <p>' + schoolDescription + '</p>\n            <br><span>Learn More &rarr;</span>\n          </a>\n        ';
+
+	        Velocity(modalContent, { opacity: 1 });
+	      } });
+
+	    $('#ourSchool').one('click', function (e) {
+	      e.stopPropagation();
+	      $(section).removeClass('modal-open');
+
+	      Velocity(modalContent, { opacity: 0 }, {
+	        complete: function complete() {
+	          Velocity(modalWrapper, { opacity: 0, easing: 'easeOutCubic' });
+
+	          Velocity(modal, closedState, {
+	            duration: 500,
+	            complete: function complete() {
+	              modalContent.innerHTML = '';
+	              modal.style.backgroundImage = '';
+	            }
+	          });
+	        }
+	      });
+	    });
 	  });
 	};
 

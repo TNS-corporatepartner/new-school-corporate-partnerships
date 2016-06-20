@@ -81,13 +81,15 @@ function init() {
     .filter(e => e.clientY >= window.innerHeight / 2 )
     .mapTo('down')
 
-  var cursor$ = Observable.merge(moveUp$, moveDown$).publish()
+  var cursor$ = Observable.merge(moveUp$, moveDown$).startWith('load').publish()
   
   cursor$.subscribe( d => {
     if (d === 'up' && app.activeScrollIndex) {
       document.body.style.cursor = 'url(/images/prev-cursor-red.svg), auto'
     } else if (d === 'down' && app.activeScrollIndex !== 5) {
       document.body.style.cursor = 'url(/images/next-cursor-red.svg), auto'
+    } else if (d === 'load') {
+      document.body.style.cursor = 'url(/images/next-cursor-black.svg), auto'
     } else {
       document.body.style.cursor = 'auto'
     }
