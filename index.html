@@ -165,9 +165,32 @@
 		</section>
 
 		<section id="ourApproach">
-			<div class="placeholder-fs">
-				<h1>Our Approach</h1>
+			<div id="approachCanvas">
+				{% for project in (1..5) %}
+					<div class="project" data-programs='["food studies", "fashion design", "screenwriting", "journalism", "design and technology"]'></div>
+				{% endfor %}
+
+				
+				<div class="program" data-id="food studies">food studies</div>				
+				<div class="program" data-id="fashion design">fashion design</div>				
+				<div class="program" data-id="screenwriting">screenwriting</div>				
+				<div class="program" data-id="journalism">journalism</div>				
+				<div class="program" data-id="design and technology">design and technology</div>				
+
+				{% for program in (1..20) %}
+					<div class="program">program #{{program}}</div>
+				{% endfor %}
 			</div>
+
+
+			<hgroup class="section-headlines">
+				<h4>Our University</h4>
+				<h3 class="dynamic-text">A Trans-disciplinary approach</h3>
+			</hgroup>
+
+			<div class="section-intro">
+				<h1>Our Schools</h1>
+			</div>			
 		</section>
 
 		<section id="ourPeople">

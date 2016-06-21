@@ -555,6 +555,25 @@ section#ourPeople.modal-open {
     transform: scale(1);
     background-color: #333; }
 
+#ourApproach {
+  overflow: hidden; }
+
+#ourApproach #approachCanvas {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  height: 200%;
+  width: 200%;
+  transform: translate3d(0%, 0%, 0); }
+  #ourApproach #approachCanvas .project, #ourApproach #approachCanvas .program {
+    position: absolute; }
+  #ourApproach #approachCanvas .project {
+    background-color: blue;
+    width: 100px;
+    height: 200px; }
+  #ourApproach #approachCanvas .program {
+    transition: all 1s ease-in-out; }
+
 section#contactUs {
   display: -ms-flexbox;
   display: flex; }
