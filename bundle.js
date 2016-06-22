@@ -32563,13 +32563,14 @@
 
 	  $(this.schoolLinks).on('click', function (e) {
 	    e.stopPropagation();
-	    var r = this.querySelector('img').getBoundingClientRect();
+	    var r = this.querySelector('.img-container').getBoundingClientRect();
 	    var section = document.getElementById('ourSchool');
-	    var modal = document.getElementById('schoolModal');
-	    var modalWrapper = modal.querySelector('.content-wrap');
-	    var modalContent = modal.querySelector('.content');
+	    var modalBg = document.getElementById('schoolModal');
+	    var modalContent = modalBg.querySelector('.content');
 
-	    var closedState = {
+	    console.log(this.querySelector('.img-container'));
+
+	    var readyState = {
 	      top: r.top,
 	      bottom: r.bottom,
 	      left: r.left,
@@ -32579,45 +32580,55 @@
 	    };
 
 	    var openState = {
-	      top: 0,
+	      top: '30%',
 	      left: 0,
 	      width: '100%',
-	      height: '100%',
+	      height: '40%',
 	      opacity: 1
 	    };
 
 	    $('body').addClass('school-modal-open');
-	    $(modal).css(closedState);
+
+	    Velocity(modalContent, readyState, {
+	      duration: 0
+	    });
+
+	    // $(modalContent).css(readyState)
 
 	    var schoolName = 'Parsons';
 	    var schoolDescription = 'One of the world\'s leading art and design schools. Offers an enlightened approach to design education and sustainability.';
+	    var imgUrl = '/images/studentgroup.jpg';
 
-	    modalWrapper.style.backgroundImage = 'url(/images/studentgroup.jpg)';
-	    Velocity(modalWrapper, { opacity: 1 });
-	    Velocity(modal, openState, { duration: 500, easing: 'easeOutCubic', complete: function complete() {
+	    modalContent.innerHTML = '\n        <div class="text-container">\n          <h1>' + schoolName + '</h1>\n          <p>' + schoolDescription + '</p>\n          <a href="http://google.com" _target="blank"><span>Learn More &rarr;</a>\n        </div>\n\n        <div class="img-container">\n          <img src="' + imgUrl + '" />\n        </div>          \n      ';
 
-	        modalContent.innerHTML = '\n          <h1>' + schoolName + '</h1>\n          <p>' + schoolDescription + '</p>\n          <br><span>Learn More &rarr;</span>\n        ';
+	    var modalImg = modalContent.querySelector('.img-container');
+	    var modalText = modalContent.querySelector('.text-container');
 
-	        Velocity(modalContent, { opacity: 1 });
-	      } });
+	    Velocity(modalImg, { width: '50%' }, {
+	      easing: 'easeOutCubic',
+	      duration: 800
+	    });
+
+	    Velocity(modalText, { width: '50%' }, {
+	      easing: 'easeOutCubic',
+	      duration: 800,
+	      complete: function complete() {
+	        Velocity(modalText, { opacity: 1 });
+	      }
+	    });
+
+	    Velocity(modalContent, openState, { duration: 800, easing: 'easeOutCubic' });
 
 	    $('#ourSchool').one('click', function (e) {
 	      e.stopPropagation();
+
 	      $('body').removeClass('school-modal-open');
 
-	      Velocity(modalContent, { opacity: 0 }, {
-	        complete: function complete() {
-	          Velocity(modalWrapper, { opacity: 0, easing: 'easeOutCubic' });
-
-	          Velocity(modal, closedState, {
-	            duration: 500,
-	            complete: function complete() {
-	              modalContent.innerHTML = '';
-	              modal.style.backgroundImage = '';
-	            }
-	          });
-	        }
-	      });
+	      setTimeout(function () {
+	        Velocity(modalImg, 'reverse', { duration: 0 });
+	        Velocity(modalText, 'reverse', { duration: 0 });
+	        Velocity(modalContent, 'reverse', { duration: 0 });
+	      }, 500);
 	    });
 	  });
 	};

@@ -14,6 +14,10 @@ body.school-modal-open {
     .section-headlines h3  {
       color: white;
     }
+    #schoolModal {
+      opacity: 1;
+      pointer-events: auto;
+    }
   }
 }
 section#ourSchool {    
@@ -128,30 +132,38 @@ section#ourSchool {
 
   #schoolModal {
     position: absolute;
-    // background-color: white;
-    .content-wrap {
-      height: 100%;
-      width: 100%;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: $gray-dark-trans;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease-in-out;
+
+    .content {
+      position: absolute;
       display: flex;
       align-items: center;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      opacity: 0;            
-      .content {
-        width: 50%;
+      background-color: $black-tint;
+      color: white;
+      .text-container {
+        width: 0%;
+        opacity: 0;
         padding: 2vw;
-        text-decoration: none;
-        color: white;
-        cursor: url(/images/click-cursor-red.svg), auto;        
-        background-color: $black-tint;        
-        opacity: 0;        
         p {
           margin-bottom: 20px;
         }
-
-        span {
-          text-transform: uppercase;
+        
+        a {
+          color: white;
+          cursor: url(/images/click-cursor-red.svg), auto;      
+        }
+      }
+      .img-container {
+        width: 100%;
+        img {
+          width: 100%;
         }
       }
     }

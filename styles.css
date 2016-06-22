@@ -352,6 +352,9 @@ body.school-modal-open section#ourSchool {
   body.school-modal-open section#ourSchool .section-headlines h4,
   body.school-modal-open section#ourSchool .section-headlines h3 {
     color: white; }
+  body.school-modal-open section#ourSchool #schoolModal {
+    opacity: 1;
+    pointer-events: auto; }
 
 section#ourSchool .section-headlines h4,
 section#ourSchool .section-headlines h3 {
@@ -446,30 +449,36 @@ section#ourSchool .school-links {
         transition: all 0.4s ease-in-out; }
 
 section#ourSchool #schoolModal {
-  position: absolute; }
-  section#ourSchool #schoolModal .content-wrap {
-    height: 100%;
-    width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(51, 51, 51, 0.9);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease-in-out; }
+  section#ourSchool #schoolModal .content {
+    position: absolute;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-align: center;
         align-items: center;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    opacity: 0; }
-    section#ourSchool #schoolModal .content-wrap .content {
-      width: 50%;
-      padding: 2vw;
-      text-decoration: none;
-      color: white;
-      cursor: url(/images/click-cursor-red.svg), auto;
-      background-color: rgba(0, 0, 0, 0.35);
-      opacity: 0; }
-      section#ourSchool #schoolModal .content-wrap .content p {
+    background-color: rgba(0, 0, 0, 0.35);
+    color: white; }
+    section#ourSchool #schoolModal .content .text-container {
+      width: 0%;
+      opacity: 0;
+      padding: 2vw; }
+      section#ourSchool #schoolModal .content .text-container p {
         margin-bottom: 20px; }
-      section#ourSchool #schoolModal .content-wrap .content span {
-        text-transform: uppercase; }
+      section#ourSchool #schoolModal .content .text-container a {
+        color: white;
+        cursor: url(/images/click-cursor-red.svg), auto; }
+    section#ourSchool #schoolModal .content .img-container {
+      width: 100%; }
+      section#ourSchool #schoolModal .content .img-container img {
+        width: 100%; }
 
 #peopleSlider {
   position: relative;

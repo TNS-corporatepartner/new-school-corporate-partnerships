@@ -18,13 +18,16 @@ export class OurSchool {
   
     $(this.schoolLinks).on('click', function(e) {
       e.stopPropagation()
-      const r = this.querySelector('img').getBoundingClientRect()
+      const r = this.querySelector('.img-container').getBoundingClientRect()
       const section = document.getElementById('ourSchool')
-      const modal = document.getElementById('schoolModal')
-      const modalWrapper = modal.querySelector('.content-wrap')      
-      const modalContent = modal.querySelector('.content')
+      const modalBg = document.getElementById('schoolModal')
+      const modalContent = modalBg.querySelector('.content')      
 
-      const closedState = {
+      console.log(this.querySelector('.img-container'))
+
+      
+
+      const readyState = {
         top: r.top,
         bottom: r.bottom,
         left: r.left,
@@ -34,51 +37,71 @@ export class OurSchool {
       }
 
       const openState = {
-        top: 0,
+        top: '30%',
         left: 0,
         width: '100%',
-        height: '100%',
+        height: '40%',
         opacity: 1
       }
 
-      $('body').addClass('school-modal-open')
-      $(modal).css(closedState)
 
+      $('body').addClass('school-modal-open')
+      
+      Velocity(modalContent, readyState, {
+        duration: 0
+      })
+      
+      // $(modalContent).css(readyState)
+      
       const schoolName = 'Parsons'
       const schoolDescription = 'One of the world\'s leading art and design schools. Offers an enlightened approach to design education and sustainability.'
+      const imgUrl = '/images/studentgroup.jpg'
 
-      modalWrapper.style.backgroundImage = 'url(/images/studentgroup.jpg)'
-      Velocity(modalWrapper, {opacity: 1})
-      Velocity(modal, openState, { duration: 500, easing: 'easeOutCubic', complete: function() {
-
-        modalContent.innerHTML = `
+      modalContent.innerHTML = `
+        <div class="text-container">
           <h1>${schoolName}</h1>
           <p>${schoolDescription}</p>
-          <br><span>Learn More &rarr;</span>
-        `
+          <a href="http://google.com" _target="blank"><span>Learn More &rarr;</a>
+        </div>
 
-        Velocity(modalContent, {opacity: 1})        
-      }})
+        <div class="img-container">
+          <img src="${imgUrl}" />
+        </div>          
+      `
+
+      const modalImg = modalContent.querySelector('.img-container')      
+      const modalText = modalContent.querySelector('.text-container')
+
+      Velocity(modalImg, {width: '50%'}, {
+        easing: 'easeOutCubic',
+        duration: 800
+      })
+
+      Velocity(modalText, {width: '50%'}, {
+         easing: 'easeOutCubic',
+        duration: 800,
+        complete: function() {
+          Velocity(modalText, {opacity: 1})
+        }
+      })
+    
+
+      Velocity(modalContent, openState, { duration: 800, easing: 'easeOutCubic'})
 
 
       $('#ourSchool').one('click', (e) => {
         e.stopPropagation()        
+
         $('body').removeClass('school-modal-open')
 
-        Velocity(modalContent, {opacity: 0}, {
-          complete: function() {
-            Velocity(modalWrapper, { opacity: 0, easing: 'easeOutCubic' })      
-
-            Velocity(modal, closedState, {
-              duration: 500,
-              complete: function() {
-                modalContent.innerHTML = ''
-                modal.style.backgroundImage = ''
-              }
-            })
-          }
-        })
+        setTimeout(function() {
+          Velocity(modalImg, 'reverse', {duration: 0})
+          Velocity(modalText, 'reverse', {duration: 0})
+          Velocity(modalContent, 'reverse', {duration: 0})          
+        }, 500)
+        
       })
+
     })
   }
 
