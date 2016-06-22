@@ -72,26 +72,26 @@ export class OurPeople {
         //   (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2) * -1         
 
         // const sliderX = event.direction === 'right' ? this.sliderX - velocity * 10 : this.sliderX + velocity * 10
-        // this.sliderX = sliderX
-        
-        this.sliderX += this.mouseCoords(e).x / 5
+        // this.sliderX = sliderX        
+
+        this.sliderX += this.mouseCoords(e).x
+
         var sliderPosition = ( ( ( this.sliderX - this.cellWidth ) % this.slideWidth ) + this.slideWidth ) % this.slideWidth;
         sliderPosition += -this.slideWidth + this.cellWidth;        
-        this.slider.style.left = sliderPosition + 'px';
         
-        // Velocity(this.slider, 'stop')
-        // Velocity(this.slider, {
-        //   left: sliderPosition + 'px'
-        // }, {
-        //   duration: 1000,
-        //   easing: 'easeInSine'
-        // })        
+        const isLeftReset = Math.abs(this.lastLeft - sliderPosition) > 10 ? true : false
 
-      }, err => console.error(err), () => {
-        console.log('done')
-        this.sliderX = 0
-      }
-      )
+        Velocity(this.slider, 'stop')
+        Velocity(this.slider, {
+          left: sliderPosition + 'px'
+        }, {
+          duration: isLeftReset ? 1 : 150,
+          easing: 'easeInSine'
+        })
+
+        this.lastLeft = sliderPosition
+        
+      })
 
     $('.person.video').on('click', function(e) {
       e.stopPropagation()
@@ -114,6 +114,7 @@ export class OurPeople {
     })      
   }
 
+  //returns a value of positive or negative 50 depending on distance from center
   mouseCoords(e) {
     const xPercent = e.clientX / window.innerWidth * 100
     const x = xPercent >= 50 ? (xPercent - 50) * -1 : 50 - xPercent

@@ -70,18 +70,26 @@ h6{
   height: 100%;
   top: 0;
   left: 0;
-  background-color: $gray-light;
+  display: flex;
+  align-items: center;
   padding: 2vw;
+  background-color: $gray-light;  
   transition: opacity 0.4s ease-in-out;
   &.hidden {
     opacity: 0;
     pointer-events: none;
   }
   h1 {
+    position: absolute;
+    top: 2vw;
+    left: 2vw;
     max-width: 60%;
     @media (max-width: $break1) {
       max-width: none;
     }
+  }
+  p {
+    max-width: 60%;
   }
 }
 

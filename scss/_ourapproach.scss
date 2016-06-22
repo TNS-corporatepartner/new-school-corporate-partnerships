@@ -18,14 +18,25 @@
   }
 
   .project {
-    background-color: blue;
     width: 100px;
     height: 200px;
+    display: flex;
+    align-items: center;
+    &:hover h4 {
+      opacity: 1;
+    }
+    img {
+      margin-right: 15px;
+    }
+    h4 {
+      min-width: 300px;
+      opacity: 0;
+      transition: opacity 0.4s ease-in-out;
+    }
   }
 
   .program {
     transition: all 1s ease-in-out;
   }
-  
 
 }
