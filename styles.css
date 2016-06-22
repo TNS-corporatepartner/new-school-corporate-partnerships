@@ -231,13 +231,16 @@ section#futureOf {
 
 #fixedLogo {
   position: fixed;
-  top: 20px;
+  bottom: calc(100vw - 450px);
   left: 20px;
   width: 400px;
   pointer-events: none; }
   #fixedLogo svg {
     width: 100%;
     overflow: visible; }
+
+section#coreValues.active .content {
+  pointer-events: none; }
 
 section#coreValues .section-intro {
   background-color: #333; }
@@ -284,7 +287,7 @@ section#coreValues .core-values-slider {
       width: 0;
       overflow: hidden; }
     section#coreValues .core-values-slider .core-values-cell.is-selected {
-      cursor: url("/images/close-cursor.svg"), auto; }
+      cursor: url("/images/close-cursor-red.svg"), auto; }
     section#coreValues .core-values-slider .core-values-cell #particles-js {
       position: absolute;
       top: 0;
@@ -329,8 +332,7 @@ section#coreValues .core-values-slider {
       position: absolute;
       top: 0;
       left: 0;
-      width: 100vw;
-      pointer-events: none; }
+      width: 100vw; }
 
 section#coreValues .core-values-cell canvas {
   opacity: 0.2; }
@@ -346,7 +348,7 @@ body.school-modal-open #fixedLogo svg > g {
     transition: stroke 0.8s ease-in-out; }
 
 body.school-modal-open section#ourSchool {
-  cursor: url("/images/close-cursor.svg"), auto; }
+  cursor: url("/images/close-cursor-red.svg"), auto; }
   body.school-modal-open section#ourSchool .section-headlines h4,
   body.school-modal-open section#ourSchool .section-headlines h3 {
     color: white; }
@@ -546,14 +548,33 @@ section#ourSchool #schoolModal {
 
 section#ourPeople.modal-open {
   background-color: #333;
-  cursor: url("/images/close-cursor.svg"), auto; }
+  cursor: url("/images/close-cursor-red.svg"), auto; }
   section#ourPeople.modal-open .section-headlines h3 {
     color: white; }
   section#ourPeople.modal-open #personModal {
     opacity: 1;
     pointer-events: auto;
     transform: scale(1);
-    background-color: #333; }
+    background-color: rgba(51, 51, 51, 0.8); }
+
+#ourApproach {
+  overflow: hidden; }
+
+#ourApproach #approachCanvas {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  height: 200%;
+  width: 200%;
+  transform: translate3d(0%, 0%, 0); }
+  #ourApproach #approachCanvas .project, #ourApproach #approachCanvas .program {
+    position: absolute; }
+  #ourApproach #approachCanvas .project {
+    background-color: blue;
+    width: 100px;
+    height: 200px; }
+  #ourApproach #approachCanvas .program {
+    transition: all 1s ease-in-out; }
 
 section#contactUs {
   display: -ms-flexbox;

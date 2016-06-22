@@ -31,18 +31,67 @@ export class OurPeople {
 
     const mousingRight = mousing$
       .filter(e => e.clientX > window.innerWidth / 2)
-      .map(e => { return { e: e, direction: 'right'}})
-      .subscribe((e) => this.scrollOnMouseMove(e)) 
 
     const mousingLeft = mousing$
       .filter(e => e.clientX < window.innerWidth / 2)
-      .map(e => { return { e: e, direction: 'left'}})
-      .subscribe((e) => this.scrollOnMouseMove(e))
 
-    const moving$ = Observable.interval(50)
-      .takeUntil(mousing$)
-      .repeat()
-      .subscribe( () => this.scrollAmbiently() )
+  
+    var test = this.section.querySelector('.section-headlines')
+
+    const exit$ = Observable.fromEvent(test, 'mouseleave').subscribe(() => {
+      this.slideX = 3
+    })
+  
+    Observable.interval(15)
+      
+      // .takeUntil(exit$)
+
+      .withLatestFrom( 
+        Observable.merge(
+          mousingLeft.map(e => ({ e: e, direction: 'left'})), 
+          mousingRight.map(e => ({ e: e, direction: 'right'}))
+        )
+      )
+
+      .map(e => { 
+        return { 
+          e: e[1].e, 
+          direction: e[1].direction
+        }
+      })
+      
+      // .repeat()
+
+      .subscribe(event => {
+        const e = event.e    
+        this.lastDirection = event.direction
+        
+        //calculates a number between 0 and 1 based on mouse position
+        // const velocity = event.direction === 'right' ? 
+        //   (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2) : 
+        //   (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2) * -1         
+
+        // const sliderX = event.direction === 'right' ? this.sliderX - velocity * 10 : this.sliderX + velocity * 10
+        // this.sliderX = sliderX
+        
+        this.sliderX += this.mouseCoords(e).x / 5
+        var sliderPosition = ( ( ( this.sliderX - this.cellWidth ) % this.slideWidth ) + this.slideWidth ) % this.slideWidth;
+        sliderPosition += -this.slideWidth + this.cellWidth;        
+        this.slider.style.left = sliderPosition + 'px';
+        
+        // Velocity(this.slider, 'stop')
+        // Velocity(this.slider, {
+        //   left: sliderPosition + 'px'
+        // }, {
+        //   duration: 1000,
+        //   easing: 'easeInSine'
+        // })        
+
+      }, err => console.error(err), () => {
+        console.log('done')
+        this.sliderX = 0
+      }
+      )
 
     $('.person.video').on('click', function(e) {
       e.stopPropagation()
@@ -63,6 +112,19 @@ export class OurPeople {
         modalContent.innerHTML = ''
       })      
     })      
+  }
+
+  mouseCoords(e) {
+    const xPercent = e.clientX / window.innerWidth * 100
+    const x = xPercent >= 50 ? (xPercent - 50) * -1 : 50 - xPercent
+
+    const yPercent = e.clientY / window.innerHeight * 100
+    const y = yPercent >= 50 ? (yPercent - 50) * -1 : 50 - yPercent
+
+    return {
+      x: x,
+      y: y
+    }
   }
 
   scrollAmbiently() {
@@ -88,7 +150,18 @@ export class OurPeople {
 
     var sliderPosition = ( ( ( this.sliderX - this.cellWidth ) % this.slideWidth ) + this.slideWidth ) % this.slideWidth;
     sliderPosition += -this.slideWidth + this.cellWidth;        
-    this.slider.style.left = sliderPosition + 'px';    
+    // this.slider.style.left = sliderPosition + 'px';
+    
+    console.log(sliderPosition.toFixed(0) + 'px')
+
+    Velocity(this.slider, 'stop')
+    Velocity(this.slider, {
+      left: sliderPosition.toFixed(0) + 'px'
+    }, {
+      duration: 1000,
+      easing: 'easeInSine'
+    })    
+        
   }  
 }
 
