@@ -77,13 +77,21 @@ export class OurApproach {
     $('.project').on('mouseenter', function() {
       const projectTop = parseInt(this.style.top)
       const projectLeft = parseInt(this.style.left)
+      const programEls = $(this).data('programs').map( pId => document.querySelector(`.program[data-id="${pId}"]`) )
+        
+      programEls.forEach( (el, index) => {
+        el.lastLeft = el.style.left 
+        el.lastTop = el.style.top 
+        el.style.left = projectLeft + (index % 2 == 0 ? -5 : 5) + '%'
+        el.style.top = projectTop + (index % 2 == 0 ? -5 : 5) + '%'
+      })
 
-      $(this).data('programs')
-        .map( pId => document.querySelector(`.program[data-id="${pId}"]`) )
-        .forEach( (programEl, index) => {
-          programEl.style.left = projectLeft + (index % 2 == 0 ? -5 : 5) + '%'
-          programEl.style.top = projectTop + (index % 2 == 0 ? -5 : 5) + '%'
-        })      
+      $(this).one('mouseleave', function() {
+        programEls.forEach(el => {
+          el.style.left = el.lastLeft
+          el.style.top = el.lastTop
+        })
+      })      
     })
   }
 

@@ -32719,25 +32719,24 @@
 	      //   (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2) * -1        
 
 	      // const sliderX = event.direction === 'right' ? this.sliderX - velocity * 10 : this.sliderX + velocity * 10
-	      // this.sliderX = sliderX
+	      // this.sliderX = sliderX       
 
-	      _this.sliderX += _this.mouseCoords(e).x / 5;
+	      _this.sliderX += _this.mouseCoords(e).x;
+
 	      var sliderPosition = ((_this.sliderX - _this.cellWidth) % _this.slideWidth + _this.slideWidth) % _this.slideWidth;
 	      sliderPosition += -_this.slideWidth + _this.cellWidth;
-	      _this.slider.style.left = sliderPosition + 'px';
 
-	      // Velocity(this.slider, 'stop')
-	      // Velocity(this.slider, {
-	      //   left: sliderPosition + 'px'
-	      // }, {
-	      //   duration: 1000,
-	      //   easing: 'easeInSine'
-	      // })      
-	    }, function (err) {
-	      return console.error(err);
-	    }, function () {
-	      console.log('done');
-	      _this.sliderX = 0;
+	      var isLeftReset = Math.abs(_this.lastLeft - sliderPosition) > 10 ? true : false;
+
+	      Velocity(_this.slider, 'stop');
+	      Velocity(_this.slider, {
+	        left: sliderPosition + 'px'
+	      }, {
+	        duration: isLeftReset ? 1 : 150,
+	        easing: 'easeInSine'
+	      });
+
+	      _this.lastLeft = sliderPosition;
 	    });
 
 	    $('.person.video').on('click', function (e) {
@@ -32760,6 +32759,9 @@
 	      });
 	    });
 	  }
+
+	  //returns a value of positive or negative 50 depending on distance from center
+
 
 	  _createClass(OurPeople, [{
 	    key: 'mouseCoords',
@@ -37429,12 +37431,22 @@
 	      $('.project').on('mouseenter', function () {
 	        var projectTop = parseInt(this.style.top);
 	        var projectLeft = parseInt(this.style.left);
-
-	        $(this).data('programs').map(function (pId) {
+	        var programEls = $(this).data('programs').map(function (pId) {
 	          return document.querySelector('.program[data-id="' + pId + '"]');
-	        }).forEach(function (programEl, index) {
-	          programEl.style.left = projectLeft + (index % 2 == 0 ? -5 : 5) + '%';
-	          programEl.style.top = projectTop + (index % 2 == 0 ? -5 : 5) + '%';
+	        });
+
+	        programEls.forEach(function (el, index) {
+	          el.lastLeft = el.style.left;
+	          el.lastTop = el.style.top;
+	          el.style.left = projectLeft + (index % 2 == 0 ? -5 : 5) + '%';
+	          el.style.top = projectTop + (index % 2 == 0 ? -5 : 5) + '%';
+	        });
+
+	        $(this).one('mouseleave', function () {
+	          programEls.forEach(function (el) {
+	            el.style.left = el.lastLeft;
+	            el.style.top = el.lastTop;
+	          });
 	        });
 	      });
 	    }
