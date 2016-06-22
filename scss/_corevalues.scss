@@ -1,5 +1,9 @@
 section#coreValues {
 
+  &.active .content {
+    pointer-events: none;
+  }
+
   .section-intro {
     background-color: $gray-dark;
     h1 {
@@ -60,7 +64,7 @@ section#coreValues {
         overflow: hidden;        
       }
       &.is-selected {
-        cursor: url('/images/close-cursor.svg'), auto;
+        cursor: url('/images/close-cursor-red.svg'), auto;
       }
 
       #particles-js {
@@ -115,7 +119,7 @@ section#coreValues {
         top: 0;
         left: 0;
         width: 100vw;
-        pointer-events: none;
+        // pointer-events: none;
       }
     }
   }

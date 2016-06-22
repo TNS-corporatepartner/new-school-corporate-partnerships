@@ -125,7 +125,7 @@
 
 section#ourPeople.modal-open{
   background-color: $gray-dark;
-  cursor: url('/images/close-cursor.svg'), auto;
+  cursor: url('/images/close-cursor-red.svg'), auto;
   .section-headlines{
     h3{
       color: white;
@@ -135,6 +135,6 @@ section#ourPeople.modal-open{
     opacity: 1;
     pointer-events: auto;
     transform: scale(1);
-    background-color: $gray-dark;
+    background-color: $gray-dark-trans;
   }
 }
