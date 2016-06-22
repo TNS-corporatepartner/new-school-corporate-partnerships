@@ -229,13 +229,13 @@
 
 	      //logo animate in
 	      Velocity(line1, { x1: 4.501, y1: 64.81, x2: 109.524, y2: 64.81 }, { duration: 500 });
-	      Velocity(line2, { x1: 4.501, y1: 70.5, x2: 109.524, y2: 70.5 }, { duration: 500 });
-	      Velocity(fixedLogoText, { translateX: 0, translateY: 0 }, { duration: 2000 });
+	      Velocity(line2, { x1: 4.501, y1: 71.5, x2: 109.524, y2: 71.5 }, { duration: 500 });
+	      Velocity(fixedLogoText, { translateX: 0, translateY: 0 }, { duration: 2000 / 4 });
 
 	      //logo animate down
 	      Velocity(fixedLogo, {
-	        top: window.innerHeight - 100,
-	        width: 120
+	        bottom: 20,
+	        width: 150
 	      }, {
 	        duration: 1000,
 	        delay: 2500
@@ -296,7 +296,7 @@
 	  Velocity(fixedLogo, 'stop');
 	  Velocity(fixedLogo, {
 	    top: window.innerHeight - 100,
-	    width: 120
+	    width: 150
 	  }, {
 	    duration: 800
 	  });
@@ -32688,9 +32688,15 @@
 
 	    var test = this.section.querySelector('.section-headlines');
 
-	    var exit$ = _rxjs.Observable.fromEvent(test, 'mouseleave');
+	    var exit$ = _rxjs.Observable.fromEvent(test, 'mouseleave').subscribe(function () {
+	      _this.slideX = 3;
+	    });
 
-	    _rxjs.Observable.interval(15).takeUntil(exit$).withLatestFrom(_rxjs.Observable.merge(mousingLeft.map(function (e) {
+	    _rxjs.Observable.interval(15)
+
+	    // .takeUntil(exit$)
+
+	    .withLatestFrom(_rxjs.Observable.merge(mousingLeft.map(function (e) {
 	      return { e: e, direction: 'left' };
 	    }), mousingRight.map(function (e) {
 	      return { e: e, direction: 'right' };
@@ -32707,20 +32713,22 @@
 	      var e = event.e;
 	      _this.lastDirection = event.direction;
 
-	      var velocity = event.direction === 'right' ? (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2) : (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2) * -1;
+	      //calculates a number between 0 and 1 based on mouse position
+	      // const velocity = event.direction === 'right' ?
+	      //   (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2) :
+	      //   (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2) * -1        
 
-	      var sliderX = event.direction === 'right' ? _this.sliderX - velocity * 10 : _this.sliderX + velocity * 10;
-	      _this.sliderX = sliderX;
+	      // const sliderX = event.direction === 'right' ? this.sliderX - velocity * 10 : this.sliderX + velocity * 10
+	      // this.sliderX = sliderX
 
+	      _this.sliderX += _this.mouseCoords(e).x / 5;
 	      var sliderPosition = ((_this.sliderX - _this.cellWidth) % _this.slideWidth + _this.slideWidth) % _this.slideWidth;
 	      sliderPosition += -_this.slideWidth + _this.cellWidth;
 	      _this.slider.style.left = sliderPosition + 'px';
 
-	      // console.log(sliderPosition.toFixed(0) + 'px')
-
 	      // Velocity(this.slider, 'stop')
 	      // Velocity(this.slider, {
-	      //   left: sliderPosition.toFixed(0)
+	      //   left: sliderPosition + 'px'
 	      // }, {
 	      //   duration: 1000,
 	      //   easing: 'easeInSine'
@@ -32754,6 +32762,20 @@
 	  }
 
 	  _createClass(OurPeople, [{
+	    key: 'mouseCoords',
+	    value: function mouseCoords(e) {
+	      var xPercent = e.clientX / window.innerWidth * 100;
+	      var x = xPercent >= 50 ? (xPercent - 50) * -1 : 50 - xPercent;
+
+	      var yPercent = e.clientY / window.innerHeight * 100;
+	      var y = yPercent >= 50 ? (yPercent - 50) * -1 : 50 - yPercent;
+
+	      return {
+	        x: x,
+	        y: y
+	      };
+	    }
+	  }, {
 	    key: 'scrollAmbiently',
 	    value: function scrollAmbiently() {
 	      var currSliderX = parseInt(this.slider.style.left || 0);

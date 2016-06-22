@@ -161,16 +161,16 @@ function init() {
 
       //logo animate in
       Velocity(line1, {x1: 4.501, y1: 64.81, x2: 109.524, y2: 64.81}, {duration: 500})
-      Velocity(line2, {x1: 4.501, y1: 70.5, x2: 109.524, y2: 70.5}, {duration: 500})
-      Velocity(fixedLogoText, {translateX: 0, translateY: 0}, {duration: 2000})
+      Velocity(line2, {x1: 4.501, y1: 71.5, x2: 109.524, y2: 71.5}, {duration: 500})
+      Velocity(fixedLogoText, {translateX: 0, translateY: 0}, {duration: 2000 / 4})
 
       //logo animate down
       Velocity(fixedLogo, {
-        top: window.innerHeight - 100,
-        width: 120
+        bottom: 20,
+        width: 150
       }, {
         duration: 1000,
-        delay: 2500
+        delay: 2500 
       })
 
       //intro text animate in
@@ -228,7 +228,7 @@ function skipSplashAnimation() {
   Velocity(fixedLogo, 'stop')
   Velocity(fixedLogo, {
     top: window.innerHeight - 100,
-    width: 120
+    width: 150
   }, {
     duration: 800
   })

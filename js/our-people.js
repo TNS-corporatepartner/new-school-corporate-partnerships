@@ -38,11 +38,13 @@ export class OurPeople {
   
     var test = this.section.querySelector('.section-headlines')
 
-    const exit$ = Observable.fromEvent(test, 'mouseleave')
+    const exit$ = Observable.fromEvent(test, 'mouseleave').subscribe(() => {
+      this.slideX = 3
+    })
   
     Observable.interval(15)
       
-      .takeUntil(exit$)
+      // .takeUntil(exit$)
 
       .withLatestFrom( 
         Observable.merge(
@@ -64,22 +66,22 @@ export class OurPeople {
         const e = event.e    
         this.lastDirection = event.direction
         
-        const velocity = event.direction === 'right' ? 
-          (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2) : 
-          (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2) * -1 
+        //calculates a number between 0 and 1 based on mouse position
+        // const velocity = event.direction === 'right' ? 
+        //   (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2) : 
+        //   (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2) * -1         
 
-        const sliderX = event.direction === 'right' ? this.sliderX - velocity * 10 : this.sliderX + velocity * 10
-        this.sliderX = sliderX
+        // const sliderX = event.direction === 'right' ? this.sliderX - velocity * 10 : this.sliderX + velocity * 10
+        // this.sliderX = sliderX
         
+        this.sliderX += this.mouseCoords(e).x / 5
         var sliderPosition = ( ( ( this.sliderX - this.cellWidth ) % this.slideWidth ) + this.slideWidth ) % this.slideWidth;
         sliderPosition += -this.slideWidth + this.cellWidth;        
         this.slider.style.left = sliderPosition + 'px';
         
-        // console.log(sliderPosition.toFixed(0) + 'px')
-
         // Velocity(this.slider, 'stop')
         // Velocity(this.slider, {
-        //   left: sliderPosition.toFixed(0)
+        //   left: sliderPosition + 'px'
         // }, {
         //   duration: 1000,
         //   easing: 'easeInSine'
@@ -110,6 +112,19 @@ export class OurPeople {
         modalContent.innerHTML = ''
       })      
     })      
+  }
+
+  mouseCoords(e) {
+    const xPercent = e.clientX / window.innerWidth * 100
+    const x = xPercent >= 50 ? (xPercent - 50) * -1 : 50 - xPercent
+
+    const yPercent = e.clientY / window.innerHeight * 100
+    const y = yPercent >= 50 ? (yPercent - 50) * -1 : 50 - yPercent
+
+    return {
+      x: x,
+      y: y
+    }
   }
 
   scrollAmbiently() {
