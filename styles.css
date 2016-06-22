@@ -380,37 +380,70 @@ section#ourSchool .school-links {
   height: 100%; }
   section#ourSchool .school-links .school {
     position: absolute;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-align: center;
-        align-items: center;
     cursor: url(/images/click-cursor-red.svg), auto; }
     section#ourSchool .school-links .school:hover h3 {
       color: black; }
     section#ourSchool .school-links .school.parsons {
-      top: 30%;
-      left: 5%; }
+      left: 26%;
+      top: 22.2%; }
     section#ourSchool .school-links .school.lang {
-      top: 55%;
-      left: 18%; }
+      left: calc(34.4% + 14.9%);
+      top: 61%; }
     section#ourSchool .school-links .school.public {
-      top: 78%;
-      left: 35%; }
+      left: 71.2%;
+      top: 45.2%; }
     section#ourSchool .school-links .school.performing {
-      top: 18%;
-      left: 45%; }
+      left: 2%;
+      top: 53%; }
     section#ourSchool .school-links .school.research {
-      top: 40%;
-      left: 55%; }
-    section#ourSchool .school-links .school img {
-      width: 100px;
-      margin-right: 20px; }
-    section#ourSchool .school-links .school h3 {
-      font-weight: 300;
-      font-size: 2vh;
-      width: 300px;
-      color: #E82E21;
-      transition: all 0.4s ease-in-out; }
+      left: calc(58.4% + 14.9%);
+      top: 13.4%; }
+    section#ourSchool .school-links .school.horz {
+      width: 22.79%;
+      height: 15%; }
+      section#ourSchool .school-links .school.horz .text-container {
+        bottom: -100%; }
+        section#ourSchool .school-links .school.horz .text-container h3 {
+          top: 1.5vw;
+          left: 1.5vw; }
+    section#ourSchool .school-links .school.vert {
+      position: absolute;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-align: center;
+          align-items: center;
+      width: 14.9%;
+      height: 24%; }
+      section#ourSchool .school-links .school.vert .text-container {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-align: center;
+            align-items: center; }
+        section#ourSchool .school-links .school.vert .text-container h3 {
+          position: relative; }
+      section#ourSchool .school-links .school.vert .img-container {
+        left: -114.9%; }
+    section#ourSchool .school-links .school .img-container {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      margin-right: 20px;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      border: 1px solid #999; }
+    section#ourSchool .school-links .school .text-container {
+      position: absolute;
+      height: 100%;
+      width: 100%; }
+      section#ourSchool .school-links .school .text-container h3 {
+        position: absolute;
+        font-weight: 300;
+        font-size: 2.2vh;
+        line-height: 2.7vh;
+        width: 250px;
+        color: #E82E21;
+        transition: all 0.4s ease-in-out; }
 
 section#ourSchool #schoolModal {
   position: absolute; }

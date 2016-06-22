@@ -45,42 +45,83 @@ section#ourSchool {
     height: 100%;
     .school {
       position: absolute;
-      display: flex;
-      align-items: center;
-      cursor: url(/images/click-cursor-red.svg), auto;
+      cursor: url(/images/click-cursor-red.svg), auto;      
       &:hover h3 {
         color: black;
       }
       &.parsons {
-        top: 30%;
-        left: 5%;
+        left: 26%;
+        top: 22.2%;        
       }
       &.lang {
-        top: 55%;
-        left: 18%;
+        left: calc(34.4% + 14.9%);
+        top: 61%;        
       }
       &.public {
-        top: 78%;
-        left: 35%;
+        left: 71.2%;
+        top: 45.2%;        
       }
       &.performing {
-        top: 18%;
-        left: 45%;
+        left: 2%;
+        top: 53%;        
       }
       &.research {
-        top: 40%;
-        left: 55%;
+        left: calc(58.4% + 14.9%);
+        top: 13.4%;        
       }
-      img {
-        width: 100px;
+      &.horz {
+        width: 22.79%;
+        height: 15%;
+        .text-container {
+          bottom: -100%;
+          h3 {
+            top: 1.5vw;
+            left: 1.5vw;
+            // bottom: -40%; 
+          }                    
+        }        
+      }
+      &.vert {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        width: 14.9%;
+        height: 24%;
+        .text-container {
+          display: flex;
+          align-items: center;
+          h3 {
+            position: relative;
+          }
+        } 
+        .img-container {
+          left: -114.9%;
+        }
+      }      
+      .img-container {
+        position: absolute;
+        height: 100%;
+        width: 100%;
         margin-right: 20px;
+        // background-image: url('/images/school-preview1.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        border: 1px solid $gray;
       }
-      h3 {
-        font-weight: 300;
-        font-size: 2vh;
-        width: 300px;
-        color: $red;
-        transition: all 0.4s ease-in-out;
+      .text-container {
+        position: absolute;
+        height: 100%;
+        width: 100%;        
+        h3 {
+          position: absolute;
+          font-weight: 300;
+          font-size: 2.2vh;
+          line-height: 2.7vh;
+          width: 250px;
+          color: $red;
+          transition: all 0.4s ease-in-out;
+        }
       }
     }
   }

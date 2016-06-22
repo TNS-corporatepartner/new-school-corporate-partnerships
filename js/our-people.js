@@ -42,7 +42,7 @@ export class OurPeople {
       this.slideX = 3
     })
   
-    Observable.interval(15)
+    Observable.interval(10)
       
       // .takeUntil(exit$)
 
@@ -74,7 +74,7 @@ export class OurPeople {
         // const sliderX = event.direction === 'right' ? this.sliderX - velocity * 10 : this.sliderX + velocity * 10
         // this.sliderX = sliderX        
 
-        this.sliderX += this.mouseCoords(e).x
+        this.sliderX += this.mouseCoords(e).x / 2
 
         var sliderPosition = ( ( ( this.sliderX - this.cellWidth ) % this.slideWidth ) + this.slideWidth ) % this.slideWidth;
         sliderPosition += -this.slideWidth + this.cellWidth;        
@@ -85,7 +85,7 @@ export class OurPeople {
         Velocity(this.slider, {
           left: sliderPosition + 'px'
         }, {
-          duration: isLeftReset ? 1 : 150,
+          duration: isLeftReset ? 1 : 2000,
           easing: 'easeInSine'
         })
 
