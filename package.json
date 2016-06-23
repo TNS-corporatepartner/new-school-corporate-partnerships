@@ -25,6 +25,7 @@
   "dependencies": {
     "d3": "^3.5.17",
     "flickity": "^1.2.1",
+    "fullpage.js": "^2.8.1",
     "gsap": "^1.18.5",
     "isotope-layout": "^3.0.1",
     "isotope-masonry-horizontal": "^2.0.0",
