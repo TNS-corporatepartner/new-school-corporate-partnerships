@@ -118,35 +118,55 @@
 		<section id="ourSchool">		
 
 			<div class="school-links">
-				<div class="school parsons">
-					<img src="/images/school-preview1.png">
-					<h3>Parsons School of Design</h3>
+				<div class="school parsons horz">
+					<div class="img-container">
+						<!--<img src="/images/school-preview1.png">-->
+					</div>
+					<div class="text-container">
+						<h3>Parsons School of Design</h3>
+					</div>
 				</div>
 
-				<div class="school lang">
-					<img src="/images/school-preview1.png">
-					<h3>Eugene Lang College of Liberal Arts</h3>
+				<div class="school lang vert">
+					<div class="img-container">
+						<!--<img src="/images/school-preview1.png">-->
+					</div>
+					<div class="text-container">
+						<h3>Eugene Lang College of Liberal Arts</h3>
+					</div>
 				</div>
 
-				<div class="school public">
-					<img src="/images/school-preview1.png">
-					<h3>Schools of Public Engagement</h3>
+				<div class="school public horz">
+					<div class="img-container">
+						<!--<img src="/images/school-preview1.png">-->
+					</div>
+					<div class="text-container">
+						<h3>Schools of Public Engagement</h3>
+					</div>
 				</div>
 
-				<div class="school performing">
-					<img src="/images/school-preview1.png">
-					<h3>College of Performing Arts</h3>
+				<div class="school performing horz">
+					<div class="img-container">
+						<!--<img src="/images/school-preview1.png">-->
+					</div>
+					<div class="text-container">
+						<h3>College of Performing Arts</h3>
+					</div>					
 				</div>
 
-				<div class="school research">
-					<img src="/images/school-preview1.png">
-					<h3>The New School for Social Research</h3>
+				<div class="school research vert">
+					<div class="img-container">
+						<!--<img src="/images/school-preview1.png">-->
+					</div>
+					<div class="text-container">
+						<h3>The New School for Social Research</h3>
+					</div>
 				</div>
 			</div>
 
 			<div id="schoolModal">
-				<div class="content-wrap">
-					<a href="https://www.google.com" target="_blank" class="content"></a>
+				<div class="content">
+					<a href="https://www.google.com" target="_blank"></a>
 				</div>
 				
 			</div>			
@@ -204,8 +224,8 @@
 			<div id="peopleSlider">
 				<div class="slider-inner">
 
-					{% for i in (1..2) %}
-						<div class="cell {% if forloop.index == 1 %}clone{% endif %}">
+					{% for i in (1..3) %}
+						<div class="cell cell-{{forloop.index}}">
 							<div class="grid">
 								{% for person in site.people %}
 									<div class="person {% if person.video %}video{% endif %}" style="background-image:url('{{person.image}}');" data-src="{% if person.video %}{{person.video}}{% endif %}">
@@ -240,68 +260,63 @@
 		</section>
 
 		<section id="contactUs">
-
-			<aside id="asideSlider">
-
-				<div id="contactSlider">
-					<div class="contact-cell" style="background-image: url('/images/contact1.jpg')">
-						<div class="content">
-							<h2>Stimulating social innovation &amp; entrepreneurship</h2>
-							<div class="invisible">
-								<p>The New School offers opportunities to create new thinking for a new world. From incubating ideas to solving specific business challenges, The New School designs for both the issues of our time as well well as those to come.</p>
+				<div class="panel-group">
+					<div class="panel">
+						<div class="panel-tint"></div>
+						<div class="content-wrapper">
+							<div class="content">
+								<h4>Stimulate Innovation &amp; Entrepreneurship</h4>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga facere porro error, architecto sint impedit tempore, deserunt perferendis odit assumenda delectus fugit libero praesentium excepturi. Aut mollitia magnam, totam non.</p>
 							</div>
 						</div>
 					</div>
-
-					<div class="contact-cell" style="background-image: url('/images/contact1.jpg')">
-						<div class="content">
-							<h2>Preparing a workforce for the gig economy</h2>
-							<div class="invisible">
-								<p>The New School offers opportunities to create new thinking for a new world. From incubating ideas to solving specific business challenges, The New School designs for both the issues of our time as well well as those to come.</p>
+					<div class="panel">
+						<div class="panel-tint"></div>
+						<div class="content-wrapper">
+							<div class="content">
+								<h4>Prepare a workforce for the new economy</h4>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus facere velit molestias expedita officia, unde iste perferendis sunt porro aspernatur, placeat voluptas earum autem tenetur harum similique optio nihil non?</p>
 							</div>
 						</div>
 					</div>
-
-					<div class="contact-cell" style="background-image: url('/images/contact2.jpg')">
-						<div class="content">
-							<h2>Leveraging big data to see the future</h2>
-							<div class="invisible">
-								<p>The New School offers opportunities to create new thinking for a new world. From incubating ideas to solving specific business challenges, The New School designs for both the issues of our time as well well as those to come.</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</aside>
-
-			<div class="content">
-				<p>Our Partners understand the value of using design thinking to solve real-world problems.</p>
-
-				<div class="contact-info">
-					<p>Ready to design the future?</p>
-					<h4>Collaborate with us</h4>
-
-					<div class="invisible">
-						<div class="debbie">
-							<img src="/images/debbie.jpg" height="120">
-							<div class="contact-details">
-								<p><strong>Debbie Gibb</strong></p>
-								<p>Vice President</p>
-								<p>Corporate Partnerships &amp; Industry Development</p>
-								<p>The New School</p>
-								<button>Email Debbie</button>
+					<div class="panel">
+						<div class="panel-tint"></div>
+						<div class="content-wrapper">
+							<div class="content">
+								<h4>Leverage big data to envision the future</h4>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae facere provident quo ab, deserunt eius tempora dignissimos enim magnam numquam aperiam itaque, quis velit, officiis sunt esse mollitia, reprehenderit temporibus.</p>
 							</div>
 						</div>
 					</div>
 				</div>
 
 				<hgroup class="section-headlines">
-					<h4>Partner with us</h4>
+					<h4>Are You Ready to Design the Future?</h4>
 					<h3 class="dynamic-text"></h3>
 				</hgroup>
 			</div>
 		</section>
 
 	</main>
+
+	<div id="partnerTray">
+		<hgroup class="section-headlines">
+			<h3>Partner with us</h3>
+			<h3 class="dynamic-text"></h3>
+		</hgroup>		
+
+		<div class="debbie">
+			<p>Debbie Gibb</p>
+			<p><small>Vice President</small></p>
+			<p><small>Corporate Partnerships &amp; Industry Development</small></p>
+			<p><small>The New School</small></p>
+
+			<div class="contact">
+				<a href="http://mailto:debbie@newschool.edu">debbie@newschool.edu &rarr;</a>
+				<tel>123-456-7890</tel>
+			</div>
+		</div>
+	</div>
 
 	<footer>
 		<div id="introBg"></div>

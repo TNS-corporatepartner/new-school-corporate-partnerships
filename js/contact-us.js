@@ -2,23 +2,21 @@ import Flickity from 'flickity'
 
 export class ContactUs {
   constructor() {
-    this.asideSlider = document.getElementById('asideSlider')
-    this.slidesUl = this.asideSlider.querySelector('ul')
-    this.slides = this.asideSlider.querySelectorAll('li')
+    $('#contactUs .panel .content').on('mouseenter', this.openPanel)
+    $('#contactUs .panel').on('mouseleave', this.closePanel)
+    $('#contactUs').on('click', '.panel.hover', this.closePanel)
+  }
 
-    var flkty = new Flickity( '#contactSlider', {
-      autoPlay: true
-    });
+  openPanel(e) {
+    e.stopPropagation()
+    const $panel = $(this).parents('.panel')      
+    $('.panel-group .panel').not($panel).addClass('hover-sibling')
+    $panel.addClass('hover')
+  }
 
-    console.log('test')
-
-    $('#contactUs .content').on('mouseenter', function() {
-      $(this).addClass('show-invisible')
-    })
-
-    $('#contactUs .content').on('mouseleave', function() {
-      $(this).removeClass('show-invisible')
-    })
+  closePanel(e) {
+    e.stopPropagation()
+    $('.panel-group .panel').removeClass('hover hover-sibling')  
   }
 
   sleep() {
@@ -27,8 +25,5 @@ export class ContactUs {
 
   awake() {
     this.isSleeping = false
-    // this.asideSlider = document.getElementById('asideSlider')
-    // this.slides = this.asideSlider.querySelectorAll('li')
-    // this.animateSlide(this.slides.length - 1)
   }
 }

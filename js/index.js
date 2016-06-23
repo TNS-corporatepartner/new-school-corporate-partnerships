@@ -71,6 +71,18 @@ function init() {
     })
   }
 
+  $('#header a').on('click', function(e) {
+    e.preventDefault()
+    e.stopPropagation()
+    $('body').addClass('partner-tray')
+  })
+
+  $('#partnerTray').on('click', function(e) {
+    e.preventDefault()
+    e.stopPropagation()
+    $('body').removeClass('partner-tray')    
+  })
+
   var move$ = Observable.fromEvent(window, 'mousemove') 
   
   var moveUp$ = move$
@@ -101,6 +113,8 @@ function init() {
     .subscribe(v => {
       const event = v[0]
       const direction = v[1]
+
+      $('body').removeClass('partner-tray')    
 
       if (direction === 'up' && app.activeScrollIndex !== 0) {
         $('main').moveUp()
@@ -160,7 +174,7 @@ function init() {
       $('body').addClass('intro-in-progress')
 
       //logo animate in
-      Velocity(line1, {x1: 4.501, y1: 64.81, x2: 109.524, y2: 64.81}, {duration: 500})
+      Velocity(line1, {x1: 4.501, y1: 64.81, x2: 109.524, y2: 64.81}, {duration: 500 / 4})
       Velocity(line2, {x1: 4.501, y1: 71.5, x2: 109.524, y2: 71.5}, {duration: 500})
       Velocity(fixedLogoText, {translateX: 0, translateY: 0}, {duration: 2000 / 4})
 
@@ -169,25 +183,25 @@ function init() {
         bottom: 20,
         width: 150
       }, {
-        duration: 1000,
-        delay: 2500 
+        duration: 1000 / 4,
+        delay: 2500  / 4
       })
 
       //intro text animate in
       Velocity(introText, {opacity: 1}, {
-        duration: 1000,
-        delay: 3300,
+        duration: 1000 / 4,
+        delay: 3300 / 4,
         complete: () => {
           setTimeout(() => {
             Velocity(introText, {opacity: 0}, {
-              duration: 500,
+              duration: 500 / 4,
               display: 'none'
             })
 
             setTimeout(function() {
               $('body').removeClass('intro-in-progress')
-            }, 500)            
-          }, 3000)
+            }, 500 / 4)            
+          }, 3000 / 4)
         }
       })
 
@@ -196,13 +210,13 @@ function init() {
         width: '140px',
         height: '62px'
       }, {
-        duration: 800,
-        delay: 8000
+        duration: 800 / 4,
+        delay: 8000 / 4
       })
 
       setTimeout(() => {
         obs.next()        
-      }, 8800)
+      }, 8800 / 4)
     })
   }
 }
