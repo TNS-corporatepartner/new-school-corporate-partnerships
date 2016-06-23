@@ -61687,16 +61687,15 @@
 	  function ContactUs() {
 	    _classCallCheck(this, ContactUs);
 
-	    $('#contactUs .panel .content').on('mouseenter', this.openPanel);
+	    $('#contactUs .panel').on('mouseenter', this.openPanel);
 	    $('#contactUs .panel').on('mouseleave', this.closePanel);
-	    $('#contactUs').on('click', '.panel.hover', this.closePanel);
 	  }
 
 	  _createClass(ContactUs, [{
 	    key: 'openPanel',
 	    value: function openPanel(e) {
 	      e.stopPropagation();
-	      var $panel = $(this).parents('.panel');
+	      var $panel = $(this);
 	      $('.panel-group .panel').not($panel).addClass('hover-sibling');
 	      $panel.addClass('hover');
 	    }

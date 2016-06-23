@@ -2,14 +2,13 @@ import Flickity from 'flickity'
 
 export class ContactUs {
   constructor() {
-    $('#contactUs .panel .content').on('mouseenter', this.openPanel)
+    $('#contactUs .panel').on('mouseenter', this.openPanel)
     $('#contactUs .panel').on('mouseleave', this.closePanel)
-    $('#contactUs').on('click', '.panel.hover', this.closePanel)
   }
 
   openPanel(e) {
     e.stopPropagation()
-    const $panel = $(this).parents('.panel')      
+    const $panel = $(this)      
     $('.panel-group .panel').not($panel).addClass('hover-sibling')
     $panel.addClass('hover')
   }
