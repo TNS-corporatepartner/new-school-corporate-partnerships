@@ -32671,7 +32671,9 @@
 	    this.section = document.getElementById('ourPeople');
 	    this.sectionInto = this.section.querySelector('.section-intro');
 	    this.slider = document.getElementById('peopleSlider');
-	    this.lastDirection = 'right';
+	    this.sliderInner = this.slider.querySelector('.slider-inner');
+	    this.walkDirection = 'right';
+	    this.lastLeft = 0;
 
 	    var chunks = document.querySelectorAll('.grid').forEach(function (chunk) {
 	      new _isotopeLayout2.default(chunk, {
@@ -32683,72 +32685,8 @@
 	      });
 	    });
 
-	    this.sliderX = 0;
 	    this.cellWidth = this.slider.querySelector('.cell .grid').offsetWidth;
 	    this.slideWidth = this.cellWidth * 1;
-
-	    var mousing$ = _rxjs.Observable.fromEvent(this.slider, 'mousemove');
-
-	    var mousingRight = mousing$.filter(function (e) {
-	      return e.clientX > window.innerWidth / 2;
-	    });
-
-	    var mousingLeft = mousing$.filter(function (e) {
-	      return e.clientX < window.innerWidth / 2;
-	    });
-
-	    var test = this.section.querySelector('.section-headlines');
-
-	    var exit$ = _rxjs.Observable.fromEvent(test, 'mouseleave').subscribe(function () {
-	      _this.slideX = 3;
-	    });
-
-	    _rxjs.Observable.interval(10)
-
-	    // .takeUntil(exit$)
-
-	    .withLatestFrom(_rxjs.Observable.merge(mousingLeft.map(function (e) {
-	      return { e: e, direction: 'left' };
-	    }), mousingRight.map(function (e) {
-	      return { e: e, direction: 'right' };
-	    }))).map(function (e) {
-	      return {
-	        e: e[1].e,
-	        direction: e[1].direction
-	      };
-	    })
-
-	    // .repeat()
-
-	    .subscribe(function (event) {
-	      var e = event.e;
-	      _this.lastDirection = event.direction;
-
-	      //calculates a number between 0 and 1 based on mouse position
-	      // const velocity = event.direction === 'right' ?
-	      //   (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2) :
-	      //   (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2) * -1        
-
-	      // const sliderX = event.direction === 'right' ? this.sliderX - velocity * 10 : this.sliderX + velocity * 10
-	      // this.sliderX = sliderX       
-
-	      _this.sliderX += _this.mouseCoords(e).x / 2;
-
-	      var sliderPosition = ((_this.sliderX - _this.cellWidth) % _this.slideWidth + _this.slideWidth) % _this.slideWidth;
-	      sliderPosition += -_this.slideWidth + _this.cellWidth;
-
-	      var isLeftReset = Math.abs(_this.lastLeft - sliderPosition) > 10 ? true : false;
-
-	      Velocity(_this.slider, 'stop');
-	      Velocity(_this.slider, {
-	        left: sliderPosition + 'px'
-	      }, {
-	        duration: isLeftReset ? 1 : 2000,
-	        easing: 'easeInSine'
-	      });
-
-	      _this.lastLeft = sliderPosition;
-	    });
 
 	    $('.person.video').on('click', function (e) {
 	      e.stopPropagation();
@@ -32769,12 +32707,65 @@
 	        modalContent.innerHTML = '';
 	      });
 	    });
+
+	    var mousemove$ = _rxjs.Observable.fromEvent(this.slider, 'mousemove').map(function (e) {
+	      return _this.mouseCoords(e);
+	    });
+
+	    var run$ = mousemove$.take(1).switchMap(function (e) {
+	      return _this.animateToPoint$(e);
+	    }).repeat();
+
+	    var walk$ = function walk$(direction) {
+	      return _rxjs.Observable.interval(15).mapTo(direction);
+	    };
+
+	    walk$('right').takeUntil(mousemove$).subscribe(function (direction) {
+	      return _this.animateSlowly(direction);
+	    });
+
+	    run$.switchMap(function () {
+	      return walk$().takeUntil(mousemove$);
+	    }).subscribe(function (direction) {
+	      return _this.animateSlowly(direction);
+	    }, this.handleErr, function () {
+	      console.log('RUN DONE');
+	    });
 	  }
 
-	  //returns a value of positive or negative 50 depending on distance from center
-
-
 	  _createClass(OurPeople, [{
+	    key: 'animateSlowly',
+	    value: function animateSlowly(direction) {
+	      var step = direction === 'right' ? -1 : 1;
+	      var newLeft = this.lastLeft += step;
+
+	      Velocity(this.sliderInner, 'stop');
+	      Velocity(this.sliderInner, {
+	        left: this.setNewLeft(newLeft)
+	      }, {
+	        duration: 0
+	      });
+	    }
+	  }, {
+	    key: 'animateToPoint$',
+	    value: function animateToPoint$(e) {
+	      var _this2 = this;
+
+	      return _rxjs.Observable.create(function (obs) {
+	        Velocity(_this2.sliderInner, 'stop');
+	        Velocity(_this2.sliderInner, {
+	          left: e.sliderDest
+	        }, {
+	          duration: e.duration,
+	          complete: function complete() {
+	            obs.next(e.direction);
+	            obs.complete();
+	          },
+	          easing: 'easeInSine'
+	        });
+	      });
+	    }
+	  }, {
 	    key: 'mouseCoords',
 	    value: function mouseCoords(e) {
 	      var xPercent = e.clientX / window.innerWidth * 100;
@@ -32783,47 +32774,33 @@
 	      var yPercent = e.clientY / window.innerHeight * 100;
 	      var y = yPercent >= 50 ? (yPercent - 50) * -1 : 50 - yPercent;
 
+	      var lastLeft = this.lastLeft || 0;
+	      var unfilteredNewLeft = lastLeft + x * 0.01 * window.innerWidth;
+
+	      var newLeft = this.setNewLeft(unfilteredNewLeft);
+	      var isLeftReset = unfilteredNewLeft.toFixed(0) != newLeft.toFixed(0);
+	      this.lastLeft = newLeft;
+
+	      //returns x and y with positive or negative 50 depending on distance from center
 	      return {
 	        x: x,
-	        y: y
+	        y: y,
+	        sliderDest: newLeft,
+	        direction: newLeft < lastLeft ? 'right' : 'left',
+	        duration: isLeftReset ? 0 : 1000
 	      };
 	    }
 	  }, {
-	    key: 'scrollAmbiently',
-	    value: function scrollAmbiently() {
-	      var currSliderX = parseInt(this.slider.style.left || 0);
-	      var sliderX = this.lastDirection === 'right' ? currSliderX - 2 : currSliderX + 2;
-	      this.updateSliderPosition(sliderX);
+	    key: 'setNewLeft',
+	    value: function setNewLeft(newLeft) {
+	      var sliderPosition = ((newLeft - this.cellWidth) % this.slideWidth + this.slideWidth) % this.slideWidth;
+	      var newLeft = sliderPosition += -this.slideWidth + this.cellWidth;
+	      return newLeft;
 	    }
 	  }, {
-	    key: 'scrollOnMouseMove',
-	    value: function scrollOnMouseMove(event) {
-	      var e = event.e;
-	      this.lastDirection = event.direction;
-
-	      var velocity = event.direction === 'right' ? (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2) : (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2) * -1;
-
-	      var sliderX = event.direction === 'right' ? this.sliderX - velocity * 40 : this.sliderX + velocity * 40;
-	      this.updateSliderPosition(sliderX);
-	    }
-	  }, {
-	    key: 'updateSliderPosition',
-	    value: function updateSliderPosition(sliderX) {
-	      this.sliderX = sliderX;
-
-	      var sliderPosition = ((this.sliderX - this.cellWidth) % this.slideWidth + this.slideWidth) % this.slideWidth;
-	      sliderPosition += -this.slideWidth + this.cellWidth;
-	      // this.slider.style.left = sliderPosition + 'px';
-
-	      console.log(sliderPosition.toFixed(0) + 'px');
-
-	      Velocity(this.slider, 'stop');
-	      Velocity(this.slider, {
-	        left: sliderPosition.toFixed(0) + 'px'
-	      }, {
-	        duration: 1000,
-	        easing: 'easeInSine'
-	      });
+	    key: 'handleErr',
+	    value: function handleErr(err) {
+	      console.log(err);
 	    }
 	  }]);
 
