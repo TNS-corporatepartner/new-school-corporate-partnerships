@@ -19,7 +19,6 @@ const sections =  {
   ]
 }
 
-
 export class CoreValues {
 
   constructor() {
@@ -125,6 +124,7 @@ export class CoreValues {
       })
     })      
   }
+  
 
   // resetCellText() {
   //   return new Promise(resolve => {

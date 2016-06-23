@@ -1,4 +1,210 @@
 @charset "UTF-8";
+/*!
+ * fullPage 2.8.1
+ * https://github.com/alvarotrigo/fullPage.js
+ * MIT licensed
+ *
+ * Copyright (C) 2013 alvarotrigo.com - A project by Alvaro Trigo
+ * Contribution by Jhony0311
+ */
+html.fp-enabled,
+.fp-enabled body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  /*Avoid flicker on slides transitions for mobile phones #336 */
+  -webkit-tap-highlight-color: transparent; }
+
+#superContainer {
+  height: 100%;
+  position: relative;
+  /* Touch detection for Windows 8 */
+  -ms-touch-action: none;
+  /* IE 11 on Windows Phone 8.1*/
+  touch-action: none; }
+
+.fp-section {
+  position: relative;
+  /* Safari<=5 Android<=3 */
+  /* <=28 */
+  box-sizing: border-box; }
+
+.fp-slide {
+  float: left; }
+
+.fp-slide, .fp-slidesContainer {
+  height: 100%;
+  display: block; }
+
+.fp-slides {
+  z-index: 1;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  /* Safari<=6 Android<=4.3 */
+  transition: all 0.3s ease-out; }
+
+.fp-section.fp-table, .fp-slide.fp-table {
+  display: table;
+  table-layout: fixed;
+  width: 100%; }
+
+.fp-tableCell {
+  display: table-cell;
+  vertical-align: middle;
+  width: 100%;
+  height: 100%; }
+
+.fp-slidesContainer {
+  float: left;
+  position: relative; }
+
+.fp-controlArrow {
+  -webkit-user-select: none;
+  /* webkit (safari, chrome) browsers */
+  -moz-user-select: none;
+  /* mozilla browsers */
+  -khtml-user-select: none;
+  /* webkit (konqueror) browsers */
+  -ms-user-select: none;
+  /* IE10+ */
+  position: absolute;
+  z-index: 4;
+  top: 50%;
+  cursor: pointer;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  margin-top: -38px;
+  transform: translate3d(0, 0, 0); }
+  .fp-controlArrow.fp-prev {
+    left: 15px;
+    width: 0;
+    border-width: 38.5px 34px 38.5px 0;
+    border-color: transparent #fff transparent transparent; }
+  .fp-controlArrow.fp-next {
+    right: 15px;
+    border-width: 38.5px 0 38.5px 34px;
+    border-color: transparent transparent transparent #fff; }
+
+.fp-scrollable {
+  overflow: scroll; }
+
+.fp-notransition {
+  transition: none !important; }
+
+.fp-slidesNav {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  opacity: 1; }
+  .fp-slidesNav.bottom {
+    bottom: 17px; }
+  .fp-slidesNav.top {
+    top: 17px; }
+
+#fp-nav ul,
+.fp-slidesNav ul {
+  margin: 0;
+  padding: 0; }
+  #fp-nav ul li,
+  .fp-slidesNav ul li {
+    display: block;
+    width: 14px;
+    height: 13px;
+    margin: 7px;
+    position: relative; }
+    #fp-nav ul li a,
+    .fp-slidesNav ul li a {
+      display: block;
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      text-decoration: none; }
+      #fp-nav ul li a.active span,
+      .fp-slidesNav ul li a.active span {
+        height: 12px;
+        width: 12px;
+        margin: -6px 0 0 -6px;
+        border-radius: 100%; }
+        #fp-nav ul li:hover #fp-nav ul li a.active span,
+        #fp-slidesNav ul li:hover #fp-nav ul li a.active span, #fp-nav ul li:hover
+        .fp-slidesNav ul li a.active span,
+        #fp-slidesNav ul li:hover
+        .fp-slidesNav ul li a.active span {
+          height: 12px;
+          width: 12px;
+          margin: -6px 0 0 -6px;
+          border-radius: 100%; }
+      #fp-nav ul li a span,
+      .fp-slidesNav ul li a span {
+        border-radius: 50%;
+        position: absolute;
+        z-index: 1;
+        height: 4px;
+        width: 4px;
+        border: 0;
+        background: #333;
+        left: 50%;
+        top: 50%;
+        margin: -2px 0 0 -2px;
+        transition: all 0.1s ease-in-out; }
+    #fp-nav ul li:hover a span,
+    .fp-slidesNav ul li:hover a span {
+      width: 10px;
+      height: 10px;
+      margin: -5px 0px 0px -5px; }
+
+#fp-nav {
+  position: fixed;
+  z-index: 100;
+  margin-top: -32px;
+  top: 50%;
+  opacity: 1;
+  -webkit-transform: translate3d(0, 0, 0); }
+  #fp-nav.right {
+    right: 17px; }
+  #fp-nav.left {
+    left: 17px; }
+  #fp-nav ul li .fp-tooltip {
+    position: absolute;
+    top: -2px;
+    color: #fff;
+    font-size: 14px;
+    font-family: arial, helvetica, sans-serif;
+    white-space: nowrap;
+    max-width: 220px;
+    overflow: hidden;
+    display: block;
+    opacity: 0;
+    width: 0;
+    cursor: pointer; }
+    #fp-nav ul li .fp-tooltip.right {
+      right: 20px; }
+  #fp-nav ul li:hover .fp-tooltip {
+    transition: opacity 0.2s ease-in;
+    width: auto;
+    opacity: 1; }
+  #fp-nav.fp-show-active a.active + .fp-tooltip {
+    transition: opacity 0.2s ease-in;
+    width: auto;
+    opacity: 1; }
+
+.fp-slidesNav ul li {
+  display: inline-block; }
+
+.fp-auto-height.fp-section,
+.fp-auto-height .fp-slide,
+.fp-auto-height .fp-tableCell {
+  height: auto !important; }
+
+.fp-responsive .fp-auto-height-responsive.fp-section,
+.fp-responsive .fp-auto-height-responsive .fp-slide,
+.fp-responsive .fp-auto-height-responsive .fp-tableCell {
+  height: auto !important; }
+
 body, html {
   margin: 0;
   overflow: hidden;
@@ -97,9 +303,9 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
   font-style: italic;
   font-weight: normal; }
 
-body.viewing-page-3 #fixedLogo svg > g, body.viewing-page-4 #fixedLogo svg > g, body.viewing-page-5 #fixedLogo svg > g {
+body.fp-viewing-2 #fixedLogo svg > g, body.fp-viewing-3 #fixedLogo svg > g, body.fp-viewing-4 #fixedLogo svg > g {
   fill: #333; }
-  body.viewing-page-3 #fixedLogo svg > g line, body.viewing-page-4 #fixedLogo svg > g line, body.viewing-page-5 #fixedLogo svg > g line {
+  body.fp-viewing-2 #fixedLogo svg > g line, body.fp-viewing-3 #fixedLogo svg > g line, body.fp-viewing-4 #fixedLogo svg > g line {
     stroke: #333; }
 
 body.intro-in-progress #fixedLogo svg > g, body.partner-tray #fixedLogo svg > g {
@@ -111,6 +317,9 @@ body.intro-in-progress #fixedLogo svg > g {
   transition: none; }
   body.intro-in-progress #fixedLogo svg > g line {
     transition: none; }
+
+main {
+  margin-right: 8px !important; }
 
 #fixedLogo svg > g {
   transition: fill 0.8s ease-in-out; }
@@ -136,8 +345,7 @@ header#header {
     display: block; }
 
 .logo-container,
-header#header,
-.onepage-pagination {
+header#header {
   cursor: pointer;
   transition: opacity 0.4s ease-in-out; }
 
@@ -181,6 +389,30 @@ body.partner-tray #partnerTray {
       #partnerTray .debbie .contact tel {
         display: block;
         margin: 0.5em 0; }
+
+#fp-nav {
+  margin-top: auto !important;
+  top: 0;
+  height: 100vh; }
+  #fp-nav.right {
+    right: 0; }
+  #fp-nav ul {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+        flex-direction: column;
+    height: 100%;
+    list-style: none;
+    background-color: white; }
+    #fp-nav ul li {
+      -ms-flex-preferred-size: 16.67%;
+          flex-basis: 16.67%;
+      margin: 0;
+      width: 8px; }
+      #fp-nav ul li a span {
+        display: none; }
+      #fp-nav ul li a.active {
+        background-color: #E82E21; }
 
 body.show-question section#futureOf .question {
   transition-delay: 1s;
@@ -514,7 +746,7 @@ section#ourSchool #schoolModal {
         width: 100%; }
 
 #peopleSlider {
-  position: relative;
+  position: absolute;
   top: calc(50% - 303px);
   outline: none; }
   #peopleSlider .slider-inner {
@@ -681,7 +913,7 @@ section#contactUs {
       -ms-flex-align: center;
           align-items: center;
       overflow: hidden;
-      transition: all 0.8s ease-in-out; }
+      transition: all 0.5s ease-in-out; }
       section#contactUs .panel-group .panel:before {
         content: '';
         opacity: 0.85;
@@ -695,9 +927,9 @@ section#contactUs {
         background-repeat: no-repeat;
         background-color: #e82e21;
         background-blend-mode: multiply;
-        transition: background-color 0.8s ease-in-out 0s, -webkit-filter 0.8s linear 0s;
-        transition: background-color 0.8s ease-in-out 0s, filter 0.8s linear 0s;
-        transition: background-color 0.8s ease-in-out 0s, filter 0.8s linear 0s, -webkit-filter 0.8s linear 0s;
+        transition: background-color 0.5s ease-in-out 0s, -webkit-filter 0.5s linear 0s;
+        transition: background-color 0.5s ease-in-out 0s, filter 0.5s linear 0s;
+        transition: background-color 0.5s ease-in-out 0s, filter 0.5s linear 0s, -webkit-filter 0.5s linear 0s;
         transform-origin: center; }
       section#contactUs .panel-group .panel:first-of-type:before {
         background-image: url(/images/workshop.png); }
@@ -737,18 +969,18 @@ section#contactUs {
           background-color: transparent;
           color: white;
           cursor: url("/images/click-cursor-red.svg"), auto;
-          transition: background-color 0.8s ease-in-out; }
+          transition: background-color 0.5s ease-in-out; }
           section#contactUs .panel-group .panel .content-wrapper .content h4 {
             width: 30vw;
             font-size: 26px;
-            transition: transform 0.8s ease-in-out;
+            transition: transform 0.5s ease-in-out;
             transform-origin: left top; }
           section#contactUs .panel-group .panel .content-wrapper .content p {
             width: 50vw;
             opacity: 0;
             font-size: 18px;
             font-size: 22px;
-            transition: opacity 0.8s ease-in-out;
+            transition: opacity 0.5s ease-in-out;
             -webkit-font-smoothing: antialiased; }
 
 body {

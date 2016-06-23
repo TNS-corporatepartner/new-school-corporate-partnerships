@@ -1,8 +1,8 @@
 body {
 
-  &.viewing-page-3,
-  &.viewing-page-4, 
-  &.viewing-page-5 {
+  &.fp-viewing-2,
+  &.fp-viewing-3, 
+  &.fp-viewing-4 {
     #fixedLogo svg > g {
       fill: $gray-dark;      
       line {
@@ -29,6 +29,10 @@ body {
       }
     }      
   }
+}
+
+main {
+  margin-right: 8px !important;
 }
 
 #fixedLogo svg > g {
@@ -61,8 +65,7 @@ header#header {
 }
 
 .logo-container,
-header#header,
-.onepage-pagination {
+header#header {
   cursor: pointer;
   transition: opacity 0.4s ease-in-out;
 }
@@ -120,3 +123,32 @@ body.partner-tray #partnerTray {
   }
 }
 
+#fp-nav {
+  &.right {
+    right: 0;
+  }
+  margin-top: auto !important;
+  top: 0; 
+  height: 100vh;
+  ul {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    list-style: none;
+    background-color: white;
+
+    li {
+      flex-basis: 16.67%;
+      margin: 0;
+      width: 8px;
+      a {
+        span {
+          display: none;
+        }
+        &.active {
+          background-color: $red;
+        }
+      }
+    }
+  }
+}

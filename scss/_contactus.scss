@@ -14,7 +14,7 @@ section#contactUs {
       display: flex;
       align-items: center;
       overflow: hidden;      
-      transition: all 0.8s ease-in-out;
+      transition: all 0.5s ease-in-out;
       &:before {
         content: '';
         opacity: 0.85;
@@ -26,7 +26,7 @@ section#contactUs {
         background-repeat: no-repeat;
         background-color: $red-tint;
         background-blend-mode: multiply;          
-        transition: background-color 0.8s ease-in-out 0s, filter 0.8s linear 0s;
+        transition: background-color 0.5s ease-in-out 0s, filter 0.5s linear 0s;
         transform-origin: center;                
       }       
       &:first-of-type:before {
@@ -79,11 +79,11 @@ section#contactUs {
           background-color: transparent;
           color: white;
           cursor: url('/images/click-cursor-red.svg'), auto;
-          transition: background-color 0.8s ease-in-out;
+          transition: background-color 0.5s ease-in-out;
           h4 {
             width: 30vw;            
             font-size: 26px;
-            transition: transform 0.8s ease-in-out;
+            transition: transform 0.5s ease-in-out;
             transform-origin: left top;
           }
           p {          
@@ -91,7 +91,7 @@ section#contactUs {
             opacity: 0;
             font-size: 18px;
             font-size: 22px;
-            transition: opacity 0.8s ease-in-out;
+            transition: opacity 0.5s ease-in-out;
             -webkit-font-smoothing: antialiased;
           }          
         }
