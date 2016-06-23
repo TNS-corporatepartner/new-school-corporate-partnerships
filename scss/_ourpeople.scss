@@ -10,8 +10,11 @@
       position: absolute;
       top: 0;
       left: 0;
-      &.clone:first-of-type .grid { 
+      &.cell-1 .grid { 
         left: -100%; 
+      }      
+      &.cell-3 .grid { 
+        left: 100%; 
       }      
     }
     .grid {

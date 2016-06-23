@@ -493,8 +493,10 @@ section#ourSchool #schoolModal {
       position: absolute;
       top: 0;
       left: 0; }
-      #peopleSlider .slider-inner .cell.clone:first-of-type .grid {
+      #peopleSlider .slider-inner .cell.cell-1 .grid {
         left: -100%; }
+      #peopleSlider .slider-inner .cell.cell-3 .grid {
+        left: 100%; }
     #peopleSlider .slider-inner .grid {
       position: absolute;
       top: 0;

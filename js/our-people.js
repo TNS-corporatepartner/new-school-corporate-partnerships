@@ -1,6 +1,8 @@
 import {Observable, Subject} from 'rxjs'
 import Isotope from 'isotope-layout'
 import 'isotope-masonry-horizontal'
+import 'gsap'
+import _ from 'lodash'
 
 export class OurPeople {
   constructor() {
@@ -13,7 +15,9 @@ export class OurPeople {
     this.slider = document.getElementById('peopleSlider')
     this.sliderInner = this.slider.querySelector('.slider-inner')
     this.walkDirection = 'right'
-    this.lastLeft = 0        
+    this.lastLeft = 0      
+    this.tl = new TimelineMax({repeat: -1})
+    this.timeScale = 5  
 
     var chunks = document.querySelectorAll('.grid').forEach(chunk => {
       new Isotope( chunk, {
@@ -48,28 +52,53 @@ export class OurPeople {
       })      
     })      
 
+    
+
+    this.tl.add( new TweenMax(this.sliderInner, '5', {
+      left: this.cellWidth * -1,
+      ease: Linear.easeNone, 
+      timeScale: this.timeScale
+    }))
+
+    const mouseleave$ = Observable.fromEvent(this.slider, 'mouseleave')
+      .subscribe(() => {
+        this.tl.timeScale(1)
+      })
+
     const mousemove$ = Observable.fromEvent(this.slider, 'mousemove')
-      .map(e => this.mouseCoords(e)) 
-
-    const run$ = mousemove$
-      .take(1) 
-      .switchMap((e) => this.animateToPoint$(e))      
+      .map(e => this.mouseCoords(e))
       .repeat()
+      .subscribe(e => {  
+        if ( e.x < 0 && this.tl.reversed() ) {
+          this.tl.reversed(false)
+        } else if ( e.x > 0 && !this.tl.reversed() ) {
+          this.tl.reversed(true)
+        }
 
-    const walk$ = (direction) => 
-      Observable.interval(15).mapTo(direction)
+        this.tl.timeScale( Math.abs(e.x / 10) )          
+      })
 
-    walk$('right')
-      .takeUntil(mousemove$)
-      .subscribe( (direction) => this.animateSlowly(direction) )    
 
-    run$
-      .switchMap( () => walk$().takeUntil(mousemove$) )       
-      .subscribe(
-        (direction) => this.animateSlowly(direction), 
-        this.handleErr, 
-        () => { console.log('RUN DONE') }
-      )
+
+    // const run$ = mousemove$
+    //   .take(1) 
+    //   .switchMap((e) => this.animateToPoint$(e))      
+    //   .repeat()
+
+    // const walk$ = (direction) => 
+    //   Observable.interval(15).mapTo(direction)
+
+    // walk$('right')
+    //   .takeUntil(mousemove$)
+    //   .subscribe( (direction) => this.animateSlowly(direction) )    
+
+    // run$
+    //   .switchMap( () => walk$().takeUntil(mousemove$) )       
+    //   .subscribe(
+    //     (direction) => this.animateSlowly(direction), 
+    //     this.handleErr, 
+    //     () => { console.log('RUN DONE') }
+    //   )
   }
 
   animateSlowly(direction) {
