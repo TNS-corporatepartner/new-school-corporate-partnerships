@@ -25,33 +25,16 @@ body, .onepage-wrapper, html {
 
 .onepage-pagination {
   position: absolute;
-  right: 0px;
-  top: 50%;
-  z-index: 5;
-  list-style: none;
-  margin: 0;
-  padding: 0; }
-
-.onepage-pagination li {
-  padding: 0;
-  text-align: center; }
-
-.onepage-pagination li a {
-  padding: 2px;
+  top: 0;
+  right: 0;
+  height: 100%;
+  display: -ms-flexbox;
+  display: flex;
   width: 50px;
-  height: 7px;
-  margin: 10px 0px;
-  background-color: white;
-  display: block;
-  transition: height 0.5s, width 0.5s; }
-  .onepage-pagination li a:hover {
-    height: 12px; }
-
-.onepage-pagination:hover li a {
-  width: 75px; }
-
-.onepage-pagination li a.active {
-  background-color: #E82E21; }
+  -ms-flex-direction: column;
+      flex-direction: column; }
+  .onepage-pagination li {
+    height: 16.67%; }
 
 .disabled-onepage-scroll, .disabled-onepage-scroll .wrapper {
   overflow: auto; }
@@ -691,42 +674,52 @@ section#contactUs {
     height: 100%; }
     section#contactUs .panel-group .panel {
       position: relative;
-      -ms-flex: 1 6 auto;
-          flex: 1 6 auto;
+      -ms-flex: 1 3 auto;
+          flex: 1 3 auto;
       display: -ms-flexbox;
       display: flex;
       -ms-flex-align: center;
           align-items: center;
-      background-size: auto 100%;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-color: rgba(195, 37, 25, 0.8);
-      background-blend-mode: multiply;
+      overflow: hidden;
       transition: all 0.8s ease-in-out; }
-      section#contactUs .panel-group .panel:first-of-type {
+      section#contactUs .panel-group .panel:before {
+        content: '';
+        opacity: 0.85;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: auto 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: #e82e21;
+        background-blend-mode: multiply;
+        transition: background-color 0.8s ease-in-out 0s, -webkit-filter 0.8s linear 0s;
+        transition: background-color 0.8s ease-in-out 0s, filter 0.8s linear 0s;
+        transition: background-color 0.8s ease-in-out 0s, filter 0.8s linear 0s, -webkit-filter 0.8s linear 0s;
+        transform-origin: center; }
+      section#contactUs .panel-group .panel:first-of-type:before {
         background-image: url(/images/workshop.png); }
-      section#contactUs .panel-group .panel:nth-of-type(2) {
+      section#contactUs .panel-group .panel:nth-of-type(2):before {
         background-image: url(/images/workforce.jpg); }
-      section#contactUs .panel-group .panel:last-of-type {
+      section#contactUs .panel-group .panel:last-of-type:before {
         background-image: url(/images/envision.png); }
       section#contactUs .panel-group .panel.hover {
-        background-color: transparent;
-        -ms-flex: 6 1 auto;
-            flex: 6 1 auto; }
+        -ms-flex: 3 1 auto;
+            flex: 3 1 auto; }
+        section#contactUs .panel-group .panel.hover:before {
+          background-color: transparent; }
         section#contactUs .panel-group .panel.hover .content-wrapper .content {
           pointer-events: none;
           background-color: rgba(0, 0, 0, 0.35); }
           section#contactUs .panel-group .panel.hover .content-wrapper .content p {
             opacity: 1; }
-      section#contactUs .panel-group .panel.hover-sibling {
-        -webkit-filter: blur(5px);
-                filter: blur(5px);
-        margin: -50px -50px -50px -50px;
-        overflow: hidden;
-        background-color: rgba(150, 28, 19, 0.8); }
-        section#contactUs .panel-group .panel.hover-sibling .content h4 {
-          transform: scale(0.5);
-          opacity: 0.5; }
+      section#contactUs .panel-group .panel.hover-sibling:before {
+        background-color: #c21f14; }
+      section#contactUs .panel-group .panel.hover-sibling .content h4 {
+        transform: scale(0.5);
+        opacity: 0.5; }
       section#contactUs .panel-group .panel .panel-tint {
         position: absolute;
         top: 0;
@@ -738,7 +731,7 @@ section#contactUs {
         width: 100%; }
         section#contactUs .panel-group .panel .content-wrapper .content {
           position: absolute;
-          top: -15%;
+          margin-top: -10%;
           width: 100%;
           padding: 2vw;
           background-color: transparent;

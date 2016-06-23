@@ -10,40 +10,53 @@ section#contactUs {
     height: 100%;
     .panel {
       position: relative;
-      flex: 1 6 auto;
+      flex: 1 3 auto;
       display: flex;
-      align-items: center;      
-      background-size: auto 100%;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-color: $red-tint;
-      background-blend-mode: multiply;       
+      align-items: center;
+      overflow: hidden;      
       transition: all 0.8s ease-in-out;
-      &:first-of-type {
+      &:before {
+        content: '';
+        opacity: 0.85;
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background-size: auto 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: $red-tint;
+        background-blend-mode: multiply;          
+        transition: background-color 0.8s ease-in-out 0s, filter 0.8s linear 0s;
+        transform-origin: center;                
+      }       
+      &:first-of-type:before {
         background-image: url(/images/workshop.png);
       }     
-      &:nth-of-type(2) {
+      &:nth-of-type(2):before {
         background-image: url(/images/workforce.jpg);
       }     
-      &:last-of-type {
+      &:last-of-type:before {
         background-image: url(/images/envision.png);
-      }     
+      }           
       &.hover {
-         background-color: transparent;
-         flex: 6 1 auto;
-         .content-wrapper .content {         
-           pointer-events: none;  
-           background-color: $black-tint;
-           p {
-             opacity: 1;
-           }
-         }
+        &:before {
+          background-color: transparent; 
+        }
+        flex: 3 1 auto;
+        .content-wrapper .content {         
+          pointer-events: none;  
+          background-color: $black-tint;
+          p {
+            opacity: 1;
+          }
+        }
       }
       &.hover-sibling {
-        filter: blur(5px);
-        margin: -50px -50px -50px -50px;
-        overflow: hidden;        
-        background-color: darken($red-tint, 10%);
+        &:before {
+          // filter: blur(5px);
+          background-color: darken($red-tint, 10%);         
+        }
+        
         .content h4 {       
           transform: scale(0.5);          
           opacity: 0.5;
@@ -60,7 +73,7 @@ section#contactUs {
         width: 100%;           
         .content {
           position: absolute;          
-          top: -15%;
+          margin-top: -10%;
           width: 100%;          
           padding: 2vw;
           background-color: transparent;
@@ -68,7 +81,7 @@ section#contactUs {
           cursor: url('/images/click-cursor-red.svg'), auto;
           transition: background-color 0.8s ease-in-out;
           h4 {
-            width: 30vw;
+            width: 30vw;            
             font-size: 26px;
             transition: transform 0.8s ease-in-out;
             transform-origin: left top;
