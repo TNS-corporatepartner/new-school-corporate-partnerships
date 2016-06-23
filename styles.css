@@ -114,9 +114,9 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
   font-style: italic;
   font-weight: normal; }
 
-body.viewing-page-3 #fixedLogo svg > g, body.viewing-page-4 #fixedLogo svg > g, body.viewing-page-5 #fixedLogo svg > g, body.viewing-page-6 #fixedLogo svg > g {
+body.viewing-page-3 #fixedLogo svg > g, body.viewing-page-4 #fixedLogo svg > g, body.viewing-page-5 #fixedLogo svg > g {
   fill: #333; }
-  body.viewing-page-3 #fixedLogo svg > g line, body.viewing-page-4 #fixedLogo svg > g line, body.viewing-page-5 #fixedLogo svg > g line, body.viewing-page-6 #fixedLogo svg > g line {
+  body.viewing-page-3 #fixedLogo svg > g line, body.viewing-page-4 #fixedLogo svg > g line, body.viewing-page-5 #fixedLogo svg > g line {
     stroke: #333; }
 
 body.intro-in-progress #fixedLogo svg > g, body.partner-tray #fixedLogo svg > g {
@@ -678,6 +678,75 @@ section#ourPeople.modal-open {
 
 section#contactUs {
   background: #E1E1E1; }
+  section#contactUs .section-headlines {
+    color: white; }
+  section#contactUs .panel-group {
+    display: -ms-flexbox;
+    display: flex;
+    height: 100%; }
+    section#contactUs .panel-group .panel {
+      position: relative;
+      -ms-flex: 1 6 auto;
+          flex: 1 6 auto;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-align: center;
+          align-items: center;
+      background-size: auto 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: rgba(195, 37, 25, 0.8);
+      background-blend-mode: multiply;
+      transition: all 0.8s ease-in-out; }
+      section#contactUs .panel-group .panel:first-of-type {
+        background-image: url(/images/studentgroup.jpg); }
+      section#contactUs .panel-group .panel:nth-of-type(2) {
+        background-image: url(/images/workforce.jpg); }
+      section#contactUs .panel-group .panel:last-of-type {
+        background-image: url(/images/studentgroup.jpg); }
+      section#contactUs .panel-group .panel.hover {
+        background-color: transparent;
+        -ms-flex: 6 1 auto;
+            flex: 6 1 auto;
+        cursor: url("/images/close-cursor-red.svg"), auto; }
+        section#contactUs .panel-group .panel.hover .content-wrapper .content {
+          pointer-events: none;
+          background-color: rgba(0, 0, 0, 0.35);
+          cursor: url("/images/close-cursor-red.svg"), auto; }
+          section#contactUs .panel-group .panel.hover .content-wrapper .content p {
+            opacity: 1; }
+      section#contactUs .panel-group .panel.hover-sibling .content h4 {
+        transform: scale(0.5) translate3d(-50%, -25%, 0);
+        opacity: 0.5; }
+      section#contactUs .panel-group .panel .panel-tint {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%; }
+      section#contactUs .panel-group .panel .content-wrapper {
+        position: relative;
+        width: 100%; }
+        section#contactUs .panel-group .panel .content-wrapper .content {
+          position: absolute;
+          top: -15%;
+          width: 100%;
+          padding: 2vw;
+          background-color: transparent;
+          color: white;
+          cursor: url("/images/click-cursor-red.svg"), auto;
+          transition: all 0.8s ease-in-out; }
+          section#contactUs .panel-group .panel .content-wrapper .content h4 {
+            width: 30vw;
+            font-size: 26px;
+            transition: all 0.8s ease-in-out; }
+          section#contactUs .panel-group .panel .content-wrapper .content p {
+            width: 50vw;
+            opacity: 0;
+            font-size: 18px;
+            font-size: 22px;
+            transition: opacity 0.8s ease-in-out;
+            -webkit-font-smoothing: antialiased; }
 
 body {
   background-color: #E1E1E1;

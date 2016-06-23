@@ -1,3 +1,85 @@
 section#contactUs { 
   background: $gray-light;
+
+  .section-headlines {
+    color: white;
+  }
+
+  .panel-group {
+    display: flex;
+    height: 100%;
+    .panel {
+      position: relative;
+      flex: 1 6 auto;
+      display: flex;
+      align-items: center;      
+      background-size: auto 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: $red-tint;
+      background-blend-mode: multiply; 
+      transition: all 0.8s ease-in-out;
+      &:first-of-type {
+        background-image: url(/images/studentgroup.jpg);
+      }     
+      &:nth-of-type(2) {
+        background-image: url(/images/workforce.jpg);
+      }     
+      &:last-of-type {
+        background-image: url(/images/studentgroup.jpg);
+      }     
+      &.hover {
+         background-color: transparent;
+         flex: 6 1 auto;
+         cursor: url('/images/close-cursor-red.svg'), auto;
+         .content-wrapper .content {         
+           pointer-events: none;  
+           background-color: $black-tint;
+           cursor: url('/images/close-cursor-red.svg'), auto;
+           p {
+             opacity: 1;
+           }
+         }
+      }
+      &.hover-sibling {
+        .content h4 {
+          transform: scale(0.5) translate3d(-50%, -25%, 0);
+          opacity: 0.5;
+        }
+      }
+      .panel-tint {
+        position: absolute;
+        top: 0 ; left: 0;
+        height: 100%;
+        width: 100%;
+      }
+      .content-wrapper {
+        position: relative;  
+        width: 100%;           
+        .content {
+          position: absolute;          
+          top: -15%;
+          width: 100%;          
+          padding: 2vw;
+          background-color: transparent;
+          color: white;
+          cursor: url('/images/click-cursor-red.svg'), auto;
+          transition: all 0.8s ease-in-out;
+          h4 {
+            width: 30vw;
+            font-size: 26px;
+            transition: all 0.8s ease-in-out;
+          }
+          p {          
+            width: 50vw;
+            opacity: 0;
+            font-size: 18px;
+            font-size: 22px;
+            transition: opacity 0.8s ease-in-out;
+            -webkit-font-smoothing: antialiased;
+          }          
+        }
+      }
+    }
+  }
 }

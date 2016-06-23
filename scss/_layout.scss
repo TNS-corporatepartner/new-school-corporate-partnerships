@@ -2,8 +2,7 @@ body {
 
   &.viewing-page-3,
   &.viewing-page-4, 
-  &.viewing-page-5, 
-  &.viewing-page-6 {
+  &.viewing-page-5 {
     #fixedLogo svg > g {
       fill: $gray-dark;      
       line {
