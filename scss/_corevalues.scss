@@ -20,8 +20,11 @@ section#coreValues {
     }
     &.content-closed {
       .core-values-cell .content {
-        .content-inner h1 {
-          font-size: 3vh;
+        .content-inner {
+          transform: translateY(-40%); 
+          h1 {
+            font-size: 3vh;
+          }
         }
       }
       +.section-headlines .dynamic-text {
@@ -88,13 +91,15 @@ section#coreValues {
         position: relative;
         display: flex;
         align-items: center;                
-        width: 100%;       
+        width: 100%;               
         transition: all 0.4s ease-in-out;
         .content-inner {
           position: absolute;
           width: 100%;
           max-width: 33vw;
           padding: 2vw;
+          transform: translateY(-50%);
+          transition: transform 0.4s ease-in-out;
           h1 {            
             max-width: 33vw;
             font-size: 6vh;
