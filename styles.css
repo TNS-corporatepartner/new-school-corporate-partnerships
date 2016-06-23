@@ -283,106 +283,111 @@ section#futureOf {
     width: 100%;
     overflow: visible; }
 
-section#coreValues.active .content {
-  pointer-events: none; }
-
-section#coreValues .section-intro {
+section#coreValues {
   background-color: #333; }
-  section#coreValues .section-intro h1 {
-    color: white; }
-
-section#coreValues .core-values-slider {
-  height: 100vh; }
-  section#coreValues .core-values-slider.uninitialized {
-    display: -ms-flexbox;
-    display: flex; }
-    section#coreValues .core-values-slider.uninitialized .core-values-cell {
-      padding: 0; }
-    section#coreValues .core-values-slider.uninitialized .flickity-canv-next-button {
-      opacity: 0; }
-  section#coreValues .core-values-slider.content-closed + .section-headlines .dynamic-text {
-    opacity: 0; }
-  section#coreValues .core-values-slider .core-values-cell {
-    position: relative;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-positive: 1;
-        flex-grow: 1;
-    -ms-flex-preferred-size: 0%;
-        flex-basis: 0%;
-    -ms-flex-align: center;
-        align-items: center;
-    width: 100%;
-    height: 100vh;
-    transition: flex 0.5s ease-in-out, opacity 0.5s ease-in-out, width 0.5s ease-in-out;
-    transition: flex 0.5s ease-in-out, opacity 0.5s ease-in-out, width 0.5s ease-in-out, -ms-flex 0.5s ease-in-out;
+  section#coreValues .section-intro {
     background-color: #333; }
-    section#coreValues .core-values-slider .core-values-cell:hover {
-      -ms-flex-positive: 1.5;
-          flex-grow: 1.5; }
-    section#coreValues .core-values-slider .core-values-cell.opening {
-      -ms-flex-positive: 10;
-          flex-grow: 10; }
-    section#coreValues .core-values-slider .core-values-cell.sibling-is-opening {
-      -ms-flex-positive: 0;
-          flex-grow: 0;
-      opacity: 0;
-      padding: 0;
-      width: 0;
-      overflow: hidden; }
-    section#coreValues .core-values-slider .core-values-cell.is-selected {
-      cursor: url("/images/close-cursor-red.svg"), auto; }
-    section#coreValues .core-values-slider .core-values-cell #particles-js {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100vw; }
-    section#coreValues .core-values-slider .core-values-cell span.close-cell {
-      position: absolute;
-      top: 100px;
-      right: 20px;
-      opacity: 1;
-      transition: opacity 0.4s ease-in-out; }
-      section#coreValues .core-values-slider .core-values-cell span.close-cell:before {
-        content: '×';
-        color: white;
-        font-size: 30pt;
-        padding: 20px; }
-    section#coreValues .core-values-slider .core-values-cell .content {
+    section#coreValues .section-intro h1 {
+      color: white; }
+  section#coreValues .core-values-slider {
+    height: 100vh; }
+    section#coreValues .core-values-slider.uninitialized {
+      display: -ms-flexbox;
+      display: flex; }
+      section#coreValues .core-values-slider.uninitialized .core-values-cell {
+        padding: 0; }
+      section#coreValues .core-values-slider.uninitialized .flickity-canv-next-button {
+        opacity: 0; }
+    section#coreValues .core-values-slider.content-closed .core-values-cell .content .content-inner {
+      transform: translateY(-40%); }
+      section#coreValues .core-values-slider.content-closed .core-values-cell .content .content-inner h1 {
+        font-size: 3vh; }
+    section#coreValues .core-values-slider.content-closed + .section-headlines .dynamic-text {
+      opacity: 0; }
+    section#coreValues .core-values-slider .core-values-cell {
       position: relative;
       display: -ms-flexbox;
       display: flex;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+      -ms-flex-preferred-size: 0%;
+          flex-basis: 0%;
       -ms-flex-align: center;
           align-items: center;
-      height: 100%;
       width: 100%;
-      max-width: 550px;
-      padding: 2vw;
-      transition: all 0.4s ease-in-out; }
-      section#coreValues .core-values-slider .core-values-cell .content .content-inner {
-        width: 100%; }
-        section#coreValues .core-values-slider .core-values-cell .content .content-inner h1 {
-          display: inline;
-          font-size: 3vh;
+      transition: flex 0.5s ease-in-out, opacity 0.5s ease-in-out, width 0.5s ease-in-out;
+      transition: flex 0.5s ease-in-out, opacity 0.5s ease-in-out, width 0.5s ease-in-out, -ms-flex 0.5s ease-in-out;
+      background-color: #333; }
+      section#coreValues .core-values-slider .core-values-cell.hover {
+        -ms-flex-positive: 1.5;
+            flex-grow: 1.5; }
+      section#coreValues .core-values-slider .core-values-cell.hover-sibling {
+        opacity: 0.5; }
+      section#coreValues .core-values-slider .core-values-cell.opening {
+        -ms-flex-positive: 10;
+            flex-grow: 10; }
+      section#coreValues .core-values-slider .core-values-cell.sibling-is-opening {
+        -ms-flex-positive: 0;
+            flex-grow: 0;
+        opacity: 0;
+        padding: 0;
+        width: 0;
+        overflow: hidden; }
+      section#coreValues .core-values-slider .core-values-cell.is-selected {
+        cursor: url("/images/close-cursor-red.svg"), auto;
+        height: 100vh; }
+        section#coreValues .core-values-slider .core-values-cell.is-selected .content .content-inner {
+          max-width: 62vw !important; }
+      section#coreValues .core-values-slider .core-values-cell #particles-js {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100vw; }
+      section#coreValues .core-values-slider .core-values-cell span.close-cell {
+        position: absolute;
+        top: 100px;
+        right: 20px;
+        opacity: 1;
+        transition: opacity 0.4s ease-in-out; }
+        section#coreValues .core-values-slider .core-values-cell span.close-cell:before {
+          content: '×';
           color: white;
-          padding: 100px 0;
-          transition: font-size 0.4s ease-in-out;
-          cursor: url(/images/click-cursor-red.svg), auto; }
-        section#coreValues .core-values-slider .core-values-cell .content .content-inner .dynamic-text {
-          opacity: 0;
-          color: white; }
-    section#coreValues .core-values-slider .core-values-cell canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100vw; }
-
-section#coreValues .core-values-cell canvas {
-  opacity: 0.2; }
-
-section#coreValues .core-values-cell:hover canvas {
-  opacity: 1; }
+          font-size: 30pt;
+          padding: 20px; }
+      section#coreValues .core-values-slider .core-values-cell .content {
+        position: relative;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-align: center;
+            align-items: center;
+        width: 100%;
+        transition: all 0.4s ease-in-out; }
+        section#coreValues .core-values-slider .core-values-cell .content .content-inner {
+          position: absolute;
+          width: 100%;
+          max-width: 33vw;
+          padding: 2vw;
+          transform: translateY(-50%);
+          transition: transform 0.4s ease-in-out; }
+          section#coreValues .core-values-slider .core-values-cell .content .content-inner h1 {
+            max-width: 33vw;
+            font-size: 6vh;
+            color: white;
+            transition: font-size 0.4s ease-in-out;
+            cursor: url(/images/click-cursor-red.svg), auto; }
+          section#coreValues .core-values-slider .core-values-cell .content .content-inner .dynamic-text {
+            opacity: 0;
+            color: white; }
+      section#coreValues .core-values-slider .core-values-cell canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw; }
+  section#coreValues .core-values-cell canvas {
+    opacity: 0.2; }
+  section#coreValues .core-values-cell:hover canvas {
+    opacity: 1; }
 
 body.school-modal-open #fixedLogo svg > g {
   fill: white;
@@ -699,25 +704,29 @@ section#contactUs {
       background-blend-mode: multiply;
       transition: all 0.8s ease-in-out; }
       section#contactUs .panel-group .panel:first-of-type {
-        background-image: url(/images/studentgroup.jpg); }
+        background-image: url(/images/workshop.png); }
       section#contactUs .panel-group .panel:nth-of-type(2) {
         background-image: url(/images/workforce.jpg); }
       section#contactUs .panel-group .panel:last-of-type {
-        background-image: url(/images/studentgroup.jpg); }
+        background-image: url(/images/envision.png); }
       section#contactUs .panel-group .panel.hover {
         background-color: transparent;
         -ms-flex: 6 1 auto;
-            flex: 6 1 auto;
-        cursor: url("/images/close-cursor-red.svg"), auto; }
+            flex: 6 1 auto; }
         section#contactUs .panel-group .panel.hover .content-wrapper .content {
           pointer-events: none;
-          background-color: rgba(0, 0, 0, 0.35);
-          cursor: url("/images/close-cursor-red.svg"), auto; }
+          background-color: rgba(0, 0, 0, 0.35); }
           section#contactUs .panel-group .panel.hover .content-wrapper .content p {
             opacity: 1; }
-      section#contactUs .panel-group .panel.hover-sibling .content h4 {
-        transform: scale(0.5) translate3d(-50%, -25%, 0);
-        opacity: 0.5; }
+      section#contactUs .panel-group .panel.hover-sibling {
+        -webkit-filter: blur(5px);
+                filter: blur(5px);
+        margin: -50px -50px -50px -50px;
+        overflow: hidden;
+        background-color: rgba(150, 28, 19, 0.8); }
+        section#contactUs .panel-group .panel.hover-sibling .content h4 {
+          transform: scale(0.5);
+          opacity: 0.5; }
       section#contactUs .panel-group .panel .panel-tint {
         position: absolute;
         top: 0;
@@ -735,11 +744,12 @@ section#contactUs {
           background-color: transparent;
           color: white;
           cursor: url("/images/click-cursor-red.svg"), auto;
-          transition: all 0.8s ease-in-out; }
+          transition: background-color 0.8s ease-in-out; }
           section#contactUs .panel-group .panel .content-wrapper .content h4 {
             width: 30vw;
             font-size: 26px;
-            transition: all 0.8s ease-in-out; }
+            transition: transform 0.8s ease-in-out;
+            transform-origin: left top; }
           section#contactUs .panel-group .panel .content-wrapper .content p {
             width: 50vw;
             opacity: 0;

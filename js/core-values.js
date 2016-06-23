@@ -32,15 +32,23 @@ export class CoreValues {
     this.dynamicHeadline = this.section.querySelector('.section-headlines .dynamic-text')
     
     Observable.fromEvent(window, 'resize').debounceTime(100).subscribe(() => this.resizeParticles())
-    $(this.cells).on('mouseenter', function() { $(this.cells).not(this).addClass('sibling-is-hovered') })
-    $(this.cells).on('mouseleave', function() { $(this.cells).removeClass('sibling-is-hovered') })    
+
+    $('#coreValues .content-inner').on('mouseenter', function() {
+      const $cell = $(this).parents('.core-values-cell')     
+      $('#coreValues .core-values-cell').not($cell).addClass('hover-sibling')
+      $cell.addClass('hover')
+    })
+
+    $('#coreValues .core-values-cell').on('mouseleave', function() {
+      $('#coreValues .core-values-cell').removeClass('hover hover-sibling')
+    })
+    
 
     $('#coreValues').on('click', '.core-values-cell.is-selected', (e) => {
       e.stopPropagation()
       this.cancelCellAnimation().then(() => {                
         this.closeCell()
       })
-      // this.closeCell()
     })
 
     $('.content-inner h1').on('click', function(e) { 
@@ -99,8 +107,6 @@ export class CoreValues {
 
   cancelCellAnimation() {
     return new Promise(resolve => {
-      console.log(this.lastCellAnimated)
-
       Velocity(this.lastCellAnimated.dynamicText, 'stop')
       Velocity(this.lastCellAnimated.dynamicText, {opacity: 0}, {
         duration: 400,
@@ -138,7 +144,7 @@ export class CoreValues {
     const h1 = flkty.selectedCell.element.querySelector('h1')
     const dynamicText = flkty.selectedCell.element.querySelector('.dynamic-text')
     const key = $(flkty.selectedCell.element).data('headline');
-    const phrases = sections[key];
+    const phrases = sections[key].slice(0);
 
     this.activeCell = $(flkty.selectedCell.element).parents('.core-values-cell').get(0)
 
@@ -149,6 +155,7 @@ export class CoreValues {
       h1: h1,
       dynamicText: dynamicText
     };
+    
 
     //called recursively until phrases array is empty
     (function changeWord(phrase, firstPhrase) {
@@ -162,6 +169,7 @@ export class CoreValues {
 
           Velocity(dynamicText, {opacity: 1}, {
             duration: 2000,
+            display: 'block',
             complete: () => {
               if (phrases.length) {
                 changeWord( phrases.splice(0, 1)[0] )
@@ -175,17 +183,17 @@ export class CoreValues {
 
   closeCell() {      
     this.activeCell = this.flkty.selectedCell.element
-    this.flkty.destroy()
+    this.flkty.destroy()    
 
     $(this.cells).not(this.activeCell).addClass('sibling-is-opening')
     $(this.activeCell).addClass('opening')
     $(this.slider).addClass('uninitialized')
 
     setTimeout(() => {
-      console.log(this.activeCell)
       $(this.cells).removeClass('sibling-is-opening')
       $(this.activeCell).removeClass('opening')
-      this.activeCell = null
+      $(this.activeCell).parents('.global-slider').addClass('content-closed')
+      this.activeCell = null      
     })
 
     setTimeout( () => {

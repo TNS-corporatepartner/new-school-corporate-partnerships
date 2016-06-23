@@ -62,7 +62,7 @@ export class OurPeople {
 
     const mouseleave$ = Observable.fromEvent(this.slider, 'mouseleave')
       .subscribe(() => {
-        this.tl.timeScale(1)
+        this.tl.timeScale(0.25)
       })
 
     const mousemove$ = Observable.fromEvent(this.slider, 'mousemove')
@@ -75,7 +75,7 @@ export class OurPeople {
           this.tl.reversed(true)
         }
 
-        this.tl.timeScale( Math.abs(e.x / 10) )          
+        this.tl.timeScale( Math.abs(e.x / 15) )          
       })
 
 
