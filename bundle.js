@@ -32344,11 +32344,15 @@
 	    _rxjs.Observable.fromEvent(window, 'resize').debounceTime(100).subscribe(function () {
 	      return _this.resizeParticles();
 	    });
-	    $(this.cells).on('mouseenter', function () {
-	      $(this.cells).not(this).addClass('sibling-is-hovered');
+
+	    $('#coreValues .content-inner').on('mouseenter', function () {
+	      var $cell = $(this).parents('.core-values-cell');
+	      $('#coreValues .core-values-cell').not($cell).addClass('hover-sibling');
+	      $cell.addClass('hover');
 	    });
-	    $(this.cells).on('mouseleave', function () {
-	      $(this.cells).removeClass('sibling-is-hovered');
+
+	    $('#coreValues .core-values-cell').on('mouseleave', function () {
+	      $('#coreValues .core-values-cell').removeClass('hover hover-sibling');
 	    });
 
 	    $('#coreValues').on('click', '.core-values-cell.is-selected', function (e) {
@@ -32356,7 +32360,6 @@
 	      _this.cancelCellAnimation().then(function () {
 	        _this.closeCell();
 	      });
-	      // this.closeCell()
 	    });
 
 	    $('.content-inner h1').on('click', function (e) {
@@ -32423,8 +32426,6 @@
 	      var _this3 = this;
 
 	      return new Promise(function (resolve) {
-	        console.log(_this3.lastCellAnimated);
-
 	        Velocity(_this3.lastCellAnimated.dynamicText, 'stop');
 	        Velocity(_this3.lastCellAnimated.dynamicText, { opacity: 0 }, {
 	          duration: 400,
@@ -32464,7 +32465,7 @@
 	      var h1 = flkty.selectedCell.element.querySelector('h1');
 	      var dynamicText = flkty.selectedCell.element.querySelector('.dynamic-text');
 	      var key = $(flkty.selectedCell.element).data('headline');
-	      var phrases = sections[key];
+	      var phrases = sections[key].slice(0);
 
 	      this.activeCell = $(flkty.selectedCell.element).parents('.core-values-cell').get(0);
 
@@ -32488,6 +32489,7 @@
 
 	            Velocity(dynamicText, { opacity: 1 }, {
 	              duration: 2000,
+	              display: 'block',
 	              complete: function complete() {
 	                if (phrases.length) {
 	                  changeWord(phrases.splice(0, 1)[0]);
@@ -32511,9 +32513,9 @@
 	      $(this.slider).addClass('uninitialized');
 
 	      setTimeout(function () {
-	        console.log(_this4.activeCell);
 	        $(_this4.cells).removeClass('sibling-is-opening');
 	        $(_this4.activeCell).removeClass('opening');
+	        $(_this4.activeCell).parents('.global-slider').addClass('content-closed');
 	        _this4.activeCell = null;
 	      });
 
@@ -32737,7 +32739,7 @@
 	    }));
 
 	    var mouseleave$ = _rxjs.Observable.fromEvent(this.slider, 'mouseleave').subscribe(function () {
-	      _this.tl.timeScale(1);
+	      _this.tl.timeScale(0.25);
 	    });
 
 	    var mousemove$ = _rxjs.Observable.fromEvent(this.slider, 'mousemove').map(function (e) {
@@ -32749,7 +32751,7 @@
 	        _this.tl.reversed(true);
 	      }
 
-	      _this.tl.timeScale(Math.abs(e.x / 10));
+	      _this.tl.timeScale(Math.abs(e.x / 15));
 	    });
 
 	    // const run$ = mousemove$
