@@ -119,12 +119,15 @@ body.viewing-page-3 #fixedLogo svg > g, body.viewing-page-4 #fixedLogo svg > g, 
   body.viewing-page-3 #fixedLogo svg > g line, body.viewing-page-4 #fixedLogo svg > g line, body.viewing-page-5 #fixedLogo svg > g line, body.viewing-page-6 #fixedLogo svg > g line {
     stroke: #333; }
 
-body.intro-in-progress #fixedLogo svg > g {
-  transition: none;
+body.intro-in-progress #fixedLogo svg > g, body.partner-tray #fixedLogo svg > g {
   fill: white; }
-  body.intro-in-progress #fixedLogo svg > g line {
-    transition: none;
+  body.intro-in-progress #fixedLogo svg > g line, body.partner-tray #fixedLogo svg > g line {
     stroke: white; }
+
+body.intro-in-progress #fixedLogo svg > g {
+  transition: none; }
+  body.intro-in-progress #fixedLogo svg > g line {
+    transition: none; }
 
 #fixedLogo svg > g {
   transition: fill 0.8s ease-in-out; }
@@ -154,6 +157,47 @@ header#header,
 .onepage-pagination {
   cursor: pointer;
   transition: opacity 0.4s ease-in-out; }
+
+body.partner-tray #partnerTray {
+  transform: translateY(0%); }
+
+#partnerTray {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: #222;
+  color: white;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  padding: 2vw;
+  transform: translateY(100%);
+  transition: transform 0.5s ease-in-out;
+  cursor: url("/images/close-cursor-red.svg"), auto; }
+  #partnerTray .debbie {
+    margin-top: -6%;
+    -webkit-font-smoothing: antialiased; }
+    #partnerTray .debbie p {
+      color: #E82E21; }
+      #partnerTray .debbie p:first-of-type {
+        font-weight: 600; }
+      #partnerTray .debbie p:not(:first-of-type) {
+        line-height: 20px; }
+      #partnerTray .debbie p small {
+        color: white;
+        font-size: 16px;
+        font-weight: 300; }
+    #partnerTray .debbie .contact {
+      margin-top: 20px; }
+      #partnerTray .debbie .contact a {
+        color: white;
+        text-decoration: none; }
+      #partnerTray .debbie .contact tel {
+        display: block;
+        margin: 0.5em 0; }
 
 body.show-question section#futureOf .question {
   transition-delay: 1s;
@@ -633,63 +677,7 @@ section#ourPeople.modal-open {
     transition: all 1s ease-in-out; }
 
 section#contactUs {
-  display: -ms-flexbox;
-  display: flex; }
-  section#contactUs > * {
-    position: relative;
-    -ms-flex-preferred-size: 50%;
-        flex-basis: 50%; }
-  section#contactUs .section-headlines h4 {
-    color: black; }
-  section#contactUs .content {
-    background-color: #E1E1E1;
-    padding: 5vw 2vw; }
-    section#contactUs .content.show-invisible .contact-info .invisible {
-      opacity: 1;
-      max-height: 500px; }
-    section#contactUs .content .contact-info {
-      margin-top: 200px; }
-      section#contactUs .content .contact-info > p, section#contactUs .content .contact-info h4 {
-        color: #E82E21;
-        line-height: 1.6em; }
-      section#contactUs .content .contact-info p {
-        text-transform: uppercase; }
-      section#contactUs .content .contact-info .invisible {
-        opacity: 0;
-        max-height: 0;
-        transition: all 0.5s ease-in-out; }
-        section#contactUs .content .contact-info .invisible .debbie {
-          display: -ms-flexbox;
-          display: flex;
-          margin: 20px auto; }
-          section#contactUs .content .contact-info .invisible .debbie img {
-            margin-right: 20px; }
-          section#contactUs .content .contact-info .invisible .debbie .contact-details button {
-            background-color: #E82E21; }
-  section#contactUs aside#asideSlider {
-    -ms-flex-order: 2;
-        order: 2;
-    background-color: #E1E1E1; }
-    section#contactUs aside#asideSlider #contactSlider .contact-cell {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center; }
-      section#contactUs aside#asideSlider #contactSlider .contact-cell .content {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        background-color: rgba(0, 0, 0, 0.4);
-        color: white; }
-        section#contactUs aside#asideSlider #contactSlider .contact-cell .content.show-invisible .invisible {
-          opacity: 1;
-          max-height: 500px; }
-        section#contactUs aside#asideSlider #contactSlider .contact-cell .content .invisible {
-          opacity: 0;
-          max-height: 0;
-          transition: all 0.5s ease-in-out; }
+  background: #E1E1E1; }
 
 body {
   background-color: #E1E1E1;

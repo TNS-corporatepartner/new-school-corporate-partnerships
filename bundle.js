@@ -137,6 +137,18 @@
 	    });
 	  }
 
+	  $('#header a').on('click', function (e) {
+	    e.preventDefault();
+	    e.stopPropagation();
+	    $('body').addClass('partner-tray');
+	  });
+
+	  $('#partnerTray').on('click', function (e) {
+	    e.preventDefault();
+	    e.stopPropagation();
+	    $('body').removeClass('partner-tray');
+	  });
+
 	  var move$ = _rxjs.Observable.fromEvent(window, 'mousemove');
 
 	  var moveUp$ = move$.filter(function (e) {
@@ -164,6 +176,8 @@
 	  var click$ = _rxjs.Observable.fromEvent(document, 'click').withLatestFrom(cursor$).subscribe(function (v) {
 	    var event = v[0];
 	    var direction = v[1];
+
+	    $('body').removeClass('partner-tray');
 
 	    if (direction === 'up' && app.activeScrollIndex !== 0) {
 	      $('main').moveUp();
@@ -61670,24 +61684,6 @@
 	var ContactUs = exports.ContactUs = function () {
 	  function ContactUs() {
 	    _classCallCheck(this, ContactUs);
-
-	    this.asideSlider = document.getElementById('asideSlider');
-	    this.slidesUl = this.asideSlider.querySelector('ul');
-	    this.slides = this.asideSlider.querySelectorAll('li');
-
-	    var flkty = new _flickity2.default('#contactSlider', {
-	      autoPlay: true
-	    });
-
-	    console.log('test');
-
-	    $('#contactUs .content').on('mouseenter', function () {
-	      $(this).addClass('show-invisible');
-	    });
-
-	    $('#contactUs .content').on('mouseleave', function () {
-	      $(this).removeClass('show-invisible');
-	    });
 	  }
 
 	  _createClass(ContactUs, [{

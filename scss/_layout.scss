@@ -11,16 +11,24 @@ body {
       }
     }
   }
+  
+  &.intro-in-progress,
+  &.partner-tray {
+    #fixedLogo svg > g {
+      fill: white;      
+      line {
+        stroke: white;        
+      }
+    }    
+  }
 
   &.intro-in-progress {
     #fixedLogo svg > g {
       transition: none;
-      fill: white;      
       line {
-        transition: none;
-        stroke: white;        
+        transition: none;        
       }
-    }    
+    }      
   }
 }
 
@@ -58,5 +66,58 @@ header#header,
 .onepage-pagination {
   cursor: pointer;
   transition: opacity 0.4s ease-in-out;
+}
+
+
+body.partner-tray #partnerTray {
+  transform: translateY(0%);
+}
+
+#partnerTray {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: $gray-darker;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 2vw;
+  transform: translateY(100%);
+  transition: transform 0.5s ease-in-out;
+  cursor: url('/images/close-cursor-red.svg'), auto;
+
+  .debbie {
+    margin-top: -6%;
+    -webkit-font-smoothing: antialiased;
+    p {
+      color: $red;
+      
+      &:first-of-type {
+        font-weight: 600;
+      }
+      &:not(:first-of-type) {
+        line-height: 20px;
+      }
+      small { 
+        color: white;
+        font-size: 16px; 
+        font-weight: 300;
+        
+      }
+    }
+    .contact {
+      margin-top: 20px;
+      a {
+        color: white;
+        text-decoration: none;
+      }
+      tel {
+        display: block;
+        margin: 0.5em 0;
+      }
+    }
+  }
 }
 

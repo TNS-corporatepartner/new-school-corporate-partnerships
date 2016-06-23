@@ -71,6 +71,18 @@ function init() {
     })
   }
 
+  $('#header a').on('click', function(e) {
+    e.preventDefault()
+    e.stopPropagation()
+    $('body').addClass('partner-tray')
+  })
+
+  $('#partnerTray').on('click', function(e) {
+    e.preventDefault()
+    e.stopPropagation()
+    $('body').removeClass('partner-tray')    
+  })
+
   var move$ = Observable.fromEvent(window, 'mousemove') 
   
   var moveUp$ = move$
@@ -101,6 +113,8 @@ function init() {
     .subscribe(v => {
       const event = v[0]
       const direction = v[1]
+
+      $('body').removeClass('partner-tray')    
 
       if (direction === 'up' && app.activeScrollIndex !== 0) {
         $('main').moveUp()
