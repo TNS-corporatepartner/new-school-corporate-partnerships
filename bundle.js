@@ -32327,8 +32327,8 @@
 	      instance.openCell($(this).parents('.core-values-cell').get(0));
 	    });
 
-	    particlesJS.load('visionary-thinking', '/js/particles/design-dna.json');
-	    particlesJS.load('couragously-innovative', '/js/particles/fearless.json');
+	    particlesJS.load('visionary-thinking', '/js/particles/visionary.json');
+	    particlesJS.load('couragously-innovative', '/js/particles/innovation.json');
 	    particlesJS.load('global-diversity', '/js/particles/diversity.json');
 
 	    setTimeout(function () {
@@ -32377,8 +32377,8 @@
 	      this.startCellAnimation(this.flkty);
 
 	      // this.flkty.on('settle', () => {
-	      //   this.resetCellText().then(this.startCellAnimation.bind(this, this.flkty))     
-	      // })  
+	      //   this.resetCellText().then(this.startCellAnimation.bind(this, this.flkty))
+	      // })
 	    }
 	  }, {
 	    key: 'cancelCellAnimation',
@@ -61488,6 +61488,19 @@
 	    this.xPositions = [];
 	    this.yPositions = [];
 
+	    this.painter$;
+
+	    this.raf$ = _rxjs.Observable.create(function (obs) {
+	      (function raf() {
+	        requestAnimationFrame(function (e) {
+	          obs.next(e);
+	          raf();
+	        });
+	      })();
+	    });
+
+	    this.mousemove$ = _rxjs.Observable.fromEvent(this.canvas, 'mousemove').map(this.mouseCoords); //returns {x, y}
+
 	    setTimeout(function () {
 	      $(_this.sectionIntro).addClass('hidden');
 	    }, 1200);
@@ -61503,21 +61516,10 @@
 	    value: function handlePanning() {
 	      var _this2 = this;
 
-	      var raf$ = _rxjs.Observable.create(function (obs) {
-	        (function raf() {
-	          requestAnimationFrame(function (e) {
-	            obs.next(e);
-	            raf();
-	          });
-	        })();
-	      });
-
-	      var mousemove$ = _rxjs.Observable.fromEvent(this.canvas, 'mousemove').map(this.mouseCoords); //returns {x, y}
-
-	      var painter$ = raf$.withLatestFrom(mousemove$).subscribe(function (v) {
+	      var painter$ = this.raf$.withLatestFrom(this.mousemove$).subscribe(function (v) {
 	        var mouse = v[1];
-	        console.log(mouse.x);
-	        _this2.canvas.style.transform = 'translate3d(' + mouse.x + '%, ' + mouse.y + '%, 0)';
+	        //console.log(mouse.x)
+	        _this2.canvas.style.transform = 'translate3d(' + mouse.x + '%, ' + mouse.y + '%, 0) rotateX(10deg)';
 
 	        // console.log(this.canvas.style.transform)
 	        // Velocity(this.canvas, 'stop')
@@ -61528,7 +61530,7 @@
 	        // }, {
 	        //   duration: 150,
 	        //   easing: 'easeInSine'
-	        // })      
+	        // })
 	      });
 	    }
 	  }, {
@@ -61537,8 +61539,8 @@
 	      $('.project').on('mouseenter', function () {
 	        var projectTop = parseInt(this.style.top); //percent
 	        var projectLeft = parseInt(this.style.left); //percent
-	        var projectWidth = this.offsetWidth; //px   
-	        var projectHeight = this.offsetHeight; //px   
+	        var projectWidth = this.offsetWidth; //px
+	        var projectHeight = this.offsetHeight; //px
 	        var programEls = $(this).data('programs').map(function (pId) {
 	          return document.querySelector('.program[data-id="' + pId + '"]');
 	        });
@@ -61552,7 +61554,7 @@
 	          el.lastLeft = el.style.left;
 	          el.lastTop = el.style.top;
 
-	          //position programs around project       
+	          //position programs around project
 	          el.style.left = programPositions[index].left;
 	          el.style.top = programPositions[index].top;
 	          // el.textContent += programPositions[index].place //for debugging
@@ -61737,8 +61739,8 @@
 
 	      // console.log(
 	      //   this.xPositions,
-	      //   this.yPositions     
-	      // )  
+	      //   this.yPositions
+	      // )
 	    }
 	  }, {
 	    key: 'randomX',

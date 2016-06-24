@@ -26,23 +26,37 @@
 
 	<header id="header">
 
-		{% assign people = site.collections | where:'label','people' | first %}
 
-		<a href="#">Partner With Us {{ people.title  }} something</a>
+		<a href="#">Partner With Us</a>
 	</header>
 
 	<main>
 
-
 		<section id="futureOf" class="section dark-section">
 			<div class="global-slider future-of-slider">
-				{% for cell in site.future %}
-				<div class="future-of-cell" data-title="{{cell.title}}" data-question="{{cell.content}}">
+				<div class="future-of-cell">
 					<div class="video-fs">
-						<video loop="true" muted src="{{cell.video}}"></video>
-					</div>					
+						<video loop="true" muted src="http://familiar-temp.s3.amazonaws.com/sample2.mp4"></video>
+					</div>
 				</div>
-				{% endfor %}
+
+				<div class="future-of-cell">
+					<div class="video-fs">
+						<video loop="true" muted src="http://familiar-temp.s3.amazonaws.com/sample1b.mp4"></video>
+					</div>
+				</div>
+
+				<div class="future-of-cell">
+					<div class="video-fs">
+						<video loop="true" muted src="http://familiar-temp.s3.amazonaws.com/sample3.mp4"></video>
+					</div>
+				</div>
+
+				<div class="future-of-cell">
+					<div class="video-fs">
+						<video loop="true" muted src="http://familiar-temp.s3.amazonaws.com/sample4.mp4"></video>
+					</div>
+				</div>
 			</div>
 
 			<h2 class="question">That is the qustion</h2>
@@ -55,21 +69,10 @@
 
 		<section id="coreValues" class="section dark-section">
 			<div class="global-slider core-values-slider uninitialized content-closed">
+				<div class="core-values-cell" data-headline="Visionary Thinking">
+					<div id="designDna"></div>
+					<!--<span class="close-cell"></span>-->
 
-				{% for value in site.values %}
-					<div class="core-values-cell" data-headline="{{value.title}}" data-content="{{value.content}}">
-						<div id="{{value.slug}}"></div>					
-						<div class="content">
-							<div class="content-inner">
-								<h1>{{value.title}}</h1>
-								<h2 class="dynamic-text"></h2>
-							</div>
-						</div>
-					</div>
-				{% endfor %}
-
-				<!--<div class="core-values-cell" data-headline="Visionary Thinking">
-					<div id="designDna"></div>					
 					<div class="content">
 						<div class="content-inner">
 							<h1>Visionary <br>Thinking</h1>
@@ -79,7 +82,8 @@
 				</div>
 
 				<div class="core-values-cell" data-headline="Courageous Innovation">
-					<div id="fearless"></div>					
+					<div id="fearless"></div>
+					<!--<span class="close-cell"></span>-->
 					<div class="content">
 						<div class="content-inner">
 							<h1>Courageous <br>Innovation</h1>
@@ -89,14 +93,17 @@
 				</div>
 
 				<div class="core-values-cell" data-headline="Global Diversity">
-					<div id="diversity"></div>					
+					<div id="diversity"></div>
+					<!--<span class="close-cell"></span>-->
 					<div class="content">
 						<div class="content-inner">
 							<h1>Global <br>Diversity</h1>
-							<h2 class="dynamic-text"></h2>
+							<h2 class="dynamic-text">
+
+							</h2>
 						</div>
 					</div>
-				</div>-->
+				</div>
 			</div>
 
 			<hgroup class="section-headlines">
