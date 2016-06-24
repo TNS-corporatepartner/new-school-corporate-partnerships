@@ -51,7 +51,6 @@ export class OurApproach {
       raf$.withLatestFrom(mousemove$)
       .subscribe(v => {
         const mouse = v[1]
-        console.log(mouse.x)
         this.canvas.style.transform = `translate3d(${mouse.x}%, ${mouse.y}%, 0)`
 
 

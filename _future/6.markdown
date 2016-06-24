@@ -2,6 +2,5 @@
 title: Work
 video: http://familiar-temp.s3.amazonaws.com/nscp/WORK.mp4
 order: 6
+question: How can going back to school push business forward faster?
 ---
-
-How can going back to school push business forward faster?

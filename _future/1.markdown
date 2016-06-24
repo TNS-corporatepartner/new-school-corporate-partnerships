@@ -2,6 +2,5 @@
 title: Big Data
 video: http://familiar-temp.s3.amazonaws.com/nscp/BIGDATA.mp4
 order: 1
+question: How can data be empathetic? 
 ---
-
-How can data be empathetic?

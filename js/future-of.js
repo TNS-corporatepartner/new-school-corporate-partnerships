@@ -12,25 +12,13 @@ export class FutureOf {
     this.loadingWord = this.section.querySelector('.section-headlines .dynamic-text')
     this.questionEl = document.querySelector('.question')
     this.slider = document.querySelector('.future-of-slider')
+    this.words = []
+    this.questions = []
 
-    this.questions = [
-      'How can data be empathetic?',
-      'How can spending more be more profitable?',
-      'How can identity be kept from being lost in translation?',
-      'How can learning to fail result in success',
-      'How can going back to school push business forward faster?',
-      'How can technology make us more human?'
-    ]
-    
-    this.words = [
-      'Big Data',
-      'Design',
-      'Sustainability',
-      'Globalization',
-      'Gamification',
-      'Work',
-      'Technology'
-    ]
+    this.section.querySelectorAll('.future-of-cell').forEach((el) => {
+      this.questions.push($(el).data('question')) 
+      this.words.push($(el).data('title')) 
+    })
 
     this.shufflerConfig = {
       limit: 26,
