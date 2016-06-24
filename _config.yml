@@ -2,6 +2,9 @@
 title: New School Corporate Partnerships
 timezone: UTC
 collections:
+  future:
+    title: Imagine the Future of…
+    output: false
   projects:
     title: Our Multi-Dimensional Approach
     output: false
@@ -100,15 +103,13 @@ collections:
     - NONDEGREE
     - SUSTAINABILITY STRATEGIES
     - GRADUATE CERTIFICATE
-    - TEACHING ENGLISH TO SPEAKERS OF OTHER LANGUAGESTEACHING ENGLISH TO SPEAKERS OF OTHER LANGUAGES
+    - TEACHING ENGLISH TO SPEAKERS OF OTHER LANGUAGESTEACHING ENGLISH TO SPEAKERS
+      OF OTHER LANGUAGES
     - THEATER
     - THEORIES OF URBAN PRACTICE
     - TRANSDISCIPLINARY DESIGN
     - URBAN DESIGN
     - URBAN POLICY ANALYSIS AND MANAGEMENT
-  future:
-    title: Imagine the Future of…
-    output: false
   schools:
     title: Our Schools
     output: false
