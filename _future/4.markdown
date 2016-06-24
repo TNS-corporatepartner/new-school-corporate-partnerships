@@ -3,4 +3,5 @@ title: Globalization
 video: http://familiar-temp.s3.amazonaws.com/nscp/GLOBALIZATION.mp4
 order: 4
 ---
+
 How can identity be kept from being lost in translation?
