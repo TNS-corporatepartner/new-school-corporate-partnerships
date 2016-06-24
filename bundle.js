@@ -108,7 +108,7 @@
 	  initGlobalStreams();
 
 	  $('main').fullpage({
-	    anchors: ['firstPage', 'secondPage'],
+	    anchors: ['future', 'difference', 'schools', 'approach', 'people', 'partner'],
 	    navigation: true,
 	    onLeave: function onLeave(lastIndex, nextIndex, direction) {
 	      if (!app.instances[nextIndex]) {
@@ -131,7 +131,7 @@
 	    app.activeInstance = app.instances[1];
 	  });
 
-	  // skipSplashAnimation()
+	  skipSplashAnimation();
 
 	  function initSplashContent() {
 	    return _rxjs.Observable.create(function (obs) {
@@ -61507,9 +61507,18 @@
 	    value: function handlePanning() {
 	      var _this2 = this;
 
+	      var raf$ = _rxjs.Observable.create(function (obs) {
+	        (function raf() {
+	          requestAnimationFrame(function (e) {
+	            obs.next(e);
+	            raf();
+	          });
+	        })();
+	      });
+
 	      var mousemove$ = _rxjs.Observable.fromEvent(window, 'mousemove').map(this.mouseCoords); //returns {x, y}
 
-	      var painter$ = _rxjs.Observable.interval(15).withLatestFrom(mousemove$).subscribe(function (v) {
+	      var painter$ = raf$.withLatestFrom(mousemove$).subscribe(function (v) {
 	        var mouse = v[1];
 
 	        Velocity(_this2.canvas, 'stop');
@@ -61524,6 +61533,111 @@
 	      });
 	    }
 	  }, {
+	    key: 'handleHover',
+	    value: function handleHover() {
+
+	      $('.project').on('mouseenter', function () {
+	        var projectTop = parseInt(this.style.top); //percent
+	        var projectLeft = parseInt(this.style.left); //percent
+	        var projectWidth = this.offsetWidth; //px   
+	        var projectHeight = this.offsetHeight; //px   
+	        var programEls = $(this).data('programs').map(function (pId) {
+	          return document.querySelector('.program[data-id="' + pId + '"]');
+	        });
+	        var programPositions = getProgramPositions(projectLeft, projectTop, projectWidth, projectHeight, programEls);
+
+	        $('.project').not(this).addClass('sibling-hover');
+	        $('.program').not(programEls).addClass('sibling-hover');
+
+	        programEls.forEach(function (el, index) {
+	          //save last original position to reset on mouseleave
+	          el.lastLeft = el.style.left;
+	          el.lastTop = el.style.top;
+
+	          //position programs around project       
+	          el.style.left = programPositions[index].left;
+	          el.style.top = programPositions[index].top;
+	          // el.textContent += programPositions[index].place //for debugging
+	        });
+
+	        $(this).one('mouseleave', function () {
+	          $('.project').removeClass('sibling-hover');
+	          $('.program').removeClass('sibling-hover');
+
+	          programEls.forEach(function (el) {
+	            el.style.left = el.lastLeft;
+	            el.style.top = el.lastTop;
+	          });
+	        });
+	      });
+
+	      function getProgramPositions(projectLeft, projectTop, projectWidth, projectHeight, programEls) {
+	        var position1 = {
+	          left: 'calc(' + projectLeft + '% + ' + projectWidth / 2 + 'px)',
+	          top: 'calc(' + projectTop + '% - 15px)',
+	          place: 'one, '
+	        };
+
+	        var position2 = {
+	          left: 'calc(' + projectLeft + '% + ' + projectWidth / 8 + 'px)',
+	          top: 'calc(' + projectTop + '% - 50px)',
+	          place: 'two, '
+	        };
+
+	        var position3 = {
+	          left: 'calc(' + projectLeft + '% - ' + 20 + 'px)',
+	          top: 'calc(' + projectTop + '% - 5px)',
+	          place: 'three, '
+	        };
+
+	        var position4 = {
+	          left: 'calc(' + projectLeft + '% - ' + 100 + 'px)',
+	          top: 'calc(' + projectTop + '% + 70px)',
+	          place: 'four, '
+	        };
+
+	        var position5 = {
+	          left: 'calc(' + projectLeft + '% - ' + 130 + 'px)',
+	          top: 'calc(' + projectTop + '% + 150px)',
+	          place: 'five, '
+	        };
+
+	        var position6 = {
+	          left: 'calc(' + projectLeft + '% - ' + 50 + 'px)',
+	          top: 'calc(' + projectTop + '% + ' + projectHeight + 'px)',
+	          place: 'six, '
+	        };
+
+	        var position7 = {
+	          left: 'calc(' + (projectLeft - 5) + '% - ' + 0 + 'px)',
+	          top: 'calc(' + projectTop + '% + ' + projectHeight / 2 + 'px)',
+	          place: 'sevem, '
+	        };
+
+	        var position8 = {
+	          left: 'calc(' + projectLeft + '% - ' + 0 + 'px)',
+	          top: 'calc(' + projectTop + '% + ' + (projectHeight + 80) + 'px)',
+	          place: 'eight, '
+	        };
+
+	        var position9 = {
+	          left: 'calc(' + projectLeft + '% + ' + projectWidth / 4 + 'px)',
+	          top: 'calc(' + projectTop + '% + ' + projectHeight + 'px)',
+	          place: 'nine, '
+	        };
+
+	        var position10 = {
+	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 100) + 'px)',
+	          top: 'calc(' + projectTop + '% + ' + (projectHeight - 40) + 'px)',
+	          place: 'ten, '
+	        };
+
+	        var positions = [position1, position2, position3, position4, position5, position6, position7, position8, position9, position10];
+	        var randomPositions = _lodash2.default.shuffle(positions).slice(0, programEls.length);
+	        return randomPositions;
+	      }
+	    }
+	  }, {
 	    key: 'mouseCoords',
 	    value: function mouseCoords(e) {
 	      var xPercent = e.clientX / window.innerWidth * 100;
@@ -61536,33 +61650,6 @@
 	        x: x,
 	        y: y
 	      };
-	    }
-	  }, {
-	    key: 'handleHover',
-	    value: function handleHover() {
-	      var projectTargets = [];
-
-	      $('.project').on('mouseenter', function () {
-	        var projectTop = parseInt(this.style.top);
-	        var projectLeft = parseInt(this.style.left);
-	        var programEls = $(this).data('programs').map(function (pId) {
-	          return document.querySelector('.program[data-id="' + pId + '"]');
-	        });
-
-	        programEls.forEach(function (el, index) {
-	          el.lastLeft = el.style.left;
-	          el.lastTop = el.style.top;
-	          el.style.left = projectLeft + (index % 2 == 0 ? -5 : 5) + '%';
-	          el.style.top = projectTop + (index % 2 == 0 ? -5 : 5) + '%';
-	        });
-
-	        $(this).one('mouseleave', function () {
-	          programEls.forEach(function (el) {
-	            el.style.left = el.lastLeft;
-	            el.style.top = el.lastTop;
-	          });
-	        });
-	      });
 	    }
 	  }, {
 	    key: 'positionItems',

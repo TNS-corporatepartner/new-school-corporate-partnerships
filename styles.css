@@ -878,23 +878,79 @@ section#ourPeople.modal-open {
   transform: translate3d(0%, 0%, 0); }
   #ourApproach #approachCanvas .project, #ourApproach #approachCanvas .program {
     position: absolute; }
+    #ourApproach #approachCanvas .project.sibling-hover, #ourApproach #approachCanvas .program.sibling-hover {
+      opacity: 0.3; }
   #ourApproach #approachCanvas .project {
-    width: 100px;
+    width: 400px;
     height: 200px;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-align: center;
-        align-items: center; }
-    #ourApproach #approachCanvas .project:hover h4 {
+        align-items: center;
+    cursor: url(/images/click-cursor-red.svg), auto;
+    transition: opacity 0.6s ease-in-out; }
+    #ourApproach #approachCanvas .project:hover .info {
       opacity: 1; }
-    #ourApproach #approachCanvas .project img {
-      margin-right: 15px; }
-    #ourApproach #approachCanvas .project h4 {
-      min-width: 300px;
+    #ourApproach #approachCanvas .project .info {
       opacity: 0;
       transition: opacity 0.4s ease-in-out; }
+      #ourApproach #approachCanvas .project .info label {
+        text-transform: uppercase;
+        font-size: 10px; }
+      #ourApproach #approachCanvas .project .info h4 {
+        margin: 5px 0;
+        min-width: 300px;
+        color: #E82E21; }
+      #ourApproach #approachCanvas .project .info p {
+        font-size: 16px;
+        color: #E82E21;
+        font-family: "NeueDisplay", sans-serif;
+        -webkit-font-smoothing: antialiased; }
+    #ourApproach #approachCanvas .project img {
+      margin-right: 15px; }
   #ourApproach #approachCanvas .program {
+    max-width: 150px;
     transition: all 1s ease-in-out; }
+    #ourApproach #approachCanvas .program:nth-of-type(1) {
+      transition-delay: 0.04s; }
+    #ourApproach #approachCanvas .program:nth-of-type(2) {
+      transition-delay: 0.08s; }
+    #ourApproach #approachCanvas .program:nth-of-type(3) {
+      transition-delay: 0.12s; }
+    #ourApproach #approachCanvas .program:nth-of-type(4) {
+      transition-delay: 0.16s; }
+    #ourApproach #approachCanvas .program:nth-of-type(5) {
+      transition-delay: 0.2s; }
+    #ourApproach #approachCanvas .program:nth-of-type(6) {
+      transition-delay: 0.24s; }
+    #ourApproach #approachCanvas .program:nth-of-type(7) {
+      transition-delay: 0.28s; }
+    #ourApproach #approachCanvas .program:nth-of-type(8) {
+      transition-delay: 0.32s; }
+    #ourApproach #approachCanvas .program:nth-of-type(9) {
+      transition-delay: 0.36s; }
+    #ourApproach #approachCanvas .program:nth-of-type(10) {
+      transition-delay: 0.4s; }
+    #ourApproach #approachCanvas .program:nth-of-type(11) {
+      transition-delay: 0.44s; }
+    #ourApproach #approachCanvas .program:nth-of-type(12) {
+      transition-delay: 0.48s; }
+    #ourApproach #approachCanvas .program:nth-of-type(13) {
+      transition-delay: 0.52s; }
+    #ourApproach #approachCanvas .program:nth-of-type(14) {
+      transition-delay: 0.56s; }
+    #ourApproach #approachCanvas .program:nth-of-type(15) {
+      transition-delay: 0.6s; }
+    #ourApproach #approachCanvas .program:nth-of-type(16) {
+      transition-delay: 0.64s; }
+    #ourApproach #approachCanvas .program:nth-of-type(17) {
+      transition-delay: 0.68s; }
+    #ourApproach #approachCanvas .program:nth-of-type(18) {
+      transition-delay: 0.72s; }
+    #ourApproach #approachCanvas .program:nth-of-type(19) {
+      transition-delay: 0.76s; }
+    #ourApproach #approachCanvas .program:nth-of-type(20) {
+      transition-delay: 0.8s; }
 
 section#contactUs {
   background: #E1E1E1; }

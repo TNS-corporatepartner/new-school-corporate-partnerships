@@ -189,18 +189,28 @@
 		<section id="ourApproach" class="section">
 			<div id="approachCanvas">
 				{% for project in (1..5) %}
+					<!--<div class="project" data-programs='["food studies", "fashion design", "screenwriting", "journalism", "design and technology", "composition", "piano", "acting", "psychology", "communication design"]'>-->
 					<div class="project" data-programs='["food studies", "fashion design", "screenwriting", "journalism", "design and technology"]'>
 						<img src="/images/music.jpg" width="200">
-						<h4>Make Music People Can See</h4>
+						<div class="info">
+							<label>Case Study</label>
+							<h4>Make Music People Can See</h4>
+							<p>Learn More &rarr;</p>
+						</div>
+						
 					</div>
 				{% endfor %}
-
-				
+												
 				<div class="program" data-id="food studies">food studies</div>				
 				<div class="program" data-id="fashion design">fashion design</div>				
 				<div class="program" data-id="screenwriting">screenwriting</div>				
 				<div class="program" data-id="journalism">journalism</div>				
-				<div class="program" data-id="design and technology">design and technology</div>				
+				<div class="program" data-id="design and technology">design and technology</div>
+				<div class="program" data-id="composition">composition</div>				
+				<div class="program" data-id="piano">piano</div>				
+				<div class="program" data-id="acting">acting</div>				
+				<div class="program" data-id="psychology">psychology</div>				
+				<div class="program" data-id="communication design">communication design</div>				
 
 				{% for program in (1..20) %}
 					<div class="program">program #{{program}}</div>

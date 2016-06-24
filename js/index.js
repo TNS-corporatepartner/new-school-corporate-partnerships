@@ -43,7 +43,7 @@ function init() {
   initGlobalStreams()
 
   $('main').fullpage({
-    anchors:['firstPage', 'secondPage'],
+    anchors:['future', 'difference', 'schools', 'approach', 'people', 'partner'],
     navigation: true,
     onLeave: function(lastIndex, nextIndex, direction) {            
       if (!app.instances[nextIndex]) {
@@ -69,7 +69,7 @@ function init() {
   )
   
       
-  // skipSplashAnimation()
+  skipSplashAnimation()
   
 
   function initSplashContent() {

@@ -34,12 +34,20 @@ export class OurApproach {
 
 
   handlePanning() {
+    const raf$ = Observable.create(obs => {
+      (function raf() {
+        requestAnimationFrame(function(e) {
+          obs.next(e)
+          raf()
+        })
+      })()
+    })
+
     const mousemove$ = Observable
       .fromEvent(window, 'mousemove')
       .map(this.mouseCoords) //returns {x, y}
 
-    const painter$ = Observable
-      .interval(15)
+    const painter$ = raf$ 
       .withLatestFrom(mousemove$)
       .subscribe(v => {
         const mouse = v[1]
@@ -57,6 +65,108 @@ export class OurApproach {
   }
 
 
+  handleHover() {
+
+    $('.project').on('mouseenter', function() {      
+      const projectTop = parseInt(this.style.top)   //percent
+      const projectLeft = parseInt(this.style.left) //percent
+      const projectWidth = this.offsetWidth         //px    
+      const projectHeight = this.offsetHeight       //px    
+      const programEls = $(this).data('programs').map( pId => document.querySelector(`.program[data-id="${pId}"]`) )
+      const programPositions = getProgramPositions(projectLeft, projectTop, projectWidth, projectHeight, programEls)
+
+      $('.project').not(this).addClass('sibling-hover')
+      $('.program').not(programEls).addClass('sibling-hover')
+
+      programEls.forEach( (el, index) => {
+        //save last original position to reset on mouseleave
+        el.lastLeft = el.style.left 
+        el.lastTop = el.style.top 
+        
+        //position programs around project        
+        el.style.left = programPositions[index].left
+        el.style.top = programPositions[index].top
+        // el.textContent += programPositions[index].place //for debugging
+      })
+
+      $(this).one('mouseleave', function() {
+        $('.project').removeClass('sibling-hover')
+        $('.program').removeClass('sibling-hover')
+
+        programEls.forEach(el => {
+          el.style.left = el.lastLeft
+          el.style.top = el.lastTop
+        })
+      })      
+    })
+
+    function getProgramPositions(projectLeft, projectTop, projectWidth, projectHeight, programEls) {
+      const position1 = {
+        left: `calc(${projectLeft}% + ${projectWidth / 2}px)`,
+        top: `calc(${projectTop}% - 15px)`,
+        place: 'one, '
+      } 
+
+      const position2 = {
+        left: `calc(${projectLeft}% + ${projectWidth / 8}px)`,
+        top: `calc(${projectTop}% - 50px)`,
+        place: 'two, '
+      } 
+
+      const position3 = {
+        left: `calc(${projectLeft}% - ${20}px)`,
+        top: `calc(${projectTop}% - 5px)`,
+        place: 'three, '
+      } 
+
+      const position4 = {
+        left: `calc(${projectLeft}% - ${100}px)`,
+        top: `calc(${projectTop}% + 70px)`,
+        place: 'four, '
+      } 
+
+      const position5 = {
+        left: `calc(${projectLeft}% - ${130}px)`,
+        top: `calc(${projectTop}% + 150px)`,
+        place: 'five, '
+      }
+
+      const position6 = {
+        left: `calc(${projectLeft}% - ${50}px)`,
+        top: `calc(${projectTop}% + ${projectHeight}px)`,
+        place: 'six, '
+      }
+
+      const position7 = {
+        left: `calc(${projectLeft - 5}% - ${0}px)`,
+        top: `calc(${projectTop}% + ${projectHeight / 2}px)`,
+        place: 'sevem, '
+      } 
+
+      const position8 = {
+        left: `calc(${projectLeft}% - ${0}px)`,
+        top: `calc(${projectTop}% + ${projectHeight + 80}px)`,
+        place: 'eight, '
+      }
+
+      const position9 = {
+        left: `calc(${projectLeft}% + ${projectWidth / 4}px)`,
+        top: `calc(${projectTop}% + ${projectHeight}px)`,
+        place: 'nine, '
+      }
+
+      const position10 = {
+        left: `calc(${projectLeft}% + ${projectWidth - 100}px)`,
+        top: `calc(${projectTop}% + ${projectHeight - 40}px)`,
+        place: 'ten, '
+      }
+
+      const positions = [position1, position2, position3, position4, position5, position6, position7, position8, position9, position10] 
+      const randomPositions = _.shuffle(positions).slice(0, programEls.length)
+      return randomPositions
+    }
+  }
+
   mouseCoords(e) {
     const xPercent = e.clientX / window.innerWidth * 100
     const x = xPercent >= 50 ? (xPercent - 50) * -1 : 50 - xPercent
@@ -68,31 +178,6 @@ export class OurApproach {
       x: x,
       y: y
     }
-  }
-
-
-  handleHover() {
-    const projectTargets = []
-
-    $('.project').on('mouseenter', function() {
-      const projectTop = parseInt(this.style.top)
-      const projectLeft = parseInt(this.style.left)
-      const programEls = $(this).data('programs').map( pId => document.querySelector(`.program[data-id="${pId}"]`) )
-        
-      programEls.forEach( (el, index) => {
-        el.lastLeft = el.style.left 
-        el.lastTop = el.style.top 
-        el.style.left = projectLeft + (index % 2 == 0 ? -5 : 5) + '%'
-        el.style.top = projectTop + (index % 2 == 0 ? -5 : 5) + '%'
-      })
-
-      $(this).one('mouseleave', function() {
-        programEls.forEach(el => {
-          el.style.left = el.lastLeft
-          el.style.top = el.lastTop
-        })
-      })      
-    })
   }
 
 
