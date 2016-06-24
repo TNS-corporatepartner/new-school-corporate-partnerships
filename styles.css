@@ -910,7 +910,8 @@ section#ourPeople.modal-open {
       margin-right: 15px; }
   #ourApproach #approachCanvas .program {
     max-width: 150px;
-    transition: all 1s ease-in-out; }
+    transition: all 1s ease-in-out;
+    pointer-events: none; }
     #ourApproach #approachCanvas .program:nth-of-type(1) {
       transition-delay: 0.04s; }
     #ourApproach #approachCanvas .program:nth-of-type(2) {
@@ -951,6 +952,72 @@ section#ourPeople.modal-open {
       transition-delay: 0.76s; }
     #ourApproach #approachCanvas .program:nth-of-type(20) {
       transition-delay: 0.8s; }
+
+#ourApproachModal {
+  position: absolute;
+  display: none;
+  background-color: rgba(34, 34, 34, 0.9);
+  cursor: url(/images/close-cursor-red.svg), auto; }
+  #ourApproachModal .content {
+    display: none;
+    height: 100%;
+    -webkit-font-smoothing: antialiased;
+    overflow: scroll; }
+    #ourApproachModal .content aside {
+      width: 50%;
+      height: 100%;
+      padding: 4vw;
+      padding-top: 20vh;
+      color: white; }
+      #ourApproachModal .content aside:before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 50vw;
+        background-color: rgba(34, 34, 34, 0.9); }
+      #ourApproachModal .content aside > * {
+        position: relative; }
+      #ourApproachModal .content aside .label-heading {
+        color: #E82E21;
+        display: block;
+        margin-bottom: 2.5vh; }
+      #ourApproachModal .content aside .label-group {
+        color: #999;
+        display: block;
+        width: 40%; }
+      #ourApproachModal .content aside blockquote {
+        margin: 2.5vh 0;
+        color: #E82E21;
+        padding-right: 5vw;
+        font-size: 22px;
+        font-style: italic; }
+      #ourApproachModal .content aside h2 {
+        margin-top: 5vh;
+        line-height: 5vh; }
+      #ourApproachModal .content aside .text-content p {
+        font-size: 22px;
+        line-height: 32px; }
+      #ourApproachModal .content aside .gradient-bottom {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 20vh;
+        width: 50vw;
+        background-image: linear-gradient(0deg, rgba(34, 34, 34, 0.97) 50%, transparent);
+        pointer-events: none; }
+    #ourApproachModal .content .img-container {
+      position: fixed;
+      pointer-events: none;
+      height: 100vh;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-align: center;
+          align-items: center;
+      width: 50%; }
+      #ourApproachModal .content .img-container img {
+        width: 100%; }
 
 section#contactUs {
   background: #E1E1E1; }

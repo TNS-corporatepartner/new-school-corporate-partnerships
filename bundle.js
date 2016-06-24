@@ -61500,6 +61500,7 @@
 	    this.positionItems();
 	    this.handlePanning();
 	    this.handleHover();
+	    this.handleClick();
 	  }
 
 	  _createClass(OurApproach, [{
@@ -61535,7 +61536,6 @@
 	  }, {
 	    key: 'handleHover',
 	    value: function handleHover() {
-
 	      $('.project').on('mouseenter', function () {
 	        var projectTop = parseInt(this.style.top); //percent
 	        var projectLeft = parseInt(this.style.left); //percent
@@ -61636,6 +61636,70 @@
 	        var randomPositions = _lodash2.default.shuffle(positions).slice(0, programEls.length);
 	        return randomPositions;
 	      }
+	    }
+	  }, {
+	    key: 'handleClick',
+	    value: function handleClick() {
+	      $('.project').on('click', function (e) {
+	        e.stopPropagation();
+	        var modal = document.getElementById('ourApproachModal');
+	        var modalContent = modal.querySelector('.content');
+	        var projectImg = this.querySelector('img').getBoundingClientRect();
+
+	        modal.querySelector('img').src = '/images/music.jpg';
+
+	        $(modal.querySelector('aside')).focus();
+
+	        $.fn.fullpage.setAllowScrolling(false);
+
+	        Velocity(modal, {
+	          left: projectImg.left,
+	          top: projectImg.top,
+	          width: projectImg.width,
+	          height: projectImg.height,
+	          opacity: 1,
+	          scale: 1
+	        }, {
+	          duration: 0,
+	          display: 'block',
+	          complete: function complete() {
+	            Velocity(modal, {
+	              top: 0,
+	              left: 0,
+	              width: '100%',
+	              height: '100%'
+	            }, {
+	              duration: 400,
+	              complete: function complete() {
+	                Velocity(modalContent, {
+	                  opacity: 1
+	                }, {
+	                  display: 'flex'
+	                });
+	              }
+	            });
+	          }
+	        });
+
+	        $(modal).one('click', function (e) {
+	          e.stopPropagation();
+
+	          $.fn.fullpage.setAllowScrolling(true);
+
+	          Velocity(modalContent, 'reverse', {
+	            complete: function complete() {
+	              // Velocity(modal, 'reverse')
+	              Velocity(modal, {
+	                opacity: 0,
+	                scale: 0.5
+	              }, {
+	                display: 'none',
+	                duration: 400
+	              });
+	            }
+	          });
+	        });
+	      });
 	    }
 	  }, {
 	    key: 'mouseCoords',

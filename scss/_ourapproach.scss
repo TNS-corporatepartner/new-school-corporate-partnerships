@@ -7,7 +7,7 @@
   top: -50%; left: -50%;
   height: 200%;
   width: 200%;
-  transform: translate3d(0%, 0%, 0);  
+  transform: translate3d(0%, 0%, 0);
   .project, .program {
     position: absolute;
     &.sibling-hover {
@@ -31,11 +31,11 @@
       label {
         text-transform: uppercase;
         font-size: 10px;
-      }      
+      }
       h4 {
         margin: 5px 0;
         min-width: 300px;
-        color: $red;        
+        color: $red;
       }
       p {
         font-size: 16px;
@@ -46,17 +46,98 @@
     }
     img {
       margin-right: 15px;
-    }    
+    }
   }
 
   .program {
     max-width: 150px;
     transition: all 1s ease-in-out;
+    pointer-events: none;
     @for $i from 1 through 20 {
-      &:nth-of-type(#{$i}) { 
+      &:nth-of-type(#{$i}) {
         transition-delay: 0.01s * $i * 4;
       }
-    }    
+    }
   }
 
+}
+
+#ourApproachModal {  
+  position: absolute;
+  display: none;
+  background-color: $gray-darker-trans;
+  cursor: url(/images/close-cursor-red.svg), auto;
+  .content {    
+    display: none;
+    height: 100%;
+    -webkit-font-smoothing: antialiased;
+    overflow: scroll;
+
+    aside {
+      width: 50%;
+      height: 100%;
+      padding: 4vw;
+      padding-top: 20vh;                  
+      color: white;
+      &:before {
+        content: '';
+        position: fixed;
+        top: 0; left: 0;
+        bottom: 0;
+        width: 50vw;
+        background-color: $gray-darker-trans;
+      }
+      > * {
+        position: relative;
+      }
+      .label-heading {
+        color: $red;
+        display: block;
+        margin-bottom: 2.5vh;
+      }
+      .label-group {
+        color: $gray;
+        display: block;
+        width: 40%;
+      }
+      blockquote {
+        margin: 2.5vh 0;
+        color: $red;
+        padding-right: 5vw;
+        font-size: 22px;
+        font-style: italic;
+      }
+      h2 {
+        margin-top: 5vh;        
+        line-height: 5vh;
+      }
+      .text-content {
+        p {
+          font-size: 22px;      
+          line-height: 32px;  
+        }
+      }
+      .gradient-bottom {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 20vh;
+        width: 50vw;
+        background-image: linear-gradient(0deg, $gray-darkest-trans 50%, transparent);
+        pointer-events: none;
+      }
+    }
+
+    .img-container {
+      position: fixed;
+      pointer-events: none;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      width: 50%;      
+      img {
+        width: 100%;
+      }
+    }
+  }
 }

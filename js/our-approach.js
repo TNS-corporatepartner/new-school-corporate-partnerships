@@ -30,8 +30,8 @@ export class OurApproach {
     this.positionItems()
     this.handlePanning()
     this.handleHover()
+    this.handleClick()    
   }
-
 
   handlePanning() {
     const raf$ = Observable.create(obs => {
@@ -66,7 +66,6 @@ export class OurApproach {
 
 
   handleHover() {
-
     $('.project').on('mouseenter', function() {      
       const projectTop = parseInt(this.style.top)   //percent
       const projectLeft = parseInt(this.style.left) //percent
@@ -165,6 +164,70 @@ export class OurApproach {
       const randomPositions = _.shuffle(positions).slice(0, programEls.length)
       return randomPositions
     }
+  }
+
+  handleClick() {
+    $('.project').on('click', function(e) {
+      e.stopPropagation()
+      const modal = document.getElementById('ourApproachModal')
+      const modalContent = modal.querySelector('.content')
+      const projectImg = this.querySelector('img').getBoundingClientRect()      
+
+      modal.querySelector('img').src = '/images/music.jpg'
+
+      $(modal.querySelector('aside')).focus()
+
+      $.fn.fullpage.setAllowScrolling(false)
+
+      Velocity(modal, {
+        left: projectImg.left,
+        top: projectImg.top,
+        width: projectImg.width,
+        height: projectImg.height,
+        opacity: 1,
+        scale: 1
+      }, {
+        duration: 0,
+        display: 'block',
+        complete: function() {
+          Velocity(modal, {
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%'
+          }, {
+            duration: 400,
+            complete: function() {
+              Velocity(modalContent, {
+                opacity: 1
+              }, {
+                display: 'flex'
+              })
+            }
+          })
+        }
+      })      
+
+
+      $(modal).one('click', function(e) {
+        e.stopPropagation()
+
+        $.fn.fullpage.setAllowScrolling(true)
+
+        Velocity(modalContent, 'reverse', {
+          complete: function() {
+            // Velocity(modal, 'reverse')
+            Velocity(modal, {
+              opacity: 0,
+              scale: 0.5
+            }, {
+              display: 'none', 
+              duration: 400
+            })            
+          }
+        })
+      })
+    })
   }
 
   mouseCoords(e) {
