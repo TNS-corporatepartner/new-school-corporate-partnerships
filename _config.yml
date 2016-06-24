@@ -5,7 +5,7 @@ collections:
   projects:
     title: Our Multi-Dimensional Approach
     output: false
-    introduction: We connect multiple disciplines to find unforeseen opportunities and create unexpected possibilities for our partners. 
+    introduction: We connect multiple disciplines to find unforeseen opportunities and create unexpected possibilities for our partners.
     programs:
     - ACTING
     - ANTHROPOLOGY
@@ -115,11 +115,13 @@ collections:
     introduction: Our unique structure provides the expertise of five schools collaborating
       to reinvent everything and approach issues from multiple, integrated perspectives.
   people:
-    title: People
+    title: Our History of Innovation
+    introduction: From our beginning in 1919, we’ve been a home for industry pioneers, world changers, and innovative leaders.
     output: false
-  posts:
-    title: Posts
-    output: true
+  partner:
+    title: Partner with Us
+    introduction: Our partners understand the value of using design thinking to solve real-world problems. Collaborate with us to design the future.
+    output: false
   values:
     title: The New School is Different by Design
     output: false
