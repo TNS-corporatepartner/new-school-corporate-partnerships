@@ -1,0 +1,6 @@
+---
+title: Gamification
+video: http://familiar-temp.s3.amazonaws.com/nscp/GAMIFICATION.mp4
+order: 5
+---
+How can learning to fail result in success?
