@@ -32,8 +32,6 @@
 	<![endif]-->
 
 	<header id="header">
-
-
 		<a href="#">Partner With Us</a>
 	</header>
 
@@ -41,29 +39,15 @@
 
 		<section id="futureOf" class="section dark-section">
 			<div class="global-slider future-of-slider">
-				<div class="future-of-cell">
-					<div class="video-fs">
-						<video loop="true" muted src="http://familiar-temp.s3.amazonaws.com/sample2.mp4"></video>
-					</div>
-				</div>
 
-				<div class="future-of-cell">
+				{% for cell in site.future %}
+				<div class="future-of-cell" data-title="{{cell.title}}" data-question="{{cell.question}}">
 					<div class="video-fs">
-						<video loop="true" muted src="http://familiar-temp.s3.amazonaws.com/sample1b.mp4"></video>
+						<video loop="true" muted src="{{cell.video}}"></video>
 					</div>
 				</div>
+				{% endfor %}
 
-				<div class="future-of-cell">
-					<div class="video-fs">
-						<video loop="true" muted src="http://familiar-temp.s3.amazonaws.com/sample3.mp4"></video>
-					</div>
-				</div>
-
-				<div class="future-of-cell">
-					<div class="video-fs">
-						<video loop="true" muted src="http://familiar-temp.s3.amazonaws.com/sample4.mp4"></video>
-					</div>
-				</div>
 			</div>
 
 			<h2 class="question">That is the qustion</h2>
@@ -77,7 +61,7 @@
 		<section id="coreValues" class="section dark-section">
 			<div class="global-slider core-values-slider uninitialized content-closed">
 				{% for value in site.values | sort: 'order' %}
-					<div class="core-values-cell" data-headline="{{value.title}}" data-content="{{value.content}}">
+					<div class="core-values-cell" data-headline="{{value.title}}" data-phrases='{{value.phrases | jsonify}}'>
 						<div id="{{value.slug}}"></div>
 						<div class="content">
 							<div class="content-inner">
@@ -139,51 +123,35 @@
 		</section>
 
 		<section id="ourApproach" class="section">
-			<!--<div class="canvas-container">-->
-				<div id="approachCanvas">
-					{% for project in (1..5) %}
-						<!--<div class="project" data-programs='["food studies", "fashion design", "screenwriting", "journalism", "design and technology", "composition", "piano", "acting", "psychology", "communication design"]'>-->
-						<div class="project"
-								data-programs='["food studies", "fashion design", "screenwriting", "journalism", "design and technology"]'
-								data-content="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet dolorem blanditiis amet quod sed ad culpa, eligendi pariatur, hic porro! Quae tempore soluta ipsam voluptatum ullam optio saepe! Quidem, perspiciatis!"
-								data-title="Make music people can see"
-								data-blockquote="How can wearable technology reinvent the role of orchestral garments?">
-							<img src="/images/music.jpg" width="200">
-							<div class="info">
-								<label>Case Study</label>
-								<h4>Make Music People Can See</h4>
-								<p>Learn More &rarr;</p>
-							</div>
-
+			<div id="approachCanvas">
+				{% for project in site.projects %}
+					<div class="project"
+							data-programs="{{project.programs}}"
+							data-content="{{project.content}}"
+							data-title="{{project.title}}"
+							data-blockquote="{{project.question}}">
+						<img src="{{project.image}}" width="200" />
+						<div class="info">
+							<label>Case Study</label>
+							<h4>{{project.title}}</h4>
+							<p>Learn More &rarr;</p>
 						</div>
-					{% endfor %}
+					</div>
+				{% endfor %}
 
+				{% for program in projects.programs %}
 					<div class="program" data-id="food studies">food studies</div>
-					<div class="program" data-id="fashion design">fashion design</div>
-					<div class="program" data-id="screenwriting">screenwriting</div>
-					<div class="program" data-id="journalism">journalism</div>
-					<div class="program" data-id="design and technology">design and technology</div>
-					<div class="program" data-id="composition">composition</div>
-					<div class="program" data-id="piano">piano</div>
-					<div class="program" data-id="acting">acting</div>
-					<div class="program" data-id="psychology">psychology</div>
-					<div class="program" data-id="communication design">communication design</div>
-
-					{% for program in (1..20) %}
-						<div class="program">program #{{program}}</div>
-					{% endfor %}
-				</div>
-			<!--</div>-->
-
+				{% endfor %}
+			</div>
 
 			<hgroup class="section-headlines">
-				<!-- <h4>Our University</h4> -->
-				<h3 class="dynamic-text">{{projects.title}}</h3>
 
+				<h3 class="dynamic-text">{{projects.title}}</h3>
 			</hgroup>
 
 			<div class="section-intro">
 				<h1>{{projects.title}}</h1>
+
 				<p>{{projects.introduction}}</p>
 			</div>
 
@@ -232,13 +200,13 @@
 			</div>
 
 			<hgroup class="section-headlines">
-				<h3>A History of Innovation</h3>
-				<p>We’ve been a source of inspiration for pioneers and world changers</p>
+				<h3>{{people.title}}</h3>
+				<p>{{people.introduction}}</p>
+
 			</hgroup>
 
 			<div class="section-intro">
-				<h1>A History of Innovation</h1>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+				<h1>{{people.title}}</h1>
 			</div>
 
 			<div id="personModal">
@@ -249,33 +217,17 @@
 
 		<section id="contactUs" class="section">
 				<div class="panel-group">
-					<div class="panel">
-						<div class="panel-tint"></div>
-						<div class="content-wrapper">
-							<div class="content">
-								<h4>Stimulate Innovation &amp; Entrepreneurship</h4>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga facere porro error, architecto sint impedit tempore, deserunt perferendis odit assumenda delectus fugit libero praesentium excepturi. Aut mollitia magnam, totam non.</p>
+					{% for panel in site.partner %}
+						<div class="panel">
+							<div class="panel-tint"></div>
+							<div class="content-wrapper">
+								<div class="content">
+									<h4>{{panel.title}}</h4>
+									{{panel.content}}
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="panel">
-						<div class="panel-tint"></div>
-						<div class="content-wrapper">
-							<div class="content">
-								<h4>Prepare a workforce for the new economy</h4>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus facere velit molestias expedita officia, unde iste perferendis sunt porro aspernatur, placeat voluptas earum autem tenetur harum similique optio nihil non?</p>
-							</div>
-						</div>
-					</div>
-					<div class="panel">
-						<div class="panel-tint"></div>
-						<div class="content-wrapper">
-							<div class="content">
-								<h4>Leverage big data to envision the future</h4>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae facere provident quo ab, deserunt eius tempora dignissimos enim magnam numquam aperiam itaque, quis velit, officiis sunt esse mollitia, reprehenderit temporibus.</p>
-							</div>
-						</div>
-					</div>
+					{% endfor %}
 				</div>
 
 				<hgroup class="section-headlines">

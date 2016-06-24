@@ -63,7 +63,6 @@ export class OurApproach {
         //console.log(mouse.x)
         this.canvas.style.transform = `translate3d(${mouse.x}%, ${mouse.y}%, 0) rotateX(10deg)`
 
-
         // console.log(this.canvas.style.transform)
         // Velocity(this.canvas, 'stop')
 
