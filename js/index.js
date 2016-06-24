@@ -61,56 +61,16 @@ function init() {
     () => console.log(null),
     err => console.error(err),
     () => {
+      //executes when initSplashContent stream completes
       app.activeScrollIndex = 1
       app.instances[1] = new app.constructors[1]()
       app.activeInstance = app.instances[1]
     }
   )
-
-
   
-
-  // function handleNav(e) {
-    // //handle nav fired before splash animation completes
-    // if (splashContent$ && !splashContent$.isUnsubscribed) {
-    //   splashContent$.complete()
-    //   splashContent$.unsubscribe()
-    //   skipSplashAnimation()
-    //   loadComponent(e.index - 1)
-
-    // //handle nav normally
-    // } else if (splashContent$) {
-
-    //   if (e.lastActiveInstance && e.lastActiveInstance.sleep) {
-    //     e.lastActiveInstance.sleep.call(e.lastActiveInstance)
-    //   }
-
-    //   loadComponent(e.index)
-
-    // //handle nav before splash animation initialized
-    // } else if (initSplash) {
-    //   splashContent$ = initSplashContent().subscribe( () => {
-    //     loadComponent(e.index)
-    //     splashContent$.complete()
-    //     splashContent$.unsubscribe()
-    //   }, err => console.error(err), () => initSplash = false)
-    // }
-  // }
-
-  // function loadComponent(index) {
-  //   app.activeScrollIndex = index
-  //   app.activeInstance = app.componentInstances[ index ]
-
-  //   if (!app.activeInstance && app.componentConstructors[index]) {
-  //     const instance = new app.componentConstructors[index]()
-  //     app.activeInstance = instance
-  //     app.componentInstances[ index ] = instance
-  //     console.log(instance)
-  //   } else if (app.activeInstance && app.activeInstance.awake) {
-  //     app.activeInstance.awake.call(app.activeInstance)
-  //   }
-  // }
-
+      
+  // skipSplashAnimation()
+  
 
   function initSplashContent() {
     return Observable.create(obs => {
@@ -118,34 +78,34 @@ function init() {
       $('body').addClass('intro-in-progress')
 
       //logo animate in
-      Velocity(line1, {x1: 4.501, y1: 64.81, x2: 109.524, y2: 64.81}, {duration: 500 / 4})
-      Velocity(line2, {x1: 4.501, y1: 71.5, x2: 109.524, y2: 71.5}, {duration: 500 / 4})
-      Velocity(fixedLogoText, {translateX: 0, translateY: 0}, {duration: 2000 / 4})
+      Velocity(line1, {x1: 4.501, y1: 64.81, x2: 109.524, y2: 64.81}, {duration: 500})
+      Velocity(line2, {x1: 4.501, y1: 71.5, x2: 109.524, y2: 71.5}, {duration: 500})
+      Velocity(fixedLogoText, {translateX: 0, translateY: 0}, {duration: 2000})
 
       //logo animate down
       Velocity(fixedLogo, {
         bottom: 20,
         width: 150
       }, {
-        duration: 1000 / 4,
-        delay: 2500  / 4
+        duration: 1000,
+        delay: 2500 
       })
 
       //intro text animate in
       Velocity(introText, {opacity: 1}, {
-        duration: 1000 / 4,
-        delay: 3300 / 4,
+        duration: 1000,
+        delay: 3300,
         complete: () => {
           setTimeout(() => {
             Velocity(introText, {opacity: 0}, {
-              duration: 500 / 4,
+              duration: 500,
               display: 'none'
             })
 
             setTimeout(function() {
               $('body').removeClass('intro-in-progress')
-            }, 500 / 4)            
-          }, 3000 / 4)
+            }, 500)            
+          }, 3000)
         }
       })
 
@@ -154,43 +114,45 @@ function init() {
         width: '140px',
         height: '62px'
       }, {
-        duration: 800 / 4,
-        delay: 8000 / 4
+        duration: 800,
+        delay: 8000
       })
 
       setTimeout(() => {
         obs.complete()        
-      }, 8800 / 4)
+      }, 8800)
     })
   }
 }
 
-// function skipSplashAnimation() {
-//   Velocity(introText, 'stop')
-//   Velocity(introText, {opacity: 0}, {
-//     duration: 200,
-//     display: 'none'
-//   })
+function skipSplashAnimation() {
+  app.intro$.complete()
 
-//   Velocity(introBg, 'stop')
-//   Velocity(introBg, {
-//     width: '140px',
-//     height: '62px'
-//   }, {
-//     duration: 800
-//   })
+  Velocity(introText, 'stop')
+  Velocity(introText, {opacity: 0}, {
+    duration: 200,
+    display: 'none'
+  })
 
-//   Velocity(fixedLogoText, 'stop')
-//   Velocity(fixedLogoText, {translateX: 0, translateY: 0}, {duration: 2000})
+  Velocity(introBg, 'stop')
+  Velocity(introBg, {
+    width: '140px',
+    height: '62px'
+  }, {
+    duration: 800
+  })
 
-//   Velocity(fixedLogo, 'stop')
-//   Velocity(fixedLogo, {
-//     top: window.innerHeight - 100,
-//     width: 150
-//   }, {
-//     duration: 800
-//   })
-// }
+  Velocity(fixedLogoText, 'stop')
+  Velocity(fixedLogoText, {translateX: 0, translateY: 0}, {duration: 2000})
+
+  Velocity(fixedLogo, 'stop')
+  Velocity(fixedLogo, {
+    top: window.innerHeight - 100,
+    width: 150
+  }, {
+    duration: 800
+  })
+}
 
 
 function initGlobalStreams() {
