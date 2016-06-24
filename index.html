@@ -76,7 +76,7 @@
 
 		<section id="coreValues" class="section dark-section">
 			<div class="global-slider core-values-slider uninitialized content-closed">
-				{% for value in site.values %}
+				{% for value in site.values | sort: 'order' %}
 					<div class="core-values-cell" data-headline="{{value.title}}" data-content="{{value.content}}">
 						<div id="{{value.slug}}"></div>
 						<div class="content">
