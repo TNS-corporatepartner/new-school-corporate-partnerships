@@ -1,0 +1,7 @@
+---
+title: Design
+video: http://familiar-temp.s3.amazonaws.com/nscp/DESIGN.mp4
+order: 2
+---
+
+How can design transform the economy?

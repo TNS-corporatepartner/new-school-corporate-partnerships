@@ -2,17 +2,17 @@ import Flickity from 'flickity'
 import {Observable} from 'rxjs'
 
 const sections =  {
-  "Inspiring Visionary Thinking": [
+  "Visionary Thinking": [
     'We use design to tackle the big question.',
     'We are the only comprehensive university with a world-famous design school at its core.',
     'We design solutions that get to the future first.'
   ],
-  "Courageously Innovative": [
+  "Courageous Innovation": [
     'We rethink the question, not just the answer.',
     'We collaborate with unlikely partners to expand the possibilities.',
     'We innovate with a purpose to improve the human experience.'
   ],
-  "Embodying Diversity": [
+  "Global Diversity": [
     'We are a microcosm of the global population and a magnet for talent from all over the world.',
     'We are in one of the most creative and diverse city in the world.',
     'We are a living laboratory for exploring and testing the news.'
@@ -29,11 +29,11 @@ export class CoreValues {
     this.cells = this.slider.childNodes
     this.activeCell = null
     this.dynamicHeadline = this.section.querySelector('.section-headlines .dynamic-text')
-    
+
     Observable.fromEvent(window, 'resize').debounceTime(100).subscribe(() => this.resizeParticles())
 
     $('#coreValues .content-inner').on('mouseenter', function() {
-      const $cell = $(this).parents('.core-values-cell')     
+      const $cell = $(this).parents('.core-values-cell')
       $('#coreValues .core-values-cell').not($cell).addClass('hover-sibling')
       $cell.addClass('hover')
     })
@@ -41,23 +41,26 @@ export class CoreValues {
     $('#coreValues .core-values-cell').on('mouseleave', function() {
       $('#coreValues .core-values-cell').removeClass('hover hover-sibling')
     })
-    
+
 
     $('#coreValues').on('click', '.core-values-cell.is-selected', (e) => {
       e.stopPropagation()
-      this.cancelCellAnimation().then(() => {                
+      this.cancelCellAnimation().then(() => {
         this.closeCell()
       })
     })
 
-    $('.content-inner h1').on('click', function(e) { 
+    $('.content-inner h1').on('click', function(e) {
       e.stopPropagation()
       instance.openCell( $(this).parents('.core-values-cell').get(0) )
-    })    
+    })
 
-    particlesJS.load('designDna', '/js/particles/design-dna.json')
-    // particlesJS.load('fearless', '/js/particles/fearless.json')
-    particlesJS.load('diversity', '/js/particles/diversity.json')
+
+    particlesJS.load('visionary-thinking', '/js/particles/design-dna.json')
+    particlesJS.load('couragously-innovative', '/js/particles/fearless.json')
+    particlesJS.load('global-diversity', '/js/particles/diversity.json')
+
+
 
     setTimeout(() => {
       $(this.sectionInto).addClass('hidden')
@@ -65,7 +68,7 @@ export class CoreValues {
 
     setTimeout(() => {
       this.resizeParticles()
-    }, 1500)    
+    }, 1500)
   }
 
   openCell(cell) {
@@ -76,14 +79,14 @@ export class CoreValues {
       //grow selected cell and shrink siblings
       $(this.cells).not(cell).addClass('sibling-is-opening')
       $(cell).addClass('opening')
-      
+
       setTimeout(() => {
         //changes styles for flickity initialization
         $(this.slider).removeClass('uninitialized')
         $(this.cells).removeClass('sibling-is-opening opening')
 
         //init flickity (and cell animation)
-        this.initFlkty( $(cell).index() )        
+        this.initFlkty( $(cell).index() )
         this.resizeParticles()
       }, 800)
     }
@@ -100,8 +103,8 @@ export class CoreValues {
     this.startCellAnimation(this.flkty)
 
     // this.flkty.on('settle', () => {
-    //   this.resetCellText().then(this.startCellAnimation.bind(this, this.flkty))      
-    // })    
+    //   this.resetCellText().then(this.startCellAnimation.bind(this, this.flkty))
+    // })
   }
 
   cancelCellAnimation() {
@@ -116,15 +119,15 @@ export class CoreValues {
             display: 'block',
             duration: 400,
             complete: () => {
-              $(this.activeCell).parents('.global-slider').addClass('content-closed')              
+              $(this.activeCell).parents('.global-slider').addClass('content-closed')
               resolve()
             }
           })
         }
       })
-    })      
+    })
   }
-  
+
 
   // resetCellText() {
   //   return new Promise(resolve => {
@@ -155,7 +158,7 @@ export class CoreValues {
       h1: h1,
       dynamicText: dynamicText
     };
-    
+
 
     //called recursively until phrases array is empty
     (function changeWord(phrase, firstPhrase) {
@@ -181,9 +184,9 @@ export class CoreValues {
     })( phrases.splice(0, 1)[0], true )
   }
 
-  closeCell() {      
+  closeCell() {
     this.activeCell = this.flkty.selectedCell.element
-    this.flkty.destroy()    
+    this.flkty.destroy()
 
     $(this.cells).not(this.activeCell).addClass('sibling-is-opening')
     $(this.activeCell).addClass('opening')
@@ -193,7 +196,7 @@ export class CoreValues {
       $(this.cells).removeClass('sibling-is-opening')
       $(this.activeCell).removeClass('opening')
       $(this.activeCell).parents('.global-slider').addClass('content-closed')
-      this.activeCell = null      
+      this.activeCell = null
     })
 
     setTimeout( () => {

@@ -108,7 +108,7 @@
 	  initGlobalStreams();
 
 	  $('main').fullpage({
-	    anchors: ['firstPage', 'secondPage'],
+	    anchors: ['future', 'difference', 'schools', 'approach', 'people', 'partner'],
 	    navigation: true,
 	    onLeave: function onLeave(lastIndex, nextIndex, direction) {
 	      if (!app.instances[nextIndex]) {
@@ -125,51 +125,13 @@
 	  }, function (err) {
 	    return console.error(err);
 	  }, function () {
+	    //executes when initSplashContent stream completes
 	    app.activeScrollIndex = 1;
 	    app.instances[1] = new app.constructors[1]();
 	    app.activeInstance = app.instances[1];
 	  });
 
-	  // function handleNav(e) {
-	  // //handle nav fired before splash animation completes
-	  // if (splashContent$ && !splashContent$.isUnsubscribed) {
-	  //   splashContent$.complete()
-	  //   splashContent$.unsubscribe()
-	  //   skipSplashAnimation()
-	  //   loadComponent(e.index - 1)
-
-	  // //handle nav normally
-	  // } else if (splashContent$) {
-
-	  //   if (e.lastActiveInstance && e.lastActiveInstance.sleep) {
-	  //     e.lastActiveInstance.sleep.call(e.lastActiveInstance)
-	  //   }
-
-	  //   loadComponent(e.index)
-
-	  // //handle nav before splash animation initialized
-	  // } else if (initSplash) {
-	  //   splashContent$ = initSplashContent().subscribe( () => {
-	  //     loadComponent(e.index)
-	  //     splashContent$.complete()
-	  //     splashContent$.unsubscribe()
-	  //   }, err => console.error(err), () => initSplash = false)
-	  // }
-	  // }
-
-	  // function loadComponent(index) {
-	  //   app.activeScrollIndex = index
-	  //   app.activeInstance = app.componentInstances[ index ]
-
-	  //   if (!app.activeInstance && app.componentConstructors[index]) {
-	  //     const instance = new app.componentConstructors[index]()
-	  //     app.activeInstance = instance
-	  //     app.componentInstances[ index ] = instance
-	  //     console.log(instance)
-	  //   } else if (app.activeInstance && app.activeInstance.awake) {
-	  //     app.activeInstance.awake.call(app.activeInstance)
-	  //   }
-	  // }
+	  skipSplashAnimation();
 
 	  function initSplashContent() {
 	    return _rxjs.Observable.create(function (obs) {
@@ -177,34 +139,34 @@
 	      $('body').addClass('intro-in-progress');
 
 	      //logo animate in
-	      Velocity(line1, { x1: 4.501, y1: 64.81, x2: 109.524, y2: 64.81 }, { duration: 500 / 4 });
-	      Velocity(line2, { x1: 4.501, y1: 71.5, x2: 109.524, y2: 71.5 }, { duration: 500 / 4 });
-	      Velocity(fixedLogoText, { translateX: 0, translateY: 0 }, { duration: 2000 / 4 });
+	      Velocity(line1, { x1: 4.501, y1: 64.81, x2: 109.524, y2: 64.81 }, { duration: 500 });
+	      Velocity(line2, { x1: 4.501, y1: 71.5, x2: 109.524, y2: 71.5 }, { duration: 500 });
+	      Velocity(fixedLogoText, { translateX: 0, translateY: 0 }, { duration: 2000 });
 
 	      //logo animate down
 	      Velocity(fixedLogo, {
 	        bottom: 20,
 	        width: 150
 	      }, {
-	        duration: 1000 / 4,
-	        delay: 2500 / 4
+	        duration: 1000,
+	        delay: 2500
 	      });
 
 	      //intro text animate in
 	      Velocity(introText, { opacity: 1 }, {
-	        duration: 1000 / 4,
-	        delay: 3300 / 4,
+	        duration: 1000,
+	        delay: 3300,
 	        complete: function complete() {
 	          setTimeout(function () {
 	            Velocity(introText, { opacity: 0 }, {
-	              duration: 500 / 4,
+	              duration: 500,
 	              display: 'none'
 	            });
 
 	            setTimeout(function () {
 	              $('body').removeClass('intro-in-progress');
-	            }, 500 / 4);
-	          }, 3000 / 4);
+	            }, 500);
+	          }, 3000);
 	        }
 	      });
 
@@ -213,43 +175,45 @@
 	        width: '140px',
 	        height: '62px'
 	      }, {
-	        duration: 800 / 4,
-	        delay: 8000 / 4
+	        duration: 800,
+	        delay: 8000
 	      });
 
 	      setTimeout(function () {
 	        obs.complete();
-	      }, 8800 / 4);
+	      }, 8800);
 	    });
 	  }
 	}
 
-	// function skipSplashAnimation() {
-	//   Velocity(introText, 'stop')
-	//   Velocity(introText, {opacity: 0}, {
-	//     duration: 200,
-	//     display: 'none'
-	//   })
+	function skipSplashAnimation() {
+	  app.intro$.complete();
 
-	//   Velocity(introBg, 'stop')
-	//   Velocity(introBg, {
-	//     width: '140px',
-	//     height: '62px'
-	//   }, {
-	//     duration: 800
-	//   })
+	  Velocity(introText, 'stop');
+	  Velocity(introText, { opacity: 0 }, {
+	    duration: 200,
+	    display: 'none'
+	  });
 
-	//   Velocity(fixedLogoText, 'stop')
-	//   Velocity(fixedLogoText, {translateX: 0, translateY: 0}, {duration: 2000})
+	  Velocity(introBg, 'stop');
+	  Velocity(introBg, {
+	    width: '140px',
+	    height: '62px'
+	  }, {
+	    duration: 800
+	  });
 
-	//   Velocity(fixedLogo, 'stop')
-	//   Velocity(fixedLogo, {
-	//     top: window.innerHeight - 100,
-	//     width: 150
-	//   }, {
-	//     duration: 800
-	//   })
-	// }
+	  Velocity(fixedLogoText, 'stop');
+	  Velocity(fixedLogoText, { translateX: 0, translateY: 0 }, { duration: 2000 });
+
+	  Velocity(fixedLogo, 'stop');
+	  Velocity(fixedLogo, {
+	    top: window.innerHeight - 100,
+	    width: 150
+	  }, {
+	    duration: 800
+	  });
+	}
 
 	function initGlobalStreams() {
 	  $('#header a').on('click', function (e) {
@@ -17867,9 +17831,9 @@
 	    this.questionEl = document.querySelector('.question');
 	    this.slider = document.querySelector('.future-of-slider');
 
-	    this.questions = ['How can data be empathetic?', 'How can you succeed by failing?', 'How can technology make us more human?', 'How can we create a better world through better business?'];
+	    this.questions = ['How can data be empathetic?', 'How can spending more be more profitable?', 'How can identity be kept from being lost in translation?', 'How can learning to fail result in success', 'How can going back to school push business forward faster?', 'How can technology make us more human?'];
 
-	    this.words = ['Big Data', 'Gamification', 'Technology', 'Sustainability'];
+	    this.words = ['Big Data', 'Design', 'Sustainability', 'Globalization', 'Gamification', 'Work', 'Technology'];
 
 	    this.shufflerConfig = {
 	      limit: 26,
@@ -32318,9 +32282,9 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var sections = {
-	  "Inspiring Visionary Thinking": ['We use design to tackle the big question.', 'We are the only comprehensive university with a world-famous design school at its core.', 'We design solutions that get to the future first.'],
-	  "Courageously Innovative": ['We rethink the question, not just the answer.', 'We collaborate with unlikely partners to expand the possibilities.', 'We innovate with a purpose to improve the human experience.'],
-	  "Embodying Diversity": ['We are a microcosm of the global population and a magnet for talent from all over the world.', 'We are in one of the most creative and diverse city in the world.', 'We are a living laboratory for exploring and testing the news.']
+	  "Visionary Thinking": ['We use design to tackle the big question.', 'We are the only comprehensive university with a world-famous design school at its core.', 'We design solutions that get to the future first.'],
+	  "Courageous Innovation": ['We rethink the question, not just the answer.', 'We collaborate with unlikely partners to expand the possibilities.', 'We innovate with a purpose to improve the human experience.'],
+	  "Global Diversity": ['We are a microcosm of the global population and a magnet for talent from all over the world.', 'We are in one of the most creative and diverse city in the world.', 'We are a living laboratory for exploring and testing the news.']
 	};
 
 	var CoreValues = exports.CoreValues = function () {
@@ -32363,9 +32327,9 @@
 	      instance.openCell($(this).parents('.core-values-cell').get(0));
 	    });
 
-	    particlesJS.load('designDna', '/js/particles/design-dna.json');
-	    // particlesJS.load('fearless', '/js/particles/fearless.json')
-	    particlesJS.load('diversity', '/js/particles/diversity.json');
+	    particlesJS.load('visionary-thinking', '/js/particles/visionary.json');
+	    particlesJS.load('couragously-innovative', '/js/particles/innovation.json');
+	    particlesJS.load('global-diversity', '/js/particles/diversity.json');
 
 	    setTimeout(function () {
 	      $(_this.sectionInto).addClass('hidden');
@@ -32413,8 +32377,8 @@
 	      this.startCellAnimation(this.flkty);
 
 	      // this.flkty.on('settle', () => {
-	      //   this.resetCellText().then(this.startCellAnimation.bind(this, this.flkty))     
-	      // })  
+	      //   this.resetCellText().then(this.startCellAnimation.bind(this, this.flkty))
+	      // })
 	    }
 	  }, {
 	    key: 'cancelCellAnimation',
@@ -32563,33 +32527,19 @@
 	  this.section = document.getElementById('ourSchool');
 	  this.sectionInto = this.section.querySelector('.section-intro');
 	  this.paragraphIntro = this.section.querySelector('.intro-paragraph');
-	  this.schoolLinks = this.section.querySelectorAll('.school');
 
 	  setTimeout(function () {
 	    $(_this.sectionInto).addClass('hidden');
 	  }, 1200);
 
-	  // setTimeout(() => {
-	  $(this.paragraphIntro).addClass('hidden');
-	  // }, 3000)
-
-	  $(this.schoolLinks).on('click', function (e) {
+	  $('.school').on('click', function (e) {
 	    e.stopPropagation();
 	    var r = this.querySelector('.img-container').getBoundingClientRect();
 	    var section = document.getElementById('ourSchool');
-	    var modalBg = document.getElementById('schoolModal');
-	    var modalContent = modalBg.querySelector('.content');
-
-	    console.log(this.querySelector('.img-container'));
-
-	    var readyState = {
-	      top: r.top,
-	      bottom: r.bottom,
-	      left: r.left,
-	      width: r.width,
-	      height: r.height,
-	      opacity: 0
-	    };
+	    var modal = document.getElementById('schoolModal');
+	    var modalContent = modal.querySelector('.content');
+	    var modalImg = modalContent.querySelector('.img-container');
+	    var modalText = modalContent.querySelector('.text-container');
 
 	    var openState = {
 	      top: '30%',
@@ -32601,46 +32551,55 @@
 
 	    $('body').addClass('school-modal-open');
 
-	    Velocity(modalContent, readyState, {
-	      duration: 0
-	    });
+	    modalContent.querySelector('.school-name').textContent = $(this).data('name');
+	    modalContent.querySelector('.school-description').textContent = $(this).data('description');
+	    modalContent.querySelector('.img-container').style = 'background-image: url(' + $(this).data('image-src');
 
-	    // $(modalContent).css(readyState)
+	    var startPos = {
+	      top: r.top,
+	      bottom: r.bottom,
+	      left: r.left,
+	      width: r.width,
+	      height: r.height,
+	      opacity: 0
+	    };
 
-	    var schoolName = 'Parsons';
-	    var schoolDescription = 'One of the world\'s leading art and design schools. Offers an enlightened approach to design education and sustainability.';
-	    var imgUrl = '/images/studentgroup.jpg';
-
-	    modalContent.innerHTML = '\n        <div class="text-container">\n          <h1>' + schoolName + '</h1>\n          <p>' + schoolDescription + '</p>\n          <a href="http://google.com" _target="blank"><span>Learn More &rarr;</a>\n        </div>\n\n        <div class="img-container">\n          <img src="' + imgUrl + '" />\n        </div>          \n      ';
-
-	    var modalImg = modalContent.querySelector('.img-container');
-	    var modalText = modalContent.querySelector('.text-container');
-
-	    Velocity(modalImg, { width: '50%' }, {
-	      easing: 'easeOutCubic',
-	      duration: 800
-	    });
-
-	    Velocity(modalText, { width: '50%' }, {
-	      easing: 'easeOutCubic',
-	      duration: 800,
+	    Velocity(modal, startPos, {
+	      duration: 0,
+	      display: 'flex',
 	      complete: function complete() {
-	        Velocity(modalText, { opacity: 1 });
+	        Velocity(modal, {
+	          top: 0,
+	          left: 0,
+	          width: '100%',
+	          height: '100%',
+	          opacity: 1
+	        }, {
+	          duration: 600,
+	          complete: function complete() {
+	            Velocity(modalContent, {
+	              opacity: 1
+	            }, {
+	              display: 'flex'
+	            });
+	          }
+	        });
 	      }
 	    });
-
-	    Velocity(modalContent, openState, { duration: 800, easing: 'easeOutCubic' });
 
 	    $('#ourSchool').one('click', function (e) {
 	      e.stopPropagation();
 
 	      $('body').removeClass('school-modal-open');
 
-	      setTimeout(function () {
-	        Velocity(modalImg, 'reverse', { duration: 0 });
-	        Velocity(modalText, 'reverse', { duration: 0 });
-	        Velocity(modalContent, 'reverse', { duration: 0 });
-	      }, 500);
+	      Velocity(modalContent, {
+	        opacity: 0
+	      }, {
+	        display: 'none',
+	        complete: function complete() {
+	          Velocity(modal, startPos);
+	        }
+	      });
 	    });
 	  });
 	};
@@ -61529,6 +61488,19 @@
 	    this.xPositions = [];
 	    this.yPositions = [];
 
+	    this.painter$;
+
+	    this.raf$ = _rxjs.Observable.create(function (obs) {
+	      (function raf() {
+	        requestAnimationFrame(function (e) {
+	          obs.next(e);
+	          raf();
+	        });
+	      })();
+	    });
+
+	    this.mousemove$ = _rxjs.Observable.fromEvent(this.canvas, 'mousemove').map(this.mouseCoords); //returns {x, y}
+
 	    setTimeout(function () {
 	      $(_this.sectionIntro).addClass('hidden');
 	    }, 1200);
@@ -61536,6 +61508,7 @@
 	    this.positionItems();
 	    this.handlePanning();
 	    this.handleHover();
+	    this.handleClick();
 	  }
 
 	  _createClass(OurApproach, [{
@@ -61543,19 +61516,190 @@
 	    value: function handlePanning() {
 	      var _this2 = this;
 
-	      var mousemove$ = _rxjs.Observable.fromEvent(window, 'mousemove').map(this.mouseCoords); //returns {x, y}
-
-	      var painter$ = _rxjs.Observable.interval(15).withLatestFrom(mousemove$).subscribe(function (v) {
+	      var painter$ = this.raf$.withLatestFrom(this.mousemove$).subscribe(function (v) {
 	        var mouse = v[1];
+	        //console.log(mouse.x)
+	        _this2.canvas.style.transform = 'translate3d(' + mouse.x + '%, ' + mouse.y + '%, 0) rotateX(10deg)';
 
-	        Velocity(_this2.canvas, 'stop');
+	        // console.log(this.canvas.style.transform)
+	        // Velocity(this.canvas, 'stop')
 
-	        Velocity(_this2.canvas, {
-	          translateX: mouse.x + '%',
-	          translateY: mouse.y + '%'
+	        // Velocity(this.canvas, {
+	        //   translateX: mouse.x + '%',
+	        //   translateY: mouse.y + '%'
+	        // }, {
+	        //   duration: 150,
+	        //   easing: 'easeInSine'
+	        // })
+	      });
+	    }
+	  }, {
+	    key: 'handleHover',
+	    value: function handleHover() {
+	      $('.project').on('mouseenter', function () {
+	        var projectTop = parseInt(this.style.top); //percent
+	        var projectLeft = parseInt(this.style.left); //percent
+	        var projectWidth = this.offsetWidth; //px
+	        var projectHeight = this.offsetHeight; //px
+	        var programEls = $(this).data('programs').map(function (pId) {
+	          return document.querySelector('.program[data-id="' + pId + '"]');
+	        });
+	        var programPositions = getProgramPositions(projectLeft, projectTop, projectWidth, projectHeight, programEls);
+
+	        $('.project').not(this).addClass('sibling-hover');
+	        $('.program').not(programEls).addClass('sibling-hover');
+
+	        programEls.forEach(function (el, index) {
+	          //save last original position to reset on mouseleave
+	          el.lastLeft = el.style.left;
+	          el.lastTop = el.style.top;
+
+	          //position programs around project
+	          el.style.left = programPositions[index].left;
+	          el.style.top = programPositions[index].top;
+	          // el.textContent += programPositions[index].place //for debugging
+	        });
+
+	        $(this).one('mouseleave', function () {
+	          $('.project').removeClass('sibling-hover');
+	          $('.program').removeClass('sibling-hover');
+
+	          programEls.forEach(function (el) {
+	            el.style.left = el.lastLeft;
+	            el.style.top = el.lastTop;
+	          });
+	        });
+	      });
+
+	      function getProgramPositions(projectLeft, projectTop, projectWidth, projectHeight, programEls) {
+	        var position1 = {
+	          left: 'calc(' + projectLeft + '% + ' + projectWidth / 2 + 'px)',
+	          top: 'calc(' + projectTop + '% - 15px)',
+	          place: 'one, '
+	        };
+
+	        var position2 = {
+	          left: 'calc(' + projectLeft + '% + ' + projectWidth / 8 + 'px)',
+	          top: 'calc(' + projectTop + '% - 50px)',
+	          place: 'two, '
+	        };
+
+	        var position3 = {
+	          left: 'calc(' + projectLeft + '% - ' + 20 + 'px)',
+	          top: 'calc(' + projectTop + '% - 5px)',
+	          place: 'three, '
+	        };
+
+	        var position4 = {
+	          left: 'calc(' + projectLeft + '% - ' + 100 + 'px)',
+	          top: 'calc(' + projectTop + '% + 70px)',
+	          place: 'four, '
+	        };
+
+	        var position5 = {
+	          left: 'calc(' + projectLeft + '% - ' + 130 + 'px)',
+	          top: 'calc(' + projectTop + '% + 150px)',
+	          place: 'five, '
+	        };
+
+	        var position6 = {
+	          left: 'calc(' + projectLeft + '% - ' + 50 + 'px)',
+	          top: 'calc(' + projectTop + '% + ' + projectHeight + 'px)',
+	          place: 'six, '
+	        };
+
+	        var position7 = {
+	          left: 'calc(' + (projectLeft - 5) + '% - ' + 0 + 'px)',
+	          top: 'calc(' + projectTop + '% + ' + projectHeight / 2 + 'px)',
+	          place: 'sevem, '
+	        };
+
+	        var position8 = {
+	          left: 'calc(' + projectLeft + '% - ' + 0 + 'px)',
+	          top: 'calc(' + projectTop + '% + ' + (projectHeight + 80) + 'px)',
+	          place: 'eight, '
+	        };
+
+	        var position9 = {
+	          left: 'calc(' + projectLeft + '% + ' + projectWidth / 4 + 'px)',
+	          top: 'calc(' + projectTop + '% + ' + projectHeight + 'px)',
+	          place: 'nine, '
+	        };
+
+	        var position10 = {
+	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 100) + 'px)',
+	          top: 'calc(' + projectTop + '% + ' + (projectHeight - 40) + 'px)',
+	          place: 'ten, '
+	        };
+
+	        var positions = [position1, position2, position3, position4, position5, position6, position7, position8, position9, position10];
+	        var randomPositions = _lodash2.default.shuffle(positions).slice(0, programEls.length);
+	        return randomPositions;
+	      }
+	    }
+	  }, {
+	    key: 'handleClick',
+	    value: function handleClick() {
+	      $('.project').on('click', function (e) {
+	        e.stopPropagation();
+	        var modal = document.getElementById('ourApproachModal');
+	        var modalContent = modal.querySelector('.content');
+	        var projectImg = this.querySelector('img').getBoundingClientRect();
+
+	        modalContent.querySelector('.title-content').textContent = $(this).data('title');
+	        modalContent.querySelector('.label-group').textContent = $(this).data('programs').join(', ');
+	        modalContent.querySelector('blockquote').textContent = $(this).data('blockquote');
+	        modalContent.querySelector('.text-content').textContent = $(this).data('content');
+
+	        modal.querySelector('img').src = '/images/music.jpg';
+	        $.fn.fullpage.setAllowScrolling(false);
+
+	        Velocity(modal, {
+	          left: projectImg.left,
+	          top: projectImg.top,
+	          width: projectImg.width,
+	          height: projectImg.height,
+	          opacity: 1,
+	          scale: 1
 	        }, {
-	          duration: 150,
-	          easing: 'easeInSine'
+	          duration: 0,
+	          display: 'block',
+	          complete: function complete() {
+	            Velocity(modal, {
+	              top: 0,
+	              left: 0,
+	              width: '100%',
+	              height: '100%'
+	            }, {
+	              duration: 400,
+	              complete: function complete() {
+	                Velocity(modalContent, {
+	                  opacity: 1
+	                }, {
+	                  display: 'flex'
+	                });
+	              }
+	            });
+	          }
+	        });
+
+	        $(modal).one('click', function (e) {
+	          e.stopPropagation();
+
+	          $.fn.fullpage.setAllowScrolling(true);
+
+	          Velocity(modalContent, 'reverse', {
+	            complete: function complete() {
+	              // Velocity(modal, 'reverse')
+	              Velocity(modal, {
+	                opacity: 0,
+	                scale: 0.5
+	              }, {
+	                display: 'none',
+	                duration: 400
+	              });
+	            }
+	          });
 	        });
 	      });
 	    }
@@ -61572,33 +61716,6 @@
 	        x: x,
 	        y: y
 	      };
-	    }
-	  }, {
-	    key: 'handleHover',
-	    value: function handleHover() {
-	      var projectTargets = [];
-
-	      $('.project').on('mouseenter', function () {
-	        var projectTop = parseInt(this.style.top);
-	        var projectLeft = parseInt(this.style.left);
-	        var programEls = $(this).data('programs').map(function (pId) {
-	          return document.querySelector('.program[data-id="' + pId + '"]');
-	        });
-
-	        programEls.forEach(function (el, index) {
-	          el.lastLeft = el.style.left;
-	          el.lastTop = el.style.top;
-	          el.style.left = projectLeft + (index % 2 == 0 ? -5 : 5) + '%';
-	          el.style.top = projectTop + (index % 2 == 0 ? -5 : 5) + '%';
-	        });
-
-	        $(this).one('mouseleave', function () {
-	          programEls.forEach(function (el) {
-	            el.style.left = el.lastLeft;
-	            el.style.top = el.lastTop;
-	          });
-	        });
-	      });
 	    }
 	  }, {
 	    key: 'positionItems',
@@ -61622,8 +61739,8 @@
 
 	      // console.log(
 	      //   this.xPositions,
-	      //   this.yPositions     
-	      // )  
+	      //   this.yPositions
+	      // )
 	    }
 	  }, {
 	    key: 'randomX',

@@ -653,16 +653,16 @@ section#ourSchool .school-links {
     section#ourSchool .school-links .school.parsons {
       left: 26%;
       top: 22.2%; }
-    section#ourSchool .school-links .school.lang {
+    section#ourSchool .school-links .school.eugene-lang {
       left: calc(34.4% + 14.9%);
       top: 61%; }
-    section#ourSchool .school-links .school.public {
+    section#ourSchool .school-links .school.public-engagement {
       left: 71.2%;
       top: 45.2%; }
-    section#ourSchool .school-links .school.performing {
+    section#ourSchool .school-links .school.performing-arts {
       left: 2%;
       top: 53%; }
-    section#ourSchool .school-links .school.research {
+    section#ourSchool .school-links .school.social-research {
       left: calc(58.4% + 14.9%);
       top: 13.4%; }
     section#ourSchool .school-links .school.horz {
@@ -715,35 +715,40 @@ section#ourSchool .school-links {
 
 section#ourSchool #schoolModal {
   position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background-color: rgba(51, 51, 51, 0.9);
-  opacity: 0;
+  background-color: rgba(34, 34, 34, 0.9);
   pointer-events: none;
-  transition: opacity 0.5s ease-in-out; }
+  display: none;
+  -ms-flex-align: center;
+      -ms-grid-row-align: center;
+      align-items: center; }
   section#ourSchool #schoolModal .content {
-    position: absolute;
-    display: -ms-flexbox;
-    display: flex;
+    display: none;
+    height: 50%;
     -ms-flex-align: center;
+        -ms-grid-row-align: center;
         align-items: center;
-    background-color: rgba(0, 0, 0, 0.35);
+    background-color: rgba(34, 34, 34, 0.9);
     color: white; }
     section#ourSchool #schoolModal .content .text-container {
-      width: 0%;
-      opacity: 0;
-      padding: 2vw; }
+      width: 50%;
+      padding: 4vw; }
+      section#ourSchool #schoolModal .content .text-container .school-name {
+        margin-top: 5vh;
+        line-height: 5.2vh;
+        text-transform: uppercase;
+        font-weight: 900;
+        margin-bottom: 15px; }
       section#ourSchool #schoolModal .content .text-container p {
         margin-bottom: 20px; }
       section#ourSchool #schoolModal .content .text-container a {
         color: white;
         cursor: url(/images/click-cursor-red.svg), auto; }
     section#ourSchool #schoolModal .content .img-container {
-      width: 100%; }
-      section#ourSchool #schoolModal .content .img-container img {
-        width: 100%; }
+      width: 50%;
+      height: 100%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center; }
 
 #peopleSlider {
   position: absolute;
@@ -869,32 +874,162 @@ section#ourPeople.modal-open {
 #ourApproach {
   overflow: hidden; }
 
+.canvas-container {
+  position: relative; }
+
 #ourApproach #approachCanvas {
   position: absolute;
   top: -50%;
   left: -50%;
   height: 200%;
   width: 200%;
-  transform: translate3d(0%, 0%, 0); }
+  transform: translate3d(0%, 0%, 0);
+  border: 5px solid red;
+  transition: transform 3.5s cubic-bezier(0.075, 0.82, 0.165, 1); }
   #ourApproach #approachCanvas .project, #ourApproach #approachCanvas .program {
     position: absolute; }
+    #ourApproach #approachCanvas .project.sibling-hover, #ourApproach #approachCanvas .program.sibling-hover {
+      opacity: 0.3; }
   #ourApproach #approachCanvas .project {
-    width: 100px;
+    width: 400px;
     height: 200px;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-align: center;
-        align-items: center; }
-    #ourApproach #approachCanvas .project:hover h4 {
+        align-items: center;
+    cursor: url(/images/click-cursor-red.svg), auto;
+    transition: opacity 0.6s ease-in-out; }
+    #ourApproach #approachCanvas .project:hover .info {
       opacity: 1; }
-    #ourApproach #approachCanvas .project img {
-      margin-right: 15px; }
-    #ourApproach #approachCanvas .project h4 {
-      min-width: 300px;
+    #ourApproach #approachCanvas .project .info {
       opacity: 0;
       transition: opacity 0.4s ease-in-out; }
+      #ourApproach #approachCanvas .project .info label {
+        text-transform: uppercase;
+        font-size: 10px; }
+      #ourApproach #approachCanvas .project .info h4 {
+        margin: 5px 0;
+        min-width: 300px;
+        color: #E82E21; }
+      #ourApproach #approachCanvas .project .info p {
+        font-size: 16px;
+        color: #E82E21;
+        font-family: "NeueDisplay", sans-serif;
+        -webkit-font-smoothing: antialiased; }
+    #ourApproach #approachCanvas .project img {
+      margin-right: 15px; }
   #ourApproach #approachCanvas .program {
-    transition: all 1s ease-in-out; }
+    max-width: 150px;
+    transition: all 1s ease-in-out;
+    pointer-events: none; }
+    #ourApproach #approachCanvas .program:nth-of-type(1) {
+      transition-delay: 0.04s; }
+    #ourApproach #approachCanvas .program:nth-of-type(2) {
+      transition-delay: 0.08s; }
+    #ourApproach #approachCanvas .program:nth-of-type(3) {
+      transition-delay: 0.12s; }
+    #ourApproach #approachCanvas .program:nth-of-type(4) {
+      transition-delay: 0.16s; }
+    #ourApproach #approachCanvas .program:nth-of-type(5) {
+      transition-delay: 0.2s; }
+    #ourApproach #approachCanvas .program:nth-of-type(6) {
+      transition-delay: 0.24s; }
+    #ourApproach #approachCanvas .program:nth-of-type(7) {
+      transition-delay: 0.28s; }
+    #ourApproach #approachCanvas .program:nth-of-type(8) {
+      transition-delay: 0.32s; }
+    #ourApproach #approachCanvas .program:nth-of-type(9) {
+      transition-delay: 0.36s; }
+    #ourApproach #approachCanvas .program:nth-of-type(10) {
+      transition-delay: 0.4s; }
+    #ourApproach #approachCanvas .program:nth-of-type(11) {
+      transition-delay: 0.44s; }
+    #ourApproach #approachCanvas .program:nth-of-type(12) {
+      transition-delay: 0.48s; }
+    #ourApproach #approachCanvas .program:nth-of-type(13) {
+      transition-delay: 0.52s; }
+    #ourApproach #approachCanvas .program:nth-of-type(14) {
+      transition-delay: 0.56s; }
+    #ourApproach #approachCanvas .program:nth-of-type(15) {
+      transition-delay: 0.6s; }
+    #ourApproach #approachCanvas .program:nth-of-type(16) {
+      transition-delay: 0.64s; }
+    #ourApproach #approachCanvas .program:nth-of-type(17) {
+      transition-delay: 0.68s; }
+    #ourApproach #approachCanvas .program:nth-of-type(18) {
+      transition-delay: 0.72s; }
+    #ourApproach #approachCanvas .program:nth-of-type(19) {
+      transition-delay: 0.76s; }
+    #ourApproach #approachCanvas .program:nth-of-type(20) {
+      transition-delay: 0.8s; }
+
+#ourApproachModal {
+  position: absolute;
+  display: none;
+  background-color: rgba(34, 34, 34, 0.9);
+  cursor: url(/images/close-cursor-red.svg), auto; }
+  #ourApproachModal .content {
+    display: none;
+    height: 100%;
+    -webkit-font-smoothing: antialiased;
+    overflow: scroll; }
+    #ourApproachModal .content aside {
+      width: 50%;
+      height: 100%;
+      padding: 4vw;
+      padding-top: 20vh;
+      color: white; }
+      #ourApproachModal .content aside:before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 50vw;
+        background-color: rgba(34, 34, 34, 0.9); }
+      #ourApproachModal .content aside > * {
+        position: relative; }
+      #ourApproachModal .content aside .label-heading {
+        color: #E82E21;
+        display: block;
+        margin-bottom: 2.5vh; }
+      #ourApproachModal .content aside .label-group {
+        color: #999;
+        display: block;
+        width: 40%; }
+      #ourApproachModal .content aside blockquote {
+        margin: 2.5vh 0;
+        color: #E82E21;
+        padding-right: 5vw;
+        font-size: 22px;
+        font-style: italic; }
+      #ourApproachModal .content aside .title-content {
+        margin-top: 5vh;
+        line-height: 5.2vh;
+        text-transform: uppercase;
+        font-weight: 900; }
+      #ourApproachModal .content aside .text-content p {
+        font-size: 22px;
+        line-height: 32px; }
+      #ourApproachModal .content aside .gradient-bottom {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 20vh;
+        width: 50vw;
+        background-image: linear-gradient(0deg, rgba(34, 34, 34, 0.97) 50%, transparent);
+        pointer-events: none; }
+    #ourApproachModal .content .img-container {
+      position: fixed;
+      pointer-events: none;
+      height: 100vh;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-align: center;
+          align-items: center;
+      width: 50%; }
+      #ourApproachModal .content .img-container img {
+        width: 100%; }
 
 section#contactUs {
   background: #E1E1E1; }
@@ -1055,6 +1190,7 @@ h6 {
 
 .section-headlines {
   position: absolute;
+  pointer-events: none;
   top: 0;
   left: 0;
   padding: 2vw;

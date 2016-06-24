@@ -2,23 +2,144 @@
 title: New School Corporate Partnerships
 timezone: UTC
 collections:
-  people:
-    title: People
+  future:
+    title: Imagine the Future of…
     output: false
+  people:
+    title: Our History of Innovation
+    output: false
+    introduction: From our beginning in 1919, we’ve been a home for industry pioneers,
+      world changers, and innovative leaders.
+  projects:
+    title: Our Multi-Dimensional Approach
+    output: false
+    introduction: We connect multiple disciplines to find unforeseen opportunities
+      and create unexpected possibilities for our partners.
+    programs:
+    - ACTING
+    - ANTHROPOLOGY
+    - ARCHITECTURAL DESIGN
+    - ARCHITECTURE
+    - ARCHITECTURE & LIGHTING DESIGN
+    - ART, MEDIA, AND TECHNOLOGY
+    - THE ARTS
+    - BA/BFA DUAL DEGREE
+    - BACHELOR'S PROGRAMS FOR ADULTS
+    - GRADUATE CERTIFICATE
+    - CLASSICAL MUSIC
+    - COMMUNICATION DESIGN
+    - CONTINUING EDUCATION
+    - CONTEMPORARY MUSIC
+    - CREATIVE ARTS AND HEALTH
+    - CREATIVE PUBLISHING AND CRITICAL JOURNALISM
+    - CREATIVE WRITING
+    - CULTURE AND MEDIA
+    - DATA VISUALIZATION
+    - DESIGN AND TECHNOLOGY
+    - DESIGN AND URBAN ECOLOGIES
+    - DESIGN STUDIES
+    - DIRECTING
+    - DOCUMENTARY MEDIA STUDIES
+    - GRADUATE CERTIFICATE
+    - DRAMATIC ARTS
+    - ECONOMICS
+    - ECONOMICS
+    - ENGLISH AS A SECOND LANGUAGE
+    - ESL + DESIGN
+    - ESL + FOODESL + MUSIC
+    - ENVIRONMENTAL POLICY AND SUSTAINABILITY MANAGEMENT
+    - ENVIRONMENTAL STUDIES
+    - FASHION BUSINESSFASHION DESIGN
+    - FASHION DESIGN
+    - FASHION DESIGN AND SOCIETY
+    - FASHION MARKETING
+    - FASHION STUDIES
+    - FILM PRODUCTIONFINE ART AND FOUNDATIONFINE ARTS
+    - FINE ARTS
+    - FOOD STUDIES
+    - GENDER AND SEXUALITY STUDIES
+    - GRADUATE CERTIFICATE
+    - GLOBAL POLITICAL ECONOMY AND FINANCE
+    - GLOBAL STUDIES
+    - GRAPHIC DESIGN
+    - GRAPHIC AND DIGITAL DESIGNHARM REDUCTION PSYCHOTHERAPYHISTORICAL STUDIES
+    - HISTORY
+    - HISTORY OF DESIGN AND CURATORIAL STUDIES
+    - ILLUSTRATION
+    - INDUSTRIAL DESIGN
+    - INTEGRATED DESIGN
+    - INTERDISCIPLINARY SCIENCE
+    - INTERIOR DESIGN
+    - INTERIOR DESIGN AND ARCHITECTURE STUDIES
+    - INTERNATIONAL AFFAIRS
+    - JAZZ AND CONTEMPORARY MUSIC
+    - JOURNALISM + DESIGN
+    - LEADERSHIP AND CHANGE
+    - GRADUATE CERTIFICATE
+    - LIBERAL ARTS
+    - LIBERAL STUDIES
+    - LIGHTING DESIGN
+    - LITERARY STUDIES
+    - MEDIA MANAGEMENT
+    - GRADUATE CERTIFICATE
+    - MEDIA STUDIES
+    - MINORS
+    - MUSICAL THEATER
+    - NONPROFIT MANAGEMENT
+    - ORGANIZATIONAL CHANGE MANAGEMENT
+    - ORGANIZATION DEVELOPMENT
+    - GRADUATE CERTIFICATE
+    - PHILOSOPHY
+    - PHOTOGRAPHY
+    - PLAYWRITING
+    - POLITICS
+    - PRE-COLLEGE (MANNES)
+    - PRE-COLLEGE (PARSONS)
+    - PRODUCT DESIGN
+    - PSYCHOLOGY
+    - PUBLIC AND URBAN POLICY
+    - SCREEN STUDIES
+    - SCREENWRITINGSOCIOLOGY
+    - SOCIOLOGY
+    - STRATEGIC DESIGN AND MANAGEMENT
+    - GLOBAL EXECUTIVE, MS
+    - SUMMER PROGRAMS (PARSONS)
+    - NONDEGREE
+    - SUSTAINABILITY STRATEGIES
+    - GRADUATE CERTIFICATE
+    - TEACHING ENGLISH TO SPEAKERS OF OTHER LANGUAGES
+    - THEATER
+    - THEORIES OF URBAN PRACTICE
+    - TRANSDISCIPLINARY DESIGN
+    - URBAN DESIGN
+    - URBAN POLICY ANALYSIS AND MANAGEMENT
+  schools:
+    title: Our Schools
+    output: false
+    introduction: Our unique structure provides the expertise of five schools collaborating
+      to reinvent everything and approach issues from multiple, integrated perspectives.
+  partner:
+    title: Partner with Us
+    output: false
+    introduction: Our partners understand the value of using design thinking to solve
+      real-world problems. Collaborate with us to design the future.
   posts:
     title: Posts
     output: true
+  values:
+    title: The New School is Different by Design
+    output: false
   uploads:
     title: Uploads
-    output: false
-  values:
-    title: Values
     output: false
 email: your-email@domain.com
 description: |
   Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
 baseurl: 
 url: http://yourdomain.com
+introduction: The New School, in NYC, is the only university where a world-renowned
+  art and design school comes together with acclaimed liberal arts, performing arts,
+  and graduate schools…to rethink everything.
 twitter_username: jekyllrb
 github_username: jekyll
 markdown: kramdown
