@@ -17821,8 +17821,6 @@
 
 	var FutureOf = exports.FutureOf = function () {
 	  function FutureOf() {
-	    var _this = this;
-
 	    _classCallCheck(this, FutureOf);
 
 	    this.section = document.querySelector('#futureOf');
@@ -17832,13 +17830,10 @@
 	    this.loadingWord = this.section.querySelector('.section-headlines .dynamic-text');
 	    this.questionEl = document.querySelector('.question');
 	    this.slider = document.querySelector('.future-of-slider');
-	    this.words = [];
-	    this.questions = [];
 
-	    this.section.querySelectorAll('.future-of-cell').forEach(function (el) {
-	      _this.questions.push($(el).data('question'));
-	      _this.words.push($(el).data('title'));
-	    });
+	    this.questions = ['How can data be empathetic?', 'How can spending more be more profitable?', 'How can identity be kept from being lost in translation?', 'How can learning to fail result in success', 'How can going back to school push business forward faster?', 'How can technology make us more human?'];
+
+	    this.words = ['Big Data', 'Design', 'Sustainability', 'Globalization', 'Gamification', 'Work', 'Technology'];
 
 	    this.shufflerConfig = {
 	      limit: 26,
@@ -17860,7 +17855,7 @@
 	  _createClass(FutureOf, [{
 	    key: 'initVideos',
 	    value: function initVideos() {
-	      var _this2 = this;
+	      var _this = this;
 
 	      this.shuffler({
 	        limit: 6,
@@ -17868,19 +17863,19 @@
 	        index: 0,
 	        words: ['The Workforce', 'Online', 'Research & Development', 'Personalization', 'Data Privacy', 'Big Data']
 	      }).then(function () {
-	        var cell = _this2.flkty.cells[_this2.flkty.selectedIndex].element;
+	        var cell = _this.flkty.cells[_this.flkty.selectedIndex].element;
 	        Velocity(cell, { opacity: 1 });
-	        _this2.playCellSequence();
+	        _this.playCellSequence();
 	      });
 
 	      this.flkty.on('cellSelect', function () {
-	        _this2.playCellSequence();
+	        _this.playCellSequence();
 	      });
 	    }
 	  }, {
 	    key: 'playCellSequence',
 	    value: function playCellSequence() {
-	      var _this3 = this;
+	      var _this2 = this;
 
 	      if (_index.app.activeInstance == this) {
 	        var cell = this.flkty.cells[this.flkty.selectedIndex].element;
@@ -17894,8 +17889,8 @@
 	        this.sliderTimer = setTimeout(function () {
 	          $('body').removeClass('show-question');
 	          setTimeout(function () {
-	            _this3.loadingWord.textContent = _this3.words[_this3.flkty.selectedIndex + 1] ? _this3.words[_this3.flkty.selectedIndex + 1] : _this3.words[0];
-	            _this3.flkty.next();
+	            _this2.loadingWord.textContent = _this2.words[_this2.flkty.selectedIndex + 1] ? _this2.words[_this2.flkty.selectedIndex + 1] : _this2.words[0];
+	            _this2.flkty.next();
 	          }, 1000);
 	        }, 5000);
 	      }
@@ -17903,7 +17898,7 @@
 	  }, {
 	    key: 'shuffler',
 	    value: function shuffler(o) {
-	      var _this4 = this;
+	      var _this3 = this;
 
 	      this.loadingWord = this.section.querySelector('.section-headlines .dynamic-text');
 
@@ -17911,12 +17906,12 @@
 
 	      return new Promise(function (resolve) {
 	        var wordSwitcher = setInterval(function () {
-	          _this4.loadingWord.textContent = o.words[o.index];
+	          _this3.loadingWord.textContent = o.words[o.index];
 	          o.index = o.index > o.words.length ? 0 : o.index;
 
 	          if (o.count === o.limit) {
 	            clearInterval(wordSwitcher);
-	            _this4.loadingWord.textContent = o.words[o.words.length - 1];
+	            _this3.loadingWord.textContent = o.words[o.words.length - 1];
 	            resolve();
 	          } else {
 	            o.count++;
@@ -32286,7 +32281,11 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var sections = {};
+	var sections = {
+	  "Visionary Thinking": ['We use design to tackle the big question.', 'We are the only comprehensive university with a world-famous design school at its core.', 'We design solutions that get to the future first.'],
+	  "Courageous Innovation": ['We rethink the question, not just the answer.', 'We collaborate with unlikely partners to expand the possibilities.', 'We innovate with a purpose to improve the human experience.'],
+	  "Global Diversity": ['We are a microcosm of the global population and a magnet for talent from all over the world.', 'We are in one of the most creative and diverse city in the world.', 'We are a living laboratory for exploring and testing the news.']
+	};
 
 	var CoreValues = exports.CoreValues = function () {
 	  function CoreValues() {
@@ -32301,12 +32300,6 @@
 	    this.cells = this.slider.childNodes;
 	    this.activeCell = null;
 	    this.dynamicHeadline = this.section.querySelector('.section-headlines .dynamic-text');
-
-	    this.section.querySelectorAll('.core-values-cell').forEach(function (el) {
-	      sections[$(el).data('headline')] = $(el).data('phrases');
-	    });
-
-	    console.log(sections);
 
 	    _rxjs.Observable.fromEvent(window, 'resize').debounceTime(100).subscribe(function () {
 	      return _this.resizeParticles();
@@ -32384,8 +32377,8 @@
 	      this.startCellAnimation(this.flkty);
 
 	      // this.flkty.on('settle', () => {
-	      //   this.resetCellText().then(this.startCellAnimation.bind(this, this.flkty))     
-	      // })  
+	      //   this.resetCellText().then(this.startCellAnimation.bind(this, this.flkty))
+	      // })
 	    }
 	  }, {
 	    key: 'cancelCellAnimation',
@@ -61495,6 +61488,19 @@
 	    this.xPositions = [];
 	    this.yPositions = [];
 
+	    this.painter$;
+
+	    this.raf$ = _rxjs.Observable.create(function (obs) {
+	      (function raf() {
+	        requestAnimationFrame(function (e) {
+	          obs.next(e);
+	          raf();
+	        });
+	      })();
+	    });
+
+	    this.mousemove$ = _rxjs.Observable.fromEvent(this.canvas, 'mousemove').map(this.mouseCoords); //returns {x, y}
+
 	    setTimeout(function () {
 	      $(_this.sectionIntro).addClass('hidden');
 	    }, 1200);
@@ -61510,20 +61516,10 @@
 	    value: function handlePanning() {
 	      var _this2 = this;
 
-	      var raf$ = _rxjs.Observable.create(function (obs) {
-	        (function raf() {
-	          requestAnimationFrame(function (e) {
-	            obs.next(e);
-	            raf();
-	          });
-	        })();
-	      });
-
-	      var mousemove$ = _rxjs.Observable.fromEvent(this.canvas, 'mousemove').map(this.mouseCoords); //returns {x, y}
-
-	      var painter$ = raf$.withLatestFrom(mousemove$).subscribe(function (v) {
+	      var painter$ = this.raf$.withLatestFrom(this.mousemove$).subscribe(function (v) {
 	        var mouse = v[1];
-	        _this2.canvas.style.transform = 'translate3d(' + mouse.x + '%, ' + mouse.y + '%, 0)';
+	        //console.log(mouse.x)
+	        _this2.canvas.style.transform = 'translate3d(' + mouse.x + '%, ' + mouse.y + '%, 0) rotateX(10deg)';
 
 	        // console.log(this.canvas.style.transform)
 	        // Velocity(this.canvas, 'stop')
@@ -61534,7 +61530,7 @@
 	        // }, {
 	        //   duration: 150,
 	        //   easing: 'easeInSine'
-	        // })      
+	        // })
 	      });
 	    }
 	  }, {
@@ -61543,8 +61539,8 @@
 	      $('.project').on('mouseenter', function () {
 	        var projectTop = parseInt(this.style.top); //percent
 	        var projectLeft = parseInt(this.style.left); //percent
-	        var projectWidth = this.offsetWidth; //px   
-	        var projectHeight = this.offsetHeight; //px   
+	        var projectWidth = this.offsetWidth; //px
+	        var projectHeight = this.offsetHeight; //px
 	        var programEls = $(this).data('programs').map(function (pId) {
 	          return document.querySelector('.program[data-id="' + pId + '"]');
 	        });
@@ -61558,7 +61554,7 @@
 	          el.lastLeft = el.style.left;
 	          el.lastTop = el.style.top;
 
-	          //position programs around project       
+	          //position programs around project
 	          el.style.left = programPositions[index].left;
 	          el.style.top = programPositions[index].top;
 	          // el.textContent += programPositions[index].place //for debugging
@@ -61743,8 +61739,8 @@
 
 	      // console.log(
 	      //   this.xPositions,
-	      //   this.yPositions     
-	      // )  
+	      //   this.yPositions
+	      // )
 	    }
 	  }, {
 	    key: 'randomX',

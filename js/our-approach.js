@@ -23,6 +23,22 @@ export class OurApproach {
     this.xPositions = []
     this.yPositions = []
 
+    this.painter$;
+
+    this.raf$ = Observable.create(obs => {
+      (function raf() {
+        requestAnimationFrame(function(e) {
+          obs.next(e)
+          raf()
+        })
+      })()
+    });
+
+    this.mousemove$ = Observable
+      .fromEvent(this.canvas, 'mousemove')
+      .map(this.mouseCoords) //returns {x, y}
+
+
     setTimeout(() => {
       $(this.sectionIntro).addClass('hidden')
     }, 1200)
@@ -30,29 +46,22 @@ export class OurApproach {
     this.positionItems()
     this.handlePanning()
     this.handleHover()
-    this.handleClick()    
+    this.handleClick()
   }
 
+
+
   handlePanning() {
-    const raf$ = Observable.create(obs => {
-      (function raf() {
-        requestAnimationFrame(function(e) {
-          obs.next(e)
-          raf()
-        })
-      })()
-    })
 
-    const mousemove$ = Observable
-      .fromEvent(this.canvas, 'mousemove')
-      .map(this.mouseCoords) //returns {x, y}
 
-    const painter$ = 
-      raf$.withLatestFrom(mousemove$)
+
+
+    const painter$ =
+      this.raf$.withLatestFrom(this.mousemove$)
       .subscribe(v => {
         const mouse = v[1]
-        this.canvas.style.transform = `translate3d(${mouse.x}%, ${mouse.y}%, 0)`
-
+        //console.log(mouse.x)
+        this.canvas.style.transform = `translate3d(${mouse.x}%, ${mouse.y}%, 0) rotateX(10deg)`
 
         // console.log(this.canvas.style.transform)
         // Velocity(this.canvas, 'stop')
@@ -63,29 +72,32 @@ export class OurApproach {
         // }, {
         //   duration: 150,
         //   easing: 'easeInSine'
-        // })        
+        // })
       })
   }
 
 
   handleHover() {
-    $('.project').on('mouseenter', function() {      
+    $('.project').on('mouseenter', function() {
       const projectTop = parseInt(this.style.top)   //percent
       const projectLeft = parseInt(this.style.left) //percent
-      const projectWidth = this.offsetWidth         //px    
-      const projectHeight = this.offsetHeight       //px    
+      const projectWidth = this.offsetWidth         //px
+      const projectHeight = this.offsetHeight       //px
       const programEls = $(this).data('programs').map( pId => document.querySelector(`.program[data-id="${pId}"]`) )
       const programPositions = getProgramPositions(projectLeft, projectTop, projectWidth, projectHeight, programEls)
+
 
       $('.project').not(this).addClass('sibling-hover')
       $('.program').not(programEls).addClass('sibling-hover')
 
+
+
       programEls.forEach( (el, index) => {
         //save last original position to reset on mouseleave
-        el.lastLeft = el.style.left 
-        el.lastTop = el.style.top 
-        
-        //position programs around project        
+        el.lastLeft = el.style.left
+        el.lastTop = el.style.top
+
+        //position programs around project
         el.style.left = programPositions[index].left
         el.style.top = programPositions[index].top
         // el.textContent += programPositions[index].place //for debugging
@@ -99,7 +111,7 @@ export class OurApproach {
           el.style.left = el.lastLeft
           el.style.top = el.lastTop
         })
-      })      
+      })
     })
 
     function getProgramPositions(projectLeft, projectTop, projectWidth, projectHeight, programEls) {
@@ -107,25 +119,25 @@ export class OurApproach {
         left: `calc(${projectLeft}% + ${projectWidth / 2}px)`,
         top: `calc(${projectTop}% - 15px)`,
         place: 'one, '
-      } 
+      }
 
       const position2 = {
         left: `calc(${projectLeft}% + ${projectWidth / 8}px)`,
         top: `calc(${projectTop}% - 50px)`,
         place: 'two, '
-      } 
+      }
 
       const position3 = {
         left: `calc(${projectLeft}% - ${20}px)`,
         top: `calc(${projectTop}% - 5px)`,
         place: 'three, '
-      } 
+      }
 
       const position4 = {
         left: `calc(${projectLeft}% - ${100}px)`,
         top: `calc(${projectTop}% + 70px)`,
         place: 'four, '
-      } 
+      }
 
       const position5 = {
         left: `calc(${projectLeft}% - ${130}px)`,
@@ -143,7 +155,7 @@ export class OurApproach {
         left: `calc(${projectLeft - 5}% - ${0}px)`,
         top: `calc(${projectTop}% + ${projectHeight / 2}px)`,
         place: 'sevem, '
-      } 
+      }
 
       const position8 = {
         left: `calc(${projectLeft}% - ${0}px)`,
@@ -163,7 +175,7 @@ export class OurApproach {
         place: 'ten, '
       }
 
-      const positions = [position1, position2, position3, position4, position5, position6, position7, position8, position9, position10] 
+      const positions = [position1, position2, position3, position4, position5, position6, position7, position8, position9, position10]
       const randomPositions = _.shuffle(positions).slice(0, programEls.length)
       return randomPositions
     }
@@ -174,7 +186,7 @@ export class OurApproach {
       e.stopPropagation()
       const modal = document.getElementById('ourApproachModal')
       const modalContent = modal.querySelector('.content')
-      const projectImg = this.querySelector('img').getBoundingClientRect()      
+      const projectImg = this.querySelector('img').getBoundingClientRect()
 
       modalContent.querySelector('.title-content').textContent = $(this).data('title')
       modalContent.querySelector('.label-group').textContent = $(this).data('programs').join(', ')
@@ -211,7 +223,7 @@ export class OurApproach {
             }
           })
         }
-      })      
+      })
 
 
       $(modal).one('click', function(e) {
@@ -226,9 +238,9 @@ export class OurApproach {
               opacity: 0,
               scale: 0.5
             }, {
-              display: 'none', 
+              display: 'none',
               duration: 400
-            })            
+            })
           }
         })
       })
@@ -251,53 +263,51 @@ export class OurApproach {
 
   positionItems() {
    $('.program, .project').each( (index, item) => {
-      this.xPositions.push(this.randomX())      
-      this.yPositions.push(this.randomY())      
+      this.xPositions.push(this.randomX())
+      this.yPositions.push(this.randomY())
     })
 
-    this.xPositions = _.shuffle(this.xPositions) 
-    this.yPositions = _.shuffle(this.yPositions) 
+    this.xPositions = _.shuffle(this.xPositions)
+    this.yPositions = _.shuffle(this.yPositions)
 
     $('.program, .project').each( (index, item) => {
       $(item).css({
         left: this.xPositions[index],
         top: this.yPositions[index]
       })
-    })    
+    })
 
     // console.log(
     //   this.xPositions,
-    //   this.yPositions      
-    // )    
+    //   this.yPositions
+    // )
   }
 
 
   randomX() {
-    const variance = (Math.random() * this.random.variance) + 1 
-    const x = (this.random.xIndex + variance) 
+    const variance = (Math.random() * this.random.variance) + 1
+    const x = (this.random.xIndex + variance)
 
     if (this.random.xIndex < this.random.max) {
       this.random.xIndex += this.random.step
     } else {
       this.random.xIndex = 0
-    }    
-    
+    }
+
     return x.toFixed(0) + '%'
   }
 
 
   randomY() {
-    const variance = (Math.random() * this.random.variance) + 1 
-    const y = (this.random.yIndex + variance) 
+    const variance = (Math.random() * this.random.variance) + 1
+    const y = (this.random.yIndex + variance)
 
     if (this.random.yIndex < this.random.max) {
       this.random.yIndex += this.random.step
     } else {
       this.random.yIndex = 0
-    }    
-    
+    }
+
     return y.toFixed(0) + '%'
   }
 }
-
-

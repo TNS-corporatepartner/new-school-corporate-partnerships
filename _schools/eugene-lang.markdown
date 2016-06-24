@@ -1,7 +1,7 @@
 ---
 title: Eugene Lang College of Liberal Arts
 orientation: vert
-image: /images/school-preview1.png
+image: "/images/school-preview1.png"
 order: 3
 ---
 

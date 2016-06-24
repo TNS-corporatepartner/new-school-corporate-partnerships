@@ -39,13 +39,15 @@
 
 		<section id="futureOf" class="section dark-section">
 			<div class="global-slider future-of-slider">
+
 				{% for cell in site.future %}
 				<div class="future-of-cell" data-title="{{cell.title}}" data-question="{{cell.question}}">
 					<div class="video-fs">
 						<video loop="true" muted src="{{cell.video}}"></video>
-					</div>					
+					</div>
 				</div>
 				{% endfor %}
+
 			</div>
 
 			<h2 class="question">That is the qustion</h2>
@@ -77,7 +79,7 @@
 			</hgroup>
 
 			<div class="section-intro">
-				<h1>{{values.title}}</h1>				
+				<h1>{{values.title}}</h1>
 			</div>
 		</section>
 
@@ -85,7 +87,7 @@
 
 			<div class="school-links">
 				{% for school in site.schools %}
-					<div class="school {{school.slug}} {{school.orientation}}" 
+					<div class="school {{school.slug}} {{school.orientation}}"
 							data-name="{{school.title}}"
 							data-description="{{school.content}}"
 							data-image-src="{{school.image}}">
