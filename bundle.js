@@ -32327,9 +32327,9 @@
 	      instance.openCell($(this).parents('.core-values-cell').get(0));
 	    });
 
-	    particlesJS.load('designDna', '/js/particles/design-dna.json');
-	    // particlesJS.load('fearless', '/js/particles/fearless.json')
-	    particlesJS.load('diversity', '/js/particles/diversity.json');
+	    particlesJS.load('visionary-thinking', '/js/particles/design-dna.json');
+	    particlesJS.load('couragously-innovative', '/js/particles/fearless.json');
+	    particlesJS.load('global-diversity', '/js/particles/diversity.json');
 
 	    setTimeout(function () {
 	      $(_this.sectionInto).addClass('hidden');
@@ -61514,9 +61514,7 @@
 
 	      var mousemove$ = _rxjs.Observable.fromEvent(this.canvas, 'mousemove').map(this.mouseCoords); //returns {x, y}
 
-	      var painter$ = raf$
-	      // Observable.interval(10)
-	      .withLatestFrom(mousemove$).subscribe(function (v) {
+	      var painter$ = raf$.withLatestFrom(mousemove$).subscribe(function (v) {
 	        var mouse = v[1];
 	        console.log(mouse.x);
 	        _this2.canvas.style.transform = 'translate3d(' + mouse.x + '%, ' + mouse.y + '%, 0)';

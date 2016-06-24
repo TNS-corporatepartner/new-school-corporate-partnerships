@@ -48,9 +48,7 @@ export class OurApproach {
       .map(this.mouseCoords) //returns {x, y}
 
     const painter$ = 
-      raf$
-      // Observable.interval(10) 
-      .withLatestFrom(mousemove$)
+      raf$.withLatestFrom(mousemove$)
       .subscribe(v => {
         const mouse = v[1]
         console.log(mouse.x)
