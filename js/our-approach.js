@@ -44,23 +44,29 @@ export class OurApproach {
     })
 
     const mousemove$ = Observable
-      .fromEvent(window, 'mousemove')
+      .fromEvent(this.canvas, 'mousemove')
       .map(this.mouseCoords) //returns {x, y}
 
-    const painter$ = raf$ 
+    const painter$ = 
+      raf$
+      // Observable.interval(10) 
       .withLatestFrom(mousemove$)
       .subscribe(v => {
         const mouse = v[1]
+        console.log(mouse.x)
+        this.canvas.style.transform = `translate3d(${mouse.x}%, ${mouse.y}%, 0)`
 
-        Velocity(this.canvas, 'stop')
 
-        Velocity(this.canvas, {
-          translateX: mouse.x + '%',
-          translateY: mouse.y + '%'
-        }, {
-          duration: 150,
-          easing: 'easeInSine'
-        })        
+        // console.log(this.canvas.style.transform)
+        // Velocity(this.canvas, 'stop')
+
+        // Velocity(this.canvas, {
+        //   translateX: mouse.x + '%',
+        //   translateY: mouse.y + '%'
+        // }, {
+        //   duration: 150,
+        //   easing: 'easeInSine'
+        // })        
       })
   }
 

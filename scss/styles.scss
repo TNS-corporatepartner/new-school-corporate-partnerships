@@ -96,6 +96,7 @@ h6{
 
 .section-headlines {
   position: absolute;
+  pointer-events: none;
   top: 0; left: 0;
   padding: 2vw;
   max-width: 70vw;

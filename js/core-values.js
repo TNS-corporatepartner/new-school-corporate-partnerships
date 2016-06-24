@@ -2,17 +2,17 @@ import Flickity from 'flickity'
 import {Observable} from 'rxjs'
 
 const sections =  {
-  "Inspiring Visionary Thinking": [
+  "Visionary Thinking": [
     'We use design to tackle the big question.',
     'We are the only comprehensive university with a world-famous design school at its core.',
     'We design solutions that get to the future first.'
   ],
-  "Courageously Innovative": [
+  "Courageous Innovation": [
     'We rethink the question, not just the answer.',
     'We collaborate with unlikely partners to expand the possibilities.',
     'We innovate with a purpose to improve the human experience.'
   ],
-  "Embodying Diversity": [
+  "Global Diversity": [
     'We are a microcosm of the global population and a magnet for talent from all over the world.',
     'We are in one of the most creative and diverse city in the world.',
     'We are a living laboratory for exploring and testing the news.'

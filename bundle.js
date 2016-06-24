@@ -17831,9 +17831,9 @@
 	    this.questionEl = document.querySelector('.question');
 	    this.slider = document.querySelector('.future-of-slider');
 
-	    this.questions = ['How can data be empathetic?', 'How can you succeed by failing?', 'How can technology make us more human?', 'How can we create a better world through better business?'];
+	    this.questions = ['How can data be empathetic?', 'How can spending more be more profitable?', 'How can identity be kept from being lost in translation?', 'How can learning to fail result in success', 'How can going back to school push business forward faster?', 'How can technology make us more human?'];
 
-	    this.words = ['Big Data', 'Gamification', 'Technology', 'Sustainability'];
+	    this.words = ['Big Data', 'Design', 'Sustainability', 'Globalization', 'Gamification', 'Work', 'Technology'];
 
 	    this.shufflerConfig = {
 	      limit: 26,
@@ -32282,9 +32282,9 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var sections = {
-	  "Inspiring Visionary Thinking": ['We use design to tackle the big question.', 'We are the only comprehensive university with a world-famous design school at its core.', 'We design solutions that get to the future first.'],
-	  "Courageously Innovative": ['We rethink the question, not just the answer.', 'We collaborate with unlikely partners to expand the possibilities.', 'We innovate with a purpose to improve the human experience.'],
-	  "Embodying Diversity": ['We are a microcosm of the global population and a magnet for talent from all over the world.', 'We are in one of the most creative and diverse city in the world.', 'We are a living laboratory for exploring and testing the news.']
+	  "Visionary Thinking": ['We use design to tackle the big question.', 'We are the only comprehensive university with a world-famous design school at its core.', 'We design solutions that get to the future first.'],
+	  "Courageous Innovation": ['We rethink the question, not just the answer.', 'We collaborate with unlikely partners to expand the possibilities.', 'We innovate with a purpose to improve the human experience.'],
+	  "Global Diversity": ['We are a microcosm of the global population and a magnet for talent from all over the world.', 'We are in one of the most creative and diverse city in the world.', 'We are a living laboratory for exploring and testing the news.']
 	};
 
 	var CoreValues = exports.CoreValues = function () {
@@ -61512,20 +61512,25 @@
 	        })();
 	      });
 
-	      var mousemove$ = _rxjs.Observable.fromEvent(window, 'mousemove').map(this.mouseCoords); //returns {x, y}
+	      var mousemove$ = _rxjs.Observable.fromEvent(this.canvas, 'mousemove').map(this.mouseCoords); //returns {x, y}
 
-	      var painter$ = raf$.withLatestFrom(mousemove$).subscribe(function (v) {
+	      var painter$ = raf$
+	      // Observable.interval(10)
+	      .withLatestFrom(mousemove$).subscribe(function (v) {
 	        var mouse = v[1];
+	        console.log(mouse.x);
+	        _this2.canvas.style.transform = 'translate3d(' + mouse.x + '%, ' + mouse.y + '%, 0)';
 
-	        Velocity(_this2.canvas, 'stop');
+	        // console.log(this.canvas.style.transform)
+	        // Velocity(this.canvas, 'stop')
 
-	        Velocity(_this2.canvas, {
-	          translateX: mouse.x + '%',
-	          translateY: mouse.y + '%'
-	        }, {
-	          duration: 150,
-	          easing: 'easeInSine'
-	        });
+	        // Velocity(this.canvas, {
+	        //   translateX: mouse.x + '%',
+	        //   translateY: mouse.y + '%'
+	        // }, {
+	        //   duration: 150,
+	        //   easing: 'easeInSine'
+	        // })      
 	      });
 	    }
 	  }, {

@@ -874,13 +874,18 @@ section#ourPeople.modal-open {
 #ourApproach {
   overflow: hidden; }
 
+.canvas-container {
+  position: relative; }
+
 #ourApproach #approachCanvas {
   position: absolute;
   top: -50%;
   left: -50%;
   height: 200%;
   width: 200%;
-  transform: translate3d(0%, 0%, 0); }
+  transform: translate3d(0%, 0%, 0);
+  border: 5px solid red;
+  transition: transform 3.5s cubic-bezier(0.075, 0.82, 0.165, 1); }
   #ourApproach #approachCanvas .project, #ourApproach #approachCanvas .program {
     position: absolute; }
     #ourApproach #approachCanvas .project.sibling-hover, #ourApproach #approachCanvas .program.sibling-hover {
@@ -1185,6 +1190,7 @@ h6 {
 
 .section-headlines {
   position: absolute;
+  pointer-events: none;
   top: 0;
   left: 0;
   padding: 2vw;

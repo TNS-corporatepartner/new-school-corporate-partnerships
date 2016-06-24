@@ -2,12 +2,18 @@
   overflow: hidden;
 }
 
+.canvas-container {
+  position: relative;
+}
+
 #ourApproach #approachCanvas {
   position: absolute;
   top: -50%; left: -50%;
   height: 200%;
   width: 200%;
   transform: translate3d(0%, 0%, 0);
+  border: 5px solid red;
+  transition: transform 3.5s cubic-bezier(0.075, 0.82, 0.165, 1);
   .project, .program {
     position: absolute;
     &.sibling-hover {

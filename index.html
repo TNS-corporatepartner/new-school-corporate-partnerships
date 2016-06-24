@@ -67,35 +67,35 @@
 
 		<section id="coreValues" class="section dark-section">
 			<div class="global-slider core-values-slider uninitialized content-closed">
-				<div class="core-values-cell" data-headline="Inspiring Visionary Thinking">
+				<div class="core-values-cell" data-headline="Visionary Thinking">
 					<div id="designDna"></div>
 					<!--<span class="close-cell"></span>-->
 
 					<div class="content">
 						<div class="content-inner">
-							<h1>Inspiring Visionary <br>Thinking</h1>
+							<h1>Visionary <br>Thinking</h1>
 							<h2 class="dynamic-text"></h2>
 						</div>
 					</div>
 				</div>
 
-				<div class="core-values-cell" data-headline="Courageously Innovative">
+				<div class="core-values-cell" data-headline="Courageous Innovation">
 					<div id="fearless"></div>
 					<!--<span class="close-cell"></span>-->
 					<div class="content">
 						<div class="content-inner">
-							<h1>Courageously <br>Innovative</h1>
+							<h1>Courageous <br>Innovation</h1>
 							<h2 class="dynamic-text"></h2>
 						</div>
 					</div>
 				</div>
 
-				<div class="core-values-cell" data-headline="Embodying Diversity">
+				<div class="core-values-cell" data-headline="Global Diversity">
 					<div id="diversity"></div>
 					<!--<span class="close-cell"></span>-->
 					<div class="content">
 						<div class="content-inner">
-							<h1>Embodying <br>Diversity</h1>
+							<h1>Global <br>Diversity</h1>
 							<h2 class="dynamic-text">
 
 							</h2>
@@ -193,39 +193,43 @@
 		</section>
 
 		<section id="ourApproach" class="section">
-			<div id="approachCanvas">
-				{% for project in (1..5) %}
-					<!--<div class="project" data-programs='["food studies", "fashion design", "screenwriting", "journalism", "design and technology", "composition", "piano", "acting", "psychology", "communication design"]'>-->
-					<div class="project" 
-							 data-programs='["food studies", "fashion design", "screenwriting", "journalism", "design and technology"]'
-							 data-content="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet dolorem blanditiis amet quod sed ad culpa, eligendi pariatur, hic porro! Quae tempore soluta ipsam voluptatum ullam optio saepe! Quidem, perspiciatis!"
-							 data-title="Make music people can see"
-							 data-blockquote="How can wearable technology reinvent the role of orchestral garments?">
-						<img src="/images/music.jpg" width="200">
-						<div class="info">
-							<label>Case Study</label>
-							<h4>Make Music People Can See</h4>
-							<p>Learn More &rarr;</p>
-						</div>
-						
-					</div>
-				{% endfor %}
-												
-				<div class="program" data-id="food studies">food studies</div>				
-				<div class="program" data-id="fashion design">fashion design</div>				
-				<div class="program" data-id="screenwriting">screenwriting</div>				
-				<div class="program" data-id="journalism">journalism</div>				
-				<div class="program" data-id="design and technology">design and technology</div>
-				<div class="program" data-id="composition">composition</div>				
-				<div class="program" data-id="piano">piano</div>				
-				<div class="program" data-id="acting">acting</div>				
-				<div class="program" data-id="psychology">psychology</div>				
-				<div class="program" data-id="communication design">communication design</div>				
+			<!--<div class="canvas-container">-->
 
-				{% for program in (1..20) %}
-					<div class="program">program #{{program}}</div>
-				{% endfor %}
-			</div>
+			
+				<div id="approachCanvas">
+					{% for project in (1..5) %}
+						<!--<div class="project" data-programs='["food studies", "fashion design", "screenwriting", "journalism", "design and technology", "composition", "piano", "acting", "psychology", "communication design"]'>-->
+						<div class="project" 
+								data-programs='["food studies", "fashion design", "screenwriting", "journalism", "design and technology"]'
+								data-content="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet dolorem blanditiis amet quod sed ad culpa, eligendi pariatur, hic porro! Quae tempore soluta ipsam voluptatum ullam optio saepe! Quidem, perspiciatis!"
+								data-title="Make music people can see"
+								data-blockquote="How can wearable technology reinvent the role of orchestral garments?">
+							<img src="/images/music.jpg" width="200">
+							<div class="info">
+								<label>Case Study</label>
+								<h4>Make Music People Can See</h4>
+								<p>Learn More &rarr;</p>
+							</div>
+							
+						</div>
+					{% endfor %}
+													
+					<div class="program" data-id="food studies">food studies</div>				
+					<div class="program" data-id="fashion design">fashion design</div>				
+					<div class="program" data-id="screenwriting">screenwriting</div>				
+					<div class="program" data-id="journalism">journalism</div>				
+					<div class="program" data-id="design and technology">design and technology</div>
+					<div class="program" data-id="composition">composition</div>				
+					<div class="program" data-id="piano">piano</div>				
+					<div class="program" data-id="acting">acting</div>				
+					<div class="program" data-id="psychology">psychology</div>				
+					<div class="program" data-id="communication design">communication design</div>				
+
+					{% for program in (1..20) %}
+						<div class="program">program #{{program}}</div>
+					{% endfor %}
+				</div>
+			<!--</div>-->
 
 
 			<hgroup class="section-headlines">
@@ -360,7 +364,7 @@
 	<footer>
 		<div id="introBg"></div>
 
-		<h2 id="introText"><span>The New School, in NYC, is the only university where a world-renowned art and design school partners with acclaimed liberal arts, performing arts, and graduate schools to rethink everything.<span></h2>
+		<h2 id="introText"><span>The New School, in NYC, is the only university where a world-renowned art and design school comes together with acclaimed liberal arts, performing arts, and graduate schools…to rethink everything.<span></h2>
 
 		<div id="fixedLogo">
 			<svg viewBox="0 0 110 72" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="overflow: visible;">
