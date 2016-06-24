@@ -32,7 +32,10 @@
 	<![endif]-->
 
 	<header id="header">
-		<a href="#">Partner With Us</a>
+
+		{% assign people = site.collections | where:'label','people' | first %}
+
+		<a href="#">Partner With Us {{ people.title  }} something</a>
 	</header>
 
 	<main>
@@ -81,7 +84,7 @@
 			</div>
 		</section>
 
-		<section id="ourSchool" class="section">		
+		<section id="ourSchool" class="section">
 
 			<div class="school-links">
 				{% for school in site.schools %}
@@ -106,8 +109,8 @@
 					</div>
 
 					<div class="img-container"></div>
-				</div>			
-			</div>			
+				</div>
+			</div>
 
 			<hgroup class="section-headlines">
 				<h4>Our University</h4>
@@ -117,16 +120,15 @@
 			<div class="section-intro">
 				<h1>Our Schools</h1>
 				<p>Our Unique structure provides the expertise of five schools collaborating to reinvent everything and approach issues holistically.</p>
-			</div>			
+			</div>
 		</section>
 
 		<section id="ourApproach" class="section">
 			<!--<div class="canvas-container">-->
-			
 				<div id="approachCanvas">
 					{% for project in (1..5) %}
 						<!--<div class="project" data-programs='["food studies", "fashion design", "screenwriting", "journalism", "design and technology", "composition", "piano", "acting", "psychology", "communication design"]'>-->
-						<div class="project" 
+						<div class="project"
 								data-programs='["food studies", "fashion design", "screenwriting", "journalism", "design and technology"]'
 								data-content="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet dolorem blanditiis amet quod sed ad culpa, eligendi pariatur, hic porro! Quae tempore soluta ipsam voluptatum ullam optio saepe! Quidem, perspiciatis!"
 								data-title="Make music people can see"
@@ -137,20 +139,20 @@
 								<h4>Make Music People Can See</h4>
 								<p>Learn More &rarr;</p>
 							</div>
-							
+
 						</div>
 					{% endfor %}
-													
-					<div class="program" data-id="food studies">food studies</div>				
-					<div class="program" data-id="fashion design">fashion design</div>				
-					<div class="program" data-id="screenwriting">screenwriting</div>				
-					<div class="program" data-id="journalism">journalism</div>				
+
+					<div class="program" data-id="food studies">food studies</div>
+					<div class="program" data-id="fashion design">fashion design</div>
+					<div class="program" data-id="screenwriting">screenwriting</div>
+					<div class="program" data-id="journalism">journalism</div>
 					<div class="program" data-id="design and technology">design and technology</div>
-					<div class="program" data-id="composition">composition</div>				
-					<div class="program" data-id="piano">piano</div>				
-					<div class="program" data-id="acting">acting</div>				
-					<div class="program" data-id="psychology">psychology</div>				
-					<div class="program" data-id="communication design">communication design</div>				
+					<div class="program" data-id="composition">composition</div>
+					<div class="program" data-id="piano">piano</div>
+					<div class="program" data-id="acting">acting</div>
+					<div class="program" data-id="psychology">psychology</div>
+					<div class="program" data-id="communication design">communication design</div>
 
 					{% for program in (1..20) %}
 						<div class="program">program #{{program}}</div>
@@ -181,12 +183,12 @@
 						<div class="gradient-bottom"></div>
 					</aside>
 
-					<div class="img-container">						
-						<img />												
+					<div class="img-container">
+						<img />
 					</div>
 				</div>
 
-			</div>						
+			</div>
 		</section>
 
 		<section id="ourPeople" class="section">
@@ -209,7 +211,7 @@
 							</div>
 						</div>
 					{% endfor %}
-				
+
 				</div>
 			</div>
 
@@ -273,7 +275,7 @@
 		<hgroup class="section-headlines">
 			<h3>Partner with us</h3>
 			<h3 class="dynamic-text"></h3>
-		</hgroup>		
+		</hgroup>
 
 		<div class="debbie">
 			<p>Debbie Gibb</p>
