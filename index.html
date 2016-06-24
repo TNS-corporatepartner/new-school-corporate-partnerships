@@ -1,6 +1,13 @@
 ---
 ---
 
+{% assign future = site.collections | where: 'label', 'future' | first %}
+{% assign values = site.collections | where: 'label', 'values' | first %}
+{% assign schools = site.collections | where: 'label', 'schools' | first %}
+{% assign people = site.collections | where: 'label', 'people' | first %}
+{% assign projects = site.collections | where: 'label', 'projects' | first %}
+{% assign partner = site.collections | where: 'label', 'partner' | first %}
+
 <!doctype html>
 <html class="no-js" lang="">
 
@@ -30,7 +37,6 @@
 
 	<main>
 
-
 		<section id="futureOf" class="section dark-section">
 			<div class="global-slider future-of-slider">
 				{% for cell in site.future %}
@@ -52,7 +58,6 @@
 
 		<section id="coreValues" class="section dark-section">
 			<div class="global-slider core-values-slider uninitialized content-closed">
-
 				{% for value in site.values %}
 					<div class="core-values-cell" data-headline="{{value.title}}" data-content="{{value.content}}">
 						<div id="{{value.slug}}"></div>					
@@ -64,101 +69,32 @@
 						</div>
 					</div>
 				{% endfor %}
-
-				<!--<div class="core-values-cell" data-headline="Visionary Thinking">
-					<div id="designDna"></div>					
-					<div class="content">
-						<div class="content-inner">
-							<h1>Visionary <br>Thinking</h1>
-							<h2 class="dynamic-text"></h2>
-						</div>
-					</div>
-				</div>
-
-				<div class="core-values-cell" data-headline="Courageous Innovation">
-					<div id="fearless"></div>					
-					<div class="content">
-						<div class="content-inner">
-							<h1>Courageous <br>Innovation</h1>
-							<h2 class="dynamic-text"></h2>
-						</div>
-					</div>
-				</div>
-
-				<div class="core-values-cell" data-headline="Global Diversity">
-					<div id="diversity"></div>					
-					<div class="content">
-						<div class="content-inner">
-							<h1>Global <br>Diversity</h1>
-							<h2 class="dynamic-text"></h2>
-						</div>
-					</div>
-				</div>-->
 			</div>
 
 			<hgroup class="section-headlines">
-				<h4>The New School is different by design</h4>
+				<h4>{{values.title}}</h4>
 				<h3 class="dynamic-text"></h3>
 			</hgroup>
 
 			<div class="section-intro">
-				<h1>The New School is different by design</h1>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+				<h1>{{values.title}}</h1>				
 			</div>
 		</section>
 
 		<section id="ourSchool" class="section">		
 
 			<div class="school-links">
-				<div class="school parsons horz" 
-						 data-name="Parsons School of Design"
-						 data-description="One of the world's leading art and design schools. Offers an enlightened approach to design education and sustainability."
-						 data-image-src="/images/school-preview1.png">
-					<div class="img-container"></div>
-					<div class="text-container">
-						<h3>Parsons School of Design</h3>
+				{% for school in site.schools %}
+					<div class="school {{school.slug}} {{school.orientation}}" 
+							data-name="{{school.title}}"
+							data-description="{{school.content}}"
+							data-image-src="{{school.image}}">
+						<div class="img-container"></div>
+						<div class="text-container">
+							<h3>{{school.title}}</h3>
+						</div>
 					</div>
-				</div>
-
-				<div class="school lang vert"
-						 data-name="Eugene lang college of liberal arts"
-						 data-description="One of the world's leading art and design schools. Offers an enlightened approach to design education and sustainability."
-						 data-image-src="/images/school-preview1.png">
-					<div class="img-container"></div>
-					<div class="text-container">
-						<h3>Eugene Lang College of Liberal Arts</h3>
-					</div>
-				</div>
-
-				<div class="school public horz"
-						 data-name="Schools of public Engagement"
-						 data-description="One of the world's leading art and design schools. Offers an enlightened approach to design education and sustainability."
-						 data-image-src="/images/school-preview1.png">
-					<div class="img-container"></div>
-					<div class="text-container">
-						<h3>Schools of Public Engagement</h3>
-					</div>
-				</div>
-
-				<div class="school performing horz"
-						 data-name="College of performing arts"
-						 data-description="One of the world's leading art and design schools. Offers an enlightened approach to design education and sustainability."
-						 data-image-src="/images/school-preview1.png">
-					<div class="img-container"></div>
-					<div class="text-container">
-						<h3>College of Performing Arts</h3>
-					</div>					
-				</div>
-
-				<div class="school research vert"
-						 data-name="The new school for social research"
-						 data-description="One of the world's leading art and design schools. Offers an enlightened approach to design education and sustainability."
-						 data-image-src="/images/school-preview1.png">
-					<div class="img-container"></div>
-					<div class="text-container">
-						<h3>The New School for Social Research</h3>
-					</div>
-				</div>
+				{% endfor %}
 			</div>
 
 			<div id="schoolModal">
@@ -186,7 +122,6 @@
 
 		<section id="ourApproach" class="section">
 			<!--<div class="canvas-container">-->
-
 			
 				<div id="approachCanvas">
 					{% for project in (1..5) %}
