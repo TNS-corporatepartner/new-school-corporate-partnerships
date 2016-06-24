@@ -173,10 +173,12 @@ export class OurApproach {
       const modalContent = modal.querySelector('.content')
       const projectImg = this.querySelector('img').getBoundingClientRect()      
 
+      modalContent.querySelector('.title-content').textContent = $(this).data('title')
+      modalContent.querySelector('.label-group').textContent = $(this).data('programs').join(', ')
+      modalContent.querySelector('blockquote').textContent = $(this).data('blockquote')
+      modalContent.querySelector('.text-content').textContent = $(this).data('content')
+
       modal.querySelector('img').src = '/images/music.jpg'
-
-      $(modal.querySelector('aside')).focus()
-
       $.fn.fullpage.setAllowScrolling(false)
 
       Velocity(modal, {

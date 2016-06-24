@@ -132,25 +132,27 @@ section#ourSchool {
 
   #schoolModal {
     position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: $gray-dark-trans;
-    opacity: 0;
+    background-color: $gray-darker-trans;
     pointer-events: none;
-    transition: opacity 0.5s ease-in-out;
+    display: none;
+    align-items: center;
 
     .content {
-      position: absolute;
-      display: flex;
+      display: none;
+      height: 50%;
       align-items: center;
-      background-color: $black-tint;
+      background-color: $gray-darker-trans;
       color: white;
       .text-container {
-        width: 0%;
-        opacity: 0;
-        padding: 2vw;
+        width: 50%;
+        padding: 4vw;
+        .school-name {
+          margin-top: 5vh;        
+          line-height: 5.2vh;
+          text-transform: uppercase;
+          font-weight: 900;  
+          margin-bottom: 15px;        
+        }
         p {
           margin-bottom: 20px;
         }
@@ -161,10 +163,11 @@ section#ourSchool {
         }
       }
       .img-container {
-        width: 100%;
-        img {
-          width: 100%;
-        }
+        width: 50%;
+        height: 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
       }
     }
   }

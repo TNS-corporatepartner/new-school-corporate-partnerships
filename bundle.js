@@ -32527,33 +32527,19 @@
 	  this.section = document.getElementById('ourSchool');
 	  this.sectionInto = this.section.querySelector('.section-intro');
 	  this.paragraphIntro = this.section.querySelector('.intro-paragraph');
-	  this.schoolLinks = this.section.querySelectorAll('.school');
 
 	  setTimeout(function () {
 	    $(_this.sectionInto).addClass('hidden');
 	  }, 1200);
 
-	  // setTimeout(() => {
-	  $(this.paragraphIntro).addClass('hidden');
-	  // }, 3000)
-
-	  $(this.schoolLinks).on('click', function (e) {
+	  $('.school').on('click', function (e) {
 	    e.stopPropagation();
 	    var r = this.querySelector('.img-container').getBoundingClientRect();
 	    var section = document.getElementById('ourSchool');
-	    var modalBg = document.getElementById('schoolModal');
-	    var modalContent = modalBg.querySelector('.content');
-
-	    console.log(this.querySelector('.img-container'));
-
-	    var readyState = {
-	      top: r.top,
-	      bottom: r.bottom,
-	      left: r.left,
-	      width: r.width,
-	      height: r.height,
-	      opacity: 0
-	    };
+	    var modal = document.getElementById('schoolModal');
+	    var modalContent = modal.querySelector('.content');
+	    var modalImg = modalContent.querySelector('.img-container');
+	    var modalText = modalContent.querySelector('.text-container');
 
 	    var openState = {
 	      top: '30%',
@@ -32565,46 +32551,55 @@
 
 	    $('body').addClass('school-modal-open');
 
-	    Velocity(modalContent, readyState, {
-	      duration: 0
-	    });
+	    modalContent.querySelector('.school-name').textContent = $(this).data('name');
+	    modalContent.querySelector('.school-description').textContent = $(this).data('description');
+	    modalContent.querySelector('.img-container').style = 'background-image: url(' + $(this).data('image-src');
 
-	    // $(modalContent).css(readyState)
+	    var startPos = {
+	      top: r.top,
+	      bottom: r.bottom,
+	      left: r.left,
+	      width: r.width,
+	      height: r.height,
+	      opacity: 0
+	    };
 
-	    var schoolName = 'Parsons';
-	    var schoolDescription = 'One of the world\'s leading art and design schools. Offers an enlightened approach to design education and sustainability.';
-	    var imgUrl = '/images/studentgroup.jpg';
-
-	    modalContent.innerHTML = '\n        <div class="text-container">\n          <h1>' + schoolName + '</h1>\n          <p>' + schoolDescription + '</p>\n          <a href="http://google.com" _target="blank"><span>Learn More &rarr;</a>\n        </div>\n\n        <div class="img-container">\n          <img src="' + imgUrl + '" />\n        </div>          \n      ';
-
-	    var modalImg = modalContent.querySelector('.img-container');
-	    var modalText = modalContent.querySelector('.text-container');
-
-	    Velocity(modalImg, { width: '50%' }, {
-	      easing: 'easeOutCubic',
-	      duration: 800
-	    });
-
-	    Velocity(modalText, { width: '50%' }, {
-	      easing: 'easeOutCubic',
-	      duration: 800,
+	    Velocity(modal, startPos, {
+	      duration: 0,
+	      display: 'flex',
 	      complete: function complete() {
-	        Velocity(modalText, { opacity: 1 });
+	        Velocity(modal, {
+	          top: 0,
+	          left: 0,
+	          width: '100%',
+	          height: '100%',
+	          opacity: 1
+	        }, {
+	          duration: 600,
+	          complete: function complete() {
+	            Velocity(modalContent, {
+	              opacity: 1
+	            }, {
+	              display: 'flex'
+	            });
+	          }
+	        });
 	      }
 	    });
-
-	    Velocity(modalContent, openState, { duration: 800, easing: 'easeOutCubic' });
 
 	    $('#ourSchool').one('click', function (e) {
 	      e.stopPropagation();
 
 	      $('body').removeClass('school-modal-open');
 
-	      setTimeout(function () {
-	        Velocity(modalImg, 'reverse', { duration: 0 });
-	        Velocity(modalText, 'reverse', { duration: 0 });
-	        Velocity(modalContent, 'reverse', { duration: 0 });
-	      }, 500);
+	      Velocity(modalContent, {
+	        opacity: 0
+	      }, {
+	        display: 'none',
+	        complete: function complete() {
+	          Velocity(modal, startPos);
+	        }
+	      });
 	    });
 	  });
 	};
@@ -61646,10 +61641,12 @@
 	        var modalContent = modal.querySelector('.content');
 	        var projectImg = this.querySelector('img').getBoundingClientRect();
 
+	        modalContent.querySelector('.title-content').textContent = $(this).data('title');
+	        modalContent.querySelector('.label-group').textContent = $(this).data('programs').join(', ');
+	        modalContent.querySelector('blockquote').textContent = $(this).data('blockquote');
+	        modalContent.querySelector('.text-content').textContent = $(this).data('content');
+
 	        modal.querySelector('img').src = '/images/music.jpg';
-
-	        $(modal.querySelector('aside')).focus();
-
 	        $.fn.fullpage.setAllowScrolling(false);
 
 	        Velocity(modal, {

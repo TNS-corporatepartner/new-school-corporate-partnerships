@@ -118,46 +118,51 @@
 		<section id="ourSchool" class="section">		
 
 			<div class="school-links">
-				<div class="school parsons horz">
-					<div class="img-container">
-						<!--<img src="/images/school-preview1.png">-->
-					</div>
+				<div class="school parsons horz" 
+						 data-name="Parsons School of Design"
+						 data-description="One of the world's leading art and design schools. Offers an enlightened approach to design education and sustainability."
+						 data-image-src="/images/school-preview1.png">
+					<div class="img-container"></div>
 					<div class="text-container">
 						<h3>Parsons School of Design</h3>
 					</div>
 				</div>
 
-				<div class="school lang vert">
-					<div class="img-container">
-						<!--<img src="/images/school-preview1.png">-->
-					</div>
+				<div class="school lang vert"
+						 data-name="Eugene lang college of liberal arts"
+						 data-description="One of the world's leading art and design schools. Offers an enlightened approach to design education and sustainability."
+						 data-image-src="/images/school-preview1.png">
+					<div class="img-container"></div>
 					<div class="text-container">
 						<h3>Eugene Lang College of Liberal Arts</h3>
 					</div>
 				</div>
 
-				<div class="school public horz">
-					<div class="img-container">
-						<!--<img src="/images/school-preview1.png">-->
-					</div>
+				<div class="school public horz"
+						 data-name="Schools of public Engagement"
+						 data-description="One of the world's leading art and design schools. Offers an enlightened approach to design education and sustainability."
+						 data-image-src="/images/school-preview1.png">
+					<div class="img-container"></div>
 					<div class="text-container">
 						<h3>Schools of Public Engagement</h3>
 					</div>
 				</div>
 
-				<div class="school performing horz">
-					<div class="img-container">
-						<!--<img src="/images/school-preview1.png">-->
-					</div>
+				<div class="school performing horz"
+						 data-name="College of performing arts"
+						 data-description="One of the world's leading art and design schools. Offers an enlightened approach to design education and sustainability."
+						 data-image-src="/images/school-preview1.png">
+					<div class="img-container"></div>
 					<div class="text-container">
 						<h3>College of Performing Arts</h3>
 					</div>					
 				</div>
 
-				<div class="school research vert">
-					<div class="img-container">
-						<!--<img src="/images/school-preview1.png">-->
-					</div>
+				<div class="school research vert"
+						 data-name="The new school for social research"
+						 data-description="One of the world's leading art and design schools. Offers an enlightened approach to design education and sustainability."
+						 data-image-src="/images/school-preview1.png">
+					<div class="img-container"></div>
 					<div class="text-container">
 						<h3>The New School for Social Research</h3>
 					</div>
@@ -166,14 +171,15 @@
 
 			<div id="schoolModal">
 				<div class="content">
-					<a href="https://www.google.com" target="_blank"></a>
-				</div>
-				
-			</div>			
+					<div class="text-container">
+						<h2 class="school-name"></h2>
+						<p class="school-description"></p>
+						<a _target="blank"><span></a>
+					</div>
 
-			<div class="intro-paragraph">
-				<p>Our Unique structure provides the expertise of five schools collaborating to reinvent everything and approach issues holistically.</p>
-			</div>
+					<div class="img-container"></div>
+				</div>			
+			</div>			
 
 			<hgroup class="section-headlines">
 				<h4>Our University</h4>
@@ -182,7 +188,7 @@
 
 			<div class="section-intro">
 				<h1>Our Schools</h1>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+				<p>Our Unique structure provides the expertise of five schools collaborating to reinvent everything and approach issues holistically.</p>
 			</div>			
 		</section>
 
@@ -190,7 +196,11 @@
 			<div id="approachCanvas">
 				{% for project in (1..5) %}
 					<!--<div class="project" data-programs='["food studies", "fashion design", "screenwriting", "journalism", "design and technology", "composition", "piano", "acting", "psychology", "communication design"]'>-->
-					<div class="project" data-programs='["food studies", "fashion design", "screenwriting", "journalism", "design and technology"]'>
+					<div class="project" 
+							 data-programs='["food studies", "fashion design", "screenwriting", "journalism", "design and technology"]'
+							 data-content="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet dolorem blanditiis amet quod sed ad culpa, eligendi pariatur, hic porro! Quae tempore soluta ipsam voluptatum ullam optio saepe! Quidem, perspiciatis!"
+							 data-title="Make music people can see"
+							 data-blockquote="How can wearable technology reinvent the role of orchestral garments?">
 						<img src="/images/music.jpg" width="200">
 						<div class="info">
 							<label>Case Study</label>
@@ -233,17 +243,10 @@
 				<div class="content">
 					<aside class="case-study">
 						<label class="label-heading">Case Study</label>
-						<label class="label-group">Design &amp; Technology, Fashion, Orchestral, Instrumental</label>
-
-						<h2 class="title-content">Make music people can see</h2>
-						<blockquote>How can wearable technology reinvent the role of orchestral garments?</blockquote>
-						<div class="text-content">
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique pariatur corporis dolorem nemo obcaecati maiores laudantium id totam facilis illum. Vel quibusdam aperiam eaque id itaque, nisi eius aut maiores! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae maiores asperiores assumenda iure id rem quod nobis consectetur quia, reiciendis voluptatibus fugit omnis rerum dolor facere ad labore. Sapiente, amet! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat unde pariatur neque numquam fuga facilis autem? Similique nobis reprehenderit omnis cumque, vitae, soluta ducimus ipsum laboriosam. Dolores tenetur eveniet molestias.</p>
-
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique pariatur corporis dolorem nemo obcaecati maiores laudantium id totam facilis illum. Vel quibusdam aperiam eaque id itaque, nisi eius aut maiores! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae maiores asperiores assumenda iure id rem quod nobis consectetur quia, reiciendis voluptatibus fugit omnis rerum dolor facere ad labore. Sapiente, amet! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat unde pariatur neque numquam fuga facilis autem? Similique nobis reprehenderit omnis cumque, vitae, soluta ducimus ipsum laboriosam. Dolores tenetur eveniet molestias.</p>
-
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique pariatur corporis dolorem nemo obcaecati maiores laudantium id totam facilis illum. Vel quibusdam aperiam eaque id itaque, nisi eius aut maiores! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae maiores asperiores assumenda iure id rem quod nobis consectetur quia, reiciendis voluptatibus fugit omnis rerum dolor facere ad labore. Sapiente, amet! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat unde pariatur neque numquam fuga facilis autem? Similique nobis reprehenderit omnis cumque, vitae, soluta ducimus ipsum laboriosam. Dolores tenetur eveniet molestias.</p>
-						</div>
+						<label class="label-group"></label>
+						<h2 class="title-content"></h2>
+						<blockquote></blockquote>
+						<div class="text-content"></div>
 						<div class="gradient-bottom"></div>
 					</aside>
 

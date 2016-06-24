@@ -107,9 +107,11 @@
         font-size: 22px;
         font-style: italic;
       }
-      h2 {
+      .title-content {
         margin-top: 5vh;        
-        line-height: 5vh;
+        line-height: 5.2vh;
+        text-transform: uppercase;
+        font-weight: 900;
       }
       .text-content {
         p {
