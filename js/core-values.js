@@ -55,8 +55,9 @@ export class CoreValues {
       instance.openCell( $(this).parents('.core-values-cell').get(0) )
     })
 
-    particlesJS.load('visionary-thinking', '/js/particles/visionary.json')
-    particlesJS.load('couragously-innovative', '/js/particles/innovation.json')
+
+    particlesJS.load('visionary-thinking', '/js/particles/design-dna.json')
+    particlesJS.load('couragously-innovative', '/js/particles/fearless.json')
     particlesJS.load('global-diversity', '/js/particles/diversity.json')
 
 
