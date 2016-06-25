@@ -182,6 +182,7 @@ export class OurApproach {
     }
   }
 
+
   handleClick() {
     $('.project').on('click', function(e) {
       e.stopPropagation()
@@ -189,8 +190,11 @@ export class OurApproach {
       const modalContent = modal.querySelector('.content')
       const projectImg = this.querySelector('img').getBoundingClientRect()
 
+      console.log(this)
+      console.log($(this).data('programs'))
+
       modalContent.querySelector('.title-content').textContent = $(this).data('title')
-      modalContent.querySelector('.label-group').textContent = $(this).data('programs').join(', ')
+      modalContent.querySelector('.label-group').textContent = $(this).data('programs').split(', ')
       modalContent.querySelector('blockquote').textContent = $(this).data('blockquote')
       modalContent.querySelector('.text-content').textContent = $(this).data('content')
 
