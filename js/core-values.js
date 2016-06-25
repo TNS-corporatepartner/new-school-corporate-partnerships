@@ -1,23 +1,7 @@
 import Flickity from 'flickity'
 import {Observable} from 'rxjs'
 
-const sections =  {
-  "Visionary Thinking": [
-    'We use design to tackle the big question.',
-    'We are the only comprehensive university with a world-famous design school at its core.',
-    'We design solutions that get to the future first.'
-  ],
-  "Courageous Innovation": [
-    'We rethink the question, not just the answer.',
-    'We collaborate with unlikely partners to expand the possibilities.',
-    'We innovate with a purpose to improve the human experience.'
-  ],
-  "Global Diversity": [
-    'We are a microcosm of the global population and a magnet for talent from all over the world.',
-    'We are in one of the most creative and diverse city in the world.',
-    'We are a living laboratory for exploring and testing the news.'
-  ]
-}
+let sections = {}
 
 export class CoreValues {
 
@@ -29,6 +13,11 @@ export class CoreValues {
     this.cells = this.slider.childNodes
     this.activeCell = null
     this.dynamicHeadline = this.section.querySelector('.section-headlines .dynamic-text')
+
+
+    this.section.querySelectorAll('.core-values-cell').forEach((el) => {
+      sections[$(el).data('headline')] = $(el).data('phrases')
+    })
 
     Observable.fromEvent(window, 'resize').debounceTime(100).subscribe(() => this.resizeParticles())
 
@@ -56,8 +45,8 @@ export class CoreValues {
     })
 
 
-    particlesJS.load('visionary-thinking', '/js/particles/design-dna.json')
-    particlesJS.load('couragously-innovative', '/js/particles/fearless.json')
+    particlesJS.load('visionary-thinking', '/js/particles/visionary.json')
+    particlesJS.load('couragously-innovative', '/js/particles/innovation.json')
     particlesJS.load('global-diversity', '/js/particles/diversity.json')
 
 

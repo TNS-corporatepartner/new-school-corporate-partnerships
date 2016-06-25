@@ -63,7 +63,6 @@ export class OurApproach {
         //console.log(mouse.x)
         this.canvas.style.transform = `translate3d(${mouse.x}%, ${mouse.y}%, 0) rotateX(10deg)`
 
-
         // console.log(this.canvas.style.transform)
         // Velocity(this.canvas, 'stop')
 
@@ -83,15 +82,16 @@ export class OurApproach {
       const projectTop = parseInt(this.style.top)   //percent
       const projectLeft = parseInt(this.style.left) //percent
       const projectWidth = this.offsetWidth         //px
-      const projectHeight = this.offsetHeight       //px
-      const programEls = $(this).data('programs').map( pId => document.querySelector(`.program[data-id="${pId}"]`) )
-      const programPositions = getProgramPositions(projectLeft, projectTop, projectWidth, projectHeight, programEls)
+      const projectHeight = this.offsetHeight       //px 
+      const programEls = $(this).data('programs')
+        .split(',')
+        .map( pId => document.querySelector(`.program[data-id="${pId}"]`) )
+        .filter(p => p)
 
+      const programPositions = getProgramPositions(projectLeft, projectTop, projectWidth, projectHeight, programEls)
 
       $('.project').not(this).addClass('sibling-hover')
       $('.program').not(programEls).addClass('sibling-hover')
-
-
 
       programEls.forEach( (el, index) => {
         //save last original position to reset on mouseleave

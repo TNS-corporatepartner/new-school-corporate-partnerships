@@ -2,6 +2,6 @@
 title: Technology
 video: http://familiar-temp.s3.amazonaws.com/nscp/TECHNOLOGY.mp4
 order: 7
+question: How can technology make us more human?
 ---
 
-How can technology make us more human?

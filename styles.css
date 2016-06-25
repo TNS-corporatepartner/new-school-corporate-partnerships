@@ -884,7 +884,6 @@ section#ourPeople.modal-open {
   height: 200%;
   width: 200%;
   transform: translate3d(0%, 0%, 0);
-  border: 5px solid red;
   transition: transform 3.5s cubic-bezier(0.075, 0.82, 0.165, 1); }
   #ourApproach #approachCanvas .project, #ourApproach #approachCanvas .program {
     position: absolute; }
@@ -1067,11 +1066,11 @@ section#contactUs {
         transition: background-color 0.5s ease-in-out 0s, filter 0.5s linear 0s, -webkit-filter 0.5s linear 0s;
         transform-origin: center; }
       section#contactUs .panel-group .panel:first-of-type:before {
-        background-image: url(/images/workshop.png); }
+        background-image: url(/uploads/workshop.png); }
       section#contactUs .panel-group .panel:nth-of-type(2):before {
-        background-image: url(/images/workforce.jpg); }
+        background-image: url(/uploads/workforce.jpg); }
       section#contactUs .panel-group .panel:last-of-type:before {
-        background-image: url(/images/envision.png); }
+        background-image: url(/uploads/envision.png); }
       section#contactUs .panel-group .panel.hover {
         -ms-flex: 3 1 auto;
             flex: 3 1 auto; }
