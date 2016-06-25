@@ -61571,9 +61571,12 @@
 	        var projectLeft = parseInt(this.style.left); //percent
 	        var projectWidth = this.offsetWidth; //px
 	        var projectHeight = this.offsetHeight; //px
-	        var programEls = $(this).data('programs').map(function (pId) {
+	        var programEls = $(this).data('programs').split(',').map(function (pId) {
 	          return document.querySelector('.program[data-id="' + pId + '"]');
+	        }).filter(function (p) {
+	          return p;
 	        });
+
 	        var programPositions = getProgramPositions(projectLeft, projectTop, projectWidth, projectHeight, programEls);
 
 	        $('.project').not(this).addClass('sibling-hover');

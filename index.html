@@ -125,10 +125,10 @@
 		<section id="ourApproach" class="section">
 			<div id="approachCanvas">
 				{% for project in site.projects %}
-					<div class="project"
-							data-programs="{{project.programs}}"
+					<div class="project"							
+							data-programs="{% for program in project.programs %}{{program | slugify}},{% endfor %}"
 							data-content="{{project.content}}"
-							data-title="{{project.title}}"
+							data-title="{{project.title}}"							
 							data-blockquote="{{project.question}}">
 						<img src="{{project.image}}" width="200" />
 						<div class="info">
@@ -140,7 +140,7 @@
 				{% endfor %}
 
 				{% for program in projects.programs %}
-					<div class="program" data-id="food studies">food studies</div>
+					<div class="program" data-id="{{program | slugify}}">{{program}}</div>
 				{% endfor %}
 			</div>
 
