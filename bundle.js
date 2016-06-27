@@ -131,7 +131,7 @@
 	    app.activeInstance = app.instances[1];
 	  });
 
-	  //skipSplashAnimation()
+	  skipSplashAnimation();
 
 	  function initSplashContent() {
 	    return _rxjs.Observable.create(function (obs) {
@@ -14508,31 +14508,6 @@
 	// shim for using process in browser
 
 	var process = module.exports = {};
-
-	// cached from whatever global is present so that test runners that stub it
-	// don't break things.  But we need to wrap it in a try catch in case it is
-	// wrapped in strict mode code which doesn't define any globals.  It's inside a
-	// function because try/catches deoptimize in certain engines.
-
-	var cachedSetTimeout;
-	var cachedClearTimeout;
-
-	(function () {
-	  try {
-	    cachedSetTimeout = setTimeout;
-	  } catch (e) {
-	    cachedSetTimeout = function () {
-	      throw new Error('setTimeout is not defined');
-	    }
-	  }
-	  try {
-	    cachedClearTimeout = clearTimeout;
-	  } catch (e) {
-	    cachedClearTimeout = function () {
-	      throw new Error('clearTimeout is not defined');
-	    }
-	  }
-	} ())
 	var queue = [];
 	var draining = false;
 	var currentQueue;
@@ -14557,7 +14532,7 @@
 	    if (draining) {
 	        return;
 	    }
-	    var timeout = cachedSetTimeout(cleanUpNextTick);
+	    var timeout = setTimeout(cleanUpNextTick);
 	    draining = true;
 
 	    var len = queue.length;
@@ -14574,7 +14549,7 @@
 	    }
 	    currentQueue = null;
 	    draining = false;
-	    cachedClearTimeout(timeout);
+	    clearTimeout(timeout);
 	}
 
 	process.nextTick = function (fun) {
@@ -14586,7 +14561,7 @@
 	    }
 	    queue.push(new Item(fun, args));
 	    if (queue.length === 1 && !draining) {
-	        cachedSetTimeout(drainQueue, 0);
+	        setTimeout(drainQueue, 0);
 	    }
 	};
 
@@ -61529,7 +61504,7 @@
 	      })();
 	    });
 
-	    this.mousemove$ = _rxjs.Observable.fromEvent(this.canvas, 'mousemove').map(this.mouseCoords); //returns {x, y}
+	    this.mousemove$ = _rxjs.Observable.fromEvent(this.section, 'mousemove').map(this.mouseCoords); //returns {x, y}
 
 	    setTimeout(function () {
 	      $(_this.sectionIntro).addClass('hidden');
@@ -61548,27 +61523,15 @@
 
 	      var painter$ = this.raf$.withLatestFrom(this.mousemove$).subscribe(function (v) {
 	        var mouse = v[1];
-	        //console.log(mouse.x)
-	        _this2.canvas.style.transform = 'translate3d(' + mouse.x + '%, ' + mouse.y + '%, 0) rotateX(10deg)';
-
-	        // console.log(this.canvas.style.transform)
-	        // Velocity(this.canvas, 'stop')
-
-	        // Velocity(this.canvas, {
-	        //   translateX: mouse.x + '%',
-	        //   translateY: mouse.y + '%'
-	        // }, {
-	        //   duration: 150,
-	        //   easing: 'easeInSine'
-	        // })
+	        _this2.canvas.style.transform = 'translate3d(' + mouse.x + '%, ' + mouse.y + '%, 0)';
 	      });
 	    }
 	  }, {
 	    key: 'handleHover',
 	    value: function handleHover() {
 	      $('.project').on('mouseenter', function () {
-	        var projectTop = parseInt(this.style.top); //percent
-	        var projectLeft = parseInt(this.style.left); //percent
+	        var projectLeft = parseInt($(this).css('left')) / parseInt($(this).parent().css('width')) * 100;
+	        var projectTop = parseInt($(this).css('top'));
 	        var projectWidth = this.offsetWidth; //px
 	        var projectHeight = this.offsetHeight; //px
 	        var programEls = $(this).data('programs').split(',').map(function (pId) {
@@ -61606,62 +61569,62 @@
 
 	      function getProgramPositions(projectLeft, projectTop, projectWidth, projectHeight, programEls) {
 	        var position1 = {
-	          left: 'calc(' + projectLeft + '% + ' + projectWidth / 2 + 'px)',
-	          top: 'calc(' + projectTop + '% - 15px)',
+	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 100) + 'px)',
+	          top: projectTop - 100 + 'px',
 	          place: 'one, '
 	        };
 
 	        var position2 = {
-	          left: 'calc(' + projectLeft + '% + ' + projectWidth / 8 + 'px)',
-	          top: 'calc(' + projectTop + '% - 50px)',
+	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 350) + 'px)',
+	          top: projectTop - 100 + 'px',
 	          place: 'two, '
 	        };
 
 	        var position3 = {
-	          left: 'calc(' + projectLeft + '% - ' + 20 + 'px)',
-	          top: 'calc(' + projectTop + '% - 5px)',
+	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 500) + 'px)',
+	          top: projectTop - 100 + 'px',
 	          place: 'three, '
 	        };
 
 	        var position4 = {
-	          left: 'calc(' + projectLeft + '% - ' + 100 + 'px)',
-	          top: 'calc(' + projectTop + '% + 70px)',
+	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 700) + 'px)',
+	          top: projectTop - 100 + 'px',
 	          place: 'four, '
 	        };
 
 	        var position5 = {
-	          left: 'calc(' + projectLeft + '% - ' + 130 + 'px)',
-	          top: 'calc(' + projectTop + '% + 150px)',
+	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 700) + 'px)',
+	          top: projectTop + 'px',
 	          place: 'five, '
 	        };
 
 	        var position6 = {
-	          left: 'calc(' + projectLeft + '% - ' + 50 + 'px)',
-	          top: 'calc(' + projectTop + '% + ' + projectHeight + 'px)',
+	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 700) + 'px)',
+	          top: projectTop + 100 + 'px',
 	          place: 'six, '
 	        };
 
 	        var position7 = {
-	          left: 'calc(' + (projectLeft - 5) + '% - ' + 0 + 'px)',
-	          top: 'calc(' + projectTop + '% + ' + projectHeight / 2 + 'px)',
+	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 700) + 'px)',
+	          top: projectTop + 200 + 'px',
 	          place: 'sevem, '
 	        };
 
 	        var position8 = {
-	          left: 'calc(' + projectLeft + '% - ' + 0 + 'px)',
-	          top: 'calc(' + projectTop + '% + ' + (projectHeight + 80) + 'px)',
+	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 450) + 'px)',
+	          top: projectTop + 250 + 'px',
 	          place: 'eight, '
 	        };
 
 	        var position9 = {
-	          left: 'calc(' + projectLeft + '% + ' + projectWidth / 4 + 'px)',
-	          top: 'calc(' + projectTop + '% + ' + projectHeight + 'px)',
+	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 200) + 'px)',
+	          top: projectTop + 250 + 'px',
 	          place: 'nine, '
 	        };
 
 	        var position10 = {
-	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 100) + 'px)',
-	          top: 'calc(' + projectTop + '% + ' + (projectHeight - 40) + 'px)',
+	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 50) + 'px)',
+	          top: projectTop + 250 + 'px',
 	          place: 'ten, '
 	        };
 
@@ -61743,10 +61706,10 @@
 	    key: 'mouseCoords',
 	    value: function mouseCoords(e) {
 	      var xPercent = e.clientX / window.innerWidth * 100;
-	      var x = xPercent >= 50 ? (xPercent - 50) * -1 : 50 - xPercent;
+	      var x = xPercent >= 50 ? (xPercent * .5 - 25) * -1 : 25 - xPercent * .5;
 
 	      var yPercent = e.clientY / window.innerHeight * 100;
-	      var y = yPercent >= 50 ? (yPercent - 50) * -1 : 50 - yPercent;
+	      var y = yPercent >= 50 ? (yPercent - 50) * -1 : 35 - yPercent * .5;
 
 	      return {
 	        x: x,
@@ -61756,55 +61719,14 @@
 	  }, {
 	    key: 'positionItems',
 	    value: function positionItems() {
-	      var _this3 = this;
-
-	      $('.program, .project').each(function (index, item) {
-	        _this3.xPositions.push(_this3.randomX());
-	        _this3.yPositions.push(_this3.randomY());
+	      $('.program').each(function (index, el) {
+	        $(el).css('transform', 'translate3d( ' + (Math.random() * 25 + 1) + '%, ' + (Math.random() * 25 + 1) + 'px, 0)');
 	      });
 
-	      this.xPositions = _lodash2.default.shuffle(this.xPositions);
-	      this.yPositions = _lodash2.default.shuffle(this.yPositions);
-
-	      $('.program, .project').each(function (index, item) {
-	        $(item).css({
-	          left: _this3.xPositions[index],
-	          top: _this3.yPositions[index]
-	        });
+	      var pckry = new Packery('#approachCanvas', {
+	        itemSelector: '.grid-item',
+	        stamp: '.project'
 	      });
-
-	      // console.log(
-	      //   this.xPositions,
-	      //   this.yPositions
-	      // )
-	    }
-	  }, {
-	    key: 'randomX',
-	    value: function randomX() {
-	      var variance = Math.random() * this.random.variance + 1;
-	      var x = this.random.xIndex + variance;
-
-	      if (this.random.xIndex < this.random.max) {
-	        this.random.xIndex += this.random.step;
-	      } else {
-	        this.random.xIndex = 0;
-	      }
-
-	      return x.toFixed(0) + '%';
-	    }
-	  }, {
-	    key: 'randomY',
-	    value: function randomY() {
-	      var variance = Math.random() * this.random.variance + 1;
-	      var y = this.random.yIndex + variance;
-
-	      if (this.random.yIndex < this.random.max) {
-	        this.random.yIndex += this.random.step;
-	      } else {
-	        this.random.yIndex = 0;
-	      }
-
-	      return y.toFixed(0) + '%';
 	    }
 	  }]);
 

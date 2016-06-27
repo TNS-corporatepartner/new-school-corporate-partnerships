@@ -878,26 +878,58 @@ section#ourPeople.modal-open {
   position: relative; }
 
 #ourApproach #approachCanvas {
+  max-width: 150%;
   position: absolute;
-  top: -50%;
-  left: -50%;
-  height: 200%;
-  width: 200%;
+  top: -25%;
+  left: -25%;
+  width: 150%;
+  height: 150%;
   transform: translate3d(0%, 0%, 0);
   transition: transform 3.5s cubic-bezier(0.075, 0.82, 0.165, 1); }
   #ourApproach #approachCanvas .project, #ourApproach #approachCanvas .program {
     position: absolute; }
     #ourApproach #approachCanvas .project.sibling-hover, #ourApproach #approachCanvas .program.sibling-hover {
-      opacity: 0.3; }
+      opacity: 0.1; }
   #ourApproach #approachCanvas .project {
-    width: 400px;
-    height: 200px;
+    width: 500px;
+    height: 270px;
+    padding: 15px;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-align: center;
         align-items: center;
     cursor: url(/images/click-cursor-red.svg), auto;
     transition: opacity 0.6s ease-in-out; }
+    #ourApproach #approachCanvas .project.project1 {
+      left: 1%;
+      top: 50px; }
+    #ourApproach #approachCanvas .project.project2 {
+      left: 40%;
+      top: 150px; }
+    #ourApproach #approachCanvas .project.project3 {
+      left: 80%;
+      top: -50px; }
+    #ourApproach #approachCanvas .project.project4 {
+      left: 10%;
+      top: 450px; }
+    #ourApproach #approachCanvas .project.project5 {
+      left: 45%;
+      top: 600px; }
+    #ourApproach #approachCanvas .project.project6 {
+      left: 70%;
+      top: 1000px; }
+    #ourApproach #approachCanvas .project.project7 {
+      left: 40%;
+      top: 1200px; }
+    #ourApproach #approachCanvas .project.project8 {
+      left: 80%;
+      top: 600px; }
+    #ourApproach #approachCanvas .project.project9 {
+      left: 10%;
+      top: 900px; }
+    #ourApproach #approachCanvas .project.project10 {
+      left: 2%;
+      top: 1300px; }
     #ourApproach #approachCanvas .project:hover .info {
       opacity: 1; }
     #ourApproach #approachCanvas .project .info {
@@ -918,9 +950,12 @@ section#ourPeople.modal-open {
     #ourApproach #approachCanvas .project img {
       margin-right: 15px; }
   #ourApproach #approachCanvas .program {
-    max-width: 150px;
+    padding: 35px;
+    max-width: 240px;
     transition: all 1s ease-in-out;
-    pointer-events: none; }
+    pointer-events: none;
+    font-size: 12px;
+    float: left; }
     #ourApproach #approachCanvas .program:nth-of-type(1) {
       transition-delay: 0.04s; }
     #ourApproach #approachCanvas .program:nth-of-type(2) {
