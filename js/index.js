@@ -69,7 +69,7 @@ function init() {
   )
 
 
-  //skipSplashAnimation()
+  skipSplashAnimation()
 
 
   function initSplashContent() {

@@ -125,8 +125,24 @@
 
 		<section id="ourApproach" class="section">
 			<div id="approachCanvas">
+
 				{% for project in site.projects %}
-					<div class="project"
+					<div class="project project{{forloop.index}}"
+							data-programs="{% for program in project.programs %}{{program | slugify}},{% endfor %}"
+							data-content="{{project.content}}"
+							data-title="{{project.title}}"
+							data-blockquote="{{project.question}}">
+						<img src="{{project.image}}" width="200" />
+						<div class="info">
+							<label>Case Study</label>
+							<h4>{{project.title}}</h4>
+							<p>Learn More &rarr;</p>
+						</div>
+					</div>				
+				{% endfor %}
+			
+				{% for project in site.projects %}					
+					<div class="project project{{forloop.length | plus: forloop.index}}"
 							data-programs="{% for program in project.programs %}{{program | slugify}},{% endfor %}"
 							data-content="{{project.content}}"
 							data-title="{{project.title}}"
@@ -141,8 +157,11 @@
 				{% endfor %}
 
 				{% for program in projects.programs %}
-					<div class="program" data-id="{{program | slugify}}">{{program}}</div>
+					<div class="program grid-item" data-id="{{program | slugify}}">{{program}}</div>
 				{% endfor %}
+				
+
+
 			</div>
 
 			<hgroup class="section-headlines">
@@ -306,11 +325,12 @@
 	<script src="js/onepagescroll.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.8.1/jquery.fullPage.js"></script>
 	<script src="js/particles/particles.lib.js"></script>
+	<script src="https://npmcdn.com/packery@2.1/dist/packery.pkgd.min.js"></script>
 	<script src="/bundle.js"></script>
 
-	<!-- <script id="__bs_script__">//<![CDATA[
+	 <script id="__bs_script__">//<![CDATA[
 		document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.2.12.10.js'><\/script>".replace("HOST", location.hostname));
-	//]]></script> -->
+	//]]></script> 
 
 </body>
 

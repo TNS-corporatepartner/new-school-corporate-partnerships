@@ -9,6 +9,14 @@ programs:
 - Composition
 - Piano
 - Orchestral Instruments
+- Architecture
+- Lighting Design
+- Design and Technology
+- Product Design
+- Urban Policy
+- Graphic Design
+- Environmental Studies
+- Environmental Policy
 ---
 
 Orchestral musicians traditionally drape themselves in black to enhance and grant priority to their sound. The New School, in partnership with the Baltimore Symphony Orchestra, sought to explode the senses by developing garments that explored the intersections of performance, fashion, design, sight and sound.

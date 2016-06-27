@@ -35,7 +35,7 @@ export class OurApproach {
     });
 
     this.mousemove$ = Observable
-      .fromEvent(this.canvas, 'mousemove')
+      .fromEvent(this.section, 'mousemove')
       .map(this.mouseCoords) //returns {x, y}
 
 
@@ -50,37 +50,20 @@ export class OurApproach {
   }
 
 
-
   handlePanning() {
-
-
-
-
     const painter$ =
       this.raf$.withLatestFrom(this.mousemove$)
       .subscribe(v => {
         const mouse = v[1]
-        //console.log(mouse.x)
-        this.canvas.style.transform = `translate3d(${mouse.x}%, ${mouse.y}%, 0) rotateX(10deg)`
-
-        // console.log(this.canvas.style.transform)
-        // Velocity(this.canvas, 'stop')
-
-        // Velocity(this.canvas, {
-        //   translateX: mouse.x + '%',
-        //   translateY: mouse.y + '%'
-        // }, {
-        //   duration: 150,
-        //   easing: 'easeInSine'
-        // })
+        this.canvas.style.transform = `translate3d(${mouse.x}%, ${mouse.y}%, 0)`
       })
   }
 
 
   handleHover() {
     $('.project').on('mouseenter', function() {
-      const projectTop = parseInt(this.style.top)   //percent
-      const projectLeft = parseInt(this.style.left) //percent
+      const projectLeft = parseInt($(this).css('left')) / parseInt($(this).parent().css('width')) * 100 
+      const projectTop = parseInt($(this).css('top'))    
       const projectWidth = this.offsetWidth         //px
       const projectHeight = this.offsetHeight       //px 
       const programEls = $(this).data('programs')
@@ -96,7 +79,7 @@ export class OurApproach {
       programEls.forEach( (el, index) => {
         //save last original position to reset on mouseleave
         el.lastLeft = el.style.left
-        el.lastTop = el.style.top
+        el.lastTop = el.style.top        
 
         //position programs around project
         el.style.left = programPositions[index].left
@@ -117,62 +100,62 @@ export class OurApproach {
 
     function getProgramPositions(projectLeft, projectTop, projectWidth, projectHeight, programEls) {
       const position1 = {
-        left: `calc(${projectLeft}% + ${projectWidth / 2}px)`,
-        top: `calc(${projectTop}% - 15px)`,
+        left: `calc(${projectLeft}% + ${projectWidth - 100}px)`,
+        top: `${projectTop - 100}px`,
         place: 'one, '
       }
 
       const position2 = {
-        left: `calc(${projectLeft}% + ${projectWidth / 8}px)`,
-        top: `calc(${projectTop}% - 50px)`,
+        left: `calc(${projectLeft}% + ${projectWidth - 350}px)`,
+        top: `${projectTop - 100}px`,
         place: 'two, '
       }
 
       const position3 = {
-        left: `calc(${projectLeft}% - ${20}px)`,
-        top: `calc(${projectTop}% - 5px)`,
+        left: `calc(${projectLeft}% + ${projectWidth - 500}px)`,
+        top: `${projectTop - 100}px`,
         place: 'three, '
       }
 
       const position4 = {
-        left: `calc(${projectLeft}% - ${100}px)`,
-        top: `calc(${projectTop}% + 70px)`,
+        left: `calc(${projectLeft}% + ${projectWidth - 700}px)`,
+        top: `${projectTop - 100}px`,
         place: 'four, '
       }
 
       const position5 = {
-        left: `calc(${projectLeft}% - ${130}px)`,
-        top: `calc(${projectTop}% + 150px)`,
+        left: `calc(${projectLeft}% + ${projectWidth - 700}px)`,
+        top: `${projectTop}px`,
         place: 'five, '
       }
 
       const position6 = {
-        left: `calc(${projectLeft}% - ${50}px)`,
-        top: `calc(${projectTop}% + ${projectHeight}px)`,
+        left: `calc(${projectLeft}% + ${projectWidth - 700}px)`,
+        top: `${projectTop + 100}px`,
         place: 'six, '
       }
 
       const position7 = {
-        left: `calc(${projectLeft - 5}% - ${0}px)`,
-        top: `calc(${projectTop}% + ${projectHeight / 2}px)`,
+        left: `calc(${projectLeft}% + ${projectWidth - 700}px)`,
+        top: `${projectTop + 200}px`,
         place: 'sevem, '
       }
 
       const position8 = {
-        left: `calc(${projectLeft}% - ${0}px)`,
-        top: `calc(${projectTop}% + ${projectHeight + 80}px)`,
+        left: `calc(${projectLeft}% + ${projectWidth - 450}px)`,
+        top: `${projectTop + 250}px`,
         place: 'eight, '
       }
 
       const position9 = {
-        left: `calc(${projectLeft}% + ${projectWidth / 4}px)`,
-        top: `calc(${projectTop}% + ${projectHeight}px)`,
+        left: `calc(${projectLeft}% + ${projectWidth - 200}px)`,
+        top: `${projectTop + 250}px`,
         place: 'nine, '
       }
 
       const position10 = {
-        left: `calc(${projectLeft}% + ${projectWidth - 100}px)`,
-        top: `calc(${projectTop}% + ${projectHeight - 40}px)`,
+        left: `calc(${projectLeft}% + ${projectWidth - 50}px)`,
+        top: `${projectTop + 250}px`,
         place: 'ten, '
       }
 
@@ -254,10 +237,10 @@ export class OurApproach {
 
   mouseCoords(e) {
     const xPercent = e.clientX / window.innerWidth * 100
-    const x = xPercent >= 50 ? (xPercent - 50) * -1 : 50 - xPercent
+    const x = xPercent >= 50 ? (xPercent * .5 - 25) * -1 : 25 - xPercent * .5
 
-    const yPercent = e.clientY / window.innerHeight * 100
-    const y = yPercent >= 50 ? (yPercent - 50) * -1 : 50 - yPercent
+    const yPercent = e.clientY / window.innerHeight * 100    
+    const y = yPercent >= 50 ? (yPercent - 50) * -1 : 35 - yPercent * .5
 
     return {
       x: x,
@@ -267,52 +250,13 @@ export class OurApproach {
 
 
   positionItems() {
-   $('.program, .project').each( (index, item) => {
-      this.xPositions.push(this.randomX())
-      this.yPositions.push(this.randomY())
+    $('.program').each((index, el) => {   
+      $(el).css('transform', `translate3d( ${(Math.random() * 25) + 1}%, ${(Math.random() * 25) + 1}px, 0)`)
     })
 
-    this.xPositions = _.shuffle(this.xPositions)
-    this.yPositions = _.shuffle(this.yPositions)
-
-    $('.program, .project').each( (index, item) => {
-      $(item).css({
-        left: this.xPositions[index],
-        top: this.yPositions[index]
-      })
+    var pckry = new Packery( '#approachCanvas', {
+      itemSelector: '.grid-item',
+      stamp: '.project'
     })
-
-    // console.log(
-    //   this.xPositions,
-    //   this.yPositions
-    // )
-  }
-
-
-  randomX() {
-    const variance = (Math.random() * this.random.variance) + 1
-    const x = (this.random.xIndex + variance)
-
-    if (this.random.xIndex < this.random.max) {
-      this.random.xIndex += this.random.step
-    } else {
-      this.random.xIndex = 0
-    }
-
-    return x.toFixed(0) + '%'
-  }
-
-
-  randomY() {
-    const variance = (Math.random() * this.random.variance) + 1
-    const y = (this.random.yIndex + variance)
-
-    if (this.random.yIndex < this.random.max) {
-      this.random.yIndex += this.random.step
-    } else {
-      this.random.yIndex = 0
-    }
-
-    return y.toFixed(0) + '%'
   }
 }

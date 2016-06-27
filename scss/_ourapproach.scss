@@ -7,27 +7,68 @@
 }
 
 #ourApproach #approachCanvas {
+  max-width: 150%;
   position: absolute;
-  top: -50%; left: -50%;
-  height: 200%;
-  width: 200%;
+  top: -25%; left: -25%;
+  width: 150%;
+  height: 150%;
   transform: translate3d(0%, 0%, 0);
-  // border: 5px solid red;
   transition: transform 3.5s cubic-bezier(0.075, 0.82, 0.165, 1);
   .project, .program {
     position: absolute;
     &.sibling-hover {
-      opacity: 0.3;
+      opacity: 0.1;
     }
   }
 
   .project {
-    width: 400px;
-    height: 200px;
+    width: 500px;
+    height: 270px;
+    padding: 15px;
     display: flex;
     align-items: center;
     cursor: url(/images/click-cursor-red.svg), auto;
     transition: opacity 0.6s ease-in-out;
+    &.project1 {
+      left: 1%;
+      top: 50px;
+    }
+    &.project2 {
+      left: 40%;
+      top: 150px;
+    }
+    &.project3 {
+      left: 80%;
+      top: -50px;
+    }
+    &.project4 {
+      left: 10%;
+      top: 450px;
+    }
+    &.project5 {
+      left: 45%;
+      top: 600px;
+    }
+    &.project6 {
+      left: 70%;
+      top: 1000px;
+    }
+    &.project7 {
+      left: 40%;
+      top: 1200px;
+    }
+    &.project8 {
+      left: 80%;
+      top: 600px;
+    }
+    &.project9 {
+      left: 10%;
+      top: 900px;
+    }
+    &.project10 {
+      left: 2%;
+      top: 1300px;
+    }
     &:hover .info {
       opacity: 1;
     }
@@ -56,9 +97,12 @@
   }
 
   .program {
-    max-width: 150px;
+    padding: 35px;
+    max-width: 240px;
     transition: all 1s ease-in-out;
     pointer-events: none;
+    font-size: 12px;
+    float: left;
     @for $i from 1 through 20 {
       &:nth-of-type(#{$i}) {
         transition-delay: 0.01s * $i * 4;
