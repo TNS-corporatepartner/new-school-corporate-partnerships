@@ -131,7 +131,7 @@
 	    app.activeInstance = app.instances[1];
 	  });
 
-	  skipSplashAnimation();
+	  //skipSplashAnimation()
 
 	  function initSplashContent() {
 	    return _rxjs.Observable.create(function (obs) {

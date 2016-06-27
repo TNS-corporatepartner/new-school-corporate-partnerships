@@ -45,13 +45,13 @@ function init() {
   $('main').fullpage({
     anchors:['future', 'difference', 'schools', 'approach', 'people', 'partner'],
     navigation: true,
-    onLeave: function(lastIndex, nextIndex, direction) {            
+    onLeave: function(lastIndex, nextIndex, direction) {
       if (!app.instances[nextIndex]) {
-        app.instances[nextIndex] = new app.constructors[nextIndex]() 
+        app.instances[nextIndex] = new app.constructors[nextIndex]()
       }
-      
+
       app.activeScrollIndex = nextIndex
-      app.activeInstance = app.instances[nextIndex]      
+      app.activeInstance = app.instances[nextIndex]
 
     }
   })
@@ -67,10 +67,10 @@ function init() {
       app.activeInstance = app.instances[1]
     }
   )
-  
-      
-  skipSplashAnimation()
-  
+
+
+  //skipSplashAnimation()
+
 
   function initSplashContent() {
     return Observable.create(obs => {
@@ -88,7 +88,7 @@ function init() {
         width: 150
       }, {
         duration: 1000,
-        delay: 2500 
+        delay: 2500
       })
 
       //intro text animate in
@@ -104,7 +104,7 @@ function init() {
 
             setTimeout(function() {
               $('body').removeClass('intro-in-progress')
-            }, 500)            
+            }, 500)
           }, 3000)
         }
       })
@@ -119,7 +119,7 @@ function init() {
       })
 
       setTimeout(() => {
-        obs.complete()        
+        obs.complete()
       }, 8800)
     })
   }
@@ -165,11 +165,11 @@ function initGlobalStreams() {
   $('#partnerTray').on('click', function(e) {
     e.preventDefault()
     e.stopPropagation()
-    $('body').removeClass('partner-tray')    
+    $('body').removeClass('partner-tray')
   })
 
-  var move$ = Observable.fromEvent(window, 'mousemove') 
-  
+  var move$ = Observable.fromEvent(window, 'mousemove')
+
   var moveUp$ = move$
     .filter(e => e.clientY < window.innerHeight / 2 )
     .mapTo('up')
@@ -179,7 +179,7 @@ function initGlobalStreams() {
     .mapTo('down')
 
   var cursor$ = Observable.merge(moveUp$, moveDown$).startWith('load').publish()
-  
+
   cursor$.subscribe( d => {
     if (app.activeScrollIndex == 1) {
       document.body.style.cursor = 'url(/images/next-cursor-red.svg), auto'
@@ -191,7 +191,7 @@ function initGlobalStreams() {
       document.body.style.cursor = 'url(/images/next-cursor-red.svg), auto'
     } else if (d === 'load') {
       document.body.style.cursor = 'url(/images/next-cursor-black.svg), auto'
-    } 
+    }
   })
 
   var click$ = Observable
@@ -202,7 +202,7 @@ function initGlobalStreams() {
       const direction = v[1]
 
       app.intro$.complete()
-      $('body').removeClass('partner-tray')    
+      $('body').removeClass('partner-tray')
 
       if (app.activeScrollIndex == 1) {
         $.fn.fullpage.moveSectionDown();
@@ -215,5 +215,5 @@ function initGlobalStreams() {
       }
     })
 
-  cursor$.connect()  
+  cursor$.connect()
 }
