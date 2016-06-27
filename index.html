@@ -114,21 +114,22 @@
 			<hgroup class="section-headlines">
 				<!-- <h4>Our University</h4> -->
 				<h3 class="dynamic-text">{{schools.title}}</h3>
+				<p>{{schools.introduction}}</p>
+
 			</hgroup>
 
 			<div class="section-intro">
 				<h1>{{schools.title}}</h1>
-				<p>{{schools.introduction}}</p>
 			</div>
 		</section>
 
 		<section id="ourApproach" class="section">
 			<div id="approachCanvas">
 				{% for project in site.projects %}
-					<div class="project"							
+					<div class="project"
 							data-programs="{% for program in project.programs %}{{program | slugify}},{% endfor %}"
 							data-content="{{project.content}}"
-							data-title="{{project.title}}"							
+							data-title="{{project.title}}"
 							data-blockquote="{{project.question}}">
 						<img src="{{project.image}}" width="200" />
 						<div class="info">
@@ -147,12 +148,13 @@
 			<hgroup class="section-headlines">
 
 				<h3 class="dynamic-text">{{projects.title}}</h3>
+				<p>{{projects.introduction}}</p>
+
 			</hgroup>
 
 			<div class="section-intro">
 				<h1>{{projects.title}}</h1>
 
-				<p>{{projects.introduction}}</p>
 			</div>
 
 			<div id="ourApproachModal">
