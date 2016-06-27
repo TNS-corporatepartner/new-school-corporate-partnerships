@@ -61546,6 +61546,8 @@
 	        $('.program').not(programEls).addClass('sibling-hover');
 
 	        programEls.forEach(function (el, index) {
+	          $(el).addClass('hover');
+
 	          //save last original position to reset on mouseleave
 	          el.lastLeft = el.style.left;
 	          el.lastTop = el.style.top;
@@ -61561,6 +61563,7 @@
 	          $('.program').removeClass('sibling-hover');
 
 	          programEls.forEach(function (el) {
+	            $(el).removeClass('hover');
 	            el.style.left = el.lastLeft;
 	            el.style.top = el.lastTop;
 	          });
@@ -61570,42 +61573,42 @@
 	      function getProgramPositions(projectLeft, projectTop, projectWidth, projectHeight, programEls) {
 	        var position1 = {
 	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 100) + 'px)',
-	          top: projectTop - 100 + 'px',
+	          top: projectTop - 25 + 'px',
 	          place: 'one, '
 	        };
 
 	        var position2 = {
-	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 350) + 'px)',
-	          top: projectTop - 100 + 'px',
+	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 250) + 'px)',
+	          top: projectTop - 40 + 'px',
 	          place: 'two, '
 	        };
 
 	        var position3 = {
 	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 500) + 'px)',
-	          top: projectTop - 100 + 'px',
+	          top: projectTop - 60 + 'px',
 	          place: 'three, '
 	        };
 
 	        var position4 = {
-	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 700) + 'px)',
-	          top: projectTop - 100 + 'px',
+	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 720) + 'px)',
+	          top: projectTop - 125 + 'px',
 	          place: 'four, '
 	        };
 
 	        var position5 = {
-	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 700) + 'px)',
+	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 720) + 'px)',
 	          top: projectTop + 'px',
 	          place: 'five, '
 	        };
 
 	        var position6 = {
-	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 700) + 'px)',
+	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 720) + 'px)',
 	          top: projectTop + 100 + 'px',
 	          place: 'six, '
 	        };
 
 	        var position7 = {
-	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 700) + 'px)',
+	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 720) + 'px)',
 	          top: projectTop + 200 + 'px',
 	          place: 'sevem, '
 	        };
@@ -61618,13 +61621,13 @@
 
 	        var position9 = {
 	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 200) + 'px)',
-	          top: projectTop + 250 + 'px',
+	          top: projectTop + 200 + 'px',
 	          place: 'nine, '
 	        };
 
 	        var position10 = {
 	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 50) + 'px)',
-	          top: projectTop + 250 + 'px',
+	          top: projectTop + 200 + 'px',
 	          place: 'ten, '
 	        };
 
@@ -61709,7 +61712,7 @@
 	      var x = xPercent >= 50 ? (xPercent * .5 - 25) * -1 : 25 - xPercent * .5;
 
 	      var yPercent = e.clientY / window.innerHeight * 100;
-	      var y = yPercent >= 50 ? (yPercent - 50) * -1 : 35 - yPercent * .5;
+	      var y = yPercent >= 50 ? (yPercent - 50) * -1 : 25 - yPercent * .5;
 
 	      return {
 	        x: x,
