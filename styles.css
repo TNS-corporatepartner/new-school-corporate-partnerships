@@ -303,28 +303,40 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
   font-style: italic;
   font-weight: normal; }
 
-body.fp-viewing-2 #fixedLogo svg > g, body.fp-viewing-3 #fixedLogo svg > g, body.fp-viewing-4 #fixedLogo svg > g {
+body.fp-viewing-intro #header, body.fp-viewing-partner #header {
+  background: #222; }
+
+body.fp-viewing-schools #fixedLogo svg > g, body.fp-viewing-approach #fixedLogo svg > g, body.fp-viewing-people #fixedLogo svg > g {
   fill: #333; }
-  body.fp-viewing-2 #fixedLogo svg > g line, body.fp-viewing-3 #fixedLogo svg > g line, body.fp-viewing-4 #fixedLogo svg > g line {
+  body.fp-viewing-schools #fixedLogo svg > g line, body.fp-viewing-approach #fixedLogo svg > g line, body.fp-viewing-people #fixedLogo svg > g line {
     stroke: #333; }
 
-body.intro-in-progress #fixedLogo svg > g, body.partner-tray #fixedLogo svg > g {
+body.partner-tray #fixedLogo svg > g {
   fill: white; }
-  body.intro-in-progress #fixedLogo svg > g line, body.partner-tray #fixedLogo svg > g line {
+  body.partner-tray #fixedLogo svg > g line {
     stroke: white; }
 
-body.intro-in-progress #fixedLogo svg > g {
-  transition: none; }
-  body.intro-in-progress #fixedLogo svg > g line {
+body.intro-in-progress #fixedLogo {
+  transform: translateY(150%); }
+  body.intro-in-progress #fixedLogo svg > g {
     transition: none; }
+    body.intro-in-progress #fixedLogo svg > g line {
+      transition: none; }
 
 main {
   margin-right: 8px !important; }
 
-#fixedLogo svg > g {
-  transition: fill 0.8s ease-in-out; }
-  #fixedLogo svg > g line {
-    transition: stroke 0.8s ease-in-out; }
+#fixedLogo {
+  position: fixed;
+  transform: translateY(0%);
+  bottom: 2vw;
+  right: 2vw;
+  width: 140px;
+  transition: transform 0.8s ease-in-out; }
+  #fixedLogo svg > g {
+    transition: fill 0.8s ease-in-out; }
+    #fixedLogo svg > g line {
+      transition: stroke 0.8s ease-in-out; }
 
 header#header {
   position: fixed;
@@ -349,46 +361,44 @@ header#header {
   cursor: pointer;
   transition: opacity 0.4s ease-in-out; }
 
-body.partner-tray #partnerTray {
-  transform: translateY(0%); }
-
-#partnerTray {
+#contactModal {
+  display: none;
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 50%;
-  background: #222;
+  z-index: 120;
+  background-color: #E82E21;
+  top: 0;
+  right: 0;
+  width: 140px;
+  height: 64px;
   color: white;
-  display: -ms-flexbox;
-  display: flex;
   -ms-flex-align: center;
+      -ms-grid-row-align: center;
       align-items: center;
   padding: 2vw;
-  transform: translateY(100%);
-  transition: transform 0.5s ease-in-out;
   cursor: url("/images/close-cursor-red.svg"), auto; }
-  #partnerTray .debbie {
-    margin-top: -6%;
-    -webkit-font-smoothing: antialiased; }
-    #partnerTray .debbie p {
-      color: #E82E21; }
-      #partnerTray .debbie p:first-of-type {
-        font-weight: 600; }
-      #partnerTray .debbie p:not(:first-of-type) {
-        line-height: 20px; }
-      #partnerTray .debbie p small {
-        color: white;
-        font-size: 16px;
-        font-weight: 300; }
-    #partnerTray .debbie .contact {
-      margin-top: 20px; }
-      #partnerTray .debbie .contact a {
-        color: white;
-        text-decoration: none; }
-      #partnerTray .debbie .contact tel {
-        display: block;
-        margin: 0.5em 0; }
+  #contactModal .content {
+    display: none; }
+    #contactModal .content .debbie {
+      margin-top: -6%;
+      -webkit-font-smoothing: antialiased; }
+      #contactModal .content .debbie p {
+        color: #E82E21; }
+        #contactModal .content .debbie p:first-of-type {
+          font-weight: 600; }
+        #contactModal .content .debbie p:not(:first-of-type) {
+          line-height: 20px; }
+        #contactModal .content .debbie p small {
+          color: white;
+          font-size: 16px;
+          font-weight: 300; }
+      #contactModal .content .debbie .contact {
+        margin-top: 20px; }
+        #contactModal .content .debbie .contact a {
+          color: white;
+          text-decoration: none; }
+        #contactModal .content .debbie .contact tel {
+          display: block;
+          margin: 0.5em 0; }
 
 #fp-nav {
   margin-top: auto !important;
@@ -413,6 +423,62 @@ body.partner-tray #partnerTray {
         display: none; }
       #fp-nav ul li a.active {
         background-color: #E82E21; }
+
+#staticIntro .content {
+  background-color: #E82E21;
+  height: 100%;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center; }
+
+#staticIntro h2 {
+  padding-left: 2vw;
+  color: white;
+  max-width: 1100px; }
+
+#introBg {
+  position: fixed;
+  z-index: 101;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  background-color: #E82E21; }
+
+#introText {
+  position: fixed;
+  z-index: 101;
+  width: calc(100vw - 140px);
+  height: 100vh;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  top: 0;
+  left: 0;
+  padding-left: 2vw;
+  opacity: 0;
+  color: white;
+  pointer-events: none; }
+  #introText span {
+    display: block;
+    max-width: 1100px;
+    color: white; }
+
+#introLogoText {
+  transition: transform 1s ease-in-out; }
+
+#introLogo {
+  position: absolute;
+  z-index: 101;
+  bottom: calc(100vh - 295px);
+  left: 20px;
+  width: 400px;
+  pointer-events: none; }
+  #introLogo svg {
+    width: 100%;
+    overflow: visible; }
 
 body.show-question section#futureOf .question {
   transition-delay: 1s;
@@ -442,61 +508,8 @@ section#futureOf {
     opacity: 0;
     transition: all 1s ease-in-out;
     max-width: 60vw; }
-  section#futureOf h4 {
-    animation-name: fadeIn;
-    animation-duration: 2s;
-    animation-fill-mode: forwards;
-    animation-delay: 7.5s;
-    opacity: 0; }
   section#futureOf .section-headlines .dynamic-text {
     transition-delay: 10s; }
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0; }
-  100% {
-    opacity: 1; } }
-
-#introBg {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  width: 100%;
-  background-color: #E82E21;
-  cursor: url(/images/next-cursor-black.svg), auto; }
-
-#introText {
-  position: fixed;
-  width: calc(100vw - 140px);
-  height: 100vh;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-align: center;
-      align-items: center;
-  top: 0;
-  left: 0;
-  padding-left: 2vw;
-  opacity: 0;
-  color: white;
-  pointer-events: none; }
-  #introText span {
-    display: block;
-    max-width: 1100px;
-    color: white; }
-
-#fixedLogoText {
-  transition: transform 1s ease-in-out; }
-
-#fixedLogo {
-  position: fixed;
-  bottom: calc(100vh - 295px);
-  left: 20px;
-  width: 400px;
-  pointer-events: none; }
-  #fixedLogo svg {
-    width: 100%;
-    overflow: visible; }
 
 section#coreValues {
   background-color: #333; }
@@ -582,15 +595,15 @@ section#coreValues {
           position: absolute;
           width: 100%;
           max-width: 33vw;
-          padding: 2vw;
+          padding: 4vw 2vw;
           transform: translateY(-50%);
-          transition: transform 0.4s ease-in-out; }
+          transition: transform 0.4s ease-in-out;
+          cursor: url(/images/click-cursor-red.svg), auto; }
           section#coreValues .core-values-slider .core-values-cell .content .content-inner h1 {
             max-width: 33vw;
             font-size: 6vh;
             color: white;
-            transition: font-size 0.4s ease-in-out;
-            cursor: url(/images/click-cursor-red.svg), auto; }
+            transition: font-size 0.4s ease-in-out; }
           section#coreValues .core-values-slider .core-values-cell .content .content-inner .dynamic-text {
             opacity: 0;
             color: white; }
@@ -652,19 +665,19 @@ section#ourSchool .school-links {
       color: black; }
     section#ourSchool .school-links .school.parsons {
       left: 26%;
-      top: 22.2%; }
+      top: 27.2%; }
     section#ourSchool .school-links .school.eugene-lang {
       left: calc(34.4% + 14.9%);
-      top: 61%; }
+      top: 66%; }
     section#ourSchool .school-links .school.public-engagement {
       left: 71.2%;
-      top: 45.2%; }
+      top: 50.2%; }
     section#ourSchool .school-links .school.performing-arts {
       left: 2%;
       top: 53%; }
     section#ourSchool .school-links .school.social-research {
       left: calc(58.4% + 14.9%);
-      top: 13.4%; }
+      top: 18.4%; }
     section#ourSchool .school-links .school.horz {
       width: 22.79%;
       height: 15%; }
@@ -695,7 +708,6 @@ section#ourSchool .school-links {
       height: 100%;
       width: 100%;
       margin-right: 20px;
-      background-image: url("/images/school-preview1.png");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -879,6 +891,7 @@ section#ourPeople.modal-open {
 
 #ourApproach #approachCanvas {
   max-width: 150%;
+  max-height: 100vh;
   position: absolute;
   top: -25%;
   left: -25%;
@@ -903,14 +916,14 @@ section#ourPeople.modal-open {
     cursor: url(/images/click-cursor-red.svg), auto;
     transition: opacity 0.6s ease-in-out; }
     #ourApproach #approachCanvas .project.project1 {
-      left: 5%;
-      top: 50px; }
+      left: 8%;
+      top: 90px; }
     #ourApproach #approachCanvas .project.project2 {
       left: 40%;
       top: 150px; }
     #ourApproach #approachCanvas .project.project3 {
       left: 70%;
-      top: -50px; }
+      top: 0px; }
     #ourApproach #approachCanvas .project.project4 {
       left: 10%;
       top: 450px; }
@@ -1013,7 +1026,7 @@ section#ourPeople.modal-open {
   cursor: url(/images/close-cursor-red.svg), auto; }
   #ourApproachModal .content {
     display: none;
-    height: 100%;
+    height: 100vh;
     -webkit-font-smoothing: antialiased;
     overflow: scroll; }
     #ourApproachModal .content aside {
@@ -1039,7 +1052,7 @@ section#ourPeople.modal-open {
       #ourApproachModal .content aside .label-group {
         color: #999;
         display: block;
-        width: 40%; }
+        width: 62.5%; }
       #ourApproachModal .content aside blockquote {
         margin: 2.5vh 0;
         color: #E82E21;
@@ -1051,9 +1064,11 @@ section#ourPeople.modal-open {
         line-height: 5.2vh;
         text-transform: uppercase;
         font-weight: 900; }
-      #ourApproachModal .content aside .text-content p {
-        font-size: 22px;
-        line-height: 32px; }
+      #ourApproachModal .content aside .text-content {
+        margin-bottom: 100px; }
+        #ourApproachModal .content aside .text-content p {
+          font-size: 22px;
+          line-height: 32px; }
       #ourApproachModal .content aside .gradient-bottom {
         position: absolute;
         left: 0;

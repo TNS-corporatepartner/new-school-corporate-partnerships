@@ -39,8 +39,9 @@ export class CoreValues {
       })
     })
 
-    $('.content-inner h1').on('click', function(e) {
+    $('.content-inner').on('click', function(e) {
       e.stopPropagation()
+      console.log(this)
       instance.openCell( $(this).parents('.core-values-cell').get(0) )
     })
 

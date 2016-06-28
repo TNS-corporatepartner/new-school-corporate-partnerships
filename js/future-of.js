@@ -34,6 +34,8 @@ export class FutureOf {
       autoPlay: false
     })
 
+    console.log('init future')
+
     this.initVideos()
   }
 
@@ -59,10 +61,8 @@ export class FutureOf {
   playCellSequence() {
     if (app.activeInstance == this) {
       const cell = this.flkty.cells[ this.flkty.selectedIndex ].element
-      console.log(cell)
       const video = cell.querySelector('video')
       this.questionEl.textContent = this.questions[this.flkty.selectedIndex]
-
       video.play()
       $('body').addClass('show-question')
 

@@ -55,7 +55,7 @@ export class OurApproach {
       this.raf$.withLatestFrom(this.mousemove$)
       .subscribe(v => {
         const mouse = v[1]
-        this.canvas.style.transform = `perspective(10000px) translate3d(${mouse.x}%, ${mouse.y}%, 0) rotateX(${mouse.rotateX}deg) rotateY(${mouse.rotateY}deg) scale(1)`
+        this.canvas.style.transform = `perspective(3000px) translate3d(${mouse.x}%, ${mouse.y}%, 0) rotateX(${0}deg) rotateY(${mouse.rotateY}deg) scale(0.9)`
       })
   }
 
@@ -175,14 +175,13 @@ export class OurApproach {
       const modal = document.getElementById('ourApproachModal')
       const modalContent = modal.querySelector('.content')
       const projectImg = this.querySelector('img').getBoundingClientRect()
-
+      
       console.log(this)
-      console.log($(this).data('programs'))
 
       modalContent.querySelector('.title-content').textContent = $(this).data('title')
-      modalContent.querySelector('.label-group').textContent = $(this).data('programs').split(', ')
+      modalContent.querySelector('.label-group').textContent = $(this).data('programs').replace(/-/g, ' ').split(',').join(', ') 
       modalContent.querySelector('blockquote').textContent = $(this).data('blockquote')
-      modalContent.querySelector('.text-content').textContent = $(this).data('content')
+      modalContent.querySelector('.text-content').innerHTML = $(this).data('content')
 
       modal.querySelector('img').src = '/images/music.jpg'
       $.fn.fullpage.setAllowScrolling(false)
@@ -238,6 +237,7 @@ export class OurApproach {
     })
   }
 
+
   mouseCoords(e) {
     const xPercent = e.clientX / window.innerWidth * 100
     const x = xPercent >= 50 ? (xPercent * .5 - 25) * -1 : 25 - xPercent * .5
@@ -257,6 +257,7 @@ export class OurApproach {
 
 
   positionItems() {
+    console.log('init PACK')
     $('.program').each((index, el) => {   
       $(el).css('transform', `translate3d( ${(Math.random() * 25) + 1}%, ${(Math.random() * 25) + 1}px, 0)`)
     })
