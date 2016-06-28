@@ -79,13 +79,19 @@ function init() {
 
           initGlobalStreams()                          
         },
+        onLeave: function() {
+          app.activeInstance.sleep && app.activeInstance.sleep() 
+        },
         afterLoad: function(anchorLink, index) {
           if (!app.instances[index]) {
             app.instances[index] = new app.constructors[index]()
+            app.activeScrollIndex = index
+            app.activeInstance = app.instances[index]            
+          } else {
+            app.activeScrollIndex = index
+            app.activeInstance = app.instances[index]
+            app.instances[index].awake && app.instances[index].awake()             
           }
-
-          app.activeScrollIndex = index
-          app.activeInstance = app.instances[index]
         }
       })      
     }

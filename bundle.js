@@ -149,13 +149,19 @@
 
 	        initGlobalStreams();
 	      },
+	      onLeave: function onLeave() {
+	        app.activeInstance.sleep && app.activeInstance.sleep();
+	      },
 	      afterLoad: function afterLoad(anchorLink, index) {
 	        if (!app.instances[index]) {
 	          app.instances[index] = new app.constructors[index]();
+	          app.activeScrollIndex = index;
+	          app.activeInstance = app.instances[index];
+	        } else {
+	          app.activeScrollIndex = index;
+	          app.activeInstance = app.instances[index];
+	          app.instances[index].awake && app.instances[index].awake();
 	        }
-
-	        app.activeScrollIndex = index;
-	        app.activeInstance = app.instances[index];
 	      }
 	    });
 	  });
@@ -17891,6 +17897,7 @@
 	    _classCallCheck(this, FutureOf);
 
 	    this.section = document.querySelector('#futureOf');
+	    this.sectionIntro = this.section.querySelector('.section-intro');
 	    this.imagineEl = document.querySelector('.future-of-header h1');
 	    this.futureOfEl = document.querySelectorAll('.future-of-header h1')[1];
 	    // this.loadingEl = document.querySelector('.shuffler')
@@ -17919,9 +17926,10 @@
 	      autoPlay: false
 	    });
 
-	    console.log('init future');
-
-	    this.initVideos();
+	    setTimeout(function () {
+	      $(_this.sectionIntro).addClass('hidden');
+	      _this.initVideos();
+	    }, 1200);
 	  }
 
 	  _createClass(FutureOf, [{
@@ -17949,6 +17957,8 @@
 	    value: function playCellSequence() {
 	      var _this3 = this;
 
+	      console.log(this);
+	      console.log(_index.app.activeInstance);
 	      if (_index.app.activeInstance == this) {
 	        var cell = this.flkty.cells[this.flkty.selectedIndex].element;
 	        var video = cell.querySelector('video');
@@ -17999,7 +18009,7 @@
 	  }, {
 	    key: 'awake',
 	    value: function awake() {
-	      var cell = this.flkty.cells[this.flkty.selectedIndex].element;
+	      // const cell = this.flkty.cells[ this.flkty.selectedIndex ].element
 	      this.playCellSequence();
 	    }
 	  }]);
@@ -32533,12 +32543,13 @@
 
 	    _classCallCheck(this, OurPeople);
 
+	    this.section = document.getElementById('ourPeople');
+	    this.sectionInto = this.section.querySelector('.section-intro');
+
 	    setTimeout(function () {
 	      $(_this.sectionInto).addClass('hidden');
 	    }, 1200);
 
-	    this.section = document.getElementById('ourPeople');
-	    this.sectionInto = this.section.querySelector('.section-intro');
 	    this.slider = document.getElementById('peopleSlider');
 	    this.sliderInner = this.slider.querySelector('.slider-inner');
 	    this.walkDirection = 'right';

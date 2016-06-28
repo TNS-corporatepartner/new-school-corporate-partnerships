@@ -6,6 +6,7 @@ export class FutureOf {
 
   constructor() {
     this.section = document.querySelector('#futureOf')
+    this.sectionIntro = this.section.querySelector('.section-intro')
     this.imagineEl = document.querySelector('.future-of-header h1')
     this.futureOfEl = document.querySelectorAll('.future-of-header h1')[1]
     // this.loadingEl = document.querySelector('.shuffler')
@@ -34,9 +35,10 @@ export class FutureOf {
       autoPlay: false
     })
 
-    console.log('init future')
-
-    this.initVideos()
+    setTimeout(() => {
+      $(this.sectionIntro).addClass('hidden')
+      this.initVideos()
+    }, 1200)    
   }
 
 
@@ -52,13 +54,15 @@ export class FutureOf {
       this.playCellSequence()
     })
 
-
     this.flkty.on('cellSelect', () => {
       this.playCellSequence()
     })
   }
 
+
   playCellSequence() {
+    console.log(this)
+    console.log(app.activeInstance)
     if (app.activeInstance == this) {
       const cell = this.flkty.cells[ this.flkty.selectedIndex ].element
       const video = cell.querySelector('video')
@@ -103,11 +107,10 @@ export class FutureOf {
   sleep() {
     $('body').removeClass('show-question')
     window.clearTimeout(this.sliderTimer)
-
   }
 
   awake() {
-    const cell = this.flkty.cells[ this.flkty.selectedIndex ].element
+    // const cell = this.flkty.cells[ this.flkty.selectedIndex ].element
     this.playCellSequence()
   }
 }
