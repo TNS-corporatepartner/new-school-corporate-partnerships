@@ -34,6 +34,8 @@ export class FutureOf {
       autoPlay: false
     })
 
+    console.log('init future')
+
     this.initVideos()
   }
 

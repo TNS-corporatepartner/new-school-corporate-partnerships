@@ -90,6 +90,7 @@
 	  var introBg = document.getElementById('introBg');
 	  var line1 = document.getElementById('svgLine1');
 	  var line2 = document.getElementById('svgLine2');
+	  var initialLoad = false;
 
 	  app.variables = {
 	    $red: '#E82E21',
@@ -116,40 +117,46 @@
 	    7: null
 	  };
 
-	  $('main').fullpage({
-	    anchors: ['intro', 'future', 'difference', 'schools', 'approach', 'people', 'partner'],
-	    navigation: true,
-	    onLeave: function onLeave(lastIndex, nextIndex, direction) {
-	      if (!app.instances[nextIndex]) {
-	        app.instances[nextIndex] = new app.constructors[nextIndex]();
-	      }
-
-	      app.activeScrollIndex = nextIndex;
-	      app.activeInstance = app.instances[nextIndex];
-	    }
-	  });
-
-	  if (!window.location.hash) {
-	    $.fn.fullpage.silentMoveTo('future', 1);
-	  } else {
-	    $.fn.fullpage.silentMoveTo(window.location.hash.slice(1), 1);
-	  }
-
-	  $.fn.fullpage.setAllowScrolling(false);
-
 	  app.intro$ = initSplashContent().subscribe(function () {
 	    return console.log(null);
 	  }, function (err) {
 	    return console.error(err);
 	  }, function () {
-	    //executes when initSplashContent stream completes
-	    app.activeScrollIndex = 1;
-	    app.instances[1] = new app.constructors[1]();
-	    app.activeInstance = app.instances[1];
-
-	    initGlobalStreams();
-	    $.fn.fullpage.setAllowScrolling(true);
+	    //executes when initSplashContent stream completes     
 	    window.removeEventListener('click', skipSplashAnimation);
+
+	    $('main').fullpage({
+	      anchors: ['intro', 'future', 'difference', 'schools', 'approach', 'people', 'partner'],
+	      navigation: true,
+	      afterRender: function afterRender() {
+	        if (!window.location.hash) {
+	          $.fn.fullpage.silentMoveTo('future', 1);
+	        } else {
+	          $.fn.fullpage.silentMoveTo(window.location.hash.slice(1), 1);
+	        }
+
+	        $('body').removeClass('intro-in-progress');
+
+	        //intro red-background animate to corner
+	        Velocity(introBg, {
+	          width: '140px',
+	          height: '62px'
+	        }, {
+	          duration: 800,
+	          display: 'none'
+	        });
+
+	        initGlobalStreams();
+	      },
+	      onLeave: function onLeave(lastIndex, nextIndex, direction) {
+	        if (!app.instances[nextIndex]) {
+	          app.instances[nextIndex] = new app.constructors[nextIndex]();
+	        }
+
+	        app.activeScrollIndex = nextIndex;
+	        app.activeInstance = app.instances[nextIndex];
+	      }
+	    });
 	  });
 
 	  app.showContactModal = function () {
@@ -225,25 +232,11 @@
 	              duration: 500,
 	              display: 'none'
 	            });
-
-	            setTimeout(function () {
-	              $('body').removeClass('intro-in-progress');
-	            }, 500);
 	          }, 3000);
 	        }
 	      });
 
-	      //intro red-background animate to corner
-	      Velocity(introBg, {
-	        width: '140px',
-	        height: '62px'
-	      }, {
-	        duration: 800,
-	        delay: 8000
-	      });
-
 	      setTimeout(function () {
-	        Velocity(introBg, { opacity: 0 }, { display: 'none' });
 	        obs.complete();
 	      }, 8800);
 
@@ -280,7 +273,7 @@
 	    duration: 800
 	  });
 
-	  Velocity(introBg, { opacity: 0 }, { display: 'none' });
+	  // Velocity(introBg, { opacity: 0 }, { display: 'none' })
 	}
 
 	function initGlobalStreams() {
@@ -17929,6 +17922,8 @@
 	      wrapAround: true,
 	      autoPlay: false
 	    });
+
+	    console.log('init future');
 
 	    this.initVideos();
 	  }

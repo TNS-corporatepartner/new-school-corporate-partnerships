@@ -316,6 +316,9 @@ body.intro-in-progress #fixedLogo svg > g, body.partner-tray #fixedLogo svg > g 
   body.intro-in-progress #fixedLogo svg > g line, body.partner-tray #fixedLogo svg > g line {
     stroke: white; }
 
+body.intro-in-progress main {
+  opacity: 0; }
+
 body.intro-in-progress #fixedLogo svg > g {
   transition: none; }
   body.intro-in-progress #fixedLogo svg > g line {
