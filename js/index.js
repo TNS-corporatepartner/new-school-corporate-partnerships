@@ -1,7 +1,5 @@
-// import 'fullpage.js'
-
 import {Observable} from 'rxjs'
-// import {frame$} from './utils.js'
+import {Intro} from './intro.js'
 import { FutureOf } from './future-of.js'
 import { CoreValues } from './core-values.js'
 import { OurSchool } from './our-school.js'
@@ -15,6 +13,7 @@ window.addEventListener('DOMContentLoaded', init)
 
 function init() {
   let splashContent$ = null, initSplash = true
+  var partnerBtn = document.getElementById('header').querySelector('a')
   var fixedLogo = document.getElementById('fixedLogo')
   var fixedLogoText = document.getElementById('fixedLogoText')
   var introText = document.getElementById('introText')
@@ -23,12 +22,13 @@ function init() {
   var line2 = document.getElementById('svgLine2')
 
   app.constructors = {
-    1: FutureOf,
-    2: CoreValues,
-    3: OurSchool,
-    4: OurApproach,
-    5: OurPeople,
-    6: ContactUs
+    1: Intro,
+    2: FutureOf,
+    3: CoreValues,
+    4: OurSchool,
+    5: OurApproach,
+    6: OurPeople,
+    7: ContactUs
   }
 
   app.instances = {
@@ -37,13 +37,12 @@ function init() {
     3: null,
     4: null,
     5: null,
-    6: null
-  }
-
-  initGlobalStreams()
+    6: null,
+    7: null
+  } 
 
   $('main').fullpage({
-    anchors:['future', 'difference', 'schools', 'approach', 'people', 'partner'],
+    anchors:['intro', 'future', 'difference', 'schools', 'approach', 'people', 'partner'],
     navigation: true,
     onLeave: function(lastIndex, nextIndex, direction) {
       if (!app.instances[nextIndex]) {
@@ -56,6 +55,14 @@ function init() {
     }
   })
 
+  if (!window.location.hash) {
+    $.fn.fullpage.silentMoveTo('future', 1)
+  } else {
+    $.fn.fullpage.silentMoveTo(window.location.hash.slice(1), 1)
+  }
+  
+  $.fn.fullpage.setAllowScrolling(false)
+
 
   app.intro$ = initSplashContent().subscribe(
     () => console.log(null),
@@ -65,17 +72,18 @@ function init() {
       app.activeScrollIndex = 1
       app.instances[1] = new app.constructors[1]()
       app.activeInstance = app.instances[1]
+
+      initGlobalStreams()
+      $.fn.fullpage.setAllowScrolling(true)
+      window.removeEventListener('click', skipSplashAnimation)
     }
   )
-
-
-  skipSplashAnimation()
 
 
   function initSplashContent() {
     return Observable.create(obs => {
 
-      $('body').addClass('intro-in-progress')
+      $('body').addClass('intro-in-progress')      
 
       //logo animate in
       Velocity(line1, {x1: 4.501, y1: 64.81, x2: 109.524, y2: 64.81}, {duration: 500})
@@ -113,20 +121,24 @@ function init() {
       Velocity(introBg, {
         width: '140px',
         height: '62px'
-      }, {
+      }, {        
         duration: 800,
         delay: 8000
       })
 
       setTimeout(() => {
+        Velocity(introBg, { opacity: 0 }, { display: 'none' })
         obs.complete()
       }, 8800)
+
+      window.addEventListener('click', skipSplashAnimation)
     })
   }
 }
 
 function skipSplashAnimation() {
   app.intro$.complete()
+
 
   Velocity(introText, 'stop')
   Velocity(introText, {opacity: 0}, {
@@ -152,6 +164,8 @@ function skipSplashAnimation() {
   }, {
     duration: 800
   })
+
+  Velocity(introBg, { opacity: 0 }, { display: 'none' })
 }
 
 
@@ -183,7 +197,7 @@ function initGlobalStreams() {
   cursor$.subscribe( d => {
     if (app.activeScrollIndex == 1) {
       document.body.style.cursor = 'url(/images/next-cursor-red.svg), auto'
-    } else if (app.activeScrollIndex == 6) {
+    } else if (app.activeScrollIndex == 7) {
       document.body.style.cursor = 'url(/images/prev-cursor-red.svg), auto'
     } else if (d === 'up' ) {
       document.body.style.cursor = 'url(/images/prev-cursor-red.svg), auto'
@@ -206,7 +220,7 @@ function initGlobalStreams() {
 
       if (app.activeScrollIndex == 1) {
         $.fn.fullpage.moveSectionDown();
-      } else if (app.activeScrollIndex == 6) {
+      } else if (app.activeScrollIndex == 7) {
         $.fn.fullpage.moveSectionUp();
       } else if (direction === 'up') {
           $.fn.fullpage.moveSectionUp();

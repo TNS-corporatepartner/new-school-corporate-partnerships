@@ -64,7 +64,7 @@ section#futureOf {
 }
 
 #introBg {
-  position: fixed;
+  position: fixed; z-index: 101;
   top: 0; bottom: 0;
   right: 0;
   width: 100%;
@@ -73,7 +73,7 @@ section#futureOf {
 }
 
 #introText {
-  position: fixed;
+  position: fixed; z-index: 101;
   width: calc(100vw - 140px);
   height: 100vh;
   display: flex;
@@ -91,12 +91,12 @@ section#futureOf {
   }
 }
 
-#fixedLogoText {
+#fixedLogoText {  
   transition: transform 1s ease-in-out;
 }
 
 #fixedLogo {
-  position: fixed;
+  position: fixed; z-index: 101;
   bottom: calc(100vh - 295px);
   left: 20px;
   width: 400px;
