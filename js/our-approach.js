@@ -55,7 +55,7 @@ export class OurApproach {
       this.raf$.withLatestFrom(this.mousemove$)
       .subscribe(v => {
         const mouse = v[1]
-        this.canvas.style.transform = `translate3d(${mouse.x}%, ${mouse.y}%, 0)`
+        this.canvas.style.transform = `perspective(10000px) translate3d(${mouse.x}%, ${mouse.y}%, 0) rotateX(${mouse.rotateX}deg) rotateY(${mouse.rotateY}deg) scale(1)`
       })
   }
 
@@ -77,6 +77,8 @@ export class OurApproach {
       $('.program').not(programEls).addClass('sibling-hover')
 
       programEls.forEach( (el, index) => {
+        $(el).addClass('hover')
+
         //save last original position to reset on mouseleave
         el.lastLeft = el.style.left
         el.lastTop = el.style.top        
@@ -92,6 +94,7 @@ export class OurApproach {
         $('.program').removeClass('sibling-hover')
 
         programEls.forEach(el => {
+          $(el).removeClass('hover')
           el.style.left = el.lastLeft
           el.style.top = el.lastTop
         })
@@ -101,42 +104,42 @@ export class OurApproach {
     function getProgramPositions(projectLeft, projectTop, projectWidth, projectHeight, programEls) {
       const position1 = {
         left: `calc(${projectLeft}% + ${projectWidth - 100}px)`,
-        top: `${projectTop - 100}px`,
+        top: `${projectTop - 25}px`,
         place: 'one, '
       }
 
       const position2 = {
-        left: `calc(${projectLeft}% + ${projectWidth - 350}px)`,
-        top: `${projectTop - 100}px`,
+        left: `calc(${projectLeft}% + ${projectWidth - 250}px)`,
+        top: `${projectTop - 40}px`,
         place: 'two, '
       }
 
       const position3 = {
         left: `calc(${projectLeft}% + ${projectWidth - 500}px)`,
-        top: `${projectTop - 100}px`,
+        top: `${projectTop - 60}px`,
         place: 'three, '
       }
 
       const position4 = {
-        left: `calc(${projectLeft}% + ${projectWidth - 700}px)`,
-        top: `${projectTop - 100}px`,
+        left: `calc(${projectLeft}% + ${projectWidth - 720}px)`,
+        top: `${projectTop - 125}px`,
         place: 'four, '
       }
 
       const position5 = {
-        left: `calc(${projectLeft}% + ${projectWidth - 700}px)`,
+        left: `calc(${projectLeft}% + ${projectWidth - 720}px)`,
         top: `${projectTop}px`,
         place: 'five, '
       }
 
       const position6 = {
-        left: `calc(${projectLeft}% + ${projectWidth - 700}px)`,
+        left: `calc(${projectLeft}% + ${projectWidth - 720}px)`,
         top: `${projectTop + 100}px`,
         place: 'six, '
       }
 
       const position7 = {
-        left: `calc(${projectLeft}% + ${projectWidth - 700}px)`,
+        left: `calc(${projectLeft}% + ${projectWidth - 720}px)`,
         top: `${projectTop + 200}px`,
         place: 'sevem, '
       }
@@ -149,13 +152,13 @@ export class OurApproach {
 
       const position9 = {
         left: `calc(${projectLeft}% + ${projectWidth - 200}px)`,
-        top: `${projectTop + 250}px`,
+        top: `${projectTop + 200}px`,
         place: 'nine, '
       }
 
       const position10 = {
         left: `calc(${projectLeft}% + ${projectWidth - 50}px)`,
-        top: `${projectTop + 250}px`,
+        top: `${projectTop + 200}px`,
         place: 'ten, '
       }
 
@@ -240,11 +243,15 @@ export class OurApproach {
     const x = xPercent >= 50 ? (xPercent * .5 - 25) * -1 : 25 - xPercent * .5
 
     const yPercent = e.clientY / window.innerHeight * 100    
-    const y = yPercent >= 50 ? (yPercent - 50) * -1 : 35 - yPercent * .5
+    const y = yPercent >= 50 ? (yPercent - 50) * -1 : 25 - yPercent * .5
+
+    const z = x
 
     return {
       x: x,
-      y: y
+      y: y,
+      rotateX: y * -0.3,
+      rotateY: x * 0.6,
     }
   }
 
