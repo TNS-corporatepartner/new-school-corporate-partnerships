@@ -61523,7 +61523,7 @@
 
 	      var painter$ = this.raf$.withLatestFrom(this.mousemove$).subscribe(function (v) {
 	        var mouse = v[1];
-	        _this2.canvas.style.transform = 'translate3d(' + mouse.x + '%, ' + mouse.y + '%, 0)';
+	        _this2.canvas.style.transform = 'perspective(10000px) translate3d(' + mouse.x + '%, ' + mouse.y + '%, 0) rotateX(' + mouse.rotateX + 'deg) rotateY(' + mouse.rotateY + 'deg) scale(1)';
 	      });
 	    }
 	  }, {
@@ -61714,9 +61714,13 @@
 	      var yPercent = e.clientY / window.innerHeight * 100;
 	      var y = yPercent >= 50 ? (yPercent - 50) * -1 : 25 - yPercent * .5;
 
+	      var z = x;
+
 	      return {
 	        x: x,
-	        y: y
+	        y: y,
+	        rotateX: y * -0.3,
+	        rotateY: x * 0.6
 	      };
 	    }
 	  }, {

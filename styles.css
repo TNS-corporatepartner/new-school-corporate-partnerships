@@ -884,7 +884,7 @@ section#ourPeople.modal-open {
   left: -25%;
   width: 150%;
   height: 150%;
-  transform: translate3d(0%, 0%, 0);
+  transform: translate3d(0%, 0%, 0) rotateY(10deg);
   transition: transform 3.5s cubic-bezier(0.075, 0.82, 0.165, 1); }
   #ourApproach #approachCanvas .project, #ourApproach #approachCanvas .program {
     position: absolute; }

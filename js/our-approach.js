@@ -55,7 +55,7 @@ export class OurApproach {
       this.raf$.withLatestFrom(this.mousemove$)
       .subscribe(v => {
         const mouse = v[1]
-        this.canvas.style.transform = `translate3d(${mouse.x}%, ${mouse.y}%, 0)`
+        this.canvas.style.transform = `perspective(10000px) translate3d(${mouse.x}%, ${mouse.y}%, 0) rotateX(${mouse.rotateX}deg) rotateY(${mouse.rotateY}deg) scale(1)`
       })
   }
 
@@ -245,9 +245,13 @@ export class OurApproach {
     const yPercent = e.clientY / window.innerHeight * 100    
     const y = yPercent >= 50 ? (yPercent - 50) * -1 : 25 - yPercent * .5
 
+    const z = x
+
     return {
       x: x,
-      y: y
+      y: y,
+      rotateX: y * -0.3,
+      rotateY: x * 0.6,
     }
   }
 
