@@ -126,9 +126,9 @@
 				{% for school in site.schools %}
 					<div class="school {{school.slug}} {{school.orientation}}"
 							data-name="{{school.title}}"
-							data-description="{{school.content}}"
+							data-description="{{school.description}}"
 							data-image-src="{{school.image}}">
-						<div class="img-container"></div>
+						<div class="img-container" style="background-image: url({{school.image}})"></div>
 						<div class="text-container">
 							<h3>{{school.title}}</h3>
 						</div>

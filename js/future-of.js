@@ -61,7 +61,6 @@ export class FutureOf {
       const cell = this.flkty.cells[ this.flkty.selectedIndex ].element
       const video = cell.querySelector('video')
       this.questionEl.textContent = this.questions[this.flkty.selectedIndex]
-
       video.play()
       $('body').addClass('show-question')
 

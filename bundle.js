@@ -17962,7 +17962,6 @@
 	        var cell = this.flkty.cells[this.flkty.selectedIndex].element;
 	        var video = cell.querySelector('video');
 	        this.questionEl.textContent = this.questions[this.flkty.selectedIndex];
-
 	        video.play();
 	        $('body').addClass('show-question');
 

@@ -58,7 +58,6 @@ function init() {
 
       app.activeScrollIndex = nextIndex
       app.activeInstance = app.instances[nextIndex]
-
     }
   })
 
