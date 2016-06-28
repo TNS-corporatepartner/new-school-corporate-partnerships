@@ -311,26 +311,32 @@ body.fp-viewing-schools #fixedLogo svg > g, body.fp-viewing-approach #fixedLogo 
   body.fp-viewing-schools #fixedLogo svg > g line, body.fp-viewing-approach #fixedLogo svg > g line, body.fp-viewing-people #fixedLogo svg > g line {
     stroke: #333; }
 
-body.intro-in-progress #fixedLogo svg > g, body.partner-tray #fixedLogo svg > g {
+body.partner-tray #fixedLogo svg > g {
   fill: white; }
-  body.intro-in-progress #fixedLogo svg > g line, body.partner-tray #fixedLogo svg > g line {
+  body.partner-tray #fixedLogo svg > g line {
     stroke: white; }
 
-body.intro-in-progress main {
-  opacity: 0; }
-
-body.intro-in-progress #fixedLogo svg > g {
-  transition: none; }
-  body.intro-in-progress #fixedLogo svg > g line {
+body.intro-in-progress #fixedLogo {
+  transform: translateY(150%); }
+  body.intro-in-progress #fixedLogo svg > g {
     transition: none; }
+    body.intro-in-progress #fixedLogo svg > g line {
+      transition: none; }
 
 main {
   margin-right: 8px !important; }
 
-#fixedLogo svg > g {
-  transition: fill 0.8s ease-in-out; }
-  #fixedLogo svg > g line {
-    transition: stroke 0.8s ease-in-out; }
+#fixedLogo {
+  position: fixed;
+  transform: translateY(0%);
+  bottom: 2vw;
+  right: 2vw;
+  width: 140px;
+  transition: transform 0.8s ease-in-out; }
+  #fixedLogo svg > g {
+    transition: fill 0.8s ease-in-out; }
+    #fixedLogo svg > g line {
+      transition: stroke 0.8s ease-in-out; }
 
 header#header {
   position: fixed;
@@ -460,17 +466,17 @@ header#header {
     max-width: 1100px;
     color: white; }
 
-#fixedLogoText {
+#introLogoText {
   transition: transform 1s ease-in-out; }
 
-#fixedLogo {
-  position: fixed;
+#introLogo {
+  position: absolute;
   z-index: 101;
   bottom: calc(100vh - 295px);
   left: 20px;
   width: 400px;
   pointer-events: none; }
-  #fixedLogo svg {
+  #introLogo svg {
     width: 100%;
     overflow: visible; }
 

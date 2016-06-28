@@ -41,12 +41,12 @@
   }
 }
 
-#fixedLogoText {  
+#introLogoText {  
   transition: transform 1s ease-in-out;
 }
 
-#fixedLogo {
-  position: fixed; z-index: 101;
+#introLogo {
+  position: absolute; z-index: 101;
   bottom: calc(100vh - 295px);
   left: 20px;
   width: 400px;

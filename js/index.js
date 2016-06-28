@@ -16,13 +16,12 @@ function init() {
   var header = document.getElementById('header')
   var contactModal = document.getElementById('contactModal')
   var partnerBtn = header.querySelector('a')
-  var fixedLogo = document.getElementById('fixedLogo')
-  var fixedLogoText = document.getElementById('fixedLogoText')
+  var introLogo = document.getElementById('introLogo')
+  var introLogoText = document.getElementById('introLogoText')
   var introText = document.getElementById('introText')
   var introBg = document.getElementById('introBg')
   var line1 = document.getElementById('svgLine1')
   var line2 = document.getElementById('svgLine2')
-  var initialLoad = false
 
   app.variables = {
     $red: '#E82E21',
@@ -75,6 +74,8 @@ function init() {
             duration: 800,
             display: 'none'
           })                        
+          
+          Velocity(introLogo, {opacity: 0}, {display: 'none', duration: 450})          
 
           initGlobalStreams()                          
         },
@@ -103,6 +104,7 @@ function init() {
           duration: 500,
           display: 'flex',
           complete: function() {
+            
             Velocity(contactModal.querySelector('.content'), {
               opacity: 1
             }, {
@@ -136,17 +138,15 @@ function init() {
   }
 
   function initSplashContent() {
-    return Observable.create(obs => {
-
-      $('body').addClass('intro-in-progress')      
+    return Observable.create(obs => {      
 
       //logo animate in
       Velocity(line1, {x1: 4.501, y1: 64.81, x2: 109.524, y2: 64.81}, {duration: 500})
       Velocity(line2, {x1: 4.501, y1: 71.5, x2: 109.524, y2: 71.5}, {duration: 500})
-      Velocity(fixedLogoText, {translateX: 0, translateY: 0}, {duration: 2000})
+      Velocity(introLogoText, {translateX: 0, translateY: 0}, {duration: 2000})
 
       //logo animate down
-      Velocity(fixedLogo, {
+      Velocity(introLogo, {
         bottom: 20,
         width: 150
       }, {
@@ -177,35 +177,27 @@ function init() {
   }
 }
 
-function skipSplashAnimation() {
-  app.intro$.complete()
-
+function skipSplashAnimation() {  
   Velocity(introText, 'stop')
   Velocity(introText, {opacity: 0}, {
     duration: 200,
     display: 'none'
   })
 
-  Velocity(introBg, 'stop')
-  Velocity(introBg, {
-    width: '140px',
-    height: '62px'
-  }, {
-    duration: 800
-  })
+  Velocity(introLogoText, 'stop')
+  Velocity(introLogoText, {translateX: 0, translateY: 0}, {duration: 2000})
 
-  Velocity(fixedLogoText, 'stop')
-  Velocity(fixedLogoText, {translateX: 0, translateY: 0}, {duration: 2000})
-
-  Velocity(fixedLogo, 'stop')
-  Velocity(fixedLogo, {
+  Velocity(introLogo, 'stop')
+  Velocity(introLogo, {
     bottom: 20,
     width: 150
   }, {
-    duration: 800
+    duration: 500
   })
 
-  // Velocity(introBg, { opacity: 0 }, { display: 'none' })
+  setTimeout(function() {
+    app.intro$.complete()
+  }, 300)
 }
 
 
