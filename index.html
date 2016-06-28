@@ -14,7 +14,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
-	<title></title>
+	<title>The New School | Corporate Partnerships</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -65,14 +65,16 @@
 		</section>
 
 		<section id="coreValues" class="section dark-section">
-			<div class="global-slider core-values-slider uninitialized content-closed">
-				{% for value in site.values | sort: 'order' %}
-					<div class="core-values-cell" data-headline="{{value.title}}" data-phrases='{{value.phrases | jsonify}}'>
-						<div id="{{value.slug}}"></div>
-						<div class="content">
-							<div class="content-inner">
-								<h1>{{value.title}}</h1>
-								<h2 class="dynamic-text"></h2>
+			<div class="panel-group">
+				{% for panel in site.values %}
+					<div class="panel">						
+						<div class="panel-tint">
+							<div id="{{panel.slug}}" class="particles-container"></div>
+						</div>
+						<div class="content-wrapper">
+							<div class="content">
+								<h4>{{panel.title}}</h4>
+								{{panel.content}}
 							</div>
 						</div>
 					</div>

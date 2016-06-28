@@ -17,12 +17,4 @@ export class ContactUs {
     e.stopPropagation()
     $('.panel-group .panel').removeClass('hover hover-sibling')  
   }
-
-  sleep() {
-    this.isSleeping = true
-  }
-
-  awake() {
-    this.isSleeping = false
-  }
 }
