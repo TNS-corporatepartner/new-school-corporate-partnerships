@@ -61707,10 +61707,12 @@
 	        var modalContent = modal.querySelector('.content');
 	        var projectImg = this.querySelector('img').getBoundingClientRect();
 
+	        console.log(this);
+
 	        modalContent.querySelector('.title-content').textContent = $(this).data('title');
-	        modalContent.querySelector('.label-group').textContent = $(this).data('programs').split(', ');
+	        modalContent.querySelector('.label-group').textContent = $(this).data('programs').replace(/-/g, ' ').split(',').join(', ');
 	        modalContent.querySelector('blockquote').textContent = $(this).data('blockquote');
-	        modalContent.querySelector('.text-content').textContent = $(this).data('content');
+	        modalContent.querySelector('.text-content').innerHTML = $(this).data('content');
 
 	        modal.querySelector('img').src = '/images/music.jpg';
 	        $.fn.fullpage.setAllowScrolling(false);
@@ -61785,6 +61787,7 @@
 	  }, {
 	    key: 'positionItems',
 	    value: function positionItems() {
+	      console.log('init PACK');
 	      $('.program').each(function (index, el) {
 	        $(el).css('transform', 'translate3d( ' + (Math.random() * 25 + 1) + '%, ' + (Math.random() * 25 + 1) + 'px, 0)');
 	      });

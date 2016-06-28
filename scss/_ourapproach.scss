@@ -8,6 +8,7 @@
 
 #ourApproach #approachCanvas {
   max-width: 150%;
+  max-height: 100vh;
   position: absolute;
   top: -25%; left: -25%;
   width: 150%;
@@ -132,7 +133,7 @@
   cursor: url(/images/close-cursor-red.svg), auto;
   .content {    
     display: none;
-    height: 100%;
+    height: 100vh;
     -webkit-font-smoothing: antialiased;
     overflow: scroll;
 
@@ -161,7 +162,7 @@
       .label-group {
         color: $gray;
         display: block;
-        width: 40%;
+        width: 62.5%;
       }
       blockquote {
         margin: 2.5vh 0;
@@ -177,6 +178,7 @@
         font-weight: 900;
       }
       .text-content {
+        margin-bottom: 100px;
         p {
           font-size: 22px;      
           line-height: 32px;  
