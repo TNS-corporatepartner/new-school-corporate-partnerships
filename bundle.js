@@ -32355,212 +32355,33 @@
 
 	    _classCallCheck(this, CoreValues);
 
-	    var instance = this;
 	    this.section = document.getElementById('coreValues');
-	    this.sectionInto = this.section.querySelector('.section-intro');
-	    this.slider = document.querySelector('.core-values-slider');
-	    this.cells = this.slider.childNodes;
-	    this.activeCell = null;
-	    this.dynamicHeadline = this.section.querySelector('.section-headlines .dynamic-text');
-
-	    this.section.querySelectorAll('.core-values-cell').forEach(function (el) {
-	      sections[$(el).data('headline')] = $(el).data('phrases');
-	    });
-
-	    _rxjs.Observable.fromEvent(window, 'resize').debounceTime(100).subscribe(function () {
-	      return _this.resizeParticles();
-	    });
-
-	    $('#coreValues .content-inner').on('mouseenter', function () {
-	      var $cell = $(this).parents('.core-values-cell');
-	      $('#coreValues .core-values-cell').not($cell).addClass('hover-sibling');
-	      $cell.addClass('hover');
-	    });
-
-	    $('#coreValues .core-values-cell').on('mouseleave', function () {
-	      $('#coreValues .core-values-cell').removeClass('hover hover-sibling');
-	    });
-
-	    $('#coreValues').on('click', '.core-values-cell.is-selected', function (e) {
-	      e.stopPropagation();
-	      _this.cancelCellAnimation().then(function () {
-	        _this.closeCell();
-	      });
-	    });
-
-	    $('.content-inner').on('click', function (e) {
-	      e.stopPropagation();
-	      console.log(this);
-	      instance.openCell($(this).parents('.core-values-cell').get(0));
-	    });
+	    this.sectionIntro = this.section.querySelector('.section-intro');
+	    $('#coreValues .panel').on('mouseenter', this.openPanel);
+	    $('#coreValues .panel').on('mouseleave', this.closePanel);
 
 	    particlesJS.load('visionary-thinking', '/js/particles/visionary.json');
 	    particlesJS.load('couragously-innovative', '/js/particles/innovation.json');
 	    particlesJS.load('global-diversity', '/js/particles/diversity.json');
 
 	    setTimeout(function () {
-	      $(_this.sectionInto).addClass('hidden');
+	      $(_this.sectionIntro).addClass('hidden');
 	    }, 1200);
-
-	    setTimeout(function () {
-	      _this.resizeParticles();
-	    }, 1500);
 	  }
 
 	  _createClass(CoreValues, [{
-	    key: 'openCell',
-	    value: function openCell(cell) {
-	      var _this2 = this;
-
-	      if (!this.activeCell) {
-	        //remove class to show section header dynamic text
-	        $(cell.parentNode).removeClass('content-closed');
-
-	        //grow selected cell and shrink siblings
-	        $(this.cells).not(cell).addClass('sibling-is-opening');
-	        $(cell).addClass('opening');
-
-	        setTimeout(function () {
-	          //changes styles for flickity initialization
-	          $(_this2.slider).removeClass('uninitialized');
-	          $(_this2.cells).removeClass('sibling-is-opening opening');
-
-	          //init flickity (and cell animation)
-	          _this2.initFlkty($(cell).index());
-	          _this2.resizeParticles();
-	        }, 800);
-	      }
+	    key: 'openPanel',
+	    value: function openPanel(e) {
+	      e.stopPropagation();
+	      var $panel = $(this);
+	      $('.panel-group .panel').not($panel).addClass('hover-sibling');
+	      $panel.addClass('hover');
 	    }
 	  }, {
-	    key: 'initFlkty',
-	    value: function initFlkty(initialIndex) {
-	      this.flkty = new _flickity2.default(this.slider, {
-	        cellAlign: 'left',
-	        contain: true,
-	        initialIndex: initialIndex,
-	        draggable: false
-	      });
-
-	      this.startCellAnimation(this.flkty);
-
-	      // this.flkty.on('settle', () => {
-	      //   this.resetCellText().then(this.startCellAnimation.bind(this, this.flkty))
-	      // })
-	    }
-	  }, {
-	    key: 'cancelCellAnimation',
-	    value: function cancelCellAnimation() {
-	      var _this3 = this;
-
-	      return new Promise(function (resolve) {
-	        Velocity(_this3.lastCellAnimated.dynamicText, 'stop');
-	        Velocity(_this3.lastCellAnimated.dynamicText, { opacity: 0 }, {
-	          duration: 400,
-	          display: 'none',
-	          complete: function complete() {
-	            Velocity(_this3.lastCellAnimated.h1, 'stop');
-	            Velocity(_this3.lastCellAnimated.h1, { opacity: 1 }, {
-	              display: 'block',
-	              duration: 400,
-	              complete: function complete() {
-	                $(_this3.activeCell).parents('.global-slider').addClass('content-closed');
-	                resolve();
-	              }
-	            });
-	          }
-	        });
-	      });
-	    }
-
-	    // resetCellText() {
-	    //   return new Promise(resolve => {
-	    //     Velocity(this.lastCellAnimated.dynamicText, {opacity: 0}, {
-	    //       duration: 200,
-	    //       display: 'none',
-	    //       complete: () => {
-	    //         Velocity(this.lastCellAnimated.h1, {opacity: 1}, {
-	    //           duration: 200
-	    //         })
-	    //       }
-	    //     })
-	    //   })
-	    // }
-
-	  }, {
-	    key: 'startCellAnimation',
-	    value: function startCellAnimation(flkty) {
-	      var h1 = flkty.selectedCell.element.querySelector('h1');
-	      var dynamicText = flkty.selectedCell.element.querySelector('.dynamic-text');
-	      var key = $(flkty.selectedCell.element).data('headline');
-	      var phrases = sections[key].slice(0);
-
-	      this.activeCell = $(flkty.selectedCell.element).parents('.core-values-cell').get(0);
-
-	      //change header text
-	      this.dynamicHeadline.textContent = $(this.activeCell).data('headline');
-
-	      this.lastCellAnimated = {
-	        h1: h1,
-	        dynamicText: dynamicText
-	      };
-
-	      //called recursively until phrases array is empty
-	      (function changeWord(phrase, firstPhrase) {
-	        var fadeOutEl = firstPhrase ? h1 : dynamicText;
-
-	        Velocity(fadeOutEl, { opacity: 0 }, {
-	          duration: 1000,
-	          display: 'none',
-	          complete: function complete() {
-	            dynamicText.textContent = phrase;
-
-	            Velocity(dynamicText, { opacity: 1 }, {
-	              duration: 2000,
-	              display: 'block',
-	              complete: function complete() {
-	                if (phrases.length) {
-	                  changeWord(phrases.splice(0, 1)[0]);
-	                }
-	              }
-	            });
-	          }
-	        });
-	      })(phrases.splice(0, 1)[0], true);
-	    }
-	  }, {
-	    key: 'closeCell',
-	    value: function closeCell() {
-	      var _this4 = this;
-
-	      this.activeCell = this.flkty.selectedCell.element;
-	      this.flkty.destroy();
-
-	      $(this.cells).not(this.activeCell).addClass('sibling-is-opening');
-	      $(this.activeCell).addClass('opening');
-	      $(this.slider).addClass('uninitialized');
-
-	      setTimeout(function () {
-	        $(_this4.cells).removeClass('sibling-is-opening');
-	        $(_this4.activeCell).removeClass('opening');
-	        $(_this4.activeCell).parents('.global-slider').addClass('content-closed');
-	        _this4.activeCell = null;
-	      });
-
-	      setTimeout(function () {
-	        _this4.resizeParticles();
-	      }, 550);
-	    }
-	  }, {
-	    key: 'resizeParticles',
-	    value: function resizeParticles() {
-	      $('canvas').css({
-	        width: window.innerWidth,
-	        height: window.innerHeight
-	      });
-
-	      pJSDom.forEach(function (pjs) {
-	        window.particlesJS.layout(null, pjs.pJS);
-	      });
+	    key: 'closePanel',
+	    value: function closePanel(e) {
+	      e.stopPropagation();
+	      $('.panel-group .panel').removeClass('hover hover-sibling');
 	    }
 	  }]);
 
@@ -61844,16 +61665,6 @@
 	    value: function closePanel(e) {
 	      e.stopPropagation();
 	      $('.panel-group .panel').removeClass('hover hover-sibling');
-	    }
-	  }, {
-	    key: 'sleep',
-	    value: function sleep() {
-	      this.isSleeping = true;
-	    }
-	  }, {
-	    key: 'awake',
-	    value: function awake() {
-	      this.isSleeping = false;
 	    }
 	  }]);
 
