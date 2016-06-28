@@ -71,53 +71,53 @@ header#header {
 }
 
 
-body.partner-tray #partnerTray {
-  transform: translateY(0%);
-}
+// body.partner-tray #partnerTray {
+//   transform: translateY(0%);
+// }
 
-#partnerTray {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 50%;
-  background: $gray-darker;
+#contactModal {
+  display: none;
+  position: absolute; z-index: 120;
+  background-color: $red;
+  top: 0;
+  right: 0;
+  width: 140px;
+  height: 64px;
   color: white;
-  display: flex;
   align-items: center;
   padding: 2vw;
-  transform: translateY(100%);
-  transition: transform 0.5s ease-in-out;
   cursor: url('/images/close-cursor-red.svg'), auto;
-
-  .debbie {
-    margin-top: -6%;
-    -webkit-font-smoothing: antialiased;
-    p {
-      color: $red;
-      
-      &:first-of-type {
-        font-weight: 600;
-      }
-      &:not(:first-of-type) {
-        line-height: 20px;
-      }
-      small { 
-        color: white;
-        font-size: 16px; 
-        font-weight: 300;
+  .content {
+    display: none;
+    .debbie {
+      margin-top: -6%;
+      -webkit-font-smoothing: antialiased;
+      p {
+        color: $red;
         
+        &:first-of-type {
+          font-weight: 600;
+        }
+        &:not(:first-of-type) {
+          line-height: 20px;
+        }
+        small { 
+          color: white;
+          font-size: 16px; 
+          font-weight: 300;
+          
+        }
       }
-    }
-    .contact {
-      margin-top: 20px;
-      a {
-        color: white;
-        text-decoration: none;
-      }
-      tel {
-        display: block;
-        margin: 0.5em 0;
+      .contact {
+        margin-top: 20px;
+        a {
+          color: white;
+          text-decoration: none;
+        }
+        tel {
+          display: block;
+          margin: 0.5em 0;
+        }
       }
     }
   }

@@ -81,13 +81,20 @@
 	function init() {
 	  var splashContent$ = null,
 	      initSplash = true;
-	  var partnerBtn = document.getElementById('header').querySelector('a');
+	  var header = document.getElementById('header');
+	  var contactModal = document.getElementById('contactModal');
+	  var partnerBtn = header.querySelector('a');
 	  var fixedLogo = document.getElementById('fixedLogo');
 	  var fixedLogoText = document.getElementById('fixedLogoText');
 	  var introText = document.getElementById('introText');
 	  var introBg = document.getElementById('introBg');
 	  var line1 = document.getElementById('svgLine1');
 	  var line2 = document.getElementById('svgLine2');
+
+	  app.variables = {
+	    $red: '#E82E21',
+	    $grayDarker: '#222'
+	  };
 
 	  app.constructors = {
 	    1: _intro.Intro,
@@ -144,6 +151,50 @@
 	    $.fn.fullpage.setAllowScrolling(true);
 	    window.removeEventListener('click', skipSplashAnimation);
 	  });
+
+	  app.showContactModal = function () {
+	    Velocity(header, { opacity: 0 }, {
+	      duration: 125,
+	      complete: function complete() {
+	        Velocity(contactModal, {
+	          width: '100%',
+	          height: '100%',
+	          backgroundColor: app.variables.$grayDarker
+	        }, {
+	          duration: 500,
+	          display: 'flex',
+	          complete: function complete() {
+	            Velocity(contactModal.querySelector('.content'), {
+	              opacity: 1
+	            }, {
+	              display: 'flex'
+	            });
+
+	            $(contactModal).one('click', app.hideContactModal);
+	          }
+	        });
+	      }
+	    });
+	  };
+
+	  app.hideContactModal = function () {
+
+	    Velocity(contactModal.querySelector('.content'), { opacity: 0 }, {
+	      display: 'none',
+	      complete: function complete() {
+	        Velocity(contactModal, {
+	          width: 140,
+	          height: 64,
+	          backgroundColor: app.variables.$red
+	        }, {
+	          duration: 450,
+	          display: 'none'
+	        });
+
+	        Velocity(header, { opacity: 1 }, { duration: 200 });
+	      }
+	    });
+	  };
 
 	  function initSplashContent() {
 	    return _rxjs.Observable.create(function (obs) {
@@ -233,10 +284,11 @@
 	}
 
 	function initGlobalStreams() {
-	  $('#header a').on('click', function (e) {
+	  $('#header, #header a').on('click', function (e) {
 	    e.preventDefault();
 	    e.stopPropagation();
-	    $('body').addClass('partner-tray');
+	    // $('body').addClass('partner-tray')
+	    app.showContactModal();
 	  });
 
 	  $('#partnerTray').on('click', function (e) {

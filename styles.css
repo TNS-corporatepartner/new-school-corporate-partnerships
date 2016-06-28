@@ -349,46 +349,44 @@ header#header {
   cursor: pointer;
   transition: opacity 0.4s ease-in-out; }
 
-body.partner-tray #partnerTray {
-  transform: translateY(0%); }
-
-#partnerTray {
+#contactModal {
+  display: none;
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 50%;
-  background: #222;
+  z-index: 120;
+  background-color: #E82E21;
+  top: 0;
+  right: 0;
+  width: 140px;
+  height: 64px;
   color: white;
-  display: -ms-flexbox;
-  display: flex;
   -ms-flex-align: center;
+      -ms-grid-row-align: center;
       align-items: center;
   padding: 2vw;
-  transform: translateY(100%);
-  transition: transform 0.5s ease-in-out;
   cursor: url("/images/close-cursor-red.svg"), auto; }
-  #partnerTray .debbie {
-    margin-top: -6%;
-    -webkit-font-smoothing: antialiased; }
-    #partnerTray .debbie p {
-      color: #E82E21; }
-      #partnerTray .debbie p:first-of-type {
-        font-weight: 600; }
-      #partnerTray .debbie p:not(:first-of-type) {
-        line-height: 20px; }
-      #partnerTray .debbie p small {
-        color: white;
-        font-size: 16px;
-        font-weight: 300; }
-    #partnerTray .debbie .contact {
-      margin-top: 20px; }
-      #partnerTray .debbie .contact a {
-        color: white;
-        text-decoration: none; }
-      #partnerTray .debbie .contact tel {
-        display: block;
-        margin: 0.5em 0; }
+  #contactModal .content {
+    display: none; }
+    #contactModal .content .debbie {
+      margin-top: -6%;
+      -webkit-font-smoothing: antialiased; }
+      #contactModal .content .debbie p {
+        color: #E82E21; }
+        #contactModal .content .debbie p:first-of-type {
+          font-weight: 600; }
+        #contactModal .content .debbie p:not(:first-of-type) {
+          line-height: 20px; }
+        #contactModal .content .debbie p small {
+          color: white;
+          font-size: 16px;
+          font-weight: 300; }
+      #contactModal .content .debbie .contact {
+        margin-top: 20px; }
+        #contactModal .content .debbie .contact a {
+          color: white;
+          text-decoration: none; }
+        #contactModal .content .debbie .contact tel {
+          display: block;
+          margin: 0.5em 0; }
 
 #fp-nav {
   margin-top: auto !important;
