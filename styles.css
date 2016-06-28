@@ -443,7 +443,8 @@ header#header {
   bottom: 0;
   right: 0;
   width: 100%;
-  background-color: #E82E21; }
+  background-color: #E82E21;
+  cursor: url(/images/next-cursor-black.svg), auto; }
 
 #introText {
   position: fixed;
