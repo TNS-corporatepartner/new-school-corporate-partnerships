@@ -885,9 +885,11 @@ section#ourPeople.modal-open {
 
 #ourApproach {
   overflow: hidden; }
-
-.canvas-container {
-  position: relative; }
+  #ourApproach .section-headlines {
+    background-image: linear-gradient(180deg, rgba(225, 225, 225, 0.5) 80%, transparent);
+    max-width: none; }
+    #ourApproach .section-headlines h3, #ourApproach .section-headlines p {
+      max-width: 70vw; }
 
 #ourApproach #approachCanvas {
   max-width: 150%;
@@ -1068,7 +1070,8 @@ section#ourPeople.modal-open {
         margin-bottom: 100px; }
         #ourApproachModal .content aside .text-content p {
           font-size: 22px;
-          line-height: 32px; }
+          line-height: 32px;
+          margin-bottom: 2vw; }
       #ourApproachModal .content aside .gradient-bottom {
         position: absolute;
         left: 0;

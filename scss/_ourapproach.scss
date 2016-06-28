@@ -1,9 +1,12 @@
 #ourApproach {
   overflow: hidden;
-}
-
-.canvas-container {
-  position: relative;
+  .section-headlines {
+    background-image: linear-gradient(180deg, rgba(225, 225, 225, 0.5) 80%, transparent);
+    max-width: none;
+    h3, p {
+      max-width: 70vw;
+    }
+  }
 }
 
 #ourApproach #approachCanvas {
@@ -182,6 +185,7 @@
         p {
           font-size: 22px;      
           line-height: 32px;  
+          margin-bottom: 2vw;
         }
       }
       .gradient-bottom {
