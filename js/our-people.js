@@ -51,9 +51,7 @@ export class OurPeople {
         modalContent.innerHTML = ''
       })      
     })      
-
-    
-
+ 
     this.tl.add( new TweenMax(this.sliderInner, '5', {
       left: this.cellWidth * -1,
       ease: Linear.easeNone, 

@@ -61432,13 +61432,15 @@
 	          $(el).addClass('hover');
 
 	          //save last original position to reset on mouseleave
+	          el.lastTransform = el.style.transform;
 	          el.lastLeft = el.style.left;
 	          el.lastTop = el.style.top;
 
 	          //position programs around project
+	          el.style.transform = 'translate3d(0px, 0px, 0)';
 	          el.style.left = programPositions[index].left;
 	          el.style.top = programPositions[index].top;
-	          // el.textContent += programPositions[index].place //for debugging
+	          // el.textContent = el.textContent.slice(0, -2) + programPositions[index].place //for debugging
 	        });
 
 	        $(this).one('mouseleave', function () {
@@ -61449,6 +61451,7 @@
 	            $(el).removeClass('hover');
 	            el.style.left = el.lastLeft;
 	            el.style.top = el.lastTop;
+	            el.style.transform = el.lastTransform;
 	          });
 	        });
 	      });
@@ -61457,61 +61460,61 @@
 	        var position1 = {
 	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 100) + 'px)',
 	          top: projectTop - 25 + 'px',
-	          place: 'one, '
+	          place: '01'
 	        };
 
 	        var position2 = {
 	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 250) + 'px)',
 	          top: projectTop - 40 + 'px',
-	          place: 'two, '
+	          place: '02'
 	        };
 
 	        var position3 = {
 	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 500) + 'px)',
 	          top: projectTop - 60 + 'px',
-	          place: 'three, '
+	          place: '03'
 	        };
 
 	        var position4 = {
 	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 720) + 'px)',
 	          top: projectTop - 125 + 'px',
-	          place: 'four, '
+	          place: '04'
 	        };
 
 	        var position5 = {
 	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 720) + 'px)',
-	          top: projectTop + 'px',
-	          place: 'five, '
+	          top: projectTop - 50 + 'px',
+	          place: '05'
 	        };
 
 	        var position6 = {
-	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 720) + 'px)',
+	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 900) + 'px)',
 	          top: projectTop + 100 + 'px',
-	          place: 'six, '
+	          place: '06'
 	        };
 
 	        var position7 = {
 	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 720) + 'px)',
 	          top: projectTop + 200 + 'px',
-	          place: 'sevem, '
+	          place: '07'
 	        };
 
 	        var position8 = {
 	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 450) + 'px)',
 	          top: projectTop + 250 + 'px',
-	          place: 'eight, '
+	          place: '08'
 	        };
 
 	        var position9 = {
 	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 200) + 'px)',
 	          top: projectTop + 200 + 'px',
-	          place: 'nine, '
+	          place: '09'
 	        };
 
 	        var position10 = {
 	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 50) + 'px)',
 	          top: projectTop + 200 + 'px',
-	          place: 'ten, '
+	          place: '10'
 	        };
 
 	        var positions = [position1, position2, position3, position4, position5, position6, position7, position8, position9, position10];
@@ -61527,8 +61530,6 @@
 	        var modal = document.getElementById('ourApproachModal');
 	        var modalContent = modal.querySelector('.content');
 	        var projectImg = this.querySelector('img').getBoundingClientRect();
-
-	        console.log(this);
 
 	        modalContent.querySelector('.title-content').textContent = $(this).data('title');
 	        modalContent.querySelector('.label-group').textContent = $(this).data('programs').replace(/-/g, ' ').split(',').join(', ');
@@ -61574,7 +61575,6 @@
 
 	          Velocity(modalContent, 'reverse', {
 	            complete: function complete() {
-	              // Velocity(modal, 'reverse')
 	              Velocity(modal, {
 	                opacity: 0,
 	                scale: 0.5
@@ -61608,7 +61608,6 @@
 	  }, {
 	    key: 'positionItems',
 	    value: function positionItems() {
-	      console.log('init PACK');
 	      $('.program').each(function (index, el) {
 	        $(el).css('transform', 'translate3d( ' + (Math.random() * 25 + 1) + '%, ' + (Math.random() * 25 + 1) + 'px, 0)');
 	      });
