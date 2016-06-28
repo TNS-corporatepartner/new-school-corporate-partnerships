@@ -274,7 +274,7 @@
 
 	  Velocity(fixedLogo, 'stop');
 	  Velocity(fixedLogo, {
-	    top: window.innerHeight - 100,
+	    bottom: 20,
 	    width: 150
 	  }, {
 	    duration: 800
@@ -287,57 +287,46 @@
 	  $('#header, #header a').on('click', function (e) {
 	    e.preventDefault();
 	    e.stopPropagation();
-	    // $('body').addClass('partner-tray')
 	    app.showContactModal();
-	  });
-
-	  $('#partnerTray').on('click', function (e) {
-	    e.preventDefault();
-	    e.stopPropagation();
-	    $('body').removeClass('partner-tray');
 	  });
 
 	  var move$ = _rxjs.Observable.fromEvent(window, 'mousemove');
 
 	  var moveUp$ = move$.filter(function (e) {
-	    return e.clientY < window.innerHeight / 2;
+	    return e.clientY < window.innerHeight * 0.2;
 	  }).mapTo('up');
 
+	  var deadZone$ = move$.filter(function (e) {
+	    return e.clientY > window.innerHeight * 0.2 && e.clientY < window.innerHeight * 0.8;
+	  }).mapTo('dead');
+
 	  var moveDown$ = move$.filter(function (e) {
-	    return e.clientY >= window.innerHeight / 2;
+	    return e.clientY > window.innerHeight * 0.8;
 	  }).mapTo('down');
 
-	  var cursor$ = _rxjs.Observable.merge(moveUp$, moveDown$).startWith('load').publish();
+	  var cursor$ = _rxjs.Observable.merge(moveUp$, moveDown$, deadZone$).publish();
 
 	  cursor$.subscribe(function (d) {
-	    if (app.activeScrollIndex == 1) {
+	    if ('down' === d) {
 	      document.body.style.cursor = 'url(/images/next-cursor-red.svg), auto';
-	    } else if (app.activeScrollIndex == 7) {
+	    } else if ('up' === d) {
 	      document.body.style.cursor = 'url(/images/prev-cursor-red.svg), auto';
-	    } else if (d === 'up') {
-	      document.body.style.cursor = 'url(/images/prev-cursor-red.svg), auto';
-	    } else if (d === 'down') {
-	      document.body.style.cursor = 'url(/images/next-cursor-red.svg), auto';
-	    } else if (d === 'load') {
-	      document.body.style.cursor = 'url(/images/next-cursor-black.svg), auto';
+	    } else if ('dead' === d) {
+	      document.body.style.cursor = 'auto';
 	    }
 	  });
 
 	  var click$ = _rxjs.Observable.fromEvent(document, 'click').withLatestFrom(cursor$).subscribe(function (v) {
-	    var event = v[0];
-	    var direction = v[1];
+	    var e = v[0];
+	    var d = v[1];
 
 	    app.intro$.complete();
 	    $('body').removeClass('partner-tray');
 
-	    if (app.activeScrollIndex == 1) {
+	    if ('down' === d) {
 	      $.fn.fullpage.moveSectionDown();
-	    } else if (app.activeScrollIndex == 7) {
+	    } else if ('up' === d) {
 	      $.fn.fullpage.moveSectionUp();
-	    } else if (direction === 'up') {
-	      $.fn.fullpage.moveSectionUp();
-	    } else if (direction === 'down') {
-	      $.fn.fullpage.moveSectionDown();
 	    }
 	  });
 
@@ -32413,8 +32402,9 @@
 	      });
 	    });
 
-	    $('.content-inner h1').on('click', function (e) {
+	    $('.content-inner').on('click', function (e) {
 	      e.stopPropagation();
+	      console.log(this);
 	      instance.openCell($(this).parents('.core-values-cell').get(0));
 	    });
 

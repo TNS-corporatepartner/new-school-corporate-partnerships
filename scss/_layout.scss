@@ -1,8 +1,15 @@
 body {
 
-  &.fp-viewing-2,
-  &.fp-viewing-3, 
-  &.fp-viewing-4 {
+  &.fp-viewing-intro,
+  &.fp-viewing-partner {
+    #header {
+      background: $gray-darker;
+    }
+  }
+
+  &.fp-viewing-schools,
+  &.fp-viewing-approach, 
+  &.fp-viewing-people {
     #fixedLogo svg > g {
       fill: $gray-dark;      
       line {

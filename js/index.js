@@ -208,7 +208,7 @@ function skipSplashAnimation() {
 
   Velocity(fixedLogo, 'stop')
   Velocity(fixedLogo, {
-    top: window.innerHeight - 100,
+    bottom: 20,
     width: 150
   }, {
     duration: 800
@@ -222,39 +222,32 @@ function initGlobalStreams() {
   $('#header, #header a').on('click', function(e) {
     e.preventDefault()
     e.stopPropagation()
-    // $('body').addClass('partner-tray')
     app.showContactModal()
-  })
-
-  $('#partnerTray').on('click', function(e) {
-    e.preventDefault()
-    e.stopPropagation()
-    $('body').removeClass('partner-tray')
   })
 
   var move$ = Observable.fromEvent(window, 'mousemove')
 
   var moveUp$ = move$
-    .filter(e => e.clientY < window.innerHeight / 2 )
+    .filter(e => e.clientY < window.innerHeight * 0.2 )
     .mapTo('up')
 
+  var deadZone$ = move$
+    .filter(e => e.clientY > window.innerHeight * 0.2 && e.clientY < window.innerHeight * 0.8)
+    .mapTo('dead')
+
   var moveDown$ = move$
-    .filter(e => e.clientY >= window.innerHeight / 2 )
+    .filter(e => e.clientY > window.innerHeight * 0.8 )
     .mapTo('down')
 
-  var cursor$ = Observable.merge(moveUp$, moveDown$).startWith('load').publish()
+  var cursor$ = Observable.merge(moveUp$, moveDown$, deadZone$).publish()
 
   cursor$.subscribe( d => {
-    if (app.activeScrollIndex == 1) {
+    if ('down' === d) {
       document.body.style.cursor = 'url(/images/next-cursor-red.svg), auto'
-    } else if (app.activeScrollIndex == 7) {
+    } else if ('up' === d) {
       document.body.style.cursor = 'url(/images/prev-cursor-red.svg), auto'
-    } else if (d === 'up' ) {
-      document.body.style.cursor = 'url(/images/prev-cursor-red.svg), auto'
-    } else if (d === 'down') {
-      document.body.style.cursor = 'url(/images/next-cursor-red.svg), auto'
-    } else if (d === 'load') {
-      document.body.style.cursor = 'url(/images/next-cursor-black.svg), auto'
+    } else if ('dead' === d) {
+      document.body.style.cursor = 'auto'
     }
   })
 
@@ -262,20 +255,16 @@ function initGlobalStreams() {
     .fromEvent(document, 'click')
     .withLatestFrom(cursor$)
     .subscribe(v => {
-      const event = v[0]
-      const direction = v[1]
+      const e = v[0]
+      const d = v[1]
 
       app.intro$.complete()
       $('body').removeClass('partner-tray')
 
-      if (app.activeScrollIndex == 1) {
-        $.fn.fullpage.moveSectionDown();
-      } else if (app.activeScrollIndex == 7) {
-        $.fn.fullpage.moveSectionUp();
-      } else if (direction === 'up') {
-          $.fn.fullpage.moveSectionUp();
-      } else if (direction === 'down') {
-        $.fn.fullpage.moveSectionDown();
+      if ('down' === d) {
+        $.fn.fullpage.moveSectionDown()
+      } else if ('up' === d) {
+        $.fn.fullpage.moveSectionUp()
       }
     })
 
