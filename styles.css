@@ -903,14 +903,14 @@ section#ourPeople.modal-open {
     cursor: url(/images/click-cursor-red.svg), auto;
     transition: opacity 0.6s ease-in-out; }
     #ourApproach #approachCanvas .project.project1 {
-      left: 5%;
-      top: 50px; }
+      left: 8%;
+      top: 90px; }
     #ourApproach #approachCanvas .project.project2 {
       left: 40%;
       top: 150px; }
     #ourApproach #approachCanvas .project.project3 {
       left: 70%;
-      top: -50px; }
+      top: 0px; }
     #ourApproach #approachCanvas .project.project4 {
       left: 10%;
       top: 450px; }

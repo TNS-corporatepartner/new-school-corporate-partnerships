@@ -55,7 +55,7 @@ export class OurApproach {
       this.raf$.withLatestFrom(this.mousemove$)
       .subscribe(v => {
         const mouse = v[1]
-        this.canvas.style.transform = `perspective(10000px) translate3d(${mouse.x}%, ${mouse.y}%, 0) rotateX(${mouse.rotateX}deg) rotateY(${mouse.rotateY}deg) scale(1)`
+        this.canvas.style.transform = `perspective(3000px) translate3d(${mouse.x}%, ${mouse.y}%, 0) rotateX(${0}deg) rotateY(${mouse.rotateY}deg) scale(0.9)`
       })
   }
 

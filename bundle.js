@@ -61523,7 +61523,7 @@
 
 	      var painter$ = this.raf$.withLatestFrom(this.mousemove$).subscribe(function (v) {
 	        var mouse = v[1];
-	        _this2.canvas.style.transform = 'perspective(10000px) translate3d(' + mouse.x + '%, ' + mouse.y + '%, 0) rotateX(' + mouse.rotateX + 'deg) rotateY(' + mouse.rotateY + 'deg) scale(1)';
+	        _this2.canvas.style.transform = 'perspective(3000px) translate3d(' + mouse.x + '%, ' + mouse.y + '%, 0) rotateX(' + 0 + 'deg) rotateY(' + mouse.rotateY + 'deg) scale(0.9)';
 	      });
 	    }
 	  }, {
