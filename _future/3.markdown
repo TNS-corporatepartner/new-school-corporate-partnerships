@@ -1,6 +1,6 @@
 ---
 title: Sustainability
-video: http://familiar-temp.s3.amazonaws.com/nscp/SUSTAINABILITY.mp4
+video: 
 order: 3
 question: How can spending more be more profitable?
 ---
