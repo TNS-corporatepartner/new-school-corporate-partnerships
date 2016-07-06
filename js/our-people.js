@@ -6,12 +6,14 @@ import _ from 'lodash'
 
 export class OurPeople {
   constructor() {
+    this.section = document.getElementById('ourPeople')
+    this.sectionInto = this.section.querySelector('.section-intro')
+
     setTimeout(() => {
       $(this.sectionInto).addClass('hidden')
     }, 1200)
 
-    this.section = document.getElementById('ourPeople')
-    this.sectionInto = this.section.querySelector('.section-intro')    
+    
     this.slider = document.getElementById('peopleSlider')
     this.sliderInner = this.slider.querySelector('.slider-inner')
     this.walkDirection = 'right'
@@ -51,9 +53,7 @@ export class OurPeople {
         modalContent.innerHTML = ''
       })      
     })      
-
-    
-
+ 
     this.tl.add( new TweenMax(this.sliderInner, '5', {
       left: this.cellWidth * -1,
       ease: Linear.easeNone, 
@@ -77,8 +77,6 @@ export class OurPeople {
 
         this.tl.timeScale( Math.abs(e.x / 15) )          
       })
-
-
 
     // const run$ = mousemove$
     //   .take(1) 

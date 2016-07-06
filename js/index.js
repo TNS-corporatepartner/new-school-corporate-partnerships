@@ -73,19 +73,25 @@ function init() {
           }, {        
             duration: 800,
             display: 'none'
-          })                        
+          })
           
           Velocity(introLogo, {opacity: 0}, {display: 'none', duration: 450})          
 
           initGlobalStreams()                          
         },
-        onLeave: function(lastIndex, nextIndex, direction) {
-          if (!app.instances[nextIndex]) {
-            app.instances[nextIndex] = new app.constructors[nextIndex]()
+        onLeave: function() {
+          app.activeInstance.sleep && app.activeInstance.sleep() 
+        },
+        afterLoad: function(anchorLink, index) {
+          if (!app.instances[index]) {
+            app.instances[index] = new app.constructors[index]()
+            app.activeScrollIndex = index
+            app.activeInstance = app.instances[index]            
+          } else {
+            app.activeScrollIndex = index
+            app.activeInstance = app.instances[index]
+            app.instances[index].awake && app.instances[index].awake()             
           }
-
-          app.activeScrollIndex = nextIndex
-          app.activeInstance = app.instances[nextIndex]
         }
       })      
     }
@@ -225,12 +231,14 @@ function initGlobalStreams() {
   var cursor$ = Observable.merge(moveUp$, moveDown$, deadZone$).publish()
 
   cursor$.subscribe( d => {
-    if ('down' === d) {
+    if (app.activeScrollIndex == 1) {
+      document.body.style.cursor = 'url(/images/next-cursor-black.svg), auto'
+    } else if ('down' === d) {
       document.body.style.cursor = 'url(/images/next-cursor-red.svg), auto'
     } else if ('up' === d) {
       document.body.style.cursor = 'url(/images/prev-cursor-red.svg), auto'
     } else if ('dead' === d) {
-      document.body.style.cursor = 'auto'
+      document.body.style.cursor = 'url(/images/arrow-cursor-red.svg), auto'
     }
   })
 
@@ -244,7 +252,9 @@ function initGlobalStreams() {
       app.intro$.complete()
       $('body').removeClass('partner-tray')
 
-      if ('down' === d) {
+      if (app.activeScrollIndex == 1) {
+        $.fn.fullpage.moveSectionDown()
+      } else if ('down' === d) {
         $.fn.fullpage.moveSectionDown()
       } else if ('up' === d) {
         $.fn.fullpage.moveSectionUp()

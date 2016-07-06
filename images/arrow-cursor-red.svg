@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="31px" height="52px" viewBox="0 0 31 52" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <title>arrow-cursor-red</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="1024" transform="translate(-492.000000, -616.000000)" fill="#E82E21">
+            <g id="arrow-cursor-red" transform="translate(503.954448, 641.846220) rotate(-20.000000) translate(-503.954448, -641.846220) translate(487.954448, 614.846220)">
+                <polygon id="Triangle-1" points="16 0 32 36.7882353 16.5255682 33.6705882 -4.54747351e-13 36.7882353"></polygon>
+                <rect id="Rectangle-269" x="12" y="14" width="8" height="39.2823529"></rect>
+            </g>
+        </g>
+    </g>
+</svg>
