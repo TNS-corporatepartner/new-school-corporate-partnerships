@@ -327,6 +327,7 @@ main {
 
 #fixedLogo {
   position: fixed;
+  z-index: 200;
   transform: translateY(0%);
   bottom: 1.5vw;
   right: calc(1.5vw + 10px);
@@ -713,8 +714,6 @@ section#ourSchool .school-links {
     section#ourSchool .school-links .school.social-research {
       left: 55%;
       top: 19%; }
-      section#ourSchool .school-links .school.social-research .img {
-        background-position: 15% 50%; }
     section#ourSchool .school-links .school.horz {
       width: 20%;
       height: 22%; }
@@ -759,7 +758,7 @@ section#ourSchool .school-links {
       background-repeat: no-repeat;
       transition: all .6s ease-in-out; }
     section#ourSchool .school-links .school:hover .img {
-      transform: scale(1.05); }
+      transform: scale(1.1); }
     section#ourSchool .school-links .school.not-hover .img {
       -webkit-filter: grayscale(100%);
               filter: grayscale(100%);
@@ -1162,42 +1161,51 @@ section#contactUs {
       -ms-flex-align: center;
           align-items: center;
       overflow: hidden;
-      transition: all 0.5s ease-in-out; }
+      transition: all .65s ease-in-out;
+      background-color: #E82E21; }
       section#contactUs .panel-group .panel:before {
         content: '';
-        opacity: 0.85;
+        opacity: 0.7;
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background-size: auto 100%;
+        background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        background-color: #e82e21;
-        background-blend-mode: multiply;
-        transition: background-color 0.5s ease-in-out 0s, -webkit-filter 0.5s linear 0s;
-        transition: background-color 0.5s ease-in-out 0s, filter 0.5s linear 0s;
-        transition: background-color 0.5s ease-in-out 0s, filter 0.5s linear 0s, -webkit-filter 0.5s linear 0s;
+        mix-blend-mode: multiply;
+        transition: background-color 0.5s ease-in-out, -webkit-filter 0.5s linear;
+        transition: background-color 0.5s ease-in-out, filter 0.5s linear;
+        transition: background-color 0.5s ease-in-out, filter 0.5s linear, -webkit-filter 0.5s linear;
         transform-origin: center; }
       section#contactUs .panel-group .panel:first-of-type:before {
         background-image: url(/uploads/workshop.png); }
       section#contactUs .panel-group .panel:nth-of-type(2):before {
-        background-image: url(/uploads/workforce.jpg); }
+        background-image: url(/uploads/120513_workforce.jpg); }
       section#contactUs .panel-group .panel:last-of-type:before {
         background-image: url(/uploads/envision.png); }
       section#contactUs .panel-group .panel.hover {
         -ms-flex: 3 1 auto;
             flex: 3 1 auto; }
         section#contactUs .panel-group .panel.hover:before {
-          background-color: transparent; }
-        section#contactUs .panel-group .panel.hover .content-wrapper .content {
-          pointer-events: none;
+          background-color: transparent;
+          mix-blend-mode: normal;
+          opacity: 1; }
+        section#contactUs .panel-group .panel.hover .panel-tint {
           background-color: rgba(0, 0, 0, 0.35); }
+        section#contactUs .panel-group .panel.hover .content-wrapper .content {
+          pointer-events: none; }
+          section#contactUs .panel-group .panel.hover .content-wrapper .content h4 {
+            transform: scale(1.5);
+            transform-origin: bottom left; }
           section#contactUs .panel-group .panel.hover .content-wrapper .content p {
             opacity: 1; }
       section#contactUs .panel-group .panel.hover-sibling:before {
-        background-color: #c21f14; }
+        -webkit-filter: blur(10px);
+                filter: blur(10px);
+        opacity: .5;
+        transform: scale(1.1); }
       section#contactUs .panel-group .panel.hover-sibling .content h4 {
         transform: scale(0.5);
         opacity: 0.5; }
@@ -1221,15 +1229,16 @@ section#contactUs {
           transition: background-color 0.5s ease-in-out; }
           section#contactUs .panel-group .panel .content-wrapper .content h4 {
             width: 30vw;
-            font-size: 26px;
-            transition: transform 0.5s ease-in-out;
+            font-size: 28px;
+            font-weight: normal;
+            transition: transform .65s ease-in-out;
             transform-origin: left top; }
           section#contactUs .panel-group .panel .content-wrapper .content p {
             width: 50vw;
             opacity: 0;
             font-size: 18px;
             font-size: 22px;
-            transition: opacity 0.5s ease-in-out;
+            transition: opacity .65s ease-in-out;
             -webkit-font-smoothing: antialiased; }
 
 body {
@@ -1244,9 +1253,12 @@ body {
   box-sizing: border-box; }
 
 p {
-  font-size: 20px;
+  font-size: 2.2vh;
   line-height: 1.45;
   max-width: 900px; }
+  @media (min-width: 1440px) {
+    p {
+      max-width: 1200px; } }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: "NeueDisplay", sans-serif;

@@ -32624,13 +32624,13 @@
 
 	  setTimeout(function () {
 	    $(_this.sectionInto).addClass('hidden');
-	  }, 1200);
+	  }, 1600);
 
-	  $('.school').on('hover', function (e) {
+	  $('.school').on('mouseenter', function (e) {
 	    $(this).siblings().addClass('not-hover');
 	  });
 
-	  $('.school').on('mouseout', function (e) {
+	  $('.school').on('mouseleave', function (e) {
 	    $(this).siblings().removeClass('not-hover');
 	  });
 

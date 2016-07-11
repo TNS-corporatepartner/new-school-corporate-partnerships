@@ -48,6 +48,7 @@ main {
 
 #fixedLogo {
   position: fixed;
+  z-index: 200;
   transform: translateY(0%);
   bottom: 1.5vw;
   right: calc(1.5vw + 10px);

@@ -14,26 +14,28 @@ section#contactUs {
       display: flex;
       align-items: center;
       overflow: hidden;
-      transition: all 0.5s ease-in-out;
+      transition: all .65s ease-in-out;
+      background-color: $red;
+
       &:before {
         content: '';
-        opacity: 0.85;
+        opacity: 0.7;
         position: absolute;
         top: 0; left: 0;
         width: 100%; height: 100%;
-        background-size: auto 100%;
+        background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        background-color: $red-tint;
-        background-blend-mode: multiply;
-        transition: background-color 0.5s ease-in-out 0s, filter 0.5s linear 0s;
+        // background-color: $red-tint;
+        mix-blend-mode: multiply;
+        transition: background-color 0.5s ease-in-out, filter 0.5s linear;
         transform-origin: center;
       }
       &:first-of-type:before {
         background-image: url(/uploads/workshop.png);
       }
       &:nth-of-type(2):before {
-        background-image: url(/uploads/workforce.jpg);
+        background-image: url(/uploads/120513_workforce.jpg);
       }
       &:last-of-type:before {
         background-image: url(/uploads/envision.png);
@@ -41,11 +43,21 @@ section#contactUs {
       &.hover {
         &:before {
           background-color: transparent;
+          mix-blend-mode: normal;
+          opacity: 1;
         }
+        .panel-tint{
+          background-color: $black-tint;
+        }
+
         flex: 3 1 auto;
         .content-wrapper .content {
           pointer-events: none;
-          background-color: $black-tint;
+          h4{
+            // width: 100%;
+            transform: scale(1.5);
+            transform-origin: bottom left;
+          }
           p {
             opacity: 1;
           }
@@ -53,8 +65,9 @@ section#contactUs {
       }
       &.hover-sibling {
         &:before {
-          // filter: blur(5px);
-          background-color: darken($red-tint, 10%);
+          filter: blur(10px);
+          opacity: .5;
+          transform: scale(1.1);
         }
 
         .content h4 {
@@ -82,8 +95,9 @@ section#contactUs {
           transition: background-color 0.5s ease-in-out;
           h4 {
             width: 30vw;
-            font-size: 26px;
-            transition: transform 0.5s ease-in-out;
+            font-size: 28px;
+            font-weight: normal;
+            transition: transform .65s ease-in-out;
             transform-origin: left top;
           }
           p {
@@ -91,7 +105,7 @@ section#contactUs {
             opacity: 0;
             font-size: 18px;
             font-size: 22px;
-            transition: opacity 0.5s ease-in-out;
+            transition: opacity .65s ease-in-out;
             -webkit-font-smoothing: antialiased;
           }
         }
