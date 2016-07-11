@@ -18,12 +18,9 @@ collections:
     programs:
     - ACTING
     - ANTHROPOLOGY
-    - ARCHITECTURAL DESIGN
     - ARCHITECTURE
-    - ARCHITECTURE & LIGHTING DESIGN
     - ART, MEDIA, AND TECHNOLOGY
     - THE ARTS
-    - BA/BFA DUAL DEGREE
     - BACHELOR'S PROGRAMS FOR ADULTS
     - GRADUATE CERTIFICATE
     - CLASSICAL MUSIC
@@ -39,7 +36,6 @@ collections:
     - DESIGN STUDIES
     - DIRECTING
     - DOCUMENTARY MEDIA STUDIES
-    - GRADUATE CERTIFICATE
     - DRAMATIC ARTS
     - ECONOMICS
     - ENGLISH AS A SECOND LANGUAGE
@@ -47,12 +43,12 @@ collections:
     - ESL + FOODESL + MUSIC
     - ENVIRONMENTAL POLICY AND SUSTAINABILITY MANAGEMENT
     - ENVIRONMENTAL STUDIES
-    - FASHION BUSINESSFASHION DESIGN
+    - FASHION BUSINESS
     - FASHION DESIGN
     - FASHION DESIGN AND SOCIETY
     - FASHION MARKETING
     - FASHION STUDIES
-    - FILM PRODUCTIONFINE ART AND FOUNDATIONFINE ARTS
+    - FILM PRODUCTION
     - FINE ARTS
     - FOOD STUDIES
     - GENDER AND SEXUALITY STUDIES
@@ -69,7 +65,6 @@ collections:
     - INTEGRATED DESIGN
     - INTERDISCIPLINARY SCIENCE
     - INTERIOR DESIGN
-    - INTERIOR DESIGN AND ARCHITECTURE STUDIES
     - INTERNATIONAL AFFAIRS
     - JAZZ AND CONTEMPORARY MUSIC
     - JOURNALISM + DESIGN
@@ -96,7 +91,7 @@ collections:
     - PSYCHOLOGY
     - PUBLIC AND URBAN POLICY
     - SCREEN STUDIES
-    - SCREENWRITINGSOCIOLOGY
+    - SCREENWRITING
     - SOCIOLOGY
     - STRATEGIC DESIGN AND MANAGEMENT
     - GLOBAL EXECUTIVE
@@ -109,7 +104,7 @@ collections:
     - URBAN DESIGN
     - URBAN POLICY ANALYSIS AND MANAGEMENT
   schools:
-    title: Our Schools
+    title: One University, Five Schools
     output: false
     introduction: Our unique structure provides the expertise of five schools collaborating
       to reinvent everything and approach issues from multiple, integrated perspectives.
@@ -130,7 +125,7 @@ collections:
 email: your-email@domain.com
 description: |
   Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
-baseurl: 
+baseurl:
 url: http://yourdomain.com
 introduction: The New School, in NYC, is the only university where a world-renowned
   art and design school comes together with acclaimed liberal arts, performing arts,

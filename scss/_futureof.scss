@@ -12,6 +12,10 @@ section#futureOf {
   background-color: black;
   color: white;
 
+  .section-intro{
+    background-color: black;
+  }
+
 
   .future-of-slider {
     .future-of-cell {
@@ -21,7 +25,7 @@ section#futureOf {
         opacity: 0;
       }
       .video-fs{
-        opacity: .8;
+        opacity: .75;
       }
     }
   }
@@ -31,12 +35,12 @@ section#futureOf {
     top: 50%;
     left: 0;
     transform: translateY(-50%);
-    background-color: $black-tint;
+    // background-color: $black-tint;
     padding: 1.5vw;
     padding-left: 2vw;
     opacity: 0;
     transition: all 1s ease-in-out;
-    max-width: 60vw;
+    max-width: 70vw;
   }
 
   // h4 {
@@ -48,7 +52,7 @@ section#futureOf {
   // }
 
   .section-headlines .dynamic-text{
-    transition-delay: 10s;
+    transition-delay: 14s;
   }
 }
 

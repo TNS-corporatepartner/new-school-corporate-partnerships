@@ -8,23 +8,23 @@ body {
   }
 
   &.fp-viewing-schools,
-  &.fp-viewing-approach, 
+  &.fp-viewing-approach,
   &.fp-viewing-people {
     #fixedLogo svg > g {
-      fill: $gray-dark;      
+      fill: $gray-dark;
       line {
-        stroke: $gray-dark;        
+        stroke: $gray-dark;
       }
     }
   }
-  
+
   &.partner-tray {
     #fixedLogo svg > g {
-      fill: white;      
+      fill: white;
       line {
-        stroke: white;        
+        stroke: white;
       }
-    }    
+    }
   }
 
   &.intro-in-progress {
@@ -34,10 +34,10 @@ body {
       svg > g {
         transition: none;
         line {
-          transition: none;        
+          transition: none;
         }
-      }       
-    }      
+      }
+    }
   }
 }
 
@@ -49,8 +49,8 @@ main {
 #fixedLogo {
   position: fixed;
   transform: translateY(0%);
-  bottom: 2vw;
-  right: 2vw;
+  bottom: 1.5vw;
+  right: calc(1.5vw + 10px);
   width: 140px;
   transition: transform 0.8s ease-in-out;
   svg > g {
@@ -58,14 +58,14 @@ main {
     line {
       transition: stroke 0.8s ease-in-out;
     }
-  }  
-} 
+  }
+}
 
 header#header {
   position: fixed;
   z-index: 10;
   top: 0;
-  right: 0;
+  right: 10px;
   padding: 15px 20px;
   background-color: $red;
   width: 140px;
@@ -113,18 +113,18 @@ header#header {
       -webkit-font-smoothing: antialiased;
       p {
         color: $red;
-        
+
         &:first-of-type {
           font-weight: 600;
         }
         &:not(:first-of-type) {
           line-height: 20px;
         }
-        small { 
+        small {
           color: white;
-          font-size: 16px; 
+          font-size: 16px;
           font-weight: 300;
-          
+
         }
       }
       .contact {
@@ -147,7 +147,7 @@ header#header {
     right: 0;
   }
   margin-top: auto !important;
-  top: 0; 
+  top: 0;
   height: 100vh;
   ul {
     display: flex;
@@ -159,12 +159,18 @@ header#header {
     li {
       flex-basis: 16.67%;
       margin: 0;
-      width: 8px;
+      width: 10px;
       a {
+        background-color: white;
+        transition: background .5s ease-in-out;
         span {
           display: none;
         }
         &.active {
+          background-color: $red;
+        }
+
+        &:hover{
           background-color: $red;
         }
       }

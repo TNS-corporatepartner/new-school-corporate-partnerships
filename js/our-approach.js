@@ -41,7 +41,7 @@ export class OurApproach {
 
     setTimeout(() => {
       $(this.sectionIntro).addClass('hidden')
-    }, 1200)
+    }, 1600)
 
     this.positionItems()
     this.handlePanning()
@@ -62,10 +62,10 @@ export class OurApproach {
 
   handleHover() {
     $('.project').on('mouseenter', function() {
-      const projectLeft = parseInt($(this).css('left')) / parseInt($(this).parent().css('width')) * 100 
-      const projectTop = parseInt($(this).css('top'))    
+      const projectLeft = parseInt($(this).css('left')) / parseInt($(this).parent().css('width')) * 100
+      const projectTop = parseInt($(this).css('top'))
       const projectWidth = this.offsetWidth         //px
-      const projectHeight = this.offsetHeight       //px 
+      const projectHeight = this.offsetHeight       //px
       const programEls = $(this).data('programs')
         .split(',')
         .map( pId => document.querySelector(`.program[data-id="${pId}"]`) )
@@ -82,7 +82,7 @@ export class OurApproach {
         //save last original position to reset on mouseleave
         el.lastTransform = el.style.transform
         el.lastLeft = el.style.left
-        el.lastTop = el.style.top        
+        el.lastTop = el.style.top
 
         //position programs around project
         el.style.transform = 'translate3d(0px, 0px, 0)'
@@ -178,9 +178,9 @@ export class OurApproach {
       const modal = document.getElementById('ourApproachModal')
       const modalContent = modal.querySelector('.content')
       const projectImg = this.querySelector('img').getBoundingClientRect()
-      
+
       modalContent.querySelector('.title-content').textContent = $(this).data('title')
-      modalContent.querySelector('.label-group').textContent = $(this).data('programs').replace(/-/g, ' ').split(',').join(', ') 
+      modalContent.querySelector('.label-group').textContent = $(this).data('programs').replace(/-/g, ' ').split(',').join(', ')
       modalContent.querySelector('blockquote').textContent = $(this).data('blockquote')
       modalContent.querySelector('.text-content').innerHTML = $(this).data('content')
 
@@ -242,7 +242,7 @@ export class OurApproach {
     const xPercent = e.clientX / window.innerWidth * 100
     const x = xPercent >= 50 ? (xPercent * .5 - 25) * -1 : 25 - xPercent * .5
 
-    const yPercent = e.clientY / window.innerHeight * 100    
+    const yPercent = e.clientY / window.innerHeight * 100
     const y = yPercent >= 50 ? (yPercent - 50) * -1 : 25 - yPercent * .5
 
     const z = x
@@ -257,7 +257,7 @@ export class OurApproach {
 
 
   positionItems() {
-    $('.program').each((index, el) => {   
+    $('.program').each((index, el) => {
       $(el).css('transform', `translate3d( ${(Math.random() * 25) + 1}%, ${(Math.random() * 25) + 1}px, 0)`)
     })
 

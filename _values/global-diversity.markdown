@@ -3,7 +3,6 @@ title: Global Diversity
 order: 3
 ---
 
-- We use design to tackle the big questions
-- We are the only comprehensive university with a world-famous design school, Parsons,
-  at its core
-- We design solutions that get to the future first
+- We are a microcosm of the global population and a magnet for talent from all over the world.
+- We are in one of the most creative and diverse city in the world.
+- We are a living laboratory for exploring and testing the new.

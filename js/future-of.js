@@ -17,8 +17,8 @@ export class FutureOf {
     this.questions = []
 
     this.section.querySelectorAll('.future-of-cell').forEach((el) => {
-      this.questions.push($(el).data('question')) 
-      this.words.push($(el).data('title')) 
+      this.questions.push($(el).data('question'))
+      this.words.push($(el).data('title'))
     })
 
     this.shufflerConfig = {
@@ -38,7 +38,7 @@ export class FutureOf {
     setTimeout(() => {
       $(this.sectionIntro).addClass('hidden')
       this.initVideos()
-    }, 1200)    
+    }, 1600)    
   }
 
 

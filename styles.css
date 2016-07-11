@@ -328,8 +328,8 @@ main {
 #fixedLogo {
   position: fixed;
   transform: translateY(0%);
-  bottom: 2vw;
-  right: 2vw;
+  bottom: 1.5vw;
+  right: calc(1.5vw + 10px);
   width: 140px;
   transition: transform 0.8s ease-in-out; }
   #fixedLogo svg > g {
@@ -341,7 +341,7 @@ header#header {
   position: fixed;
   z-index: 10;
   top: 0;
-  right: 0;
+  right: 10px;
   padding: 15px 20px;
   background-color: #E82E21;
   width: 140px; }
@@ -417,11 +417,16 @@ header#header {
       -ms-flex-preferred-size: 16.67%;
           flex-basis: 16.67%;
       margin: 0;
-      width: 8px; }
-      #fp-nav ul li a span {
-        display: none; }
-      #fp-nav ul li a.active {
-        background-color: #E82E21; }
+      width: 10px; }
+      #fp-nav ul li a {
+        background-color: white;
+        transition: background .5s ease-in-out; }
+        #fp-nav ul li a span {
+          display: none; }
+        #fp-nav ul li a.active {
+          background-color: #E82E21; }
+        #fp-nav ul li a:hover {
+          background-color: #E82E21; }
 
 #staticIntro .content {
   background-color: #E82E21;
@@ -490,26 +495,27 @@ section#futureOf {
   height: 100vh;
   background-color: black;
   color: white; }
+  section#futureOf .section-intro {
+    background-color: black; }
   section#futureOf .future-of-slider .future-of-cell {
     width: 100%;
     height: 100vh; }
     section#futureOf .future-of-slider .future-of-cell:first-of-type {
       opacity: 0; }
     section#futureOf .future-of-slider .future-of-cell .video-fs {
-      opacity: .8; }
+      opacity: .75; }
   section#futureOf .question {
     position: absolute;
     top: 50%;
     left: 0;
     transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.35);
     padding: 1.5vw;
     padding-left: 2vw;
     opacity: 0;
     transition: all 1s ease-in-out;
-    max-width: 60vw; }
+    max-width: 70vw; }
   section#futureOf .section-headlines .dynamic-text {
-    transition-delay: 10s; }
+    transition-delay: 14s; }
 
 section#coreValues {
   background-color: #333; }
@@ -555,35 +561,36 @@ section#coreValues {
         section#coreValues .panel-group .panel.hover .content-wrapper .content {
           pointer-events: none; }
           section#coreValues .panel-group .panel.hover .content-wrapper .content h4 {
-            border-bottom: 4px solid white;
             max-width: 100%;
             max-width: 26vw;
             transform-origin: left center;
             transition-delay: 0.25s;
-            transform: scale(1.5); }
+            transform: scale(1.35); }
+          section#coreValues .panel-group .panel.hover .content-wrapper .content ul {
+            height: auto; }
           section#coreValues .panel-group .panel.hover .content-wrapper .content ul li {
             opacity: 1;
             color: #999; }
             section#coreValues .panel-group .panel.hover .content-wrapper .content ul li:nth-of-type(1) {
-              transition-delay: 0.75s; }
-            section#coreValues .panel-group .panel.hover .content-wrapper .content ul li:nth-of-type(2) {
               transition-delay: 1.5s; }
-            section#coreValues .panel-group .panel.hover .content-wrapper .content ul li:nth-of-type(3) {
-              transition-delay: 2.25s; }
-            section#coreValues .panel-group .panel.hover .content-wrapper .content ul li:nth-of-type(4) {
+            section#coreValues .panel-group .panel.hover .content-wrapper .content ul li:nth-of-type(2) {
               transition-delay: 3s; }
-            section#coreValues .panel-group .panel.hover .content-wrapper .content ul li:nth-of-type(5) {
-              transition-delay: 3.75s; }
-            section#coreValues .panel-group .panel.hover .content-wrapper .content ul li:nth-of-type(6) {
+            section#coreValues .panel-group .panel.hover .content-wrapper .content ul li:nth-of-type(3) {
               transition-delay: 4.5s; }
-            section#coreValues .panel-group .panel.hover .content-wrapper .content ul li:nth-of-type(7) {
-              transition-delay: 5.25s; }
-            section#coreValues .panel-group .panel.hover .content-wrapper .content ul li:nth-of-type(8) {
+            section#coreValues .panel-group .panel.hover .content-wrapper .content ul li:nth-of-type(4) {
               transition-delay: 6s; }
-            section#coreValues .panel-group .panel.hover .content-wrapper .content ul li:nth-of-type(9) {
-              transition-delay: 6.75s; }
-            section#coreValues .panel-group .panel.hover .content-wrapper .content ul li:nth-of-type(10) {
+            section#coreValues .panel-group .panel.hover .content-wrapper .content ul li:nth-of-type(5) {
               transition-delay: 7.5s; }
+            section#coreValues .panel-group .panel.hover .content-wrapper .content ul li:nth-of-type(6) {
+              transition-delay: 9s; }
+            section#coreValues .panel-group .panel.hover .content-wrapper .content ul li:nth-of-type(7) {
+              transition-delay: 10.5s; }
+            section#coreValues .panel-group .panel.hover .content-wrapper .content ul li:nth-of-type(8) {
+              transition-delay: 12s; }
+            section#coreValues .panel-group .panel.hover .content-wrapper .content ul li:nth-of-type(9) {
+              transition-delay: 13.5s; }
+            section#coreValues .panel-group .panel.hover .content-wrapper .content ul li:nth-of-type(10) {
+              transition-delay: 15s; }
             section#coreValues .panel-group .panel.hover .content-wrapper .content ul li:last-of-type {
               color: #fff !important; }
       section#coreValues .panel-group .panel.hover-sibling:before {
@@ -605,9 +612,12 @@ section#coreValues {
         width: 100%; }
         section#coreValues .panel-group .panel .content-wrapper .content {
           position: absolute;
-          margin-top: -10%;
+          top: 50%;
+          transform: translateY(-50%);
+          margin-top: 40px;
           width: 100%;
-          padding: 2vw;
+          padding: 30px;
+          padding-right: 60px;
           background-color: transparent;
           color: white;
           cursor: url("/images/click-cursor-red.svg"), auto;
@@ -617,15 +627,27 @@ section#coreValues {
             font-size: 4.25vh;
             transition: transform 0.5s ease-in-out, max-width 0.5s ease-in-out;
             transform-origin: left top; }
+            @media (max-width: 1440px) {
+              section#coreValues .panel-group .panel .content-wrapper .content h4 {
+                font-size: 36px; } }
           section#coreValues .panel-group .panel .content-wrapper .content ul {
             list-style: none;
             min-width: 60vw;
-            margin-top: 6vh; }
+            margin-top: 40px;
+            height: 0;
+            transition: height 0.5s ease-in-out; }
             section#coreValues .panel-group .panel .content-wrapper .content ul li {
-              font-size: 2.5vh;
-              margin-bottom: 2vw;
+              font-size: 30px;
+              margin-bottom: 20px;
               opacity: 0;
               transition: opacity 0.5s ease-in-out, color 1.8s ease-in; }
+              @media (min-width: 1440px) {
+                section#coreValues .panel-group .panel .content-wrapper .content ul li {
+                  font-size: 36px;
+                  max-width: 900px; } }
+              @media (min-width: 1440px) {
+                section#coreValues .panel-group .panel .content-wrapper .content ul li {
+                  margin-bottom: 30px; } }
 
 body.school-modal-open #fixedLogo svg > g {
   fill: white;
@@ -642,6 +664,11 @@ body.school-modal-open section#ourSchool {
   body.school-modal-open section#ourSchool #schoolModal {
     opacity: 1;
     pointer-events: auto; }
+
+body.school-modal-open .school {
+  -webkit-filter: grayscale(100%) blur(10px);
+          filter: grayscale(100%) blur(10px);
+  opacity: .4; }
 
 section#ourSchool .section-headlines h4,
 section#ourSchool .section-headlines h3 {
@@ -671,67 +698,83 @@ section#ourSchool .school-links {
   section#ourSchool .school-links .school {
     position: absolute;
     cursor: url(/images/click-cursor-red.svg), auto; }
-    section#ourSchool .school-links .school:hover h3 {
-      color: black; }
     section#ourSchool .school-links .school.parsons {
-      left: 26%;
+      left: 19%;
       top: 27.2%; }
     section#ourSchool .school-links .school.eugene-lang {
-      left: calc(34.4% + 14.9%);
-      top: 66%; }
+      left: 70%;
+      top: 64%; }
     section#ourSchool .school-links .school.public-engagement {
-      left: 71.2%;
-      top: 50.2%; }
+      left: 75%;
+      top: 33%; }
     section#ourSchool .school-links .school.performing-arts {
-      left: 2%;
-      top: 53%; }
+      left: 25%;
+      top: 58%; }
     section#ourSchool .school-links .school.social-research {
-      left: calc(58.4% + 14.9%);
-      top: 18.4%; }
+      left: 55%;
+      top: 19%; }
+      section#ourSchool .school-links .school.social-research .img {
+        background-position: 15% 50%; }
     section#ourSchool .school-links .school.horz {
-      width: 22.79%;
-      height: 15%; }
+      width: 20%;
+      height: 22%; }
       section#ourSchool .school-links .school.horz .text-container {
         bottom: -100%; }
         section#ourSchool .school-links .school.horz .text-container h3 {
-          top: 1.5vw;
-          left: 1.5vw; }
+          top: 15px; }
     section#ourSchool .school-links .school.vert {
       position: absolute;
       display: -ms-flexbox;
       display: flex;
       -ms-flex-align: center;
           align-items: center;
-      width: 14.9%;
-      height: 24%; }
+      width: 15%;
+      height: 30%; }
       section#ourSchool .school-links .school.vert .text-container {
         display: -ms-flexbox;
         display: flex;
         -ms-flex-align: center;
-            align-items: center; }
+            align-items: center;
+        margin-left: 15px; }
         section#ourSchool .school-links .school.vert .text-container h3 {
           position: relative; }
       section#ourSchool .school-links .school.vert .img-container {
-        left: -114.9%; }
+        left: -100%; }
     section#ourSchool .school-links .school .img-container {
       position: absolute;
       height: 100%;
       width: 100%;
+      top: 0;
+      left: 0;
+      overflow: hidden; }
+    section#ourSchool .school-links .school .img {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
       margin-right: 20px;
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      border: 1px solid #999; }
+      transition: all .6s ease-in-out; }
+    section#ourSchool .school-links .school:hover .img {
+      transform: scale(1.05); }
+    section#ourSchool .school-links .school.not-hover .img {
+      -webkit-filter: grayscale(100%);
+              filter: grayscale(100%);
+      opacity: .4; }
+    section#ourSchool .school-links .school.not-hover .text-container h3 {
+      color: #999; }
     section#ourSchool .school-links .school .text-container {
       position: absolute;
       height: 100%;
       width: 100%; }
       section#ourSchool .school-links .school .text-container h3 {
         position: absolute;
-        font-weight: 300;
-        font-size: 2.2vh;
-        line-height: 2.7vh;
-        width: 250px;
+        font-weight: normal;
+        font-size: 2.4vh;
+        line-height: 1.2;
         color: #E82E21;
         transition: all 0.4s ease-in-out; }
 
@@ -745,7 +788,8 @@ section#ourSchool #schoolModal {
       align-items: center; }
   section#ourSchool #schoolModal .content {
     display: none;
-    height: 50%;
+    height: calc(100vh - 360px);
+    width: 100vw;
     -ms-flex-align: center;
         -ms-grid-row-align: center;
         align-items: center;
@@ -753,12 +797,14 @@ section#ourSchool #schoolModal {
     color: white; }
     section#ourSchool #schoolModal .content .text-container {
       width: 50%;
-      padding: 4vw; }
+      padding: 4vw;
+      -webkit-font-smoothing: antialiased; }
       section#ourSchool #schoolModal .content .text-container .school-name {
-        margin-top: 5vh;
-        line-height: 5.2vh;
+        line-height: 1.1;
         text-transform: uppercase;
-        font-weight: 900;
+        font-weight: normal;
+        margin-top: 20px;
+        font-family: "NeueDisplay", sans-serif;
         margin-bottom: 15px; }
       section#ourSchool #schoolModal .content .text-container p {
         margin-bottom: 20px; }
@@ -1198,22 +1244,27 @@ body {
   box-sizing: border-box; }
 
 p {
-  font-size: 22px; }
+  font-size: 20px;
+  line-height: 1.45;
+  max-width: 900px; }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: "NeueDisplay", sans-serif;
   font-weight: bold; }
 
 h1 {
-  font-size: 7.5vh; }
+  font-size: 75px; }
 
 h2 {
   font-family: "Neue", sans-serif;
-  font-size: 4.8vh;
+  font-size: 40px;
   line-height: 1.3; }
 
 h3 {
-  font-size: 42px; }
+  font-size: 32px; }
+  @media (max-width: 1440px) {
+    h3 {
+      font-size: 28px; } }
 
 h4 {
   font-size: 24px; }
@@ -1263,7 +1314,7 @@ h6 {
   top: 0;
   left: 0;
   padding: 2vw;
-  max-width: 70vw; }
+  max-width: 80vw; }
   .section-headlines .dynamic-text {
     transition: opacity 0.4s ease-in-out; }
   .section-headlines p {

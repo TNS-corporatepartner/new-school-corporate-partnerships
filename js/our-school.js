@@ -10,14 +10,22 @@ export class OurSchool {
     setTimeout(() => {
       $(this.sectionInto).addClass('hidden')
     }, 1200)
-  
+
+    $('.school').on('hover', function(e) {
+      $(this).siblings().addClass('not-hover');
+    })
+
+    $('.school').on('mouseout', function(e) {
+      $(this).siblings().removeClass('not-hover');
+    })
+
     $('.school').on('click', function(e) {
       e.stopPropagation()
       const r = this.querySelector('.img-container').getBoundingClientRect()
       const section = document.getElementById('ourSchool')
       const modal = document.getElementById('schoolModal')
-      const modalContent = modal.querySelector('.content')      
-      const modalImg = modalContent.querySelector('.img-container')      
+      const modalContent = modal.querySelector('.content')
+      const modalImg = modalContent.querySelector('.img-container')
       const modalText = modalContent.querySelector('.text-container')
 
 
@@ -58,7 +66,7 @@ export class OurSchool {
             duration: 600,
             complete: function() {
               Velocity(modalContent, {
-                opacity: 1 
+                opacity: 1
               }, {
                 display: 'flex'
               })
@@ -69,7 +77,7 @@ export class OurSchool {
 
 
       $('#ourSchool').one('click', (e) => {
-        e.stopPropagation()        
+        e.stopPropagation()
 
         $('body').removeClass('school-modal-open')
 
