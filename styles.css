@@ -774,88 +774,84 @@ section#ourSchool #schoolModal {
 
 #peopleSlider {
   position: absolute;
+  left: 0;
   top: calc(50% - 303px);
+  width: 100vw;
   outline: none; }
   #peopleSlider .slider-inner {
-    position: relative;
-    height: 600px;
-    left: 0; }
+    position: relative; }
     #peopleSlider .slider-inner .cell {
-      position: absolute;
-      top: 0;
-      left: 0; }
-      #peopleSlider .slider-inner .cell.cell-1 .grid {
-        left: -100%; }
-      #peopleSlider .slider-inner .cell.cell-3 .grid {
-        left: 100%; }
-    #peopleSlider .slider-inner .grid {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 600px; }
-      #peopleSlider .slider-inner .grid .person {
-        width: 300px;
-        height: 300px;
-        color: white;
-        position: relative;
-        display: -ms-inline-flexbox;
-        display: inline-flex;
-        -ms-flex-align: end;
-            align-items: flex-end;
-        -ms-flex-wrap: wrap;
-            flex-wrap: wrap;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        cursor: url(/images/click-cursor-black.svg), auto; }
-        #peopleSlider .slider-inner .grid .person:not(.video) {
-          -webkit-filter: grayscale(1);
-                  filter: grayscale(1);
-          transition: -webkit-filter 1s ease;
-          transition: filter 1s ease;
-          transition: filter 1s ease, -webkit-filter 1s ease; }
-          #peopleSlider .slider-inner .grid .person:not(.video):hover {
-            -webkit-filter: grayscale(0);
-                    filter: grayscale(0); }
-            #peopleSlider .slider-inner .grid .person:not(.video):hover .overlay {
-              opacity: .7; }
-        #peopleSlider .slider-inner .grid .person:hover p {
-          max-height: 200px;
-          opacity: 1; }
-        #peopleSlider .slider-inner .grid .person.video {
-          width: 604px; }
-          #peopleSlider .slider-inner .grid .person.video .overlay {
-            background-color: rgba(0, 0, 0, 0.1);
-            transition: background 1s ease; }
-          #peopleSlider .slider-inner .grid .person.video:hover .overlay {
-            background-color: rgba(232, 46, 33, 0.7); }
-            #peopleSlider .slider-inner .grid .person.video:hover .overlay:before {
-              content: url(/images/play-button.svg); }
-        #peopleSlider .slider-inner .grid .person hgroup {
-          position: absolute;
-          padding: 10px;
-          bottom: 0;
-          left: 0; }
-        #peopleSlider .slider-inner .grid .person p {
-          opacity: 0;
-          max-height: 0;
-          font-size: 18px;
-          margin-top: 5px;
-          transition: all 0.8s ease-in-out; }
-        #peopleSlider .slider-inner .grid .person .overlay {
-          position: absolute;
-          background-color: rgba(0, 0, 0, 0.35);
-          background-blend-mode: multiply;
-          display: -ms-flexbox;
-          display: flex;
-          -ms-flex-align: center;
-              align-items: center;
-          -ms-flex-pack: center;
-              justify-content: center;
-          width: 100%;
-          height: 100%;
-          opacity: 1;
-          transition: all 1s ease; }
+      float: left;
+      transform: translateX(-100%); }
+      #peopleSlider .slider-inner .cell .grid {
+        height: 600px;
+        max-height: 600px !important; }
+        #peopleSlider .slider-inner .cell .grid .person {
+          float: left;
+          width: 300px;
+          height: 300px;
+          color: white;
+          position: relative;
+          display: -ms-inline-flexbox;
+          display: inline-flex;
+          -ms-flex-align: end;
+              align-items: flex-end;
+          -ms-flex-wrap: wrap;
+              flex-wrap: wrap;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+          cursor: url(/images/click-cursor-black.svg), auto; }
+          #peopleSlider .slider-inner .cell .grid .person.video {
+            width: 600px; }
+          #peopleSlider .slider-inner .cell .grid .person:not(.video) {
+            -webkit-filter: grayscale(1);
+                    filter: grayscale(1);
+            transition: -webkit-filter 1s ease;
+            transition: filter 1s ease;
+            transition: filter 1s ease, -webkit-filter 1s ease; }
+            #peopleSlider .slider-inner .cell .grid .person:not(.video):hover {
+              -webkit-filter: grayscale(0);
+                      filter: grayscale(0); }
+              #peopleSlider .slider-inner .cell .grid .person:not(.video):hover .overlay {
+                opacity: .7; }
+          #peopleSlider .slider-inner .cell .grid .person:hover p {
+            max-height: 200px;
+            opacity: 1; }
+          #peopleSlider .slider-inner .cell .grid .person.video {
+            width: 604px; }
+            #peopleSlider .slider-inner .cell .grid .person.video .overlay {
+              background-color: rgba(0, 0, 0, 0.1);
+              transition: background 1s ease; }
+            #peopleSlider .slider-inner .cell .grid .person.video:hover .overlay {
+              background-color: rgba(232, 46, 33, 0.7); }
+              #peopleSlider .slider-inner .cell .grid .person.video:hover .overlay:before {
+                content: url(/images/play-button.svg); }
+          #peopleSlider .slider-inner .cell .grid .person hgroup {
+            position: absolute;
+            padding: 10px;
+            bottom: 0;
+            left: 0; }
+          #peopleSlider .slider-inner .cell .grid .person p {
+            opacity: 0;
+            max-height: 0;
+            font-size: 18px;
+            margin-top: 5px;
+            transition: all 0.8s ease-in-out; }
+          #peopleSlider .slider-inner .cell .grid .person .overlay {
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.35);
+            background-blend-mode: multiply;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-align: center;
+                align-items: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+            width: 100%;
+            height: 100%;
+            opacity: 1;
+            transition: all 1s ease; }
 
 #personModal {
   position: absolute;

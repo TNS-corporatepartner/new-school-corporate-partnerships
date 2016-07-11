@@ -12,15 +12,20 @@ export class OurPeople {
     setTimeout(() => {
       $(this.sectionInto).addClass('hidden')
     }, 1200)
-
     
     this.slider = document.getElementById('peopleSlider')
     this.sliderInner = this.slider.querySelector('.slider-inner')
     this.walkDirection = 'right'
     this.lastLeft = 0      
-    this.tl = new TimelineMax({repeat: -1})
+    this.tl = new TimelineMax({
+      repeat: -1,
+      onReverseComplete: () => {
+        this.tl.seek('5')
+      }
+    })
     this.timeScale = 5  
 
+    
     var chunks = document.querySelectorAll('.grid').forEach(chunk => {
       new Isotope( chunk, {
         itemSelector: '.person',
@@ -31,11 +36,18 @@ export class OurPeople {
       });
     })
 
-    this.cellWidth = this.slider.querySelector('.cell .grid').offsetWidth
-    this.slideWidth = this.cellWidth * 1;
+    //set width of parent containing isotope grids in order to float: left
+    const sliderInnerWidth = document.querySelector('.grid').offsetWidth * 3
+    this.sliderInner.style.width = sliderInnerWidth + 'px'
+    this.cellWidth = this.slider.querySelector('.cell').offsetWidth
+
+    const tl = this.tl
 
     $('.person.video').on('click', function(e) {
       e.stopPropagation()
+
+      tl.timeScale(0)
+
       const personModal = document.getElementById('personModal')
       const modalContent = personModal.querySelector('.content')
       const videoSrc = $(this).data('src');
@@ -49,6 +61,9 @@ export class OurPeople {
 
       $('#ourPeople').one('click', (e) => {
         e.stopPropagation()
+
+        tl.timeScale(0.25)
+
         $('#ourPeople').removeClass('modal-open');
         modalContent.innerHTML = ''
       })      
@@ -59,6 +74,8 @@ export class OurPeople {
       ease: Linear.easeNone, 
       timeScale: this.timeScale
     }))
+
+    this.tl.timeScale(0.25)
 
     const mouseleave$ = Observable.fromEvent(this.slider, 'mouseleave')
       .subscribe(() => {
@@ -77,55 +94,8 @@ export class OurPeople {
 
         this.tl.timeScale( Math.abs(e.x / 15) )          
       })
-
-    // const run$ = mousemove$
-    //   .take(1) 
-    //   .switchMap((e) => this.animateToPoint$(e))      
-    //   .repeat()
-
-    // const walk$ = (direction) => 
-    //   Observable.interval(15).mapTo(direction)
-
-    // walk$('right')
-    //   .takeUntil(mousemove$)
-    //   .subscribe( (direction) => this.animateSlowly(direction) )    
-
-    // run$
-    //   .switchMap( () => walk$().takeUntil(mousemove$) )       
-    //   .subscribe(
-    //     (direction) => this.animateSlowly(direction), 
-    //     this.handleErr, 
-    //     () => { console.log('RUN DONE') }
-    //   )
   }
 
-  animateSlowly(direction) {
-    const step = direction === 'right' ? -1 : 1
-    var newLeft = this.lastLeft += step   
-
-    Velocity(this.sliderInner, 'stop')
-    Velocity(this.sliderInner, {
-      left: this.setNewLeft(newLeft)
-    }, {
-      duration: 0
-    })            
-  }
-
-  animateToPoint$(e) {
-    return Observable.create(obs => {
-        Velocity(this.sliderInner, 'stop')
-        Velocity(this.sliderInner, {
-          left: e.sliderDest
-        }, {
-          duration: e.duration,
-          complete: () => {
-            obs.next(e.direction)
-            obs.complete()
-          },
-          easing: 'easeInSine'
-        })
-    })
-  } 
   
   mouseCoords(e) {
     const xPercent = e.clientX / window.innerWidth * 100
@@ -134,27 +104,11 @@ export class OurPeople {
     const yPercent = e.clientY / window.innerHeight * 100
     const y = yPercent >= 50 ? (yPercent - 50) * -1 : 50 - yPercent
 
-    const lastLeft = this.lastLeft || 0
-    const unfilteredNewLeft = lastLeft + (x * 0.01 * window.innerWidth)
-
-    const newLeft = this.setNewLeft( unfilteredNewLeft ) 
-    const isLeftReset = unfilteredNewLeft.toFixed(0) != newLeft.toFixed(0)      
-    this.lastLeft = newLeft
-
     //returns x and y with positive or negative 50 depending on distance from center
     return {
       x: x,
-      y: y,
-      sliderDest: newLeft,
-      direction: newLeft < lastLeft ? 'right' : 'left',
-      duration: isLeftReset ? 0 : 1000
+      y: y
     }
-  }
-
-  setNewLeft(newLeft) {
-    var sliderPosition = ( ( ( newLeft - this.cellWidth ) % this.slideWidth ) + this.slideWidth ) % this.slideWidth;
-    var newLeft = sliderPosition += -this.slideWidth + this.cellWidth;    
-    return newLeft
   }
 
   handleErr(err) {

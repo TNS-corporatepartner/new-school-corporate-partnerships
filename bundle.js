@@ -32554,7 +32554,12 @@
 	    this.sliderInner = this.slider.querySelector('.slider-inner');
 	    this.walkDirection = 'right';
 	    this.lastLeft = 0;
-	    this.tl = new TimelineMax({ repeat: -1 });
+	    this.tl = new TimelineMax({
+	      repeat: -1,
+	      onReverseComplete: function onReverseComplete() {
+	        _this.tl.seek('5');
+	      }
+	    });
 	    this.timeScale = 5;
 
 	    var chunks = document.querySelectorAll('.grid').forEach(function (chunk) {
@@ -32567,11 +32572,18 @@
 	      });
 	    });
 
-	    this.cellWidth = this.slider.querySelector('.cell .grid').offsetWidth;
-	    this.slideWidth = this.cellWidth * 1;
+	    //set width of parent containing isotope grids in order to float: left
+	    var sliderInnerWidth = document.querySelector('.grid').offsetWidth * 3;
+	    this.sliderInner.style.width = sliderInnerWidth + 'px';
+	    this.cellWidth = this.slider.querySelector('.cell').offsetWidth;
+
+	    var tl = this.tl;
 
 	    $('.person.video').on('click', function (e) {
 	      e.stopPropagation();
+
+	      tl.timeScale(0);
+
 	      var personModal = document.getElementById('personModal');
 	      var modalContent = personModal.querySelector('.content');
 	      var videoSrc = $(this).data('src');
@@ -32585,6 +32597,9 @@
 
 	      $('#ourPeople').one('click', function (e) {
 	        e.stopPropagation();
+
+	        tl.timeScale(0.25);
+
 	        $('#ourPeople').removeClass('modal-open');
 	        modalContent.innerHTML = '';
 	      });
@@ -32595,6 +32610,8 @@
 	      ease: Linear.easeNone,
 	      timeScale: this.timeScale
 	    }));
+
+	    this.tl.timeScale(0.25);
 
 	    var mouseleave$ = _rxjs.Observable.fromEvent(this.slider, 'mouseleave').subscribe(function () {
 	      _this.tl.timeScale(0.25);
@@ -32611,61 +32628,9 @@
 
 	      _this.tl.timeScale(Math.abs(e.x / 15));
 	    });
-
-	    // const run$ = mousemove$
-	    //   .take(1)
-	    //   .switchMap((e) => this.animateToPoint$(e))     
-	    //   .repeat()
-
-	    // const walk$ = (direction) =>
-	    //   Observable.interval(15).mapTo(direction)
-
-	    // walk$('right')
-	    //   .takeUntil(mousemove$)
-	    //   .subscribe( (direction) => this.animateSlowly(direction) )   
-
-	    // run$
-	    //   .switchMap( () => walk$().takeUntil(mousemove$) )      
-	    //   .subscribe(
-	    //     (direction) => this.animateSlowly(direction),
-	    //     this.handleErr,
-	    //     () => { console.log('RUN DONE') }
-	    //   )
 	  }
 
 	  _createClass(OurPeople, [{
-	    key: 'animateSlowly',
-	    value: function animateSlowly(direction) {
-	      var step = direction === 'right' ? -1 : 1;
-	      var newLeft = this.lastLeft += step;
-
-	      Velocity(this.sliderInner, 'stop');
-	      Velocity(this.sliderInner, {
-	        left: this.setNewLeft(newLeft)
-	      }, {
-	        duration: 0
-	      });
-	    }
-	  }, {
-	    key: 'animateToPoint$',
-	    value: function animateToPoint$(e) {
-	      var _this2 = this;
-
-	      return _rxjs.Observable.create(function (obs) {
-	        Velocity(_this2.sliderInner, 'stop');
-	        Velocity(_this2.sliderInner, {
-	          left: e.sliderDest
-	        }, {
-	          duration: e.duration,
-	          complete: function complete() {
-	            obs.next(e.direction);
-	            obs.complete();
-	          },
-	          easing: 'easeInSine'
-	        });
-	      });
-	    }
-	  }, {
 	    key: 'mouseCoords',
 	    value: function mouseCoords(e) {
 	      var xPercent = e.clientX / window.innerWidth * 100;
@@ -32674,28 +32639,11 @@
 	      var yPercent = e.clientY / window.innerHeight * 100;
 	      var y = yPercent >= 50 ? (yPercent - 50) * -1 : 50 - yPercent;
 
-	      var lastLeft = this.lastLeft || 0;
-	      var unfilteredNewLeft = lastLeft + x * 0.01 * window.innerWidth;
-
-	      var newLeft = this.setNewLeft(unfilteredNewLeft);
-	      var isLeftReset = unfilteredNewLeft.toFixed(0) != newLeft.toFixed(0);
-	      this.lastLeft = newLeft;
-
 	      //returns x and y with positive or negative 50 depending on distance from center
 	      return {
 	        x: x,
-	        y: y,
-	        sliderDest: newLeft,
-	        direction: newLeft < lastLeft ? 'right' : 'left',
-	        duration: isLeftReset ? 0 : 1000
+	        y: y
 	      };
-	    }
-	  }, {
-	    key: 'setNewLeft',
-	    value: function setNewLeft(newLeft) {
-	      var sliderPosition = ((newLeft - this.cellWidth) % this.slideWidth + this.slideWidth) % this.slideWidth;
-	      var newLeft = sliderPosition += -this.slideWidth + this.cellWidth;
-	      return newLeft;
 	    }
 	  }, {
 	    key: 'handleErr',
