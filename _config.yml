@@ -5,6 +5,11 @@ collections:
   future:
     title: Imagine the Future of…
     output: false
+  schools:
+    title: One University, Five Schools
+    output: false
+    introduction: Our unique structure provides the expertise of five schools collaborating
+      to reinvent everything and approach issues from multiple, integrated perspectives.
   people:
     title: Our History of Innovation
     output: false
@@ -103,11 +108,6 @@ collections:
     - TRANSDISCIPLINARY DESIGN
     - URBAN DESIGN
     - URBAN POLICY ANALYSIS AND MANAGEMENT
-  schools:
-    title: One University, Five Schools
-    output: false
-    introduction: Our unique structure provides the expertise of five schools collaborating
-      to reinvent everything and approach issues from multiple, integrated perspectives.
   partner:
     title: Partner with Us
     output: false
@@ -125,7 +125,7 @@ collections:
 email: your-email@domain.com
 description: |
   Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
-baseurl:
+baseurl: 
 url: http://yourdomain.com
 introduction: The New School, in NYC, is the only university where a world-renowned
   art and design school comes together with acclaimed liberal arts, performing arts,

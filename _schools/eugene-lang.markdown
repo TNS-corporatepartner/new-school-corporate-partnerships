@@ -6,3 +6,4 @@ order: 4
 description: A small, progressive liberal arts college, in the heart of NYC, designed
   for fiercely independent scholars. At Lang, scholarly rigor meets intellectual freedom.
 ---
+
