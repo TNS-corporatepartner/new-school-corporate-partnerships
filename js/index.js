@@ -214,6 +214,13 @@ function initGlobalStreams() {
     app.showContactModal()
   })
 
+  $('.contact-btn').on('click', function(e) {
+    e.preventDefault()
+    e.stopPropagation()
+    app.showContactModal()
+  })
+
+
   var move$ = Observable.fromEvent(window, 'mousemove')
 
   var moveUp$ = move$

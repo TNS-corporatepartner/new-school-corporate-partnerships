@@ -1,5 +1,6 @@
 ---
 title: Leverage big data to envision the future
+date: 2016-06-24 23:00:00 Z
 position: 2
 image: "/uploads/envision.png"
 ---

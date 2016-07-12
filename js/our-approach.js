@@ -159,7 +159,7 @@ export class OurApproach {
 
       const position3 = {
         left: left + 25,
-        top: top - 25,             
+        top: top - 100,             
         place: '03'
       }
 
@@ -177,7 +177,7 @@ export class OurApproach {
 
       const position6 = {
         left: left,
-        top: top + height + 20, //20 project paddingBottom        
+        top: top + height + 30,        
         place: '06'
       }
 
@@ -189,7 +189,7 @@ export class OurApproach {
 
       const position8 = {
         left: left + 300, //300 program width
-        top: top + height + 20,
+        top: top + height + 30,
         place: '08'
       }
 
