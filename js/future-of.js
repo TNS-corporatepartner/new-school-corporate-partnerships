@@ -32,7 +32,8 @@ export class FutureOf {
       cellAlign: 'left',
       contain: true,
       wrapAround: true,
-      autoPlay: false
+      autoPlay: false,
+      accessibility: false
     })
 
     setTimeout(() => {
@@ -61,8 +62,6 @@ export class FutureOf {
 
 
   playCellSequence() {
-    console.log(this)
-    console.log(app.activeInstance)
     if (app.activeInstance == this) {
       const cell = this.flkty.cells[ this.flkty.selectedIndex ].element
       const video = cell.querySelector('video')
@@ -75,6 +74,18 @@ export class FutureOf {
         setTimeout(() => {
           this.loadingWord.textContent = this.words[ this.flkty.selectedIndex + 1 ] ? this.words[ this.flkty.selectedIndex + 1 ] : this.words[0]
           this.flkty.next()
+
+          //reset video
+          this.flkty.once('settle', function() {
+            console.log('SETTLE DOWN')
+            video.pause()
+            video.currentTime = 0
+            video.load()
+          })
+          setTimeout(function() {
+
+          })
+
         }, 1000)
       }, 5000)
     }

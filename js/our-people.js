@@ -12,11 +12,11 @@ export class OurPeople {
     setTimeout(() => {
       $(this.sectionInto).addClass('hidden')
     }, 1200)
-    
+
     this.slider = document.getElementById('peopleSlider')
     this.sliderInner = this.slider.querySelector('.slider-inner')
     this.walkDirection = 'right'
-    this.lastLeft = 0      
+    this.lastLeft = 0
     this.tl = new TimelineMax({
       repeat: -1,
       smoothChildTiming: true,
@@ -24,15 +24,13 @@ export class OurPeople {
         this.tl.seek('5')
       }
     })
-    this.timeScale = 5  
+    this.timeScale = 5
 
     document.querySelectorAll('.grid').forEach(chunk => {
       new Isotope( chunk, {
         itemSelector: '.person',
         layoutMode: 'masonryHorizontal',
-        masonryHorizontal: {
-          rowHeight: 300
-        }
+
       })
     })
 
@@ -52,51 +50,64 @@ export class OurPeople {
       const modalContent = personModal.querySelector('.content')
       const videoSrc = $(this).data('src');
       const video = $('<video />')
-      
+
       video.attr('src', videoSrc)
       video.attr('autoplay', true)
-      
+
       $('#ourPeople').addClass('modal-open');
       $(modalContent).append(video)
 
       $('#ourPeople').one('click', (e) => {
         e.stopPropagation()
 
-        tl.timeScale(0.25)
+        tl.timeScale(0.45)
 
         $('#ourPeople').removeClass('modal-open');
         modalContent.innerHTML = ''
-      })      
-    })      
- 
+      })
+    })
+
+    $('.person.video').on('mouseenter', () => {
+      this.tl.timeScale(0.09)
+
+    })
+
+    $('.person.video').on('mouseleave', () => {
+      console.log('leave');
+      this.tl.timeScale(0.45)
+    })
+
+
     this.tl.add( new TweenMax(this.sliderInner, '5', {
       left: this.cellWidth * -1,
-      ease: Linear.easeNone, 
+      ease: Linear.easeNone,
       timeScale: this.timeScale
     }))
 
-    this.tl.timeScale(0.25)
+    this.tl.timeScale(0.45)
 
     const mouseleave$ = Observable.fromEvent(this.slider, 'mouseleave')
       .subscribe(() => {
-        this.tl.timeScale(0.25)
+        this.tl.timeScale(0.45)
       })
+
+
 
     const mousemove$ = Observable.fromEvent(this.slider, 'mousemove')
       .map(e => this.mouseCoords(e))
       .repeat()
-      .subscribe(e => {  
+      .subscribe(e => {
         if ( e.x < 0 && this.tl.reversed() ) {
           this.tl.reversed(false)
         } else if ( e.x > 0 && !this.tl.reversed() ) {
           this.tl.reversed(true)
         }
 
-        this.tl.timeScale( Math.abs(e.x / 15) )          
+        //this.tl.timeScale( Math.abs(e.x / 50) )
       })
   }
 
-  
+
   mouseCoords(e) {
     const xPercent = e.clientX / window.innerWidth * 100
     const x = xPercent >= 50 ? (xPercent - 50) * -1 : 50 - xPercent
@@ -113,6 +124,5 @@ export class OurPeople {
 
   handleErr(err) {
     console.log(err)
-  }  
+  }
 }
-

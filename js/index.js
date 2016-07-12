@@ -54,8 +54,8 @@ function init() {
     () => { //executes when initSplashContent stream completes
       window.removeEventListener('click', skipSplashAnimation)
 
-      $('main').fullpage({
-        anchors:['intro', 'future', 'difference', 'schools', 'approach', 'people', 'partner'],
+       $('main').fullpage({
+        anchors:['intro', 'future', 'difference', 'schools', 'approach', 'people', 'partner','contact'],
         navigation: true,
         afterRender: function() {
           if (!window.location.hash) {
@@ -83,15 +83,19 @@ function init() {
           app.activeInstance.sleep && app.activeInstance.sleep()
         },
         afterLoad: function(anchorLink, index) {
-          if (!app.instances[index]) {
-            app.instances[index] = new app.constructors[index]()
-            app.activeScrollIndex = index
-            app.activeInstance = app.instances[index]
-          } else {
-            app.activeScrollIndex = index
-            app.activeInstance = app.instances[index]
-            app.instances[index].awake && app.instances[index].awake()
+
+          if (app.constructors[index]){
+            if (!app.instances[index] ) {
+              app.instances[index] = new app.constructors[index]()
+              app.activeScrollIndex = index
+              app.activeInstance = app.instances[index]
+            } else {
+              app.activeScrollIndex = index
+              app.activeInstance = app.instances[index]
+              app.instances[index].awake && app.instances[index].awake()
+            }
           }
+
         }
       })
     }
