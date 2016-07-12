@@ -274,7 +274,7 @@ export class OurApproach {
 
     $('.project').on('click', function(e) {      
       e.stopPropagation()
-      tl.timeScale(0)
+      tl.pause()
 
       const modal = document.getElementById('ourApproachModal')
       const modalContent = modal.querySelector('.content')
@@ -285,7 +285,9 @@ export class OurApproach {
       modalContent.querySelector('blockquote').textContent = $(this).data('blockquote')
       modalContent.querySelector('.text-content').innerHTML = $(this).data('content')
 
-      modal.querySelector('img').src = '/images/music.jpg'
+      console.log($(this).data('image'))
+
+      modal.querySelector('img').src = $(this).data('image')
       $.fn.fullpage.setAllowScrolling(false)
 
       Velocity(modal, {
@@ -317,11 +319,10 @@ export class OurApproach {
         }
       })
 
-
       $(modal).one('click', function(e) {
         e.stopPropagation()
 
-        tl.timeScale(0.1)
+        tl.play()
 
         $.fn.fullpage.setAllowScrolling(true)
 

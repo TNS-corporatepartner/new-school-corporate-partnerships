@@ -14569,31 +14569,6 @@
 	// shim for using process in browser
 
 	var process = module.exports = {};
-
-	// cached from whatever global is present so that test runners that stub it
-	// don't break things.  But we need to wrap it in a try catch in case it is
-	// wrapped in strict mode code which doesn't define any globals.  It's inside a
-	// function because try/catches deoptimize in certain engines.
-
-	var cachedSetTimeout;
-	var cachedClearTimeout;
-
-	(function () {
-	  try {
-	    cachedSetTimeout = setTimeout;
-	  } catch (e) {
-	    cachedSetTimeout = function () {
-	      throw new Error('setTimeout is not defined');
-	    }
-	  }
-	  try {
-	    cachedClearTimeout = clearTimeout;
-	  } catch (e) {
-	    cachedClearTimeout = function () {
-	      throw new Error('clearTimeout is not defined');
-	    }
-	  }
-	} ())
 	var queue = [];
 	var draining = false;
 	var currentQueue;
@@ -14618,7 +14593,7 @@
 	    if (draining) {
 	        return;
 	    }
-	    var timeout = cachedSetTimeout(cleanUpNextTick);
+	    var timeout = setTimeout(cleanUpNextTick);
 	    draining = true;
 
 	    var len = queue.length;
@@ -14635,7 +14610,7 @@
 	    }
 	    currentQueue = null;
 	    draining = false;
-	    cachedClearTimeout(timeout);
+	    clearTimeout(timeout);
 	}
 
 	process.nextTick = function (fun) {
@@ -14647,7 +14622,7 @@
 	    }
 	    queue.push(new Item(fun, args));
 	    if (queue.length === 1 && !draining) {
-	        cachedSetTimeout(drainQueue, 0);
+	        setTimeout(drainQueue, 0);
 	    }
 	};
 
@@ -17956,7 +17931,8 @@
 	      cellAlign: 'left',
 	      contain: true,
 	      wrapAround: true,
-	      autoPlay: false
+	      autoPlay: false,
+	      accessibility: false
 	    });
 
 	    setTimeout(function () {
@@ -17990,22 +17966,31 @@
 	    value: function playCellSequence() {
 	      var _this3 = this;
 
-	      console.log(this);
-	      console.log(_index.app.activeInstance);
 	      if (_index.app.activeInstance == this) {
-	        var cell = this.flkty.cells[this.flkty.selectedIndex].element;
-	        var video = cell.querySelector('video');
-	        this.questionEl.textContent = this.questions[this.flkty.selectedIndex];
-	        video.play();
-	        $('body').addClass('show-question');
+	        (function () {
+	          var cell = _this3.flkty.cells[_this3.flkty.selectedIndex].element;
+	          var video = cell.querySelector('video');
+	          _this3.questionEl.textContent = _this3.questions[_this3.flkty.selectedIndex];
+	          video.play();
+	          $('body').addClass('show-question');
 
-	        this.sliderTimer = setTimeout(function () {
-	          $('body').removeClass('show-question');
-	          setTimeout(function () {
-	            _this3.loadingWord.textContent = _this3.words[_this3.flkty.selectedIndex + 1] ? _this3.words[_this3.flkty.selectedIndex + 1] : _this3.words[0];
-	            _this3.flkty.next();
-	          }, 1000);
-	        }, 5000);
+	          _this3.sliderTimer = setTimeout(function () {
+	            $('body').removeClass('show-question');
+	            setTimeout(function () {
+	              _this3.loadingWord.textContent = _this3.words[_this3.flkty.selectedIndex + 1] ? _this3.words[_this3.flkty.selectedIndex + 1] : _this3.words[0];
+	              _this3.flkty.next();
+
+	              //reset video
+	              _this3.flkty.once('settle', function () {
+	                console.log('SETTLE DOWN');
+	                video.pause();
+	                video.currentTime = 0;
+	                video.load();
+	              });
+	              setTimeout(function () {});
+	            }, 1000);
+	          }, 5000);
+	        })();
 	      }
 	    }
 	  }, {
@@ -61636,7 +61621,7 @@
 
 	      $('.project').on('click', function (e) {
 	        e.stopPropagation();
-	        tl.timeScale(0);
+	        tl.pause();
 
 	        var modal = document.getElementById('ourApproachModal');
 	        var modalContent = modal.querySelector('.content');
@@ -61647,7 +61632,9 @@
 	        modalContent.querySelector('blockquote').textContent = $(this).data('blockquote');
 	        modalContent.querySelector('.text-content').innerHTML = $(this).data('content');
 
-	        modal.querySelector('img').src = '/images/music.jpg';
+	        console.log($(this).data('image'));
+
+	        modal.querySelector('img').src = $(this).data('image');
 	        $.fn.fullpage.setAllowScrolling(false);
 
 	        Velocity(modal, {
@@ -61682,7 +61669,7 @@
 	        $(modal).one('click', function (e) {
 	          e.stopPropagation();
 
-	          tl.timeScale(0.1);
+	          tl.play();
 
 	          $.fn.fullpage.setAllowScrolling(true);
 

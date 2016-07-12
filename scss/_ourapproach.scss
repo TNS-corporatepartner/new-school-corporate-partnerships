@@ -56,27 +56,27 @@
           bottom: 75px;
         }
         &.project2 {
-          left: 418px;
+          left: 600px;
           top: 100px;
         }
         &.project3 {
-          left: 933px;
+          left: 1000px;
           bottom: 50px;
         }
         &.project4 {
-          left: 1296px;
+          left: 1500px;
           top: 80px;
         }
         &.project5 {
-          left: 1711px;
+          left: 2000px;
           bottom: 75px;
         }          
         &.project6 {
-          left: 2281px;
+          left: 2500px;
           top: 80px;
         }
         &.project7 {
-          left: 2903px;
+          left: 3000px;
           top: 250px;
         }
         &.project8 {
@@ -164,7 +164,7 @@
 }
 
 #ourApproachModal {
-  position: absolute;
+  position: absolute; z-index: 1000;
   display: none;
   background-color: $gray-darker-trans;
   cursor: url(/images/close-cursor-red.svg), auto;
