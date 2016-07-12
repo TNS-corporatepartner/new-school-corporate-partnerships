@@ -61311,8 +61311,6 @@
 	exports.OurApproach = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	// import 'isotope-masonry-horizontal'
-
 
 	var _lodash = __webpack_require__(390);
 
@@ -61366,8 +61364,6 @@
 	    this.xPositions = [];
 	    this.yPositions = [];
 
-	    this.painter$;
-
 	    this.raf$ = _rxjs.Observable.create(function (obs) {
 	      (function raf() {
 	        requestAnimationFrame(function (e) {
@@ -61384,7 +61380,7 @@
 	    }, 1600);
 
 	    this.positionItems();
-	    // this.handlePanning()
+	    this.handlePanning();
 	    // this.handleHover()
 	    // this.handleClick()
 
@@ -61406,14 +61402,51 @@
 	  }
 
 	  _createClass(OurApproach, [{
+	    key: 'positionItems',
+	    value: function positionItems() {
+	      $('.program').each(function (index, el) {
+	        $(el).css({
+	          paddingTop: Math.random() * 50 + 1,
+	          paddingRight: Math.random() * 50 + 1,
+	          paddingLeft: Math.random() * 50 + 1,
+	          paddingBottom: Math.random() * 50 + 1
+	        });
+	      });
+
+	      document.querySelectorAll('.approach-grid').forEach(function (grid) {
+	        new Packery(grid, {
+	          itemSelector: '.program',
+	          isHorizontal: true,
+	          stamp: '.project'
+	        });
+	      });
+
+	      //set width of parent containing isotope grids in order to float: left
+	      var sliderInnerWidth = document.querySelector('.approach-grid').offsetWidth * 3;
+	      this.sliderInner.style.width = sliderInnerWidth + 'px';
+	      this.cellWidth = document.querySelector('.approach-grid').offsetWidth;
+
+	      // $('.program').each((index, el) => {  
+	      //   // $(el).css('transform', `translate3d( ${(Math.random() * 5) + 1}%, ${(Math.random() * 50) + 1}%, 0)`)
+	      //   $(el).css('transform', `translateY( ${(Math.random() * 25) + 1}%`)
+	      // })
+	    }
+	  }, {
 	    key: 'handlePanning',
 	    value: function handlePanning() {
-	      var _this2 = this;
+	      this.tl.add(new TweenMax(this.sliderInner, '5', {
+	        left: this.cellWidth * -1,
+	        ease: Linear.easeNone,
+	        timeScale: this.timeScale
+	      }));
 
-	      var painter$ = this.raf$.withLatestFrom(this.mousemove$).subscribe(function (v) {
-	        var mouse = v[1];
-	        _this2.canvas.style.transform = 'perspective(3000px) translate3d(' + mouse.x + '%, 0%, 0) rotateX(' + 0 + 'deg) rotateY(' + mouse.rotateY + 'deg) scale(0.9)';
-	      });
+	      this.tl.timeScale(0.25);
+
+	      // this.raf$.withLatestFrom(this.mousemove$)
+	      // .subscribe(v => {
+	      //   const mouse = v[1]
+	      //   this.canvas.style.transform = `perspective(3000px) translate3d(${mouse.x}%, 0%, 0) rotateX(${0}deg) rotateY(${mouse.rotateY}deg) scale(0.9)`
+	      // })
 	    }
 	  }, {
 	    key: 'handleHover',
@@ -61607,44 +61640,6 @@
 	          });
 	        });
 	      });
-	    }
-	  }, {
-	    key: 'positionItems',
-	    value: function positionItems() {
-	      $('.program').each(function (index, el) {
-	        $(el).css({
-	          paddingTop: Math.random() * 50 + 1,
-	          paddingRight: Math.random() * 50 + 1,
-	          paddingLeft: Math.random() * 50 + 1,
-	          paddingBottom: Math.random() * 50 + 1
-	        });
-	      });
-
-	      document.querySelectorAll('.approach-grid').forEach(function (grid) {
-	        new Packery(grid, {
-	          itemSelector: '.program',
-	          isHorizontal: true,
-	          stamp: '.project'
-	        });
-	      });
-
-	      //set width of parent containing isotope grids in order to float: left
-	      var sliderInnerWidth = document.querySelector('.approach-cell').offsetWidth * 3 + 10;
-	      this.sliderInner.style.width = sliderInnerWidth + 'px';
-	      this.cellWidth = document.querySelector('.approach-cell').offsetWidth;
-
-	      this.tl.add(new TweenMax(this.sliderInner, '5', {
-	        left: this.cellWidth * -1,
-	        ease: Linear.easeNone,
-	        timeScale: this.timeScale
-	      }));
-
-	      this.tl.timeScale(0.25);
-
-	      // $('.program').each((index, el) => {  
-	      //   // $(el).css('transform', `translate3d( ${(Math.random() * 5) + 1}%, ${(Math.random() * 50) + 1}%, 0)`)
-	      //   $(el).css('transform', `translateY( ${(Math.random() * 25) + 1}%`)
-	      // })
 	    }
 	  }]);
 

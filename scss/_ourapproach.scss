@@ -10,111 +10,140 @@
   }
 }
 
-
 #ourApproach #approachCanvas {
-  // background-color: blue;
   position: absolute;
   left: 0;
   top: calc(50% - 303px);
   width: 100vw;  
   .approach-slider-inner {
     position: relative;
-
-    .approach-cell {
-      float: left;
-      transform: translateX(-100%);
-      // &:first-of-type .approach-grid {
-      //   background-color: green;
-      // }
-      .approach-grid {
-        height: 500px;
-        max-height: 500px !important;    
-        .project {
-          position: absolute;
-          width: 550px;
-          height: 300px;
-          padding: 75px 25px;
-          display: flex;
-          align-items: center;
-          cursor: url(/images/click-cursor-red.svg), auto;
-          transition: opacity 0.6s ease-in-out;
-          &.project1 {
-            left: 100px;
-            top: 15px;
+    .approach-grid {
+      float: left;        
+      height: 60vh;
+      max-height: 60vh !important;    
+      .project {
+        position: absolute;
+        padding: 15px 25px;
+        display: flex;
+        align-items: center;
+        cursor: url(/images/click-cursor-red.svg), auto;
+        transition: opacity 0.6s ease-in-out;
+        &.project1 {
+          left: 0%;
+          bottom: -75px;
+        }
+        &.project2 {
+          // left: 8%;
+          // left: 261px;
+          left: 418px;
+          top: 100px;
+        }
+        &.project3 {
+          // left: 18%;
+          // left: 587px;
+          left: 933px;
+          bottom: 50px;
+        }
+        &.project4 {
+          // left: 25%;
+          // left: 816px;
+          left: 1296px;
+          top: -25px;
+        }
+        &.project5 {
+          // left: 33%;
+          // left: 1077px;
+          left: 1711px;
+          bottom: 0px;
+        }          
+        &.project6 {
+          // left: 44%;
+          // left: 1436px;
+          left: 2281px;
+          top: 0px;
+        }
+        &.project7 {
+          // left: 56%;
+          // left: 1828px;
+          left: 2903px;
+          top: 250px;
+        }
+        &.project8 {
+          // left: 68%;
+          // left: 2220px;
+          left: 3525px;
+          bottom: -75px;
+        }
+        &.project9 {
+          // left: 74%;
+          // left: 2416px;
+          left: 3836px;
+          top: -25px;
+        }
+        &.project10 {
+          // left: 83%;
+          // left: 2709px;
+          left: 4304px;
+          bottom: 125px;
+        }          
+        &:hover .info {
+          opacity: 1;
+          h4 {
+            color: $red;
           }
-          &.project2 {
-            left: 0;
-            top: 400px;
-          }
-          &.project3 {
-            left: 400px;
-            top: 0;
-          }
-          &.project4 {
-            left: 400px;
-            top: 400px;
-          }
-          &.project5 {
-            left: 800px;
-            top: 100px;
-          }          
-          &:hover .info {
+          p {
             opacity: 1;
-            h4 {
-              color: $red;
-            }
-            p {
-              opacity: 1;
-            }
-          }
-          .info {
-            opacity: 0.5;
-            transition: opacity 0.4s ease-in-out;
-            label {
-              text-transform: uppercase;
-              font-size: 10px;
-            }
-            h4 {
-              margin: 5px 0;
-              min-width: 300px;
-              color: $gray;
-              transition: color 0.4s ease-in-out;
-            }
-            p {
-              font-size: 16px;
-              color: $red;
-              font-family: $font-family-display;
-              -webkit-font-smoothing: antialiased;
-              opacity: 0;
-              transition: opacity 0.4s ease-in-out;
-            }
-          }
-          .project-image {
-            width: 200px; min-width: 200px;      
-            height: 200px;
-            background-position: center;
-            background-size: cover;
-            margin-right: 15px;
           }
         }
-
-        .program {
-          float: left;
-          width: 300px;
-          height: 50px;
-          align-items: center;
-          // transition: all 1s ease-in-out;
-          pointer-events: none;
-          font-size: 12px;
-          float: left;
-          @for $i from 1 through 20 {
-            &:nth-of-type(#{$i}) {
-              transition-delay: 0.01s * $i * 4;
-            }
-          }          
+        .info {
+          opacity: 0.5;
+          transition: opacity 0.4s ease-in-out;
+          max-width: 300px;
+          label {
+            text-transform: uppercase;
+            font-size: 10px;
+          }
+          h4 {
+            margin: 5px 0;
+            min-width: 300px;
+            color: $gray;
+            transition: color 0.4s ease-in-out;
+          }
+          p {
+            font-size: 16px;
+            color: $red;
+            font-family: $font-family-display;
+            -webkit-font-smoothing: antialiased;
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
+          }
+        }
+        .project-image {
+          width: 200px; min-width: 200px;      
+          height: 200px;
+          background-position: center;
+          background-size: cover;
+          margin-right: 15px;
         }
       }
+
+      .program {
+        float: left;
+        width: 300px;
+        height: 50px;
+        align-items: center;
+        // transition: all 1s ease-in-out;
+        pointer-events: none;
+        font-size: 12px;
+        float: left;
+        @for $i from 1 through 20 {
+          &:nth-of-type(#{$i}) {
+            transition-delay: 0.01s * $i * 4;
+          }
+        }          
+      }
     }
+
   }
 }
 

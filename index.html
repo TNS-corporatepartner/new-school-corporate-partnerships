@@ -143,7 +143,7 @@
 				<div class="approach-slider-inner">
 
 						{% for i in (1..3) %}
-							<div class="approach-cell cell-{{forloop.index}}">
+							
 								<div class="approach-grid">
 
 									{% for program in projects.programs %}
@@ -163,10 +163,23 @@
 											</div>
 										</div>				
 									{% endfor %}
-							
+
+									{% for project in site.projects %}
+										<div class="project project{{forloop.length | plus: forloop.index}}"
+												data-programs="{% for program in project.programs %}{{program | slugify}},{% endfor %}"
+												data-content="{{project.content}}"
+												data-title="{{project.title}}"
+												data-blockquote="{{project.question}}">
+											<div class="project-image" style="background-image: url({{project.image}})" ></div>
+											<div class="info">
+												<h4>{{project.title}}</h4>
+												<p>Learn More &rarr;</p>
+											</div>
+										</div>				
+									{% endfor %}							
 
 								</div>
-							</div>
+							
 						{% endfor %}
 
 					</div>
