@@ -1,5 +1,6 @@
 ---
 title: Courageous Innovation
+position: 1
 order: 2
 ---
 

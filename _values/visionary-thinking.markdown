@@ -1,5 +1,6 @@
 ---
 title: Visionary Thinking
+position: 0
 order: 1
 ---
 
