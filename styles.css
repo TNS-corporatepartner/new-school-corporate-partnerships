@@ -950,8 +950,9 @@ section#ourPeople.modal-open {
   width: 100vw; }
   #ourApproach #approachCanvas .approach-slider-inner {
     position: relative;
-    left: -347px; }
+    left: -1850px; }
     #ourApproach #approachCanvas .approach-slider-inner .approach-grid {
+      position: relative;
       float: left;
       height: 60vh;
       max-height: 60vh !important; }
@@ -977,13 +978,13 @@ section#ourPeople.modal-open {
           bottom: 50px; }
         #ourApproach #approachCanvas .approach-slider-inner .approach-grid .project.project4 {
           left: 1296px;
-          top: -25px; }
+          top: 80px; }
         #ourApproach #approachCanvas .approach-slider-inner .approach-grid .project.project5 {
           left: 1711px;
           bottom: 0px; }
         #ourApproach #approachCanvas .approach-slider-inner .approach-grid .project.project6 {
           left: 2281px;
-          top: 0px; }
+          top: 80px; }
         #ourApproach #approachCanvas .approach-slider-inner .approach-grid .project.project7 {
           left: 2903px;
           top: 250px; }
@@ -991,10 +992,10 @@ section#ourPeople.modal-open {
           left: 3525px;
           bottom: -75px; }
         #ourApproach #approachCanvas .approach-slider-inner .approach-grid .project.project9 {
-          left: 3836px;
-          top: -25px; }
+          left: 4200px;
+          top: 80px; }
         #ourApproach #approachCanvas .approach-slider-inner .approach-grid .project.project10 {
-          left: 4304px;
+          left: 4804px;
           bottom: 125px; }
         #ourApproach #approachCanvas .approach-slider-inner .approach-grid .project:hover .info {
           opacity: 1; }
@@ -1005,7 +1006,7 @@ section#ourPeople.modal-open {
         #ourApproach #approachCanvas .approach-slider-inner .approach-grid .project.sibling-hover {
           -webkit-filter: grayscale(100%);
                   filter: grayscale(100%);
-          opacity: .4; }
+          opacity: .2; }
         #ourApproach #approachCanvas .approach-slider-inner .approach-grid .project .info {
           opacity: 0.5;
           transition: opacity 0.4s ease-in-out;
@@ -1039,7 +1040,7 @@ section#ourPeople.modal-open {
         -ms-flex-align: center;
             -ms-grid-row-align: center;
             align-items: center;
-        transition: top 1s ease-in-out, left 1s ease-in-out, opacity 1s ease-in-out;
+        transition: top 1s ease-in-out, left 1s ease-in-out, opacity 1s ease-in-out, font-size 1s ease-in-out;
         pointer-events: none;
         font-size: 12px;
         float: left; }
@@ -1084,7 +1085,8 @@ section#ourPeople.modal-open {
         #ourApproach #approachCanvas .approach-slider-inner .approach-grid .program:nth-of-type(20) {
           transition-delay: 0.8s; }
         #ourApproach #approachCanvas .approach-slider-inner .approach-grid .program.hover {
-          font-size: 16px; }
+          font-size: 16px;
+          z-index: 999; }
         #ourApproach #approachCanvas .approach-slider-inner .approach-grid .program.sibling-hover {
           opacity: 0.1; }
 

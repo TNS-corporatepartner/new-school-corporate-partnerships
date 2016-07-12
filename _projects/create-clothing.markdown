@@ -10,6 +10,10 @@ programs:
 - Lighting Design
 - Strategic Design Management
 - Fine Arts
+- Urban Policy
+- Graphic Design
+- Environmental Studies
+- Environmental Policy
 ---
 
 Students from across Parsons School of Design partnered with Intel during a semester-long class to understand how new forms of sensors could be woven into fabrics and revolutionize the way people interact with their clothing.  New designs with embedded technology were adaptive to the wearer’s needs and increased the ability for the wearer to showcase their personality in every environment.

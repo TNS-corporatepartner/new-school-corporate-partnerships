@@ -16,9 +16,10 @@
   top: calc(50% - 303px);
   width: 100vw;  
   .approach-slider-inner {
-    position: relative;
-    left: -347px;
-    .approach-grid {
+    position: relative;  
+    left: -1850px;      
+    .approach-grid {            
+      position: relative;    
       float: left;        
       height: 60vh;
       max-height: 60vh !important;    
@@ -34,57 +35,39 @@
           bottom: -75px;
         }
         &.project2 {
-          // left: 8%;
-          // left: 261px;
           left: 418px;
           top: 100px;
         }
         &.project3 {
-          // left: 18%;
-          // left: 587px;
           left: 933px;
           bottom: 50px;
         }
         &.project4 {
-          // left: 25%;
-          // left: 816px;
           left: 1296px;
-          top: -25px;
+          top: 80px;
         }
         &.project5 {
-          // left: 33%;
-          // left: 1077px;
           left: 1711px;
           bottom: 0px;
         }          
         &.project6 {
-          // left: 44%;
-          // left: 1436px;
           left: 2281px;
-          top: 0px;
+          top: 80px;
         }
         &.project7 {
-          // left: 56%;
-          // left: 1828px;
           left: 2903px;
           top: 250px;
         }
         &.project8 {
-          // left: 68%;
-          // left: 2220px;
           left: 3525px;
           bottom: -75px;
         }
         &.project9 {
-          // left: 74%;
-          // left: 2416px;
-          left: 3836px;
-          top: -25px;
+          left: 4200px;
+          top: 80px;
         }
         &.project10 {
-          // left: 83%;
-          // left: 2709px;
-          left: 4304px;
+          left: 4804px;
           bottom: 125px;
         }          
         &:hover .info {
@@ -98,7 +81,7 @@
         }
         &.sibling-hover {
           filter: grayscale(100%);
-          opacity: .4;
+          opacity: .2;
         }
         .info {
           opacity: 0.5;
@@ -137,7 +120,7 @@
         width: 300px;
         height: 50px;
         align-items: center;
-        transition: top 1s ease-in-out, left 1s ease-in-out, opacity 1s ease-in-out;
+        transition: top 1s ease-in-out, left 1s ease-in-out, opacity 1s ease-in-out, font-size 1s ease-in-out;
         pointer-events: none;
         font-size: 12px;
         float: left;
@@ -148,6 +131,7 @@
         }
         &.hover {
           font-size: 16px;
+          z-index: 999;
         }          
         &.sibling-hover {
           opacity: 0.1;
