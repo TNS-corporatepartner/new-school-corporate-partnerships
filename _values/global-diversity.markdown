@@ -1,5 +1,6 @@
 ---
 title: Global Diversity
+position: 2
 order: 3
 ---
 
