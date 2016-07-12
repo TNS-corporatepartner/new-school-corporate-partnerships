@@ -8,7 +8,8 @@ export class OurApproach {
     this.section = document.getElementById('ourApproach')
     this.sectionIntro = this.section.querySelector('.section-intro')
     this.canvas = document.getElementById('approachCanvas')
-    this.sliderInner = document.querySelector('.approach-slider-inner')    
+    this.sliderInner = document.querySelector('.approach-slider-inner')
+    this.grids = document.querySelectorAll('.approach-grid')    
 
     this.random = {
       variance: 3,
@@ -32,22 +33,31 @@ export class OurApproach {
     }, 1600)
 
     this.positionItems()
-    this.handlePanning()
+    // this.handlePanning()
     this.handleHover()
     this.handleClick()    
   }
 
   positionItems() {
-    document.querySelector('.approach-grid').querySelectorAll('.program').forEach(el => {
-      $(el).css({
+    //generate random padding from programs in first grid
+    var randomPadding = Array.prototype.map.call(document.querySelector('.approach-grid').querySelectorAll('.program'), program => {
+      return {
         paddingTop: (Math.random() * 50) + 1,        
         paddingRight: (Math.random() * 50) + 1,
         paddingLeft: (Math.random() * 50) + 1,
         paddingBottom: (Math.random() * 50) + 1,
-      })      
-    })  
+      }
+    })
 
-    document.querySelectorAll('.approach-grid').forEach(grid => {
+    //apply same randomized padding to programs in each grid
+    this.grids.forEach(grid => {
+      grid.querySelectorAll('.program').forEach( (program, index) => {
+        $(program).css(randomPadding[index])
+      })
+    })
+
+    //initalize three identical packery grids
+    this.grids.forEach(grid => {
       new Packery(grid, {
         itemSelector: '.program',
         isHorizontal: true,
@@ -56,9 +66,10 @@ export class OurApproach {
     })
 
     //set width of parent containing isotope grids in order to float: left
-    const sliderInnerWidth = document.querySelector('.approach-grid').offsetWidth * 3
-    this.sliderInner.style.width = sliderInnerWidth + 'px'
+    const sliderInnerWidth = document.querySelector('.approach-grid').offsetWidth * 3    
     this.cellWidth = document.querySelector('.approach-grid').offsetWidth
+    this.sliderInner.style.width = sliderInnerWidth + 'px'
+    this.grids.forEach(grid => grid.style.left = this.cellWidth * -1 + 'px')
   }
 
 
@@ -96,12 +107,12 @@ export class OurApproach {
     // })
   }
 
-
   handleHover() {
     const sliderInner = this.sliderInner
+    const cellWidth = this.cellWidth
     
     $('.project').on('mouseenter', function() {
-      const bounds = this.getBoundingClientRect()
+      const bounds = this.getBoundingClientRect() 
       const parent = this.offsetParent.getBoundingClientRect()
       const projectLeft = bounds.left + 25 //25 paddingLeft
       const projectTop = bounds.top - parent.top + 15 //15 paddingTop
@@ -110,7 +121,9 @@ export class OurApproach {
       const projectHeight = this.offsetHeight       //px
       const programEls = $(this).data('programs')
         .split(',')
-        .map( pId => document.querySelector(`.program[data-id="${pId}"]`) )
+        .map( pId => {
+          return this.offsetParent.querySelector(`.program[data-id="${pId}"]`)
+        })
         .filter(p => p)
 
       const programPositions = getProgramPositions(projectTop, projectBottom, projectLeft, projectWidth, projectHeight, programEls)
@@ -146,8 +159,8 @@ export class OurApproach {
 
     function getProgramPositions(top, bottom, left, width, height, programEls) {
       const position1 = {
-        left: left + width,
-        top: top + 15,
+        left: left + width + 200,
+        top: top,
         place: '01'
       }
 
@@ -159,19 +172,19 @@ export class OurApproach {
 
       const position3 = {
         left: left + 25,
-        top: top - 100,             
+        top: top - 75,             
         place: '03'
       }
 
       const position4 = {
-        left: left,
-        top: top + 50,
+        left: left - 25,
+        top: top + 25,
         place: '04'
       }
 
       const position5 = {
         left: left,
-        top: top,        
+        top: top + 150,        
         place: '05'
       }
 
@@ -189,22 +202,23 @@ export class OurApproach {
 
       const position8 = {
         left: left + 300, //300 program width
-        top: top + height + 30,
+        top: top + height + 50,
         place: '08'
       }
 
       const position9 = {
         left: left + width,
-        top: top + height + 75,
+        top: top + height + 100,
         place: '09'
       }
 
       const position10 = {
-        left: left + width + 250,
-        top: top + height + 10,  
+        left: left + width + 150,
+        top: top + height,  
         place: '10'
       }
 
+      // const positions = [position1, position1, position1, position1, position1, position1, position1, position1, position1, position1]
       const positions = [position1, position2, position3, position4, position5, position6, position7, position8, position9, position10]
       const randomPositions = _.shuffle(positions).slice(0, programEls.length)
       return randomPositions

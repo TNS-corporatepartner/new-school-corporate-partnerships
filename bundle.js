@@ -221,8 +221,7 @@
 
 	      //logo animate down
 	      Velocity(introLogo, {
-	        bottom: 20,
-	        width: 150
+	        opacity: 0
 	      }, {
 	        duration: 1000,
 	        delay: 2500
@@ -235,16 +234,16 @@
 	        complete: function complete() {
 	          setTimeout(function () {
 	            Velocity(introText, { opacity: 0 }, {
-	              duration: 500,
+	              duration: 900,
 	              display: 'none'
 	            });
-	          }, 3000);
+	          }, 3400);
 	        }
 	      });
 
 	      setTimeout(function () {
 	        obs.complete();
-	      }, 8800);
+	      }, 9200);
 
 	      window.addEventListener('click', skipSplashAnimation);
 	    });
@@ -307,7 +306,7 @@
 	    if (app.activeScrollIndex == 1) {
 	      document.body.style.cursor = 'url(/images/next-cursor-black.svg), auto';
 	    } else if ('down' === d) {
-	      document.body.style.cursor = 'url(/images/next-cursor-red.svg), auto';
+	      document.body.style.cursor = 'url(/images/click-cursor-red.svg), auto';
 	    } else if ('up' === d) {
 	      document.body.style.cursor = 'url(/images/prev-cursor-red.svg), auto';
 	    } else if ('dead' === d) {
@@ -61536,6 +61535,7 @@
 	    this.sectionIntro = this.section.querySelector('.section-intro');
 	    this.canvas = document.getElementById('approachCanvas');
 	    this.sliderInner = document.querySelector('.approach-slider-inner');
+	    this.grids = document.querySelectorAll('.approach-grid');
 
 	    this.random = {
 	      variance: 3,
@@ -61559,7 +61559,7 @@
 	    }, 1600);
 
 	    this.positionItems();
-	    this.handlePanning();
+	    // this.handlePanning()
 	    this.handleHover();
 	    this.handleClick();
 	  }
@@ -61567,16 +61567,27 @@
 	  _createClass(OurApproach, [{
 	    key: 'positionItems',
 	    value: function positionItems() {
-	      document.querySelector('.approach-grid').querySelectorAll('.program').forEach(function (el) {
-	        $(el).css({
+	      var _this2 = this;
+
+	      //generate random padding from programs in first grid
+	      var randomPadding = Array.prototype.map.call(document.querySelector('.approach-grid').querySelectorAll('.program'), function (program) {
+	        return {
 	          paddingTop: Math.random() * 50 + 1,
 	          paddingRight: Math.random() * 50 + 1,
 	          paddingLeft: Math.random() * 50 + 1,
 	          paddingBottom: Math.random() * 50 + 1
+	        };
+	      });
+
+	      //apply same randomized padding to programs in each grid
+	      this.grids.forEach(function (grid) {
+	        grid.querySelectorAll('.program').forEach(function (program, index) {
+	          $(program).css(randomPadding[index]);
 	        });
 	      });
 
-	      document.querySelectorAll('.approach-grid').forEach(function (grid) {
+	      //initalize three identical packery grids
+	      this.grids.forEach(function (grid) {
 	        new Packery(grid, {
 	          itemSelector: '.program',
 	          isHorizontal: true,
@@ -61586,28 +61597,31 @@
 
 	      //set width of parent containing isotope grids in order to float: left
 	      var sliderInnerWidth = document.querySelector('.approach-grid').offsetWidth * 3;
-	      this.sliderInner.style.width = sliderInnerWidth + 'px';
 	      this.cellWidth = document.querySelector('.approach-grid').offsetWidth;
+	      this.sliderInner.style.width = sliderInnerWidth + 'px';
+	      this.grids.forEach(function (grid) {
+	        return grid.style.left = _this2.cellWidth * -1 + 'px';
+	      });
 	    }
 	  }, {
 	    key: 'handlePanning',
 	    value: function handlePanning() {
-	      var _this2 = this;
+	      var _this3 = this;
 
 	      _rxjs.Observable.fromEvent(this.sliderInner, 'mouseleave').subscribe(function () {
-	        _this2.tl.timeScale(0.15);
+	        _this3.tl.timeScale(0.15);
 	      });
 
 	      _rxjs.Observable.fromEvent(this.sliderInner, 'mousemove').map(function (e) {
-	        return _this2.mouseCoords(e);
+	        return _this3.mouseCoords(e);
 	      }).repeat().subscribe(function (e) {
-	        if (e.x < 0 && _this2.tl.reversed()) {
-	          _this2.tl.reversed(false);
-	        } else if (e.x > 0 && !_this2.tl.reversed()) {
-	          _this2.tl.reversed(true);
+	        if (e.x < 0 && _this3.tl.reversed()) {
+	          _this3.tl.reversed(false);
+	        } else if (e.x > 0 && !_this3.tl.reversed()) {
+	          _this3.tl.reversed(true);
 	        }
 
-	        _this2.tl.timeScale(Math.abs(e.x / 25));
+	        _this3.tl.timeScale(Math.abs(e.x / 25));
 	      });
 
 	      this.tl.add(new TweenMax(this.sliderInner, '5', {
@@ -61628,8 +61642,11 @@
 	    key: 'handleHover',
 	    value: function handleHover() {
 	      var sliderInner = this.sliderInner;
+	      var cellWidth = this.cellWidth;
 
 	      $('.project').on('mouseenter', function () {
+	        var _this4 = this;
+
 	        var bounds = this.getBoundingClientRect();
 	        var parent = this.offsetParent.getBoundingClientRect();
 	        var projectLeft = bounds.left + 25; //25 paddingLeft
@@ -61638,7 +61655,7 @@
 	        var projectWidth = this.offsetWidth; //px
 	        var projectHeight = this.offsetHeight; //px
 	        var programEls = $(this).data('programs').split(',').map(function (pId) {
-	          return document.querySelector('.program[data-id="' + pId + '"]');
+	          return _this4.offsetParent.querySelector('.program[data-id="' + pId + '"]');
 	        }).filter(function (p) {
 	          return p;
 	        });
@@ -61676,8 +61693,8 @@
 
 	      function getProgramPositions(top, bottom, left, width, height, programEls) {
 	        var position1 = {
-	          left: left + width,
-	          top: top + 15,
+	          left: left + width + 200,
+	          top: top,
 	          place: '01'
 	        };
 
@@ -61689,19 +61706,19 @@
 
 	        var position3 = {
 	          left: left + 25,
-	          top: top - 100,
+	          top: top - 75,
 	          place: '03'
 	        };
 
 	        var position4 = {
-	          left: left,
-	          top: top + 50,
+	          left: left - 25,
+	          top: top + 25,
 	          place: '04'
 	        };
 
 	        var position5 = {
 	          left: left,
-	          top: top,
+	          top: top + 150,
 	          place: '05'
 	        };
 
@@ -61719,22 +61736,23 @@
 
 	        var position8 = {
 	          left: left + 300, //300 program width
-	          top: top + height + 30,
+	          top: top + height + 50,
 	          place: '08'
 	        };
 
 	        var position9 = {
 	          left: left + width,
-	          top: top + height + 75,
+	          top: top + height + 100,
 	          place: '09'
 	        };
 
 	        var position10 = {
-	          left: left + width + 250,
-	          top: top + height + 10,
+	          left: left + width + 150,
+	          top: top + height,
 	          place: '10'
 	        };
 
+	        // const positions = [position1, position1, position1, position1, position1, position1, position1, position1, position1, position1]
 	        var positions = [position1, position2, position3, position4, position5, position6, position7, position8, position9, position10];
 	        var randomPositions = _lodash2.default.shuffle(positions).slice(0, programEls.length);
 	        return randomPositions;
