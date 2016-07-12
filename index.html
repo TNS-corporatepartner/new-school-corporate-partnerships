@@ -249,7 +249,10 @@
 
 		<section id="contactUs" class="section">
 				<div class="panel-group">
-					{% for panel in site.partner %}
+
+					{% assign partners = site.partners | sort: 'position' %}
+
+					{% for panel in partners %}
 						<div class="panel">
 							<div class="panel-tint"></div>
 							<div class="content-wrapper">
