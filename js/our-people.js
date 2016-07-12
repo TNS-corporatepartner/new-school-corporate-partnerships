@@ -60,12 +60,23 @@ export class OurPeople {
       $('#ourPeople').one('click', (e) => {
         e.stopPropagation()
 
-        tl.timeScale(0.25)
+        tl.timeScale(0.45)
 
         $('#ourPeople').removeClass('modal-open');
         modalContent.innerHTML = ''
       })
     })
+
+    $('.person.video').on('mouseenter', () => {
+      this.tl.timeScale(0.09)
+
+    })
+
+    $('.person.video').on('mouseleave', () => {
+      console.log('leave');
+      this.tl.timeScale(0.45)
+    })
+
 
     this.tl.add( new TweenMax(this.sliderInner, '5', {
       left: this.cellWidth * -1,
@@ -73,12 +84,14 @@ export class OurPeople {
       timeScale: this.timeScale
     }))
 
-    this.tl.timeScale(0.25)
+    this.tl.timeScale(0.45)
 
     const mouseleave$ = Observable.fromEvent(this.slider, 'mouseleave')
       .subscribe(() => {
-        this.tl.timeScale(0.25)
+        this.tl.timeScale(0.45)
       })
+
+
 
     const mousemove$ = Observable.fromEvent(this.slider, 'mousemove')
       .map(e => this.mouseCoords(e))
@@ -90,7 +103,7 @@ export class OurPeople {
           this.tl.reversed(true)
         }
 
-        this.tl.timeScale( Math.abs(e.x / 15) )
+        //this.tl.timeScale( Math.abs(e.x / 50) )
       })
   }
 

@@ -133,20 +133,26 @@ header#header {
 //   transform: translateY(0%);
 // }
 
-#contactModal, #contactInfo {
-  display: none;
-  position: absolute; z-index: 120;
-  background-color: $red;
-  top: 0;
-  right: 0;
-  width: 140px;
-  height: 64px;
-  color: white;
-  align-items: center;
-  padding: 2vw;
-  cursor: url('/images/close-cursor-red.svg'), auto;
-  .content {
+body.fp-viewing-contact {
+
+  #downArrow, header#header {
     display: none;
+  }
+}
+
+.contactUs {
+  cursor: url('/images/close-cursor-red.svg'), auto;
+
+  background-color: rgb(34, 34, 34);
+  padding: 2vw;
+
+  h3, h6 {
+    color: white;
+  }
+
+  .content {
+    display: flex;
+
     .debbie {
       margin-top: -6%;
       -webkit-font-smoothing: antialiased;
@@ -161,6 +167,7 @@ header#header {
         color: $red;
         margin-bottom: 15px;
       }
+
       p {
         color: white;
         font-size: 24px;
@@ -168,7 +175,7 @@ header#header {
       }
       .contact {
         margin-top: 35px;
-        a{
+        a {
           display: block;
           margin-bottom: 15px;
           font-family: $font-family-display;
@@ -183,9 +190,26 @@ header#header {
           }
 
         }
-
       }
     }
+  }
+
+}
+
+#contactModal {
+  display: none;
+  position: absolute; z-index: 120;
+  background-color: $red;
+  top: 0;
+  right: 0;
+  width: 140px;
+  height: 64px;
+  color: white;
+  align-items: center;
+  padding: 2vw;
+
+  .content {
+    display: none;
   }
 }
 

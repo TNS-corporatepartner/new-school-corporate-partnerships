@@ -394,7 +394,47 @@ header#header {
   cursor: pointer;
   transition: opacity 0.4s ease-in-out; }
 
-#contactModal, #contactInfo {
+body.fp-viewing-contact #downArrow, body.fp-viewing-contact header#header {
+  display: none; }
+
+.contactUs {
+  cursor: url("/images/close-cursor-red.svg"), auto;
+  background-color: #222222;
+  padding: 2vw; }
+  .contactUs h3, .contactUs h6 {
+    color: white; }
+  .contactUs .content {
+    display: -ms-flexbox;
+    display: flex; }
+    .contactUs .content .debbie {
+      margin-top: -6%;
+      -webkit-font-smoothing: antialiased;
+      border: 1px solid white;
+      padding: 25px;
+      cursor: url("/images/arrow-cursor-red.svg"), auto; }
+      .contactUs .content .debbie h6 {
+        font-weight: normal;
+        margin-bottom: 5px; }
+      .contactUs .content .debbie h2 {
+        color: #E82E21;
+        margin-bottom: 15px; }
+      .contactUs .content .debbie p {
+        color: white;
+        font-size: 24px; }
+      .contactUs .content .debbie .contact {
+        margin-top: 35px; }
+        .contactUs .content .debbie .contact a {
+          display: block;
+          margin-bottom: 15px;
+          font-family: "NeueDisplay", sans-serif;
+          color: white;
+          font-size: 16px;
+          cursor: url("/images/click-cursor-red.svg"), auto;
+          text-decoration: none; }
+          .contactUs .content .debbie .contact a:hover {
+            color: #E82E21; }
+
+#contactModal {
   display: none;
   position: absolute;
   z-index: 120;
@@ -407,37 +447,9 @@ header#header {
   -ms-flex-align: center;
       -ms-grid-row-align: center;
       align-items: center;
-  padding: 2vw;
-  cursor: url("/images/close-cursor-red.svg"), auto; }
-  #contactModal .content, #contactInfo .content {
+  padding: 2vw; }
+  #contactModal .content {
     display: none; }
-    #contactModal .content .debbie, #contactInfo .content .debbie {
-      margin-top: -6%;
-      -webkit-font-smoothing: antialiased;
-      border: 1px solid white;
-      padding: 25px;
-      cursor: url("/images/arrow-cursor-red.svg"), auto; }
-      #contactModal .content .debbie h6, #contactInfo .content .debbie h6 {
-        font-weight: normal;
-        margin-bottom: 5px; }
-      #contactModal .content .debbie h2, #contactInfo .content .debbie h2 {
-        color: #E82E21;
-        margin-bottom: 15px; }
-      #contactModal .content .debbie p, #contactInfo .content .debbie p {
-        color: white;
-        font-size: 24px; }
-      #contactModal .content .debbie .contact, #contactInfo .content .debbie .contact {
-        margin-top: 35px; }
-        #contactModal .content .debbie .contact a, #contactInfo .content .debbie .contact a {
-          display: block;
-          margin-bottom: 15px;
-          font-family: "NeueDisplay", sans-serif;
-          color: white;
-          font-size: 16px;
-          cursor: url("/images/click-cursor-red.svg"), auto;
-          text-decoration: none; }
-          #contactModal .content .debbie .contact a:hover, #contactInfo .content .debbie .contact a:hover {
-            color: #E82E21; }
 
 #fp-nav {
   margin-top: auto !important;
