@@ -1078,7 +1078,8 @@ section#ourPeople.modal-open {
         #ourApproach #approachCanvas .approach-slider-inner .approach-grid .program:nth-of-type(20) {
           transition-delay: 0.8s; }
         #ourApproach #approachCanvas .approach-slider-inner .approach-grid .program.hover {
-          font-size: 16px; }
+          font-size: 16px;
+          background-color: red; }
         #ourApproach #approachCanvas .approach-slider-inner .approach-grid .program.sibling-hover {
           opacity: 0.1; }
 
