@@ -25,7 +25,7 @@ section#coreValues {
         width: 100%; height: 100%;
         background-size: auto 100%;
         background-position: center;
-        background-repeat: no-repeat;        
+        background-repeat: no-repeat;
         background-blend-mode: multiply;
         transition: background-color 0.5s ease-in-out 0s, filter 0.5s linear 0s;
         transform-origin: center;
@@ -38,25 +38,27 @@ section#coreValues {
         .content-wrapper .content {
           pointer-events: none;
           h4 {
-            border-bottom: 4px solid white;
-            max-width: 100%; 
+            max-width: 100%;
             max-width: 26vw;
             transform-origin: left center;
             transition-delay: 0.25s;
-            transform: scale(1.5);
+            transform: scale(1.35);
           }
-          ul li {            
+          ul{
+            height: auto;
+          }
+          ul li {
 
             opacity: 1;
             color: $gray;
             @for $i from 1 through 10 {
               &:nth-of-type(#{$i}) {
-                transition-delay: 0.75s * $i;
+                transition-delay: 1.5s * $i;
               }
             }
             &:last-of-type {
               color: $white !important;
-            }     
+            }
           }
         }
       }
@@ -74,7 +76,7 @@ section#coreValues {
       }
       .particles-container {
         width: 100vw;
-        height: 100%;        
+        height: 100%;
       }
       .panel-tint {
         position: absolute;
@@ -87,9 +89,12 @@ section#coreValues {
         width: 100%;
         .content {
           position: absolute;
-          margin-top: -10%;
+          top: 50%;
+          transform: translateY(-50%);
+          margin-top: 40px;
           width: 100%;
-          padding: 2vw;
+          padding: 30px;
+          padding-right: 60px;
           background-color: transparent;
           color: white;
           cursor: url('/images/click-cursor-red.svg'), auto;
@@ -99,14 +104,26 @@ section#coreValues {
             font-size: 4.25vh;
             transition: transform 0.5s ease-in-out, max-width 0.5s ease-in-out;
             transform-origin: left top;
+            @media (max-width: $break1) {
+              font-size: 36px;
+            }
           }
           ul {
             list-style: none;
             min-width: 60vw;
-            margin-top: 6vh;
+            margin-top: 40px;
+            height: 0;
+            transition: height 0.5s ease-in-out;
             li {
-              font-size: 2.5vh;
-              margin-bottom: 2vw;
+              font-size: 30px;
+              @media (min-width: $break1) {
+                font-size: 36px;
+                max-width: 900px;
+              }
+              margin-bottom: 20px;
+              @media (min-width: $break1) {
+                margin-bottom: 30px;
+              }
               opacity: 0;
               transition: opacity 0.5s ease-in-out, color 1.8s ease-in;
             }

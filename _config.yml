@@ -5,6 +5,11 @@ collections:
   future:
     title: Imagine the Future of…
     output: false
+  schools:
+    title: One University, Five Schools
+    output: false
+    introduction: Our unique structure provides the expertise of five schools collaborating
+      to reinvent everything and approach issues from multiple, integrated perspectives.
   people:
     title: Our History of Innovation
     output: false
@@ -18,12 +23,9 @@ collections:
     programs:
     - ACTING
     - ANTHROPOLOGY
-    - ARCHITECTURAL DESIGN
     - ARCHITECTURE
-    - ARCHITECTURE & LIGHTING DESIGN
     - ART, MEDIA, AND TECHNOLOGY
     - THE ARTS
-    - BA/BFA DUAL DEGREE
     - BACHELOR'S PROGRAMS FOR ADULTS
     - GRADUATE CERTIFICATE
     - CLASSICAL MUSIC
@@ -39,7 +41,6 @@ collections:
     - DESIGN STUDIES
     - DIRECTING
     - DOCUMENTARY MEDIA STUDIES
-    - GRADUATE CERTIFICATE
     - DRAMATIC ARTS
     - ECONOMICS
     - ENGLISH AS A SECOND LANGUAGE
@@ -47,12 +48,12 @@ collections:
     - ESL + FOODESL + MUSIC
     - ENVIRONMENTAL POLICY AND SUSTAINABILITY MANAGEMENT
     - ENVIRONMENTAL STUDIES
-    - FASHION BUSINESSFASHION DESIGN
+    - FASHION BUSINESS
     - FASHION DESIGN
     - FASHION DESIGN AND SOCIETY
     - FASHION MARKETING
     - FASHION STUDIES
-    - FILM PRODUCTIONFINE ART AND FOUNDATIONFINE ARTS
+    - FILM PRODUCTION
     - FINE ARTS
     - FOOD STUDIES
     - GENDER AND SEXUALITY STUDIES
@@ -69,7 +70,6 @@ collections:
     - INTEGRATED DESIGN
     - INTERDISCIPLINARY SCIENCE
     - INTERIOR DESIGN
-    - INTERIOR DESIGN AND ARCHITECTURE STUDIES
     - INTERNATIONAL AFFAIRS
     - JAZZ AND CONTEMPORARY MUSIC
     - JOURNALISM + DESIGN
@@ -96,7 +96,7 @@ collections:
     - PSYCHOLOGY
     - PUBLIC AND URBAN POLICY
     - SCREEN STUDIES
-    - SCREENWRITINGSOCIOLOGY
+    - SCREENWRITING
     - SOCIOLOGY
     - STRATEGIC DESIGN AND MANAGEMENT
     - GLOBAL EXECUTIVE
@@ -108,11 +108,6 @@ collections:
     - TRANSDISCIPLINARY DESIGN
     - URBAN DESIGN
     - URBAN POLICY ANALYSIS AND MANAGEMENT
-  schools:
-    title: Our Schools
-    output: false
-    introduction: Our unique structure provides the expertise of five schools collaborating
-      to reinvent everything and approach issues from multiple, integrated perspectives.
   partner:
     title: Partner with Us
     output: false

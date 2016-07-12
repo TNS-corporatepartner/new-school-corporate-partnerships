@@ -121,7 +121,7 @@
 	  }, function (err) {
 	    return console.error(err);
 	  }, function () {
-	    //executes when initSplashContent stream completes     
+	    //executes when initSplashContent stream completes
 	    window.removeEventListener('click', skipSplashAnimation);
 
 	    $('main').fullpage({
@@ -17929,7 +17929,7 @@
 	    setTimeout(function () {
 	      $(_this.sectionIntro).addClass('hidden');
 	      _this.initVideos();
-	    }, 1200);
+	    }, 1600);
 	  }
 
 	  _createClass(FutureOf, [{
@@ -32380,7 +32380,7 @@
 
 	    setTimeout(function () {
 	      $(_this.sectionIntro).addClass('hidden');
-	    }, 1200);
+	    }, 1600);
 	  }
 
 	  _createClass(CoreValues, [{
@@ -32432,7 +32432,15 @@
 
 	  setTimeout(function () {
 	    $(_this.sectionInto).addClass('hidden');
-	  }, 1200);
+	  }, 1600);
+
+	  $('.school').on('mouseenter', function (e) {
+	    $(this).siblings().addClass('not-hover');
+	  });
+
+	  $('.school').on('mouseleave', function (e) {
+	    $(this).siblings().removeClass('not-hover');
+	  });
 
 	  $('.school').on('click', function (e) {
 	    e.stopPropagation();
@@ -61373,7 +61381,7 @@
 
 	    setTimeout(function () {
 	      $(_this.sectionIntro).addClass('hidden');
-	    }, 1200);
+	    }, 1600);
 
 	    this.positionItems();
 	    // this.handlePanning()

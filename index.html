@@ -40,7 +40,7 @@
 		<section id="staticIntro" class="section">
 			<div class="content">
 				<h2><span>{{site.introduction}}<span></h2>
-			</div>			
+			</div>
 		</section>
 
 		<section id="futureOf" class="section dark-section">
@@ -59,19 +59,19 @@
 			<h2 class="question">That is the qustion</h2>
 
 			<hgroup class="section-headlines">
-				<h4>Imagine <br>The Future Of</h4>
+				<h3>Imagine <br>The Future Of</h3>
 				<h1 class="dynamic-text"></h1>
 			</hgroup>
 
 			<div class="section-intro">
 				<h1>{{future.title}}</h1>
-			</div>			
+			</div>
 		</section>
 
 		<section id="coreValues" class="section dark-section">
 			<div class="panel-group">
 				{% for panel in site.values %}
-					<div class="panel">						
+					<div class="panel">
 						<div class="panel-tint">
 							<div id="{{panel.slug}}" class="particles-container"></div>
 						</div>
@@ -86,8 +86,8 @@
 			</div>
 
 			<hgroup class="section-headlines">
-				<h4>{{values.title}}</h4>
-				<h3 class="dynamic-text"></h3>
+				<h3>{{values.title}}</h3>
+				<!-- <h3 class="dynamic-text"></h3> -->
 			</hgroup>
 
 			<div class="section-intro">
@@ -103,7 +103,9 @@
 							data-name="{{school.title}}"
 							data-description="{{school.description}}"
 							data-image-src="{{school.image}}">
-						<div class="img-container" style="background-image: url({{school.image}})"></div>
+						<div class="img-container">
+							<div class="img" style="background-image: url({{school.image}})"></div>
+						</div>
 						<div class="text-container">
 							<h3>{{school.title}}</h3>
 						</div>
@@ -252,6 +254,7 @@
 								<div class="content">
 									<h4>{{panel.title}}</h4>
 									{{panel.content}}
+									<a href="#" class="contact-btn">Contact Us &rarr;</a>
 								</div>
 							</div>
 						</div>
@@ -259,8 +262,7 @@
 				</div>
 
 				<hgroup class="section-headlines">
-					<h4>Are You Ready to Design the Future?</h4>
-					<h3 class="dynamic-text"></h3>
+					<h3>Are You Ready to Design the Future?</h3>
 				</hgroup>
 			</div>
 		</section>
@@ -319,10 +321,10 @@
 						</g>
 					</g>
 				</svg>
-			</div>			
+			</div>
 		</div>
 
-		<h2 id="introText"><span>{{site.introduction}}<span></h2>		
+		<h2 id="introText"><span>{{site.introduction}}<span></h2>
 	</footer>
 
 	<div id="fixedLogo">
@@ -347,7 +349,7 @@
 				</g>
 			</g>
 		</svg>
-	</div>	
+	</div>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-rc1/jquery.js"></script>
@@ -360,7 +362,7 @@
 
 	 <script id="__bs_script__">//<![CDATA[
 		document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.2.12.10.js'><\/script>".replace("HOST", location.hostname));
-	//]]></script> 
+	//]]></script>
 
 </body>
 
