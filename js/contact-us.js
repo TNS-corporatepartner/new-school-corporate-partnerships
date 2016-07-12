@@ -6,15 +6,17 @@ export class ContactUs {
     $('#contactUs .panel').on('mouseleave', this.closePanel)
   }
 
+
+
   openPanel(e) {
     e.stopPropagation()
-    const $panel = $(this)      
+    const $panel = $(this)
     $('.panel-group .panel').not($panel).addClass('hover-sibling')
     $panel.addClass('hover')
   }
 
   closePanel(e) {
     e.stopPropagation()
-    $('.panel-group .panel').removeClass('hover hover-sibling')  
+    $('.panel-group .panel').removeClass('hover hover-sibling')
   }
 }

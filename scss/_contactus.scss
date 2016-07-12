@@ -17,7 +17,7 @@ section#contactUs {
       transition: all .65s ease-in-out;
       background-color: $red;
 
-      &:before {
+      .bg-img {
         content: '';
         opacity: 0.7;
         position: absolute;
@@ -26,28 +26,19 @@ section#contactUs {
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        // background-color: $red-tint;
         mix-blend-mode: multiply;
         transition: background-color 0.5s ease-in-out, filter 0.5s linear;
         transform-origin: center;
       }
-      &:first-of-type:before {
-        background-image: url(/uploads/workshop.png);
-      }
-      &:nth-of-type(2):before {
-        background-image: url(/uploads/120513_workforce.jpg);
-      }
-      &:last-of-type:before {
-        background-image: url(/uploads/envision.png);
-      }
+
       &.hover {
-        &:before {
+        .bg-img {
           background-color: transparent;
           mix-blend-mode: normal;
           opacity: 1;
         }
         .panel-tint{
-          background-color: $black-tint;
+          background-color: rgba(black, .55);
         }
 
         flex: 3 1 auto;
@@ -58,13 +49,13 @@ section#contactUs {
             transform: scale(1.5);
             transform-origin: bottom left;
           }
-          p {
+          p, .contact-btn {
             opacity: 1;
           }
         }
       }
       &.hover-sibling {
-        &:before {
+        .bg-img {
           filter: blur(10px);
           opacity: .5;
           transform: scale(1.1);
@@ -108,8 +99,33 @@ section#contactUs {
             transition: opacity .65s ease-in-out;
             -webkit-font-smoothing: antialiased;
           }
+
+          .contact-btn{
+            margin-top: 25px;
+            opacity: 0;
+          }
         }
       }
     }
   }
+}
+
+.btn{
+  background-color: transparent;
+  transition: all .35s ease-in-out;
+  display: inline-block;
+  font-family: $font-family-display;
+  font-size: 16px;
+  color: white;
+  padding: 10px 15px;
+  border: 1px solid white;
+  text-decoration: none;
+  pointer-events: all;
+  cursor: url('/images/click-cursor-red.svg'), auto;
+
+  &:hover{
+    background-color: white;
+    color: $red;
+  }
+
 }
