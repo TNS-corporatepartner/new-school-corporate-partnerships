@@ -1,6 +1,6 @@
 ---
 title: Leverage big data to envision the future
-position: 0
+position: 2
 image: "/uploads/envision.png"
 ---
 
