@@ -17928,8 +17928,7 @@
 	      cellAlign: 'left',
 	      contain: true,
 	      wrapAround: true,
-	      autoPlay: false,
-	      accessibility: false
+	      autoPlay: false
 	    });
 
 	    setTimeout(function () {
@@ -17963,31 +17962,22 @@
 	    value: function playCellSequence() {
 	      var _this3 = this;
 
+	      console.log(this);
+	      console.log(_index.app.activeInstance);
 	      if (_index.app.activeInstance == this) {
-	        (function () {
-	          var cell = _this3.flkty.cells[_this3.flkty.selectedIndex].element;
-	          var video = cell.querySelector('video');
-	          _this3.questionEl.textContent = _this3.questions[_this3.flkty.selectedIndex];
-	          video.play();
-	          $('body').addClass('show-question');
+	        var cell = this.flkty.cells[this.flkty.selectedIndex].element;
+	        var video = cell.querySelector('video');
+	        this.questionEl.textContent = this.questions[this.flkty.selectedIndex];
+	        video.play();
+	        $('body').addClass('show-question');
 
-	          _this3.sliderTimer = setTimeout(function () {
-	            $('body').removeClass('show-question');
-	            setTimeout(function () {
-	              _this3.loadingWord.textContent = _this3.words[_this3.flkty.selectedIndex + 1] ? _this3.words[_this3.flkty.selectedIndex + 1] : _this3.words[0];
-	              _this3.flkty.next();
-
-	              //reset video
-	              _this3.flkty.once('settle', function () {
-	                console.log('SETTLE DOWN');
-	                video.pause();
-	                video.currentTime = 0;
-	                video.load();
-	              });
-	              setTimeout(function () {});
-	            }, 1000);
-	          }, 5000);
-	        })();
+	        this.sliderTimer = setTimeout(function () {
+	          $('body').removeClass('show-question');
+	          setTimeout(function () {
+	            _this3.loadingWord.textContent = _this3.words[_this3.flkty.selectedIndex + 1] ? _this3.words[_this3.flkty.selectedIndex + 1] : _this3.words[0];
+	            _this3.flkty.next();
+	          }, 1000);
+	        }, 5000);
 	      }
 	    }
 	  }, {
