@@ -1,6 +1,6 @@
 ---
 title: Global Diversity
-order: 3
+position: 2
 ---
 
 - We are a microcosm of the global population and a magnet for talent from all over the world.

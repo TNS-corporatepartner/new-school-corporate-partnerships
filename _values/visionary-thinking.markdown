@@ -1,6 +1,6 @@
 ---
 title: Visionary Thinking
-order: 1
+position: 0
 ---
 
 - We use design to tackle the big questions.
