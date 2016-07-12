@@ -346,8 +346,8 @@ main {
     animation-name: pulse;
     animation-duration: .5s;
     animation-direction: alternate;
-    animation-iteration-count: 2;
-    transform: scale(1.1); }
+    animation-iteration-count: 6;
+    transform: scale(1.2); }
 
 @keyframes pulse {
   25% {
@@ -739,8 +739,8 @@ section#ourSchool .school-links {
     position: absolute;
     cursor: url(/images/click-cursor-red.svg), auto; }
     section#ourSchool .school-links .school.parsons {
-      left: 2%;
-      top: 27%; }
+      left: 5%;
+      top: 25%; }
     section#ourSchool .school-links .school.eugene-lang {
       left: 67%;
       top: 60%; }
@@ -861,7 +861,7 @@ section#ourSchool #schoolModal {
 #peopleSlider {
   position: absolute;
   left: 0;
-  top: calc(50% - 303px);
+  top: 190px;
   width: 100vw;
   outline: none; }
   #peopleSlider .slider-inner {
@@ -870,12 +870,12 @@ section#ourSchool #schoolModal {
       float: left;
       transform: translateX(-100%); }
       #peopleSlider .slider-inner .cell .grid {
-        height: 600px;
-        max-height: 600px !important; }
+        height: calc(100vh - 380px);
+        max-height: calc(100vh - 380px) !important; }
         #peopleSlider .slider-inner .cell .grid .person {
           float: left;
-          width: 300px;
-          height: 300px;
+          width: calc(50vh - 190px);
+          height: calc(50vh - 190px);
           color: white;
           position: relative;
           display: -ms-inline-flexbox;
@@ -889,7 +889,7 @@ section#ourSchool #schoolModal {
           background-size: cover;
           cursor: url(/images/click-cursor-black.svg), auto; }
           #peopleSlider .slider-inner .cell .grid .person.video {
-            width: 600px; }
+            width: calc(100vh - 380px); }
           #peopleSlider .slider-inner .cell .grid .person:not(.video) {
             -webkit-filter: grayscale(1);
                     filter: grayscale(1);
@@ -905,7 +905,7 @@ section#ourSchool #schoolModal {
             max-height: 200px;
             opacity: 1; }
           #peopleSlider .slider-inner .cell .grid .person.video {
-            width: 604px; }
+            width: calc(100vh - 380px); }
             #peopleSlider .slider-inner .cell .grid .person.video .overlay {
               background-color: rgba(0, 0, 0, 0.1);
               transition: background 1s ease; }
@@ -941,8 +941,8 @@ section#ourSchool #schoolModal {
 
 #personModal {
   position: absolute;
-  height: 606px;
-  top: calc(50% - 303px);
+  height: calc(100vh - 380px);
+  top: 190px;
   width: 100%;
   opacity: 0;
   pointer-events: none;
@@ -1220,7 +1220,8 @@ section#contactUs {
           align-items: center;
       overflow: hidden;
       transition: all .65s ease-in-out;
-      background-color: #E82E21; }
+      background-color: #E82E21;
+      transform: translate3d(0, 0, 0); }
       section#contactUs .panel-group .panel .bg-img {
         content: '';
         opacity: 0.7;
@@ -1229,7 +1230,7 @@ section#contactUs {
         left: 0;
         width: 100%;
         height: 100%;
-        background-size: cover;
+        background-size: auto 100%;
         background-position: center;
         background-repeat: no-repeat;
         mix-blend-mode: multiply;

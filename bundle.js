@@ -32771,10 +32771,8 @@
 	    document.querySelectorAll('.grid').forEach(function (chunk) {
 	      new _isotopeLayout2.default(chunk, {
 	        itemSelector: '.person',
-	        layoutMode: 'masonryHorizontal',
-	        masonryHorizontal: {
-	          rowHeight: 300
-	        }
+	        layoutMode: 'masonryHorizontal'
+
 	      });
 	    });
 

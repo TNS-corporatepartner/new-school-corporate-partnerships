@@ -1,23 +1,23 @@
 #peopleSlider {
   position: absolute;
   left: 0;
-  top: calc(50% - 303px);
+  top: 190px;
   width: 100vw;
-  outline: none;  
+  outline: none;
   .slider-inner {
     position: relative;
     .cell {
       float: left;
-      transform: translateX(-100%);        
+      transform: translateX(-100%);
       .grid {
-        height: 600px;
-        max-height: 600px !important;
+        height: calc(100vh - 380px);
+        max-height: calc(100vh - 380px)!important;
         .person {
           float: left;
-          width: 300px;
-          height: 300px;
+          width: calc(50vh - 190px);
+          height: calc(50vh - 190px);
           &.video {
-            width: 600px;
+            width: calc(100vh - 380px);
           }
           color: white;
           position: relative;
@@ -28,7 +28,7 @@
           background-repeat: no-repeat;
           background-size: cover;
           cursor: url(/images/click-cursor-black.svg), auto;
-          &:not(.video) { 
+          &:not(.video) {
             filter: grayscale(1);
             transition: filter 1s ease;
             &:hover {
@@ -37,15 +37,15 @@
                 opacity: .7;
               }
             }
-          }      
+          }
           &:hover {
             p {
               max-height: 200px;
-              opacity: 1;          
+              opacity: 1;
             }
           }
           &.video {
-            width: 604px;
+            width: calc(100vh - 380px);
             .overlay{
               background-color: transparentize(black, .9);
               transition: background 1s ease;
@@ -69,7 +69,7 @@
 
           p {
             opacity: 0;
-            max-height: 0;        
+            max-height: 0;
             font-size: 18px;
             margin-top: 5px;
             transition: all 0.8s ease-in-out;
@@ -96,14 +96,14 @@
 
 #personModal {
   position: absolute;
-  height: 606px;
-  top: calc(50% - 303px);
+  height: calc(100vh - 380px);
+  top: 190px;
   width: 100%;
   opacity: 0;
   pointer-events: none;
   background-color: transparent;
   transition: all 0.4s ease-in-out;
-  transform: scale(0.8);  
+  transform: scale(0.8);
 
   .content {
     height: 100%;
