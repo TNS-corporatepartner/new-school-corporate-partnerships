@@ -107,7 +107,6 @@ export class OurApproach {
     // })
   }
 
-
   handleHover() {
     const sliderInner = this.sliderInner
     const cellWidth = this.cellWidth

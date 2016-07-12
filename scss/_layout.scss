@@ -112,32 +112,40 @@ header#header {
     .debbie {
       margin-top: -6%;
       -webkit-font-smoothing: antialiased;
-      p {
+      border: 1px solid white;
+      padding: 25px;
+      cursor: url('/images/arrow-cursor-red.svg'), auto;
+      h6{
+        font-weight: normal;
+        margin-bottom: 5px;
+      }
+      h2{
         color: $red;
+        margin-bottom: 15px;
+      }
+      p {
+        color: white;
+        font-size: 24px;
 
-        &:first-of-type {
-          font-weight: 600;
-        }
-        &:not(:first-of-type) {
-          line-height: 20px;
-        }
-        small {
-          color: white;
-          font-size: 16px;
-          font-weight: 300;
-
-        }
       }
       .contact {
-        margin-top: 20px;
-        a {
-          color: white;
-          text-decoration: none;
-        }
-        tel {
+        margin-top: 35px;
+        a{
           display: block;
-          margin: 0.5em 0;
+          margin-bottom: 15px;
+          font-family: $font-family-display;
+          color: white;
+          font-size: 16px;
+
+          cursor: url('/images/click-cursor-red.svg'), auto;
+          text-decoration: none;
+
+          &:hover{
+            color: $red;
+          }
+
         }
+
       }
     }
   }

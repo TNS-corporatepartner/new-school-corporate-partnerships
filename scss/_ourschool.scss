@@ -59,6 +59,9 @@ section#ourSchool {
       &.parsons {
         left: 19%;
         top: 27.2%;
+        .img{
+          background-position: 80% 50%;
+        }
       }
       &.eugene-lang {
         left: 70%;
@@ -75,6 +78,9 @@ section#ourSchool {
       &.social-research {
         left: 55%;
         top: 19%;
+        .img{
+          background-position: 20% 50%;
+        }
       }
       &.horz {
         width: 20%;

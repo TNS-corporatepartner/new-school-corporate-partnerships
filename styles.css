@@ -380,25 +380,31 @@ header#header {
     display: none; }
     #contactModal .content .debbie {
       margin-top: -6%;
-      -webkit-font-smoothing: antialiased; }
+      -webkit-font-smoothing: antialiased;
+      border: 1px solid white;
+      padding: 25px;
+      cursor: url("/images/arrow-cursor-red.svg"), auto; }
+      #contactModal .content .debbie h6 {
+        font-weight: normal;
+        margin-bottom: 5px; }
+      #contactModal .content .debbie h2 {
+        color: #E82E21;
+        margin-bottom: 15px; }
       #contactModal .content .debbie p {
-        color: #E82E21; }
-        #contactModal .content .debbie p:first-of-type {
-          font-weight: 600; }
-        #contactModal .content .debbie p:not(:first-of-type) {
-          line-height: 20px; }
-        #contactModal .content .debbie p small {
+        color: white;
+        font-size: 24px; }
+      #contactModal .content .debbie .contact {
+        margin-top: 35px; }
+        #contactModal .content .debbie .contact a {
+          display: block;
+          margin-bottom: 15px;
+          font-family: "NeueDisplay", sans-serif;
           color: white;
           font-size: 16px;
-          font-weight: 300; }
-      #contactModal .content .debbie .contact {
-        margin-top: 20px; }
-        #contactModal .content .debbie .contact a {
-          color: white;
+          cursor: url("/images/click-cursor-red.svg"), auto;
           text-decoration: none; }
-        #contactModal .content .debbie .contact tel {
-          display: block;
-          margin: 0.5em 0; }
+          #contactModal .content .debbie .contact a:hover {
+            color: #E82E21; }
 
 #fp-nav {
   margin-top: auto !important;
@@ -702,6 +708,8 @@ section#ourSchool .school-links {
     section#ourSchool .school-links .school.parsons {
       left: 19%;
       top: 27.2%; }
+      section#ourSchool .school-links .school.parsons .img {
+        background-position: 80% 50%; }
     section#ourSchool .school-links .school.eugene-lang {
       left: 70%;
       top: 64%; }
@@ -714,6 +722,8 @@ section#ourSchool .school-links {
     section#ourSchool .school-links .school.social-research {
       left: 55%;
       top: 19%; }
+      section#ourSchool .school-links .school.social-research .img {
+        background-position: 20% 50%; }
     section#ourSchool .school-links .school.horz {
       width: 20%;
       height: 22%; }
@@ -1180,7 +1190,7 @@ section#contactUs {
       overflow: hidden;
       transition: all .65s ease-in-out;
       background-color: #E82E21; }
-      section#contactUs .panel-group .panel:before {
+      section#contactUs .panel-group .panel .bg-img {
         content: '';
         opacity: 0.7;
         position: absolute;
@@ -1196,29 +1206,23 @@ section#contactUs {
         transition: background-color 0.5s ease-in-out, filter 0.5s linear;
         transition: background-color 0.5s ease-in-out, filter 0.5s linear, -webkit-filter 0.5s linear;
         transform-origin: center; }
-      section#contactUs .panel-group .panel:first-of-type:before {
-        background-image: url(/uploads/workshop.png); }
-      section#contactUs .panel-group .panel:nth-of-type(2):before {
-        background-image: url(/uploads/120513_workforce.jpg); }
-      section#contactUs .panel-group .panel:last-of-type:before {
-        background-image: url(/uploads/envision.png); }
       section#contactUs .panel-group .panel.hover {
         -ms-flex: 3 1 auto;
             flex: 3 1 auto; }
-        section#contactUs .panel-group .panel.hover:before {
+        section#contactUs .panel-group .panel.hover .bg-img {
           background-color: transparent;
           mix-blend-mode: normal;
           opacity: 1; }
         section#contactUs .panel-group .panel.hover .panel-tint {
-          background-color: rgba(0, 0, 0, 0.35); }
+          background-color: rgba(0, 0, 0, 0.55); }
         section#contactUs .panel-group .panel.hover .content-wrapper .content {
           pointer-events: none; }
           section#contactUs .panel-group .panel.hover .content-wrapper .content h4 {
             transform: scale(1.5);
             transform-origin: bottom left; }
-          section#contactUs .panel-group .panel.hover .content-wrapper .content p {
+          section#contactUs .panel-group .panel.hover .content-wrapper .content p, section#contactUs .panel-group .panel.hover .content-wrapper .content .contact-btn {
             opacity: 1; }
-      section#contactUs .panel-group .panel.hover-sibling:before {
+      section#contactUs .panel-group .panel.hover-sibling .bg-img {
         -webkit-filter: blur(10px);
                 filter: blur(10px);
         opacity: .5;
@@ -1257,6 +1261,25 @@ section#contactUs {
             font-size: 22px;
             transition: opacity .65s ease-in-out;
             -webkit-font-smoothing: antialiased; }
+          section#contactUs .panel-group .panel .content-wrapper .content .contact-btn {
+            margin-top: 25px;
+            opacity: 0; }
+
+.btn {
+  background-color: transparent;
+  transition: all .35s ease-in-out;
+  display: inline-block;
+  font-family: "NeueDisplay", sans-serif;
+  font-size: 16px;
+  color: white;
+  padding: 10px 15px;
+  border: 1px solid white;
+  text-decoration: none;
+  pointer-events: all;
+  cursor: url("/images/click-cursor-red.svg"), auto; }
+  .btn:hover {
+    background-color: white;
+    color: #E82E21; }
 
 body {
   background-color: #E1E1E1;
