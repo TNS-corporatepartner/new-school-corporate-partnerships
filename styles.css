@@ -394,7 +394,7 @@ header#header {
   cursor: pointer;
   transition: opacity 0.4s ease-in-out; }
 
-#contactModal {
+#contactModal, #contactInfo {
   display: none;
   position: absolute;
   z-index: 120;
@@ -409,26 +409,26 @@ header#header {
       align-items: center;
   padding: 2vw;
   cursor: url("/images/close-cursor-red.svg"), auto; }
-  #contactModal .content {
+  #contactModal .content, #contactInfo .content {
     display: none; }
-    #contactModal .content .debbie {
+    #contactModal .content .debbie, #contactInfo .content .debbie {
       margin-top: -6%;
       -webkit-font-smoothing: antialiased;
       border: 1px solid white;
       padding: 25px;
       cursor: url("/images/arrow-cursor-red.svg"), auto; }
-      #contactModal .content .debbie h6 {
+      #contactModal .content .debbie h6, #contactInfo .content .debbie h6 {
         font-weight: normal;
         margin-bottom: 5px; }
-      #contactModal .content .debbie h2 {
+      #contactModal .content .debbie h2, #contactInfo .content .debbie h2 {
         color: #E82E21;
         margin-bottom: 15px; }
-      #contactModal .content .debbie p {
+      #contactModal .content .debbie p, #contactInfo .content .debbie p {
         color: white;
         font-size: 24px; }
-      #contactModal .content .debbie .contact {
+      #contactModal .content .debbie .contact, #contactInfo .content .debbie .contact {
         margin-top: 35px; }
-        #contactModal .content .debbie .contact a {
+        #contactModal .content .debbie .contact a, #contactInfo .content .debbie .contact a {
           display: block;
           margin-bottom: 15px;
           font-family: "NeueDisplay", sans-serif;
@@ -436,7 +436,7 @@ header#header {
           font-size: 16px;
           cursor: url("/images/click-cursor-red.svg"), auto;
           text-decoration: none; }
-          #contactModal .content .debbie .contact a:hover {
+          #contactModal .content .debbie .contact a:hover, #contactInfo .content .debbie .contact a:hover {
             color: #E82E21; }
 
 #fp-nav {

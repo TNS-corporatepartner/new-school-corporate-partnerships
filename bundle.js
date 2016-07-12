@@ -125,7 +125,7 @@
 	    window.removeEventListener('click', skipSplashAnimation);
 
 	    $('main').fullpage({
-	      anchors: ['intro', 'future', 'difference', 'schools', 'approach', 'people', 'partner'],
+	      anchors: ['intro', 'future', 'difference', 'schools', 'approach', 'people', 'partner', 'contact'],
 	      navigation: true,
 	      afterRender: function afterRender() {
 	        if (!window.location.hash) {
@@ -153,14 +153,17 @@
 	        app.activeInstance.sleep && app.activeInstance.sleep();
 	      },
 	      afterLoad: function afterLoad(anchorLink, index) {
-	        if (!app.instances[index]) {
-	          app.instances[index] = new app.constructors[index]();
-	          app.activeScrollIndex = index;
-	          app.activeInstance = app.instances[index];
-	        } else {
-	          app.activeScrollIndex = index;
-	          app.activeInstance = app.instances[index];
-	          app.instances[index].awake && app.instances[index].awake();
+
+	        if (app.constructors[index]) {
+	          if (!app.instances[index]) {
+	            app.instances[index] = new app.constructors[index]();
+	            app.activeScrollIndex = index;
+	            app.activeInstance = app.instances[index];
+	          } else {
+	            app.activeScrollIndex = index;
+	            app.activeInstance = app.instances[index];
+	            app.instances[index].awake && app.instances[index].awake();
+	          }
 	        }
 	      }
 	    });
@@ -14566,6 +14569,31 @@
 	// shim for using process in browser
 
 	var process = module.exports = {};
+
+	// cached from whatever global is present so that test runners that stub it
+	// don't break things.  But we need to wrap it in a try catch in case it is
+	// wrapped in strict mode code which doesn't define any globals.  It's inside a
+	// function because try/catches deoptimize in certain engines.
+
+	var cachedSetTimeout;
+	var cachedClearTimeout;
+
+	(function () {
+	  try {
+	    cachedSetTimeout = setTimeout;
+	  } catch (e) {
+	    cachedSetTimeout = function () {
+	      throw new Error('setTimeout is not defined');
+	    }
+	  }
+	  try {
+	    cachedClearTimeout = clearTimeout;
+	  } catch (e) {
+	    cachedClearTimeout = function () {
+	      throw new Error('clearTimeout is not defined');
+	    }
+	  }
+	} ())
 	var queue = [];
 	var draining = false;
 	var currentQueue;
@@ -14590,7 +14618,7 @@
 	    if (draining) {
 	        return;
 	    }
-	    var timeout = setTimeout(cleanUpNextTick);
+	    var timeout = cachedSetTimeout(cleanUpNextTick);
 	    draining = true;
 
 	    var len = queue.length;
@@ -14607,7 +14635,7 @@
 	    }
 	    currentQueue = null;
 	    draining = false;
-	    clearTimeout(timeout);
+	    cachedClearTimeout(timeout);
 	}
 
 	process.nextTick = function (fun) {
@@ -14619,7 +14647,7 @@
 	    }
 	    queue.push(new Item(fun, args));
 	    if (queue.length === 1 && !draining) {
-	        setTimeout(drainQueue, 0);
+	        cachedSetTimeout(drainQueue, 0);
 	    }
 	};
 
