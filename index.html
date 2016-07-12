@@ -69,10 +69,10 @@
 		</section>
 
 		<section id="coreValues" class="section dark-section">
-			{% assign values = site.values | sort: 'position' %}
+			{% assign valuesItems = site.values | sort: 'position' %}
 
 			<div class="panel-group">
-				{% for panel in values %}
+				{% for panel in valuesItems %}
 					<div class="panel">
 						<div class="panel-tint">
 							<div id="{{panel.slug}}" class="particles-container"></div>
