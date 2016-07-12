@@ -69,8 +69,10 @@
 		</section>
 
 		<section id="coreValues" class="section dark-section">
+			{% assign values = site.values | sort: 'position' %}
+
 			<div class="panel-group">
-				{% for panel in site.values %}
+				{% for panel in values %}
 					<div class="panel">
 						<div class="panel-tint">
 							<div id="{{panel.slug}}" class="particles-container"></div>
@@ -161,9 +163,9 @@
 												<h4>{{project.title}}</h4>
 												<p>Learn More &rarr;</p>
 											</div>
-										</div>				
+										</div>
 									{% endfor %}
-							
+
 
 								</div>
 							</div>
