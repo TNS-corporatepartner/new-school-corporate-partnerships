@@ -153,8 +153,7 @@ function init() {
 
       //logo animate down
       Velocity(introLogo, {
-        bottom: 20,
-        width: 150
+        opacity: 0
       }, {
         duration: 1000,
         delay: 2500
@@ -167,16 +166,16 @@ function init() {
         complete: () => {
           setTimeout(() => {
             Velocity(introText, {opacity: 0}, {
-              duration: 500,
+              duration: 900,
               display: 'none'
             })
-          }, 3000)
+          }, 3400)
         }
       })
 
       setTimeout(() => {
         obs.complete()
-      }, 8800)
+      }, 9200)
 
       window.addEventListener('click', skipSplashAnimation)
     })
@@ -241,7 +240,7 @@ function initGlobalStreams() {
     if (app.activeScrollIndex == 1) {
       document.body.style.cursor = 'url(/images/next-cursor-black.svg), auto'
     } else if ('down' === d) {
-      document.body.style.cursor = 'url(/images/next-cursor-red.svg), auto'
+      document.body.style.cursor = 'url(/images/click-cursor-red.svg), auto'
     } else if ('up' === d) {
       document.body.style.cursor = 'url(/images/prev-cursor-red.svg), auto'
     } else if ('dead' === d) {

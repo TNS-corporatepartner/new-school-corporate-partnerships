@@ -46,6 +46,17 @@ main {
   // transition: opacity 1s ease-in-out;
 }
 
+#downArrow{
+  position: fixed;
+  z-index: 1;
+  bottom: 1.5vw;
+  left: 50%;
+  margin-left: -20px;
+  svg{
+    fill: none;
+  }
+}
+
 #fixedLogo {
   position: fixed;
   z-index: 200;
@@ -70,6 +81,7 @@ header#header {
   padding: 15px 20px;
   background-color: $red;
   width: 140px;
+  transition: .5s background ease-in-out;
 
   a {
     color: white;
@@ -81,6 +93,9 @@ header#header {
     -webkit-font-smoothing: antialiased;
     display: block;
 
+  }
+  &:hover{
+    background-color: $gray-darker;
   }
 }
 
