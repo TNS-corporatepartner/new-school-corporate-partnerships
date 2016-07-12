@@ -26,8 +26,6 @@ collections:
     - ARCHITECTURE
     - ART, MEDIA, AND TECHNOLOGY
     - THE ARTS
-    - BACHELOR'S PROGRAMS FOR ADULTS
-    - GRADUATE CERTIFICATE
     - CLASSICAL MUSIC
     - COMMUNICATION DESIGN
     - CONTEMPORARY MUSIC
@@ -37,6 +35,7 @@ collections:
     - CREATIVE WRITING
     - CULTURE AND MEDIA
     - DATA VISUALIZATION
+    - CULTURAL THEORY
     - DESIGN AND TECHNOLOGY
     - DESIGN AND URBAN ECOLOGIES
     - DESIGN STUDIES
@@ -46,9 +45,7 @@ collections:
     - ECONOMICS
     - ENGLISH AS A SECOND LANGUAGE
     - ESL + DESIGN
-    - ESL + FOODESL + MUSIC
     - ENVIRONMENTAL POLICY
-    - ENVIRONMENTAL STUDIES
     - FASHION BUSINESS
     - FASHION DESIGN
     - FASHION DESIGN AND SOCIETY
@@ -58,7 +55,6 @@ collections:
     - FINE ARTS
     - FOOD STUDIES
     - GENDER AND SEXUALITY STUDIES
-    - GLOBAL POLITICAL ECONOMY AND FINANCE
     - GLOBAL STUDIES
     - GRAPHIC DESIGN
     - GRAPHIC AND DIGITAL DESIGN
@@ -76,7 +72,6 @@ collections:
     - JAZZ AND CONTEMPORARY MUSIC
     - JOURNALISM + DESIGN
     - LEADERSHIP AND CHANGE
-    - GRADUATE CERTIFICATE
     - LIBERAL ARTS
     - LIBERAL STUDIES
     - LIGHTING DESIGN
@@ -88,26 +83,27 @@ collections:
     - NONPROFIT MANAGEMENT
     - ORGANIZATIONAL CHANGE MANAGEMENT
     - ORGANIZATION DEVELOPMENT
-    - GRADUATE CERTIFICATE
     - PHILOSOPHY
+    - PIANO
     - PHOTOGRAPHY
     - PLAYWRITING
     - POLITICS
     - PRODUCT DESIGN
     - PSYCHOLOGY
-    - PUBLIC AND URBAN POLICY
+    - URBAN POLICY
     - SCREEN STUDIES
     - SCREENWRITING
     - SOCIOLOGY
-    - STRATEGIC DESIGN AND MANAGEMENT
+    - INTERFACE DESIGN
+    - STRATEGIC DESIGN MANAGEMENT
     - GLOBAL EXECUTIVE
+    - ENVIRONMENTAL STUDIES
     - SUSTAINABILITY STRATEGIES
-    - GRADUATE CERTIFICATE
     - THEATER
     - THEORIES OF URBAN PRACTICE
     - TRANSDISCIPLINARY DESIGN
     - URBAN DESIGN
-    - URBAN POLICY ANALYSIS AND MANAGEMENT
+    - ORCHESTRAL INSTRUMENTS
   partner:
     title: Partner with Us
     output: false
@@ -125,7 +121,7 @@ collections:
 email: your-email@domain.com
 description: |
   Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
-baseurl: 
+baseurl:
 url: http://yourdomain.com
 introduction: The New School, in NYC, is the only university where a world-renowned
   art and design school comes together with acclaimed liberal arts, performing arts,
