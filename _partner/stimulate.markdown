@@ -1,5 +1,6 @@
 ---
 title: Stimulate innovation & entrepreneurship
+position: 0
 image: "/uploads/stimulate.jpg"
 ---
 

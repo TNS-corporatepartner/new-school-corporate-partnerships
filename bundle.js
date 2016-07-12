@@ -61311,8 +61311,6 @@
 	exports.OurApproach = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	// import 'isotope-masonry-horizontal'
-
 
 	var _lodash = __webpack_require__(390);
 
@@ -61340,11 +61338,6 @@
 	    this.sectionIntro = this.section.querySelector('.section-intro');
 	    this.canvas = document.getElementById('approachCanvas');
 	    this.sliderInner = document.querySelector('.approach-slider-inner');
-	    this.translateStep = 0.5;
-	    this.translateMax = 50;
-	    this.lastX = 0;
-	    this.lastY = 0;
-	    this.timeScale = 5;
 
 	    this.random = {
 	      variance: 3,
@@ -61363,64 +61356,87 @@
 	      }
 	    });
 
-	    this.xPositions = [];
-	    this.yPositions = [];
-
-	    this.painter$;
-
-	    this.raf$ = _rxjs.Observable.create(function (obs) {
-	      (function raf() {
-	        requestAnimationFrame(function (e) {
-	          obs.next(e);
-	          raf();
-	        });
-	      })();
-	    });
-
-	    this.mousemove$ = _rxjs.Observable.fromEvent(this.section, 'mousemove').map(this.mouseCoords); //returns {x, y}
-
 	    setTimeout(function () {
 	      $(_this.sectionIntro).addClass('hidden');
 	    }, 1600);
 
 	    this.positionItems();
-	    // this.handlePanning()
-	    // this.handleHover()
-	    // this.handleClick()
-
-	    var mouseleave$ = _rxjs.Observable.fromEvent(this.sliderInner, 'mouseleave').subscribe(function () {
-	      _this.tl.timeScale(0.25);
-	    });
-
-	    var mousemove$ = _rxjs.Observable.fromEvent(this.sliderInner, 'mousemove').map(function (e) {
-	      return _this.mouseCoords(e);
-	    }).repeat().subscribe(function (e) {
-	      if (e.x < 0 && _this.tl.reversed()) {
-	        _this.tl.reversed(false);
-	      } else if (e.x > 0 && !_this.tl.reversed()) {
-	        _this.tl.reversed(true);
-	      }
-
-	      _this.tl.timeScale(Math.abs(e.x / 25));
-	    });
+	    this.handlePanning();
+	    this.handleHover();
+	    this.handleClick();
 	  }
 
 	  _createClass(OurApproach, [{
+	    key: 'positionItems',
+	    value: function positionItems() {
+	      document.querySelector('.approach-grid').querySelectorAll('.program').forEach(function (el) {
+	        $(el).css({
+	          paddingTop: Math.random() * 50 + 1,
+	          paddingRight: Math.random() * 50 + 1,
+	          paddingLeft: Math.random() * 50 + 1,
+	          paddingBottom: Math.random() * 50 + 1
+	        });
+	      });
+
+	      document.querySelectorAll('.approach-grid').forEach(function (grid) {
+	        new Packery(grid, {
+	          itemSelector: '.program',
+	          isHorizontal: true,
+	          stamp: '.project'
+	        });
+	      });
+
+	      //set width of parent containing isotope grids in order to float: left
+	      var sliderInnerWidth = document.querySelector('.approach-grid').offsetWidth * 3;
+	      this.sliderInner.style.width = sliderInnerWidth + 'px';
+	      this.cellWidth = document.querySelector('.approach-grid').offsetWidth;
+	    }
+	  }, {
 	    key: 'handlePanning',
 	    value: function handlePanning() {
 	      var _this2 = this;
 
-	      var painter$ = this.raf$.withLatestFrom(this.mousemove$).subscribe(function (v) {
-	        var mouse = v[1];
-	        _this2.canvas.style.transform = 'perspective(3000px) translate3d(' + mouse.x + '%, 0%, 0) rotateX(' + 0 + 'deg) rotateY(' + mouse.rotateY + 'deg) scale(0.9)';
+	      _rxjs.Observable.fromEvent(this.sliderInner, 'mouseleave').subscribe(function () {
+	        _this2.tl.timeScale(0.15);
 	      });
+
+	      _rxjs.Observable.fromEvent(this.sliderInner, 'mousemove').map(function (e) {
+	        return _this2.mouseCoords(e);
+	      }).repeat().subscribe(function (e) {
+	        if (e.x < 0 && _this2.tl.reversed()) {
+	          _this2.tl.reversed(false);
+	        } else if (e.x > 0 && !_this2.tl.reversed()) {
+	          _this2.tl.reversed(true);
+	        }
+
+	        _this2.tl.timeScale(Math.abs(e.x / 25));
+	      });
+
+	      this.tl.add(new TweenMax(this.sliderInner, '5', {
+	        left: this.cellWidth * -1,
+	        ease: Linear.easeNone,
+	        timeScale: 5
+	      }));
+
+	      this.tl.timeScale(0.15);
+
+	      // this.raf$.withLatestFrom(this.mousemove$)
+	      // .subscribe(v => {
+	      //   const mouse = v[1]
+	      //   this.canvas.style.transform = `perspective(3000px) translate3d(${mouse.x}%, 0%, 0) rotateX(${0}deg) rotateY(${mouse.rotateY}deg) scale(0.9)`
+	      // })
 	    }
 	  }, {
 	    key: 'handleHover',
 	    value: function handleHover() {
+	      var sliderInner = this.sliderInner;
+
 	      $('.project').on('mouseenter', function () {
-	        var projectLeft = parseInt($(this).css('left')) / parseInt($(this).parent().css('width')) * 100;
-	        var projectTop = parseInt($(this).css('top'));
+	        var bounds = this.getBoundingClientRect();
+	        var parent = this.offsetParent.getBoundingClientRect();
+	        var projectLeft = bounds.left + 25; //25 paddingLeft
+	        var projectTop = bounds.top - parent.top + 15; //15 paddingTop
+	        var projectBottom = bounds.bottom - bounds.height + 15; //15 paddingTop
 	        var projectWidth = this.offsetWidth; //px
 	        var projectHeight = this.offsetHeight; //px
 	        var programEls = $(this).data('programs').split(',').map(function (pId) {
@@ -61429,7 +61445,7 @@
 	          return p;
 	        });
 
-	        var programPositions = getProgramPositions(projectLeft, projectTop, projectWidth, projectHeight, programEls);
+	        var programPositions = getProgramPositions(projectTop, projectBottom, projectLeft, projectWidth, projectHeight, programEls);
 
 	        $('.project').not(this).addClass('sibling-hover');
 	        $('.program').not(programEls).addClass('sibling-hover');
@@ -61438,14 +61454,12 @@
 	          $(el).addClass('hover');
 
 	          //save last original position to reset on mouseleave
-	          el.lastTransform = el.style.transform;
 	          el.lastLeft = el.style.left;
 	          el.lastTop = el.style.top;
 
-	          //position programs around project
-	          el.style.transform = 'translate3d(0px, 0px, 0)';
-	          el.style.left = programPositions[index].left;
-	          el.style.top = programPositions[index].top;
+	          //position programs around project       
+	          el.style.left = programPositions[index].left - el.offsetWidth + Math.abs(sliderInner.offsetLeft) + 'px';
+	          el.style.top = programPositions[index].top - el.offsetHeight + 'px';
 	          // el.textContent = el.textContent.slice(0, -2) + programPositions[index].place //for debugging
 	        });
 
@@ -61462,64 +61476,64 @@
 	        });
 	      });
 
-	      function getProgramPositions(projectLeft, projectTop, projectWidth, projectHeight, programEls) {
+	      function getProgramPositions(top, bottom, left, width, height, programEls) {
 	        var position1 = {
-	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 100) + 'px)',
-	          top: projectTop - 25 + 'px',
+	          left: left + width,
+	          top: top + 15,
 	          place: '01'
 	        };
 
 	        var position2 = {
-	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 250) + 'px)',
-	          top: projectTop - 40 + 'px',
+	          left: left + width / 1.5,
+	          top: top - 75,
 	          place: '02'
 	        };
 
 	        var position3 = {
-	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 500) + 'px)',
-	          top: projectTop - 60 + 'px',
+	          left: left + 25,
+	          top: top - 25,
 	          place: '03'
 	        };
 
 	        var position4 = {
-	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 720) + 'px)',
-	          top: projectTop - 125 + 'px',
+	          left: left,
+	          top: top + 50,
 	          place: '04'
 	        };
 
 	        var position5 = {
-	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 720) + 'px)',
-	          top: projectTop - 50 + 'px',
+	          left: left,
+	          top: top,
 	          place: '05'
 	        };
 
 	        var position6 = {
-	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 900) + 'px)',
-	          top: projectTop + 100 + 'px',
+	          left: left,
+	          top: top + height + 20, //20 project paddingBottom       
 	          place: '06'
 	        };
 
 	        var position7 = {
-	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 720) + 'px)',
-	          top: projectTop + 200 + 'px',
+	          left: left + 100,
+	          top: top + height + 100,
 	          place: '07'
 	        };
 
 	        var position8 = {
-	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 450) + 'px)',
-	          top: projectTop + 250 + 'px',
+	          left: left + 300, //300 program width
+	          top: top + height + 20,
 	          place: '08'
 	        };
 
 	        var position9 = {
-	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 200) + 'px)',
-	          top: projectTop + 200 + 'px',
+	          left: left + width,
+	          top: top + height + 75,
 	          place: '09'
 	        };
 
 	        var position10 = {
-	          left: 'calc(' + projectLeft + '% + ' + (projectWidth - 50) + 'px)',
-	          top: projectTop + 200 + 'px',
+	          left: left + width + 250,
+	          top: top + height + 10,
 	          place: '10'
 	        };
 
@@ -61546,11 +61560,15 @@
 	  }, {
 	    key: 'handleClick',
 	    value: function handleClick() {
+	      var tl = this.tl;
+
 	      $('.project').on('click', function (e) {
 	        e.stopPropagation();
+	        tl.timeScale(0);
+
 	        var modal = document.getElementById('ourApproachModal');
 	        var modalContent = modal.querySelector('.content');
-	        var projectImg = this.querySelector('img').getBoundingClientRect();
+	        var projectImg = this.querySelector('.project-image').getBoundingClientRect();
 
 	        modalContent.querySelector('.title-content').textContent = $(this).data('title');
 	        modalContent.querySelector('.label-group').textContent = $(this).data('programs').replace(/-/g, ' ').split(',').join(', ');
@@ -61592,6 +61610,8 @@
 	        $(modal).one('click', function (e) {
 	          e.stopPropagation();
 
+	          tl.timeScale(0.1);
+
 	          $.fn.fullpage.setAllowScrolling(true);
 
 	          Velocity(modalContent, 'reverse', {
@@ -61607,44 +61627,6 @@
 	          });
 	        });
 	      });
-	    }
-	  }, {
-	    key: 'positionItems',
-	    value: function positionItems() {
-	      $('.program').each(function (index, el) {
-	        $(el).css({
-	          paddingTop: Math.random() * 50 + 1,
-	          paddingRight: Math.random() * 50 + 1,
-	          paddingLeft: Math.random() * 50 + 1,
-	          paddingBottom: Math.random() * 50 + 1
-	        });
-	      });
-
-	      document.querySelectorAll('.approach-grid').forEach(function (grid) {
-	        new Packery(grid, {
-	          itemSelector: '.program',
-	          isHorizontal: true,
-	          stamp: '.project'
-	        });
-	      });
-
-	      //set width of parent containing isotope grids in order to float: left
-	      var sliderInnerWidth = document.querySelector('.approach-cell').offsetWidth * 3 + 10;
-	      this.sliderInner.style.width = sliderInnerWidth + 'px';
-	      this.cellWidth = document.querySelector('.approach-cell').offsetWidth;
-
-	      this.tl.add(new TweenMax(this.sliderInner, '5', {
-	        left: this.cellWidth * -1,
-	        ease: Linear.easeNone,
-	        timeScale: this.timeScale
-	      }));
-
-	      this.tl.timeScale(0.25);
-
-	      // $('.program').each((index, el) => {  
-	      //   // $(el).css('transform', `translate3d( ${(Math.random() * 5) + 1}%, ${(Math.random() * 50) + 1}%, 0)`)
-	      //   $(el).css('transform', `translateY( ${(Math.random() * 25) + 1}%`)
-	      // })
 	    }
 	  }]);
 

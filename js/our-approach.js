@@ -1,7 +1,6 @@
 import _ from 'lodash'
 import {Observable} from 'rxjs'
 import Isotope from 'isotope-layout'
-// import 'isotope-masonry-horizontal'
 import 'gsap'
 
 export class OurApproach {
@@ -9,12 +8,7 @@ export class OurApproach {
     this.section = document.getElementById('ourApproach')
     this.sectionIntro = this.section.querySelector('.section-intro')
     this.canvas = document.getElementById('approachCanvas')
-    this.sliderInner = document.querySelector('.approach-slider-inner')
-    this.translateStep = 0.5
-    this.translateMax = 50
-    this.lastX = 0
-    this.lastY = 0
-    this.timeScale = 5
+    this.sliderInner = document.querySelector('.approach-slider-inner')    
 
     this.random = {
       variance: 3,
@@ -33,40 +27,48 @@ export class OurApproach {
       }
     })    
 
-    this.xPositions = []
-    this.yPositions = []
-
-    this.painter$;
-
-    this.raf$ = Observable.create(obs => {
-      (function raf() {
-        requestAnimationFrame(function(e) {
-          obs.next(e)
-          raf()
-        })
-      })()
-    });
-
-    this.mousemove$ = Observable
-      .fromEvent(this.section, 'mousemove')
-      .map(this.mouseCoords) //returns {x, y}
-
-
     setTimeout(() => {
       $(this.sectionIntro).addClass('hidden')
     }, 1600)
 
     this.positionItems()
-    // this.handlePanning()
-    // this.handleHover()
-    // this.handleClick()
+    this.handlePanning()
+    this.handleHover()
+    this.handleClick()    
+  }
 
-    const mouseleave$ = Observable.fromEvent(this.sliderInner, 'mouseleave')
+  positionItems() {
+    document.querySelector('.approach-grid').querySelectorAll('.program').forEach(el => {
+      $(el).css({
+        paddingTop: (Math.random() * 50) + 1,        
+        paddingRight: (Math.random() * 50) + 1,
+        paddingLeft: (Math.random() * 50) + 1,
+        paddingBottom: (Math.random() * 50) + 1,
+      })      
+    })  
+
+    document.querySelectorAll('.approach-grid').forEach(grid => {
+      new Packery(grid, {
+        itemSelector: '.program',
+        isHorizontal: true,
+        stamp: '.project',
+      })
+    })
+
+    //set width of parent containing isotope grids in order to float: left
+    const sliderInnerWidth = document.querySelector('.approach-grid').offsetWidth * 3
+    this.sliderInner.style.width = sliderInnerWidth + 'px'
+    this.cellWidth = document.querySelector('.approach-grid').offsetWidth
+  }
+
+
+  handlePanning() {
+    Observable.fromEvent(this.sliderInner, 'mouseleave')
       .subscribe(() => {
-        this.tl.timeScale(0.25)
+        this.tl.timeScale(0.15)
       })
 
-    const mousemove$ = Observable.fromEvent(this.sliderInner, 'mousemove')
+    Observable.fromEvent(this.sliderInner, 'mousemove')
       .map(e => this.mouseCoords(e))
       .repeat()
       .subscribe(e => {  
@@ -77,24 +79,33 @@ export class OurApproach {
         }
 
         this.tl.timeScale( Math.abs(e.x / 25) )          
-      })    
-  }
-
-
-  handlePanning() {
-    const painter$ =
-      this.raf$.withLatestFrom(this.mousemove$)
-      .subscribe(v => {
-        const mouse = v[1]
-        this.canvas.style.transform = `perspective(3000px) translate3d(${mouse.x}%, 0%, 0) rotateX(${0}deg) rotateY(${mouse.rotateY}deg) scale(0.9)`
       })
+
+    this.tl.add( new TweenMax(this.sliderInner, '5', {
+      left: this.cellWidth * -1,
+      ease: Linear.easeNone, 
+      timeScale: 5
+    }))
+
+    this.tl.timeScale(0.15)
+
+    // this.raf$.withLatestFrom(this.mousemove$)
+    // .subscribe(v => {
+    //   const mouse = v[1]
+    //   this.canvas.style.transform = `perspective(3000px) translate3d(${mouse.x}%, 0%, 0) rotateX(${0}deg) rotateY(${mouse.rotateY}deg) scale(0.9)`
+    // })
   }
 
 
   handleHover() {
+    const sliderInner = this.sliderInner
+    
     $('.project').on('mouseenter', function() {
-      const projectLeft = parseInt($(this).css('left')) / parseInt($(this).parent().css('width')) * 100
-      const projectTop = parseInt($(this).css('top'))
+      const bounds = this.getBoundingClientRect()
+      const parent = this.offsetParent.getBoundingClientRect()
+      const projectLeft = bounds.left + 25 //25 paddingLeft
+      const projectTop = bounds.top - parent.top + 15 //15 paddingTop
+      const projectBottom = bounds.bottom - bounds.height + 15 //15 paddingTop
       const projectWidth = this.offsetWidth         //px
       const projectHeight = this.offsetHeight       //px
       const programEls = $(this).data('programs')
@@ -102,8 +113,8 @@ export class OurApproach {
         .map( pId => document.querySelector(`.program[data-id="${pId}"]`) )
         .filter(p => p)
 
-      const programPositions = getProgramPositions(projectLeft, projectTop, projectWidth, projectHeight, programEls)
-
+      const programPositions = getProgramPositions(projectTop, projectBottom, projectLeft, projectWidth, projectHeight, programEls)
+    
       $('.project').not(this).addClass('sibling-hover')
       $('.program').not(programEls).addClass('sibling-hover')
 
@@ -111,14 +122,12 @@ export class OurApproach {
         $(el).addClass('hover')
 
         //save last original position to reset on mouseleave
-        el.lastTransform = el.style.transform
         el.lastLeft = el.style.left
         el.lastTop = el.style.top
 
-        //position programs around project
-        el.style.transform = 'translate3d(0px, 0px, 0)'
-        el.style.left = programPositions[index].left
-        el.style.top = programPositions[index].top
+        //position programs around project        
+        el.style.left = programPositions[index].left - el.offsetWidth + Math.abs(sliderInner.offsetLeft) + 'px'
+        el.style.top = programPositions[index].top - el.offsetHeight + 'px'
         // el.textContent = el.textContent.slice(0, -2) + programPositions[index].place //for debugging
       })
 
@@ -135,64 +144,64 @@ export class OurApproach {
       })
     })
 
-    function getProgramPositions(projectLeft, projectTop, projectWidth, projectHeight, programEls) {
+    function getProgramPositions(top, bottom, left, width, height, programEls) {
       const position1 = {
-        left: `calc(${projectLeft}% + ${projectWidth - 100}px)`,
-        top: `${projectTop - 25}px`,
+        left: left + width,
+        top: top + 15,
         place: '01'
       }
 
       const position2 = {
-        left: `calc(${projectLeft}% + ${projectWidth - 250}px)`,
-        top: `${projectTop - 40}px`,
+        left: left + width / 1.5,
+        top: top - 75,     
         place: '02'
       }
 
       const position3 = {
-        left: `calc(${projectLeft}% + ${projectWidth - 500}px)`,
-        top: `${projectTop - 60}px`,
+        left: left + 25,
+        top: top - 25,             
         place: '03'
       }
 
       const position4 = {
-        left: `calc(${projectLeft}% + ${projectWidth - 720}px)`,
-        top: `${projectTop - 125}px`,
+        left: left,
+        top: top + 50,
         place: '04'
       }
 
       const position5 = {
-        left: `calc(${projectLeft}% + ${projectWidth - 720}px)`,
-        top: `${projectTop - 50}px`,
+        left: left,
+        top: top,        
         place: '05'
       }
 
       const position6 = {
-        left: `calc(${projectLeft}% + ${projectWidth - 900}px)`,
-        top: `${projectTop + 100}px`,
+        left: left,
+        top: top + height + 20, //20 project paddingBottom        
         place: '06'
       }
 
       const position7 = {
-        left: `calc(${projectLeft}% + ${projectWidth - 720}px)`,
-        top: `${projectTop + 200}px`,
+        left: left + 100,
+        top: top + height + 100,
         place: '07'
       }
 
       const position8 = {
-        left: `calc(${projectLeft}% + ${projectWidth - 450}px)`,
-        top: `${projectTop + 250}px`,
+        left: left + 300, //300 program width
+        top: top + height + 20,
         place: '08'
       }
 
       const position9 = {
-        left: `calc(${projectLeft}% + ${projectWidth - 200}px)`,
-        top: `${projectTop + 200}px`,
+        left: left + width,
+        top: top + height + 75,
         place: '09'
       }
 
       const position10 = {
-        left: `calc(${projectLeft}% + ${projectWidth - 50}px)`,
-        top: `${projectTop + 200}px`,
+        left: left + width + 250,
+        top: top + height + 10,  
         place: '10'
       }
 
@@ -219,11 +228,15 @@ export class OurApproach {
 
 
   handleClick() {
-    $('.project').on('click', function(e) {
+    const tl = this.tl
+
+    $('.project').on('click', function(e) {      
       e.stopPropagation()
+      tl.timeScale(0)
+
       const modal = document.getElementById('ourApproachModal')
       const modalContent = modal.querySelector('.content')
-      const projectImg = this.querySelector('img').getBoundingClientRect()
+      const projectImg = this.querySelector('.project-image').getBoundingClientRect()
 
       modalContent.querySelector('.title-content').textContent = $(this).data('title')
       modalContent.querySelector('.label-group').textContent = $(this).data('programs').replace(/-/g, ' ').split(',').join(', ')
@@ -266,6 +279,8 @@ export class OurApproach {
       $(modal).one('click', function(e) {
         e.stopPropagation()
 
+        tl.timeScale(0.1)
+
         $.fn.fullpage.setAllowScrolling(true)
 
         Velocity(modalContent, 'reverse', {
@@ -281,44 +296,5 @@ export class OurApproach {
         })
       })
     })
-  }
-
-
-  positionItems() {    
-    $('.program').each((index, el) => {   
-      $(el).css({
-        paddingTop: (Math.random() * 50) + 1,        
-        paddingRight: (Math.random() * 50) + 1,
-        paddingLeft: (Math.random() * 50) + 1,
-        paddingBottom: (Math.random() * 50) + 1,
-      })
-    })
-
-    document.querySelectorAll('.approach-grid').forEach(grid => {
-      new Packery(grid, {
-        itemSelector: '.program',
-        isHorizontal: true,
-        stamp: '.project',
-      })
-    })
-
-    //set width of parent containing isotope grids in order to float: left
-    const sliderInnerWidth = document.querySelector('.approach-cell').offsetWidth * 3 + 10
-    this.sliderInner.style.width = sliderInnerWidth + 'px'
-    this.cellWidth = document.querySelector('.approach-cell').offsetWidth
-
-    this.tl.add( new TweenMax(this.sliderInner, '5', {
-      left: this.cellWidth * -1,
-      ease: Linear.easeNone, 
-      timeScale: this.timeScale
-    }))
-
-    this.tl.timeScale(0.25)
-
-    // $('.program').each((index, el) => {   
-    //   // $(el).css('transform', `translate3d( ${(Math.random() * 5) + 1}%, ${(Math.random() * 50) + 1}%, 0)`)
-    //   $(el).css('transform', `translateY( ${(Math.random() * 25) + 1}%`)
-    // })
-
   }
 }
