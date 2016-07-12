@@ -19,25 +19,25 @@ export class OurPeople {
     this.lastLeft = 0      
     this.tl = new TimelineMax({
       repeat: -1,
+      smoothChildTiming: true,
       onReverseComplete: () => {
         this.tl.seek('5')
       }
     })
     this.timeScale = 5  
 
-    
-    var chunks = document.querySelectorAll('.grid').forEach(chunk => {
+    document.querySelectorAll('.grid').forEach(chunk => {
       new Isotope( chunk, {
         itemSelector: '.person',
         layoutMode: 'masonryHorizontal',
         masonryHorizontal: {
           rowHeight: 300
         }
-      });
+      })
     })
 
     //set width of parent containing isotope grids in order to float: left
-    const sliderInnerWidth = document.querySelector('.grid').offsetWidth * 3
+    const sliderInnerWidth = document.querySelector('.cell').offsetWidth * 3
     this.sliderInner.style.width = sliderInnerWidth + 'px'
     this.cellWidth = this.slider.querySelector('.cell').offsetWidth
 

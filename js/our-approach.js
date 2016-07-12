@@ -1,15 +1,20 @@
 import _ from 'lodash'
 import {Observable} from 'rxjs'
+import Isotope from 'isotope-layout'
+// import 'isotope-masonry-horizontal'
+import 'gsap'
 
 export class OurApproach {
   constructor() {
     this.section = document.getElementById('ourApproach')
     this.sectionIntro = this.section.querySelector('.section-intro')
     this.canvas = document.getElementById('approachCanvas')
+    this.sliderInner = document.querySelector('.approach-slider-inner')
     this.translateStep = 0.5
     this.translateMax = 50
     this.lastX = 0
     this.lastY = 0
+    this.timeScale = 5
 
     this.random = {
       variance: 3,
@@ -19,6 +24,14 @@ export class OurApproach {
       xIndex: 0,
       yIndex: 0
     }
+
+    this.tl = new TimelineMax({
+      repeat: -1,
+      smoothChildTiming: true,
+      onReverseComplete: () => {
+        this.tl.seek('5')
+      }
+    })    
 
     this.xPositions = []
     this.yPositions = []
@@ -44,9 +57,27 @@ export class OurApproach {
     }, 1200)
 
     this.positionItems()
-    this.handlePanning()
-    this.handleHover()
-    this.handleClick()
+    // this.handlePanning()
+    // this.handleHover()
+    // this.handleClick()
+
+    const mouseleave$ = Observable.fromEvent(this.sliderInner, 'mouseleave')
+      .subscribe(() => {
+        this.tl.timeScale(0.25)
+      })
+
+    const mousemove$ = Observable.fromEvent(this.sliderInner, 'mousemove')
+      .map(e => this.mouseCoords(e))
+      .repeat()
+      .subscribe(e => {  
+        if ( e.x < 0 && this.tl.reversed() ) {
+          this.tl.reversed(false)
+        } else if ( e.x > 0 && !this.tl.reversed() ) {
+          this.tl.reversed(true)
+        }
+
+        this.tl.timeScale( Math.abs(e.x / 25) )          
+      })    
   }
 
 
@@ -55,7 +86,7 @@ export class OurApproach {
       this.raf$.withLatestFrom(this.mousemove$)
       .subscribe(v => {
         const mouse = v[1]
-        this.canvas.style.transform = `perspective(3000px) translate3d(${mouse.x}%, ${mouse.y}%, 0) rotateX(${0}deg) rotateY(${mouse.rotateY}deg) scale(0.9)`
+        this.canvas.style.transform = `perspective(3000px) translate3d(${mouse.x}%, 0%, 0) rotateX(${0}deg) rotateY(${mouse.rotateY}deg) scale(0.9)`
       })
   }
 
@@ -171,6 +202,21 @@ export class OurApproach {
     }
   }
 
+  
+  mouseCoords(e) {
+    const xPercent = e.clientX / window.innerWidth * 100
+    const x = xPercent >= 50 ? (xPercent - 50) * -1 : 50 - xPercent
+
+    const yPercent = e.clientY / window.innerHeight * 100
+    const y = yPercent >= 50 ? (yPercent - 50) * -1 : 50 - yPercent
+
+    //returns x and y with positive or negative 50 depending on distance from center
+    return {
+      x: x,
+      y: y
+    }    
+  }
+
 
   handleClick() {
     $('.project').on('click', function(e) {
@@ -238,32 +284,41 @@ export class OurApproach {
   }
 
 
-  mouseCoords(e) {
-    const xPercent = e.clientX / window.innerWidth * 100
-    const x = xPercent >= 50 ? (xPercent * .5 - 25) * -1 : 25 - xPercent * .5
-
-    const yPercent = e.clientY / window.innerHeight * 100    
-    const y = yPercent >= 50 ? (yPercent - 50) * -1 : 25 - yPercent * .5
-
-    const z = x
-
-    return {
-      x: x,
-      y: y,
-      rotateX: y * -0.3,
-      rotateY: x * 0.6,
-    }
-  }
-
-
-  positionItems() {
+  positionItems() {    
     $('.program').each((index, el) => {   
-      $(el).css('transform', `translate3d( ${(Math.random() * 25) + 1}%, ${(Math.random() * 25) + 1}px, 0)`)
+      $(el).css({
+        paddingTop: (Math.random() * 50) + 1,        
+        paddingRight: (Math.random() * 50) + 1,
+        paddingLeft: (Math.random() * 50) + 1,
+        paddingBottom: (Math.random() * 50) + 1,
+      })
     })
 
-    var pckry = new Packery( '#approachCanvas', {
-      itemSelector: '.grid-item',
-      stamp: '.project'
+    document.querySelectorAll('.approach-grid').forEach(grid => {
+      new Packery(grid, {
+        itemSelector: '.program',
+        isHorizontal: true,
+        stamp: '.project',
+      })
     })
+
+    //set width of parent containing isotope grids in order to float: left
+    const sliderInnerWidth = document.querySelector('.approach-cell').offsetWidth * 3 + 10
+    this.sliderInner.style.width = sliderInnerWidth + 'px'
+    this.cellWidth = document.querySelector('.approach-cell').offsetWidth
+
+    this.tl.add( new TweenMax(this.sliderInner, '5', {
+      left: this.cellWidth * -1,
+      ease: Linear.easeNone, 
+      timeScale: this.timeScale
+    }))
+
+    this.tl.timeScale(0.25)
+
+    // $('.program').each((index, el) => {   
+    //   // $(el).css('transform', `translate3d( ${(Math.random() * 5) + 1}%, ${(Math.random() * 50) + 1}%, 0)`)
+    //   $(el).css('transform', `translateY( ${(Math.random() * 25) + 1}%`)
+    // })
+
   }
 }

@@ -138,41 +138,36 @@
 		<section id="ourApproach" class="section">
 			<div id="approachCanvas">
 
-				{% for project in site.projects %}
-					<div class="project project{{forloop.index}}"
-							data-programs="{% for program in project.programs %}{{program | slugify}},{% endfor %}"
-							data-content="{{project.content}}"
-							data-title="{{project.title}}"
-							data-blockquote="{{project.question}}">
-						<img src="{{project.image}}" width="200" />
-						<div class="info">
-							<label>Case Study</label>
-							<h4>{{project.title}}</h4>
-							<p>Learn More &rarr;</p>
-						</div>
-					</div>				
-				{% endfor %}
-			
-				{% for project in site.projects %}					
-					<div class="project project{{forloop.length | plus: forloop.index}}"
-							data-programs="{% for program in project.programs %}{{program | slugify}},{% endfor %}"
-							data-content="{{project.content}}"
-							data-title="{{project.title}}"
-							data-blockquote="{{project.question}}">
-						<img src="{{project.image}}" width="200" />
-						<div class="info">
-							<label>Case Study</label>
-							<h4>{{project.title}}</h4>
-							<p>Learn More &rarr;</p>
-						</div>
+				<div class="approach-slider-inner">
+
+						{% for i in (1..3) %}
+							<div class="approach-cell cell-{{forloop.index}}">
+								<div class="approach-grid">
+
+									{% for program in projects.programs %}
+										<div class="program" data-id="{{program | slugify}}"><span>{{program}}</span></div>
+									{% endfor %}
+
+									{% for project in site.projects %}
+										<div class="project project{{forloop.index}}"
+												data-programs="{% for program in project.programs %}{{program | slugify}},{% endfor %}"
+												data-content="{{project.content}}"
+												data-title="{{project.title}}"
+												data-blockquote="{{project.question}}">
+											<div class="project-image" style="background-image: url({{project.image}})" ></div>
+											<div class="info">
+												<h4>{{project.title}}</h4>
+												<p>Learn More &rarr;</p>
+											</div>
+										</div>				
+									{% endfor %}
+							
+
+								</div>
+							</div>
+						{% endfor %}
+
 					</div>
-				{% endfor %}
-
-				{% for program in projects.programs %}
-					<div class="program grid-item" data-id="{{program | slugify}}">{{program}}</div>
-				{% endfor %}
-				
-
 
 			</div>
 
@@ -359,6 +354,7 @@
 	<script src="js/onepagescroll.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.8.1/jquery.fullPage.js"></script>
 	<script src="js/particles/particles.lib.js"></script>
+	<script src="//npmcdn.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
 	<script src="https://npmcdn.com/packery@2.1/dist/packery.pkgd.min.js"></script>
 	<script src="/bundle.js"></script>
 
