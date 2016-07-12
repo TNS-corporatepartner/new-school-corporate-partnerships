@@ -1144,8 +1144,6 @@ section#ourPeople.modal-open {
     #ourApproachModal .content aside {
       width: 50%;
       height: 100%;
-      padding: 4vw;
-      padding-top: 20vh;
       color: white; }
       #ourApproachModal .content aside:before {
         content: '';
@@ -1153,18 +1151,28 @@ section#ourPeople.modal-open {
         top: 0;
         left: 0;
         bottom: 0;
-        width: 50vw;
+        width: 50%;
         background-color: rgba(34, 34, 34, 0.9); }
       #ourApproachModal .content aside > * {
         position: relative; }
+      #ourApproachModal .content aside .aside-content {
+        padding: 4vw;
+        margin-bottom: 20vh; }
       #ourApproachModal .content aside .label-heading {
         color: #E82E21;
         display: block;
         margin-bottom: 2.5vh; }
       #ourApproachModal .content aside .label-group {
-        color: #999;
+        color: white;
         display: block;
-        width: 62.5%; }
+        max-width: 600px;
+        text-transform: uppercase;
+        line-height: 1.7; }
+      #ourApproachModal .content aside h6 {
+        color: #E82E21;
+        font-weight: normal;
+        margin-top: 40px;
+        margin-bottom: 5px; }
       #ourApproachModal .content aside blockquote {
         margin: 2.5vh 0;
         color: #E82E21;
@@ -1172,23 +1180,20 @@ section#ourPeople.modal-open {
         font-size: 22px;
         font-style: italic; }
       #ourApproachModal .content aside .title-content {
-        margin-top: 5vh;
-        line-height: 5.2vh;
-        text-transform: uppercase;
-        font-weight: 900; }
-      #ourApproachModal .content aside .text-content {
-        margin-bottom: 100px; }
-        #ourApproachModal .content aside .text-content p {
-          font-size: 22px;
-          line-height: 32px;
-          margin-bottom: 2vw; }
+        line-height: 1.2;
+        font-family: "NeueDisplay", sans-serif;
+        font-weight: normal; }
+      #ourApproachModal .content aside .text-content p {
+        font-size: 22px;
+        line-height: 32px;
+        margin-bottom: 20px; }
       #ourApproachModal .content aside .gradient-bottom {
         position: absolute;
         left: 0;
         bottom: 0;
         height: 20vh;
-        width: 50vw;
-        background-image: linear-gradient(0deg, rgba(34, 34, 34, 0.97) 50%, transparent);
+        width: 50%;
+        background-image: linear-gradient(0deg, #222 50%, transparent);
         pointer-events: none; }
     #ourApproachModal .content .img-container {
       position: fixed;

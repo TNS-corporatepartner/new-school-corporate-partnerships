@@ -14,15 +14,15 @@
   position: absolute;
   left: 0;
   top: calc(50% - 303px);
-  width: 100vw;  
+  width: 100vw;
   .approach-slider-inner {
-    position: relative;  
-    left: -1850px;      
-    .approach-grid {            
-      position: relative;    
-      float: left;        
+    position: relative;
+    left: -1850px;
+    .approach-grid {
+      position: relative;
+      float: left;
       height: 60vh;
-      max-height: 60vh !important;    
+      max-height: 60vh !important;
       .project {
         position: absolute;
         padding: 15px 25px;
@@ -49,7 +49,7 @@
         &.project5 {
           left: 1711px;
           bottom: 0px;
-        }          
+        }
         &.project6 {
           left: 2281px;
           top: 80px;
@@ -69,7 +69,7 @@
         &.project10 {
           left: 4804px;
           bottom: 125px;
-        }          
+        }
         &:hover .info {
           opacity: 1;
           h4 {
@@ -107,7 +107,7 @@
           }
         }
         .project-image {
-          width: 200px; min-width: 200px;      
+          width: 200px; min-width: 200px;
           height: 200px;
           background-position: center;
           background-size: cover;
@@ -132,22 +132,22 @@
         &.hover {
           font-size: 16px;
           z-index: 999;
-        }          
+        }
         &.sibling-hover {
           opacity: 0.1;
-        }          
+        }
       }
     }
 
   }
 }
 
-#ourApproachModal {  
+#ourApproachModal {
   position: absolute;
   display: none;
   background-color: $gray-darker-trans;
   cursor: url(/images/close-cursor-red.svg), auto;
-  .content {    
+  .content {
     display: none;
     height: 100vh;
     -webkit-font-smoothing: antialiased;
@@ -156,29 +156,41 @@
     aside {
       width: 50%;
       height: 100%;
-      padding: 4vw;
-      padding-top: 20vh;                  
       color: white;
       &:before {
         content: '';
         position: fixed;
         top: 0; left: 0;
         bottom: 0;
-        width: 50vw;
+        width: 50%;
         background-color: $gray-darker-trans;
       }
       > * {
         position: relative;
       }
+
+      .aside-content{
+        padding: 4vw;
+        margin-bottom:20vh;
+      }
+
       .label-heading {
         color: $red;
         display: block;
         margin-bottom: 2.5vh;
       }
       .label-group {
-        color: $gray;
+        color: white;
         display: block;
-        width: 62.5%;
+        max-width: 600px;
+        text-transform: uppercase;
+        line-height: 1.7;
+      }
+      h6{
+        color: $red;
+        font-weight: normal;
+        margin-top: 40px;
+        margin-bottom: 5px;
       }
       blockquote {
         margin: 2.5vh 0;
@@ -188,17 +200,15 @@
         font-style: italic;
       }
       .title-content {
-        margin-top: 5vh;        
-        line-height: 5.2vh;
-        text-transform: uppercase;
-        font-weight: 900;
+        line-height: 1.2;
+        font-family: $font-family-display;
+        font-weight: normal;
       }
       .text-content {
-        margin-bottom: 100px;
         p {
-          font-size: 22px;      
-          line-height: 32px;  
-          margin-bottom: 2vw;
+          font-size: 22px;
+          line-height: 32px;
+          margin-bottom: 20px;
         }
       }
       .gradient-bottom {
@@ -206,8 +216,8 @@
         left: 0;
         bottom: 0;
         height: 20vh;
-        width: 50vw;
-        background-image: linear-gradient(0deg, $gray-darkest-trans 50%, transparent);
+        width: 50%;
+        background-image: linear-gradient(0deg, $gray-darker 50%, transparent);
         pointer-events: none;
       }
     }
@@ -218,7 +228,7 @@
       height: 100vh;
       display: flex;
       align-items: center;
-      width: 50%;      
+      width: 50%;
       img {
         width: 100%;
       }
