@@ -121,7 +121,7 @@
 	  }, function (err) {
 	    return console.error(err);
 	  }, function () {
-	    //executes when initSplashContent stream completes     
+	    //executes when initSplashContent stream completes
 	    window.removeEventListener('click', skipSplashAnimation);
 
 	    $('main').fullpage({
@@ -17929,7 +17929,7 @@
 	    setTimeout(function () {
 	      $(_this.sectionIntro).addClass('hidden');
 	      _this.initVideos();
-	    }, 1200);
+	    }, 1600);
 	  }
 
 	  _createClass(FutureOf, [{
@@ -32380,7 +32380,7 @@
 
 	    setTimeout(function () {
 	      $(_this.sectionIntro).addClass('hidden');
-	    }, 1200);
+	    }, 1600);
 	  }
 
 	  _createClass(CoreValues, [{
@@ -32432,7 +32432,15 @@
 
 	  setTimeout(function () {
 	    $(_this.sectionInto).addClass('hidden');
-	  }, 1200);
+	  }, 1600);
+
+	  $('.school').on('mouseenter', function (e) {
+	    $(this).siblings().addClass('not-hover');
+	  });
+
+	  $('.school').on('mouseleave', function (e) {
+	    $(this).siblings().removeClass('not-hover');
+	  });
 
 	  $('.school').on('click', function (e) {
 	    e.stopPropagation();
@@ -32554,10 +32562,16 @@
 	    this.sliderInner = this.slider.querySelector('.slider-inner');
 	    this.walkDirection = 'right';
 	    this.lastLeft = 0;
-	    this.tl = new TimelineMax({ repeat: -1 });
+	    this.tl = new TimelineMax({
+	      repeat: -1,
+	      smoothChildTiming: true,
+	      onReverseComplete: function onReverseComplete() {
+	        _this.tl.seek('5');
+	      }
+	    });
 	    this.timeScale = 5;
 
-	    var chunks = document.querySelectorAll('.grid').forEach(function (chunk) {
+	    document.querySelectorAll('.grid').forEach(function (chunk) {
 	      new _isotopeLayout2.default(chunk, {
 	        itemSelector: '.person',
 	        layoutMode: 'masonryHorizontal',
@@ -32567,11 +32581,18 @@
 	      });
 	    });
 
-	    this.cellWidth = this.slider.querySelector('.cell .grid').offsetWidth;
-	    this.slideWidth = this.cellWidth * 1;
+	    //set width of parent containing isotope grids in order to float: left
+	    var sliderInnerWidth = document.querySelector('.cell').offsetWidth * 3;
+	    this.sliderInner.style.width = sliderInnerWidth + 'px';
+	    this.cellWidth = this.slider.querySelector('.cell').offsetWidth;
+
+	    var tl = this.tl;
 
 	    $('.person.video').on('click', function (e) {
 	      e.stopPropagation();
+
+	      tl.timeScale(0);
+
 	      var personModal = document.getElementById('personModal');
 	      var modalContent = personModal.querySelector('.content');
 	      var videoSrc = $(this).data('src');
@@ -32585,6 +32606,9 @@
 
 	      $('#ourPeople').one('click', function (e) {
 	        e.stopPropagation();
+
+	        tl.timeScale(0.25);
+
 	        $('#ourPeople').removeClass('modal-open');
 	        modalContent.innerHTML = '';
 	      });
@@ -32595,6 +32619,8 @@
 	      ease: Linear.easeNone,
 	      timeScale: this.timeScale
 	    }));
+
+	    this.tl.timeScale(0.25);
 
 	    var mouseleave$ = _rxjs.Observable.fromEvent(this.slider, 'mouseleave').subscribe(function () {
 	      _this.tl.timeScale(0.25);
@@ -32611,61 +32637,9 @@
 
 	      _this.tl.timeScale(Math.abs(e.x / 15));
 	    });
-
-	    // const run$ = mousemove$
-	    //   .take(1)
-	    //   .switchMap((e) => this.animateToPoint$(e))     
-	    //   .repeat()
-
-	    // const walk$ = (direction) =>
-	    //   Observable.interval(15).mapTo(direction)
-
-	    // walk$('right')
-	    //   .takeUntil(mousemove$)
-	    //   .subscribe( (direction) => this.animateSlowly(direction) )   
-
-	    // run$
-	    //   .switchMap( () => walk$().takeUntil(mousemove$) )      
-	    //   .subscribe(
-	    //     (direction) => this.animateSlowly(direction),
-	    //     this.handleErr,
-	    //     () => { console.log('RUN DONE') }
-	    //   )
 	  }
 
 	  _createClass(OurPeople, [{
-	    key: 'animateSlowly',
-	    value: function animateSlowly(direction) {
-	      var step = direction === 'right' ? -1 : 1;
-	      var newLeft = this.lastLeft += step;
-
-	      Velocity(this.sliderInner, 'stop');
-	      Velocity(this.sliderInner, {
-	        left: this.setNewLeft(newLeft)
-	      }, {
-	        duration: 0
-	      });
-	    }
-	  }, {
-	    key: 'animateToPoint$',
-	    value: function animateToPoint$(e) {
-	      var _this2 = this;
-
-	      return _rxjs.Observable.create(function (obs) {
-	        Velocity(_this2.sliderInner, 'stop');
-	        Velocity(_this2.sliderInner, {
-	          left: e.sliderDest
-	        }, {
-	          duration: e.duration,
-	          complete: function complete() {
-	            obs.next(e.direction);
-	            obs.complete();
-	          },
-	          easing: 'easeInSine'
-	        });
-	      });
-	    }
-	  }, {
 	    key: 'mouseCoords',
 	    value: function mouseCoords(e) {
 	      var xPercent = e.clientX / window.innerWidth * 100;
@@ -32674,28 +32648,11 @@
 	      var yPercent = e.clientY / window.innerHeight * 100;
 	      var y = yPercent >= 50 ? (yPercent - 50) * -1 : 50 - yPercent;
 
-	      var lastLeft = this.lastLeft || 0;
-	      var unfilteredNewLeft = lastLeft + x * 0.01 * window.innerWidth;
-
-	      var newLeft = this.setNewLeft(unfilteredNewLeft);
-	      var isLeftReset = unfilteredNewLeft.toFixed(0) != newLeft.toFixed(0);
-	      this.lastLeft = newLeft;
-
 	      //returns x and y with positive or negative 50 depending on distance from center
 	      return {
 	        x: x,
-	        y: y,
-	        sliderDest: newLeft,
-	        direction: newLeft < lastLeft ? 'right' : 'left',
-	        duration: isLeftReset ? 0 : 1000
+	        y: y
 	      };
-	    }
-	  }, {
-	    key: 'setNewLeft',
-	    value: function setNewLeft(newLeft) {
-	      var sliderPosition = ((newLeft - this.cellWidth) % this.slideWidth + this.slideWidth) % this.slideWidth;
-	      var newLeft = sliderPosition += -this.slideWidth + this.cellWidth;
-	      return newLeft;
 	    }
 	  }, {
 	    key: 'handleErr',
@@ -61354,12 +61311,20 @@
 	exports.OurApproach = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	// import 'isotope-masonry-horizontal'
+
 
 	var _lodash = __webpack_require__(390);
 
 	var _lodash2 = _interopRequireDefault(_lodash);
 
 	var _rxjs = __webpack_require__(2);
+
+	var _isotopeLayout = __webpack_require__(369);
+
+	var _isotopeLayout2 = _interopRequireDefault(_isotopeLayout);
+
+	__webpack_require__(388);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -61374,10 +61339,12 @@
 	    this.section = document.getElementById('ourApproach');
 	    this.sectionIntro = this.section.querySelector('.section-intro');
 	    this.canvas = document.getElementById('approachCanvas');
+	    this.sliderInner = document.querySelector('.approach-slider-inner');
 	    this.translateStep = 0.5;
 	    this.translateMax = 50;
 	    this.lastX = 0;
 	    this.lastY = 0;
+	    this.timeScale = 5;
 
 	    this.random = {
 	      variance: 3,
@@ -61387,6 +61354,14 @@
 	      xIndex: 0,
 	      yIndex: 0
 	    };
+
+	    this.tl = new TimelineMax({
+	      repeat: -1,
+	      smoothChildTiming: true,
+	      onReverseComplete: function onReverseComplete() {
+	        _this.tl.seek('5');
+	      }
+	    });
 
 	    this.xPositions = [];
 	    this.yPositions = [];
@@ -61406,12 +61381,28 @@
 
 	    setTimeout(function () {
 	      $(_this.sectionIntro).addClass('hidden');
-	    }, 1200);
+	    }, 1600);
 
 	    this.positionItems();
-	    this.handlePanning();
-	    this.handleHover();
-	    this.handleClick();
+	    // this.handlePanning()
+	    // this.handleHover()
+	    // this.handleClick()
+
+	    var mouseleave$ = _rxjs.Observable.fromEvent(this.sliderInner, 'mouseleave').subscribe(function () {
+	      _this.tl.timeScale(0.25);
+	    });
+
+	    var mousemove$ = _rxjs.Observable.fromEvent(this.sliderInner, 'mousemove').map(function (e) {
+	      return _this.mouseCoords(e);
+	    }).repeat().subscribe(function (e) {
+	      if (e.x < 0 && _this.tl.reversed()) {
+	        _this.tl.reversed(false);
+	      } else if (e.x > 0 && !_this.tl.reversed()) {
+	        _this.tl.reversed(true);
+	      }
+
+	      _this.tl.timeScale(Math.abs(e.x / 25));
+	    });
 	  }
 
 	  _createClass(OurApproach, [{
@@ -61421,7 +61412,7 @@
 
 	      var painter$ = this.raf$.withLatestFrom(this.mousemove$).subscribe(function (v) {
 	        var mouse = v[1];
-	        _this2.canvas.style.transform = 'perspective(3000px) translate3d(' + mouse.x + '%, ' + mouse.y + '%, 0) rotateX(' + 0 + 'deg) rotateY(' + mouse.rotateY + 'deg) scale(0.9)';
+	        _this2.canvas.style.transform = 'perspective(3000px) translate3d(' + mouse.x + '%, 0%, 0) rotateX(' + 0 + 'deg) rotateY(' + mouse.rotateY + 'deg) scale(0.9)';
 	      });
 	    }
 	  }, {
@@ -61538,6 +61529,21 @@
 	      }
 	    }
 	  }, {
+	    key: 'mouseCoords',
+	    value: function mouseCoords(e) {
+	      var xPercent = e.clientX / window.innerWidth * 100;
+	      var x = xPercent >= 50 ? (xPercent - 50) * -1 : 50 - xPercent;
+
+	      var yPercent = e.clientY / window.innerHeight * 100;
+	      var y = yPercent >= 50 ? (yPercent - 50) * -1 : 50 - yPercent;
+
+	      //returns x and y with positive or negative 50 depending on distance from center
+	      return {
+	        x: x,
+	        y: y
+	      };
+	    }
+	  }, {
 	    key: 'handleClick',
 	    value: function handleClick() {
 	      $('.project').on('click', function (e) {
@@ -61603,34 +61609,42 @@
 	      });
 	    }
 	  }, {
-	    key: 'mouseCoords',
-	    value: function mouseCoords(e) {
-	      var xPercent = e.clientX / window.innerWidth * 100;
-	      var x = xPercent >= 50 ? (xPercent * .5 - 25) * -1 : 25 - xPercent * .5;
-
-	      var yPercent = e.clientY / window.innerHeight * 100;
-	      var y = yPercent >= 50 ? (yPercent - 50) * -1 : 25 - yPercent * .5;
-
-	      var z = x;
-
-	      return {
-	        x: x,
-	        y: y,
-	        rotateX: y * -0.3,
-	        rotateY: x * 0.6
-	      };
-	    }
-	  }, {
 	    key: 'positionItems',
 	    value: function positionItems() {
 	      $('.program').each(function (index, el) {
-	        $(el).css('transform', 'translate3d( ' + (Math.random() * 25 + 1) + '%, ' + (Math.random() * 25 + 1) + 'px, 0)');
+	        $(el).css({
+	          paddingTop: Math.random() * 50 + 1,
+	          paddingRight: Math.random() * 50 + 1,
+	          paddingLeft: Math.random() * 50 + 1,
+	          paddingBottom: Math.random() * 50 + 1
+	        });
 	      });
 
-	      var pckry = new Packery('#approachCanvas', {
-	        itemSelector: '.grid-item',
-	        stamp: '.project'
+	      document.querySelectorAll('.approach-grid').forEach(function (grid) {
+	        new Packery(grid, {
+	          itemSelector: '.program',
+	          isHorizontal: true,
+	          stamp: '.project'
+	        });
 	      });
+
+	      //set width of parent containing isotope grids in order to float: left
+	      var sliderInnerWidth = document.querySelector('.approach-cell').offsetWidth * 3 + 10;
+	      this.sliderInner.style.width = sliderInnerWidth + 'px';
+	      this.cellWidth = document.querySelector('.approach-cell').offsetWidth;
+
+	      this.tl.add(new TweenMax(this.sliderInner, '5', {
+	        left: this.cellWidth * -1,
+	        ease: Linear.easeNone,
+	        timeScale: this.timeScale
+	      }));
+
+	      this.tl.timeScale(0.25);
+
+	      // $('.program').each((index, el) => {  
+	      //   // $(el).css('transform', `translate3d( ${(Math.random() * 5) + 1}%, ${(Math.random() * 50) + 1}%, 0)`)
+	      //   $(el).css('transform', `translateY( ${(Math.random() * 25) + 1}%`)
+	      // })
 	    }
 	  }]);
 

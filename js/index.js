@@ -25,7 +25,7 @@ function init() {
 
   app.variables = {
     $red: '#E82E21',
-    $grayDarker: '#222' 
+    $grayDarker: '#222'
   }
 
   app.constructors = {
@@ -46,54 +46,54 @@ function init() {
     5: null,
     6: null,
     7: null
-  } 
+  }
 
   app.intro$ = initSplashContent().subscribe(
     () => console.log(null),
     err => console.error(err),
-    () => { //executes when initSplashContent stream completes      
+    () => { //executes when initSplashContent stream completes
       window.removeEventListener('click', skipSplashAnimation)
 
       $('main').fullpage({
         anchors:['intro', 'future', 'difference', 'schools', 'approach', 'people', 'partner'],
         navigation: true,
-        afterRender: function() {     
+        afterRender: function() {
           if (!window.location.hash) {
             $.fn.fullpage.silentMoveTo('future', 1)
           } else {
             $.fn.fullpage.silentMoveTo(window.location.hash.slice(1), 1)
-          }          
-          
+          }
+
           $('body').removeClass('intro-in-progress')
 
           //intro red-background animate to corner
           Velocity(introBg, {
             width: '140px',
             height: '62px'
-          }, {        
+          }, {
             duration: 800,
             display: 'none'
           })
-          
-          Velocity(introLogo, {opacity: 0}, {display: 'none', duration: 450})          
 
-          initGlobalStreams()                          
+          Velocity(introLogo, {opacity: 0}, {display: 'none', duration: 450})
+
+          initGlobalStreams()
         },
         onLeave: function() {
-          app.activeInstance.sleep && app.activeInstance.sleep() 
+          app.activeInstance.sleep && app.activeInstance.sleep()
         },
         afterLoad: function(anchorLink, index) {
           if (!app.instances[index]) {
             app.instances[index] = new app.constructors[index]()
             app.activeScrollIndex = index
-            app.activeInstance = app.instances[index]            
+            app.activeInstance = app.instances[index]
           } else {
             app.activeScrollIndex = index
             app.activeInstance = app.instances[index]
-            app.instances[index].awake && app.instances[index].awake()             
+            app.instances[index].awake && app.instances[index].awake()
           }
         }
-      })      
+      })
     }
   )
 
@@ -110,7 +110,7 @@ function init() {
           duration: 500,
           display: 'flex',
           complete: function() {
-            
+
             Velocity(contactModal.querySelector('.content'), {
               opacity: 1
             }, {
@@ -138,13 +138,13 @@ function init() {
           display: 'none'
         })
 
-        Velocity(header, {opacity: 1}, {duration: 200})                       
+        Velocity(header, {opacity: 1}, {duration: 200})
       }
-    })    
+    })
   }
 
   function initSplashContent() {
-    return Observable.create(obs => {      
+    return Observable.create(obs => {
 
       //logo animate in
       Velocity(line1, {x1: 4.501, y1: 64.81, x2: 109.524, y2: 64.81}, {duration: 500})
@@ -174,7 +174,7 @@ function init() {
         }
       })
 
-      setTimeout(() => {        
+      setTimeout(() => {
         obs.complete()
       }, 8800)
 
@@ -183,7 +183,7 @@ function init() {
   }
 }
 
-function skipSplashAnimation() {  
+function skipSplashAnimation() {
   Velocity(introText, 'stop')
   Velocity(introText, {opacity: 0}, {
     duration: 200,
