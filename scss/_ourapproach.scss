@@ -10,19 +10,40 @@
   }
 }
 
+// #approachCanvas {
+//   transform: scale(0.5);
+// }
+
 #ourApproach #approachCanvas {
   position: absolute;
   left: 0;
   top: calc(50% - 303px);
-  width: 100vw;  
+  width: 100vw;
+  // &:before {
+  //   content: '';
+  //   position: absolute;
+  //   width: 100vw;
+  //   height: 100%;
+  //   z-index: 999;
+  //   border: 10px solid red;
+  //   pointer-events: none;
+  // }  
   .approach-slider-inner {
-    position: relative;  
-    left: -1850px;      
+    position: relative;     
     .approach-grid {            
       position: relative;    
       float: left;        
       height: 60vh;
       max-height: 60vh !important;    
+      // &:first-of-type {
+      //   background: aqua;
+      // }
+      // &:nth-of-type(2) {
+      //   background: mediumpurple;
+      // }
+      // &:last-of-type {
+      //   background: lightcoral;
+      // }
       .project {
         position: absolute;
         padding: 15px 25px;
@@ -32,7 +53,7 @@
         transition: opacity 0.6s ease-in-out, filter 0.6s ease-in-out;
         &.project1 {
           left: 0%;
-          bottom: -75px;
+          bottom: 75px;
         }
         &.project2 {
           left: 418px;
@@ -48,7 +69,7 @@
         }
         &.project5 {
           left: 1711px;
-          bottom: 0px;
+          bottom: 75px;
         }          
         &.project6 {
           left: 2281px;
@@ -60,7 +81,7 @@
         }
         &.project8 {
           left: 3525px;
-          bottom: -75px;
+          bottom: 75px;
         }
         &.project9 {
           left: 4200px;

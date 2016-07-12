@@ -146,7 +146,7 @@
 
 						{% for i in (1..3) %}
 
-								<div class="approach-grid">
+								<div class="approach-grid approach-grid-{{forloop.index}}">
 
 									{% for program in projects.programs %}
 										<div class="program" data-id="{{program | slugify}}"><span>{{program}}</span></div>

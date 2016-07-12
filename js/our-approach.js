@@ -9,7 +9,8 @@ export class OurApproach {
     this.sectionIntro = this.section.querySelector('.section-intro')
     this.canvas = document.getElementById('approachCanvas')
     this.sliderInner = document.querySelector('.approach-slider-inner')
-    this.grids = document.querySelectorAll('.approach-grid')    
+    this.grids = document.querySelectorAll('.approach-grid')
+    this.projects = document.querySelectorAll('.project')    
 
     this.random = {
       variance: 3,
@@ -28,12 +29,15 @@ export class OurApproach {
       }
     })    
 
+    this.projectHover$ = Observable
+      .fromEvent(this.projects, 'mouseenter')      
+
     setTimeout(() => {
       $(this.sectionIntro).addClass('hidden')
     }, 1600)
 
     this.positionItems()
-    // this.handlePanning()
+    this.handlePanning()
     this.handleHover()
     this.handleClick()    
   }
@@ -74,23 +78,20 @@ export class OurApproach {
 
 
   handlePanning() {
-    Observable.fromEvent(this.sliderInner, 'mouseleave')
-      .subscribe(() => {
-        this.tl.timeScale(0.15)
-      })
-
-    Observable.fromEvent(this.sliderInner, 'mousemove')
+    this.moveSlider$ = Observable.fromEvent(this.sliderInner, 'mousemove')
       .map(e => this.mouseCoords(e))
-      .repeat()
+      // .takeUntil(this.projectHover$)
+      // .repeat()
       .subscribe(e => {  
+
         if ( e.x < 0 && this.tl.reversed() ) {
           this.tl.reversed(false)
         } else if ( e.x > 0 && !this.tl.reversed() ) {
           this.tl.reversed(true)
         }
 
-        this.tl.timeScale( Math.abs(e.x / 25) )          
       })
+
 
     this.tl.add( new TweenMax(this.sliderInner, '5', {
       left: this.cellWidth * -1,
@@ -99,6 +100,12 @@ export class OurApproach {
     }))
 
     this.tl.timeScale(0.15)
+
+    //reduce timescale on mouseleave
+    Observable.fromEvent(this.sliderInner, 'mouseleave')
+      .subscribe(() => {
+        this.tl.timeScale(0.15)
+      })    
 
     // this.raf$.withLatestFrom(this.mousemove$)
     // .subscribe(v => {
@@ -110,41 +117,59 @@ export class OurApproach {
   handleHover() {
     const sliderInner = this.sliderInner
     const cellWidth = this.cellWidth
-    
-    $('.project').on('mouseenter', function() {
-      const bounds = this.getBoundingClientRect() 
-      const parent = this.offsetParent.getBoundingClientRect()
+    const tl = this.tl
+
+    this.projectHover$.subscribe(function(e) {
+      const project = e.target
+
+      TweenMax.to(tl, 1, {timeScale:0.05})
+
+      const bounds = project.getBoundingClientRect() 
+      const parent = project.offsetParent.getBoundingClientRect()
       const projectLeft = bounds.left + 25 //25 paddingLeft
       const projectTop = bounds.top - parent.top + 15 //15 paddingTop
       const projectBottom = bounds.bottom - bounds.height + 15 //15 paddingTop
-      const projectWidth = this.offsetWidth         //px
-      const projectHeight = this.offsetHeight       //px
-      const programEls = $(this).data('programs')
+      const projectWidth = project.offsetWidth         //px
+      const projectHeight = project.offsetHeight       //px
+      const programEls = $(project).data('programs')
         .split(',')
         .map( pId => {
-          return this.offsetParent.querySelector(`.program[data-id="${pId}"]`)
+          const prog = project.offsetParent.querySelector(`.program[data-id="${pId}"]`)
+          return prog 
         })
         .filter(p => p)
 
       const programPositions = getProgramPositions(projectTop, projectBottom, projectLeft, projectWidth, projectHeight, programEls)
-    
-      $('.project').not(this).addClass('sibling-hover')
+  
+
+      $('.project').not(project).addClass('sibling-hover')
       $('.program').not(programEls).addClass('sibling-hover')
 
       programEls.forEach( (el, index) => {
+
         $(el).addClass('hover')
 
         //save last original position to reset on mouseleave
         el.lastLeft = el.style.left
         el.lastTop = el.style.top
 
-        //position programs around project        
-        el.style.left = programPositions[index].left - el.offsetWidth + Math.abs(sliderInner.offsetLeft) + 'px'
+        
+        //position programs around project
+        const parentIndex = $(el.offsetParent).index()
+        let programLeft
+
+        if (parentIndex === 2) {
+          programLeft = programPositions[index].left - el.offsetWidth + Math.abs(sliderInner.offsetLeft) - cellWidth
+        } else {
+          programLeft = programPositions[index].left - el.offsetWidth + Math.abs(sliderInner.offsetLeft)
+        }
+        
+        el.style.left = programLeft + 'px'
         el.style.top = programPositions[index].top - el.offsetHeight + 'px'
         // el.textContent = el.textContent.slice(0, -2) + programPositions[index].place //for debugging
-      })
+      })      
 
-      $(this).one('mouseleave', function() {
+      $(project).one('mouseleave', function() {
         $('.project').removeClass('sibling-hover')
         $('.program').removeClass('sibling-hover')
 
@@ -153,8 +178,11 @@ export class OurApproach {
           el.style.left = el.lastLeft
           el.style.top = el.lastTop
           el.style.transform = el.lastTransform
-        })
+        })       
+
+        tl.timeScale(0.15) 
       })
+
     })
 
     function getProgramPositions(top, bottom, left, width, height, programEls) {

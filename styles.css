@@ -959,8 +959,7 @@ section#ourPeople.modal-open {
   top: calc(50% - 303px);
   width: 100vw; }
   #ourApproach #approachCanvas .approach-slider-inner {
-    position: relative;
-    left: -1850px; }
+    position: relative; }
     #ourApproach #approachCanvas .approach-slider-inner .approach-grid {
       position: relative;
       float: left;
@@ -979,7 +978,7 @@ section#ourPeople.modal-open {
         transition: opacity 0.6s ease-in-out, filter 0.6s ease-in-out, -webkit-filter 0.6s ease-in-out; }
         #ourApproach #approachCanvas .approach-slider-inner .approach-grid .project.project1 {
           left: 0%;
-          bottom: -75px; }
+          bottom: 75px; }
         #ourApproach #approachCanvas .approach-slider-inner .approach-grid .project.project2 {
           left: 418px;
           top: 100px; }
@@ -991,7 +990,7 @@ section#ourPeople.modal-open {
           top: 80px; }
         #ourApproach #approachCanvas .approach-slider-inner .approach-grid .project.project5 {
           left: 1711px;
-          bottom: 0px; }
+          bottom: 75px; }
         #ourApproach #approachCanvas .approach-slider-inner .approach-grid .project.project6 {
           left: 2281px;
           top: 80px; }
@@ -1000,7 +999,7 @@ section#ourPeople.modal-open {
           top: 250px; }
         #ourApproach #approachCanvas .approach-slider-inner .approach-grid .project.project8 {
           left: 3525px;
-          bottom: -75px; }
+          bottom: 75px; }
         #ourApproach #approachCanvas .approach-slider-inner .approach-grid .project.project9 {
           left: 4200px;
           top: 80px; }

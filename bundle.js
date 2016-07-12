@@ -61345,6 +61345,7 @@
 	    this.canvas = document.getElementById('approachCanvas');
 	    this.sliderInner = document.querySelector('.approach-slider-inner');
 	    this.grids = document.querySelectorAll('.approach-grid');
+	    this.projects = document.querySelectorAll('.project');
 
 	    this.random = {
 	      variance: 3,
@@ -61363,12 +61364,14 @@
 	      }
 	    });
 
+	    this.projectHover$ = _rxjs.Observable.fromEvent(this.projects, 'mouseenter');
+
 	    setTimeout(function () {
 	      $(_this.sectionIntro).addClass('hidden');
 	    }, 1600);
 
 	    this.positionItems();
-	    // this.handlePanning()
+	    this.handlePanning();
 	    this.handleHover();
 	    this.handleClick();
 	  }
@@ -61417,20 +61420,18 @@
 	    value: function handlePanning() {
 	      var _this3 = this;
 
-	      _rxjs.Observable.fromEvent(this.sliderInner, 'mouseleave').subscribe(function () {
-	        _this3.tl.timeScale(0.15);
-	      });
-
-	      _rxjs.Observable.fromEvent(this.sliderInner, 'mousemove').map(function (e) {
+	      this.moveSlider$ = _rxjs.Observable.fromEvent(this.sliderInner, 'mousemove').map(function (e) {
 	        return _this3.mouseCoords(e);
-	      }).repeat().subscribe(function (e) {
+	      })
+	      // .takeUntil(this.projectHover$)
+	      // .repeat()
+	      .subscribe(function (e) {
+
 	        if (e.x < 0 && _this3.tl.reversed()) {
 	          _this3.tl.reversed(false);
 	        } else if (e.x > 0 && !_this3.tl.reversed()) {
 	          _this3.tl.reversed(true);
 	        }
-
-	        _this3.tl.timeScale(Math.abs(e.x / 25));
 	      });
 
 	      this.tl.add(new TweenMax(this.sliderInner, '5', {
@@ -61440,6 +61441,11 @@
 	      }));
 
 	      this.tl.timeScale(0.15);
+
+	      //reduce timescale on mouseleave
+	      _rxjs.Observable.fromEvent(this.sliderInner, 'mouseleave').subscribe(function () {
+	        _this3.tl.timeScale(0.15);
+	      });
 
 	      // this.raf$.withLatestFrom(this.mousemove$)
 	      // .subscribe(v => {
@@ -61452,42 +61458,56 @@
 	    value: function handleHover() {
 	      var sliderInner = this.sliderInner;
 	      var cellWidth = this.cellWidth;
+	      var tl = this.tl;
 
-	      $('.project').on('mouseenter', function () {
-	        var _this4 = this;
+	      this.projectHover$.subscribe(function (e) {
+	        var project = e.target;
 
-	        var bounds = this.getBoundingClientRect();
-	        var parent = this.offsetParent.getBoundingClientRect();
+	        TweenMax.to(tl, 1, { timeScale: 0.05 });
+
+	        var bounds = project.getBoundingClientRect();
+	        var parent = project.offsetParent.getBoundingClientRect();
 	        var projectLeft = bounds.left + 25; //25 paddingLeft
 	        var projectTop = bounds.top - parent.top + 15; //15 paddingTop
 	        var projectBottom = bounds.bottom - bounds.height + 15; //15 paddingTop
-	        var projectWidth = this.offsetWidth; //px
-	        var projectHeight = this.offsetHeight; //px
-	        var programEls = $(this).data('programs').split(',').map(function (pId) {
-	          return _this4.offsetParent.querySelector('.program[data-id="' + pId + '"]');
+	        var projectWidth = project.offsetWidth; //px
+	        var projectHeight = project.offsetHeight; //px
+	        var programEls = $(project).data('programs').split(',').map(function (pId) {
+	          var prog = project.offsetParent.querySelector('.program[data-id="' + pId + '"]');
+	          return prog;
 	        }).filter(function (p) {
 	          return p;
 	        });
 
 	        var programPositions = getProgramPositions(projectTop, projectBottom, projectLeft, projectWidth, projectHeight, programEls);
 
-	        $('.project').not(this).addClass('sibling-hover');
+	        $('.project').not(project).addClass('sibling-hover');
 	        $('.program').not(programEls).addClass('sibling-hover');
 
 	        programEls.forEach(function (el, index) {
+
 	          $(el).addClass('hover');
 
 	          //save last original position to reset on mouseleave
 	          el.lastLeft = el.style.left;
 	          el.lastTop = el.style.top;
 
-	          //position programs around project       
-	          el.style.left = programPositions[index].left - el.offsetWidth + Math.abs(sliderInner.offsetLeft) + 'px';
+	          //position programs around project
+	          var parentIndex = $(el.offsetParent).index();
+	          var programLeft = void 0;
+
+	          if (parentIndex === 2) {
+	            programLeft = programPositions[index].left - el.offsetWidth + Math.abs(sliderInner.offsetLeft) - cellWidth;
+	          } else {
+	            programLeft = programPositions[index].left - el.offsetWidth + Math.abs(sliderInner.offsetLeft);
+	          }
+
+	          el.style.left = programLeft + 'px';
 	          el.style.top = programPositions[index].top - el.offsetHeight + 'px';
 	          // el.textContent = el.textContent.slice(0, -2) + programPositions[index].place //for debugging
 	        });
 
-	        $(this).one('mouseleave', function () {
+	        $(project).one('mouseleave', function () {
 	          $('.project').removeClass('sibling-hover');
 	          $('.program').removeClass('sibling-hover');
 
@@ -61497,6 +61517,8 @@
 	            el.style.top = el.lastTop;
 	            el.style.transform = el.lastTransform;
 	          });
+
+	          tl.timeScale(0.15);
 	        });
 	      });
 
