@@ -589,7 +589,7 @@ section#futureOf {
 section#coreValues {
   background-color: #333; }
   section#coreValues .section-intro {
-    background-color: #333; }
+    background-color: rgba(34, 34, 34, 0.97); }
     section#coreValues .section-intro h1 {
       color: white; }
   section#coreValues .panel-group {
@@ -1440,8 +1440,8 @@ h6 {
   -ms-flex-align: center;
       align-items: center;
   padding: 2vw;
-  background-color: #E1E1E1;
-  transition: opacity 0.4s ease-in-out; }
+  background-color: rgba(225, 225, 225, 0.93);
+  transition: opacity 2s ease-in-out; }
   .section-intro.hidden {
     opacity: 0;
     pointer-events: none; }

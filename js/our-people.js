@@ -11,7 +11,7 @@ export class OurPeople {
 
     setTimeout(() => {
       $(this.sectionInto).addClass('hidden')
-    }, 1200)
+    }, 750)
 
     this.slider = document.getElementById('peopleSlider')
     this.sliderInner = this.slider.querySelector('.slider-inner')

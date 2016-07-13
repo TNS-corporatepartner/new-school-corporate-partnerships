@@ -108,8 +108,8 @@ h6{
   display: flex;
   align-items: center;
   padding: 2vw;
-  background-color: $gray-light;
-  transition: opacity 0.4s ease-in-out;
+  background-color: $gray-light-trans2;
+  transition: opacity 2s ease-in-out;
   &.hidden {
     opacity: 0;
     pointer-events: none;

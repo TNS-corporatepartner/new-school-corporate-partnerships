@@ -17939,7 +17939,7 @@
 	    setTimeout(function () {
 	      $(_this.sectionIntro).addClass('hidden');
 	      _this.initVideos();
-	    }, 1600);
+	    }, 750);
 	  }
 
 	  _createClass(FutureOf, [{
@@ -32399,7 +32399,7 @@
 
 	    setTimeout(function () {
 	      $(_this.sectionIntro).addClass('hidden');
-	    }, 1600);
+	    }, 750);
 	  }
 
 	  _createClass(CoreValues, [{
@@ -32451,7 +32451,7 @@
 
 	  setTimeout(function () {
 	    $(_this.sectionInto).addClass('hidden');
-	  }, 1600);
+	  }, 750);
 
 	  $('.school').on('mouseenter', function (e) {
 	    $(this).siblings().addClass('not-hover');
@@ -32575,7 +32575,7 @@
 
 	    setTimeout(function () {
 	      $(_this.sectionInto).addClass('hidden');
-	    }, 1200);
+	    }, 750);
 
 	    this.slider = document.getElementById('peopleSlider');
 	    this.sliderInner = this.slider.querySelector('.slider-inner');
@@ -61400,7 +61400,7 @@
 
 	    setTimeout(function () {
 	      $(_this.sectionIntro).addClass('hidden');
-	    }, 1600);
+	    }, 750);
 
 	    this.positionItems();
 	    this.handlePanning();

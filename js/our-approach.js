@@ -36,7 +36,7 @@ export class OurApproach {
 
     setTimeout(() => {
       $(this.sectionIntro).addClass('hidden')
-    }, 1600)
+    }, 750)
 
     this.positionItems()
     this.handlePanning()
