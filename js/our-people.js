@@ -30,7 +30,6 @@ export class OurPeople {
       new Isotope( chunk, {
         itemSelector: '.person',
         layoutMode: 'masonryHorizontal',
-
       })
     })
 

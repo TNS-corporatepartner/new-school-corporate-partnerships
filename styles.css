@@ -636,30 +636,30 @@ section#coreValues {
             transition-delay: 0.25s;
             transform: scale(1.35); }
           section#coreValues .panel-group .panel.hover .content-wrapper .content ul {
-            height: auto; }
+            max-height: 50vh; }
           section#coreValues .panel-group .panel.hover .content-wrapper .content ul li {
             opacity: 1;
             color: #999; }
-            section#coreValues .panel-group .panel.hover .content-wrapper .content ul li:nth-of-type(1) {
-              transition-delay: 1.5s; }
+            section#coreValues .panel-group .panel.hover .content-wrapper .content ul li:first-of-type {
+              transition-delay: .5s; }
             section#coreValues .panel-group .panel.hover .content-wrapper .content ul li:nth-of-type(2) {
-              transition-delay: 3s; }
+              transition-delay: 1.5s; }
             section#coreValues .panel-group .panel.hover .content-wrapper .content ul li:nth-of-type(3) {
-              transition-delay: 4.5s; }
+              transition-delay: 2.25s; }
             section#coreValues .panel-group .panel.hover .content-wrapper .content ul li:nth-of-type(4) {
-              transition-delay: 6s; }
+              transition-delay: 3s; }
             section#coreValues .panel-group .panel.hover .content-wrapper .content ul li:nth-of-type(5) {
-              transition-delay: 7.5s; }
+              transition-delay: 3.75s; }
             section#coreValues .panel-group .panel.hover .content-wrapper .content ul li:nth-of-type(6) {
-              transition-delay: 9s; }
+              transition-delay: 4.5s; }
             section#coreValues .panel-group .panel.hover .content-wrapper .content ul li:nth-of-type(7) {
-              transition-delay: 10.5s; }
+              transition-delay: 5.25s; }
             section#coreValues .panel-group .panel.hover .content-wrapper .content ul li:nth-of-type(8) {
-              transition-delay: 12s; }
+              transition-delay: 6s; }
             section#coreValues .panel-group .panel.hover .content-wrapper .content ul li:nth-of-type(9) {
-              transition-delay: 13.5s; }
+              transition-delay: 6.75s; }
             section#coreValues .panel-group .panel.hover .content-wrapper .content ul li:nth-of-type(10) {
-              transition-delay: 15s; }
+              transition-delay: 7.5s; }
             section#coreValues .panel-group .panel.hover .content-wrapper .content ul li:last-of-type {
               color: #fff !important; }
       section#coreValues .panel-group .panel.hover-sibling:before {
@@ -690,7 +690,7 @@ section#coreValues {
           background-color: transparent;
           color: white;
           cursor: url("/images/click-cursor-red.svg"), auto;
-          transition: background-color 0.5s ease-in-out; }
+          transition: background-color 0.5s ease-in-out, transform 0.5s ease-in-out; }
           section#coreValues .panel-group .panel .content-wrapper .content h4 {
             max-width: 0vw;
             font-size: 4.25vh;
@@ -703,8 +703,8 @@ section#coreValues {
             list-style: none;
             min-width: 60vw;
             margin-top: 40px;
-            height: 0;
-            transition: height 0.5s ease-in-out; }
+            max-height: 0;
+            transition: max-height 0.5s ease-in-out; }
             section#coreValues .panel-group .panel .content-wrapper .content ul li {
               font-size: 30px;
               margin-bottom: 20px;
@@ -924,8 +924,7 @@ body.people-modal-open #fixedLogo svg g {
               flex-wrap: wrap;
           background-position: center;
           background-repeat: no-repeat;
-          background-size: cover;
-          cursor: url(/images/click-cursor-black.svg), auto; }
+          background-size: cover; }
           #peopleSlider .slider-inner .cell .grid .person.video {
             width: calc(100vh - 380px); }
           #peopleSlider .slider-inner .cell .grid .person:not(.video) {
@@ -943,7 +942,8 @@ body.people-modal-open #fixedLogo svg g {
             max-height: 200px;
             opacity: 1; }
           #peopleSlider .slider-inner .cell .grid .person.video {
-            width: calc(100vh - 380px); }
+            width: calc(100vh - 380px);
+            cursor: url(/images/click-cursor-black.svg), auto; }
             #peopleSlider .slider-inner .cell .grid .person.video .overlay {
               background-color: rgba(0, 0, 0, 0.1);
               transition: background 1s ease; }
@@ -1031,15 +1031,15 @@ body.approach-modal-open #fixedLogo svg g {
 #ourApproach #approachCanvas {
   position: absolute;
   left: 0;
-  top: calc(50% - 303px);
+  top: 190px;
   width: 100vw; }
   #ourApproach #approachCanvas .approach-slider-inner {
     position: relative; }
     #ourApproach #approachCanvas .approach-slider-inner .approach-grid {
       position: relative;
       float: left;
-      height: 60vh;
-      max-height: 60vh !important; }
+      height: calc(100vh - 380px);
+      max-height: calc(100vh - 380px) !important; }
       #ourApproach #approachCanvas .approach-slider-inner .approach-grid .project {
         position: absolute;
         padding: 15px 25px;
@@ -1055,32 +1055,32 @@ body.approach-modal-open #fixedLogo svg g {
           left: 0%;
           bottom: 75px; }
         #ourApproach #approachCanvas .approach-slider-inner .approach-grid .project.project2 {
-          left: 600px;
+          left: 620px;
           top: 100px; }
         #ourApproach #approachCanvas .approach-slider-inner .approach-grid .project.project3 {
-          left: 1000px;
+          left: 1240px;
           bottom: 50px; }
         #ourApproach #approachCanvas .approach-slider-inner .approach-grid .project.project4 {
-          left: 1500px;
+          left: 1800px;
           top: 80px; }
         #ourApproach #approachCanvas .approach-slider-inner .approach-grid .project.project5 {
-          left: 2000px;
+          left: 2420px;
           bottom: 75px; }
         #ourApproach #approachCanvas .approach-slider-inner .approach-grid .project.project6 {
-          left: 2500px;
+          left: 3000px;
           top: 80px; }
         #ourApproach #approachCanvas .approach-slider-inner .approach-grid .project.project7 {
-          left: 3000px;
+          left: 3620px;
           top: 250px; }
         #ourApproach #approachCanvas .approach-slider-inner .approach-grid .project.project8 {
-          left: 3525px;
-          bottom: 75px; }
+          left: 4150px;
+          top: 75px; }
         #ourApproach #approachCanvas .approach-slider-inner .approach-grid .project.project9 {
-          left: 4200px;
-          top: 80px; }
+          left: 4800px;
+          bottom: 80px; }
         #ourApproach #approachCanvas .approach-slider-inner .approach-grid .project.project10 {
-          left: 4804px;
-          bottom: 125px; }
+          left: 5404px;
+          top: 85px; }
         #ourApproach #approachCanvas .approach-slider-inner .approach-grid .project:hover .info {
           opacity: 1; }
           #ourApproach #approachCanvas .approach-slider-inner .approach-grid .project:hover .info h4 {
@@ -1251,6 +1251,12 @@ body.approach-modal-open #fixedLogo svg g {
       #ourApproachModal .content .img-container img {
         width: 100%; }
 
+#hoverRight {
+  cursor: url(/images/right-cursor-red.svg), auto; }
+
+#hoverLeft {
+  cursor: url(/images/left-cursor-red.svg), auto; }
+
 section#contactUs {
   background: #E1E1E1; }
   section#contactUs .section-headlines {
@@ -1268,9 +1274,31 @@ section#contactUs {
       -ms-flex-align: center;
           align-items: center;
       overflow: hidden;
-      transition: all .65s ease-in-out;
+      transition: flex-grow .65s ease-in-out, flex-shrink .65s ease-in-out, background-color .65s ease-in-out;
+      transition: flex-grow .65s ease-in-out, flex-shrink .65s ease-in-out, background-color .65s ease-in-out, -ms-flex-positive .65s ease-in-out, -ms-flex-negative .65s ease-in-out;
       background-color: #E82E21;
       transform: translate3d(0, 0, 0); }
+      section#contactUs .panel-group .panel.hover {
+        background-color: white;
+        -ms-flex: 3 1 auto;
+            flex: 3 1 auto; }
+        section#contactUs .panel-group .panel.hover .bg-img {
+          opacity: 1; }
+        section#contactUs .panel-group .panel.hover .panel-tint {
+          background-color: rgba(0, 0, 0, 0.55); }
+        section#contactUs .panel-group .panel.hover .content-wrapper .content {
+          pointer-events: none; }
+          section#contactUs .panel-group .panel.hover .content-wrapper .content h4 {
+            transform: scale(1.5); }
+          section#contactUs .panel-group .panel.hover .content-wrapper .content p, section#contactUs .panel-group .panel.hover .content-wrapper .content .contact-btn {
+            opacity: 1; }
+      section#contactUs .panel-group .panel.hover-sibling .bg-img {
+        -webkit-filter: blur(10px);
+                filter: blur(10px);
+        opacity: .5; }
+      section#contactUs .panel-group .panel.hover-sibling .content h4 {
+        transform: scale(0.5);
+        opacity: 0.5; }
       section#contactUs .panel-group .panel .bg-img {
         content: '';
         opacity: 0.7;
@@ -1283,40 +1311,14 @@ section#contactUs {
         background-position: center;
         background-repeat: no-repeat;
         mix-blend-mode: multiply;
-        transition: background-color 0.5s ease-in-out, -webkit-filter 0.5s linear;
-        transition: background-color 0.5s ease-in-out, filter 0.5s linear;
-        transition: background-color 0.5s ease-in-out, filter 0.5s linear, -webkit-filter 0.5s linear;
         transform-origin: center; }
-      section#contactUs .panel-group .panel.hover {
-        -ms-flex: 3 1 auto;
-            flex: 3 1 auto; }
-        section#contactUs .panel-group .panel.hover .bg-img {
-          background-color: transparent;
-          mix-blend-mode: normal;
-          opacity: 1; }
-        section#contactUs .panel-group .panel.hover .panel-tint {
-          background-color: rgba(0, 0, 0, 0.55); }
-        section#contactUs .panel-group .panel.hover .content-wrapper .content {
-          pointer-events: none; }
-          section#contactUs .panel-group .panel.hover .content-wrapper .content h4 {
-            transform: scale(1.5);
-            transform-origin: bottom left; }
-          section#contactUs .panel-group .panel.hover .content-wrapper .content p, section#contactUs .panel-group .panel.hover .content-wrapper .content .contact-btn {
-            opacity: 1; }
-      section#contactUs .panel-group .panel.hover-sibling .bg-img {
-        -webkit-filter: blur(10px);
-                filter: blur(10px);
-        opacity: .5;
-        transform: scale(1.1); }
-      section#contactUs .panel-group .panel.hover-sibling .content h4 {
-        transform: scale(0.5);
-        opacity: 0.5; }
       section#contactUs .panel-group .panel .panel-tint {
         position: absolute;
         top: 0;
         left: 0;
         height: 100%;
-        width: 100%; }
+        width: 100%;
+        transition: background-color 0.5s ease-in-out; }
       section#contactUs .panel-group .panel .content-wrapper {
         position: relative;
         width: 100%; }
@@ -1334,7 +1336,7 @@ section#contactUs {
             font-size: 28px;
             font-weight: normal;
             transition: transform .65s ease-in-out;
-            transform-origin: left top; }
+            transform-origin: bottom left; }
           section#contactUs .panel-group .panel .content-wrapper .content p {
             width: 50vw;
             opacity: 0;
