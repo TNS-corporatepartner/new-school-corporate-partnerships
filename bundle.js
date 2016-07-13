@@ -61504,16 +61504,15 @@
 
 	      this.projectHover$.subscribe(function (e) {
 	        var project = e.target;
-	        var bounds = project.getBoundingClientRect();
+	        var projectBounds = project.getBoundingClientRect();
 	        var parent = project.offsetParent.getBoundingClientRect();
-	        var projectLeft = bounds.left + 25; //25 paddingLeft
-	        var projectTop = bounds.top - parent.top + 15; //15 paddingTop
-	        var projectBottom = bounds.bottom - bounds.height + 15; //15 paddingTop
+	        var projectLeft = projectBounds.left + 25 + parent.left * -1; //25 paddingLeft
+	        var projectTop = projectBounds.top - parent.top + 15; //15 paddingTop
+	        var projectBottom = projectBounds.bottom - projectBounds.height + 15; //15 paddingTop
 	        var projectWidth = project.offsetWidth; //px
 	        var projectHeight = project.offsetHeight; //px
 	        var programEls = $(project).data('programs').split(',').map(function (pId) {
-	          var prog = project.offsetParent.querySelector('.program[data-id="' + pId + '"]');
-	          return prog;
+	          return project.offsetParent.querySelector('.program[data-id="' + pId + '"]');
 	        }).filter(function (p) {
 	          return p;
 	        });
@@ -61526,27 +61525,20 @@
 	        $('.project').not(project).addClass('sibling-hover');
 	        $('.program').not(programEls).addClass('sibling-hover');
 
-	        programEls.forEach(function (el, index) {
-
-	          $(el).addClass('hover');
+	        programEls.forEach(function (program, index) {
+	          $(program).addClass('hover');
 
 	          //save last original position to reset on mouseleave
-	          el.lastLeft = el.style.left;
-	          el.lastTop = el.style.top;
+	          program.lastLeft = program.style.left;
+	          program.lastTop = program.style.top;
 
 	          //position programs around project
-	          var parentIndex = $(el.offsetParent).index();
+	          var parentIndex = $(program.offsetParent).index();
 	          var programLeft = void 0;
 
-	          if (parentIndex === 2) {
-	            programLeft = programPositions[index].left - el.offsetWidth + Math.abs(sliderInner.offsetLeft) - cellWidth;
-	          } else {
-	            programLeft = programPositions[index].left - el.offsetWidth + Math.abs(sliderInner.offsetLeft);
-	          }
-
-	          el.style.left = programLeft + 'px';
-	          el.style.top = programPositions[index].top - el.offsetHeight + 'px';
-	          // el.textContent = el.textContent.slice(0, -2) + programPositions[index].place //for debugging
+	          program.style.left = programPositions[index].left - program.offsetWidth + 'px';
+	          program.style.top = programPositions[index].top - program.offsetHeight + 'px';
+	          // program.textContent = program.textContent.slice(0, -2) + programPositions[index].place //for debugging
 	        });
 
 	        $(project).one('mouseleave', function () {

@@ -64,15 +64,15 @@ body.approach-modal-open {
       float: left;
       height: calc(100vh - 380px);
       max-height: calc(100vh - 380px) !important;
-      &:first-of-type {
-        background: aqua;
-      }
-      &:nth-of-type(2) {
-        background: mediumpurple;
-      }
-      &:last-of-type {
-        background: lightcoral;
-      }
+      // &:first-of-type {
+      //   background: aqua;
+      // }
+      // &:nth-of-type(2) {
+      //   background: mediumpurple;
+      // }
+      // &:last-of-type {
+      //   background: lightcoral;
+      // }
       .project {
         position: absolute;
         padding: 15px 25px;
@@ -173,13 +173,14 @@ body.approach-modal-open {
         transition: top 1s ease-in-out, left 1s ease-in-out, opacity 1s ease-in-out, font-size 1s ease-in-out;
         pointer-events: none;
         font-size: 12px;
-        float: left;
+        float: left;        
         @for $i from 1 through 20 {
           &:nth-of-type(#{$i}) {
             transition-delay: 0.01s * $i * 4;
           }
         }
         &.hover {
+          // background-color: rgba(140, 140, 140, 0.5);
           font-size: 16px;
           z-index: 999;
         }

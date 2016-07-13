@@ -173,7 +173,7 @@
 
 										{% assign allPrograms = project.programs | sort %}
 										<div class="project project{{forloop.length | plus: forloop.index}}"
-												data-programs="{% for program in project.allPrograms %}{{program | slugify}},{% endfor %}"
+												data-programs="{% for program in project.programs %}{{program | slugify}},{% endfor %}"
 												data-content="{{project.content}}"
 												data-title="{{project.title}}"
 												data-blockquote="{{project.question}}"
