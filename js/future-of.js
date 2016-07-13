@@ -39,7 +39,7 @@ export class FutureOf {
     setTimeout(() => {
       $(this.sectionIntro).addClass('hidden')
       this.initVideos()
-    }, 1600)    
+    }, 750)    
   }
 
 

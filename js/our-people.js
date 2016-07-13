@@ -11,7 +11,7 @@ export class OurPeople {
 
     setTimeout(() => {
       $(this.sectionInto).addClass('hidden')
-    }, 1200)
+    }, 750)
 
     this.slider = document.getElementById('peopleSlider')
     this.sliderInner = this.slider.querySelector('.slider-inner')
@@ -43,7 +43,7 @@ export class OurPeople {
     $('.person.video').on('click', function(e) {
       e.stopPropagation()
 
-      tl.timeScale(0)
+      tl.pause()
 
       const personModal = document.getElementById('personModal')
       const modalContent = personModal.querySelector('.content')
@@ -60,7 +60,7 @@ export class OurPeople {
 
       $('#ourPeople').one('click', (e) => {
         e.stopPropagation();
-        tl.timeScale(0.45)
+        tl.play()
 
         $('#ourPeople').removeClass('modal-open');
         $('body').removeClass('people-modal-open')
@@ -102,7 +102,6 @@ export class OurPeople {
     //   })
 
 
-
     const mousemove$ = Observable.fromEvent(this.slider, 'mousemove')
       .map(e => this.mouseCoords(e))
       .repeat()
@@ -113,7 +112,6 @@ export class OurPeople {
           this.tl.reversed(true)
         }
 
-        //this.tl.timeScale( Math.abs(e.x / 50) )
       })
   }
 

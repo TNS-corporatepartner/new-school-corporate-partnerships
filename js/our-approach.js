@@ -13,7 +13,6 @@ export class OurApproach {
     this.projects = document.querySelectorAll('.project')
     this.hovers = document.querySelectorAll('.hover-area')
 
-
     this.random = {
       variance: 3,
       min: 0,
@@ -36,7 +35,7 @@ export class OurApproach {
 
     setTimeout(() => {
       $(this.sectionIntro).addClass('hidden')
-    }, 1600)
+    }, 750)
 
     this.positionItems()
     this.handlePanning()
@@ -131,52 +130,42 @@ export class OurApproach {
 
     this.projectHover$.subscribe(function(e) {
       const project = e.target
-
-      TweenMax.to(tl, 1, {timeScale:0.05})
-
-      const bounds = project.getBoundingClientRect()
+      const projectBounds = project.getBoundingClientRect()
       const parent = project.offsetParent.getBoundingClientRect()
-      const projectLeft = bounds.left + 25 //25 paddingLeft
-      const projectTop = bounds.top - parent.top + 15 //15 paddingTop
-      const projectBottom = bounds.bottom - bounds.height + 15 //15 paddingTop
+      const projectLeft = projectBounds.left + 25  + (parent.left * -1) //25 paddingLeft
+      const projectTop = projectBounds.top - parent.top + 15 //15 paddingTop
+      const projectBottom = projectBounds.bottom - projectBounds.height + 15 //15 paddingTop
       const projectWidth = project.offsetWidth         //px
       const projectHeight = project.offsetHeight       //px
       const programEls = $(project).data('programs')
         .split(',')
-        .map( pId => {
-          const prog = project.offsetParent.querySelector(`.program[data-id="${pId}"]`)
-          return prog
-        })
+        .map( pId => project.offsetParent.querySelector(`.program[data-id="${pId}"]`) )
         .filter(p => p)
 
       const programPositions = getProgramPositions(projectTop, projectBottom, projectLeft, projectWidth, projectHeight, programEls)
 
 
+      //slow scroll to a stop
+      TweenMax.to(tl, 1, {timeScale:0.05})
+
       $('.project').not(project).addClass('sibling-hover')
       $('.program').not(programEls).addClass('sibling-hover')
 
-      programEls.forEach( (el, index) => {
-
-        $(el).addClass('hover')
+      programEls.forEach( (program, index) => {
+        $(program).addClass('hover')
 
         //save last original position to reset on mouseleave
-        el.lastLeft = el.style.left
-        el.lastTop = el.style.top
+        program.lastLeft = program.style.left
+        program.lastTop = program.style.top
 
 
         //position programs around project
-        const parentIndex = $(el.offsetParent).index()
+        const parentIndex = $(program.offsetParent).index()
         let programLeft
 
-        if (parentIndex === 2) {
-          programLeft = programPositions[index].left - el.offsetWidth + Math.abs(sliderInner.offsetLeft) - cellWidth
-        } else {
-          programLeft = programPositions[index].left - el.offsetWidth + Math.abs(sliderInner.offsetLeft)
-        }
-
-        el.style.left = programLeft + 'px'
-        el.style.top = programPositions[index].top - el.offsetHeight + 'px'
-        // el.textContent = el.textContent.slice(0, -2) + programPositions[index].place //for debugging
+        program.style.left = programPositions[index].left - program.offsetWidth + 'px'
+        program.style.top = programPositions[index].top - program.offsetHeight + 'px'
+        // program.textContent = program.textContent.slice(0, -2) + programPositions[index].place //for debugging
       })
 
       $(project).one('mouseleave', function() {

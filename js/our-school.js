@@ -9,7 +9,7 @@ export class OurSchool {
 
     setTimeout(() => {
       $(this.sectionInto).addClass('hidden')
-    }, 1600)
+    }, 750)
 
     $('.school').on('mouseenter', function(e) {
       $(this).siblings().addClass('not-hover');

@@ -17,7 +17,7 @@ export class CoreValues {
 
     setTimeout(() => {
       $(this.sectionIntro).addClass('hidden')
-    }, 1600)
+    }, 750)
   }
 
   openPanel(e) {
