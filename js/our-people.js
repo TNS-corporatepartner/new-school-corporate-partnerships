@@ -58,8 +58,7 @@ export class OurPeople {
       $(modalContent).append(video)
 
       $('#ourPeople').one('click', (e) => {
-        e.stopPropagation()
-
+        e.stopPropagation();
         tl.timeScale(0.45)
 
         $('#ourPeople').removeClass('modal-open');
