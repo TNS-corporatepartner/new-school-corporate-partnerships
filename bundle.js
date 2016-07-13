@@ -32648,11 +32648,22 @@
 	      $('#ourPeople').one('click', function (e) {
 	        e.stopPropagation();
 
-	        tl.timeScale(0.25);
+	        tl.timeScale(0.45);
 
 	        $('#ourPeople').removeClass('modal-open');
 	        modalContent.innerHTML = '';
 	      });
+	    });
+
+	    $('.person.video').on('mouseenter', function () {
+	      console.log('enter');
+
+	      _this.tl.timeScale(0.09);
+	    });
+
+	    $('.person.video').on('mouseleave', function () {
+	      console.log('leave');
+	      _this.tl.timeScale(0.45);
 	    });
 
 	    this.tl.add(new TweenMax(this.sliderInner, '5', {
@@ -32661,11 +32672,12 @@
 	      timeScale: this.timeScale
 	    }));
 
-	    this.tl.timeScale(0.25);
+	    this.tl.timeScale(0.45);
 
-	    var mouseleave$ = _rxjs.Observable.fromEvent(this.slider, 'mouseleave').subscribe(function () {
-	      _this.tl.timeScale(0.25);
-	    });
+	    // const mouseleave$ = Observable.fromEvent(this.slider, 'mouseleave')
+	    //   .subscribe(() => {
+	    //     this.tl.timeScale(0.45)
+	    //   })
 
 	    var mousemove$ = _rxjs.Observable.fromEvent(this.slider, 'mousemove').map(function (e) {
 	      return _this.mouseCoords(e);
@@ -32676,7 +32688,7 @@
 	        _this.tl.reversed(true);
 	      }
 
-	      _this.tl.timeScale(Math.abs(e.x / 15));
+	      //this.tl.timeScale( Math.abs(e.x / 50) )
 	    });
 	  }
 

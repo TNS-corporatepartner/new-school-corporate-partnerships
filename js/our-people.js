@@ -68,6 +68,8 @@ export class OurPeople {
     })
 
     $('.person.video').on('mouseenter', () => {
+      console.log('enter');
+
       this.tl.timeScale(0.09)
 
     })
@@ -86,10 +88,10 @@ export class OurPeople {
 
     this.tl.timeScale(0.45)
 
-    const mouseleave$ = Observable.fromEvent(this.slider, 'mouseleave')
-      .subscribe(() => {
-        this.tl.timeScale(0.45)
-      })
+    // const mouseleave$ = Observable.fromEvent(this.slider, 'mouseleave')
+    //   .subscribe(() => {
+    //     this.tl.timeScale(0.45)
+    //   })
 
 
 
