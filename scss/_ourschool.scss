@@ -24,6 +24,10 @@ body.school-modal-open {
     filter:grayscale(100%) blur(10px);
     opacity: .4;
   }
+
+  #downArrow {
+    display: none;
+  }
 }
 section#ourSchool {
   .section-headlines h4,

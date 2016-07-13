@@ -722,6 +722,9 @@ body.school-modal-open .school {
           filter: grayscale(100%) blur(10px);
   opacity: .4; }
 
+body.school-modal-open #downArrow {
+  display: none; }
+
 section#ourSchool .section-headlines h4,
 section#ourSchool .section-headlines h3 {
   transition: color 0.5s ease-in-out; }
@@ -870,6 +873,12 @@ section#ourSchool #schoolModal {
       background-size: cover;
       background-position: center; }
 
+body.people-modal-open #downArrow {
+  display: none; }
+
+body.people-modal-open #fixedLogo svg g {
+  fill: white; }
+
 #peopleSlider {
   position: absolute;
   left: 0;
@@ -986,6 +995,12 @@ section#ourPeople.modal-open {
     pointer-events: auto;
     transform: scale(1);
     background-color: rgba(51, 51, 51, 0.9); }
+
+body.approach-modal-open #downArrow {
+  display: none; }
+
+body.approach-modal-open #fixedLogo svg g {
+  fill: white; }
 
 #ourApproach {
   overflow: hidden; }
@@ -1381,6 +1396,18 @@ h6 {
   height: 100vh;
   width: 100%;
   overflow: hidden; }
+
+.hover-area {
+  width: 5%;
+  background-color: transparent;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  z-index: 999; }
+  .hover-area#hoverRight {
+    right: 0px; }
+  .hover-area#hoverLeft {
+    left: 0px; }
 
 .section-intro {
   position: absolute;

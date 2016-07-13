@@ -75,6 +75,29 @@ h6{
   overflow: hidden;
 }
 
+.hover-area {
+
+  width: 5%;
+  background-color: transparent;
+  //pointer-events: none;
+  position: absolute;
+  top:0px;
+  bottom:0px;
+  z-index: 999;
+
+  &#hoverRight {
+    right:0px;
+  }
+  &#hoverLeft {
+    left:0px;
+  }
+
+  &:hover {
+    //background-color: fade-out($red, 0.7);
+  }
+}
+
+
 .section-intro {
   position: absolute;
   z-index: 3;

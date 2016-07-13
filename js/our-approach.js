@@ -10,7 +10,9 @@ export class OurApproach {
     this.canvas = document.getElementById('approachCanvas')
     this.sliderInner = document.querySelector('.approach-slider-inner')
     this.grids = document.querySelectorAll('.approach-grid')
-    this.projects = document.querySelectorAll('.project')    
+    this.projects = document.querySelectorAll('.project')
+    this.hovers = document.querySelectorAll('.hover-area')
+
 
     this.random = {
       variance: 3,
@@ -27,10 +29,10 @@ export class OurApproach {
       onReverseComplete: () => {
         this.tl.seek('5')
       }
-    })    
+    })
 
     this.projectHover$ = Observable
-      .fromEvent(this.projects, 'mouseenter')      
+      .fromEvent(this.projects, 'mouseenter')
 
     setTimeout(() => {
       $(this.sectionIntro).addClass('hidden')
@@ -39,14 +41,22 @@ export class OurApproach {
     this.positionItems()
     this.handlePanning()
     this.handleHover()
-    this.handleClick()    
+    this.handleClick()
+
+    $(this.hovers).on('mouseenter', () => {
+      this.tl.timeScale(0.55)
+    });
+
+    $(this.hovers).on('mouseleave', () => {
+      this.tl.timeScale(0.15)
+    })
   }
 
   positionItems() {
     //generate random padding from programs in first grid
     var randomPadding = Array.prototype.map.call(document.querySelector('.approach-grid').querySelectorAll('.program'), program => {
       return {
-        paddingTop: (Math.random() * 50) + 1,        
+        paddingTop: (Math.random() * 50) + 1,
         paddingRight: (Math.random() * 50) + 1,
         paddingLeft: (Math.random() * 50) + 1,
         paddingBottom: (Math.random() * 50) + 1,
@@ -70,7 +80,7 @@ export class OurApproach {
     })
 
     //set width of parent containing isotope grids in order to float: left
-    const sliderInnerWidth = document.querySelector('.approach-grid').offsetWidth * 3    
+    const sliderInnerWidth = document.querySelector('.approach-grid').offsetWidth * 3
     this.cellWidth = document.querySelector('.approach-grid').offsetWidth
     this.sliderInner.style.width = sliderInnerWidth + 'px'
     this.grids.forEach(grid => grid.style.left = this.cellWidth * -1 + 'px')
@@ -82,7 +92,7 @@ export class OurApproach {
       .map(e => this.mouseCoords(e))
       // .takeUntil(this.projectHover$)
       // .repeat()
-      .subscribe(e => {  
+      .subscribe(e => {
 
         if ( e.x < 0 && this.tl.reversed() ) {
           this.tl.reversed(false)
@@ -95,7 +105,7 @@ export class OurApproach {
 
     this.tl.add( new TweenMax(this.sliderInner, '5', {
       left: this.cellWidth * -1,
-      ease: Linear.easeNone, 
+      ease: Linear.easeNone,
       timeScale: 5
     }))
 
@@ -105,7 +115,7 @@ export class OurApproach {
     Observable.fromEvent(this.sliderInner, 'mouseleave')
       .subscribe(() => {
         this.tl.timeScale(0.15)
-      })    
+      })
 
     // this.raf$.withLatestFrom(this.mousemove$)
     // .subscribe(v => {
@@ -124,7 +134,7 @@ export class OurApproach {
 
       TweenMax.to(tl, 1, {timeScale:0.05})
 
-      const bounds = project.getBoundingClientRect() 
+      const bounds = project.getBoundingClientRect()
       const parent = project.offsetParent.getBoundingClientRect()
       const projectLeft = bounds.left + 25 //25 paddingLeft
       const projectTop = bounds.top - parent.top + 15 //15 paddingTop
@@ -135,12 +145,12 @@ export class OurApproach {
         .split(',')
         .map( pId => {
           const prog = project.offsetParent.querySelector(`.program[data-id="${pId}"]`)
-          return prog 
+          return prog
         })
         .filter(p => p)
 
       const programPositions = getProgramPositions(projectTop, projectBottom, projectLeft, projectWidth, projectHeight, programEls)
-  
+
 
       $('.project').not(project).addClass('sibling-hover')
       $('.program').not(programEls).addClass('sibling-hover')
@@ -153,7 +163,7 @@ export class OurApproach {
         el.lastLeft = el.style.left
         el.lastTop = el.style.top
 
-        
+
         //position programs around project
         const parentIndex = $(el.offsetParent).index()
         let programLeft
@@ -163,11 +173,11 @@ export class OurApproach {
         } else {
           programLeft = programPositions[index].left - el.offsetWidth + Math.abs(sliderInner.offsetLeft)
         }
-        
+
         el.style.left = programLeft + 'px'
         el.style.top = programPositions[index].top - el.offsetHeight + 'px'
         // el.textContent = el.textContent.slice(0, -2) + programPositions[index].place //for debugging
-      })      
+      })
 
       $(project).one('mouseleave', function() {
         $('.project').removeClass('sibling-hover')
@@ -178,9 +188,9 @@ export class OurApproach {
           el.style.left = el.lastLeft
           el.style.top = el.lastTop
           el.style.transform = el.lastTransform
-        })       
+        })
 
-        tl.timeScale(0.15) 
+        tl.timeScale(0.15)
       })
 
     })
@@ -194,13 +204,13 @@ export class OurApproach {
 
       const position2 = {
         left: left + width / 1.5,
-        top: top - 75,     
+        top: top - 75,
         place: '02'
       }
 
       const position3 = {
         left: left + 25,
-        top: top - 75,             
+        top: top - 75,
         place: '03'
       }
 
@@ -212,13 +222,13 @@ export class OurApproach {
 
       const position5 = {
         left: left,
-        top: top + 150,        
+        top: top + 150,
         place: '05'
       }
 
       const position6 = {
         left: left,
-        top: top + height + 30,        
+        top: top + height + 30,
         place: '06'
       }
 
@@ -242,7 +252,7 @@ export class OurApproach {
 
       const position10 = {
         left: left + width + 150,
-        top: top + height,  
+        top: top + height,
         place: '10'
       }
 
@@ -253,7 +263,7 @@ export class OurApproach {
     }
   }
 
-  
+
   mouseCoords(e) {
     const xPercent = e.clientX / window.innerWidth * 100
     const x = xPercent >= 50 ? (xPercent - 50) * -1 : 50 - xPercent
@@ -265,14 +275,14 @@ export class OurApproach {
     return {
       x: x,
       y: y
-    }    
+    }
   }
 
 
   handleClick() {
     const tl = this.tl
 
-    $('.project').on('click', function(e) {      
+    $('.project').on('click', function(e) {
       e.stopPropagation()
       tl.pause()
 
@@ -289,6 +299,9 @@ export class OurApproach {
 
       modal.querySelector('img').src = $(this).data('image')
       $.fn.fullpage.setAllowScrolling(false)
+
+      $('body').addClass('approach-modal-open')
+
 
       Velocity(modal, {
         left: projectImg.left,
@@ -325,6 +338,9 @@ export class OurApproach {
         tl.play()
 
         $.fn.fullpage.setAllowScrolling(true)
+
+        $('body').removeClass('approach-modal-open')
+
 
         Velocity(modalContent, 'reverse', {
           complete: function() {
