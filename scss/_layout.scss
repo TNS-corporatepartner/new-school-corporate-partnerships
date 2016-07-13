@@ -193,6 +193,34 @@ body.fp-viewing-contact {
     }
   }
 
+
+
+}
+
+#siteCredits {
+  clear: left;
+  color:white;
+  position: absolute;
+  bottom:0px;
+
+
+  h6 {
+    margin-bottom: 10px;
+  }
+
+  ul {
+    list-style: none;
+  }
+  li {
+    font-size: 12px;
+    list-style: none;
+    margin-bottom: 5px;
+    padding-left: 0px;
+  }
+
+  a, a:visited {
+    color:white;
+  }
 }
 
 #contactModal {

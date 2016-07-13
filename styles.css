@@ -433,6 +433,23 @@ body.fp-viewing-contact #downArrow, body.fp-viewing-contact header#header {
           .contactUs .content .debbie .contact a:hover {
             color: #E82E21; }
 
+#siteCredits {
+  clear: left;
+  color: white;
+  position: absolute;
+  bottom: 0px; }
+  #siteCredits h6 {
+    margin-bottom: 10px; }
+  #siteCredits ul {
+    list-style: none; }
+  #siteCredits li {
+    font-size: 12px;
+    list-style: none;
+    margin-bottom: 5px;
+    padding-left: 0px; }
+  #siteCredits a, #siteCredits a:visited {
+    color: white; }
+
 #contactModal {
   display: none;
   position: absolute;
