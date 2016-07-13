@@ -14569,6 +14569,31 @@
 	// shim for using process in browser
 
 	var process = module.exports = {};
+
+	// cached from whatever global is present so that test runners that stub it
+	// don't break things.  But we need to wrap it in a try catch in case it is
+	// wrapped in strict mode code which doesn't define any globals.  It's inside a
+	// function because try/catches deoptimize in certain engines.
+
+	var cachedSetTimeout;
+	var cachedClearTimeout;
+
+	(function () {
+	  try {
+	    cachedSetTimeout = setTimeout;
+	  } catch (e) {
+	    cachedSetTimeout = function () {
+	      throw new Error('setTimeout is not defined');
+	    }
+	  }
+	  try {
+	    cachedClearTimeout = clearTimeout;
+	  } catch (e) {
+	    cachedClearTimeout = function () {
+	      throw new Error('clearTimeout is not defined');
+	    }
+	  }
+	} ())
 	var queue = [];
 	var draining = false;
 	var currentQueue;
@@ -14593,7 +14618,7 @@
 	    if (draining) {
 	        return;
 	    }
-	    var timeout = setTimeout(cleanUpNextTick);
+	    var timeout = cachedSetTimeout(cleanUpNextTick);
 	    draining = true;
 
 	    var len = queue.length;
@@ -14610,7 +14635,7 @@
 	    }
 	    currentQueue = null;
 	    draining = false;
-	    clearTimeout(timeout);
+	    cachedClearTimeout(timeout);
 	}
 
 	process.nextTick = function (fun) {
@@ -14622,7 +14647,7 @@
 	    }
 	    queue.push(new Item(fun, args));
 	    if (queue.length === 1 && !draining) {
-	        setTimeout(drainQueue, 0);
+	        cachedSetTimeout(drainQueue, 0);
 	    }
 	};
 
@@ -32622,7 +32647,6 @@
 
 	      $('#ourPeople').one('click', function (e) {
 	        e.stopPropagation();
-
 	        tl.timeScale(0.45);
 
 	        $('#ourPeople').removeClass('modal-open');
@@ -32631,6 +32655,8 @@
 	    });
 
 	    $('.person.video').on('mouseenter', function () {
+	      console.log('enter');
+
 	      _this.tl.timeScale(0.09);
 	    });
 
@@ -32647,9 +32673,10 @@
 
 	    this.tl.timeScale(0.45);
 
-	    var mouseleave$ = _rxjs.Observable.fromEvent(this.slider, 'mouseleave').subscribe(function () {
-	      _this.tl.timeScale(0.45);
-	    });
+	    // const mouseleave$ = Observable.fromEvent(this.slider, 'mouseleave')
+	    //   .subscribe(() => {
+	    //     this.tl.timeScale(0.45)
+	    //   })
 
 	    var mousemove$ = _rxjs.Observable.fromEvent(this.slider, 'mousemove').map(function (e) {
 	      return _this.mouseCoords(e);
