@@ -45,15 +45,18 @@ section#coreValues {
             transform: scale(1.35);
           }
           ul{
-            height: auto;
+            max-height: 50vh;
           }
           ul li {
-
             opacity: 1;
             color: $gray;
-            @for $i from 1 through 10 {
+            &:first-of-type {
+              transition-delay: .5s;
+            }
+
+            @for $i from 2 through 10 {
               &:nth-of-type(#{$i}) {
-                transition-delay: 1.5s * $i;
+                transition-delay: 0.75s * $i;
               }
             }
             &:last-of-type {
@@ -64,8 +67,6 @@ section#coreValues {
       }
       &.hover-sibling {
         &:before {
-          // filter: blur(5px);
-          // background-color: darken($gray-darker-trans, 5%);
           background-color: $gray-darker-trans;
         }
 
@@ -98,7 +99,7 @@ section#coreValues {
           background-color: transparent;
           color: white;
           cursor: url('/images/click-cursor-red.svg'), auto;
-          transition: background-color 0.5s ease-in-out;
+          transition: background-color 0.5s ease-in-out, transform 0.5s ease-in-out;
           h4 {
             max-width: 0vw;
             font-size: 4.25vh;
@@ -112,8 +113,8 @@ section#coreValues {
             list-style: none;
             min-width: 60vw;
             margin-top: 40px;
-            height: 0;
-            transition: height 0.5s ease-in-out;
+            max-height: 0;
+            transition: max-height 0.5s ease-in-out;
             li {
               font-size: 30px;
               @media (min-width: $break1) {
