@@ -4,11 +4,11 @@ date: 2016-06-24 21:01:00 Z
 image: "/uploads/memorial.jpg"
 question: How can a digital experience provide physicality to ephemeral memories?
 programs:
-- Media Studies
-- Design and Technology
 - Cultural Theory
-- Interface Design
+- Design and Technology
 - Graphic Design
+- Interface Design
+- Media Studies
 ---
 
 Media Studies faculty and students bring to life the AIDS Memorial Quilt for the digital era. The AIDS Memorial Quilt, a breath-taking 1.3 million-square-foot quilt made by the families and friends of people lost to AIDS, is one of the largest ongoing pieces of community folk art in the world. Constantly traveling across the world in portions for exhibition value , the AIDS Memorial Quilt has never been seen in its entirety and cannot continue to withstand the physical contact it’s endured since 1987.  

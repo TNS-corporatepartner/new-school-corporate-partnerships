@@ -4,11 +4,11 @@ date: 2016-06-24 21:01:00 Z
 image: "/uploads/fashionBusiness.png"
 question: How can financial transactions be seamless?
 programs:
-- Fashion
-- Design and Technology
 - Architecture
-- Product Design
 - Data Visualization
+- Design and Technology
+- Fashion
+- Product Design
 ---
 
 MasterCard teamed up with The New School’s Parsons School of Design students to bring a forward-thinking  approach to  payment transactions.

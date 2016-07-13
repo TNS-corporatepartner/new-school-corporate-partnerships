@@ -4,11 +4,11 @@ date: 2016-06-24 21:01:00 Z
 image: "/uploads/seeMusic.jpg"
 question: How can wearable technology reinvent the role of orchestral garments?
 programs:
+- Composition
 - Design and Technology
 - Fashion
-- Composition
-- Piano
 - Orchestral Instruments
+- Piano
 ---
 
 Orchestral musicians traditionally drape themselves in black to enhance and grant priority to their sound. The New School, in partnership with the Baltimore Symphony Orchestra, sought to explode the senses by developing garments that explored the intersections of performance, fashion, design, sight and sound.
