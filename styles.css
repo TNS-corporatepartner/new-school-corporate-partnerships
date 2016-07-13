@@ -398,7 +398,6 @@ body.fp-viewing-contact #downArrow, body.fp-viewing-contact header#header {
   display: none; }
 
 .contactUs {
-  cursor: url("/images/close-cursor-red.svg"), auto;
   background-color: #222222;
   padding: 2vw; }
   .contactUs h3, .contactUs h6 {
@@ -438,6 +437,7 @@ body.fp-viewing-contact #downArrow, body.fp-viewing-contact header#header {
   display: none;
   position: absolute;
   z-index: 120;
+  cursor: url("/images/close-cursor-red.svg"), auto;
   background-color: #E82E21;
   top: 0;
   right: 0;
