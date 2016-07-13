@@ -4,9 +4,24 @@ body.people-modal-open {
     display: none;
   }
 
-  #fixedLogo svg g {
-    fill:white;
+  #fixedLogo svg > g {
+    fill: white;
+    transition: fill 0.8s ease-in-out;
+    line {
+      stroke: white;
+      transition: stroke 0.8s ease-in-out;
+    }
   }
+  #peopleSlider {
+    overflow: hidden;
+    .grid{
+      opacity: .4;
+      .person{
+        filter:grayscale(100%) blur(10px) !important;
+      }
+    }
+  }
+
 }
 
 
@@ -38,7 +53,7 @@ body.people-modal-open {
           flex-wrap: wrap;
           background-position: center;
           background-repeat: no-repeat;
-          background-size: cover;          
+          background-size: cover;
           &:not(.video) {
             filter: grayscale(1);
             transition: filter 1s ease;

@@ -893,8 +893,20 @@ section#ourSchool #schoolModal {
 body.people-modal-open #downArrow {
   display: none; }
 
-body.people-modal-open #fixedLogo svg g {
-  fill: white; }
+body.people-modal-open #fixedLogo svg > g {
+  fill: white;
+  transition: fill 0.8s ease-in-out; }
+  body.people-modal-open #fixedLogo svg > g line {
+    stroke: white;
+    transition: stroke 0.8s ease-in-out; }
+
+body.people-modal-open #peopleSlider {
+  overflow: hidden; }
+  body.people-modal-open #peopleSlider .grid {
+    opacity: .4; }
+    body.people-modal-open #peopleSlider .grid .person {
+      -webkit-filter: grayscale(100%) blur(10px) !important;
+              filter: grayscale(100%) blur(10px) !important; }
 
 #peopleSlider {
   position: absolute;
@@ -1016,8 +1028,23 @@ section#ourPeople.modal-open {
 body.approach-modal-open #downArrow {
   display: none; }
 
-body.approach-modal-open #fixedLogo svg g {
-  fill: white; }
+body.approach-modal-open #fixedLogo svg > g {
+  fill: white;
+  transition: fill 0.8s ease-in-out; }
+  body.approach-modal-open #fixedLogo svg > g line {
+    stroke: white;
+    transition: stroke 0.8s ease-in-out; }
+
+body.approach-modal-open #ourApproach .approach-grid .program {
+  opacity: .2; }
+
+body.approach-modal-open #ourApproach .approach-grid .project {
+  -webkit-filter: grayscale(100%) blur(10px) !important;
+          filter: grayscale(100%) blur(10px) !important;
+  opacity: .4; }
+
+body.approach-modal-open #ourApproach .section-headlines {
+  opacity: .2; }
 
 #ourApproach {
   overflow: hidden; }
@@ -1025,8 +1052,6 @@ body.approach-modal-open #fixedLogo svg g {
     background-image: linear-gradient(180deg, rgba(225, 225, 225, 0.5) 80%, transparent);
     max-width: none;
     width: 100%; }
-    #ourApproach .section-headlines h3, #ourApproach .section-headlines p {
-      max-width: 70vw; }
 
 #ourApproach #approachCanvas {
   position: absolute;
@@ -1251,12 +1276,6 @@ body.approach-modal-open #fixedLogo svg g {
       #ourApproachModal .content .img-container img {
         width: 100%; }
 
-#hoverRight {
-  cursor: url(/images/right-cursor-red.svg), auto; }
-
-#hoverLeft {
-  cursor: url(/images/left-cursor-red.svg), auto; }
-
 section#contactUs {
   background: #E1E1E1; }
   section#contactUs .section-headlines {
@@ -1378,10 +1397,10 @@ body {
 p {
   font-size: 2.2vh;
   line-height: 1.45;
-  max-width: 900px; }
+  max-width: 800px; }
   @media (min-width: 1440px) {
     p {
-      max-width: 1200px; } }
+      max-width: 1100px; } }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: "NeueDisplay", sans-serif;
@@ -1424,9 +1443,11 @@ h6 {
   bottom: 0px;
   z-index: 999; }
   .hover-area#hoverRight {
-    right: 0px; }
+    right: 0px;
+    cursor: url(/images/right-cursor-red.svg), auto; }
   .hover-area#hoverLeft {
-    left: 0px; }
+    left: 0px;
+    cursor: url(/images/left-cursor-red.svg), auto; }
 
 .section-intro {
   position: absolute;

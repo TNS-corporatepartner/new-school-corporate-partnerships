@@ -4,9 +4,30 @@ body.approach-modal-open {
     display: none;
   }
 
-  #fixedLogo svg g {
-    fill:white;
+  #fixedLogo svg > g {
+    fill: white;
+    transition: fill 0.8s ease-in-out;
+    line {
+      stroke: white;
+      transition: stroke 0.8s ease-in-out;
+    }
   }
+
+  #ourApproach{
+    .approach-grid{
+      .program{
+        opacity: .2;
+      }
+      .project{
+        filter:grayscale(100%) blur(10px) !important;
+        opacity: .4;
+      }
+    }
+    .section-headlines{
+      opacity: .2;
+    }
+  }
+
 }
 
 #ourApproach {
@@ -15,9 +36,6 @@ body.approach-modal-open {
     background-image: linear-gradient(180deg, rgba(225, 225, 225, 0.5) 80%, transparent);
     max-width: none;
     width: 100%;
-    h3, p {
-      max-width: 70vw;
-    }
   }
 }
 
@@ -266,12 +284,4 @@ body.approach-modal-open {
       }
     }
   }
-}
-
-#hoverRight{
-  cursor: url(/images/right-cursor-red.svg), auto;
-}
-
-#hoverLeft{
-  cursor: url(/images/left-cursor-red.svg), auto;
 }
