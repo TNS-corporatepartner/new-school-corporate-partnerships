@@ -1065,6 +1065,12 @@ body.approach-modal-open #ourApproach .section-headlines {
       float: left;
       height: calc(100vh - 380px);
       max-height: calc(100vh - 380px) !important; }
+      #ourApproach #approachCanvas .approach-slider-inner .approach-grid:first-of-type {
+        background: aqua; }
+      #ourApproach #approachCanvas .approach-slider-inner .approach-grid:nth-of-type(2) {
+        background: mediumpurple; }
+      #ourApproach #approachCanvas .approach-slider-inner .approach-grid:last-of-type {
+        background: lightcoral; }
       #ourApproach #approachCanvas .approach-slider-inner .approach-grid .project {
         position: absolute;
         padding: 15px 25px;

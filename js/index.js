@@ -104,6 +104,8 @@ function init() {
 
 
   app.showContactModal = function() {
+    $.fn.fullpage.setAllowScrolling(false)
+
     Velocity(header, {opacity: 0}, {
       duration: 125,
       complete: function() {
@@ -130,10 +132,12 @@ function init() {
   }
 
   app.hideContactModal = function() {
-
+    
     Velocity(contactModal.querySelector('.content'), {opacity: 0}, {
       display: 'none',
       complete: function() {
+        $.fn.fullpage.setAllowScrolling(true)
+
         Velocity(contactModal, {
           width: 140,
           height: 64,

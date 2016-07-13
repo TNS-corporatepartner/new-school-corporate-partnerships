@@ -171,6 +171,8 @@
 	  });
 
 	  app.showContactModal = function () {
+	    $.fn.fullpage.setAllowScrolling(false);
+
 	    Velocity(header, { opacity: 0 }, {
 	      duration: 125,
 	      complete: function complete() {
@@ -201,6 +203,8 @@
 	    Velocity(contactModal.querySelector('.content'), { opacity: 0 }, {
 	      display: 'none',
 	      complete: function complete() {
+	        $.fn.fullpage.setAllowScrolling(true);
+
 	        Velocity(contactModal, {
 	          width: 140,
 	          height: 64,
@@ -61500,9 +61504,6 @@
 
 	      this.projectHover$.subscribe(function (e) {
 	        var project = e.target;
-
-	        TweenMax.to(tl, 1, { timeScale: 0.01 });
-
 	        var bounds = project.getBoundingClientRect();
 	        var parent = project.offsetParent.getBoundingClientRect();
 	        var projectLeft = bounds.left + 25; //25 paddingLeft
@@ -61518,6 +61519,9 @@
 	        });
 
 	        var programPositions = getProgramPositions(projectTop, projectBottom, projectLeft, projectWidth, projectHeight, programEls);
+
+	        //slow scroll to a stop
+	        TweenMax.to(tl, 1, { timeScale: 0.05 });
 
 	        $('.project').not(project).addClass('sibling-hover');
 	        $('.program').not(programEls).addClass('sibling-hover');

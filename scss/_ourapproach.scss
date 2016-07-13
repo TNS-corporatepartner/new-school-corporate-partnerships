@@ -64,15 +64,15 @@ body.approach-modal-open {
       float: left;
       height: calc(100vh - 380px);
       max-height: calc(100vh - 380px) !important;
-      // &:first-of-type {
-      //   background: aqua;
-      // }
-      // &:nth-of-type(2) {
-      //   background: mediumpurple;
-      // }
-      // &:last-of-type {
-      //   background: lightcoral;
-      // }
+      &:first-of-type {
+        background: aqua;
+      }
+      &:nth-of-type(2) {
+        background: mediumpurple;
+      }
+      &:last-of-type {
+        background: lightcoral;
+      }
       .project {
         position: absolute;
         padding: 15px 25px;

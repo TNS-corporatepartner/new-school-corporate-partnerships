@@ -131,9 +131,6 @@ export class OurApproach {
 
     this.projectHover$.subscribe(function(e) {
       const project = e.target
-
-      TweenMax.to(tl, 1, {timeScale:0.01})
-
       const bounds = project.getBoundingClientRect()
       const parent = project.offsetParent.getBoundingClientRect()
       const projectLeft = bounds.left + 25 //25 paddingLeft
@@ -151,6 +148,8 @@ export class OurApproach {
 
       const programPositions = getProgramPositions(projectTop, projectBottom, projectLeft, projectWidth, projectHeight, programEls)
 
+      //slow scroll to a stop
+      TweenMax.to(tl, 1, {timeScale:0.05})
 
       $('.project').not(project).addClass('sibling-hover')
       $('.program').not(programEls).addClass('sibling-hover')
