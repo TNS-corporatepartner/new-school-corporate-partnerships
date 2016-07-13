@@ -32656,8 +32656,6 @@
 	    });
 
 	    $('.person.video').on('mouseenter', function () {
-	      console.log('enter');
-
 	      _this.tl.timeScale(0.09);
 	    });
 
@@ -32674,10 +32672,9 @@
 
 	    this.tl.timeScale(0.45);
 
-	    // const mouseleave$ = Observable.fromEvent(this.slider, 'mouseleave')
-	    //   .subscribe(() => {
-	    //     this.tl.timeScale(0.45)
-	    //   })
+	    var mouseleave$ = _rxjs.Observable.fromEvent(this.slider, 'mouseleave').subscribe(function () {
+	      _this.tl.timeScale(0.45);
+	    });
 
 	    var mousemove$ = _rxjs.Observable.fromEvent(this.slider, 'mousemove').map(function (e) {
 	      return _this.mouseCoords(e);
