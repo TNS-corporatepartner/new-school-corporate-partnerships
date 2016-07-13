@@ -28,7 +28,7 @@ body.approach-modal-open {
 #ourApproach #approachCanvas {
   position: absolute;
   left: 0;
-  top: calc(50% - 303px);
+  top: 190px;
   width: 100vw;
   // &:before {
   //   content: '';
@@ -44,8 +44,8 @@ body.approach-modal-open {
     .approach-grid {
       position: relative;
       float: left;
-      height: 60vh;
-      max-height: 60vh !important;
+      height: calc(100vh - 380px);
+      max-height: calc(100vh - 380px) !important;
       // &:first-of-type {
       //   background: aqua;
       // }
@@ -67,40 +67,40 @@ body.approach-modal-open {
           bottom: 75px;
         }
         &.project2 {
-          left: 600px;
+          left: 620px;
           top: 100px;
         }
         &.project3 {
-          left: 1000px;
+          left: 1240px;
           bottom: 50px;
         }
         &.project4 {
-          left: 1500px;
+          left: 1800px;
           top: 80px;
         }
         &.project5 {
-          left: 2000px;
+          left: 2420px;
           bottom: 75px;
         }
         &.project6 {
-          left: 2500px;
+          left: 3000px;
           top: 80px;
         }
         &.project7 {
-          left: 3000px;
+          left: 3620px;
           top: 250px;
         }
         &.project8 {
-          left: 3525px;
-          bottom: 75px;
+          left: 4150px;
+          top: 75px;
         }
         &.project9 {
-          left: 4200px;
-          top: 80px;
+          left: 4800px;
+          bottom: 80px;
         }
         &.project10 {
-          left: 4804px;
-          bottom: 125px;
+          left: 5404px;
+          top: 85px;
         }
         &:hover .info {
           opacity: 1;

@@ -38,8 +38,7 @@ body.people-modal-open {
           flex-wrap: wrap;
           background-position: center;
           background-repeat: no-repeat;
-          background-size: cover;
-          cursor: url(/images/click-cursor-black.svg), auto;
+          background-size: cover;          
           &:not(.video) {
             filter: grayscale(1);
             transition: filter 1s ease;
@@ -58,6 +57,7 @@ body.people-modal-open {
           }
           &.video {
             width: calc(100vh - 380px);
+            cursor: url(/images/click-cursor-black.svg), auto;
             .overlay{
               background-color: transparentize(black, .9);
               transition: background 1s ease;
