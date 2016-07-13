@@ -316,7 +316,21 @@
 						<a href="tel:1-{{ site.contact.phone }}">{{ site.contact.phone }}</a>
 					</div>
 				</div>
+
+
+
 			</div>
+			<!-- <div id="siteCredits">
+				<h6>Site Credits</h6>
+					<ul>
+						{% for credit in site.credits %}
+						<li>
+							{{credit|markdownify | remove: '<p>' }}
+						</li>
+
+						{% endfor %}
+					</ul>
+			</div> -->
 		</section>
 
 	</main>
@@ -339,6 +353,7 @@
 					<a href="tel:1-{{ site.contact.phone }}">{{ site.contact.phone }}</a>
 				</div>
 			</div>
+
 		</div>
 	</div>
 

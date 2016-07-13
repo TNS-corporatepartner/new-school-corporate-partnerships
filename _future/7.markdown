@@ -1,6 +1,6 @@
 ---
 title: Technology
-video: http://familiar-temp.s3.amazonaws.com/nscp/TECHNOLOGY.mp4
+video: http://familiar-temp.s3.amazonaws.com/nscp/TECHNOLOGY-NEW.mp4
 order: 7
 question: How can technology make us more human?
 ---
