@@ -32607,7 +32607,7 @@
 	    $('.person.video').on('click', function (e) {
 	      e.stopPropagation();
 
-	      tl.timeScale(0);
+	      tl.pause();
 
 	      var personModal = document.getElementById('personModal');
 	      var modalContent = personModal.querySelector('.content');
@@ -32624,7 +32624,7 @@
 
 	      $('#ourPeople').one('click', function (e) {
 	        e.stopPropagation();
-	        tl.timeScale(0.45);
+	        tl.play();
 
 	        $('#ourPeople').removeClass('modal-open');
 	        $('body').removeClass('people-modal-open');
@@ -32671,8 +32671,6 @@
 	      } else if (e.x > 0 && !_this.tl.reversed()) {
 	        _this.tl.reversed(true);
 	      }
-
-	      //this.tl.timeScale( Math.abs(e.x / 50) )
 	    });
 	  }
 
@@ -61503,7 +61501,7 @@
 	      this.projectHover$.subscribe(function (e) {
 	        var project = e.target;
 
-	        TweenMax.to(tl, 1, { timeScale: 0.05 });
+	        TweenMax.to(tl, 1, { timeScale: 0.01 });
 
 	        var bounds = project.getBoundingClientRect();
 	        var parent = project.offsetParent.getBoundingClientRect();

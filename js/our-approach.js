@@ -132,7 +132,7 @@ export class OurApproach {
     this.projectHover$.subscribe(function(e) {
       const project = e.target
 
-      TweenMax.to(tl, 1, {timeScale:0.05})
+      TweenMax.to(tl, 1, {timeScale:0.01})
 
       const bounds = project.getBoundingClientRect()
       const parent = project.offsetParent.getBoundingClientRect()
