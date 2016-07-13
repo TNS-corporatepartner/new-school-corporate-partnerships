@@ -157,17 +157,18 @@ h6{
   background-image: none;
   background-size: cover;
   background-position: 50% 50%;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat;  
   video {
-    margin: auto;
+    min-width: 100%;
+    min-height: 100%;
     position: absolute;
     z-index: -1;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%) translateY( -50%);
     visibility: visible;
     width: auto;
-    height: 100vh;
+    height: auto;
   }
 }
 
