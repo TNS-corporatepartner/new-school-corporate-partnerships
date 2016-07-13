@@ -1251,6 +1251,12 @@ body.approach-modal-open #fixedLogo svg g {
       #ourApproachModal .content .img-container img {
         width: 100%; }
 
+#hoverRight {
+  cursor: url(/images/right-cursor-red.svg), auto; }
+
+#hoverLeft {
+  cursor: url(/images/left-cursor-red.svg), auto; }
+
 section#contactUs {
   background: #E1E1E1; }
   section#contactUs .section-headlines {
