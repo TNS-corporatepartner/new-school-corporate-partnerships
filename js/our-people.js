@@ -55,6 +55,8 @@ export class OurPeople {
       video.attr('autoplay', true)
 
       $('#ourPeople').addClass('modal-open');
+      $('body').addClass('people-modal-open')
+
       $(modalContent).append(video)
 
       $('#ourPeople').one('click', (e) => {
@@ -62,19 +64,27 @@ export class OurPeople {
         tl.timeScale(0.45)
 
         $('#ourPeople').removeClass('modal-open');
+        $('body').removeClass('people-modal-open')
+
         modalContent.innerHTML = ''
       })
     })
 
     $('.person.video').on('mouseenter', () => {
-      console.log('enter');
 
       this.tl.timeScale(0.09)
 
     })
 
     $('.person.video').on('mouseleave', () => {
-      console.log('leave');
+      this.tl.timeScale(0.45)
+    })
+
+    $('.hover-area').on('mouseenter', () => {
+      this.tl.timeScale(1)
+    });
+
+    $('.hover-area').on('mouseleave', () => {
       this.tl.timeScale(0.45)
     })
 

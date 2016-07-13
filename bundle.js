@@ -32644,6 +32644,8 @@
 	      video.attr('autoplay', true);
 
 	      $('#ourPeople').addClass('modal-open');
+	      $('body').addClass('people-modal-open');
+
 	      $(modalContent).append(video);
 
 	      $('#ourPeople').one('click', function (e) {
@@ -32651,18 +32653,26 @@
 	        tl.timeScale(0.45);
 
 	        $('#ourPeople').removeClass('modal-open');
+	        $('body').removeClass('people-modal-open');
+
 	        modalContent.innerHTML = '';
 	      });
 	    });
 
 	    $('.person.video').on('mouseenter', function () {
-	      console.log('enter');
 
 	      _this.tl.timeScale(0.09);
 	    });
 
 	    $('.person.video').on('mouseleave', function () {
-	      console.log('leave');
+	      _this.tl.timeScale(0.45);
+	    });
+
+	    $('.hover-area').on('mouseenter', function () {
+	      _this.tl.timeScale(1);
+	    });
+
+	    $('.hover-area').on('mouseleave', function () {
 	      _this.tl.timeScale(0.45);
 	    });
 
@@ -61393,6 +61403,7 @@
 	    this.sliderInner = document.querySelector('.approach-slider-inner');
 	    this.grids = document.querySelectorAll('.approach-grid');
 	    this.projects = document.querySelectorAll('.project');
+	    this.hovers = document.querySelectorAll('.hover-area');
 
 	    this.random = {
 	      variance: 3,
@@ -61421,6 +61432,14 @@
 	    this.handlePanning();
 	    this.handleHover();
 	    this.handleClick();
+
+	    $(this.hovers).on('mouseenter', function () {
+	      _this.tl.timeScale(0.55);
+	    });
+
+	    $(this.hovers).on('mouseleave', function () {
+	      _this.tl.timeScale(0.15);
+	    });
 	  }
 
 	  _createClass(OurApproach, [{
@@ -61674,6 +61693,8 @@
 	        modal.querySelector('img').src = $(this).data('image');
 	        $.fn.fullpage.setAllowScrolling(false);
 
+	        $('body').addClass('approach-modal-open');
+
 	        Velocity(modal, {
 	          left: projectImg.left,
 	          top: projectImg.top,
@@ -61709,6 +61730,8 @@
 	          tl.play();
 
 	          $.fn.fullpage.setAllowScrolling(true);
+
+	          $('body').removeClass('approach-modal-open');
 
 	          Velocity(modalContent, 'reverse', {
 	            complete: function complete() {
