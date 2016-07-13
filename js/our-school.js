@@ -4,11 +4,16 @@ export class OurSchool {
 
   constructor() {
     this.section = document.getElementById('ourSchool')
+    this.sectionHeadlines = this.section.querySelector('.section-headlines')
     this.sectionInto = this.section.querySelector('.section-intro')
     this.paragraphIntro = this.section.querySelector('.intro-paragraph')
 
     setTimeout(() => {
       $(this.sectionInto).addClass('hidden')
+
+      setTimeout(() => {
+        $(this.sectionHeadlines).removeClass('hidden')
+      }, 1800)            
     }, 750)
 
     $('.school').on('mouseenter', function(e) {

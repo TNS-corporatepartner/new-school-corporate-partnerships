@@ -6,6 +6,7 @@ export class FutureOf {
 
   constructor() {
     this.section = document.querySelector('#futureOf')
+    this.sectionHeadlines = this.section.querySelector('.section-headlines')
     this.sectionIntro = this.section.querySelector('.section-intro')
     this.imagineEl = document.querySelector('.future-of-header h1')
     this.futureOfEl = document.querySelectorAll('.future-of-header h1')[1]
@@ -38,7 +39,15 @@ export class FutureOf {
 
     setTimeout(() => {
       $(this.sectionIntro).addClass('hidden')
-      this.initVideos()
+      
+      setTimeout(() => {
+        this.initVideos()
+      }, 2200)
+
+      setTimeout(() => {
+        $(this.sectionHeadlines).removeClass('hidden')
+      }, 1800)
+
     }, 750)    
   }
 
