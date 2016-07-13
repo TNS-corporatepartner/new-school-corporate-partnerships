@@ -17910,6 +17910,7 @@
 	    _classCallCheck(this, FutureOf);
 
 	    this.section = document.querySelector('#futureOf');
+	    this.sectionHeadlines = this.section.querySelector('.section-headlines');
 	    this.sectionIntro = this.section.querySelector('.section-intro');
 	    this.imagineEl = document.querySelector('.future-of-header h1');
 	    this.futureOfEl = document.querySelectorAll('.future-of-header h1')[1];
@@ -17942,7 +17943,14 @@
 
 	    setTimeout(function () {
 	      $(_this.sectionIntro).addClass('hidden');
-	      _this.initVideos();
+
+	      setTimeout(function () {
+	        _this.initVideos();
+	      }, 2200);
+
+	      setTimeout(function () {
+	        $(_this.sectionHeadlines).removeClass('hidden');
+	      }, 1800);
 	    }, 750);
 	  }
 
@@ -32394,6 +32402,7 @@
 
 	    this.section = document.getElementById('coreValues');
 	    this.sectionIntro = this.section.querySelector('.section-intro');
+	    this.sectionHeadlines = this.section.querySelector('.section-headlines');
 	    $('#coreValues .panel').on('mouseenter', this.openPanel);
 	    $('#coreValues .panel').on('mouseleave', this.closePanel);
 
@@ -32403,6 +32412,10 @@
 
 	    setTimeout(function () {
 	      $(_this.sectionIntro).addClass('hidden');
+
+	      setTimeout(function () {
+	        $(_this.sectionHeadlines).removeClass('hidden');
+	      }, 1800);
 	    }, 750);
 	  }
 
@@ -32450,11 +32463,16 @@
 	  _classCallCheck(this, OurSchool);
 
 	  this.section = document.getElementById('ourSchool');
+	  this.sectionHeadlines = this.section.querySelector('.section-headlines');
 	  this.sectionInto = this.section.querySelector('.section-intro');
 	  this.paragraphIntro = this.section.querySelector('.intro-paragraph');
 
 	  setTimeout(function () {
 	    $(_this.sectionInto).addClass('hidden');
+
+	    setTimeout(function () {
+	      $(_this.sectionHeadlines).removeClass('hidden');
+	    }, 1800);
 	  }, 750);
 
 	  $('.school').on('mouseenter', function (e) {
@@ -32575,10 +32593,15 @@
 	    _classCallCheck(this, OurPeople);
 
 	    this.section = document.getElementById('ourPeople');
+	    this.sectionHeadlines = this.section.querySelector('.section-headlines');
 	    this.sectionInto = this.section.querySelector('.section-intro');
 
 	    setTimeout(function () {
 	      $(_this.sectionInto).addClass('hidden');
+
+	      setTimeout(function () {
+	        $(_this.sectionHeadlines).removeClass('hidden');
+	      }, 1800);
 	    }, 750);
 
 	    this.slider = document.getElementById('peopleSlider');
@@ -61374,6 +61397,7 @@
 	    _classCallCheck(this, OurApproach);
 
 	    this.section = document.getElementById('ourApproach');
+	    this.sectionHeadlines = this.section.querySelector('.section-headlines');
 	    this.sectionIntro = this.section.querySelector('.section-intro');
 	    this.canvas = document.getElementById('approachCanvas');
 	    this.sliderInner = document.querySelector('.approach-slider-inner');
@@ -61402,6 +61426,10 @@
 
 	    setTimeout(function () {
 	      $(_this.sectionIntro).addClass('hidden');
+
+	      setTimeout(function () {
+	        $(_this.sectionHeadlines).removeClass('hidden');
+	      }, 1800);
 	    }, 750);
 
 	    this.positionItems();

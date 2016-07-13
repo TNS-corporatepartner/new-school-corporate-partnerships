@@ -7,10 +7,15 @@ import _ from 'lodash'
 export class OurPeople {
   constructor() {
     this.section = document.getElementById('ourPeople')
+    this.sectionHeadlines = this.section.querySelector('.section-headlines')
     this.sectionInto = this.section.querySelector('.section-intro')
 
     setTimeout(() => {
       $(this.sectionInto).addClass('hidden')
+      
+      setTimeout(() => {
+        $(this.sectionHeadlines).removeClass('hidden')
+      }, 1800)      
     }, 750)
 
     this.slider = document.getElementById('peopleSlider')

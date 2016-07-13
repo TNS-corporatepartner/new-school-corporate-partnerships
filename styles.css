@@ -1483,7 +1483,11 @@ h6 {
   top: 0;
   left: 0;
   padding: 2vw;
-  max-width: 80vw; }
+  max-width: 80vw;
+  transition: opacity 1s ease-in-out; }
+  .section-headlines.hidden {
+    opacity: 0;
+    pointer-events: none; }
   .section-headlines .dynamic-text {
     transition: opacity 0.4s ease-in-out; }
   .section-headlines p {

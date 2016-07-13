@@ -6,6 +6,7 @@ import 'gsap'
 export class OurApproach {
   constructor() {
     this.section = document.getElementById('ourApproach')
+    this.sectionHeadlines = this.section.querySelector('.section-headlines')
     this.sectionIntro = this.section.querySelector('.section-intro')
     this.canvas = document.getElementById('approachCanvas')
     this.sliderInner = document.querySelector('.approach-slider-inner')
@@ -35,6 +36,10 @@ export class OurApproach {
 
     setTimeout(() => {
       $(this.sectionIntro).addClass('hidden')
+
+      setTimeout(() => {
+        $(this.sectionHeadlines).removeClass('hidden')
+      }, 1800)      
     }, 750)
 
     this.positionItems()

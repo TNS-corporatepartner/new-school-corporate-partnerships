@@ -8,6 +8,7 @@ export class CoreValues {
   constructor() {
     this.section = document.getElementById('coreValues')
     this.sectionIntro = this.section.querySelector('.section-intro')
+    this.sectionHeadlines = this.section.querySelector('.section-headlines')
     $('#coreValues .panel').on('mouseenter', this.openPanel)
     $('#coreValues .panel').on('mouseleave', this.closePanel)
 
@@ -17,7 +18,12 @@ export class CoreValues {
 
     setTimeout(() => {
       $(this.sectionIntro).addClass('hidden')
+      
+      setTimeout(() => {
+        $(this.sectionHeadlines).removeClass('hidden')
+      }, 1800)      
     }, 750)
+    
   }
 
   openPanel(e) {
