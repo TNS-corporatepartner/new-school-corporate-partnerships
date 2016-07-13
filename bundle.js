@@ -127,6 +127,7 @@
 	    $('main').fullpage({
 	      anchors: ['intro', 'future', 'difference', 'schools', 'approach', 'people', 'partner', 'contact'],
 	      navigation: true,
+	      lockAnchors: true,
 	      afterRender: function afterRender() {
 	        if (!window.location.hash) {
 	          $.fn.fullpage.silentMoveTo('future', 1);
