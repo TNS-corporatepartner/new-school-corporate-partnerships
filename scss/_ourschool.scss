@@ -17,6 +17,7 @@ body.school-modal-open {
     #schoolModal {
       opacity: 1;
       pointer-events: auto;
+      z-index: 3;
     }
   }
 
@@ -56,67 +57,87 @@ section#ourSchool {
   .school-links {
     position: relative;
     height: 100%;
+    @media (max-width: $break3){
+      height: calc(100vh - 120px);
+      display: flex;
+      align-items: center;
+    }
     .school {
       position: absolute;
       cursor: url(/images/click-cursor-red.svg), auto;
-
-      &.parsons {
-        left: 5%;
-        top: 25%;
+      @media (max-width: $break3){
+        position: relative;
+        display: inline-block;
+        margin: 0 5px;
+        width: 54vh;
       }
-      &.eugene-lang {
-        left: 67%;
-        top: 60%;
-      }
-      &.public-engagement {
-        left: 75%;
-        top: 33%;
-      }
-      &.performing-arts {
-        left: 22%;
-        top: 58%;
-      }
-      &.social-research {
-        left: 55%;
-        top: 19%;
-        .img{
-          background-position: 20% 50%;
+      @media (min-width: 801px){
+        &.parsons {
+          left: 5%;
+          top: 25%;
         }
-      }
-      &.horz {
-        width: 20%;
-        height: 22%;
-        .text-container {
-          bottom: -100%;
-          h3 {
-            top: 15px;
+        &.eugene-lang {
+          left: 67%;
+          top: 60%;
+        }
+        &.public-engagement {
+          left: 75%;
+          top: 33%;
+        }
+        &.performing-arts {
+          left: 22%;
+          top: 58%;
+        }
+        &.social-research {
+          left: 55%;
+          top: 19%;
+          .img{
+            background-position: 20% 50%;
           }
         }
       }
-      &.vert {
-        position: absolute;
-        display: flex;
-        align-items: center;
-        width: 15%;
-        height: 30%;
-        .text-container {
+
+      @media (min-width: 801px){
+        &.horz {
+          width: 20%;
+          height: 22%;
+          .text-container {
+            bottom: -100%;
+            h3 {
+              top: 15px;
+            }
+          }
+        }
+        &.vert {
+
           display: flex;
           align-items: center;
-          margin-left: 15px;
-          h3 {
-            position: relative;
+          width: 15%;
+          height: 30%;
+          .text-container {
+            display: flex;
+            align-items: center;
+            margin-left: 15px;
+            h3 {
+              position: relative;
+            }
+          }
+          .img-container {
+            left: -100%;
           }
         }
-        .img-container {
-          left: -100%;
-        }
       }
+
       .img-container {
         position: absolute;
         height: 100%;
         width: 100%;
         top: 0; left: 0;
         overflow: hidden;
+        @media (max-width: $break3){
+          position: relative;
+          height: 32vh;
+        }
       }
       .img {
         position: absolute;
@@ -147,6 +168,12 @@ section#ourSchool {
         position: absolute;
         height: 100%;
         width: 100%;
+        @media (max-width: $break3){
+          position: relative;
+          padding-top: 10px;
+          padding-right: 15px;
+          height: auto;
+        }
         h3 {
           position: absolute;
           font-weight: normal;
@@ -154,6 +181,10 @@ section#ourSchool {
           line-height: 1.2;
           color: $red;
           transition: all 0.4s ease-in-out;
+          @media (max-width: $break3){
+            position: relative;
+            font-size: 3.5vh;
+          }
         }
       }
     }
@@ -173,6 +204,9 @@ section#ourSchool {
       align-items: center;
       background-color: $gray-darker-trans;
       color: white;
+      @media (max-width: $break3){
+        height: 100vh;
+      }
       .text-container {
         width: 50%;
         padding: 4vw;

@@ -36,6 +36,9 @@ body.approach-modal-open {
     background-image: linear-gradient(180deg, rgba(225, 225, 225, 0.5) 80%, transparent);
     max-width: none;
     width: 100%;
+    @media (max-width: $break3){
+      max-width: calc(100vw - 110px);
+    }
   }
 }
 
@@ -60,6 +63,10 @@ body.approach-modal-open {
       float: left;
       height: calc(100vh - 380px);
       max-height: calc(100vh - 380px) !important;
+      @media (max-width: $break3){
+        max-width: calc(100vh - 120px);
+        max-height: calc(100vh - 120px) !important;
+      }
       // &:first-of-type {
       //   background: aqua;
       // }
@@ -169,7 +176,7 @@ body.approach-modal-open {
         transition: top 1s ease-in-out, left 1s ease-in-out, opacity 1s ease-in-out, font-size 1s ease-in-out;
         pointer-events: none;
         font-size: 12px;
-        float: left;        
+        float: left;
         @for $i from 1 through 20 {
           &:nth-of-type(#{$i}) {
             transition-delay: 0.01s * $i * 4;

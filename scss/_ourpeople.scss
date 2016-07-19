@@ -31,6 +31,9 @@ body.people-modal-open {
   top: 190px;
   width: 100vw;
   outline: none;
+  @media (max-width: $break3){
+    top: 60px;
+  }
   .slider-inner {
     position: relative;
     .cell {
@@ -39,12 +42,17 @@ body.people-modal-open {
       .grid {
         height: calc(100vh - 380px);
         max-height: calc(100vh - 380px)!important;
+        @media (max-width: $break3){
+          height: calc(100vh - 120px);
+          max-height: calc(100vh - 120px) !important;
+        }
         .person {
           float: left;
           width: calc(50vh - 190px);
           height: calc(50vh - 190px);
-          &.video {
-            width: calc(100vh - 380px);
+          @media (max-width: $break3){
+            width: calc(100vh - 120px);
+            height: calc(100vh - 120px);
           }
           color: white;
           position: relative;
@@ -73,9 +81,19 @@ body.people-modal-open {
           &.video {
             width: calc(100vh - 380px);
             cursor: url(/images/click-cursor-black.svg), auto;
+            @media (max-width: $break3){
+              width: calc(200vh - 240px);
+            }
             .overlay{
               background-color: transparentize(black, .9);
               transition: background 1s ease;
+              @media (max-width: $break3){
+                background-color: transparentize($red, .5);
+                &:before {
+                  content:url(/images/play-button.svg);
+                }
+
+              }
             }
             &:hover {
               .overlay {
@@ -92,6 +110,9 @@ body.people-modal-open {
             padding: 10px;
             bottom: 0;
             left: 0;
+            @media (max-width: $break3){
+              padding: 5px;
+            }
           }
 
           p {
@@ -100,6 +121,9 @@ body.people-modal-open {
             font-size: 18px;
             margin-top: 5px;
             transition: all 0.8s ease-in-out;
+            @media (max-width: $break3){
+              font-size: 15px;
+            }
           }
 
           .overlay {
@@ -131,6 +155,10 @@ body.people-modal-open {
   background-color: transparent;
   transition: all 0.4s ease-in-out;
   transform: scale(0.8);
+  @media (max-width: $break3){
+    height: 100vh;
+    top: 0;
+  }
 
   .content {
     height: 100%;

@@ -35,33 +35,18 @@ section#futureOf {
     top: 50%;
     left: 0;
     transform: translateY(-50%);
-    // background-color: $black-tint;
     padding: 1.5vw;
     padding-left: 2vw;
     opacity: 0;
     transition: all 1s ease-in-out;
     max-width: 70vw;
+    @media (max-width: $break3){
+      max-width: calc(100vw - 120px);
+      margin-top: 20px;
+    }
   }
-
-  // h4 {
-  //   animation-name: fadeIn;
-  //   animation-duration: 2s;
-  //   animation-fill-mode: forwards;
-  //   animation-delay: 7.5s;
-  //   opacity: 0;
-  // }
 
   .section-headlines .dynamic-text{
     transition-delay: 14s;
   }
 }
-
-// @keyframes fadeIn{
-//   0%{
-//     opacity: 0;
-//   }
-
-//   100%{
-//     opacity: 1;
-//   }
-// }

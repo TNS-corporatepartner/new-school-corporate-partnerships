@@ -37,29 +37,39 @@ section#coreValues {
         flex: 6 1 auto;
         .content-wrapper .content {
           pointer-events: none;
+          padding-left: 30px !important;
+          @media (max-width: $break3) {
+             padding-left: 10px !important;
+           }
+
           h4 {
-            max-width: 100%;
-            max-width: 26vw;
+            max-width: 27vw;
             transform-origin: left center;
             transition-delay: 0.25s;
             transform: scale(1.35);
+            @media (max-width: $break3){
+              transform: scale(1.1);
+              overflow-wrap: break-word;
+              word-wrap: break-word;
+              hyphens: auto;
+            }
           }
           ul{
             max-height: 50vh;
           }
           ul li {
             opacity: 1;
-            color: $gray;
+            color: rgba(white, .7);
             &:first-of-type {
               transition-delay: .5s;
             }
 
-            @for $i from 2 through 10 {
-              &:nth-of-type(#{$i}) {
-                transition-delay: 0.75s * $i;
-              }
+            &:nth-of-type(2) {
+              transition-delay: 2s;
             }
+
             &:last-of-type {
+              transition-delay: 4.5s;
               color: $white !important;
             }
           }
@@ -99,14 +109,25 @@ section#coreValues {
           background-color: transparent;
           color: white;
           cursor: url('/images/click-cursor-red.svg'), auto;
-          transition: background-color 0.5s ease-in-out, transform 0.5s ease-in-out;
+          transition: background-color 0.5s ease-in-out, transform 0.5s ease-in-out, padding 0.5s ease-in-out;
+          @media (max-width: $break3) {
+             padding: 10px;
+           }
+
           h4 {
             max-width: 0vw;
             font-size: 4.25vh;
+            font-weight: normal;
             transition: transform 0.5s ease-in-out, max-width 0.5s ease-in-out;
             transform-origin: left top;
             @media (max-width: $break1) {
-              font-size: 36px;
+               font-size: 36px;
+             }
+            @media (max-width: $break3){
+              font-size: 3vw;
+              hyphens: auto;
+              width: 100%;
+              max-width: none;
             }
           }
           ul {
@@ -115,20 +136,33 @@ section#coreValues {
             margin-top: 40px;
             max-height: 0;
             transition: max-height 0.5s ease-in-out;
+            @media (max-width: $break3){
+              margin-top: 15px;
+
+            }
             li {
               font-size: 30px;
+              margin-bottom: 20px;
+
               @media (min-width: $break1) {
                 font-size: 36px;
                 max-width: 900px;
-              }
-              margin-bottom: 20px;
-              @media (min-width: $break1) {
                 margin-bottom: 30px;
+              }
+
+              @media (max-width: $break3){
+                font-size: 15px;
+                margin-bottom: 15px;
               }
               opacity: 0;
               transition: opacity 0.5s ease-in-out, color 1.8s ease-in;
             }
           }
+        }
+      }
+      &:nth-child(2){
+        .content-wrapper .content{
+          padding-left: 10px;
         }
       }
     }

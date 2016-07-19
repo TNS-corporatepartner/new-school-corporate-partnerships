@@ -132,7 +132,7 @@ function init() {
   }
 
   app.hideContactModal = function() {
-    
+
     Velocity(contactModal.querySelector('.content'), {opacity: 0}, {
       display: 'none',
       complete: function() {
@@ -160,7 +160,7 @@ function init() {
       Velocity(line2, {x1: 4.501, y1: 71.5, x2: 109.524, y2: 71.5}, {duration: 500})
       Velocity(introLogoText, {translateX: 0, translateY: 0}, {duration: 2000})
 
-      //logo animate down
+      //logo fades out
       Velocity(introLogo, {
         opacity: 0
       }, {
@@ -203,8 +203,7 @@ function skipSplashAnimation() {
 
   Velocity(introLogo, 'stop')
   Velocity(introLogo, {
-    bottom: 20,
-    width: 150
+    opacity: 0
   }, {
     duration: 500
   })
