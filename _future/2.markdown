@@ -2,6 +2,6 @@
 title: Design
 video: http://familiar-temp.s3.amazonaws.com/nscp/DESIGN-EDITED.mp4
 order: 2
-question: How can design transform the economy?
+question: How can design transform the&nbsp;economy?
 ---
 
