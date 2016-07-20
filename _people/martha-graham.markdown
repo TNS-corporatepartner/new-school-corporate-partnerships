@@ -1,8 +1,7 @@
 ---
 title: Martha Graham
 position: 1
-image: "/images/graham.jpg"
-video: 
+image: "/uploads/martha-graham.jpg"
 ---
 
 Modern Dancer

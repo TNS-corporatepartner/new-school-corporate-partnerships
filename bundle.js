@@ -32832,8 +32832,8 @@
 
 	      var personModal = document.getElementById('personModal');
 	      var modalContent = personModal.querySelector('.content');
-	      var videoSrc = $(this).data('src');
-	      var video = $('<video />');
+	      var videoSrc = 'https://player.vimeo.com/video/' + $(this).data('src') + '?autoplay=1&color=e82e21&title=0&byline=0&portrait=0';
+	      var video = $('<iframe frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>');
 
 	      video.attr('src', videoSrc);
 	      video.attr('autoplay', true);
@@ -32853,14 +32853,16 @@
 	        modalContent.innerHTML = '';
 	      });
 	    });
+	    var stopTween = void 0;
 
 	    $('.person.video').on('mouseenter', function () {
-
 	      _this.tl.timeScale(0.09);
+	      stopTween = TweenMax.to(tl, 3, { timeScale: 0 });
 	    });
 
 	    $('.person.video').on('mouseleave', function () {
-	      _this.tl.timeScale(0.45);
+	      stopTween.kill();
+	      _this.tl.timeScale(0.05);
 	    });
 
 	    $('.hover-area').on('mouseenter', function () {
@@ -32868,7 +32870,7 @@
 	    });
 
 	    $('.hover-area').on('mouseleave', function () {
-	      _this.tl.timeScale(0.45);
+	      _this.tl.timeScale(0.05);
 	    });
 
 	    this.tl.add(new TweenMax(this.sliderInner, '5', {
@@ -32877,11 +32879,11 @@
 	      timeScale: this.timeScale
 	    }));
 
-	    this.tl.timeScale(0.45);
+	    this.tl.timeScale(0.05);
 
 	    // const mouseleave$ = Observable.fromEvent(this.slider, 'mouseleave')
 	    //   .subscribe(() => {
-	    //     this.tl.timeScale(0.45)
+	    //     this.tl.timeScale(0.05)
 	    //   })
 
 	    var mousemove$ = _rxjs.Observable.fromEvent(this.slider, 'mousemove').map(function (e) {
@@ -61747,7 +61749,7 @@
 	        var programPositions = getProgramPositions(projectTop, projectBottom, projectLeft, projectWidth, projectHeight, programEls);
 
 	        //slow scroll to a stop
-	        TweenMax.to(tl, 1, { timeScale: 0.05 });
+	        var stopAnim = TweenMax.to(tl, 3, { timeScale: 0 });
 
 	        $('.project').not(project).addClass('sibling-hover');
 	        $('.program').not(programEls).addClass('sibling-hover');
@@ -61779,7 +61781,10 @@
 	            el.style.transform = el.lastTransform;
 	          });
 
+	          stopAnim.kill();
+
 	          tl.timeScale(0.15);
+	          // tl.play()
 	        });
 	      });
 

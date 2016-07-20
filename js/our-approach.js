@@ -151,9 +151,8 @@ export class OurApproach {
 
       const programPositions = getProgramPositions(projectTop, projectBottom, projectLeft, projectWidth, projectHeight, programEls)
 
-
       //slow scroll to a stop
-      TweenMax.to(tl, 1, {timeScale:0.05})
+      const stopAnim = TweenMax.to(tl, 3, {timeScale:0})
 
       $('.project').not(project).addClass('sibling-hover')
       $('.program').not(programEls).addClass('sibling-hover')
@@ -186,7 +185,10 @@ export class OurApproach {
           el.style.transform = el.lastTransform
         })
 
+        stopAnim.kill()
+
         tl.timeScale(0.15)
+        // tl.play()
       })
 
     })

@@ -1,8 +1,7 @@
 ---
 title: Ai WeiWei
 position: 3
-image: "/images/ai-weiwei.jpg"
-video: 
+image: "/uploads/ai-weiwei.jpg"
 ---
 
 Artist

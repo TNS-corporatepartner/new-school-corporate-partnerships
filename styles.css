@@ -1067,10 +1067,15 @@ body.people-modal-open #peopleSlider {
             opacity: 1; }
           #peopleSlider .slider-inner .cell .grid .person.video {
             width: calc(100vh - 380px);
+            overflow: hidden;
             cursor: url(/images/click-cursor-black.svg), auto; }
             @media (max-width: 800px) {
               #peopleSlider .slider-inner .cell .grid .person.video {
                 width: calc(200vh - 240px); } }
+            #peopleSlider .slider-inner .cell .grid .person.video:hover .overlay {
+              background-color: rgba(232, 46, 33, 0.7); }
+              #peopleSlider .slider-inner .cell .grid .person.video:hover .overlay:before {
+                content: url(/images/play-button.svg); }
             #peopleSlider .slider-inner .cell .grid .person.video .overlay {
               background-color: rgba(0, 0, 0, 0.1);
               transition: background 1s ease; }
@@ -1079,10 +1084,8 @@ body.people-modal-open #peopleSlider {
                   background-color: rgba(232, 46, 33, 0.5); }
                   #peopleSlider .slider-inner .cell .grid .person.video .overlay:before {
                     content: url(/images/play-button.svg); } }
-            #peopleSlider .slider-inner .cell .grid .person.video:hover .overlay {
-              background-color: rgba(232, 46, 33, 0.7); }
-              #peopleSlider .slider-inner .cell .grid .person.video:hover .overlay:before {
-                content: url(/images/play-button.svg); }
+            #peopleSlider .slider-inner .cell .grid .person.video iframe {
+              height: 100%; }
           #peopleSlider .slider-inner .cell .grid .person hgroup {
             position: absolute;
             padding: 10px;
@@ -1135,8 +1138,10 @@ body.people-modal-open #peopleSlider {
     display: flex;
     -ms-flex-pack: center;
         justify-content: center; }
-    #personModal .content video {
-      height: 100%; }
+    #personModal .content iframe {
+      height: 100%;
+      width: 100%;
+      pointer-events: none; }
   #personModal #closePersonModal {
     position: absolute;
     top: 20px;
@@ -1474,6 +1479,9 @@ section#contactUs {
   background: #E1E1E1; }
   section#contactUs .section-headlines {
     color: white; }
+  section#contactUs .section-intro {
+    color: white;
+    background-color: #E82E21; }
   section#contactUs .panel-group {
     display: -ms-flexbox;
     display: flex;
@@ -1687,7 +1695,7 @@ h5 {
   font-size: 34px; }
 
 h6 {
-  font-size: 18px; }
+  font-size: 17px; }
   @media (max-width: 800px) {
     h6 {
       font-size: 14px; } }

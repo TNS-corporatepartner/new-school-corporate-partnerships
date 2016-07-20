@@ -36,7 +36,7 @@ export class OurPeople {
         itemSelector: '.person',
         layoutMode: 'masonryHorizontal',
       })
-    })
+    })    
 
     //set width of parent containing isotope grids in order to float: left
     const sliderInnerWidth = document.querySelector('.cell').offsetWidth * 3
@@ -52,8 +52,8 @@ export class OurPeople {
 
       const personModal = document.getElementById('personModal')
       const modalContent = personModal.querySelector('.content')
-      const videoSrc = $(this).data('src');
-      const video = $('<video />')
+      const videoSrc = `https://player.vimeo.com/video/${$(this).data('src')}?autoplay=1&color=e82e21&title=0&byline=0&portrait=0`;
+      const video = $('<iframe frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>')
 
       video.attr('src', videoSrc)
       video.attr('autoplay', true)
@@ -73,15 +73,16 @@ export class OurPeople {
         modalContent.innerHTML = ''
       })
     })
-
+    let stopTween
+    
     $('.person.video').on('mouseenter', () => {
-
       this.tl.timeScale(0.09)
-
+      stopTween = TweenMax.to(tl, 3, {timeScale:0})
     })
 
     $('.person.video').on('mouseleave', () => {
-      this.tl.timeScale(0.45)
+      stopTween.kill()
+      this.tl.timeScale(0.05)
     })
 
     $('.hover-area').on('mouseenter', () => {
@@ -89,7 +90,7 @@ export class OurPeople {
     });
 
     $('.hover-area').on('mouseleave', () => {
-      this.tl.timeScale(0.45)
+      this.tl.timeScale(0.05)
     })
 
 
@@ -99,11 +100,11 @@ export class OurPeople {
       timeScale: this.timeScale
     }))
 
-    this.tl.timeScale(0.45)
+    this.tl.timeScale(0.05)
 
     // const mouseleave$ = Observable.fromEvent(this.slider, 'mouseleave')
     //   .subscribe(() => {
-    //     this.tl.timeScale(0.45)
+    //     this.tl.timeScale(0.05)
     //   })
 
 
