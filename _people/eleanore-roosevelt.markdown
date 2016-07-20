@@ -1,8 +1,7 @@
 ---
 title: Eleanore Roosevelt
 position: 4
-image: 
-video: 
+image: "/uploads/eleanor-roosevelt.jpg"
 ---
 
 First Lady
