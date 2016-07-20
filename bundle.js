@@ -61962,10 +61962,24 @@
 
 	var ContactUs = exports.ContactUs = function () {
 	  function ContactUs() {
+	    var _this = this;
+
 	    _classCallCheck(this, ContactUs);
+
+	    this.section = document.getElementById('contactUs');
+	    this.sectionHeadlines = this.section.querySelector('.section-headlines');
+	    this.sectionIntro = this.section.querySelector('.section-intro');
 
 	    $('#contactUs .panel').on('mouseenter', this.openPanel);
 	    $('#contactUs .panel').on('mouseleave', this.closePanel);
+
+	    setTimeout(function () {
+	      $(_this.sectionIntro).addClass('hidden');
+
+	      setTimeout(function () {
+	        $(_this.sectionHeadlines).removeClass('hidden');
+	      }, 1800);
+	    }, 750);
 	  }
 
 	  _createClass(ContactUs, [{
