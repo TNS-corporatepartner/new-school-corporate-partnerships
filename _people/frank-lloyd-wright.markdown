@@ -1,7 +1,7 @@
 ---
 title: Frank Lloyd Wright
 date: 2016-07-20 15:36:00 Z
-position: 9
+position: 10
 image: "/uploads/frank-lloyd-wright.jpg"
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Eleanore Roosevelt
-position: 30
+position: 0
 image: "/uploads/eleanor-roosevelt.jpg"
 ---
 
