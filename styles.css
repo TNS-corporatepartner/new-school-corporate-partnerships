@@ -1378,13 +1378,13 @@ body.approach-modal-open #ourApproach .section-headlines {
         color: #E82E21;
         font-weight: normal;
         margin-top: 40px;
-        margin-bottom: 5px; }
+        margin-bottom: 10px; }
       #ourApproachModal .content aside blockquote {
         margin: 2.5vh 0;
         color: #E82E21;
         padding-right: 5vw;
-        font-size: 22px;
-        font-style: italic; }
+        font-size: 28px;
+        font-weight: bold; }
       #ourApproachModal .content aside .title-content {
         line-height: 1.2;
         font-family: "NeueDisplay", sans-serif;
@@ -1399,7 +1399,7 @@ body.approach-modal-open #ourApproach .section-headlines {
         bottom: 0;
         height: 20vh;
         width: 50%;
-        background-image: linear-gradient(0deg, #222 50%, transparent);
+        background-image: linear-gradient(to top, #222 30%, rgba(34, 34, 34, 0.2) 100%);
         pointer-events: none; }
     #ourApproachModal .content .img-container {
       position: fixed;
