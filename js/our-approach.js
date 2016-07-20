@@ -7,57 +7,56 @@ import 'gsap'
 export class OurApproach {
   constructor() {
     this.section = document.getElementById('ourApproach')
-    this.sectionHeadlines = this.section.querySelector('.section-headlines')
-    this.sectionIntro = this.section.querySelector('.section-intro')
     this.canvas = document.getElementById('approachCanvas')
-    this.sliderInner = document.querySelector('.approach-slider-inner')
+    this.slider = document.querySelector('.approach-slider-inner')
     this.grids = document.querySelectorAll('.approach-grid')
+    this.gridWidth = null //defined in positionItems
     this.projects = document.querySelectorAll('.project')
-    this.hovers = document.querySelectorAll('.hover-area')
+    this.skips = document.querySelectorAll('.hover-area')
+    this.timeScaleTween = null // used as a reference to start and stop timescale animations
 
-    this.random = {
-      variance: 3,
-      min: 0,
-      max: 100,
-      step: 100 / $('.program, .project').length,
-      xIndex: 0,
-      yIndex: 0
-    }
+    //position projects and programs
+    this.positionItems()
 
+    //start infinitely looping animation
     this.tl = new TimelineMax({
       repeat: -1,
       smoothChildTiming: true,
       onReverseComplete: () => {
         this.tl.seek('5')
       }
-    })
+    }).add( new TweenMax(this.slider, '5', {
+      left: this.gridWidth * -1,
+      ease: Linear.easeNone
+    })).timeScale(0.15)
 
-    this.projectHover$ = Observable
-      .fromEvent(this.projects, 'mouseenter')
+    this.initStreams()
+    this.handleClicks()    
 
-    setTimeout(() => {
-      $(this.sectionIntro).addClass('hidden')
-
-      setTimeout(() => {
-        $(this.sectionHeadlines).removeClass('hidden')
-      }, 1800)      
-    }, 750)
-
-    this.handleClick()
-
-    if (window.innerWidth >= app.breakpoints.$break3) {
-      this.positionItems()
-      this.handlePanning()
+    if (window.innerWidth >= app.breakpoints.$break3) {      
+      this.handleSliderMovement()
       this.handleHover()      
     }
 
-    $(this.hovers).on('mouseenter', () => {
-      this.tl.timeScale(0.55)
-    });
+    //fade out section intro
+    setTimeout(() => {
+      $(this.section.querySelector('.section-intro')).addClass('hidden')
+      setTimeout(() => {
+        $(this.section.querySelector('.section-headlines')).removeClass('hidden')
+      }, 1800)      
+    }, 750)    
+  }
 
-    $(this.hovers).on('mouseleave', () => {
-      this.tl.timeScale(0.15)
-    })
+  initStreams() {
+    this.sliderMouse$ = Observable.fromEvent(this.slider, 'mousemove')
+    this.sliderLeave$ = Observable.fromEvent(this.slider, 'mouseleave')
+
+    this.projectEnter$ = Observable.fromEvent( this.projects, 'mouseenter' )
+    this.projectLeave$ = Observable.fromEvent( this.projects, 'mouseleave' )
+    this.projectClick$ = Observable.fromEvent( this.projects, 'click' )
+
+    this.skipEnter$ = Observable.fromEvent( this.skips, 'mouseenter' )
+    this.skipLeave$ = Observable.fromEvent( this.skips, 'mouseleave' )
   }
 
   positionItems() {
@@ -88,54 +87,44 @@ export class OurApproach {
     })
 
     //set width of parent containing isotope grids in order to float: left
-    const sliderInnerWidth = document.querySelector('.approach-grid').offsetWidth * 3
-    this.cellWidth = document.querySelector('.approach-grid').offsetWidth
-    this.sliderInner.style.width = sliderInnerWidth + 'px'
-    this.grids.forEach(grid => grid.style.left = this.cellWidth * -1 + 'px')
+    const sliderWidth = document.querySelector('.approach-grid').offsetWidth * 3
+    this.gridWidth = document.querySelector('.approach-grid').offsetWidth
+    this.slider.style.width = sliderWidth + 'px'
+    this.grids.forEach(grid => grid.style.left = this.gridWidth * -1 + 'px')
   }
 
-
-  handlePanning() {
-    this.moveSlider$ = Observable.fromEvent(this.sliderInner, 'mousemove')
+  handleSliderMovement() {
+    //reverese panning direction when mouse crosses y-center
+    this.sliderMouse$
       .map(e => this.mouseCoords(e))
-      // .takeUntil(this.projectHover$)
-      // .repeat()
       .subscribe(e => {
-
         if ( e.x < 0 && this.tl.reversed() ) {
           this.tl.reversed(false)
         } else if ( e.x > 0 && !this.tl.reversed() ) {
           this.tl.reversed(true)
         }
-      })
+      })    
 
-    this.tl.add( new TweenMax(this.sliderInner, '5', {
-      left: this.cellWidth * -1,
-      ease: Linear.easeNone,
-      timeScale: 5
-    }))
-
-    this.tl.timeScale(0.15)
-
-    //reduce timescale on mouseleave
-    Observable.fromEvent(this.sliderInner, 'mouseleave')
-      .subscribe(() => {
-        this.tl.timeScale(0.15)
-      })
-
-    // this.raf$.withLatestFrom(this.mousemove$)
-    // .subscribe(v => {
-    //   const mouse = v[1]
-    //   this.canvas.style.transform = `perspective(3000px) translate3d(${mouse.x}%, 0%, 0) rotateX(${0}deg) rotateY(${mouse.rotateY}deg) scale(0.9)`
-    // })
+    this.sliderLeave$.subscribe(() => {
+      this.tl.timeScale(0.15)
+    })
   }
 
   handleHover() {
-    const sliderInner = this.sliderInner
-    const cellWidth = this.cellWidth
-    const tl = this.tl
+    const sliderInner = this.slider
+    const gridWidth = this.gridWidth
 
-    this.projectHover$.subscribe(function(e) {
+    this.skipEnter$.subscribe(() => {
+      this.timeScaleTween && this.timeScaleTween.kill()
+      this.timeScaleTween = TweenMax.to(this.tl, 2, {timeScale: 0.65})
+    })
+
+    this.skipLeave$.subscribe(() => {
+      this.timeScaleTween && this.timeScaleTween.kill()
+      this.timeScaleTween = TweenMax.to(this.tl, 2, {timeScale: 0.15})
+    })
+
+    this.projectEnter$.subscribe((e) => {
       const project = e.target
       const projectBounds = project.getBoundingClientRect()
       const parent = project.offsetParent.getBoundingClientRect()
@@ -152,7 +141,8 @@ export class OurApproach {
       const programPositions = getProgramPositions(projectTop, projectBottom, projectLeft, projectWidth, projectHeight, programEls)
 
       //slow scroll to a stop
-      const stopAnim = TweenMax.to(tl, 3, {timeScale:0})
+      this.timeScaleTween && this.timeScaleTween.kill()
+      this.timescaleTween = TweenMax.to(this.tl, 3, {timeScale:0})
 
       $('.project').not(project).addClass('sibling-hover')
       $('.program').not(programEls).addClass('sibling-hover')
@@ -174,7 +164,7 @@ export class OurApproach {
         // program.textContent = program.textContent.slice(0, -2) + programPositions[index].place //for debugging
       })
 
-      $(project).one('mouseleave', function() {
+      $(project).one('mouseleave', () => {
         $('.project').removeClass('sibling-hover')
         $('.program').removeClass('sibling-hover')
 
@@ -185,10 +175,8 @@ export class OurApproach {
           el.style.transform = el.lastTransform
         })
 
-        stopAnim.kill()
-
-        tl.timeScale(0.15)
-        // tl.play()
+        this.timeScaleTween && this.timeScaleTween.kill()
+        this.timescaleTween = TweenMax.to(this.tl, 1, {timeScale: 0.15})
       })
 
     })
@@ -261,7 +249,6 @@ export class OurApproach {
     }
   }
 
-
   mouseCoords(e) {
     const xPercent = e.clientX / window.innerWidth * 100
     const x = xPercent >= 50 ? (xPercent - 50) * -1 : 50 - xPercent
@@ -276,24 +263,24 @@ export class OurApproach {
     }
   }
 
+  handleClicks() {
 
-  handleClick() {
-    const tl = this.tl
-
-    $('.project').on('click', function(e) {
+    this.projectClick$.subscribe((e) => {
+      const project = e.currentTarget
       e.stopPropagation()
-      tl.pause()
+      this.timeScaleTween && this.timeScaleTween.kill()
+      this.timescaleTween = TweenMax.to(this.tl, 1, {timeScale: 0})
 
       const modal = document.getElementById('ourApproachModal')
       const modalContent = modal.querySelector('.content')
-      const projectImg = this.querySelector('.project-image').getBoundingClientRect()
+      const projectImg = project.querySelector('.project-image').getBoundingClientRect()
 
-      modalContent.querySelector('.title-content').textContent = $(this).data('title')
-      modalContent.querySelector('.label-group').textContent = $(this).data('programs').replace(/-/g, ' ').split(',').join(', ')
-      modalContent.querySelector('blockquote').textContent = $(this).data('blockquote')
-      modalContent.querySelector('.text-content').innerHTML = $(this).data('content')
+      modalContent.querySelector('.title-content').textContent = $(project).data('title')
+      modalContent.querySelector('.label-group').textContent = $(project).data('programs').replace(/-/g, ' ').split(',').join(', ')
+      modalContent.querySelector('blockquote').textContent = $(project).data('blockquote')
+      modalContent.querySelector('.text-content').innerHTML = $(project).data('content')
 
-      modal.querySelector('img').src = $(this).data('image')
+      modal.querySelector('img').src = $(project).data('image')
       $.fn.fullpage.setAllowScrolling(false)
 
       $('body').addClass('approach-modal-open')
@@ -329,15 +316,14 @@ export class OurApproach {
         }
       })
 
-      $(modal).one('click', function(e) {
+      $(modal).one('click', (e) => {
         e.stopPropagation()
 
-        tl.play()
+        this.timeScaleTween && this.timeScaleTween.kill()
+        this.timescaleTween = TweenMax.to(this.tl, 1, {timeScale: 0.15})
 
         $.fn.fullpage.setAllowScrolling(true)
-
         $('body').removeClass('approach-modal-open')
-
 
         Velocity(modalContent, 'reverse', {
           complete: function() {

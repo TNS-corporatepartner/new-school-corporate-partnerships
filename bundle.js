@@ -61595,59 +61595,60 @@
 	    _classCallCheck(this, OurApproach);
 
 	    this.section = document.getElementById('ourApproach');
-	    this.sectionHeadlines = this.section.querySelector('.section-headlines');
-	    this.sectionIntro = this.section.querySelector('.section-intro');
 	    this.canvas = document.getElementById('approachCanvas');
-	    this.sliderInner = document.querySelector('.approach-slider-inner');
+	    this.slider = document.querySelector('.approach-slider-inner');
 	    this.grids = document.querySelectorAll('.approach-grid');
+	    this.gridWidth = null; //defined in positionItems
 	    this.projects = document.querySelectorAll('.project');
-	    this.hovers = document.querySelectorAll('.hover-area');
+	    this.skips = document.querySelectorAll('.hover-area');
+	    this.timeScaleTween = null; // used as a reference to start and stop timescale animations
 
-	    this.random = {
-	      variance: 3,
-	      min: 0,
-	      max: 100,
-	      step: 100 / $('.program, .project').length,
-	      xIndex: 0,
-	      yIndex: 0
-	    };
+	    //position projects and programs
+	    this.positionItems();
 
+	    //start infinitely looping animation
 	    this.tl = new TimelineMax({
 	      repeat: -1,
 	      smoothChildTiming: true,
 	      onReverseComplete: function onReverseComplete() {
 	        _this.tl.seek('5');
 	      }
-	    });
+	    }).add(new TweenMax(this.slider, '5', {
+	      left: this.gridWidth * -1,
+	      ease: Linear.easeNone
+	    })).timeScale(0.15);
 
-	    this.projectHover$ = _rxjs.Observable.fromEvent(this.projects, 'mouseenter');
-
-	    setTimeout(function () {
-	      $(_this.sectionIntro).addClass('hidden');
-
-	      setTimeout(function () {
-	        $(_this.sectionHeadlines).removeClass('hidden');
-	      }, 1800);
-	    }, 750);
-
-	    this.handleClick();
+	    this.initStreams();
+	    this.handleClicks();
 
 	    if (window.innerWidth >= _index.app.breakpoints.$break3) {
-	      this.positionItems();
-	      this.handlePanning();
+	      this.handleSliderMovement();
 	      this.handleHover();
 	    }
 
-	    $(this.hovers).on('mouseenter', function () {
-	      _this.tl.timeScale(0.55);
-	    });
-
-	    $(this.hovers).on('mouseleave', function () {
-	      _this.tl.timeScale(0.15);
-	    });
+	    //fade out section intro
+	    setTimeout(function () {
+	      $(_this.section.querySelector('.section-intro')).addClass('hidden');
+	      setTimeout(function () {
+	        $(_this.section.querySelector('.section-headlines')).removeClass('hidden');
+	      }, 1800);
+	    }, 750);
 	  }
 
 	  _createClass(OurApproach, [{
+	    key: 'initStreams',
+	    value: function initStreams() {
+	      this.sliderMouse$ = _rxjs.Observable.fromEvent(this.slider, 'mousemove');
+	      this.sliderLeave$ = _rxjs.Observable.fromEvent(this.slider, 'mouseleave');
+
+	      this.projectEnter$ = _rxjs.Observable.fromEvent(this.projects, 'mouseenter');
+	      this.projectLeave$ = _rxjs.Observable.fromEvent(this.projects, 'mouseleave');
+	      this.projectClick$ = _rxjs.Observable.fromEvent(this.projects, 'click');
+
+	      this.skipEnter$ = _rxjs.Observable.fromEvent(this.skips, 'mouseenter');
+	      this.skipLeave$ = _rxjs.Observable.fromEvent(this.skips, 'mouseleave');
+	    }
+	  }, {
 	    key: 'positionItems',
 	    value: function positionItems() {
 	      var _this2 = this;
@@ -61679,25 +61680,22 @@
 	      });
 
 	      //set width of parent containing isotope grids in order to float: left
-	      var sliderInnerWidth = document.querySelector('.approach-grid').offsetWidth * 3;
-	      this.cellWidth = document.querySelector('.approach-grid').offsetWidth;
-	      this.sliderInner.style.width = sliderInnerWidth + 'px';
+	      var sliderWidth = document.querySelector('.approach-grid').offsetWidth * 3;
+	      this.gridWidth = document.querySelector('.approach-grid').offsetWidth;
+	      this.slider.style.width = sliderWidth + 'px';
 	      this.grids.forEach(function (grid) {
-	        return grid.style.left = _this2.cellWidth * -1 + 'px';
+	        return grid.style.left = _this2.gridWidth * -1 + 'px';
 	      });
 	    }
 	  }, {
-	    key: 'handlePanning',
-	    value: function handlePanning() {
+	    key: 'handleSliderMovement',
+	    value: function handleSliderMovement() {
 	      var _this3 = this;
 
-	      this.moveSlider$ = _rxjs.Observable.fromEvent(this.sliderInner, 'mousemove').map(function (e) {
+	      //reverese panning direction when mouse crosses y-center
+	      this.sliderMouse$.map(function (e) {
 	        return _this3.mouseCoords(e);
-	      })
-	      // .takeUntil(this.projectHover$)
-	      // .repeat()
-	      .subscribe(function (e) {
-
+	      }).subscribe(function (e) {
 	        if (e.x < 0 && _this3.tl.reversed()) {
 	          _this3.tl.reversed(false);
 	        } else if (e.x > 0 && !_this3.tl.reversed()) {
@@ -61705,33 +61703,29 @@
 	        }
 	      });
 
-	      this.tl.add(new TweenMax(this.sliderInner, '5', {
-	        left: this.cellWidth * -1,
-	        ease: Linear.easeNone,
-	        timeScale: 5
-	      }));
-
-	      this.tl.timeScale(0.15);
-
-	      //reduce timescale on mouseleave
-	      _rxjs.Observable.fromEvent(this.sliderInner, 'mouseleave').subscribe(function () {
+	      this.sliderLeave$.subscribe(function () {
 	        _this3.tl.timeScale(0.15);
 	      });
-
-	      // this.raf$.withLatestFrom(this.mousemove$)
-	      // .subscribe(v => {
-	      //   const mouse = v[1]
-	      //   this.canvas.style.transform = `perspective(3000px) translate3d(${mouse.x}%, 0%, 0) rotateX(${0}deg) rotateY(${mouse.rotateY}deg) scale(0.9)`
-	      // })
 	    }
 	  }, {
 	    key: 'handleHover',
 	    value: function handleHover() {
-	      var sliderInner = this.sliderInner;
-	      var cellWidth = this.cellWidth;
-	      var tl = this.tl;
+	      var _this4 = this;
 
-	      this.projectHover$.subscribe(function (e) {
+	      var sliderInner = this.slider;
+	      var gridWidth = this.gridWidth;
+
+	      this.skipEnter$.subscribe(function () {
+	        _this4.timeScaleTween && _this4.timeScaleTween.kill();
+	        _this4.timeScaleTween = TweenMax.to(_this4.tl, 2, { timeScale: 0.65 });
+	      });
+
+	      this.skipLeave$.subscribe(function () {
+	        _this4.timeScaleTween && _this4.timeScaleTween.kill();
+	        _this4.timeScaleTween = TweenMax.to(_this4.tl, 2, { timeScale: 0.15 });
+	      });
+
+	      this.projectEnter$.subscribe(function (e) {
 	        var project = e.target;
 	        var projectBounds = project.getBoundingClientRect();
 	        var parent = project.offsetParent.getBoundingClientRect();
@@ -61749,7 +61743,8 @@
 	        var programPositions = getProgramPositions(projectTop, projectBottom, projectLeft, projectWidth, projectHeight, programEls);
 
 	        //slow scroll to a stop
-	        var stopAnim = TweenMax.to(tl, 3, { timeScale: 0 });
+	        _this4.timeScaleTween && _this4.timeScaleTween.kill();
+	        _this4.timescaleTween = TweenMax.to(_this4.tl, 3, { timeScale: 0 });
 
 	        $('.project').not(project).addClass('sibling-hover');
 	        $('.program').not(programEls).addClass('sibling-hover');
@@ -61781,10 +61776,8 @@
 	            el.style.transform = el.lastTransform;
 	          });
 
-	          stopAnim.kill();
-
-	          tl.timeScale(0.15);
-	          // tl.play()
+	          _this4.timeScaleTween && _this4.timeScaleTween.kill();
+	          _this4.timescaleTween = TweenMax.to(_this4.tl, 1, { timeScale: 0.15 });
 	        });
 	      });
 
@@ -61871,24 +61864,26 @@
 	      };
 	    }
 	  }, {
-	    key: 'handleClick',
-	    value: function handleClick() {
-	      var tl = this.tl;
+	    key: 'handleClicks',
+	    value: function handleClicks() {
+	      var _this5 = this;
 
-	      $('.project').on('click', function (e) {
+	      this.projectClick$.subscribe(function (e) {
+	        var project = e.currentTarget;
 	        e.stopPropagation();
-	        tl.pause();
+	        _this5.timeScaleTween && _this5.timeScaleTween.kill();
+	        _this5.timescaleTween = TweenMax.to(_this5.tl, 1, { timeScale: 0 });
 
 	        var modal = document.getElementById('ourApproachModal');
 	        var modalContent = modal.querySelector('.content');
-	        var projectImg = this.querySelector('.project-image').getBoundingClientRect();
+	        var projectImg = project.querySelector('.project-image').getBoundingClientRect();
 
-	        modalContent.querySelector('.title-content').textContent = $(this).data('title');
-	        modalContent.querySelector('.label-group').textContent = $(this).data('programs').replace(/-/g, ' ').split(',').join(', ');
-	        modalContent.querySelector('blockquote').textContent = $(this).data('blockquote');
-	        modalContent.querySelector('.text-content').innerHTML = $(this).data('content');
+	        modalContent.querySelector('.title-content').textContent = $(project).data('title');
+	        modalContent.querySelector('.label-group').textContent = $(project).data('programs').replace(/-/g, ' ').split(',').join(', ');
+	        modalContent.querySelector('blockquote').textContent = $(project).data('blockquote');
+	        modalContent.querySelector('.text-content').innerHTML = $(project).data('content');
 
-	        modal.querySelector('img').src = $(this).data('image');
+	        modal.querySelector('img').src = $(project).data('image');
 	        $.fn.fullpage.setAllowScrolling(false);
 
 	        $('body').addClass('approach-modal-open');
@@ -61927,10 +61922,10 @@
 	        $(modal).one('click', function (e) {
 	          e.stopPropagation();
 
-	          tl.play();
+	          _this5.timeScaleTween && _this5.timeScaleTween.kill();
+	          _this5.timescaleTween = TweenMax.to(_this5.tl, 1, { timeScale: 0.15 });
 
 	          $.fn.fullpage.setAllowScrolling(true);
-
 	          $('body').removeClass('approach-modal-open');
 
 	          Velocity(modalContent, 'reverse', {
