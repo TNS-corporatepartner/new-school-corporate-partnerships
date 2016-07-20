@@ -1,3 +1,4 @@
+import {app} from './index.js'
 import _ from 'lodash'
 import {Observable} from 'rxjs'
 import Isotope from 'isotope-layout'
@@ -42,10 +43,13 @@ export class OurApproach {
       }, 1800)      
     }, 750)
 
-    this.positionItems()
-    this.handlePanning()
-    this.handleHover()
     this.handleClick()
+
+    if (window.innerWidth >= app.breakpoints.$break3) {
+      this.positionItems()
+      this.handlePanning()
+      this.handleHover()      
+    }
 
     $(this.hovers).on('mouseenter', () => {
       this.tl.timeScale(0.55)
@@ -103,9 +107,7 @@ export class OurApproach {
         } else if ( e.x > 0 && !this.tl.reversed() ) {
           this.tl.reversed(true)
         }
-
       })
-
 
     this.tl.add( new TweenMax(this.sliderInner, '5', {
       left: this.cellWidth * -1,
@@ -289,13 +291,10 @@ export class OurApproach {
       modalContent.querySelector('blockquote').textContent = $(this).data('blockquote')
       modalContent.querySelector('.text-content').innerHTML = $(this).data('content')
 
-      console.log($(this).data('image'))
-
       modal.querySelector('img').src = $(this).data('image')
       $.fn.fullpage.setAllowScrolling(false)
 
       $('body').addClass('approach-modal-open')
-
 
       Velocity(modal, {
         left: projectImg.left,
@@ -316,6 +315,8 @@ export class OurApproach {
           }, {
             duration: 400,
             complete: function() {
+              modalContent.scrollTop = 0
+                            
               Velocity(modalContent, {
                 opacity: 1
               }, {

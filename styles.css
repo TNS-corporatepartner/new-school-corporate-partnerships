@@ -1189,19 +1189,27 @@ body.approach-modal-open #ourApproach .section-headlines {
 #ourApproach #approachCanvas {
   position: absolute;
   left: 0;
-  top: 190px;
+  height: 480px;
+  top: calc(50% - 220px);
   width: 100vw; }
+  @media (max-width: 800px) {
+    #ourApproach #approachCanvas {
+      height: calc(100vh - 150px);
+      top: 90px; } }
   #ourApproach #approachCanvas .approach-slider-inner {
-    position: relative; }
+    position: absolute;
+    height: 100%; }
     #ourApproach #approachCanvas .approach-slider-inner .approach-grid {
-      position: relative;
-      float: left;
-      height: calc(100vh - 380px);
-      max-height: calc(100vh - 380px) !important; }
+      height: 100%;
+      float: left; }
       @media (max-width: 800px) {
         #ourApproach #approachCanvas .approach-slider-inner .approach-grid {
-          max-width: calc(100vh - 120px);
-          max-height: calc(100vh - 120px) !important; } }
+          display: -ms-flexbox;
+          display: flex;
+          width: 100vw !important;
+          left: 0 !important; }
+          #ourApproach #approachCanvas .approach-slider-inner .approach-grid.approach-grid-2, #ourApproach #approachCanvas .approach-slider-inner .approach-grid.approach-grid-3 {
+            display: none; } }
       #ourApproach #approachCanvas .approach-slider-inner .approach-grid .project {
         position: absolute;
         padding: 15px 25px;
@@ -1213,6 +1221,45 @@ body.approach-modal-open #ourApproach .section-headlines {
         transition: opacity 0.6s ease-in-out, -webkit-filter 0.6s ease-in-out;
         transition: opacity 0.6s ease-in-out, filter 0.6s ease-in-out;
         transition: opacity 0.6s ease-in-out, filter 0.6s ease-in-out, -webkit-filter 0.6s ease-in-out; }
+        @media (max-width: 800px) {
+          #ourApproach #approachCanvas .approach-slider-inner .approach-grid .project {
+            position: relative;
+            top: auto !important;
+            bottom: auto !important;
+            left: auto !important;
+            width: 20%;
+            height: 100%;
+            -ms-flex-direction: column;
+                flex-direction: column;
+            -ms-flex-align: start;
+                -ms-grid-row-align: flex-start;
+                align-items: flex-start;
+            padding: 0 5px; }
+            #ourApproach #approachCanvas .approach-slider-inner .approach-grid .project.project6 {
+              display: none; }
+            #ourApproach #approachCanvas .approach-slider-inner .approach-grid .project.project7 {
+              display: none; }
+            #ourApproach #approachCanvas .approach-slider-inner .approach-grid .project.project8 {
+              display: none; }
+            #ourApproach #approachCanvas .approach-slider-inner .approach-grid .project.project9 {
+              display: none; }
+            #ourApproach #approachCanvas .approach-slider-inner .approach-grid .project.project10 {
+              display: none; }
+            #ourApproach #approachCanvas .approach-slider-inner .approach-grid .project .project-image {
+              width: 100% !important;
+              height: 100% !important;
+              min-width: 0 !important; }
+            #ourApproach #approachCanvas .approach-slider-inner .approach-grid .project .info {
+              opacity: 1 !important; }
+              #ourApproach #approachCanvas .approach-slider-inner .approach-grid .project .info h4 {
+                padding-top: 5px;
+                font-size: 3.5vh;
+                font-weight: normal;
+                width: 100%;
+                min-width: 0 !important;
+                color: #E82E21 !important; }
+              #ourApproach #approachCanvas .approach-slider-inner .approach-grid .project .info p {
+                display: none; } }
         #ourApproach #approachCanvas .approach-slider-inner .approach-grid .project.project1 {
           left: 0%;
           bottom: 75px; }
@@ -1330,6 +1377,9 @@ body.approach-modal-open #ourApproach .section-headlines {
           transition-delay: 0.76s; }
         #ourApproach #approachCanvas .approach-slider-inner .approach-grid .program:nth-of-type(20) {
           transition-delay: 0.8s; }
+        @media (max-width: 800px) {
+          #ourApproach #approachCanvas .approach-slider-inner .approach-grid .program {
+            display: none; } }
         #ourApproach #approachCanvas .approach-slider-inner .approach-grid .program.hover {
           font-size: 16px;
           z-index: 999; }
@@ -1384,7 +1434,11 @@ body.approach-modal-open #ourApproach .section-headlines {
         color: #E82E21;
         padding-right: 5vw;
         font-size: 28px;
-        font-weight: bold; }
+        font-weight: bold;
+        font-style: italic; }
+        @media (max-width: 800px) {
+          #ourApproachModal .content aside blockquote {
+            font-size: 15px; } }
       #ourApproachModal .content aside .title-content {
         line-height: 1.2;
         font-family: "NeueDisplay", sans-serif;
@@ -1393,6 +1447,9 @@ body.approach-modal-open #ourApproach .section-headlines {
         font-size: 22px;
         line-height: 32px;
         margin-bottom: 20px; }
+        @media (max-width: 800px) {
+          #ourApproachModal .content aside .text-content p {
+            font-size: 15px; } }
       #ourApproachModal .content aside .gradient-bottom {
         position: absolute;
         left: 0;

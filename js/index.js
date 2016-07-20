@@ -7,7 +7,35 @@ import { OurPeople } from './our-people.js'
 import { OurApproach } from './our-approach.js'
 import { ContactUs } from './contact-us.js'
 
-export let app = {}
+export let app = {
+  breakpoints: {
+    $break1: 1440,
+    $break2: 1024,
+    $break3: 800  
+  },
+  variables: {
+    $red: '#E82E21',
+    $grayDarker: '#222'
+  },
+  constructors: {
+    1: Intro,
+    2: FutureOf,
+    3: CoreValues,
+    4: OurSchool,
+    5: OurApproach,
+    6: OurPeople,
+    7: ContactUs,
+  },
+  instances: {
+    1: null,
+    2: null,
+    3: null,
+    4: null,
+    5: null,
+    6: null,
+    7: null    
+  }
+}
 
 window.addEventListener('DOMContentLoaded', init)
 
@@ -22,31 +50,6 @@ function init() {
   var introBg = document.getElementById('introBg')
   var line1 = document.getElementById('svgLine1')
   var line2 = document.getElementById('svgLine2')
-
-  app.variables = {
-    $red: '#E82E21',
-    $grayDarker: '#222'
-  }
-
-  app.constructors = {
-    1: Intro,
-    2: FutureOf,
-    3: CoreValues,
-    4: OurSchool,
-    5: OurApproach,
-    6: OurPeople,
-    7: ContactUs
-  }
-
-  app.instances = {
-    1: null,
-    2: null,
-    3: null,
-    4: null,
-    5: null,
-    6: null,
-    7: null
-  }
 
   app.intro$ = initSplashContent().subscribe(
     () => console.log(null),

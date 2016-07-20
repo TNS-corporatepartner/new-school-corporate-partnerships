@@ -120,6 +120,14 @@ collections:
   uploads:
     title: Uploads
     output: false
+defaults:
+- scope:
+    path: ''
+    type: people
+  values:
+    image: 
+    video: 
+    type: 
 contact:
   name: Debbie Gibb
   title: Vice President
