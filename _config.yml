@@ -133,7 +133,7 @@ contact:
   department: Corporate Partnerships &amp; Industry Development
   email: corporatepartner@newschool.edu
   phone: 123-456-7890
-Credits Text:
+credits_text:
 - Site Design and Development by [Familiar](http://familiar-studio.com)
 - 'Photo of Eleanor Roosevelt: This work is in the public domain because it was published
   in the United States between 1923 and 1963 and although there may or may not have
@@ -143,8 +143,17 @@ Credits Text:
   China (50 pma, not Hong Kong or Macao), Germany (70 pma), Mexico (100 pma), Switzerland
   (70 pma), and other countries with individual treaties. See Commons:Hirtle chart
   for further explanation.'
-- 'Photo of Tennesee Williams: This work is from the New York World-Telegram and Sun collection at the Library of Congress.   According to the library, there are no known copyright restrictions on the use of this work.
-  This photograph is a work for hire created prior to 1968 by a staff photographer at New York World-Telegram & Sun. It is part of a collection donated to the Library of Congress and per the instrument of gift it is in the public domain.Photographs in this collection other than those identified by such stamps as ""World-Telegram photo"" or ""World-Telegram photo by Ed Palumbo"" might not be in the public domain. Works within the collection may be attributed to other news services that retain copyright, works of the U.S. government that are in the public domain in the US, or works with no attribution for which copyright cannot be determined.'
+- 'Photo of Tennesee Williams: This work is from the New York World-Telegram and Sun
+  collection at the Library of Congress.   According to the library, there are no
+  known copyright restrictions on the use of this work. This photograph is a work
+  for hire created prior to 1968 by a staff photographer at New York World-Telegram
+  & Sun. It is part of a collection donated to the Library of Congress and per the
+  instrument of gift it is in the public domain.Photographs in this collection other
+  than those identified by such stamps as ""World-Telegram photo"" or ""World-Telegram
+  photo by Ed Palumbo"" might not be in the public domain. Works within the collection
+  may be attributed to other news services that retain copyright, works of the U.S.
+  government that are in the public domain in the US, or works with no attribution
+  for which copyright cannot be determined.'
 - 'Photo of Ai WeiWei: You are free: to share – to copy, distribute and transmit the
   work to remix – to adapt the work Under the following conditions: attribution –
   You must attribute the work in the manner specified by the author or licensor (but
