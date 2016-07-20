@@ -125,9 +125,9 @@ defaults:
     path: ''
     type: people
   values:
-    image:
-    video:
-    type:
+    image: 
+    video: 
+    type: 
 contact:
   name: Debbie Gibb
   title: Vice President
@@ -144,8 +144,17 @@ Credits Text:
   China (50 pma, not Hong Kong or Macao), Germany (70 pma), Mexico (100 pma), Switzerland
   (70 pma), and other countries with individual treaties. See Commons:Hirtle chart
   for further explanation.'
-- 'Photo of Tennesee Williams: This work is from the New York World-Telegram and Sun collection at the Library of Congress.   According to the library, there are no known copyright restrictions on the use of this work.
-  This photograph is a work for hire created prior to 1968 by a staff photographer at New York World-Telegram & Sun. It is part of a collection donated to the Library of Congress and per the instrument of gift it is in the public domain.Photographs in this collection other than those identified by such stamps as ""World-Telegram photo"" or ""World-Telegram photo by Ed Palumbo"" might not be in the public domain. Works within the collection may be attributed to other news services that retain copyright, works of the U.S. government that are in the public domain in the US, or works with no attribution for which copyright cannot be determined.'
+- 'Photo of Tennesee Williams: This work is from the New York World-Telegram and Sun
+  collection at the Library of Congress.   According to the library, there are no
+  known copyright restrictions on the use of this work. This photograph is a work
+  for hire created prior to 1968 by a staff photographer at New York World-Telegram
+  & Sun. It is part of a collection donated to the Library of Congress and per the
+  instrument of gift it is in the public domain.Photographs in this collection other
+  than those identified by such stamps as ""World-Telegram photo"" or ""World-Telegram
+  photo by Ed Palumbo"" might not be in the public domain. Works within the collection
+  may be attributed to other news services that retain copyright, works of the U.S.
+  government that are in the public domain in the US, or works with no attribution
+  for which copyright cannot be determined.'
 - 'Photo of Ai WeiWei: You are free: to share – to copy, distribute and transmit the
   work to remix – to adapt the work Under the following conditions: attribution –
   You must attribute the work in the manner specified by the author or licensor (but
@@ -186,7 +195,7 @@ Credits Text:
 email: your-email@domain.com
 description: |
   Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
-baseurl:
+baseurl: 
 url: http://yourdomain.com
 introduction: The New School, in NYC, is the only university where a world-renowned
   art and design school comes together with acclaimed liberal arts, performing arts,
