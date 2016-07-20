@@ -1,7 +1,7 @@
 ---
 title: Jason Wu
 date: 2016-07-20 15:37:00 Z
-position: 21
+position: 22
 image: "/uploads/jason-wu.jpg"
 ---
 
