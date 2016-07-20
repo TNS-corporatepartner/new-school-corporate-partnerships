@@ -1,7 +1,7 @@
 ---
 title: Gina Luria Walker
 date: 2016-07-20 15:36:00 Z
-position: 25
+position: 26
 image: "/uploads/gina-walker.jpg"
 ---
 

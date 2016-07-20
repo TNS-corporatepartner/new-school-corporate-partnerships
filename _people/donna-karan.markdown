@@ -1,7 +1,7 @@
 ---
 title: Donna Karan
 date: 2016-07-20 15:37:00 Z
-position: 19
+position: 20
 image: "/uploads/donna-karan.jpg"
 ---
 
