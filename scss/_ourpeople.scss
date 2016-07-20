@@ -27,10 +27,15 @@ body.people-modal-open {
 #peopleSlider {
   position: absolute;
   left: 0;
-  top: 190px;
+  top: calc(50vh - 270px);
   width: 100vw;
   outline: none;
-
+  @media (max-height: 800px){
+    top: calc(50vh - 230px);
+  }
+  @media (max-height: 700px){
+    top: calc(50vh - 190px);
+  }
   @media (max-width: $break-mobile){
     top: 60px;
   }
@@ -40,16 +45,34 @@ body.people-modal-open {
       float: left;
       transform: translateX(-100%);
       .grid {
-        height: calc(100vh - 380px);
-        max-height: calc(100vh - 380px)!important;
+        height: 540px;
+        max-height: 540px!important;
+        @media (max-height: 800px){
+          height: 460px;
+          max-height: 460px!important;
+        }
+        @media (max-height: 700px){
+          height: 380px;
+          max-height: 380px!important;
+        }
+
         @media (max-width: $break-mobile){
           height: calc(100vh - 120px);
           max-height: calc(100vh - 120px) !important;
         }
         .person {
           float: left;
-          width: calc(50vh - 190px);
-          height: calc(50vh - 190px);
+          width: 270px;
+          height: 270px;
+          @media (max-height: 800px){
+            width: 230px;
+            height: 230px;
+          }
+          @media (max-height: 700px){
+            width: 190px;
+            height: 190px;
+          }
+
           @media (max-width: $break-mobile){
             width: calc(100vh - 120px);
             height: calc(100vh - 120px);
@@ -80,9 +103,15 @@ body.people-modal-open {
             }
           }
           &.video {
-            width: calc(100vh - 380px);
+            width: 540px;
             overflow: hidden;
             cursor: url(/images/click-cursor-black.svg), auto;
+            @media (max-height: 800px){
+              width: 460px;
+            }
+            @media (max-height: 700px){
+              width: 380px;
+            }
             @media (max-width: $break-mobile){
               width: calc(200vh - 240px);
             }
@@ -95,10 +124,10 @@ body.people-modal-open {
               }
             }
             .overlay{
-              background-color: transparentize(black, .9);
+              background-color: transparentize($red, .7);
               transition: background 1s ease;
-              @media (max-width: $break-mobile){
-                background-color: transparentize($red, .5);
+              @media (max-width: $break-tablet){
+                background-color: transparentize($red, .4);
                 &:before {
                   content:url(/images/play-button.svg);
                 }
@@ -130,13 +159,13 @@ body.people-modal-open {
             max-height: 0;
             font-size: 18px;
             line-height: 1.2;
-            transition: opacity 0.8s ease-in-out, height 0.8s ease-in-out;
+            transition: all 0.8s ease-in-out;
             @media (max-width: $break-laptop13){
               font-size: 16px;
             }
             @media (max-width: $break-tablet){
               opacity: 1;
-              max-height: auto;
+              max-height: none;
               margin-top: 5px;
             }
             @media (max-width: $break-mobile){
@@ -165,8 +194,8 @@ body.people-modal-open {
 
 #personModal {
   position: absolute;
-  height: calc(100vh - 380px);
-  top: 190px;
+  height: calc(100vh - 300px);
+  top: 150px;
   width: 100%;
   opacity: 0;
   pointer-events: none;

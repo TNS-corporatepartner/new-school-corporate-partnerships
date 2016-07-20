@@ -1014,9 +1014,15 @@ body.people-modal-open #peopleSlider {
 #peopleSlider {
   position: absolute;
   left: 0;
-  top: 190px;
+  top: calc(50vh - 270px);
   width: 100vw;
   outline: none; }
+  @media (max-height: 800px) {
+    #peopleSlider {
+      top: calc(50vh - 230px); } }
+  @media (max-height: 700px) {
+    #peopleSlider {
+      top: calc(50vh - 190px); } }
   @media (max-width: 800px) {
     #peopleSlider {
       top: 60px; } }
@@ -1026,16 +1032,24 @@ body.people-modal-open #peopleSlider {
       float: left;
       transform: translateX(-100%); }
       #peopleSlider .slider-inner .cell .grid {
-        height: calc(100vh - 380px);
-        max-height: calc(100vh - 380px) !important; }
+        height: 540px;
+        max-height: 540px !important; }
+        @media (max-height: 800px) {
+          #peopleSlider .slider-inner .cell .grid {
+            height: 460px;
+            max-height: 460px !important; } }
+        @media (max-height: 700px) {
+          #peopleSlider .slider-inner .cell .grid {
+            height: 380px;
+            max-height: 380px !important; } }
         @media (max-width: 800px) {
           #peopleSlider .slider-inner .cell .grid {
             height: calc(100vh - 120px);
             max-height: calc(100vh - 120px) !important; } }
         #peopleSlider .slider-inner .cell .grid .person {
           float: left;
-          width: calc(50vh - 190px);
-          height: calc(50vh - 190px);
+          width: 270px;
+          height: 270px;
           color: white;
           position: relative;
           display: -ms-inline-flexbox;
@@ -1047,6 +1061,14 @@ body.people-modal-open #peopleSlider {
           background-position: center;
           background-repeat: no-repeat;
           background-size: cover; }
+          @media (max-height: 800px) {
+            #peopleSlider .slider-inner .cell .grid .person {
+              width: 230px;
+              height: 230px; } }
+          @media (max-height: 700px) {
+            #peopleSlider .slider-inner .cell .grid .person {
+              width: 190px;
+              height: 190px; } }
           @media (max-width: 800px) {
             #peopleSlider .slider-inner .cell .grid .person {
               width: calc(100vh - 120px);
@@ -1067,9 +1089,15 @@ body.people-modal-open #peopleSlider {
             opacity: 1;
             margin-top: 5px; }
           #peopleSlider .slider-inner .cell .grid .person.video {
-            width: calc(100vh - 380px);
+            width: 540px;
             overflow: hidden;
             cursor: url(/images/click-cursor-black.svg), auto; }
+            @media (max-height: 800px) {
+              #peopleSlider .slider-inner .cell .grid .person.video {
+                width: 460px; } }
+            @media (max-height: 700px) {
+              #peopleSlider .slider-inner .cell .grid .person.video {
+                width: 380px; } }
             @media (max-width: 800px) {
               #peopleSlider .slider-inner .cell .grid .person.video {
                 width: calc(200vh - 240px); } }
@@ -1078,11 +1106,11 @@ body.people-modal-open #peopleSlider {
               #peopleSlider .slider-inner .cell .grid .person.video:hover .overlay:before {
                 content: url(/images/play-button.svg); }
             #peopleSlider .slider-inner .cell .grid .person.video .overlay {
-              background-color: rgba(0, 0, 0, 0.1);
+              background-color: rgba(232, 46, 33, 0.3);
               transition: background 1s ease; }
-              @media (max-width: 800px) {
+              @media (max-width: 1024px) {
                 #peopleSlider .slider-inner .cell .grid .person.video .overlay {
-                  background-color: rgba(232, 46, 33, 0.5); }
+                  background-color: rgba(232, 46, 33, 0.6); }
                   #peopleSlider .slider-inner .cell .grid .person.video .overlay:before {
                     content: url(/images/play-button.svg); } }
             #peopleSlider .slider-inner .cell .grid .person.video iframe {
@@ -1103,14 +1131,14 @@ body.people-modal-open #peopleSlider {
             max-height: 0;
             font-size: 18px;
             line-height: 1.2;
-            transition: opacity 0.8s ease-in-out, height 0.8s ease-in-out; }
+            transition: all 0.8s ease-in-out; }
             @media (max-width: 1280px) {
               #peopleSlider .slider-inner .cell .grid .person p {
                 font-size: 16px; } }
             @media (max-width: 1024px) {
               #peopleSlider .slider-inner .cell .grid .person p {
                 opacity: 1;
-                max-height: auto;
+                max-height: none;
                 margin-top: 5px; } }
             @media (max-width: 800px) {
               #peopleSlider .slider-inner .cell .grid .person p {
@@ -1132,8 +1160,8 @@ body.people-modal-open #peopleSlider {
 
 #personModal {
   position: absolute;
-  height: calc(100vh - 380px);
-  top: 190px;
+  height: calc(100vh - 300px);
+  top: 150px;
   width: 100%;
   opacity: 0;
   pointer-events: none;
@@ -1665,10 +1693,14 @@ body {
 p {
   font-size: 2.2vh;
   line-height: 1.45;
-  max-width: 850px; }
+  max-width: 1000px; }
   @media (min-width: 1440px) {
     p {
-      max-width: 1200px; } }
+      max-width: 1200px;
+      font-size: 20px; } }
+  @media (min-width: 1280px) {
+    p {
+      font-size: 17px; } }
   @media (max-width: 800px) {
     p {
       font-size: 15px; } }
@@ -1679,6 +1711,9 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
   font-size: 75px; }
+  @media (max-width: 1280px) {
+    h1 {
+      font-size: 65px; } }
   @media (max-width: 800px) {
     h1 {
       font-size: 12vh; } }
