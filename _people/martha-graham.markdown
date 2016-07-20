@@ -1,6 +1,6 @@
 ---
 title: Martha Graham
-position: 20
+position: 19
 image: "/uploads/martha-graham.jpg"
 ---
 
