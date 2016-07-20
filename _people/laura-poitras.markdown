@@ -1,6 +1,6 @@
 ---
 title: Laura Poitras
-position: 22
+position: 21
 image: "/uploads/laura-poitras.jpg"
 ---
 
