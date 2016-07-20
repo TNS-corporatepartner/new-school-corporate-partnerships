@@ -315,7 +315,6 @@ export class OurApproach {
           }, {
             duration: 400,
             complete: function() {
-              console.log(modalContent)
               modalContent.scrollTop = 0
                             
               Velocity(modalContent, {

@@ -2,6 +2,11 @@
 title: New School Corporate Partnerships
 timezone: UTC
 collections:
+  partner:
+    title: Are you ready to design the future?
+    output: false
+    introduction: Our partners understand the value of using design thinking to solve
+      real-world problems. Collaborate with us to design the future.
   future:
     title: Imagine the Future of…
     output: false
@@ -106,11 +111,6 @@ collections:
     - JOURNALISM + DESIGN
     - MINORS
     - NONPROFIT MANAGEMENT
-  partner:
-    title: Are you ready to design the future?
-    output: false
-    introduction: Our partners understand the value of using design thinking to solve
-      real-world problems. Collaborate with us to design the future.
   posts:
     title: Posts
     output: true
@@ -120,6 +120,14 @@ collections:
   uploads:
     title: Uploads
     output: false
+defaults:
+- scope:
+    path: ''
+    type: people
+  values:
+    image: 
+    video: 
+    type: 
 contact:
   name: Debbie Gibb
   title: Vice President

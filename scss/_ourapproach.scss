@@ -27,7 +27,6 @@ body.approach-modal-open {
       opacity: .2;
     }
   }
-
 }
 
 #ourApproach {
@@ -296,13 +295,14 @@ body.approach-modal-open {
         color: $red;
         font-weight: normal;
         margin-top: 40px;
-        margin-bottom: 5px;
+        margin-bottom: 10px;
       }
       blockquote {
         margin: 2.5vh 0;
         color: $red;
         padding-right: 5vw;
-        font-size: 22px;
+        font-size: 28px;
+        font-weight: bold;
         font-style: italic;
         @media (max-width: $break3) {
           font-size: 15px;
@@ -329,7 +329,7 @@ body.approach-modal-open {
         bottom: 0;
         height: 20vh;
         width: 50%;
-        background-image: linear-gradient(0deg, $gray-darker 50%, transparent);
+        background-image: linear-gradient(to top, $gray-darker 30%, rgba($gray-darker, .2) 100%);
         pointer-events: none;
       }
     }

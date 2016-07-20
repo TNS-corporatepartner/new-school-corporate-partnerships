@@ -61907,7 +61907,6 @@
 	            }, {
 	              duration: 400,
 	              complete: function complete() {
-	                console.log(modalContent);
 	                modalContent.scrollTop = 0;
 
 	                Velocity(modalContent, {

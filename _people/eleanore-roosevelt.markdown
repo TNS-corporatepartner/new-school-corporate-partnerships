@@ -1,7 +1,8 @@
 ---
 title: Eleanore Roosevelt
-image: "/images/eleanor-roosevelt.jpg"
+position: 4
+image: 
 video: 
 ---
 
-Politician, Diplomat and Activist
+First Lady
