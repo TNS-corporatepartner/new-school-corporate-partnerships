@@ -1,7 +1,7 @@
 ---
 title: Aaron Hill
 date: 2016-07-20 15:44:00 Z
-position: 22
+position: 23
 video: 161800368
 type: Faculty
 image: "/uploads/aaron-hill.jpg"
