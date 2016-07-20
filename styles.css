@@ -1140,8 +1140,7 @@ body.people-modal-open #peopleSlider {
         justify-content: center; }
     #personModal .content iframe {
       height: 100%;
-      width: 100%;
-      pointer-events: none; }
+      width: 100%; }
   #personModal #closePersonModal {
     position: absolute;
     top: 20px;
