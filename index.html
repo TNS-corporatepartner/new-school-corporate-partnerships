@@ -50,7 +50,7 @@
 
 				{% for cell in site.future %}
 				<div class="future-of-cell" data-title="{{cell.title}}" data-question="{{cell.question}}">
-					<div class="video-fs">
+					<div class="video-fs">												
 						<video loop="true" muted src="{{cell.video}}"></video>
 					</div>
 				</div>
@@ -231,7 +231,7 @@
 		</section>
 
 		<section id="ourPeople" class="section">
-			{% assign people = site.people |sort:'position' %}
+			{% assign peoples = site.people |sort:'position' %}
 
 			<div id="peopleSlider">
 
@@ -243,7 +243,7 @@
 					{% for i in (1..3) %}
 						<div class="cell cell-{{forloop.index}}">
 							<div class="grid">
-								{% for person in people %}
+								{% for person in peoples %}
 									<div class="person {% if person.video %}video{% endif %}" style="background-image:url('{{person.image}}');" data-src="{% if person.video %}{{person.video}}{% endif %}">
 										<div class="overlay"></div>
 										<hgroup>

@@ -80,9 +80,18 @@ body.people-modal-open {
           }
           &.video {
             width: calc(100vh - 380px);
+            overflow: hidden;
             cursor: url(/images/click-cursor-black.svg), auto;
             @media (max-width: $break3){
               width: calc(200vh - 240px);
+            }            
+            &:hover {
+              .overlay {
+                background-color: transparentize($red, .3);
+                &:before {
+                  content:url(/images/play-button.svg);
+                }
+              }
             }
             .overlay{
               background-color: transparentize(black, .9);
@@ -92,17 +101,12 @@ body.people-modal-open {
                 &:before {
                   content:url(/images/play-button.svg);
                 }
+              }
+            }
+            iframe {
+              height: 100%;
+            }
 
-              }
-            }
-            &:hover {
-              .overlay {
-                background-color: transparentize($red, .3);
-                &:before {
-                  content:url(/images/play-button.svg);
-                }
-              }
-            }
           }
 
           hgroup {
@@ -164,8 +168,10 @@ body.people-modal-open {
     height: 100%;
     display: flex;
     justify-content: center;
-    video {
+    iframe {
       height: 100%;
+      width: 100%;
+      pointer-events: none;
     }
   }
   #closePersonModal {
