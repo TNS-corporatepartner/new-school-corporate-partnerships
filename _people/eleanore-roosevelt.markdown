@@ -1,5 +1,6 @@
 ---
 title: Eleanore Roosevelt
+position: 4
 image: "/images/eleanor-roosevelt.jpg"
 video: 
 ---

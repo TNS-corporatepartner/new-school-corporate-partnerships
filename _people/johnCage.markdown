@@ -1,5 +1,6 @@
 ---
 title: Ezgi Ucar
+position: 9
 description: Wearable technology
 type: photo
 image: "/images/ezgi.jpg"
