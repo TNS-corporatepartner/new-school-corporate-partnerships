@@ -1,7 +1,7 @@
 ---
 title: Design
 video: http://familiar-temp.s3.amazonaws.com/nscp/DESIGN-EDITED.mp4
-order: 2
+position: 2
+poster: '/images/posters/DESIGN.png'
 question: How can design transform industries?
 ---
-
