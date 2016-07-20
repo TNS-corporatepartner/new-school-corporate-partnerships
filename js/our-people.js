@@ -73,24 +73,28 @@ export class OurPeople {
         modalContent.innerHTML = ''
       })
     })
-    let stopTween
     
     $('.person.video').on('mouseenter', () => {
-      this.tl.timeScale(0.09)
-      stopTween = TweenMax.to(tl, 3, {timeScale:0})
+      // this.tl.timeScale(0.09)
+      this.timeScaleTween && this.timeScaleTween.kill()
+      this.timeScaleTween = TweenMax.to(tl, 3, {timeScale: 0})
     })
 
     $('.person.video').on('mouseleave', () => {
-      stopTween.kill()
+      this.timeScaleTween && this.timeScaleTween.kill()
       this.tl.timeScale(0.05)
     })
 
     $('.hover-area').on('mouseenter', () => {
-      this.tl.timeScale(1)
+      this.timeScaleTween && this.timeScaleTween.kill()
+      this.timeScaleTween = TweenMax.to(this.tl, 2, {timeScale: 1})
+      // this.tl.timeScale(1)
     });
 
     $('.hover-area').on('mouseleave', () => {
-      this.tl.timeScale(0.05)
+      this.timeScaleTween && this.timeScaleTween.kill()
+      this.timeScaleTween = TweenMax.to(this.tl, 3, {timeScale: 0.05})
+      // this.tl.timeScale(0.05)
     })
 
 

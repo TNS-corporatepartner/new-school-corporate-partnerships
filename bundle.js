@@ -32063,24 +32063,28 @@
 	        modalContent.innerHTML = '';
 	      });
 	    });
-	    var stopTween = void 0;
 
 	    $('.person.video').on('mouseenter', function () {
-	      _this.tl.timeScale(0.09);
-	      stopTween = TweenMax.to(tl, 3, { timeScale: 0 });
+	      // this.tl.timeScale(0.09)
+	      _this.timeScaleTween && _this.timeScaleTween.kill();
+	      _this.timeScaleTween = TweenMax.to(tl, 3, { timeScale: 0 });
 	    });
 
 	    $('.person.video').on('mouseleave', function () {
-	      stopTween.kill();
+	      _this.timeScaleTween && _this.timeScaleTween.kill();
 	      _this.tl.timeScale(0.05);
 	    });
 
 	    $('.hover-area').on('mouseenter', function () {
-	      _this.tl.timeScale(1);
+	      _this.timeScaleTween && _this.timeScaleTween.kill();
+	      _this.timeScaleTween = TweenMax.to(_this.tl, 2, { timeScale: 1 });
+	      // this.tl.timeScale(1)
 	    });
 
 	    $('.hover-area').on('mouseleave', function () {
-	      _this.tl.timeScale(0.05);
+	      _this.timeScaleTween && _this.timeScaleTween.kill();
+	      _this.timeScaleTween = TweenMax.to(_this.tl, 3, { timeScale: 0.05 });
+	      // this.tl.timeScale(0.05)
 	    });
 
 	    this.tl.add(new TweenMax(this.sliderInner, '5', {
