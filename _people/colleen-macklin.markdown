@@ -1,7 +1,7 @@
 ---
 title: Colleen Macklin
 date: 2016-07-20 15:45:00 Z
-position: 19
+position: 20
 type: Faculty
 image: "/uploads/colleen-macklin.jpg"
 ---
