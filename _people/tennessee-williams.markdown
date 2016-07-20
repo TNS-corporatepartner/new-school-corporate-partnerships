@@ -1,7 +1,7 @@
 ---
 title: Tennessee Williams
 date: 2016-07-20 15:30:00 Z
-position: 26
+position: 27
 image: "/uploads/tennessee-williams.jpg"
 ---
 
