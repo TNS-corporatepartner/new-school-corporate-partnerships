@@ -869,7 +869,7 @@ section#ourSchool .school-links {
         left: 22%;
         top: 58%; }
       section#ourSchool .school-links .school.social-research {
-        left: 55%;
+        left: 52%;
         top: 19%; }
         section#ourSchool .school-links .school.social-research .img {
           background-position: 20% 50%; } }
@@ -1064,7 +1064,8 @@ body.people-modal-open #peopleSlider {
                 opacity: .7; }
           #peopleSlider .slider-inner .cell .grid .person:hover p {
             max-height: 200px;
-            opacity: 1; }
+            opacity: 1;
+            margin-top: 5px; }
           #peopleSlider .slider-inner .cell .grid .person.video {
             width: calc(100vh - 380px);
             overflow: hidden;
@@ -1094,18 +1095,29 @@ body.people-modal-open #peopleSlider {
             @media (max-width: 800px) {
               #peopleSlider .slider-inner .cell .grid .person hgroup {
                 padding: 5px; } }
+          #peopleSlider .slider-inner .cell .grid .person h6 {
+            margin-bottom: 0;
+            -webkit-font-smoothing: antialiased; }
           #peopleSlider .slider-inner .cell .grid .person p {
             opacity: 0;
             max-height: 0;
             font-size: 18px;
-            margin-top: 5px;
-            transition: all 0.8s ease-in-out; }
+            line-height: 1.2;
+            transition: opacity 0.8s ease-in-out, height 0.8s ease-in-out; }
+            @media (max-width: 1280px) {
+              #peopleSlider .slider-inner .cell .grid .person p {
+                font-size: 16px; } }
+            @media (max-width: 1024px) {
+              #peopleSlider .slider-inner .cell .grid .person p {
+                opacity: 1;
+                max-height: auto;
+                margin-top: 5px; } }
             @media (max-width: 800px) {
               #peopleSlider .slider-inner .cell .grid .person p {
                 font-size: 15px; } }
           #peopleSlider .slider-inner .cell .grid .person .overlay {
             position: absolute;
-            background-color: rgba(0, 0, 0, 0.35);
+            background-color: rgba(0, 0, 0, 0.4);
             background-blend-mode: multiply;
             display: -ms-flexbox;
             display: flex;
@@ -1438,8 +1450,7 @@ body.approach-modal-open #ourApproach .section-headlines {
         color: #E82E21;
         padding-right: 5vw;
         font-size: 28px;
-        font-weight: bold;
-        font-style: italic; }
+        font-weight: bold; }
         @media (max-width: 800px) {
           #ourApproachModal .content aside blockquote {
             font-size: 15px; } }
@@ -1449,8 +1460,11 @@ body.approach-modal-open #ourApproach .section-headlines {
         font-weight: normal; }
       #ourApproachModal .content aside .text-content p {
         font-size: 22px;
-        line-height: 32px;
+        line-height: 1.35;
         margin-bottom: 20px; }
+        @media (max-width: 1024px) {
+          #ourApproachModal .content aside .text-content p {
+            font-size: 17px; } }
         @media (max-width: 800px) {
           #ourApproachModal .content aside .text-content p {
             font-size: 15px; } }
@@ -1695,6 +1709,9 @@ h5 {
 
 h6 {
   font-size: 17px; }
+  @media (max-width: 1024px) {
+    h6 {
+      font-size: 15px; } }
   @media (max-width: 800px) {
     h6 {
       font-size: 14px; } }
@@ -1754,6 +1771,9 @@ h6 {
   padding: 2vw;
   max-width: 90vw;
   transition: opacity 1s ease-in-out; }
+  @media (max-width: 1280px) {
+    .section-headlines {
+      max-width: calc(100vw - 150px); } }
   @media (max-width: 800px) {
     .section-headlines {
       max-width: calc(100vw - 110px); } }

@@ -76,7 +76,7 @@ export class FutureOf {
         this.flkty.next()
       }, 1500) // 5 seconds until next slide is called (1500ms + 3500ms)
       
-    }, 3500) //3.5 seconds until question is hidden
+    }, 3500) // 3.5 seconds until question is hidden
 
     this.flkty.once('scroll', ( progress ) => {
       clearInterval(this.autoPlay)
@@ -89,7 +89,6 @@ export class FutureOf {
         previousVideo.load()
         this.playCellSequence()        
       })
-
     })    
   }
 

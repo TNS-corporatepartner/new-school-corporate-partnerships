@@ -35,7 +35,7 @@ body.approach-modal-open {
     background-image: linear-gradient(180deg, rgba(225, 225, 225, 0.5) 80%, transparent);
     max-width: none;
     width: 100%;
-    @media (max-width: $break3){
+    @media (max-width: $break-mobile){
       max-width: calc(100vw - 110px);
     }
   }
@@ -45,9 +45,9 @@ body.approach-modal-open {
   position: absolute;
   left: 0;
   height: 480px;
-  top: calc(50% - 220px);  
+  top: calc(50% - 220px);
   width: 100vw;
-  @media (max-width: $break3) {
+  @media (max-width: $break-mobile) {
     height: calc(100vh - 150px);
     top: 90px;
   }
@@ -66,19 +66,19 @@ body.approach-modal-open {
     .approach-grid {
       height: 100%;
       float: left;
-      @media (max-width: $break3) {
+      @media (max-width: $break-mobile) {
         display: flex;
         width: 100vw !important;
         left: 0 !important;
-        &.approach-grid-2, 
+        &.approach-grid-2,
         &.approach-grid-3 {
           display: none;
-        } 
-      }    
-      
+        }
+      }
+
       // height: calc(100vh - 380px);
       // max-height: calc(100vh - 380px) !important;
-      // @media (max-width: $break3){
+      // @media (max-width: $break-mobile){
       //   max-width: calc(100vh - 120px);
       //   max-height: calc(100vh - 120px) !important;
       // }
@@ -98,7 +98,7 @@ body.approach-modal-open {
         align-items: center;
         cursor: url(/images/click-cursor-red.svg), auto;
         transition: opacity 0.6s ease-in-out, filter 0.6s ease-in-out;
-        @media (max-width: $break3) {
+        @media (max-width: $break-mobile) {
           position: relative;
           top: auto !important;
           bottom: auto !important;
@@ -126,11 +126,11 @@ body.approach-modal-open {
               font-weight: normal;
               width: 100%;
               min-width: 0 !important;
-              color: $red !important;              
+              color: $red !important;
             }
             p { display: none; }
           }
-        }             
+        }
         &.project1 {
           left: 0%;
           bottom: 75px;
@@ -170,7 +170,7 @@ body.approach-modal-open {
         &.project10 {
           left: 5404px;
           top: 85px;
-        }   
+        }
         &:hover .info {
           opacity: 1;
           h4 {
@@ -230,7 +230,7 @@ body.approach-modal-open {
             transition-delay: 0.01s * $i * 4;
           }
         }
-        @media (max-width: $break3) {
+        @media (max-width: $break-mobile) {
           display: none;
         }
         &.hover {
@@ -303,10 +303,9 @@ body.approach-modal-open {
         padding-right: 5vw;
         font-size: 28px;
         font-weight: bold;
-        font-style: italic;
-        @media (max-width: $break3) {
+        @media (max-width: $break-mobile) {
           font-size: 15px;
-        }             
+        }
       }
       .title-content {
         line-height: 1.2;
@@ -316,11 +315,14 @@ body.approach-modal-open {
       .text-content {
         p {
           font-size: 22px;
-          line-height: 32px;
+          line-height: 1.35;
           margin-bottom: 20px;
-          @media (max-width: $break3) {
+          @media (max-width: $break-tablet) {
+            font-size: 17px;
+          }
+          @media (max-width: $break-mobile) {
             font-size: 15px;
-          }          
+          }
         }
       }
       .gradient-bottom {

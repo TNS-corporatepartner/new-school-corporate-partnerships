@@ -18179,7 +18179,7 @@
 	        setTimeout(function () {
 	          _this3.flkty.next();
 	        }, 1500); // 5 seconds until next slide is called (1500ms + 3500ms)
-	      }, 3500); //3.5 seconds until question is hidden
+	      }, 3500); // 3.5 seconds until question is hidden
 
 	      this.flkty.once('scroll', function (progress) {
 	        clearInterval(_this3.autoPlay);

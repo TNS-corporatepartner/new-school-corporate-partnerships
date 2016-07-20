@@ -1,7 +1,8 @@
 ---
 title: Globalization
+position: 4
 video: http://familiar-temp.s3.amazonaws.com/nscp/GLOBALIZATION.mp4
-order: 4
+poster: "/images/posters/GLOBALIZATION.png"
 question: How can a brand's identity not be lost in&nbsp;translation?
 ---
 

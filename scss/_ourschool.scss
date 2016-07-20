@@ -57,7 +57,7 @@ section#ourSchool {
   .school-links {
     position: relative;
     height: 100%;
-    @media (max-width: $break3){
+    @media (max-width: $break-mobile){
       height: calc(100vh - 120px);
       display: flex;
       align-items: center;
@@ -65,7 +65,7 @@ section#ourSchool {
     .school {
       position: absolute;
       cursor: url(/images/click-cursor-red.svg), auto;
-      @media (max-width: $break3){
+      @media (max-width: $break-mobile){
         position: relative;
         display: inline-block;
         margin: 0 5px;
@@ -89,7 +89,7 @@ section#ourSchool {
           top: 58%;
         }
         &.social-research {
-          left: 55%;
+          left: 52%;
           top: 19%;
           .img{
             background-position: 20% 50%;
@@ -134,7 +134,7 @@ section#ourSchool {
         width: 100%;
         top: 0; left: 0;
         overflow: hidden;
-        @media (max-width: $break3){
+        @media (max-width: $break-mobile){
           position: relative;
           height: 32vh;
         }
@@ -168,7 +168,7 @@ section#ourSchool {
         position: absolute;
         height: 100%;
         width: 100%;
-        @media (max-width: $break3){
+        @media (max-width: $break-mobile){
           position: relative;
           padding-top: 10px;
           padding-right: 15px;
@@ -181,7 +181,7 @@ section#ourSchool {
           line-height: 1.2;
           color: $red;
           transition: all 0.4s ease-in-out;
-          @media (max-width: $break3){
+          @media (max-width: $break-mobile){
             position: relative;
             font-size: 3.5vh;
           }
@@ -204,7 +204,7 @@ section#ourSchool {
       align-items: center;
       background-color: $gray-darker-trans;
       color: white;
-      @media (max-width: $break3){
+      @media (max-width: $break-mobile){
         height: 100vh;
       }
       .text-container {
