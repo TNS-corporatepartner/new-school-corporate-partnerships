@@ -1,7 +1,7 @@
 ---
 title: Tracey Reese
 date: 2016-07-20 15:38:00 Z
-position: 5
+position: 6
 image: "/uploads/tracey-reese.jpg"
 ---
 
