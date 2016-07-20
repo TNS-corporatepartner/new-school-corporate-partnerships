@@ -64,15 +64,15 @@
 
 	var _futureOf = __webpack_require__(344);
 
-	var _coreValues = __webpack_require__(367);
+	var _coreValues = __webpack_require__(364);
 
-	var _ourSchool = __webpack_require__(368);
+	var _ourSchool = __webpack_require__(365);
 
-	var _ourPeople = __webpack_require__(369);
+	var _ourPeople = __webpack_require__(366);
 
-	var _ourApproach = __webpack_require__(392);
+	var _ourApproach = __webpack_require__(388);
 
-	var _contactUs = __webpack_require__(393);
+	var _contactUs = __webpack_require__(389);
 
 	var app = exports.app = {
 	  breakpoints: {
@@ -18091,7 +18091,7 @@
 
 	var _flickity2 = _interopRequireDefault(_flickity);
 
-	__webpack_require__(366);
+	__webpack_require__(363);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -18108,7 +18108,6 @@
 	    this.sectionIntro = this.section.querySelector('.section-intro');
 	    this.imagineEl = document.querySelector('.future-of-header h1');
 	    this.futureOfEl = document.querySelectorAll('.future-of-header h1')[1];
-	    // this.loadingEl = document.querySelector('.shuffler')
 	    this.loadingWord = this.section.querySelector('.section-headlines .dynamic-text');
 	    this.questionEl = document.querySelector('.question');
 	    this.slider = document.querySelector('.future-of-slider');
@@ -18131,8 +18130,7 @@
 	      cellAlign: 'left',
 	      contain: true,
 	      wrapAround: true,
-	      autoPlay: false,
-	      accessibility: false
+	      autoPlay: false
 	    });
 
 	    setTimeout(function () {
@@ -18163,42 +18161,38 @@
 	        Velocity(cell, { opacity: 1 });
 	        _this2.playCellSequence();
 	      });
-
-	      this.flkty.on('cellSelect', function () {
-	        _this2.playCellSequence();
-	      });
 	    }
 	  }, {
 	    key: 'playCellSequence',
 	    value: function playCellSequence() {
 	      var _this3 = this;
 
-	      if (_index.app.activeInstance == this) {
-	        (function () {
-	          var cell = _this3.flkty.cells[_this3.flkty.selectedIndex].element;
-	          var video = cell.querySelector('video');
-	          _this3.questionEl.textContent = _this3.questions[_this3.flkty.selectedIndex];
-	          video.play();
-	          $('body').addClass('show-question');
+	      this.flkty.selectedElement.querySelector('video').play();
+	      this.loadingWord.textContent = this.words[this.flkty.selectedIndex];
+	      this.questionEl.textContent = this.questions[this.flkty.selectedIndex];
 
-	          _this3.sliderTimer = setTimeout(function () {
-	            $('body').removeClass('show-question');
-	            setTimeout(function () {
-	              _this3.loadingWord.textContent = _this3.words[_this3.flkty.selectedIndex + 1] ? _this3.words[_this3.flkty.selectedIndex + 1] : _this3.words[0];
-	              _this3.flkty.next();
+	      $('body').addClass('show-question');
 
-	              //reset video
-	              _this3.flkty.once('settle', function () {
-	                console.log('SETTLE DOWN');
-	                video.pause();
-	                video.currentTime = 0;
-	                video.load();
-	              });
-	              setTimeout(function () {});
-	            }, 1000);
-	          }, 5000);
-	        })();
-	      }
+	      this.autoPlay = setTimeout(function () {
+	        $('body').removeClass('show-question');
+
+	        setTimeout(function () {
+	          _this3.flkty.next();
+	        }, 1500); // 5 seconds until next slide is called (1500ms + 3500ms)
+	      }, 3500); // 3.5 seconds until question is hidden
+
+	      this.flkty.once('scroll', function (progress) {
+	        clearInterval(_this3.autoPlay);
+
+	        var previousVideo = _this3.flkty.selectedElement.querySelector('video');
+	        previousVideo.pause();
+
+	        _this3.flkty.once('settle', function () {
+	          previousVideo.currentTime = 0;
+	          previousVideo.load();
+	          _this3.playCellSequence();
+	        });
+	      });
 	    }
 	  }, {
 	    key: 'shuffler',
@@ -18229,12 +18223,10 @@
 	    key: 'sleep',
 	    value: function sleep() {
 	      $('body').removeClass('show-question');
-	      window.clearTimeout(this.sliderTimer);
 	    }
 	  }, {
 	    key: 'awake',
 	    value: function awake() {
-	      // const cell = this.flkty.cells[ this.flkty.selectedIndex ].element
 	      this.playCellSequence();
 	    }
 	  }]);
@@ -18247,32 +18239,31 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	 * Flickity v1.2.1
-	 * Touch, responsive, flickable galleries
+	 * Flickity v2.0.2
+	 * Touch, responsive, flickable carousels
 	 *
 	 * Licensed GPLv3 for open source use
 	 * or Flickity Commercial License for commercial use
 	 *
 	 * http://flickity.metafizzy.co
-	 * Copyright 2015 Metafizzy
+	 * Copyright 2016 Metafizzy
 	 */
 
 	( function( window, factory ) {
-	  'use strict';
 	  // universal module definition
-
+	  /* jshint strict: false */
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 	      __webpack_require__(346),
+	      __webpack_require__(354),
 	      __webpack_require__(357),
+	      __webpack_require__(359),
 	      __webpack_require__(360),
-	      __webpack_require__(362),
-	      __webpack_require__(363),
-	      __webpack_require__(364),
-	      __webpack_require__(365)
+	      __webpack_require__(361),
+	      __webpack_require__(362)
 	    ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	  } else if ( typeof exports == 'object' ) {
+	  } else if ( typeof module == 'object' && module.exports ) {
 	    // CommonJS
 	    module.exports = factory(
 	      require('./flickity'),
@@ -18295,37 +18286,31 @@
 /* 346 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
-	 * Flickity main
-	 */
-
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// Flickity main
 	( function( window, factory ) {
-	  'use strict';
 	  // universal module definition
-
+	  /* jshint strict: false */
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 	      __webpack_require__(347),
 	      __webpack_require__(348),
 	      __webpack_require__(349),
-	      __webpack_require__(350),
+	      __webpack_require__(351),
 	      __webpack_require__(352),
-	      __webpack_require__(355),
-	      __webpack_require__(356)
-	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( classie, EventEmitter, eventie, getSize, utils, Cell, animatePrototype ) {
-	      return factory( window, classie, EventEmitter, eventie, getSize, utils, Cell, animatePrototype );
+	      __webpack_require__(353)
+	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( EvEmitter, getSize, utils, Cell, Slide, animatePrototype ) {
+	      return factory( window, EvEmitter, getSize, utils, Cell, Slide, animatePrototype );
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	  } else if ( typeof exports == 'object' ) {
+	  } else if ( typeof module == 'object' && module.exports ) {
 	    // CommonJS
 	    module.exports = factory(
 	      window,
-	      require('desandro-classie'),
-	      require('wolfy87-eventemitter'),
-	      require('eventie'),
+	      require('ev-emitter'),
 	      require('get-size'),
 	      require('fizzy-ui-utils'),
 	      require('./cell'),
+	      require('./slide'),
 	      require('./animate')
 	    );
 	  } else {
@@ -18334,18 +18319,17 @@
 
 	    window.Flickity = factory(
 	      window,
-	      window.classie,
-	      window.EventEmitter,
-	      window.eventie,
+	      window.EvEmitter,
 	      window.getSize,
 	      window.fizzyUIUtils,
 	      _Flickity.Cell,
+	      _Flickity.Slide,
 	      _Flickity.animatePrototype
 	    );
 	  }
 
-	}( window, function factory( window, classie, EventEmitter, eventie, getSize,
-	  utils, Cell, animatePrototype ) {
+	}( window, function factory( window, EvEmitter, getSize,
+	  utils, Cell, Slide, animatePrototype ) {
 
 	'use strict';
 
@@ -18391,11 +18375,13 @@
 
 	Flickity.defaults = {
 	  accessibility: true,
+	  // adaptiveHeight: false,
 	  cellAlign: 'center',
 	  // cellSelector: undefined,
 	  // contain: false,
 	  freeScrollFriction: 0.075, // friction when free-scrolling
 	  friction: 0.28, // friction when selecting
+	  namespaceJQueryEvents: true,
 	  // initialIndex: 0,
 	  percentPosition: true,
 	  resize: true,
@@ -18408,10 +18394,11 @@
 	// hash of methods triggered on _create()
 	Flickity.createMethods = [];
 
+	var proto = Flickity.prototype;
 	// inherit EventEmitter
-	utils.extend( Flickity.prototype, EventEmitter.prototype );
+	utils.extend( proto, EvEmitter.prototype );
 
-	Flickity.prototype._create = function() {
+	proto._create = function() {
 	  // add id for Flickity.data
 	  var id = this.guid = ++GUID;
 	  this.element.flickityGUID = id; // expando
@@ -18423,23 +18410,19 @@
 	  // initial physics properties
 	  this.x = 0;
 	  this.velocity = 0;
-	  this.accel = 0;
 	  this.originSide = this.options.rightToLeft ? 'right' : 'left';
 	  // create viewport & slider
 	  this.viewport = document.createElement('div');
 	  this.viewport.className = 'flickity-viewport';
-	  Flickity.setUnselectable( this.viewport );
 	  this._createSlider();
 
 	  if ( this.options.resize || this.options.watchCSS ) {
-	    eventie.bind( window, 'resize', this );
-	    this.isResizeBound = true;
+	    window.addEventListener( 'resize', this );
 	  }
 
-	  for ( var i=0, len = Flickity.createMethods.length; i < len; i++ ) {
-	    var method = Flickity.createMethods[i];
+	  Flickity.createMethods.forEach( function( method ) {
 	    this[ method ]();
-	  }
+	  }, this );
 
 	  if ( this.options.watchCSS ) {
 	    this.watchCSS();
@@ -18453,18 +18436,18 @@
 	 * set options
 	 * @param {Object} opts
 	 */
-	Flickity.prototype.option = function( opts ) {
+	proto.option = function( opts ) {
 	  utils.extend( this.options, opts );
 	};
 
-	Flickity.prototype.activate = function() {
+	proto.activate = function() {
 	  if ( this.isActive ) {
 	    return;
 	  }
 	  this.isActive = true;
-	  classie.add( this.element, 'flickity-enabled' );
+	  this.element.classList.add('flickity-enabled');
 	  if ( this.options.rightToLeft ) {
-	    classie.add( this.element, 'flickity-rtl' );
+	    this.element.classList.add('flickity-rtl');
 	  }
 
 	  this.getSize();
@@ -18480,10 +18463,10 @@
 	    // allow element to focusable
 	    this.element.tabIndex = 0;
 	    // listen for key presses
-	    eventie.bind( this.element, 'keydown', this );
+	    this.element.addEventListener( 'keydown', this );
 	  }
 
-	  this.emit('activate');
+	  this.emitEvent('activate');
 
 	  var index;
 	  var initialIndex = this.options.initialIndex;
@@ -18501,7 +18484,7 @@
 	};
 
 	// slider positions the cells
-	Flickity.prototype._createSlider = function() {
+	proto._createSlider = function() {
 	  // slider element does all the positioning
 	  var slider = document.createElement('div');
 	  slider.className = 'flickity-slider';
@@ -18509,12 +18492,12 @@
 	  this.slider = slider;
 	};
 
-	Flickity.prototype._filterFindCellElements = function( elems ) {
+	proto._filterFindCellElements = function( elems ) {
 	  return utils.filterFindElements( elems, this.options.cellSelector );
 	};
 
 	// goes through all children
-	Flickity.prototype.reloadCells = function() {
+	proto.reloadCells = function() {
 	  // collection of item elements
 	  this.cells = this._makeCells( this.slider.children );
 	  this.positionCells();
@@ -18527,26 +18510,27 @@
 	 * @param {Array or NodeList or HTMLElement} elems
 	 * @returns {Array} items - collection of new Flickity Cells
 	 */
-	Flickity.prototype._makeCells = function( elems ) {
+	proto._makeCells = function( elems ) {
 	  var cellElems = this._filterFindCellElements( elems );
 
 	  // create new Flickity for collection
-	  var cells = [];
-	  for ( var i=0, len = cellElems.length; i < len; i++ ) {
-	    var elem = cellElems[i];
-	    var cell = new Cell( elem, this );
-	    cells.push( cell );
-	  }
+	  var cells = cellElems.map( function( cellElem ) {
+	    return new Cell( cellElem, this );
+	  }, this );
 
 	  return cells;
 	};
 
-	Flickity.prototype.getLastCell = function() {
+	proto.getLastCell = function() {
 	  return this.cells[ this.cells.length - 1 ];
 	};
 
+	proto.getLastSlide = function() {
+	  return this.slides[ this.slides.length - 1 ];
+	};
+
 	// positions all cells
-	Flickity.prototype.positionCells = function() {
+	proto.positionCells = function() {
 	  // size all cells
 	  this._sizeCells( this.cells );
 	  // position all cells
@@ -18557,7 +18541,7 @@
 	 * position certain cells
 	 * @param {Integer} index - which cell to start with
 	 */
-	Flickity.prototype._positionCells = function( index ) {
+	proto._positionCells = function( index ) {
 	  index = index || 0;
 	  // also measure maxCellHeight
 	  // start 0 if positioning all cells
@@ -18568,38 +18552,106 @@
 	    var startCell = this.cells[ index - 1 ];
 	    cellX = startCell.x + startCell.size.outerWidth;
 	  }
-	  var cell;
-	  for ( var len = this.cells.length, i=index; i < len; i++ ) {
-	    cell = this.cells[i];
+	  var len = this.cells.length;
+	  for ( var i=index; i < len; i++ ) {
+	    var cell = this.cells[i];
 	    cell.setPosition( cellX );
 	    cellX += cell.size.outerWidth;
 	    this.maxCellHeight = Math.max( cell.size.outerHeight, this.maxCellHeight );
 	  }
 	  // keep track of cellX for wrap-around
 	  this.slideableWidth = cellX;
-	  // contain cell target
-	  this._containCells();
+	  // slides
+	  this.updateSlides();
+	  // contain slides target
+	  this._containSlides();
+	  // update slidesWidth
+	  this.slidesWidth = len ? this.getLastSlide().target - this.slides[0].target : 0;
 	};
 
 	/**
 	 * cell.getSize() on multiple cells
 	 * @param {Array} cells
 	 */
-	Flickity.prototype._sizeCells = function( cells ) {
-	  for ( var i=0, len = cells.length; i < len; i++ ) {
-	    var cell = cells[i];
+	proto._sizeCells = function( cells ) {
+	  cells.forEach( function( cell ) {
 	    cell.getSize();
+	  });
+	};
+
+	// --------------------------  -------------------------- //
+
+	proto.updateSlides = function() {
+	  this.slides = [];
+	  if ( !this.cells.length ) {
+	    return;
 	  }
+
+	  var slide = new Slide( this );
+	  this.slides.push( slide );
+	  var isOriginLeft = this.originSide == 'left';
+	  var nextMargin = isOriginLeft ? 'marginRight' : 'marginLeft';
+
+	  var canCellFit = this._getCanCellFit();
+
+	  this.cells.forEach( function( cell, i ) {
+	    // just add cell if first cell in slide
+	    if ( !slide.cells.length ) {
+	      slide.addCell( cell );
+	      return;
+	    }
+
+	    var slideWidth = ( slide.outerWidth - slide.firstMargin ) +
+	      ( cell.size.outerWidth - cell.size[ nextMargin ] );
+
+	    if ( canCellFit.call( this, i, slideWidth ) ) {
+	      slide.addCell( cell );
+	    } else {
+	      // doesn't fit, new slide
+	      slide.updateTarget();
+
+	      slide = new Slide( this );
+	      this.slides.push( slide );
+	      slide.addCell( cell );
+	    }
+	  }, this );
+	  // last slide
+	  slide.updateTarget();
+	  // update .selectedSlide
+	  this.updateSelectedSlide();
+	};
+
+	proto._getCanCellFit = function() {
+	  var groupCells = this.options.groupCells;
+	  if ( !groupCells ) {
+	    return function() {
+	      return false;
+	    };
+	  } else if ( typeof groupCells == 'number' ) {
+	    // group by number. 3 -> [0,1,2], [3,4,5], ...
+	    var number = parseInt( groupCells, 10 );
+	    return function( i ) {
+	      return ( i % number ) !== 0;
+	    };
+	  }
+	  // default, group by width of slide
+	  // parse '75%
+	  var percentMatch = typeof groupCells == 'string' &&
+	    groupCells.match(/^(\d+)%$/);
+	  var percent = percentMatch ? parseInt( percentMatch[1], 10 ) / 100 : 1;
+	  return function( i, slideWidth ) {
+	    return slideWidth <= ( this.size.innerWidth + 1 ) * percent;
+	  };
 	};
 
 	// alias _init for jQuery plugin .flickity()
-	Flickity.prototype._init =
-	Flickity.prototype.reposition = function() {
+	proto._init =
+	proto.reposition = function() {
 	  this.positionCells();
 	  this.positionSliderAtSelected();
 	};
 
-	Flickity.prototype.getSize = function() {
+	proto.getSize = function() {
 	  this.size = getSize( this.element );
 	  this.setCellAlign();
 	  this.cursorPosition = this.size.innerWidth * this.cellAlign;
@@ -18621,18 +18673,20 @@
 	  }
 	};
 
-	Flickity.prototype.setCellAlign = function() {
+	proto.setCellAlign = function() {
 	  var shorthand = cellAlignShorthands[ this.options.cellAlign ];
 	  this.cellAlign = shorthand ? shorthand[ this.originSide ] : this.options.cellAlign;
 	};
 
-	Flickity.prototype.setGallerySize = function() {
+	proto.setGallerySize = function() {
 	  if ( this.options.setGallerySize ) {
-	    this.viewport.style.height = this.maxCellHeight + 'px';
+	    var height = this.options.adaptiveHeight && this.selectedSlide ?
+	      this.selectedSlide.height : this.maxCellHeight;
+	    this.viewport.style.height = height + 'px';
 	  }
 	};
 
-	Flickity.prototype._getWrapShiftCells = function() {
+	proto._getWrapShiftCells = function() {
 	  // only for wrap-around
 	  if ( !this.options.wrapAround ) {
 	    return;
@@ -18652,7 +18706,7 @@
 	  this.afterShiftCells = this._getGapCells( gapX, 0, 1 );
 	};
 
-	Flickity.prototype._getGapCells = function( gapX, cellIndex, increment ) {
+	proto._getGapCells = function( gapX, cellIndex, increment ) {
 	  // keep adding cells until the cover the initial gap
 	  var cells = [];
 	  while ( gapX > 0 ) {
@@ -18670,32 +18724,30 @@
 	// ----- contain ----- //
 
 	// contain cell targets so no excess sliding
-	Flickity.prototype._containCells = function() {
+	proto._containSlides = function() {
 	  if ( !this.options.contain || this.options.wrapAround || !this.cells.length ) {
 	    return;
 	  }
-	  var startMargin = this.options.rightToLeft ? 'marginRight' : 'marginLeft';
-	  var endMargin = this.options.rightToLeft ? 'marginLeft' : 'marginRight';
-	  var firstCellStartMargin = this.cells[0].size[ startMargin ];
-	  var lastCell = this.getLastCell();
-	  var contentWidth = this.slideableWidth - lastCell.size[ endMargin ];
-	  var endLimit = contentWidth - this.size.innerWidth * ( 1 - this.cellAlign );
+	  var isRightToLeft = this.options.rightToLeft;
+	  var beginMargin = isRightToLeft ? 'marginRight' : 'marginLeft';
+	  var endMargin = isRightToLeft ? 'marginLeft' : 'marginRight';
+	  var contentWidth = this.slideableWidth - this.getLastCell().size[ endMargin ];
 	  // content is less than gallery size
 	  var isContentSmaller = contentWidth < this.size.innerWidth;
+	  // bounds
+	  var beginBound = this.cursorPosition + this.cells[0].size[ beginMargin ];
+	  var endBound = contentWidth - this.size.innerWidth * ( 1 - this.cellAlign );
 	  // contain each cell target
-	  for ( var i=0, len = this.cells.length; i < len; i++ ) {
-	    var cell = this.cells[i];
-	    // reset default target
-	    cell.setDefaultTarget();
+	  this.slides.forEach( function( slide ) {
 	    if ( isContentSmaller ) {
 	      // all cells fit inside gallery
-	      cell.target = contentWidth * this.cellAlign;
+	      slide.target = contentWidth * this.cellAlign;
 	    } else {
 	      // contain to bounds
-	      cell.target = Math.max( cell.target, this.cursorPosition + firstCellStartMargin );
-	      cell.target = Math.min( cell.target, endLimit );
+	      slide.target = Math.max( slide.target, beginBound );
+	      slide.target = Math.min( slide.target, endBound );
 	    }
-	  }
+	  }, this );
 	};
 
 	// -----  ----- //
@@ -18706,80 +18758,144 @@
 	 * @param {Event} event - original event
 	 * @param {Array} args - extra arguments
 	 */
-	Flickity.prototype.dispatchEvent = function( type, event, args ) {
-	  var emitArgs = [ event ].concat( args );
+	proto.dispatchEvent = function( type, event, args ) {
+	  var emitArgs = event ? [ event ].concat( args ) : args;
 	  this.emitEvent( type, emitArgs );
 
 	  if ( jQuery && this.$element ) {
+	    // default trigger with type if no event
+	    type += this.options.namespaceJQueryEvents ? '.flickity' : '';
+	    var $event = type;
 	    if ( event ) {
 	      // create jQuery event
-	      var $event = jQuery.Event( event );
-	      $event.type = type;
-	      this.$element.trigger( $event, args );
-	    } else {
-	      // just trigger with type if no event available
-	      this.$element.trigger( type, args );
+	      var jQEvent = jQuery.Event( event );
+	      jQEvent.type = type;
+	      $event = jQEvent;
 	    }
+	    this.$element.trigger( $event, args );
 	  }
 	};
 
 	// -------------------------- select -------------------------- //
 
 	/**
-	 * @param {Integer} index - index of the cell
+	 * @param {Integer} index - index of the slide
 	 * @param {Boolean} isWrap - will wrap-around to last/first if at the end
 	 * @param {Boolean} isInstant - will immediately set position at selected cell
 	 */
-	Flickity.prototype.select = function( index, isWrap, isInstant ) {
+	proto.select = function( index, isWrap, isInstant ) {
 	  if ( !this.isActive ) {
 	    return;
 	  }
 	  index = parseInt( index, 10 );
-	  // wrap position so slider is within normal area
-	  var len = this.cells.length;
-	  if ( this.options.wrapAround && len > 1 ) {
-	    if ( index < 0 ) {
-	      this.x -= this.slideableWidth;
-	    } else if ( index >= len ) {
-	      this.x += this.slideableWidth;
-	    }
-	  }
+	  this._wrapSelect( index );
 
 	  if ( this.options.wrapAround || isWrap ) {
-	    index = utils.modulo( index, len );
+	    index = utils.modulo( index, this.slides.length );
 	  }
 	  // bail if invalid index
-	  if ( !this.cells[ index ] ) {
+	  if ( !this.slides[ index ] ) {
 	    return;
 	  }
 	  this.selectedIndex = index;
-	  this.setSelectedCell();
+	  this.updateSelectedSlide();
 	  if ( isInstant ) {
 	    this.positionSliderAtSelected();
 	  } else {
 	    this.startAnimation();
 	  }
+	  if ( this.options.adaptiveHeight ) {
+	    this.setGallerySize();
+	  }
+
+	  this.dispatchEvent('select');
+	  // old v1 event name, remove in v3
 	  this.dispatchEvent('cellSelect');
 	};
 
-	Flickity.prototype.previous = function( isWrap ) {
+	// wraps position for wrapAround, to move to closest slide. #113
+	proto._wrapSelect = function( index ) {
+	  var len = this.slides.length;
+	  var isWrapping = this.options.wrapAround && len > 1;
+	  if ( !isWrapping ) {
+	    return index;
+	  }
+	  var wrapIndex = utils.modulo( index, len );
+	  // go to shortest
+	  var delta = Math.abs( wrapIndex - this.selectedIndex );
+	  var backWrapDelta = Math.abs( ( wrapIndex + len ) - this.selectedIndex );
+	  var forewardWrapDelta = Math.abs( ( wrapIndex - len ) - this.selectedIndex );
+	  if ( !this.isDragSelect && backWrapDelta < delta ) {
+	    index += len;
+	  } else if ( !this.isDragSelect && forewardWrapDelta < delta ) {
+	    index -= len;
+	  }
+	  // wrap position so slider is within normal area
+	  if ( index < 0 ) {
+	    this.x -= this.slideableWidth;
+	  } else if ( index >= len ) {
+	    this.x += this.slideableWidth;
+	  }
+	};
+
+	proto.previous = function( isWrap ) {
 	  this.select( this.selectedIndex - 1, isWrap );
 	};
 
-	Flickity.prototype.next = function( isWrap ) {
+	proto.next = function( isWrap ) {
 	  this.select( this.selectedIndex + 1, isWrap );
 	};
 
-	Flickity.prototype.setSelectedCell = function() {
-	  this._removeSelectedCellClass();
-	  this.selectedCell = this.cells[ this.selectedIndex ];
-	  this.selectedElement = this.selectedCell.element;
-	  classie.add( this.selectedElement, 'is-selected' );
+	proto.updateSelectedSlide = function() {
+	  var slide = this.slides[ this.selectedIndex ];
+	  // selectedIndex could be outside of slides, if triggered before resize()
+	  if ( !slide ) {
+	    return;
+	  }
+	  // unselect previous selected slide
+	  this.unselectSelectedSlide();
+	  // update new selected slide
+	  this.selectedSlide = slide;
+	  slide.select();
+	  this.selectedCells = slide.cells;
+	  this.selectedElements = slide.getCellElements();
+	  // HACK: selectedCell & selectedElement is first cell in slide, backwards compatibility
+	  // Remove in v3?
+	  this.selectedCell = slide.cells[0];
+	  this.selectedElement = this.selectedElements[0];
 	};
 
-	Flickity.prototype._removeSelectedCellClass = function() {
-	  if ( this.selectedCell ) {
-	    classie.remove( this.selectedCell.element, 'is-selected' );
+	proto.unselectSelectedSlide = function() {
+	  if ( this.selectedSlide ) {
+	    this.selectedSlide.unselect();
+	  }
+	};
+
+	/**
+	 * select slide from number or cell element
+	 * @param {Element or Number} elem
+	 */
+	proto.selectCell = function( value, isWrap, isInstant ) {
+	  // get cell
+	  var cell;
+	  if ( typeof value == 'number' ) {
+	    cell = this.cells[ value ];
+	  } else {
+	    // use string as selector
+	    if ( typeof value == 'string' ) {
+	      value = this.element.querySelector( value );
+	    }
+	    // get cell from element
+	    cell = this.getCell( value );
+	  }
+	  // select slide that has cell
+	  for ( var i=0; cell && i < this.slides.length; i++ ) {
+	    var slide = this.slides[i];
+	    var index = slide.cells.indexOf( cell );
+	    if ( index != -1 ) {
+	      this.select( i, isWrap, isInstant );
+	      return;
+	    }
 	  }
 	};
 
@@ -18790,9 +18906,9 @@
 	 * @param {Element} elem
 	 * @returns {Flickity.Cell} item
 	 */
-	Flickity.prototype.getCell = function( elem ) {
+	proto.getCell = function( elem ) {
 	  // loop through cells to get the one that matches
-	  for ( var i=0, len = this.cells.length; i < len; i++ ) {
+	  for ( var i=0; i < this.cells.length; i++ ) {
 	    var cell = this.cells[i];
 	    if ( cell.element == elem ) {
 	      return cell;
@@ -18805,16 +18921,15 @@
 	 * @param {Element, Array, NodeList} elems
 	 * @returns {Array} cells - Flickity.Cells
 	 */
-	Flickity.prototype.getCells = function( elems ) {
+	proto.getCells = function( elems ) {
 	  elems = utils.makeArray( elems );
 	  var cells = [];
-	  for ( var i=0, len = elems.length; i < len; i++ ) {
-	    var elem = elems[i];
+	  elems.forEach( function( elem ) {
 	    var cell = this.getCell( elem );
 	    if ( cell ) {
 	      cells.push( cell );
 	    }
-	  }
+	  }, this );
 	  return cells;
 	};
 
@@ -18822,12 +18937,10 @@
 	 * get cell elements
 	 * @returns {Array} cellElems
 	 */
-	Flickity.prototype.getCellElements = function() {
-	  var cellElems = [];
-	  for ( var i=0, len = this.cells.length; i < len; i++ ) {
-	    cellElems.push( this.cells[i].element );
-	  }
-	  return cellElems;
+	proto.getCellElements = function() {
+	  return this.cells.map( function( cell ) {
+	    return cell.element;
+	  });
 	};
 
 	/**
@@ -18835,7 +18948,7 @@
 	 * @param {Element} elem
 	 * @returns {Flickit.Cell} cell
 	 */
-	Flickity.prototype.getParentCell = function( elem ) {
+	proto.getParentCell = function( elem ) {
 	  // first check if elem is cell
 	  var cell = this.getCell( elem );
 	  if ( cell ) {
@@ -18847,28 +18960,28 @@
 	};
 
 	/**
-	 * get cells adjacent to a cell
-	 * @param {Integer} adjCount - number of adjacent cells
-	 * @param {Integer} index - index of cell to start
+	 * get cells adjacent to a slide
+	 * @param {Integer} adjCount - number of adjacent slides
+	 * @param {Integer} index - index of slide to start
 	 * @returns {Array} cells - array of Flickity.Cells
 	 */
-	Flickity.prototype.getAdjacentCellElements = function( adjCount, index ) {
+	proto.getAdjacentCellElements = function( adjCount, index ) {
 	  if ( !adjCount ) {
-	    return [ this.selectedElement ];
+	    return this.selectedSlide.getCellElements();
 	  }
 	  index = index === undefined ? this.selectedIndex : index;
 
-	  var len = this.cells.length;
+	  var len = this.slides.length;
 	  if ( 1 + ( adjCount * 2 ) >= len ) {
 	    return this.getCellElements();
 	  }
 
 	  var cellElems = [];
 	  for ( var i = index - adjCount; i <= index + adjCount ; i++ ) {
-	    var cellIndex = this.options.wrapAround ? utils.modulo( i, len ) : i;
-	    var cell = this.cells[ cellIndex ];
-	    if ( cell ) {
-	      cellElems.push( cell.element );
+	    var slideIndex = this.options.wrapAround ? utils.modulo( i, len ) : i;
+	    var slide = this.slides[ slideIndex ];
+	    if ( slide ) {
+	      cellElems = cellElems.concat( slide.getCellElements() );
 	    }
 	  }
 	  return cellElems;
@@ -18876,24 +18989,24 @@
 
 	// -------------------------- events -------------------------- //
 
-	Flickity.prototype.uiChange = function() {
-	  this.emit('uiChange');
+	proto.uiChange = function() {
+	  this.emitEvent('uiChange');
 	};
 
-	Flickity.prototype.childUIPointerDown = function( event ) {
+	proto.childUIPointerDown = function( event ) {
 	  this.emitEvent( 'childUIPointerDown', [ event ] );
 	};
 
 	// ----- resize ----- //
 
-	Flickity.prototype.onresize = function() {
+	proto.onresize = function() {
 	  this.watchCSS();
 	  this.resize();
 	};
 
 	utils.debounceMethod( Flickity, 'onresize', 150 );
 
-	Flickity.prototype.resize = function() {
+	proto.resize = function() {
 	  if ( !this.isActive ) {
 	    return;
 	  }
@@ -18905,43 +19018,17 @@
 	  this.positionCells();
 	  this._getWrapShiftCells();
 	  this.setGallerySize();
-	  this.positionSliderAtSelected();
+	  this.emitEvent('resize');
+	  // update selected index for group slides, instant
+	  // TODO: position can be lost between groups of various numbers
+	  var selectedElement = this.selectedElements && this.selectedElements[0];
+	  this.selectCell( selectedElement, false, true );
 	};
 
-	var supportsConditionalCSS = Flickity.supportsConditionalCSS = ( function() {
-	  var supports;
-	  return function checkSupport() {
-	    if ( supports !== undefined ) {
-	      return supports;
-	    }
-	    if ( !getComputedStyle ) {
-	      supports = false;
-	      return;
-	    }
-	    // style body's :after and check that
-	    var style = document.createElement('style');
-	    var cssText = document.createTextNode('body:after { content: "foo"; display: none; }');
-	    style.appendChild( cssText );
-	    document.head.appendChild( style );
-	    var afterContent = getComputedStyle( document.body, ':after' ).content;
-	    // check if able to get :after content
-	    supports = afterContent.indexOf('foo') != -1;
-	    document.head.removeChild( style );
-	    return supports;
-	  };
-	})();
-
 	// watches the :after property, activates/deactivates
-	Flickity.prototype.watchCSS = function() {
+	proto.watchCSS = function() {
 	  var watchOption = this.options.watchCSS;
 	  if ( !watchOption ) {
-	    return;
-	  }
-	  var supports = supportsConditionalCSS();
-	  if ( !supports ) {
-	    // activate if watch option is fallbackOn
-	    var method = watchOption == 'fallbackOn' ? 'activate' : 'deactivate';
-	    this[ method ]();
 	    return;
 	  }
 
@@ -18957,7 +19044,7 @@
 	// ----- keydown ----- //
 
 	// go previous/next if left/right keys pressed
-	Flickity.prototype.onkeydown = function( event ) {
+	proto.onkeydown = function( event ) {
 	  // only work if element is in focus
 	  if ( !this.options.accessibility ||
 	    ( document.activeElement && document.activeElement != this.element ) ) {
@@ -18980,36 +19067,33 @@
 	// -------------------------- destroy -------------------------- //
 
 	// deactivate all Flickity functionality, but keep stuff available
-	Flickity.prototype.deactivate = function() {
+	proto.deactivate = function() {
 	  if ( !this.isActive ) {
 	    return;
 	  }
-	  classie.remove( this.element, 'flickity-enabled' );
-	  classie.remove( this.element, 'flickity-rtl' );
+	  this.element.classList.remove('flickity-enabled');
+	  this.element.classList.remove('flickity-rtl');
 	  // destroy cells
-	  for ( var i=0, len = this.cells.length; i < len; i++ ) {
-	    var cell = this.cells[i];
+	  this.cells.forEach( function( cell ) {
 	    cell.destroy();
-	  }
-	  this._removeSelectedCellClass();
+	  });
+	  this.unselectSelectedSlide();
 	  this.element.removeChild( this.viewport );
 	  // move child elements back into element
 	  moveElements( this.slider.children, this.element );
 	  if ( this.options.accessibility ) {
 	    this.element.removeAttribute('tabIndex');
-	    eventie.unbind( this.element, 'keydown', this );
+	    this.element.removeEventListener( 'keydown', this );
 	  }
 	  // set flags
 	  this.isActive = false;
-	  this.emit('deactivate');
+	  this.emitEvent('deactivate');
 	};
 
-	Flickity.prototype.destroy = function() {
+	proto.destroy = function() {
 	  this.deactivate();
-	  if ( this.isResizeBound ) {
-	    eventie.unbind( window, 'resize', this );
-	  }
-	  this.emit('destroy');
+	  window.removeEventListener( 'resize', this );
+	  this.emitEvent('destroy');
 	  if ( jQuery && this.$element ) {
 	    jQuery.removeData( this.element, 'flickity' );
 	  }
@@ -19019,20 +19103,9 @@
 
 	// -------------------------- prototype -------------------------- //
 
-	utils.extend( Flickity.prototype, animatePrototype );
+	utils.extend( proto, animatePrototype );
 
 	// -------------------------- extras -------------------------- //
-
-	// quick check for IE8
-	var isIE8 = 'attachEvent' in window;
-
-	Flickity.setUnselectable = function( elem ) {
-	  if ( !isIE8 ) {
-	    return;
-	  }
-	  // IE8 prevent child from changing focus http://stackoverflow.com/a/17525223/182183
-	  elem.setAttribute( 'unselectable', 'on' );
-	};
 
 	/**
 	 * get Flickity instance from element
@@ -19062,91 +19135,115 @@
 /* 347 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	 * classie v1.0.1
-	 * class helper functions
-	 * from bonzo https://github.com/ded/bonzo
-	 * MIT license
-	 * 
-	 * classie.has( elem, 'my-class' ) -> true/false
-	 * classie.add( elem, 'my-new-class' )
-	 * classie.remove( elem, 'my-unwanted-class' )
-	 * classie.toggle( elem, 'my-class' )
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
+	 * EvEmitter v1.0.3
+	 * Lil' event emitter
+	 * MIT License
 	 */
 
-	/*jshint browser: true, strict: true, undef: true, unused: true */
-	/*global define: false, module: false */
+	/* jshint unused: true, undef: true, strict: true */
 
-	( function( window ) {
+	( function( global, factory ) {
+	  // universal module definition
+	  /* jshint strict: false */ /* globals define, module, window */
+	  if ( true ) {
+	    // AMD - RequireJS
+	    !(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	  } else if ( typeof module == 'object' && module.exports ) {
+	    // CommonJS - Browserify, Webpack
+	    module.exports = factory();
+	  } else {
+	    // Browser globals
+	    global.EvEmitter = factory();
+	  }
 
-	'use strict';
+	}( typeof window != 'undefined' ? window : this, function() {
 
-	// class helper functions from bonzo https://github.com/ded/bonzo
+	"use strict";
 
-	function classReg( className ) {
-	  return new RegExp("(^|\\s+)" + className + "(\\s+|$)");
-	}
+	function EvEmitter() {}
 
-	// classList support for class management
-	// altho to be fair, the api sucks because it won't accept multiple classes at once
-	var hasClass, addClass, removeClass;
+	var proto = EvEmitter.prototype;
 
-	if ( 'classList' in document.documentElement ) {
-	  hasClass = function( elem, c ) {
-	    return elem.classList.contains( c );
-	  };
-	  addClass = function( elem, c ) {
-	    elem.classList.add( c );
-	  };
-	  removeClass = function( elem, c ) {
-	    elem.classList.remove( c );
-	  };
-	}
-	else {
-	  hasClass = function( elem, c ) {
-	    return classReg( c ).test( elem.className );
-	  };
-	  addClass = function( elem, c ) {
-	    if ( !hasClass( elem, c ) ) {
-	      elem.className = elem.className + ' ' + c;
-	    }
-	  };
-	  removeClass = function( elem, c ) {
-	    elem.className = elem.className.replace( classReg( c ), ' ' );
-	  };
-	}
+	proto.on = function( eventName, listener ) {
+	  if ( !eventName || !listener ) {
+	    return;
+	  }
+	  // set events hash
+	  var events = this._events = this._events || {};
+	  // set listeners array
+	  var listeners = events[ eventName ] = events[ eventName ] || [];
+	  // only add once
+	  if ( listeners.indexOf( listener ) == -1 ) {
+	    listeners.push( listener );
+	  }
 
-	function toggleClass( elem, c ) {
-	  var fn = hasClass( elem, c ) ? removeClass : addClass;
-	  fn( elem, c );
-	}
-
-	var classie = {
-	  // full names
-	  hasClass: hasClass,
-	  addClass: addClass,
-	  removeClass: removeClass,
-	  toggleClass: toggleClass,
-	  // short names
-	  has: hasClass,
-	  add: addClass,
-	  remove: removeClass,
-	  toggle: toggleClass
+	  return this;
 	};
 
-	// transport
-	if ( true ) {
-	  // AMD
-	  !(__WEBPACK_AMD_DEFINE_FACTORY__ = (classie), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	} else if ( typeof exports === 'object' ) {
-	  // CommonJS
-	  module.exports = classie;
-	} else {
-	  // browser global
-	  window.classie = classie;
-	}
+	proto.once = function( eventName, listener ) {
+	  if ( !eventName || !listener ) {
+	    return;
+	  }
+	  // add event
+	  this.on( eventName, listener );
+	  // set once flag
+	  // set onceEvents hash
+	  var onceEvents = this._onceEvents = this._onceEvents || {};
+	  // set onceListeners object
+	  var onceListeners = onceEvents[ eventName ] = onceEvents[ eventName ] || {};
+	  // set flag
+	  onceListeners[ listener ] = true;
 
-	})( window );
+	  return this;
+	};
+
+	proto.off = function( eventName, listener ) {
+	  var listeners = this._events && this._events[ eventName ];
+	  if ( !listeners || !listeners.length ) {
+	    return;
+	  }
+	  var index = listeners.indexOf( listener );
+	  if ( index != -1 ) {
+	    listeners.splice( index, 1 );
+	  }
+
+	  return this;
+	};
+
+	proto.emitEvent = function( eventName, args ) {
+	  var listeners = this._events && this._events[ eventName ];
+	  if ( !listeners || !listeners.length ) {
+	    return;
+	  }
+	  var i = 0;
+	  var listener = listeners[i];
+	  args = args || [];
+	  // once stuff
+	  var onceListeners = this._onceEvents && this._onceEvents[ eventName ];
+
+	  while ( listener ) {
+	    var isOnce = onceListeners && onceListeners[ listener ];
+	    if ( isOnce ) {
+	      // remove listener
+	      // remove before trigger to prevent recursion
+	      this.off( eventName, listener );
+	      // unset once flag
+	      delete onceListeners[ listener ];
+	    }
+	    // trigger listener
+	    listener.apply( this, args );
+	    // get next listener
+	    i += isOnce ? 0 : 1;
+	    listener = listeners[i];
+	  }
+
+	  return this;
+	};
+
+	return EvEmitter;
+
+	}));
 
 
 /***/ },
@@ -19154,582 +19251,31 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	 * EventEmitter v4.2.11 - git.io/ee
-	 * Unlicense - http://unlicense.org/
-	 * Oliver Caldwell - http://oli.me.uk/
-	 * @preserve
-	 */
-
-	;(function () {
-	    'use strict';
-
-	    /**
-	     * Class for managing events.
-	     * Can be extended to provide event functionality in other classes.
-	     *
-	     * @class EventEmitter Manages event registering and emitting.
-	     */
-	    function EventEmitter() {}
-
-	    // Shortcuts to improve speed and size
-	    var proto = EventEmitter.prototype;
-	    var exports = this;
-	    var originalGlobalValue = exports.EventEmitter;
-
-	    /**
-	     * Finds the index of the listener for the event in its storage array.
-	     *
-	     * @param {Function[]} listeners Array of listeners to search through.
-	     * @param {Function} listener Method to look for.
-	     * @return {Number} Index of the specified listener, -1 if not found
-	     * @api private
-	     */
-	    function indexOfListener(listeners, listener) {
-	        var i = listeners.length;
-	        while (i--) {
-	            if (listeners[i].listener === listener) {
-	                return i;
-	            }
-	        }
-
-	        return -1;
-	    }
-
-	    /**
-	     * Alias a method while keeping the context correct, to allow for overwriting of target method.
-	     *
-	     * @param {String} name The name of the target method.
-	     * @return {Function} The aliased method
-	     * @api private
-	     */
-	    function alias(name) {
-	        return function aliasClosure() {
-	            return this[name].apply(this, arguments);
-	        };
-	    }
-
-	    /**
-	     * Returns the listener array for the specified event.
-	     * Will initialise the event object and listener arrays if required.
-	     * Will return an object if you use a regex search. The object contains keys for each matched event. So /ba[rz]/ might return an object containing bar and baz. But only if you have either defined them with defineEvent or added some listeners to them.
-	     * Each property in the object response is an array of listener functions.
-	     *
-	     * @param {String|RegExp} evt Name of the event to return the listeners from.
-	     * @return {Function[]|Object} All listener functions for the event.
-	     */
-	    proto.getListeners = function getListeners(evt) {
-	        var events = this._getEvents();
-	        var response;
-	        var key;
-
-	        // Return a concatenated array of all matching events if
-	        // the selector is a regular expression.
-	        if (evt instanceof RegExp) {
-	            response = {};
-	            for (key in events) {
-	                if (events.hasOwnProperty(key) && evt.test(key)) {
-	                    response[key] = events[key];
-	                }
-	            }
-	        }
-	        else {
-	            response = events[evt] || (events[evt] = []);
-	        }
-
-	        return response;
-	    };
-
-	    /**
-	     * Takes a list of listener objects and flattens it into a list of listener functions.
-	     *
-	     * @param {Object[]} listeners Raw listener objects.
-	     * @return {Function[]} Just the listener functions.
-	     */
-	    proto.flattenListeners = function flattenListeners(listeners) {
-	        var flatListeners = [];
-	        var i;
-
-	        for (i = 0; i < listeners.length; i += 1) {
-	            flatListeners.push(listeners[i].listener);
-	        }
-
-	        return flatListeners;
-	    };
-
-	    /**
-	     * Fetches the requested listeners via getListeners but will always return the results inside an object. This is mainly for internal use but others may find it useful.
-	     *
-	     * @param {String|RegExp} evt Name of the event to return the listeners from.
-	     * @return {Object} All listener functions for an event in an object.
-	     */
-	    proto.getListenersAsObject = function getListenersAsObject(evt) {
-	        var listeners = this.getListeners(evt);
-	        var response;
-
-	        if (listeners instanceof Array) {
-	            response = {};
-	            response[evt] = listeners;
-	        }
-
-	        return response || listeners;
-	    };
-
-	    /**
-	     * Adds a listener function to the specified event.
-	     * The listener will not be added if it is a duplicate.
-	     * If the listener returns true then it will be removed after it is called.
-	     * If you pass a regular expression as the event name then the listener will be added to all events that match it.
-	     *
-	     * @param {String|RegExp} evt Name of the event to attach the listener to.
-	     * @param {Function} listener Method to be called when the event is emitted. If the function returns true then it will be removed after calling.
-	     * @return {Object} Current instance of EventEmitter for chaining.
-	     */
-	    proto.addListener = function addListener(evt, listener) {
-	        var listeners = this.getListenersAsObject(evt);
-	        var listenerIsWrapped = typeof listener === 'object';
-	        var key;
-
-	        for (key in listeners) {
-	            if (listeners.hasOwnProperty(key) && indexOfListener(listeners[key], listener) === -1) {
-	                listeners[key].push(listenerIsWrapped ? listener : {
-	                    listener: listener,
-	                    once: false
-	                });
-	            }
-	        }
-
-	        return this;
-	    };
-
-	    /**
-	     * Alias of addListener
-	     */
-	    proto.on = alias('addListener');
-
-	    /**
-	     * Semi-alias of addListener. It will add a listener that will be
-	     * automatically removed after its first execution.
-	     *
-	     * @param {String|RegExp} evt Name of the event to attach the listener to.
-	     * @param {Function} listener Method to be called when the event is emitted. If the function returns true then it will be removed after calling.
-	     * @return {Object} Current instance of EventEmitter for chaining.
-	     */
-	    proto.addOnceListener = function addOnceListener(evt, listener) {
-	        return this.addListener(evt, {
-	            listener: listener,
-	            once: true
-	        });
-	    };
-
-	    /**
-	     * Alias of addOnceListener.
-	     */
-	    proto.once = alias('addOnceListener');
-
-	    /**
-	     * Defines an event name. This is required if you want to use a regex to add a listener to multiple events at once. If you don't do this then how do you expect it to know what event to add to? Should it just add to every possible match for a regex? No. That is scary and bad.
-	     * You need to tell it what event names should be matched by a regex.
-	     *
-	     * @param {String} evt Name of the event to create.
-	     * @return {Object} Current instance of EventEmitter for chaining.
-	     */
-	    proto.defineEvent = function defineEvent(evt) {
-	        this.getListeners(evt);
-	        return this;
-	    };
-
-	    /**
-	     * Uses defineEvent to define multiple events.
-	     *
-	     * @param {String[]} evts An array of event names to define.
-	     * @return {Object} Current instance of EventEmitter for chaining.
-	     */
-	    proto.defineEvents = function defineEvents(evts) {
-	        for (var i = 0; i < evts.length; i += 1) {
-	            this.defineEvent(evts[i]);
-	        }
-	        return this;
-	    };
-
-	    /**
-	     * Removes a listener function from the specified event.
-	     * When passed a regular expression as the event name, it will remove the listener from all events that match it.
-	     *
-	     * @param {String|RegExp} evt Name of the event to remove the listener from.
-	     * @param {Function} listener Method to remove from the event.
-	     * @return {Object} Current instance of EventEmitter for chaining.
-	     */
-	    proto.removeListener = function removeListener(evt, listener) {
-	        var listeners = this.getListenersAsObject(evt);
-	        var index;
-	        var key;
-
-	        for (key in listeners) {
-	            if (listeners.hasOwnProperty(key)) {
-	                index = indexOfListener(listeners[key], listener);
-
-	                if (index !== -1) {
-	                    listeners[key].splice(index, 1);
-	                }
-	            }
-	        }
-
-	        return this;
-	    };
-
-	    /**
-	     * Alias of removeListener
-	     */
-	    proto.off = alias('removeListener');
-
-	    /**
-	     * Adds listeners in bulk using the manipulateListeners method.
-	     * If you pass an object as the second argument you can add to multiple events at once. The object should contain key value pairs of events and listeners or listener arrays. You can also pass it an event name and an array of listeners to be added.
-	     * You can also pass it a regular expression to add the array of listeners to all events that match it.
-	     * Yeah, this function does quite a bit. That's probably a bad thing.
-	     *
-	     * @param {String|Object|RegExp} evt An event name if you will pass an array of listeners next. An object if you wish to add to multiple events at once.
-	     * @param {Function[]} [listeners] An optional array of listener functions to add.
-	     * @return {Object} Current instance of EventEmitter for chaining.
-	     */
-	    proto.addListeners = function addListeners(evt, listeners) {
-	        // Pass through to manipulateListeners
-	        return this.manipulateListeners(false, evt, listeners);
-	    };
-
-	    /**
-	     * Removes listeners in bulk using the manipulateListeners method.
-	     * If you pass an object as the second argument you can remove from multiple events at once. The object should contain key value pairs of events and listeners or listener arrays.
-	     * You can also pass it an event name and an array of listeners to be removed.
-	     * You can also pass it a regular expression to remove the listeners from all events that match it.
-	     *
-	     * @param {String|Object|RegExp} evt An event name if you will pass an array of listeners next. An object if you wish to remove from multiple events at once.
-	     * @param {Function[]} [listeners] An optional array of listener functions to remove.
-	     * @return {Object} Current instance of EventEmitter for chaining.
-	     */
-	    proto.removeListeners = function removeListeners(evt, listeners) {
-	        // Pass through to manipulateListeners
-	        return this.manipulateListeners(true, evt, listeners);
-	    };
-
-	    /**
-	     * Edits listeners in bulk. The addListeners and removeListeners methods both use this to do their job. You should really use those instead, this is a little lower level.
-	     * The first argument will determine if the listeners are removed (true) or added (false).
-	     * If you pass an object as the second argument you can add/remove from multiple events at once. The object should contain key value pairs of events and listeners or listener arrays.
-	     * You can also pass it an event name and an array of listeners to be added/removed.
-	     * You can also pass it a regular expression to manipulate the listeners of all events that match it.
-	     *
-	     * @param {Boolean} remove True if you want to remove listeners, false if you want to add.
-	     * @param {String|Object|RegExp} evt An event name if you will pass an array of listeners next. An object if you wish to add/remove from multiple events at once.
-	     * @param {Function[]} [listeners] An optional array of listener functions to add/remove.
-	     * @return {Object} Current instance of EventEmitter for chaining.
-	     */
-	    proto.manipulateListeners = function manipulateListeners(remove, evt, listeners) {
-	        var i;
-	        var value;
-	        var single = remove ? this.removeListener : this.addListener;
-	        var multiple = remove ? this.removeListeners : this.addListeners;
-
-	        // If evt is an object then pass each of its properties to this method
-	        if (typeof evt === 'object' && !(evt instanceof RegExp)) {
-	            for (i in evt) {
-	                if (evt.hasOwnProperty(i) && (value = evt[i])) {
-	                    // Pass the single listener straight through to the singular method
-	                    if (typeof value === 'function') {
-	                        single.call(this, i, value);
-	                    }
-	                    else {
-	                        // Otherwise pass back to the multiple function
-	                        multiple.call(this, i, value);
-	                    }
-	                }
-	            }
-	        }
-	        else {
-	            // So evt must be a string
-	            // And listeners must be an array of listeners
-	            // Loop over it and pass each one to the multiple method
-	            i = listeners.length;
-	            while (i--) {
-	                single.call(this, evt, listeners[i]);
-	            }
-	        }
-
-	        return this;
-	    };
-
-	    /**
-	     * Removes all listeners from a specified event.
-	     * If you do not specify an event then all listeners will be removed.
-	     * That means every event will be emptied.
-	     * You can also pass a regex to remove all events that match it.
-	     *
-	     * @param {String|RegExp} [evt] Optional name of the event to remove all listeners for. Will remove from every event if not passed.
-	     * @return {Object} Current instance of EventEmitter for chaining.
-	     */
-	    proto.removeEvent = function removeEvent(evt) {
-	        var type = typeof evt;
-	        var events = this._getEvents();
-	        var key;
-
-	        // Remove different things depending on the state of evt
-	        if (type === 'string') {
-	            // Remove all listeners for the specified event
-	            delete events[evt];
-	        }
-	        else if (evt instanceof RegExp) {
-	            // Remove all events matching the regex.
-	            for (key in events) {
-	                if (events.hasOwnProperty(key) && evt.test(key)) {
-	                    delete events[key];
-	                }
-	            }
-	        }
-	        else {
-	            // Remove all listeners in all events
-	            delete this._events;
-	        }
-
-	        return this;
-	    };
-
-	    /**
-	     * Alias of removeEvent.
-	     *
-	     * Added to mirror the node API.
-	     */
-	    proto.removeAllListeners = alias('removeEvent');
-
-	    /**
-	     * Emits an event of your choice.
-	     * When emitted, every listener attached to that event will be executed.
-	     * If you pass the optional argument array then those arguments will be passed to every listener upon execution.
-	     * Because it uses `apply`, your array of arguments will be passed as if you wrote them out separately.
-	     * So they will not arrive within the array on the other side, they will be separate.
-	     * You can also pass a regular expression to emit to all events that match it.
-	     *
-	     * @param {String|RegExp} evt Name of the event to emit and execute listeners for.
-	     * @param {Array} [args] Optional array of arguments to be passed to each listener.
-	     * @return {Object} Current instance of EventEmitter for chaining.
-	     */
-	    proto.emitEvent = function emitEvent(evt, args) {
-	        var listeners = this.getListenersAsObject(evt);
-	        var listener;
-	        var i;
-	        var key;
-	        var response;
-
-	        for (key in listeners) {
-	            if (listeners.hasOwnProperty(key)) {
-	                i = listeners[key].length;
-
-	                while (i--) {
-	                    // If the listener returns true then it shall be removed from the event
-	                    // The function is executed either with a basic call or an apply if there is an args array
-	                    listener = listeners[key][i];
-
-	                    if (listener.once === true) {
-	                        this.removeListener(evt, listener.listener);
-	                    }
-
-	                    response = listener.listener.apply(this, args || []);
-
-	                    if (response === this._getOnceReturnValue()) {
-	                        this.removeListener(evt, listener.listener);
-	                    }
-	                }
-	            }
-	        }
-
-	        return this;
-	    };
-
-	    /**
-	     * Alias of emitEvent
-	     */
-	    proto.trigger = alias('emitEvent');
-
-	    /**
-	     * Subtly different from emitEvent in that it will pass its arguments on to the listeners, as opposed to taking a single array of arguments to pass on.
-	     * As with emitEvent, you can pass a regex in place of the event name to emit to all events that match it.
-	     *
-	     * @param {String|RegExp} evt Name of the event to emit and execute listeners for.
-	     * @param {...*} Optional additional arguments to be passed to each listener.
-	     * @return {Object} Current instance of EventEmitter for chaining.
-	     */
-	    proto.emit = function emit(evt) {
-	        var args = Array.prototype.slice.call(arguments, 1);
-	        return this.emitEvent(evt, args);
-	    };
-
-	    /**
-	     * Sets the current value to check against when executing listeners. If a
-	     * listeners return value matches the one set here then it will be removed
-	     * after execution. This value defaults to true.
-	     *
-	     * @param {*} value The new value to check for when executing listeners.
-	     * @return {Object} Current instance of EventEmitter for chaining.
-	     */
-	    proto.setOnceReturnValue = function setOnceReturnValue(value) {
-	        this._onceReturnValue = value;
-	        return this;
-	    };
-
-	    /**
-	     * Fetches the current value to check against when executing listeners. If
-	     * the listeners return value matches this one then it should be removed
-	     * automatically. It will return true by default.
-	     *
-	     * @return {*|Boolean} The current value to check for or the default, true.
-	     * @api private
-	     */
-	    proto._getOnceReturnValue = function _getOnceReturnValue() {
-	        if (this.hasOwnProperty('_onceReturnValue')) {
-	            return this._onceReturnValue;
-	        }
-	        else {
-	            return true;
-	        }
-	    };
-
-	    /**
-	     * Fetches the events object and creates one if required.
-	     *
-	     * @return {Object} The events storage object.
-	     * @api private
-	     */
-	    proto._getEvents = function _getEvents() {
-	        return this._events || (this._events = {});
-	    };
-
-	    /**
-	     * Reverts the global {@link EventEmitter} to its previous value and returns a reference to this version.
-	     *
-	     * @return {Function} Non conflicting EventEmitter class.
-	     */
-	    EventEmitter.noConflict = function noConflict() {
-	        exports.EventEmitter = originalGlobalValue;
-	        return EventEmitter;
-	    };
-
-	    // Expose the class either via AMD, CommonJS or the global object
-	    if (true) {
-	        !(__WEBPACK_AMD_DEFINE_RESULT__ = function () {
-	            return EventEmitter;
-	        }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	    }
-	    else if (typeof module === 'object' && module.exports){
-	        module.exports = EventEmitter;
-	    }
-	    else {
-	        exports.EventEmitter = EventEmitter;
-	    }
-	}.call(this));
-
-
-/***/ },
-/* 349 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	 * eventie v1.0.6
-	 * event binding helper
-	 *   eventie.bind( elem, 'click', myFn )
-	 *   eventie.unbind( elem, 'click', myFn )
-	 * MIT license
-	 */
-
-	/*jshint browser: true, undef: true, unused: true */
-	/*global define: false, module: false */
-
-	( function( window ) {
-
-	'use strict';
-
-	var docElem = document.documentElement;
-
-	var bind = function() {};
-
-	function getIEEvent( obj ) {
-	  var event = window.event;
-	  // add event.target
-	  event.target = event.target || event.srcElement || obj;
-	  return event;
-	}
-
-	if ( docElem.addEventListener ) {
-	  bind = function( obj, type, fn ) {
-	    obj.addEventListener( type, fn, false );
-	  };
-	} else if ( docElem.attachEvent ) {
-	  bind = function( obj, type, fn ) {
-	    obj[ type + fn ] = fn.handleEvent ?
-	      function() {
-	        var event = getIEEvent( obj );
-	        fn.handleEvent.call( fn, event );
-	      } :
-	      function() {
-	        var event = getIEEvent( obj );
-	        fn.call( obj, event );
-	      };
-	    obj.attachEvent( "on" + type, obj[ type + fn ] );
-	  };
-	}
-
-	var unbind = function() {};
-
-	if ( docElem.removeEventListener ) {
-	  unbind = function( obj, type, fn ) {
-	    obj.removeEventListener( type, fn, false );
-	  };
-	} else if ( docElem.detachEvent ) {
-	  unbind = function( obj, type, fn ) {
-	    obj.detachEvent( "on" + type, obj[ type + fn ] );
-	    try {
-	      delete obj[ type + fn ];
-	    } catch ( err ) {
-	      // can't delete window object properties
-	      obj[ type + fn ] = undefined;
-	    }
-	  };
-	}
-
-	var eventie = {
-	  bind: bind,
-	  unbind: unbind
-	};
-
-	// ----- module definition ----- //
-
-	if ( true ) {
-	  // AMD
-	  !(__WEBPACK_AMD_DEFINE_FACTORY__ = (eventie), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	} else if ( typeof exports === 'object' ) {
-	  // CommonJS
-	  module.exports = eventie;
-	} else {
-	  // browser global
-	  window.eventie = eventie;
-	}
-
-	})( window );
-
-
-/***/ },
-/* 350 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	 * getSize v1.2.2
+	 * getSize v2.0.2
 	 * measure size of elements
 	 * MIT license
 	 */
 
 	/*jshint browser: true, strict: true, undef: true, unused: true */
-	/*global define: false, exports: false, require: false, module: false, console: false */
+	/*global define: false, module: false, console: false */
 
-	( function( window, undefined ) {
+	( function( window, factory ) {
+	  'use strict';
 
+	  if ( true ) {
+	    // AMD
+	    !(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
+	      return factory();
+	    }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	  } else if ( typeof module == 'object' && module.exports ) {
+	    // CommonJS
+	    module.exports = factory();
+	  } else {
+	    // browser global
+	    window.getSize = factory();
+	  }
+
+	})( window, function factory() {
 	'use strict';
 
 	// -------------------------- helpers -------------------------- //
@@ -19738,13 +19284,13 @@
 	function getStyleSize( value ) {
 	  var num = parseFloat( value );
 	  // not a percent like '100%', and a number
-	  var isValid = value.indexOf('%') === -1 && !isNaN( num );
+	  var isValid = value.indexOf('%') == -1 && !isNaN( num );
 	  return isValid && num;
 	}
 
 	function noop() {}
 
-	var logError = typeof console === 'undefined' ? noop :
+	var logError = typeof console == 'undefined' ? noop :
 	  function( message ) {
 	    console.error( message );
 	  };
@@ -19766,6 +19312,8 @@
 	  'borderBottomWidth'
 	];
 
+	var measurementsLength = measurements.length;
+
 	function getZeroSize() {
 	  var size = {
 	    width: 0,
@@ -19775,27 +19323,39 @@
 	    outerWidth: 0,
 	    outerHeight: 0
 	  };
-	  for ( var i=0, len = measurements.length; i < len; i++ ) {
+	  for ( var i=0; i < measurementsLength; i++ ) {
 	    var measurement = measurements[i];
 	    size[ measurement ] = 0;
 	  }
 	  return size;
 	}
 
+	// -------------------------- getStyle -------------------------- //
 
-
-	function defineGetSize( getStyleProperty ) {
+	/**
+	 * getStyle, get style of element, check for Firefox bug
+	 * https://bugzilla.mozilla.org/show_bug.cgi?id=548397
+	 */
+	function getStyle( elem ) {
+	  var style = getComputedStyle( elem );
+	  if ( !style ) {
+	    logError( 'Style returned ' + style +
+	      '. Are you running this code in a hidden iframe on Firefox? ' +
+	      'See http://bit.ly/getsizebug1' );
+	  }
+	  return style;
+	}
 
 	// -------------------------- setup -------------------------- //
 
 	var isSetup = false;
 
-	var getStyle, boxSizingProp, isBoxSizeOuter;
+	var isBoxSizeOuter;
 
 	/**
-	 * setup vars and functions
-	 * do it on initial getSize(), rather than on script load
-	 * For Firefox bug https://bugzilla.mozilla.org/show_bug.cgi?id=548397
+	 * setup
+	 * check isBoxSizerOuter
+	 * do on first getSize() rather than on page load for Firefox bug
 	 */
 	function setup() {
 	  // setup once
@@ -19804,50 +19364,25 @@
 	  }
 	  isSetup = true;
 
-	  var getComputedStyle = window.getComputedStyle;
-	  getStyle = ( function() {
-	    var getStyleFn = getComputedStyle ?
-	      function( elem ) {
-	        return getComputedStyle( elem, null );
-	      } :
-	      function( elem ) {
-	        return elem.currentStyle;
-	      };
-
-	      return function getStyle( elem ) {
-	        var style = getStyleFn( elem );
-	        if ( !style ) {
-	          logError( 'Style returned ' + style +
-	            '. Are you running this code in a hidden iframe on Firefox? ' +
-	            'See http://bit.ly/getsizebug1' );
-	        }
-	        return style;
-	      };
-	  })();
-
 	  // -------------------------- box sizing -------------------------- //
-
-	  boxSizingProp = getStyleProperty('boxSizing');
 
 	  /**
 	   * WebKit measures the outer-width on style.width on border-box elems
-	   * IE & Firefox measures the inner-width
+	   * IE & Firefox<29 measures the inner-width
 	   */
-	  if ( boxSizingProp ) {
-	    var div = document.createElement('div');
-	    div.style.width = '200px';
-	    div.style.padding = '1px 2px 3px 4px';
-	    div.style.borderStyle = 'solid';
-	    div.style.borderWidth = '1px 2px 3px 4px';
-	    div.style[ boxSizingProp ] = 'border-box';
+	  var div = document.createElement('div');
+	  div.style.width = '200px';
+	  div.style.padding = '1px 2px 3px 4px';
+	  div.style.borderStyle = 'solid';
+	  div.style.borderWidth = '1px 2px 3px 4px';
+	  div.style.boxSizing = 'border-box';
 
-	    var body = document.body || document.documentElement;
-	    body.appendChild( div );
-	    var style = getStyle( div );
+	  var body = document.body || document.documentElement;
+	  body.appendChild( div );
+	  var style = getStyle( div );
 
-	    isBoxSizeOuter = getStyleSize( style.width ) === 200;
-	    body.removeChild( div );
-	  }
+	  getSize.isBoxSizeOuter = isBoxSizeOuter = getStyleSize( style.width ) == 200;
+	  body.removeChild( div );
 
 	}
 
@@ -19857,19 +19392,19 @@
 	  setup();
 
 	  // use querySeletor if elem is string
-	  if ( typeof elem === 'string' ) {
+	  if ( typeof elem == 'string' ) {
 	    elem = document.querySelector( elem );
 	  }
 
 	  // do not proceed on non-objects
-	  if ( !elem || typeof elem !== 'object' || !elem.nodeType ) {
+	  if ( !elem || typeof elem != 'object' || !elem.nodeType ) {
 	    return;
 	  }
 
 	  var style = getStyle( elem );
 
 	  // if hidden, everything is 0
-	  if ( style.display === 'none' ) {
+	  if ( style.display == 'none' ) {
 	    return getZeroSize();
 	  }
 
@@ -19877,14 +19412,12 @@
 	  size.width = elem.offsetWidth;
 	  size.height = elem.offsetHeight;
 
-	  var isBorderBox = size.isBorderBox = !!( boxSizingProp &&
-	    style[ boxSizingProp ] && style[ boxSizingProp ] === 'border-box' );
+	  var isBorderBox = size.isBorderBox = style.boxSizing == 'border-box';
 
 	  // get all measurements
-	  for ( var i=0, len = measurements.length; i < len; i++ ) {
+	  for ( var i=0; i < measurementsLength; i++ ) {
 	    var measurement = measurements[i];
 	    var value = style[ measurement ];
-	    value = mungeNonPixel( elem, value );
 	    var num = parseFloat( value );
 	    // any 'auto', 'medium' value will be 0
 	    size[ measurement ] = !isNaN( num ) ? num : 0;
@@ -19923,156 +19456,48 @@
 	  return size;
 	}
 
-	// IE8 returns percent values, not pixels
-	// taken from jQuery's curCSS
-	function mungeNonPixel( elem, value ) {
-	  // IE8 and has percent value
-	  if ( window.getComputedStyle || value.indexOf('%') === -1 ) {
-	    return value;
-	  }
-	  var style = elem.style;
-	  // Remember the original values
-	  var left = style.left;
-	  var rs = elem.runtimeStyle;
-	  var rsLeft = rs && rs.left;
-
-	  // Put in the new values to get a computed value out
-	  if ( rsLeft ) {
-	    rs.left = elem.currentStyle.left;
-	  }
-	  style.left = value;
-	  value = style.pixelLeft;
-
-	  // Revert the changed values
-	  style.left = left;
-	  if ( rsLeft ) {
-	    rs.left = rsLeft;
-	  }
-
-	  return value;
-	}
-
 	return getSize;
 
-	}
-
-	// transport
-	if ( true ) {
-	  // AMD for RequireJS
-	  !(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(351) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (defineGetSize), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	} else if ( typeof exports === 'object' ) {
-	  // CommonJS for Component
-	  module.exports = defineGetSize( require('desandro-get-style-property') );
-	} else {
-	  // browser global
-	  window.getSize = defineGetSize( window.getStyleProperty );
-	}
-
-	})( window );
+	});
 
 
 /***/ },
-/* 351 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	 * getStyleProperty v1.0.4
-	 * original by kangax
-	 * http://perfectionkills.com/feature-testing-css-properties/
-	 * MIT license
-	 */
-
-	/*jshint browser: true, strict: true, undef: true */
-	/*global define: false, exports: false, module: false */
-
-	( function( window ) {
-
-	'use strict';
-
-	var prefixes = 'Webkit Moz ms Ms O'.split(' ');
-	var docElemStyle = document.documentElement.style;
-
-	function getStyleProperty( propName ) {
-	  if ( !propName ) {
-	    return;
-	  }
-
-	  // test standard property first
-	  if ( typeof docElemStyle[ propName ] === 'string' ) {
-	    return propName;
-	  }
-
-	  // capitalize
-	  propName = propName.charAt(0).toUpperCase() + propName.slice(1);
-
-	  // test vendor specific properties
-	  var prefixed;
-	  for ( var i=0, len = prefixes.length; i < len; i++ ) {
-	    prefixed = prefixes[i] + propName;
-	    if ( typeof docElemStyle[ prefixed ] === 'string' ) {
-	      return prefixed;
-	    }
-	  }
-	}
-
-	// transport
-	if ( true ) {
-	  // AMD
-	  !(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
-	    return getStyleProperty;
-	  }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	} else if ( typeof exports === 'object' ) {
-	  // CommonJS for Component
-	  module.exports = getStyleProperty;
-	} else {
-	  // browser global
-	  window.getStyleProperty = getStyleProperty;
-	}
-
-	})( window );
-
-
-/***/ },
-/* 352 */
+/* 349 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
-	 * Fizzy UI utils v1.0.1
+	 * Fizzy UI utils v2.0.2
 	 * MIT license
 	 */
 
 	/*jshint browser: true, undef: true, unused: true, strict: true */
 
 	( function( window, factory ) {
-	  /*global define: false, module: false, require: false */
-	  'use strict';
 	  // universal module definition
+	  /*jshint strict: false */ /*globals define, module, require */
 
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	      __webpack_require__(353),
-	      __webpack_require__(354)
-	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( docReady, matchesSelector ) {
-	      return factory( window, docReady, matchesSelector );
+	      __webpack_require__(350)
+	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( matchesSelector ) {
+	      return factory( window, matchesSelector );
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	  } else if ( typeof exports == 'object' ) {
+	  } else if ( typeof module == 'object' && module.exports ) {
 	    // CommonJS
 	    module.exports = factory(
 	      window,
-	      require('doc-ready'),
 	      require('desandro-matches-selector')
 	    );
 	  } else {
 	    // browser global
 	    window.fizzyUIUtils = factory(
 	      window,
-	      window.docReady,
 	      window.matchesSelector
 	    );
 	  }
 
-	}( window, function factory( window, docReady, matchesSelector ) {
+	}( window, function factory( window, matchesSelector ) {
 
 	'use strict';
 
@@ -20094,24 +19519,17 @@
 	  return ( ( num % div ) + div ) % div;
 	};
 
-	// ----- isArray ----- //
-	  
-	var objToString = Object.prototype.toString;
-	utils.isArray = function( obj ) {
-	  return objToString.call( obj ) == '[object Array]';
-	};
-
 	// ----- makeArray ----- //
 
 	// turn element or nodeList into an array
 	utils.makeArray = function( obj ) {
 	  var ary = [];
-	  if ( utils.isArray( obj ) ) {
+	  if ( Array.isArray( obj ) ) {
 	    // use object if already an array
 	    ary = obj;
 	  } else if ( obj && typeof obj.length == 'number' ) {
 	    // convert nodeList to array
-	    for ( var i=0, len = obj.length; i < len; i++ ) {
+	    for ( var i=0; i < obj.length; i++ ) {
 	      ary.push( obj[i] );
 	    }
 	  } else {
@@ -20121,52 +19539,14 @@
 	  return ary;
 	};
 
-	// ----- indexOf ----- //
-
-	// index of helper cause IE8
-	utils.indexOf = Array.prototype.indexOf ? function( ary, obj ) {
-	    return ary.indexOf( obj );
-	  } : function( ary, obj ) {
-	    for ( var i=0, len = ary.length; i < len; i++ ) {
-	      if ( ary[i] === obj ) {
-	        return i;
-	      }
-	    }
-	    return -1;
-	  };
-
 	// ----- removeFrom ----- //
 
 	utils.removeFrom = function( ary, obj ) {
-	  var index = utils.indexOf( ary, obj );
+	  var index = ary.indexOf( obj );
 	  if ( index != -1 ) {
 	    ary.splice( index, 1 );
 	  }
 	};
-
-	// ----- isElement ----- //
-
-	// http://stackoverflow.com/a/384380/182183
-	utils.isElement = ( typeof HTMLElement == 'function' || typeof HTMLElement == 'object' ) ?
-	  function isElementDOM2( obj ) {
-	    return obj instanceof HTMLElement;
-	  } :
-	  function isElementQuirky( obj ) {
-	    return obj && typeof obj == 'object' &&
-	      obj.nodeType == 1 && typeof obj.nodeName == 'string';
-	  };
-
-	// ----- setText ----- //
-
-	utils.setText = ( function() {
-	  var setTextProperty;
-	  function setText( elem, text ) {
-	    // only check setTextProperty once
-	    setTextProperty = setTextProperty || ( document.documentElement.textContent !== undefined ? 'textContent' : 'innerText' );
-	    elem[ setTextProperty ] = text;
-	  }
-	  return setText;
-	})();
 
 	// ----- getParent ----- //
 
@@ -20206,28 +19586,28 @@
 	  elems = utils.makeArray( elems );
 	  var ffElems = [];
 
-	  for ( var i=0, len = elems.length; i < len; i++ ) {
-	    var elem = elems[i];
+	  elems.forEach( function( elem ) {
 	    // check that elem is an actual element
-	    if ( !utils.isElement( elem ) ) {
-	      continue;
+	    if ( !( elem instanceof HTMLElement ) ) {
+	      return;
+	    }
+	    // add elem if no selector
+	    if ( !selector ) {
+	      ffElems.push( elem );
+	      return;
 	    }
 	    // filter & find items if we have a selector
-	    if ( selector ) {
-	      // filter siblings
-	      if ( matchesSelector( elem, selector ) ) {
-	        ffElems.push( elem );
-	      }
-	      // find children
-	      var childElems = elem.querySelectorAll( selector );
-	      // concat childElems to filterFound array
-	      for ( var j=0, jLen = childElems.length; j < jLen; j++ ) {
-	        ffElems.push( childElems[j] );
-	      }
-	    } else {
+	    // filter
+	    if ( matchesSelector( elem, selector ) ) {
 	      ffElems.push( elem );
 	    }
-	  }
+	    // find children
+	    var childElems = elem.querySelectorAll( selector );
+	    // concat childElems to filterFound array
+	    for ( var i=0; i < childElems.length; i++ ) {
+	      ffElems.push( childElems[i] );
+	    }
+	  });
 
 	  return ffElems;
 	};
@@ -20254,6 +19634,17 @@
 	  };
 	};
 
+	// ----- docReady ----- //
+
+	utils.docReady = function( callback ) {
+	  var readyState = document.readyState;
+	  if ( readyState == 'complete' || readyState == 'interactive' ) {
+	    callback();
+	  } else {
+	    document.addEventListener( 'DOMContentLoaded', callback );
+	  }
+	};
+
 	// ----- htmlInit ----- //
 
 	// http://jamesroberts.name/blog/2010/02/22/string-functions-for-javascript-trim-to-camel-case-to-dashed-and-to-underscore/
@@ -20265,39 +19656,43 @@
 
 	var console = window.console;
 	/**
-	 * allow user to initialize classes via .js-namespace class
+	 * allow user to initialize classes via [data-namespace] or .js-namespace class
 	 * htmlInit( Widget, 'widgetName' )
-	 * options are parsed from data-namespace-option attribute
+	 * options are parsed from data-namespace-options
 	 */
 	utils.htmlInit = function( WidgetClass, namespace ) {
-	  docReady( function() {
+	  utils.docReady( function() {
 	    var dashedNamespace = utils.toDashed( namespace );
-	    var elems = document.querySelectorAll( '.js-' + dashedNamespace );
-	    var dataAttr = 'data-' + dashedNamespace + '-options';
+	    var dataAttr = 'data-' + dashedNamespace;
+	    var dataAttrElems = document.querySelectorAll( '[' + dataAttr + ']' );
+	    var jsDashElems = document.querySelectorAll( '.js-' + dashedNamespace );
+	    var elems = utils.makeArray( dataAttrElems )
+	      .concat( utils.makeArray( jsDashElems ) );
+	    var dataOptionsAttr = dataAttr + '-options';
+	    var jQuery = window.jQuery;
 
-	    for ( var i=0, len = elems.length; i < len; i++ ) {
-	      var elem = elems[i];
-	      var attr = elem.getAttribute( dataAttr );
+	    elems.forEach( function( elem ) {
+	      var attr = elem.getAttribute( dataAttr ) ||
+	        elem.getAttribute( dataOptionsAttr );
 	      var options;
 	      try {
 	        options = attr && JSON.parse( attr );
 	      } catch ( error ) {
 	        // log error, do not initialize
 	        if ( console ) {
-	          console.error( 'Error parsing ' + dataAttr + ' on ' +
-	            elem.nodeName.toLowerCase() + ( elem.id ? '#' + elem.id : '' ) + ': ' +
-	            error );
+	          console.error( 'Error parsing ' + dataAttr + ' on ' + elem.className +
+	          ': ' + error );
 	        }
-	        continue;
+	        return;
 	      }
 	      // initialize
 	      var instance = new WidgetClass( elem, options );
 	      // make available via $().data('layoutname')
-	      var jQuery = window.jQuery;
 	      if ( jQuery ) {
 	        jQuery.data( elem, namespace, instance );
 	      }
-	    }
+	    });
+
 	  });
 	};
 
@@ -20309,109 +19704,37 @@
 
 
 /***/ },
-/* 353 */
+/* 350 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	 * docReady v1.0.4
-	 * Cross browser DOMContentLoaded event emitter
-	 * MIT license
-	 */
-
-	/*jshint browser: true, strict: true, undef: true, unused: true*/
-	/*global define: false, require: false, module: false */
-
-	( function( window ) {
-
-	'use strict';
-
-	var document = window.document;
-	// collection of functions to be triggered on ready
-	var queue = [];
-
-	function docReady( fn ) {
-	  // throw out non-functions
-	  if ( typeof fn !== 'function' ) {
-	    return;
-	  }
-
-	  if ( docReady.isReady ) {
-	    // ready now, hit it
-	    fn();
-	  } else {
-	    // queue function when ready
-	    queue.push( fn );
-	  }
-	}
-
-	docReady.isReady = false;
-
-	// triggered on various doc ready events
-	function onReady( event ) {
-	  // bail if already triggered or IE8 document is not ready just yet
-	  var isIE8NotReady = event.type === 'readystatechange' && document.readyState !== 'complete';
-	  if ( docReady.isReady || isIE8NotReady ) {
-	    return;
-	  }
-
-	  trigger();
-	}
-
-	function trigger() {
-	  docReady.isReady = true;
-	  // process queue
-	  for ( var i=0, len = queue.length; i < len; i++ ) {
-	    var fn = queue[i];
-	    fn();
-	  }
-	}
-
-	function defineDocReady( eventie ) {
-	  // trigger ready if page is ready
-	  if ( document.readyState === 'complete' ) {
-	    trigger();
-	  } else {
-	    // listen for events
-	    eventie.bind( document, 'DOMContentLoaded', onReady );
-	    eventie.bind( document, 'readystatechange', onReady );
-	    eventie.bind( window, 'load', onReady );
-	  }
-
-	  return docReady;
-	}
-
-	// transport
-	if ( true ) {
-	  // AMD
-	  !(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(349) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (defineDocReady), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	} else if ( typeof exports === 'object' ) {
-	  module.exports = defineDocReady( require('eventie') );
-	} else {
-	  // browser global
-	  window.docReady = defineDocReady( window.eventie );
-	}
-
-	})( window );
-
-
-/***/ },
-/* 354 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __WEBPACK_AMD_DEFINE_RESULT__;/**
-	 * matchesSelector v1.0.3
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
+	 * matchesSelector v2.0.1
 	 * matchesSelector( element, '.selector' )
 	 * MIT license
 	 */
 
 	/*jshint browser: true, strict: true, undef: true, unused: true */
-	/*global define: false, module: false */
 
-	( function( ElemProto ) {
+	( function( window, factory ) {
+	  /*global define: false, module: false */
+	  'use strict';
+	  // universal module definition
+	  if ( true ) {
+	    // AMD
+	    !(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	  } else if ( typeof module == 'object' && module.exports ) {
+	    // CommonJS
+	    module.exports = factory();
+	  } else {
+	    // browser global
+	    window.matchesSelector = factory();
+	  }
 
+	}( window, function factory() {
 	  'use strict';
 
 	  var matchesMethod = ( function() {
+	    var ElemProto = Element.prototype;
 	    // check for the standard method name first
 	    if ( ElemProto.matches ) {
 	      return 'matches';
@@ -20423,7 +19746,7 @@
 	    // check vendor prefixes
 	    var prefixes = [ 'webkit', 'moz', 'ms', 'o' ];
 
-	    for ( var i=0, len = prefixes.length; i < len; i++ ) {
+	    for ( var i=0; i < prefixes.length; i++ ) {
 	      var prefix = prefixes[i];
 	      var method = prefix + 'MatchesSelector';
 	      if ( ElemProto[ method ] ) {
@@ -20432,97 +19755,29 @@
 	    }
 	  })();
 
-	  // ----- match ----- //
-
-	  function match( elem, selector ) {
+	  return function matchesSelector( elem, selector ) {
 	    return elem[ matchesMethod ]( selector );
-	  }
+	  };
 
-	  // ----- appendToFragment ----- //
-
-	  function checkParent( elem ) {
-	    // not needed if already has parent
-	    if ( elem.parentNode ) {
-	      return;
-	    }
-	    var fragment = document.createDocumentFragment();
-	    fragment.appendChild( elem );
-	  }
-
-	  // ----- query ----- //
-
-	  // fall back to using QSA
-	  // thx @jonathantneal https://gist.github.com/3062955
-	  function query( elem, selector ) {
-	    // append to fragment if no parent
-	    checkParent( elem );
-
-	    // match elem with all selected elems of parent
-	    var elems = elem.parentNode.querySelectorAll( selector );
-	    for ( var i=0, len = elems.length; i < len; i++ ) {
-	      // return true if match
-	      if ( elems[i] === elem ) {
-	        return true;
-	      }
-	    }
-	    // otherwise return false
-	    return false;
-	  }
-
-	  // ----- matchChild ----- //
-
-	  function matchChild( elem, selector ) {
-	    checkParent( elem );
-	    return match( elem, selector );
-	  }
-
-	  // ----- matchesSelector ----- //
-
-	  var matchesSelector;
-
-	  if ( matchesMethod ) {
-	    // IE9 supports matchesSelector, but doesn't work on orphaned elems
-	    // check for that
-	    var div = document.createElement('div');
-	    var supportsOrphans = match( div, 'div' );
-	    matchesSelector = supportsOrphans ? match : matchChild;
-	  } else {
-	    matchesSelector = query;
-	  }
-
-	  // transport
-	  if ( true ) {
-	    // AMD
-	    !(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
-	      return matchesSelector;
-	    }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	  } else if ( typeof exports === 'object' ) {
-	    module.exports = matchesSelector;
-	  }
-	  else {
-	    // browser global
-	    window.matchesSelector = matchesSelector;
-	  }
-
-	})( Element.prototype );
+	}));
 
 
 /***/ },
-/* 355 */
+/* 351 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( window, factory ) {
-	  'use strict';
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// Flickity.Cell
+	( function( window, factory ) {
 	  // universal module definition
-
+	  /* jshint strict: false */
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	      __webpack_require__(350)
+	      __webpack_require__(348)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( getSize ) {
 	      return factory( window, getSize );
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	  } else if ( typeof exports == 'object' ) {
+	  } else if ( typeof module == 'object' && module.exports ) {
 	    // CommonJS
 	    module.exports = factory(
 	      window,
@@ -20548,42 +19803,39 @@
 	  this.create();
 	}
 
-	var isIE8 = 'attachEvent' in window;
+	var proto = Cell.prototype;
 
-	Cell.prototype.create = function() {
+	proto.create = function() {
 	  this.element.style.position = 'absolute';
-	  // IE8 prevent child from changing focus http://stackoverflow.com/a/17525223/182183
-	  if ( isIE8 ) {
-	    this.element.setAttribute( 'unselectable', 'on' );
-	  }
 	  this.x = 0;
 	  this.shift = 0;
 	};
 
-	Cell.prototype.destroy = function() {
+	proto.destroy = function() {
 	  // reset style
 	  this.element.style.position = '';
 	  var side = this.parent.originSide;
 	  this.element.style[ side ] = '';
 	};
 
-	Cell.prototype.getSize = function() {
+	proto.getSize = function() {
 	  this.size = getSize( this.element );
 	};
 
-	Cell.prototype.setPosition = function( x ) {
+	proto.setPosition = function( x ) {
 	  this.x = x;
-	  this.setDefaultTarget();
+	  this.updateTarget();
 	  this.renderPosition( x );
 	};
 
-	Cell.prototype.setDefaultTarget = function() {
+	// setDefaultTarget v1 method, backwards compatibility, remove in v3
+	proto.updateTarget = proto.setDefaultTarget = function() {
 	  var marginProperty = this.parent.originSide == 'left' ? 'marginLeft' : 'marginRight';
 	  this.target = this.x + this.size[ marginProperty ] +
 	    this.size.width * this.parent.cellAlign;
 	};
 
-	Cell.prototype.renderPosition = function( x ) {
+	proto.renderPosition = function( x ) {
 	  // render position of cell with in slider
 	  var side = this.parent.originSide;
 	  this.element.style[ side ] = this.parent.getPositionValue( x );
@@ -20592,12 +19844,12 @@
 	/**
 	 * @param {Integer} factor - 0, 1, or -1
 	**/
-	Cell.prototype.wrapShift = function( shift ) {
+	proto.wrapShift = function( shift ) {
 	  this.shift = shift;
 	  this.renderPosition( this.x + this.parent.slideableWidth * shift );
 	};
 
-	Cell.prototype.remove = function() {
+	proto.remove = function() {
 	  this.element.parentNode.removeChild( this.element );
 	};
 
@@ -20607,26 +19859,106 @@
 
 
 /***/ },
-/* 356 */
+/* 352 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( window, factory ) {
-	  'use strict';
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;// slide
+	( function( window, factory ) {
 	  // universal module definition
+	  /* jshint strict: false */
+	  if ( true ) {
+	    // AMD
+	    !(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	  } else if ( typeof module == 'object' && module.exports ) {
+	    // CommonJS
+	    module.exports = factory();
+	  } else {
+	    // browser global
+	    window.Flickity = window.Flickity || {};
+	    window.Flickity.Slide = factory();
+	  }
 
+	}( window, function factory() {
+	'use strict';
+
+	function Slide( parent ) {
+	  this.parent = parent;
+	  this.isOriginLeft = parent.originSide == 'left';
+	  this.cells = [];
+	  this.outerWidth = 0;
+	  this.height = 0;
+	}
+
+	var proto = Slide.prototype;
+
+	proto.addCell = function( cell ) {
+	  this.cells.push( cell );
+	  this.outerWidth += cell.size.outerWidth;
+	  this.height = Math.max( cell.size.outerHeight, this.height );
+	  // first cell stuff
+	  if ( this.cells.length == 1 ) {
+	    this.x = cell.x; // x comes from first cell
+	    var beginMargin = this.isOriginLeft ? 'marginLeft' : 'marginRight';
+	    this.firstMargin = cell.size[ beginMargin ];
+	  }
+	};
+
+	proto.updateTarget = function() {
+	  var endMargin = this.isOriginLeft ? 'marginRight' : 'marginLeft';
+	  var lastCell = this.getLastCell();
+	  var lastMargin = lastCell ? lastCell.size[ endMargin ] : 0;
+	  var slideWidth = this.outerWidth - ( this.firstMargin + lastMargin );
+	  this.target = this.x + this.firstMargin + slideWidth * this.parent.cellAlign;
+	};
+
+	proto.getLastCell = function() {
+	  return this.cells[ this.cells.length - 1 ];
+	};
+
+	proto.select = function() {
+	  this.changeSelectedClass('add');
+	};
+
+	proto.unselect = function() {
+	  this.changeSelectedClass('remove');
+	};
+
+	proto.changeSelectedClass = function( method ) {
+	  this.cells.forEach( function( cell ) {
+	    cell.element.classList[ method ]('is-selected');
+	  });
+	};
+
+	proto.getCellElements = function() {
+	  return this.cells.map( function( cell ) {
+	    return cell.element;
+	  });
+	};
+
+	return Slide;
+
+	}));
+
+
+/***/ },
+/* 353 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// animate
+	( function( window, factory ) {
+	  // universal module definition
+	  /* jshint strict: false */
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	      __webpack_require__(351),
-	      __webpack_require__(352)
-	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( getStyleProperty, utils ) {
-	      return factory( window, getStyleProperty, utils );
+	      __webpack_require__(349)
+	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( utils ) {
+	      return factory( window, utils );
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	  } else if ( typeof exports == 'object' ) {
+	  } else if ( typeof module == 'object' && module.exports ) {
 	    // CommonJS
 	    module.exports = factory(
 	      window,
-	      require('desandro-get-style-property'),
 	      require('fizzy-ui-utils')
 	    );
 	  } else {
@@ -20634,50 +19966,29 @@
 	    window.Flickity = window.Flickity || {};
 	    window.Flickity.animatePrototype = factory(
 	      window,
-	      window.getStyleProperty,
 	      window.fizzyUIUtils
 	    );
 	  }
 
-	}( window, function factory( window, getStyleProperty, utils ) {
+	}( window, function factory( window, utils ) {
 
 	'use strict';
 
 	// -------------------------- requestAnimationFrame -------------------------- //
 
-	// https://gist.github.com/1866474
+	// get rAF, prefixed, if present
+	var requestAnimationFrame = window.requestAnimationFrame ||
+	  window.webkitRequestAnimationFrame;
 
+	// fallback to setTimeout
 	var lastTime = 0;
-	var prefixes = 'webkit moz ms o'.split(' ');
-	// get unprefixed rAF and cAF, if present
-	var requestAnimationFrame = window.requestAnimationFrame;
-	var cancelAnimationFrame = window.cancelAnimationFrame;
-	// loop through vendor prefixes and get prefixed rAF and cAF
-	var prefix;
-	for( var i = 0; i < prefixes.length; i++ ) {
-	  if ( requestAnimationFrame && cancelAnimationFrame ) {
-	    break;
-	  }
-	  prefix = prefixes[i];
-	  requestAnimationFrame = requestAnimationFrame || window[ prefix + 'RequestAnimationFrame' ];
-	  cancelAnimationFrame  = cancelAnimationFrame  || window[ prefix + 'CancelAnimationFrame' ] ||
-	                            window[ prefix + 'CancelRequestAnimationFrame' ];
-	}
-
-	// fallback to setTimeout and clearTimeout if either request/cancel is not supported
-	if ( !requestAnimationFrame || !cancelAnimationFrame )  {
+	if ( !requestAnimationFrame )  {
 	  requestAnimationFrame = function( callback ) {
 	    var currTime = new Date().getTime();
 	    var timeToCall = Math.max( 0, 16 - ( currTime - lastTime ) );
-	    var id = window.setTimeout( function() {
-	      callback( currTime + timeToCall );
-	    }, timeToCall );
+	    var id = setTimeout( callback, timeToCall );
 	    lastTime = currTime + timeToCall;
 	    return id;
-	  };
-
-	  cancelAnimationFrame = function( id ) {
-	    window.clearTimeout( id );
 	  };
 	}
 
@@ -20711,20 +20022,16 @@
 	      _this.animate();
 	    });
 	  }
-
-	  /** /
-	  // log animation frame rate
-	  var now = new Date();
-	  if ( this.then ) {
-	    console.log( ~~( 1000 / (now-this.then)) + 'fps' )
-	  }
-	  this.then = now;
-	  /**/
 	};
 
 
-	var transformProperty = getStyleProperty('transform');
-	var is3d = !!getStyleProperty('perspective');
+	var transformProperty = ( function () {
+	  var style = document.documentElement.style;
+	  if ( typeof style.transform == 'string' ) {
+	    return 'transform';
+	  }
+	  return 'WebkitTransform';
+	})();
 
 	proto.positionSlider = function() {
 	  var x = this.x;
@@ -20736,19 +20043,20 @@
 	  }
 
 	  x = x + this.cursorPosition;
-
 	  // reverse if right-to-left and using transform
 	  x = this.options.rightToLeft && transformProperty ? -x : x;
-
 	  var value = this.getPositionValue( x );
+	  // use 3D tranforms for hardware acceleration on iOS
+	  // but use 2D when settled, for better font-rendering
+	  this.slider.style[ transformProperty ] = this.isAnimating ?
+	    'translate3d(' + value + ',0,0)' : 'translateX(' + value + ')';
 
-	  if ( transformProperty ) {
-	    // use 3D tranforms for hardware acceleration on iOS
-	    // but use 2D when settled, for better font-rendering
-	    this.slider.style[ transformProperty ] = is3d && this.isAnimating ?
-	      'translate3d(' + value + ',0,0)' : 'translateX(' + value + ')';
-	  } else {
-	    this.slider.style[ this.originSide ] = value;
+	  // scroll event
+	  var firstSlide = this.slides[0];
+	  if ( firstSlide ) {
+	    var positionX = -this.x - firstSlide.target;
+	    var progress = positionX / this.slidesWidth;
+	    this.dispatchEvent( 'scroll', null, [ progress, positionX ] );
 	  }
 	};
 
@@ -20756,8 +20064,7 @@
 	  if ( !this.cells.length ) {
 	    return;
 	  }
-	  var selectedCell = this.cells[ this.selectedIndex ];
-	  this.x = -selectedCell.target;
+	  this.x = -this.selectedSlide.target;
 	  this.positionSlider();
 	};
 
@@ -20781,9 +20088,7 @@
 	    this.isAnimating = false;
 	    delete this.isFreeScrolling;
 	    // render position with translateX when settled
-	    if ( is3d ) {
-	      this.positionSlider();
-	    }
+	    this.positionSlider();
 	    this.dispatchEvent('settle');
 	  }
 	};
@@ -20798,7 +20103,7 @@
 	};
 
 	proto._shiftCells = function( cells, gap, shift ) {
-	  for ( var i=0, len = cells.length; i < len; i++ ) {
+	  for ( var i=0; i < cells.length; i++ ) {
 	    var cell = cells[i];
 	    var cellShift = gap > 0 ? shift : 0;
 	    cell.wrapShift( cellShift );
@@ -20810,7 +20115,7 @@
 	  if ( !cells || !cells.length ) {
 	    return;
 	  }
-	  for ( var i=0, len = cells.length; i < len; i++ ) {
+	  for ( var i=0; i < cells.length; i++ ) {
 	    cells[i].wrapShift( 0 );
 	  }
 	};
@@ -20818,21 +20123,17 @@
 	// -------------------------- physics -------------------------- //
 
 	proto.integratePhysics = function() {
-	  this.velocity += this.accel;
 	  this.x += this.velocity;
 	  this.velocity *= this.getFrictionFactor();
-	  // reset acceleration
-	  this.accel = 0;
 	};
 
 	proto.applyForce = function( force ) {
-	  this.accel += force;
+	  this.velocity += force;
 	};
 
 	proto.getFrictionFactor = function() {
 	  return 1 - this.options[ this.isFreeScrolling ? 'freeScrollFriction' : 'friction' ];
 	};
-
 
 	proto.getRestingPosition = function() {
 	  // my thanks to Steven Wittens, who simplified this math greatly
@@ -20851,14 +20152,10 @@
 
 	proto.applySelectedAttraction = function() {
 	  // do not attract if pointer down or no cells
-	  var len = this.cells.length;
-	  if ( this.isPointerDown || this.isFreeScrolling || !len ) {
+	  if ( this.isPointerDown || this.isFreeScrolling || !this.cells.length ) {
 	    return;
 	  }
-	  var cell = this.cells[ this.selectedIndex ];
-	  var wrap = this.options.wrapAround && len > 1 ?
-	    this.slideableWidth * Math.floor( this.selectedIndex / len ) : 0;
-	  var distance = ( cell.target + wrap ) * -1 - this.x;
+	  var distance = this.selectedSlide.target * -1 - this.x;
 	  var force = distance * this.options.selectedAttraction;
 	  this.applyForce( force );
 	};
@@ -20869,30 +20166,26 @@
 
 
 /***/ },
-/* 357 */
+/* 354 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( window, factory ) {
-	  'use strict';
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// drag
+	( function( window, factory ) {
 	  // universal module definition
-
+	  /* jshint strict: false */
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	      __webpack_require__(347),
-	      __webpack_require__(349),
 	      __webpack_require__(346),
-	      __webpack_require__(358),
-	      __webpack_require__(352)
-	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( classie, eventie, Flickity, Unidragger, utils ) {
-	      return factory( window, classie, eventie, Flickity, Unidragger, utils );
+	      __webpack_require__(355),
+	      __webpack_require__(349)
+	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( Flickity, Unidragger, utils ) {
+	      return factory( window, Flickity, Unidragger, utils );
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	  } else if ( typeof exports == 'object' ) {
+	  } else if ( typeof module == 'object' && module.exports ) {
 	    // CommonJS
 	    module.exports = factory(
 	      window,
-	      require('desandro-classie'),
-	      require('eventie'),
 	      require('./flickity'),
 	      require('unidragger'),
 	      require('fizzy-ui-utils')
@@ -20901,31 +20194,21 @@
 	    // browser global
 	    window.Flickity = factory(
 	      window,
-	      window.classie,
-	      window.eventie,
 	      window.Flickity,
 	      window.Unidragger,
 	      window.fizzyUIUtils
 	    );
 	  }
 
-	}( window, function factory( window, classie, eventie, Flickity, Unidragger, utils ) {
+	}( window, function factory( window, Flickity, Unidragger, utils ) {
 
 	'use strict';
-
-	// handle IE8 prevent default
-	function preventDefaultEvent( event ) {
-	  if ( event.preventDefault ) {
-	    event.preventDefault();
-	  } else {
-	    event.returnValue = false;
-	  }
-	}
 
 	// ----- defaults ----- //
 
 	utils.extend( Flickity.defaults, {
-	  draggable: true
+	  draggable: true,
+	  dragThreshold: 3,
 	});
 
 	// ----- create ----- //
@@ -20934,50 +20217,69 @@
 
 	// -------------------------- drag prototype -------------------------- //
 
-	utils.extend( Flickity.prototype, Unidragger.prototype );
+	var proto = Flickity.prototype;
+	utils.extend( proto, Unidragger.prototype );
 
 	// --------------------------  -------------------------- //
 
-	Flickity.prototype._createDrag = function() {
+	proto._createDrag = function() {
 	  this.on( 'activate', this.bindDrag );
 	  this.on( 'uiChange', this._uiChangeDrag );
 	  this.on( 'childUIPointerDown', this._childUIPointerDownDrag );
 	  this.on( 'deactivate', this.unbindDrag );
 	};
 
-	Flickity.prototype.bindDrag = function() {
+	proto.bindDrag = function() {
 	  if ( !this.options.draggable || this.isDragBound ) {
 	    return;
 	  }
-	  classie.add( this.element, 'is-draggable' );
+	  this.element.classList.add('is-draggable');
 	  this.handles = [ this.viewport ];
 	  this.bindHandles();
 	  this.isDragBound = true;
 	};
 
-	Flickity.prototype.unbindDrag = function() {
+	proto.unbindDrag = function() {
 	  if ( !this.isDragBound ) {
 	    return;
 	  }
-	  classie.remove( this.element, 'is-draggable' );
+	  this.element.classList.remove('is-draggable');
 	  this.unbindHandles();
 	  delete this.isDragBound;
 	};
 
-	Flickity.prototype._uiChangeDrag = function() {
+	proto._uiChangeDrag = function() {
 	  delete this.isFreeScrolling;
 	};
 
-	Flickity.prototype._childUIPointerDownDrag = function( event ) {
-	  preventDefaultEvent( event );
+	proto._childUIPointerDownDrag = function( event ) {
+	  event.preventDefault();
 	  this.pointerDownFocus( event );
 	};
 
 	// -------------------------- pointer events -------------------------- //
 
-	Flickity.prototype.pointerDown = function( event, pointer ) {
-	  // dismiss range sliders
-	  if ( event.target.nodeName == 'INPUT' && event.target.type == 'range' ) {
+	// nodes that have text fields
+	var cursorNodes = {
+	  TEXTAREA: true,
+	  INPUT: true,
+	};
+
+	// input types that do not have text fields
+	var clickTypes = {
+	  radio: true,
+	  checkbox: true,
+	  button: true,
+	  submit: true,
+	  image: true,
+	  file: true,
+	};
+
+	proto.pointerDown = function( event, pointer ) {
+	  // dismiss inputs with text fields. #404
+	  var isCursorInput = cursorNodes[ event.target.nodeName ] &&
+	    !clickTypes[ event.target.type ];
+	  if ( isCursorInput ) {
 	    // reset pointerDown logic
 	    this.isPointerDown = false;
 	    delete this.pointerIdentifier;
@@ -20996,12 +20298,12 @@
 	  this.pointerDownFocus( event );
 	  // stop if it was moving
 	  this.dragX = this.x;
-	  classie.add( this.viewport, 'is-pointer-down' );
+	  this.viewport.classList.add('is-pointer-down');
 	  // bind move and end events
 	  this._bindPostStartEvents( event );
 	  // track scrolling
-	  this.pointerDownScroll = Unidragger.getScrollPosition();
-	  eventie.bind( window, 'scroll', this );
+	  this.pointerDownScroll = getScrollPosition();
+	  window.addEventListener( 'scroll', this );
 
 	  this.dispatchEvent( 'pointerDown', event, [ pointer ] );
 	};
@@ -21016,7 +20318,7 @@
 	  SELECT: true
 	};
 
-	Flickity.prototype.pointerDownFocus = function( event ) {
+	proto.pointerDownFocus = function( event ) {
 	  // focus element, if not touch, and its not an input or select
 	  if ( !this.options.accessibility || touchStartEvents[ event.type ] ||
 	      focusNodes[ event.target.nodeName ] ) {
@@ -21030,46 +20332,60 @@
 	  }
 	};
 
+	proto.canPreventDefaultOnPointerDown = function( event ) {
+	  // prevent default, unless touchstart or <select>
+	  var isTouchstart = event.type == 'touchstart';
+	  var targetNodeName = event.target.nodeName;
+	  return !isTouchstart && targetNodeName != 'SELECT';
+	};
+
 	// ----- move ----- //
 
-	Flickity.prototype.hasDragStarted = function( moveVector ) {
-	  return Math.abs( moveVector.x ) > 3;
+	proto.hasDragStarted = function( moveVector ) {
+	  return Math.abs( moveVector.x ) > this.options.dragThreshold;
 	};
 
 	// ----- up ----- //
 
-	Flickity.prototype.pointerUp = function( event, pointer ) {
-	  classie.remove( this.viewport, 'is-pointer-down' );
+	proto.pointerUp = function( event, pointer ) {
+	  delete this.isTouchScrolling;
+	  this.viewport.classList.remove('is-pointer-down');
 	  this.dispatchEvent( 'pointerUp', event, [ pointer ] );
 	  this._dragPointerUp( event, pointer );
 	};
 
-	Flickity.prototype.pointerDone = function() {
-	  eventie.unbind( window, 'scroll', this );
+	proto.pointerDone = function() {
+	  window.removeEventListener( 'scroll', this );
 	  delete this.pointerDownScroll;
 	};
 
 	// -------------------------- dragging -------------------------- //
 
-	Flickity.prototype.dragStart = function( event, pointer ) {
+	proto.dragStart = function( event, pointer ) {
 	  this.dragStartPosition = this.x;
 	  this.startAnimation();
 	  this.dispatchEvent( 'dragStart', event, [ pointer ] );
 	};
 
-	Flickity.prototype.dragMove = function( event, pointer, moveVector ) {
-	  preventDefaultEvent( event );
+	proto.pointerMove = function( event, pointer ) {
+	  var moveVector = this._dragPointerMove( event, pointer );
+	  this.dispatchEvent( 'pointerMove', event, [ pointer, moveVector ] );
+	  this._dragMove( event, pointer, moveVector );
+	};
+
+	proto.dragMove = function( event, pointer, moveVector ) {
+	  event.preventDefault();
 
 	  this.previousDragX = this.dragX;
 	  // reverse if right-to-left
 	  var direction = this.options.rightToLeft ? -1 : 1;
 	  var dragX = this.dragStartPosition + moveVector.x * direction;
 
-	  if ( !this.options.wrapAround && this.cells.length ) {
+	  if ( !this.options.wrapAround && this.slides.length ) {
 	    // slow drag
-	    var originBound = Math.max( -this.cells[0].target, this.dragStartPosition );
+	    var originBound = Math.max( -this.slides[0].target, this.dragStartPosition );
 	    dragX = dragX > originBound ? ( dragX + originBound ) * 0.5 : dragX;
-	    var endBound = Math.min( -this.getLastCell().target, this.dragStartPosition );
+	    var endBound = Math.min( -this.getLastSlide().target, this.dragStartPosition );
 	    dragX = dragX < endBound ? ( dragX + endBound ) * 0.5 : dragX;
 	  }
 
@@ -21079,7 +20395,7 @@
 	  this.dispatchEvent( 'dragMove', event, [ pointer, moveVector ] );
 	};
 
-	Flickity.prototype.dragEnd = function( event, pointer ) {
+	proto.dragEnd = function( event, pointer ) {
 	  if ( this.options.freeScroll ) {
 	    this.isFreeScrolling = true;
 	  }
@@ -21088,11 +20404,11 @@
 
 	  if ( this.options.freeScroll && !this.options.wrapAround ) {
 	    // if free-scroll & not wrap around
-	    // do not free-scroll if going outside of bounding cells
-	    // so bounding cells can attract slider, and keep it in bounds
+	    // do not free-scroll if going outside of bounding slides
+	    // so bounding slides can attract slider, and keep it in bounds
 	    var restingX = this.getRestingPosition();
-	    this.isFreeScrolling = -restingX > this.cells[0].target &&
-	      -restingX < this.getLastCell().target;
+	    this.isFreeScrolling = -restingX > this.slides[0].target &&
+	      -restingX < this.getLastSlide().target;
 	  } else if ( !this.options.freeScroll && index == this.selectedIndex ) {
 	    // boost selection if selected index has not changed
 	    index += this.dragEndBoostSelect();
@@ -21100,14 +20416,17 @@
 	  delete this.previousDragX;
 	  // apply selection
 	  // TODO refactor this, selecting here feels weird
+	  // HACK, set flag so dragging stays in correct direction
+	  this.isDragSelect = this.options.wrapAround;
 	  this.select( index );
+	  delete this.isDragSelect;
 	  this.dispatchEvent( 'dragEnd', event, [ pointer ] );
 	};
 
-	Flickity.prototype.dragEndRestingSelect = function() {
+	proto.dragEndRestingSelect = function() {
 	  var restingX = this.getRestingPosition();
-	  // how far away from selected cell
-	  var distance = Math.abs( this.getCellDistance( -restingX, this.selectedIndex ) );
+	  // how far away from selected slide
+	  var distance = Math.abs( this.getSlideDistance( -restingX, this.selectedIndex ) );
 	  // get closet resting going up and going down
 	  var positiveResting = this._getClosestResting( restingX, distance, 1 );
 	  var negativeResting = this._getClosestResting( restingX, distance, -1 );
@@ -21125,7 +20444,7 @@
 	 * @param {Integer} increment - +1 or -1, going up or down
 	 * @returns {Object} - { distance: {Number}, index: {Integer} }
 	 */
-	Flickity.prototype._getClosestResting = function( restingX, distance, increment ) {
+	proto._getClosestResting = function( restingX, distance, increment ) {
 	  var index = this.selectedIndex;
 	  var minDistance = Infinity;
 	  var condition = this.options.contain && !this.options.wrapAround ?
@@ -21135,7 +20454,7 @@
 	    // measure distance to next cell
 	    index += increment;
 	    minDistance = distance;
-	    distance = this.getCellDistance( -restingX, index );
+	    distance = this.getSlideDistance( -restingX, index );
 	    if ( distance === null ) {
 	      break;
 	    }
@@ -21149,25 +20468,25 @@
 	};
 
 	/**
-	 * measure distance between x and a cell target
+	 * measure distance between x and a slide target
 	 * @param {Number} x
-	 * @param {Integer} index - cell index
+	 * @param {Integer} index - slide index
 	 */
-	Flickity.prototype.getCellDistance = function( x, index ) {
-	  var len = this.cells.length;
-	  // wrap around if at least 2 cells
+	proto.getSlideDistance = function( x, index ) {
+	  var len = this.slides.length;
+	  // wrap around if at least 2 slides
 	  var isWrapAround = this.options.wrapAround && len > 1;
-	  var cellIndex = isWrapAround ? utils.modulo( index, len ) : index;
-	  var cell = this.cells[ cellIndex ];
-	  if ( !cell ) {
+	  var slideIndex = isWrapAround ? utils.modulo( index, len ) : index;
+	  var slide = this.slides[ slideIndex ];
+	  if ( !slide ) {
 	    return null;
 	  }
-	  // add distance for wrap-around cells
+	  // add distance for wrap-around slides
 	  var wrap = isWrapAround ? this.slideableWidth * Math.floor( index / len ) : 0;
-	  return x - ( cell.target + wrap );
+	  return x - ( slide.target + wrap );
 	};
 
-	Flickity.prototype.dragEndBoostSelect = function() {
+	proto.dragEndBoostSelect = function() {
 	  // do not boost if no previousDragX or dragMoveTime
 	  if ( this.previousDragX === undefined || !this.dragMoveTime ||
 	    // or if drag was held for 100 ms
@@ -21175,7 +20494,7 @@
 	    return 0;
 	  }
 
-	  var distance = this.getCellDistance( -this.dragX, this.selectedIndex );
+	  var distance = this.getSlideDistance( -this.dragX, this.selectedIndex );
 	  var delta = this.previousDragX - this.dragX;
 	  if ( distance > 0 && delta > 0 ) {
 	    // boost to next if moving towards the right, and positive velocity
@@ -21189,13 +20508,34 @@
 
 	// ----- staticClick ----- //
 
-	Flickity.prototype.staticClick = function( event, pointer ) {
+	proto.staticClick = function( event, pointer ) {
 	  // get clickedCell, if cell was clicked
 	  var clickedCell = this.getParentCell( event.target );
 	  var cellElem = clickedCell && clickedCell.element;
-	  var cellIndex = clickedCell && utils.indexOf( this.cells, clickedCell );
+	  var cellIndex = clickedCell && this.cells.indexOf( clickedCell );
 	  this.dispatchEvent( 'staticClick', event, [ pointer, cellElem, cellIndex ] );
 	};
+
+	// ----- scroll ----- //
+
+	proto.onscroll = function() {
+	  var scroll = getScrollPosition();
+	  var scrollMoveX = this.pointerDownScroll.x - scroll.x;
+	  var scrollMoveY = this.pointerDownScroll.y - scroll.y;
+	  // cancel click/tap if scroll is too much
+	  if ( Math.abs( scrollMoveX ) > 3 || Math.abs( scrollMoveY ) > 3 ) {
+	    this._pointerDone();
+	  }
+	};
+
+	// ----- utils ----- //
+
+	function getScrollPosition() {
+	  return {
+	    x: window.pageXOffset,
+	    y: window.pageYOffset
+	  };
+	}
 
 	// -----  ----- //
 
@@ -21205,11 +20545,11 @@
 
 
 /***/ },
-/* 358 */
+/* 355 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	 * Unidragger v1.1.5
+	 * Unidragger v2.1.0
 	 * Draggable base class
 	 * MIT license
 	 */
@@ -21217,35 +20557,31 @@
 	/*jshint browser: true, unused: true, undef: true, strict: true */
 
 	( function( window, factory ) {
-	  /*global define: false, module: false, require: false */
-	  'use strict';
 	  // universal module definition
+	  /*jshint strict: false */ /*globals define, module, require */
 
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	      __webpack_require__(349),
-	      __webpack_require__(359)
-	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( eventie, Unipointer ) {
-	      return factory( window, eventie, Unipointer );
+	      __webpack_require__(356)
+	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( Unipointer ) {
+	      return factory( window, Unipointer );
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	  } else if ( typeof exports == 'object' ) {
+	  } else if ( typeof module == 'object' && module.exports ) {
 	    // CommonJS
 	    module.exports = factory(
 	      window,
-	      require('eventie'),
 	      require('unipointer')
 	    );
 	  } else {
 	    // browser global
 	    window.Unidragger = factory(
 	      window,
-	      window.eventie,
 	      window.Unipointer
 	    );
 	  }
 
-	}( window, function factory( window, eventie, Unipointer ) {
+	}( window, function factory( window, Unipointer ) {
 
 	'use strict';
 
@@ -21253,29 +20589,20 @@
 
 	function noop() {}
 
-	// handle IE8 prevent default
-	function preventDefaultEvent( event ) {
-	  if ( event.preventDefault ) {
-	    event.preventDefault();
-	  } else {
-	    event.returnValue = false;
-	  }
-	}
-
 	// -------------------------- Unidragger -------------------------- //
 
 	function Unidragger() {}
 
-	// inherit Unipointer & EventEmitter
-	Unidragger.prototype = new Unipointer();
+	// inherit Unipointer & EvEmitter
+	var proto = Unidragger.prototype = Object.create( Unipointer.prototype );
 
 	// ----- bind start ----- //
 
-	Unidragger.prototype.bindHandles = function() {
+	proto.bindHandles = function() {
 	  this._bindHandles( true );
 	};
 
-	Unidragger.prototype.unbindHandles = function() {
+	proto.unbindHandles = function() {
 	  this._bindHandles( false );
 	};
 
@@ -21284,7 +20611,7 @@
 	 * works as unbinder, as you can .bindHandles( false ) to unbind
 	 * @param {Boolean} isBind - will unbind if falsey
 	 */
-	Unidragger.prototype._bindHandles = function( isBind ) {
+	proto._bindHandles = function( isBind ) {
 	  // munge isBind, default to true
 	  isBind = isBind === undefined ? true : !!isBind;
 	  // extra bind logic
@@ -21300,44 +20627,15 @@
 	      handle.style.msTouchAction = isBind ? 'none' : '';
 	    };
 	  } else {
-	    binderExtra = function() {
-	      // TODO re-enable img.ondragstart when unbinding
-	      if ( isBind ) {
-	        disableImgOndragstart( handle );
-	      }
-	    };
+	    binderExtra = noop;
 	  }
 	  // bind each handle
-	  var bindMethod = isBind ? 'bind' : 'unbind';
-	  for ( var i=0, len = this.handles.length; i < len; i++ ) {
+	  var bindMethod = isBind ? 'addEventListener' : 'removeEventListener';
+	  for ( var i=0; i < this.handles.length; i++ ) {
 	    var handle = this.handles[i];
 	    this._bindStartEvent( handle, isBind );
 	    binderExtra( handle );
-	    eventie[ bindMethod ]( handle, 'click', this );
-	  }
-	};
-
-	// remove default dragging interaction on all images in IE8
-	// IE8 does its own drag thing on images, which messes stuff up
-
-	function noDragStart() {
-	  return false;
-	}
-
-	// TODO replace this with a IE8 test
-	var isIE8 = 'attachEvent' in document.documentElement;
-
-	// IE8 only
-	var disableImgOndragstart = !isIE8 ? noop : function( handle ) {
-
-	  if ( handle.nodeName == 'IMG' ) {
-	    handle.ondragstart = noDragStart;
-	  }
-
-	  var images = handle.querySelectorAll('img');
-	  for ( var i=0, len = images.length; i < len; i++ ) {
-	    var img = images[i];
-	    img.ondragstart = noDragStart;
+	    handle[ bindMethod ]( 'click', this );
 	  }
 	};
 
@@ -21348,7 +20646,7 @@
 	 * @param {Event} event
 	 * @param {Event or Touch} pointer
 	 */
-	Unidragger.prototype.pointerDown = function( event, pointer ) {
+	proto.pointerDown = function( event, pointer ) {
 	  // dismiss range sliders
 	  if ( event.target.nodeName == 'INPUT' && event.target.type == 'range' ) {
 	    // reset pointerDown logic
@@ -21365,24 +20663,24 @@
 	  }
 	  // bind move and end events
 	  this._bindPostStartEvents( event );
-	  // track scrolling
-	  this.pointerDownScroll = Unidragger.getScrollPosition();
-	  eventie.bind( window, 'scroll', this );
-
 	  this.emitEvent( 'pointerDown', [ event, pointer ] );
 	};
 
 	// base pointer down logic
-	Unidragger.prototype._dragPointerDown = function( event, pointer ) {
+	proto._dragPointerDown = function( event, pointer ) {
 	  // track to see when dragging starts
 	  this.pointerDownPoint = Unipointer.getPointerPoint( pointer );
 
-	  // prevent default, unless touchstart or <select>
-	  var isTouchstart = event.type == 'touchstart';
-	  var targetNodeName = event.target.nodeName;
-	  if ( !isTouchstart && targetNodeName != 'SELECT' ) {
-	    preventDefaultEvent( event );
+	  var canPreventDefault = this.canPreventDefaultOnPointerDown( event, pointer );
+	  if ( canPreventDefault ) {
+	    event.preventDefault();
 	  }
+	};
+
+	// overwriteable method so Flickity can prevent for scrolling
+	proto.canPreventDefaultOnPointerDown = function( event ) {
+	  // prevent default, unless touchstart or <select>
+	  return event.target.nodeName != 'SELECT';
 	};
 
 	// ----- move event ----- //
@@ -21392,14 +20690,14 @@
 	 * @param {Event} event
 	 * @param {Event or Touch} pointer
 	 */
-	Unidragger.prototype.pointerMove = function( event, pointer ) {
+	proto.pointerMove = function( event, pointer ) {
 	  var moveVector = this._dragPointerMove( event, pointer );
 	  this.emitEvent( 'pointerMove', [ event, pointer, moveVector ] );
 	  this._dragMove( event, pointer, moveVector );
 	};
 
 	// base pointer move logic
-	Unidragger.prototype._dragPointerMove = function( event, pointer ) {
+	proto._dragPointerMove = function( event, pointer ) {
 	  var movePoint = Unipointer.getPointerPoint( pointer );
 	  var moveVector = {
 	    x: movePoint.x - this.pointerDownPoint.x,
@@ -21413,7 +20711,7 @@
 	};
 
 	// condition if pointer has moved far enough to start drag
-	Unidragger.prototype.hasDragStarted = function( moveVector ) {
+	proto.hasDragStarted = function( moveVector ) {
 	  return Math.abs( moveVector.x ) > 3 || Math.abs( moveVector.y ) > 3;
 	};
 
@@ -21425,12 +20723,12 @@
 	 * @param {Event} event
 	 * @param {Event or Touch} pointer
 	 */
-	Unidragger.prototype.pointerUp = function( event, pointer ) {
+	proto.pointerUp = function( event, pointer ) {
 	  this.emitEvent( 'pointerUp', [ event, pointer ] );
 	  this._dragPointerUp( event, pointer );
 	};
 
-	Unidragger.prototype._dragPointerUp = function( event, pointer ) {
+	proto._dragPointerUp = function( event, pointer ) {
 	  if ( this.isDragging ) {
 	    this._dragEnd( event, pointer );
 	  } else {
@@ -21439,28 +20737,24 @@
 	  }
 	};
 
-	Unipointer.prototype.pointerDone = function() {
-	  eventie.unbind( window, 'scroll', this );
-	};
-
 	// -------------------------- drag -------------------------- //
 
 	// dragStart
-	Unidragger.prototype._dragStart = function( event, pointer ) {
+	proto._dragStart = function( event, pointer ) {
 	  this.isDragging = true;
-	  this.dragStartPoint = Unidragger.getPointerPoint( pointer );
+	  this.dragStartPoint = Unipointer.getPointerPoint( pointer );
 	  // prevent clicks
 	  this.isPreventingClicks = true;
 
 	  this.dragStart( event, pointer );
 	};
 
-	Unidragger.prototype.dragStart = function( event, pointer ) {
+	proto.dragStart = function( event, pointer ) {
 	  this.emitEvent( 'dragStart', [ event, pointer ] );
 	};
 
 	// dragMove
-	Unidragger.prototype._dragMove = function( event, pointer, moveVector ) {
+	proto._dragMove = function( event, pointer, moveVector ) {
 	  // do not drag if not dragging yet
 	  if ( !this.isDragging ) {
 	    return;
@@ -21469,46 +20763,40 @@
 	  this.dragMove( event, pointer, moveVector );
 	};
 
-	Unidragger.prototype.dragMove = function( event, pointer, moveVector ) {
-	  preventDefaultEvent( event );
+	proto.dragMove = function( event, pointer, moveVector ) {
+	  event.preventDefault();
 	  this.emitEvent( 'dragMove', [ event, pointer, moveVector ] );
 	};
 
 	// dragEnd
-	Unidragger.prototype._dragEnd = function( event, pointer ) {
+	proto._dragEnd = function( event, pointer ) {
 	  // set flags
 	  this.isDragging = false;
 	  // re-enable clicking async
-	  var _this = this;
 	  setTimeout( function() {
-	    delete _this.isPreventingClicks;
-	  });
+	    delete this.isPreventingClicks;
+	  }.bind( this ) );
 
 	  this.dragEnd( event, pointer );
 	};
 
-	Unidragger.prototype.dragEnd = function( event, pointer ) {
+	proto.dragEnd = function( event, pointer ) {
 	  this.emitEvent( 'dragEnd', [ event, pointer ] );
-	};
-
-	Unidragger.prototype.pointerDone = function() {
-	  eventie.unbind( window, 'scroll', this );
-	  delete this.pointerDownScroll;
 	};
 
 	// ----- onclick ----- //
 
 	// handle all clicks and prevent clicks when dragging
-	Unidragger.prototype.onclick = function( event ) {
+	proto.onclick = function( event ) {
 	  if ( this.isPreventingClicks ) {
-	    preventDefaultEvent( event );
+	    event.preventDefault();
 	  }
 	};
 
 	// ----- staticClick ----- //
 
 	// triggered after pointer down & up with no/tiny movement
-	Unidragger.prototype._staticClick = function( event, pointer ) {
+	proto._staticClick = function( event, pointer ) {
 	  // ignore emulated mouse up clicks
 	  if ( this.isIgnoringMouseUp && event.type == 'mouseup' ) {
 	    return;
@@ -21524,52 +20812,22 @@
 	  // set flag for emulated clicks 300ms after touchend
 	  if ( event.type != 'mouseup' ) {
 	    this.isIgnoringMouseUp = true;
-	    var _this = this;
 	    // reset flag after 300ms
 	    setTimeout( function() {
-	      delete _this.isIgnoringMouseUp;
-	    }, 400 );
+	      delete this.isIgnoringMouseUp;
+	    }.bind( this ), 400 );
 	  }
 	};
 
-	Unidragger.prototype.staticClick = function( event, pointer ) {
+	proto.staticClick = function( event, pointer ) {
 	  this.emitEvent( 'staticClick', [ event, pointer ] );
-	};
-
-	// ----- scroll ----- //
-
-	Unidragger.prototype.onscroll = function() {
-	  var scroll = Unidragger.getScrollPosition();
-	  var scrollMoveX = this.pointerDownScroll.x - scroll.x;
-	  var scrollMoveY = this.pointerDownScroll.y - scroll.y;
-	  // cancel click/tap if scroll is too much
-	  if ( Math.abs( scrollMoveX ) > 3 || Math.abs( scrollMoveY ) > 3 ) {
-	    this._pointerDone();
-	  }
 	};
 
 	// ----- utils ----- //
 
-	Unidragger.getPointerPoint = function( pointer ) {
-	  return {
-	    x: pointer.pageX !== undefined ? pointer.pageX : pointer.clientX,
-	    y: pointer.pageY !== undefined ? pointer.pageY : pointer.clientY
-	  };
-	};
-
-	var isPageOffset = window.pageYOffset !== undefined;
-
-	// get scroll in { x, y }
-	Unidragger.getScrollPosition = function() {
-	  return {
-	    x: isPageOffset ? window.pageXOffset : document.body.scrollLeft,
-	    y: isPageOffset ? window.pageYOffset : document.body.scrollTop
-	  };
-	};
+	Unidragger.getPointerPoint = Unipointer.getPointerPoint;
 
 	// -----  ----- //
-
-	Unidragger.getPointerPoint = Unipointer.getPointerPoint;
 
 	return Unidragger;
 
@@ -21577,47 +20835,42 @@
 
 
 /***/ },
-/* 359 */
+/* 356 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	 * Unipointer v1.1.0
+	 * Unipointer v2.1.0
 	 * base class for doing one thing with pointer event
 	 * MIT license
 	 */
 
 	/*jshint browser: true, undef: true, unused: true, strict: true */
-	/*global define: false, module: false, require: false */
 
 	( function( window, factory ) {
-	  'use strict';
 	  // universal module definition
-
+	  /* jshint strict: false */ /*global define, module, require */
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	      __webpack_require__(348),
-	      __webpack_require__(349)
-	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( EventEmitter, eventie ) {
-	      return factory( window, EventEmitter, eventie );
+	      __webpack_require__(347)
+	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( EvEmitter ) {
+	      return factory( window, EvEmitter );
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	  } else if ( typeof exports == 'object' ) {
+	  } else if ( typeof module == 'object' && module.exports ) {
 	    // CommonJS
 	    module.exports = factory(
 	      window,
-	      require('wolfy87-eventemitter'),
-	      require('eventie')
+	      require('ev-emitter')
 	    );
 	  } else {
 	    // browser global
 	    window.Unipointer = factory(
 	      window,
-	      window.EventEmitter,
-	      window.eventie
+	      window.EvEmitter
 	    );
 	  }
 
-	}( window, function factory( window, EventEmitter, eventie ) {
+	}( window, function factory( window, EvEmitter ) {
 
 	'use strict';
 
@@ -21625,14 +20878,14 @@
 
 	function Unipointer() {}
 
-	// inherit EventEmitter
-	Unipointer.prototype = new EventEmitter();
+	// inherit EvEmitter
+	var proto = Unipointer.prototype = Object.create( EvEmitter.prototype );
 
-	Unipointer.prototype.bindStartEvent = function( elem ) {
+	proto.bindStartEvent = function( elem ) {
 	  this._bindStartEvent( elem, true );
 	};
 
-	Unipointer.prototype.unbindStartEvent = function( elem ) {
+	proto.unbindStartEvent = function( elem ) {
 	  this._bindStartEvent( elem, false );
 	};
 
@@ -21640,26 +20893,26 @@
 	 * works as unbinder, as you can ._bindStart( false ) to unbind
 	 * @param {Boolean} isBind - will unbind if falsey
 	 */
-	Unipointer.prototype._bindStartEvent = function( elem, isBind ) {
+	proto._bindStartEvent = function( elem, isBind ) {
 	  // munge isBind, default to true
 	  isBind = isBind === undefined ? true : !!isBind;
-	  var bindMethod = isBind ? 'bind' : 'unbind';
+	  var bindMethod = isBind ? 'addEventListener' : 'removeEventListener';
 
 	  if ( window.navigator.pointerEnabled ) {
 	    // W3C Pointer Events, IE11. See https://coderwall.com/p/mfreca
-	    eventie[ bindMethod ]( elem, 'pointerdown', this );
+	    elem[ bindMethod ]( 'pointerdown', this );
 	  } else if ( window.navigator.msPointerEnabled ) {
 	    // IE10 Pointer Events
-	    eventie[ bindMethod ]( elem, 'MSPointerDown', this );
+	    elem[ bindMethod ]( 'MSPointerDown', this );
 	  } else {
 	    // listen for both, for devices like Chrome Pixel
-	    eventie[ bindMethod ]( elem, 'mousedown', this );
-	    eventie[ bindMethod ]( elem, 'touchstart', this );
+	    elem[ bindMethod ]( 'mousedown', this );
+	    elem[ bindMethod ]( 'touchstart', this );
 	  }
 	};
 
 	// trigger handler methods for events
-	Unipointer.prototype.handleEvent = function( event ) {
+	proto.handleEvent = function( event ) {
 	  var method = 'on' + event.type;
 	  if ( this[ method ] ) {
 	    this[ method ]( event );
@@ -21667,8 +20920,8 @@
 	};
 
 	// returns the touch that we're keeping track of
-	Unipointer.prototype.getTouch = function( touches ) {
-	  for ( var i=0, len = touches.length; i < len; i++ ) {
+	proto.getTouch = function( touches ) {
+	  for ( var i=0; i < touches.length; i++ ) {
 	    var touch = touches[i];
 	    if ( touch.identifier == this.pointerIdentifier ) {
 	      return touch;
@@ -21678,7 +20931,7 @@
 
 	// ----- start event ----- //
 
-	Unipointer.prototype.onmousedown = function( event ) {
+	proto.onmousedown = function( event ) {
 	  // dismiss clicks from right or middle buttons
 	  var button = event.button;
 	  if ( button && ( button !== 0 && button !== 1 ) ) {
@@ -21687,12 +20940,12 @@
 	  this._pointerDown( event, event );
 	};
 
-	Unipointer.prototype.ontouchstart = function( event ) {
+	proto.ontouchstart = function( event ) {
 	  this._pointerDown( event, event.changedTouches[0] );
 	};
 
-	Unipointer.prototype.onMSPointerDown =
-	Unipointer.prototype.onpointerdown = function( event ) {
+	proto.onMSPointerDown =
+	proto.onpointerdown = function( event ) {
 	  this._pointerDown( event, event );
 	};
 
@@ -21701,7 +20954,7 @@
 	 * @param {Event} event
 	 * @param {Event or Touch} pointer
 	 */
-	Unipointer.prototype._pointerDown = function( event, pointer ) {
+	proto._pointerDown = function( event, pointer ) {
 	  // dismiss other pointers
 	  if ( this.isPointerDown ) {
 	    return;
@@ -21716,7 +20969,7 @@
 	  this.pointerDown( event, pointer );
 	};
 
-	Unipointer.prototype.pointerDown = function( event, pointer ) {
+	proto.pointerDown = function( event, pointer ) {
 	  this._bindPostStartEvents( event );
 	  this.emitEvent( 'pointerDown', [ event, pointer ] );
 	};
@@ -21729,54 +20982,46 @@
 	  MSPointerDown: [ 'MSPointerMove', 'MSPointerUp', 'MSPointerCancel' ]
 	};
 
-	Unipointer.prototype._bindPostStartEvents = function( event ) {
+	proto._bindPostStartEvents = function( event ) {
 	  if ( !event ) {
 	    return;
 	  }
 	  // get proper events to match start event
 	  var events = postStartEvents[ event.type ];
-	  // IE8 needs to be bound to document
-	  var node = event.preventDefault ? window : document;
 	  // bind events to node
-	  for ( var i=0, len = events.length; i < len; i++ ) {
-	    var evnt = events[i];
-	    eventie.bind( node, evnt, this );
-	  }
+	  events.forEach( function( eventName ) {
+	    window.addEventListener( eventName, this );
+	  }, this );
 	  // save these arguments
-	  this._boundPointerEvents = {
-	    events: events,
-	    node: node
-	  };
+	  this._boundPointerEvents = events;
 	};
 
-	Unipointer.prototype._unbindPostStartEvents = function() {
-	  var args = this._boundPointerEvents;
-	  // IE8 can trigger dragEnd twice, check for _boundEvents
-	  if ( !args || !args.events ) {
+	proto._unbindPostStartEvents = function() {
+	  // check for _boundEvents, in case dragEnd triggered twice (old IE8 bug)
+	  if ( !this._boundPointerEvents ) {
 	    return;
 	  }
+	  this._boundPointerEvents.forEach( function( eventName ) {
+	    window.removeEventListener( eventName, this );
+	  }, this );
 
-	  for ( var i=0, len = args.events.length; i < len; i++ ) {
-	    var event = args.events[i];
-	    eventie.unbind( args.node, event, this );
-	  }
 	  delete this._boundPointerEvents;
 	};
 
 	// ----- move event ----- //
 
-	Unipointer.prototype.onmousemove = function( event ) {
+	proto.onmousemove = function( event ) {
 	  this._pointerMove( event, event );
 	};
 
-	Unipointer.prototype.onMSPointerMove =
-	Unipointer.prototype.onpointermove = function( event ) {
+	proto.onMSPointerMove =
+	proto.onpointermove = function( event ) {
 	  if ( event.pointerId == this.pointerIdentifier ) {
 	    this._pointerMove( event, event );
 	  }
 	};
 
-	Unipointer.prototype.ontouchmove = function( event ) {
+	proto.ontouchmove = function( event ) {
 	  var touch = this.getTouch( event.changedTouches );
 	  if ( touch ) {
 	    this._pointerMove( event, touch );
@@ -21789,30 +21034,30 @@
 	 * @param {Event or Touch} pointer
 	 * @private
 	 */
-	Unipointer.prototype._pointerMove = function( event, pointer ) {
+	proto._pointerMove = function( event, pointer ) {
 	  this.pointerMove( event, pointer );
 	};
 
 	// public
-	Unipointer.prototype.pointerMove = function( event, pointer ) {
+	proto.pointerMove = function( event, pointer ) {
 	  this.emitEvent( 'pointerMove', [ event, pointer ] );
 	};
 
 	// ----- end event ----- //
 
 
-	Unipointer.prototype.onmouseup = function( event ) {
+	proto.onmouseup = function( event ) {
 	  this._pointerUp( event, event );
 	};
 
-	Unipointer.prototype.onMSPointerUp =
-	Unipointer.prototype.onpointerup = function( event ) {
+	proto.onMSPointerUp =
+	proto.onpointerup = function( event ) {
 	  if ( event.pointerId == this.pointerIdentifier ) {
 	    this._pointerUp( event, event );
 	  }
 	};
 
-	Unipointer.prototype.ontouchend = function( event ) {
+	proto.ontouchend = function( event ) {
 	  var touch = this.getTouch( event.changedTouches );
 	  if ( touch ) {
 	    this._pointerUp( event, touch );
@@ -21825,20 +21070,20 @@
 	 * @param {Event or Touch} pointer
 	 * @private
 	 */
-	Unipointer.prototype._pointerUp = function( event, pointer ) {
+	proto._pointerUp = function( event, pointer ) {
 	  this._pointerDone();
 	  this.pointerUp( event, pointer );
 	};
 
 	// public
-	Unipointer.prototype.pointerUp = function( event, pointer ) {
+	proto.pointerUp = function( event, pointer ) {
 	  this.emitEvent( 'pointerUp', [ event, pointer ] );
 	};
 
 	// ----- pointer done ----- //
 
 	// triggered on pointer up & pointer cancel
-	Unipointer.prototype._pointerDone = function() {
+	proto._pointerDone = function() {
 	  // reset properties
 	  this.isPointerDown = false;
 	  delete this.pointerIdentifier;
@@ -21847,18 +21092,18 @@
 	  this.pointerDone();
 	};
 
-	Unipointer.prototype.pointerDone = noop;
+	proto.pointerDone = noop;
 
 	// ----- pointer cancel ----- //
 
-	Unipointer.prototype.onMSPointerCancel =
-	Unipointer.prototype.onpointercancel = function( event ) {
+	proto.onMSPointerCancel =
+	proto.onpointercancel = function( event ) {
 	  if ( event.pointerId == this.pointerIdentifier ) {
 	    this._pointerCancel( event, event );
 	  }
 	};
 
-	Unipointer.prototype.ontouchcancel = function( event ) {
+	proto.ontouchcancel = function( event ) {
 	  var touch = this.getTouch( event.changedTouches );
 	  if ( touch ) {
 	    this._pointerCancel( event, touch );
@@ -21871,23 +21116,23 @@
 	 * @param {Event or Touch} pointer
 	 * @private
 	 */
-	Unipointer.prototype._pointerCancel = function( event, pointer ) {
+	proto._pointerCancel = function( event, pointer ) {
 	  this._pointerDone();
 	  this.pointerCancel( event, pointer );
 	};
 
 	// public
-	Unipointer.prototype.pointerCancel = function( event, pointer ) {
+	proto.pointerCancel = function( event, pointer ) {
 	  this.emitEvent( 'pointerCancel', [ event, pointer ] );
 	};
 
 	// -----  ----- //
 
-	// utility function for getting x/y cooridinates from event, because IE8
+	// utility function for getting x/y coords from event
 	Unipointer.getPointerPoint = function( pointer ) {
 	  return {
-	    x: pointer.pageX !== undefined ? pointer.pageX : pointer.clientX,
-	    y: pointer.pageY !== undefined ? pointer.pageY : pointer.clientY
+	    x: pointer.pageX,
+	    y: pointer.pageY
 	  };
 	};
 
@@ -21899,30 +21144,26 @@
 
 
 /***/ },
-/* 360 */
+/* 357 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// -------------------------- prev/next button -------------------------- //
-
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// prev/next buttons
 	( function( window, factory ) {
-	  'use strict';
 	  // universal module definition
-
+	  /* jshint strict: false */
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	      __webpack_require__(349),
 	      __webpack_require__(346),
-	      __webpack_require__(361),
-	      __webpack_require__(352)
-	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( eventie, Flickity, TapListener, utils ) {
-	      return factory( window, eventie, Flickity, TapListener, utils );
+	      __webpack_require__(358),
+	      __webpack_require__(349)
+	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( Flickity, TapListener, utils ) {
+	      return factory( window, Flickity, TapListener, utils );
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	  } else if ( typeof exports == 'object' ) {
+	  } else if ( typeof module == 'object' && module.exports ) {
 	    // CommonJS
 	    module.exports = factory(
 	      window,
-	      require('eventie'),
 	      require('./flickity'),
 	      require('tap-listener'),
 	      require('fizzy-ui-utils')
@@ -21931,35 +21172,16 @@
 	    // browser global
 	    factory(
 	      window,
-	      window.eventie,
 	      window.Flickity,
 	      window.TapListener,
 	      window.fizzyUIUtils
 	    );
 	  }
 
-	}( window, function factory( window, eventie, Flickity, TapListener, utils ) {
-
+	}( window, function factory( window, Flickity, TapListener, utils ) {
 	'use strict';
 
-	// ----- inline SVG support ----- //
-
 	var svgURI = 'http://www.w3.org/2000/svg';
-
-	// only check on demand, not on script load
-	var supportsInlineSVG = ( function() {
-	  var supports;
-	  function checkSupport() {
-	    if ( supports !== undefined ) {
-	      return supports;
-	    }
-	    var div = document.createElement('div');
-	    div.innerHTML = '<svg/>';
-	    supports = ( div.firstChild && div.firstChild.namespaceURI ) == svgURI;
-	    return supports;
-	  }
-	  return checkSupport;
-	})();
 
 	// -------------------------- PrevNextButton -------------------------- //
 
@@ -21988,34 +21210,25 @@
 
 	  element.setAttribute( 'aria-label', this.isPrevious ? 'previous' : 'next' );
 
-	  Flickity.setUnselectable( element );
 	  // create arrow
-	  if ( supportsInlineSVG() ) {
-	    var svg = this.createSVG();
-	    element.appendChild( svg );
-	  } else {
-	    // SVG not supported, set button text
-	    this.setArrowText();
-	    element.className += ' no-svg';
-	  }
+	  var svg = this.createSVG();
+	  element.appendChild( svg );
 	  // update on select
-	  var _this = this;
-	  this.onCellSelect = function() {
-	    _this.update();
-	  };
-	  this.parent.on( 'cellSelect', this.onCellSelect );
+	  this.parent.on( 'select', function() {
+	    this.update();
+	  }.bind( this ));
 	  // tap
 	  this.on( 'tap', this.onTap );
 	  // pointerDown
 	  this.on( 'pointerDown', function onPointerDown( button, event ) {
-	    _this.parent.childUIPointerDown( event );
-	  });
+	    this.parent.childUIPointerDown( event );
+	  }.bind( this ));
 	};
 
 	PrevNextButton.prototype.activate = function() {
 	  this.bindTap( this.element );
 	  // click events from keyboard
-	  eventie.bind( this.element, 'click', this );
+	  this.element.addEventListener( 'click', this );
 	  // add to DOM
 	  this.parent.element.appendChild( this.element );
 	};
@@ -22026,7 +21239,7 @@
 	  // do regular TapListener destroy
 	  TapListener.prototype.destroy.call( this );
 	  // click events from keyboard
-	  eventie.unbind( this.element, 'click', this );
+	  this.element.removeEventListener( 'click', this );
 	};
 
 	PrevNextButton.prototype.createSVG = function() {
@@ -22059,12 +21272,6 @@
 	    ' L ' + shape.x1 + ',' + ( 50 - shape.y1 ) +
 	    ' Z';
 	}
-
-	PrevNextButton.prototype.setArrowText = function() {
-	  var parentOptions = this.parent.options;
-	  var arrowText = this.isLeft ? parentOptions.leftArrowText : parentOptions.rightArrowText;
-	  utils.setText( this.element, arrowText );
-	};
 
 	PrevNextButton.prototype.onTap = function() {
 	  if ( !this.isEnabled ) {
@@ -22104,14 +21311,14 @@
 	};
 
 	PrevNextButton.prototype.update = function() {
-	  // index of first or last cell, if previous or next
-	  var cells = this.parent.cells;
-	  // enable is wrapAround and at least 2 cells
-	  if ( this.parent.options.wrapAround && cells.length > 1 ) {
+	  // index of first or last slide, if previous or next
+	  var slides = this.parent.slides;
+	  // enable is wrapAround and at least 2 slides
+	  if ( this.parent.options.wrapAround && slides.length > 1 ) {
 	    this.enable();
 	    return;
 	  }
-	  var lastIndex = cells.length ? cells.length - 1 : 0;
+	  var lastIndex = slides.length ? slides.length - 1 : 0;
 	  var boundIndex = this.isPrevious ? 0 : lastIndex;
 	  var method = this.parent.selectedIndex == boundIndex ? 'disable' : 'enable';
 	  this[ method ]();
@@ -22125,8 +21332,6 @@
 
 	utils.extend( Flickity.defaults, {
 	  prevNextButtons: true,
-	  leftArrowText: '‹',
-	  rightArrowText: '›',
 	  arrowShape: {
 	    x0: 10,
 	    x1: 60, y1: 50,
@@ -22136,8 +21341,9 @@
 	});
 
 	Flickity.createMethods.push('_createPrevNextButtons');
+	var proto = Flickity.prototype;
 
-	Flickity.prototype._createPrevNextButtons = function() {
+	proto._createPrevNextButtons = function() {
 	  if ( !this.options.prevNextButtons ) {
 	    return;
 	  }
@@ -22148,13 +21354,13 @@
 	  this.on( 'activate', this.activatePrevNextButtons );
 	};
 
-	Flickity.prototype.activatePrevNextButtons = function() {
+	proto.activatePrevNextButtons = function() {
 	  this.prevButton.activate();
 	  this.nextButton.activate();
 	  this.on( 'deactivate', this.deactivatePrevNextButtons );
 	};
 
-	Flickity.prototype.deactivatePrevNextButtons = function() {
+	proto.deactivatePrevNextButtons = function() {
 	  this.prevButton.deactivate();
 	  this.nextButton.deactivate();
 	  this.off( 'deactivate', this.deactivatePrevNextButtons );
@@ -22170,11 +21376,11 @@
 
 
 /***/ },
-/* 361 */
+/* 358 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	 * Tap listener v1.1.2
+	 * Tap listener v2.0.0
 	 * listens to taps
 	 * MIT license
 	 */
@@ -22188,11 +21394,11 @@
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	      __webpack_require__(359)
+	      __webpack_require__(356)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( Unipointer ) {
 	      return factory( window, Unipointer );
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	  } else if ( typeof exports == 'object' ) {
+	  } else if ( typeof module == 'object' && module.exports ) {
 	    // CommonJS
 	    module.exports = factory(
 	      window,
@@ -22217,13 +21423,13 @@
 	}
 
 	// inherit Unipointer & EventEmitter
-	TapListener.prototype = new Unipointer();
+	var proto = TapListener.prototype = Object.create( Unipointer.prototype );
 
 	/**
 	 * bind tap event to element
 	 * @param {Element} elem
 	 */
-	TapListener.prototype.bindTap = function( elem ) {
+	proto.bindTap = function( elem ) {
 	  if ( !elem ) {
 	    return;
 	  }
@@ -22232,7 +21438,7 @@
 	  this._bindStartEvent( elem, true );
 	};
 
-	TapListener.prototype.unbindTap = function() {
+	proto.unbindTap = function() {
 	  if ( !this.tapElement ) {
 	    return;
 	  }
@@ -22240,13 +21446,12 @@
 	  delete this.tapElement;
 	};
 
-	var isPageOffset = window.pageYOffset !== undefined;
 	/**
 	 * pointer up
 	 * @param {Event} event
 	 * @param {Event or Touch} pointer
 	 */
-	TapListener.prototype.pointerUp = function( event, pointer ) {
+	proto.pointerUp = function( event, pointer ) {
 	  // ignore emulated mouse up clicks
 	  if ( this.isIgnoringMouseUp && event.type == 'mouseup' ) {
 	    return;
@@ -22254,9 +21459,8 @@
 
 	  var pointerPoint = Unipointer.getPointerPoint( pointer );
 	  var boundingRect = this.tapElement.getBoundingClientRect();
-	  // standard or IE8 scroll positions
-	  var scrollX = isPageOffset ? window.pageXOffset : document.body.scrollLeft;
-	  var scrollY = isPageOffset ? window.pageYOffset : document.body.scrollTop;
+	  var scrollX = window.pageXOffset;
+	  var scrollY = window.pageYOffset;
 	  // calculate if pointer is inside tapElement
 	  var isInside = pointerPoint.x >= boundingRect.left + scrollX &&
 	    pointerPoint.x <= boundingRect.right + scrollX &&
@@ -22271,13 +21475,14 @@
 	  if ( event.type != 'mouseup' ) {
 	    this.isIgnoringMouseUp = true;
 	    // reset flag after 300ms
+	    var _this = this;
 	    setTimeout( function() {
-	      delete this.isIgnoringMouseUp;
-	    }.bind( this ), 320 );
+	      delete _this.isIgnoringMouseUp;
+	    }, 400 );
 	  }
 	};
 
-	TapListener.prototype.destroy = function() {
+	proto.destroy = function() {
 	  this.pointerDone();
 	  this.unbindTap();
 	};
@@ -22290,28 +21495,26 @@
 
 
 /***/ },
-/* 362 */
+/* 359 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( window, factory ) {
-	  'use strict';
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// page dots
+	( function( window, factory ) {
 	  // universal module definition
-
+	  /* jshint strict: false */
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	      __webpack_require__(349),
 	      __webpack_require__(346),
-	      __webpack_require__(361),
-	      __webpack_require__(352)
-	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( eventie, Flickity, TapListener, utils ) {
-	      return factory( window, eventie, Flickity, TapListener, utils );
+	      __webpack_require__(358),
+	      __webpack_require__(349)
+	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( Flickity, TapListener, utils ) {
+	      return factory( window, Flickity, TapListener, utils );
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	  } else if ( typeof exports == 'object' ) {
+	  } else if ( typeof module == 'object' && module.exports ) {
 	    // CommonJS
 	    module.exports = factory(
 	      window,
-	      require('eventie'),
 	      require('./flickity'),
 	      require('tap-listener'),
 	      require('fizzy-ui-utils')
@@ -22320,14 +21523,13 @@
 	    // browser global
 	    factory(
 	      window,
-	      window.eventie,
 	      window.Flickity,
 	      window.TapListener,
 	      window.fizzyUIUtils
 	    );
 	  }
 
-	}( window, function factory( window, eventie, Flickity, TapListener, utils ) {
+	}( window, function factory( window, Flickity, TapListener, utils ) {
 
 	// -------------------------- PageDots -------------------------- //
 
@@ -22344,21 +21546,11 @@
 	  // create holder element
 	  this.holder = document.createElement('ol');
 	  this.holder.className = 'flickity-page-dots';
-	  Flickity.setUnselectable( this.holder );
 	  // create dots, array of elements
 	  this.dots = [];
-	  // update on select
-	  var _this = this;
-	  this.onCellSelect = function() {
-	    _this.updateSelected();
-	  };
-	  this.parent.on( 'cellSelect', this.onCellSelect );
 	  // tap
 	  this.on( 'tap', this.onTap );
-	  // pointerDown
-	  this.on( 'pointerDown', function onPointerDown( button, event ) {
-	    _this.parent.childUIPointerDown( event );
-	  });
+
 	};
 
 	PageDots.prototype.activate = function() {
@@ -22375,8 +21567,8 @@
 	};
 
 	PageDots.prototype.setDots = function() {
-	  // get difference between number of cells and number of dots
-	  var delta = this.parent.cells.length - this.dots.length;
+	  // get difference between number of slides and number of dots
+	  var delta = this.parent.slides.length - this.dots.length;
 	  if ( delta > 0 ) {
 	    this.addDots( delta );
 	  } else if ( delta < 0 ) {
@@ -22402,10 +21594,9 @@
 	  // remove from this.dots collection
 	  var removeDots = this.dots.splice( this.dots.length - count, count );
 	  // remove from DOM
-	  for ( var i=0, len = removeDots.length; i < len; i++ ) {
-	    var dot = removeDots[i];
+	  removeDots.forEach( function( dot ) {
 	    this.holder.removeChild( dot );
-	  }
+	  }, this );
 	};
 
 	PageDots.prototype.updateSelected = function() {
@@ -22429,7 +21620,7 @@
 	  }
 
 	  this.parent.uiChange();
-	  var index = utils.indexOf( this.dots, target );
+	  var index = this.dots.indexOf( target );
 	  this.parent.select( index );
 	};
 
@@ -22447,25 +21638,38 @@
 
 	Flickity.createMethods.push('_createPageDots');
 
-	Flickity.prototype._createPageDots = function() {
+	var proto = Flickity.prototype;
+
+	proto._createPageDots = function() {
 	  if ( !this.options.pageDots ) {
 	    return;
 	  }
 	  this.pageDots = new PageDots( this );
+	  // events
 	  this.on( 'activate', this.activatePageDots );
-	  this.on( 'cellAddedRemoved', this.onCellAddedRemovedPageDots );
+	  this.on( 'select', this.updateSelectedPageDots );
+	  this.on( 'cellChange', this.updatePageDots );
+	  this.on( 'resize', this.updatePageDots );
 	  this.on( 'deactivate', this.deactivatePageDots );
+
+	  this.pageDots.on( 'pointerDown', function( button, event ) {
+	    this.childUIPointerDown( event );
+	  }.bind( this ));
 	};
 
-	Flickity.prototype.activatePageDots = function() {
+	proto.activatePageDots = function() {
 	  this.pageDots.activate();
 	};
 
-	Flickity.prototype.onCellAddedRemovedPageDots = function() {
+	proto.updateSelectedPageDots = function() {
+	  this.pageDots.updateSelected();
+	};
+
+	proto.updatePageDots = function() {
 	  this.pageDots.setDots();
 	};
 
-	Flickity.prototype.deactivatePageDots = function() {
+	proto.deactivatePageDots = function() {
 	  this.pageDots.deactivate();
 	};
 
@@ -22479,42 +21683,39 @@
 
 
 /***/ },
-/* 363 */
+/* 360 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( window, factory ) {
-	  'use strict';
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// player & autoPlay
+	( function( window, factory ) {
 	  // universal module definition
-
+	  /* jshint strict: false */
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	      __webpack_require__(348),
+	      __webpack_require__(347),
 	      __webpack_require__(349),
-	      __webpack_require__(352),
 	      __webpack_require__(346)
-	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( EventEmitter, eventie, utils, Flickity ) {
-	      return factory( EventEmitter, eventie, utils, Flickity );
+	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( EvEmitter, utils, Flickity ) {
+	      return factory( EvEmitter, utils, Flickity );
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	  } else if ( typeof exports == 'object' ) {
+	  } else if ( typeof module == 'object' && module.exports ) {
 	    // CommonJS
 	    module.exports = factory(
-	      require('wolfy87-eventemitter'),
-	      require('eventie'),
+	      require('ev-emitter'),
 	      require('fizzy-ui-utils'),
 	      require('./flickity')
 	    );
 	  } else {
 	    // browser global
 	    factory(
-	      window.EventEmitter,
-	      window.eventie,
+	      window.EvEmitter,
 	      window.fizzyUIUtils,
 	      window.Flickity
 	    );
 	  }
 
-	}( window, function factory( EventEmitter, eventie, utils, Flickity ) {
+	}( window, function factory( EvEmitter, utils, Flickity ) {
 
 	'use strict';
 
@@ -22537,24 +21738,33 @@
 	  this.state = 'stopped';
 	  // visibility change event handler
 	  if ( visibilityEvent ) {
-	    var _this = this;
 	    this.onVisibilityChange = function() {
-	      _this.visibilityChange();
-	    };
+	      this.visibilityChange();
+	    }.bind( this );
+	    this.onVisibilityPlay = function() {
+	      this.visibilityPlay();
+	    }.bind( this );
 	  }
 	}
 
-	Player.prototype = new EventEmitter();
+	Player.prototype = Object.create( EvEmitter.prototype );
 
 	// start play
 	Player.prototype.play = function() {
 	  if ( this.state == 'playing' ) {
 	    return;
 	  }
+	  // do not play if page is hidden, start playing when page is visible
+	  var isPageHidden = document[ hiddenProperty ];
+	  if ( visibilityEvent && isPageHidden ) {
+	    document.addEventListener( visibilityEvent, this.onVisibilityPlay );
+	    return;
+	  }
+
 	  this.state = 'playing';
 	  // listen to visibility change
 	  if ( visibilityEvent ) {
-	    document.addEventListener( visibilityEvent, this.onVisibilityChange, false );
+	    document.addEventListener( visibilityEvent, this.onVisibilityChange );
 	  }
 	  // start ticking
 	  this.tick();
@@ -22583,7 +21793,7 @@
 	  this.clear();
 	  // remove visibility change event
 	  if ( visibilityEvent ) {
-	    document.removeEventListener( visibilityEvent, this.onVisibilityChange, false );
+	    document.removeEventListener( visibilityEvent, this.onVisibilityChange );
 	  }
 	};
 
@@ -22599,7 +21809,7 @@
 	};
 
 	Player.prototype.unpause = function() {
-	  // re-start play if in unpaused state
+	  // re-start play if paused
 	  if ( this.state == 'paused' ) {
 	    this.play();
 	  }
@@ -22607,8 +21817,13 @@
 
 	// pause if page visibility is hidden, unpause if visible
 	Player.prototype.visibilityChange = function() {
-	  var isHidden = document[ hiddenProperty ];
-	  this[ isHidden ? 'pause' : 'unpause' ]();
+	  var isPageHidden = document[ hiddenProperty ];
+	  this[ isPageHidden ? 'pause' : 'unpause' ]();
+	};
+
+	Player.prototype.visibilityPlay = function() {
+	  this.play();
+	  document.removeEventListener( visibilityEvent, this.onVisibilityPlay );
 	};
 
 	// -------------------------- Flickity -------------------------- //
@@ -22618,8 +21833,9 @@
 	});
 
 	Flickity.createMethods.push('_createPlayer');
+	var proto = Flickity.prototype;
 
-	Flickity.prototype._createPlayer = function() {
+	proto._createPlayer = function() {
 	  this.player = new Player( this );
 
 	  this.on( 'activate', this.activatePlayer );
@@ -22628,56 +21844,52 @@
 	  this.on( 'deactivate', this.deactivatePlayer );
 	};
 
-	Flickity.prototype.activatePlayer = function() {
+	proto.activatePlayer = function() {
 	  if ( !this.options.autoPlay ) {
 	    return;
 	  }
 	  this.player.play();
-	  eventie.bind( this.element, 'mouseenter', this );
-	  this.isMouseenterBound = true;
+	  this.element.addEventListener( 'mouseenter', this );
 	};
 
 	// Player API, don't hate the ... thanks I know where the door is
 
-	Flickity.prototype.playPlayer = function() {
+	proto.playPlayer = function() {
 	  this.player.play();
 	};
 
-	Flickity.prototype.stopPlayer = function() {
+	proto.stopPlayer = function() {
 	  this.player.stop();
 	};
 
-	Flickity.prototype.pausePlayer = function() {
+	proto.pausePlayer = function() {
 	  this.player.pause();
 	};
 
-	Flickity.prototype.unpausePlayer = function() {
+	proto.unpausePlayer = function() {
 	  this.player.unpause();
 	};
 
-	Flickity.prototype.deactivatePlayer = function() {
+	proto.deactivatePlayer = function() {
 	  this.player.stop();
-	  if ( this.isMouseenterBound ) {
-	    eventie.unbind( this.element, 'mouseenter', this );
-	    delete this.isMouseenterBound;
-	  }
+	  this.element.removeEventListener( 'mouseenter', this );
 	};
 
 	// ----- mouseenter/leave ----- //
 
 	// pause auto-play on hover
-	Flickity.prototype.onmouseenter = function() {
+	proto.onmouseenter = function() {
 	  if ( !this.options.pauseAutoPlayOnHover ) {
 	    return;
 	  }
 	  this.player.pause();
-	  eventie.bind( this.element, 'mouseleave', this );
+	  this.element.addEventListener( 'mouseleave', this );
 	};
 
 	// resume auto-play on hover off
-	Flickity.prototype.onmouseleave = function() {
+	proto.onmouseleave = function() {
 	  this.player.unpause();
-	  eventie.unbind( this.element, 'mouseleave', this );
+	  this.element.removeEventListener( 'mouseleave', this );
 	};
 
 	// -----  ----- //
@@ -22690,22 +21902,22 @@
 
 
 /***/ },
-/* 364 */
+/* 361 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( window, factory ) {
-	  'use strict';
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// add, remove cell
+	( function( window, factory ) {
 	  // universal module definition
-
+	  /* jshint strict: false */
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 	      __webpack_require__(346),
-	      __webpack_require__(352)
+	      __webpack_require__(349)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( Flickity, utils ) {
 	      return factory( window, Flickity, utils );
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	  } else if ( typeof exports == 'object' ) {
+	  } else if ( typeof module == 'object' && module.exports ) {
 	    // CommonJS
 	    module.exports = factory(
 	      window,
@@ -22728,21 +21940,22 @@
 	// append cells to a document fragment
 	function getCellsFragment( cells ) {
 	  var fragment = document.createDocumentFragment();
-	  for ( var i=0, len = cells.length; i < len; i++ ) {
-	    var cell = cells[i];
+	  cells.forEach( function( cell ) {
 	    fragment.appendChild( cell.element );
-	  }
+	  });
 	  return fragment;
 	}
 
 	// -------------------------- add/remove cell prototype -------------------------- //
+
+	var proto = Flickity.prototype;
 
 	/**
 	 * Insert, prepend, or append cells
 	 * @param {Element, Array, NodeList} elems
 	 * @param {Integer} index
 	 */
-	Flickity.prototype.insert = function( elems, index ) {
+	proto.insert = function( elems, index ) {
 	  var cells = this._makeCells( elems );
 	  if ( !cells || !cells.length ) {
 	    return;
@@ -22779,11 +21992,11 @@
 	  this._cellAddedRemoved( index, selectedIndexDelta );
 	};
 
-	Flickity.prototype.append = function( elems ) {
+	proto.append = function( elems ) {
 	  this.insert( elems, this.cells.length );
 	};
 
-	Flickity.prototype.prepend = function( elems ) {
+	proto.prepend = function( elems ) {
 	  this.insert( elems, 0 );
 	};
 
@@ -22791,18 +22004,19 @@
 	 * Remove cells
 	 * @param {Element, Array, NodeList} elems
 	 */
-	Flickity.prototype.remove = function( elems ) {
+	proto.remove = function( elems ) {
 	  var cells = this.getCells( elems );
 	  var selectedIndexDelta = 0;
-	  var i, len, cell;
+	  var len = cells.length;
+	  var i, cell;
 	  // calculate selectedIndexDelta, easier if done in seperate loop
-	  for ( i=0, len = cells.length; i < len; i++ ) {
+	  for ( i=0; i < len; i++ ) {
 	    cell = cells[i];
-	    var wasBefore = utils.indexOf( this.cells, cell ) < this.selectedIndex;
+	    var wasBefore = this.cells.indexOf( cell ) < this.selectedIndex;
 	    selectedIndexDelta -= wasBefore ? 1 : 0;
 	  }
 
-	  for ( i=0, len = cells.length; i < len; i++ ) {
+	  for ( i=0; i < len; i++ ) {
 	    cell = cells[i];
 	    cell.remove();
 	    // remove item from collection
@@ -22816,27 +22030,29 @@
 	};
 
 	// updates when cells are added or removed
-	Flickity.prototype._cellAddedRemoved = function( changedCellIndex, selectedIndexDelta ) {
+	proto._cellAddedRemoved = function( changedCellIndex, selectedIndexDelta ) {
+	  // TODO this math isn't perfect with grouped slides
 	  selectedIndexDelta = selectedIndexDelta || 0;
 	  this.selectedIndex += selectedIndexDelta;
-	  this.selectedIndex = Math.max( 0, Math.min( this.cells.length - 1, this.selectedIndex ) );
+	  this.selectedIndex = Math.max( 0, Math.min( this.slides.length - 1, this.selectedIndex ) );
 
-	  this.emitEvent( 'cellAddedRemoved', [ changedCellIndex, selectedIndexDelta ] );
 	  this.cellChange( changedCellIndex, true );
+	  // backwards compatibility
+	  this.emitEvent( 'cellAddedRemoved', [ changedCellIndex, selectedIndexDelta ] );
 	};
 
 	/**
 	 * logic to be run after a cell's size changes
 	 * @param {Element} elem - cell's element
 	 */
-	Flickity.prototype.cellSizeChange = function( elem ) {
+	proto.cellSizeChange = function( elem ) {
 	  var cell = this.getCell( elem );
 	  if ( !cell ) {
 	    return;
 	  }
 	  cell.getSize();
 
-	  var index = utils.indexOf( this.cells, cell );
+	  var index = this.cells.indexOf( cell );
 	  this.cellChange( index );
 	};
 
@@ -22844,11 +22060,12 @@
 	 * logic any time a cell is changed: added, removed, or size changed
 	 * @param {Integer} changedCellIndex - index of the changed cell, optional
 	 */
-	Flickity.prototype.cellChange = function( changedCellIndex, isPositioningSlider ) {
+	proto.cellChange = function( changedCellIndex, isPositioningSlider ) {
 	  var prevSlideableWidth = this.slideableWidth;
 	  this._positionCells( changedCellIndex );
 	  this._getWrapShiftCells();
 	  this.setGallerySize();
+	  this.emitEvent( 'cellChange', [ changedCellIndex ] );
 	  // position slider
 	  if ( this.options.freeScroll ) {
 	    // shift x by change in slideableWidth
@@ -22873,29 +22090,25 @@
 
 
 /***/ },
-/* 365 */
+/* 362 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( window, factory ) {
-	  'use strict';
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// lazyload
+	( function( window, factory ) {
 	  // universal module definition
-
+	  /* jshint strict: false */
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	      __webpack_require__(347),
-	      __webpack_require__(349),
 	      __webpack_require__(346),
-	      __webpack_require__(352)
-	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( classie, eventie, Flickity, utils ) {
-	      return factory( window, classie, eventie, Flickity, utils );
+	      __webpack_require__(349)
+	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( Flickity, utils ) {
+	      return factory( window, Flickity, utils );
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	  } else if ( typeof exports == 'object' ) {
+	  } else if ( typeof module == 'object' && module.exports ) {
 	    // CommonJS
 	    module.exports = factory(
 	      window,
-	      require('desandro-classie'),
-	      require('eventie'),
 	      require('./flickity'),
 	      require('fizzy-ui-utils')
 	    );
@@ -22903,23 +22116,22 @@
 	    // browser global
 	    factory(
 	      window,
-	      window.classie,
-	      window.eventie,
 	      window.Flickity,
 	      window.fizzyUIUtils
 	    );
 	  }
 
-	}( window, function factory( window, classie, eventie, Flickity, utils ) {
+	}( window, function factory( window, Flickity, utils ) {
 	'use strict';
 
 	Flickity.createMethods.push('_createLazyload');
+	var proto = Flickity.prototype;
 
-	Flickity.prototype._createLazyload = function() {
-	  this.on( 'cellSelect', this.lazyLoad );
+	proto._createLazyload = function() {
+	  this.on( 'select', this.lazyLoad );
 	};
 
-	Flickity.prototype.lazyLoad = function() {
+	proto.lazyLoad = function() {
 	  var lazyLoad = this.options.lazyLoad;
 	  if ( !lazyLoad ) {
 	    return;
@@ -22929,16 +22141,14 @@
 	  var cellElems = this.getAdjacentCellElements( adjCount );
 	  // get lazy images in those cells
 	  var lazyImages = [];
-	  for ( var i=0, len = cellElems.length; i < len; i++ ) {
-	    var cellElem = cellElems[i];
+	  cellElems.forEach( function( cellElem ) {
 	    var lazyCellImages = getCellLazyImages( cellElem );
 	    lazyImages = lazyImages.concat( lazyCellImages );
-	  }
+	  });
 	  // load lazy images
-	  for ( i=0, len = lazyImages.length; i < len; i++ ) {
-	    var img = lazyImages[i];
+	  lazyImages.forEach( function( img ) {
 	    new LazyLoader( img, this );
-	  }
+	  }, this );
 	};
 
 	function getCellLazyImages( cellElem ) {
@@ -22966,8 +22176,8 @@
 	LazyLoader.prototype.handleEvent = utils.handleEvent;
 
 	LazyLoader.prototype.load = function() {
-	  eventie.bind( this.img, 'load', this );
-	  eventie.bind( this.img, 'error', this );
+	  this.img.addEventListener( 'load', this );
+	  this.img.addEventListener( 'error', this );
 	  // load image
 	  this.img.src = this.img.getAttribute('data-flickity-lazyload');
 	  // remove attr
@@ -22984,14 +22194,14 @@
 
 	LazyLoader.prototype.complete = function( event, className ) {
 	  // unbind events
-	  eventie.unbind( this.img, 'load', this );
-	  eventie.unbind( this.img, 'error', this );
+	  this.img.removeEventListener( 'load', this );
+	  this.img.removeEventListener( 'error', this );
 
 	  var cell = this.flickity.getParentCell( this.img );
 	  var cellElem = cell && cell.element;
 	  this.flickity.cellSizeChange( cellElem );
 
-	  classie.add( this.img, className );
+	  this.img.classList.add( className );
 	  this.flickity.dispatchEvent( 'lazyLoad', event, cellElem );
 	};
 
@@ -23005,7 +22215,7 @@
 
 
 /***/ },
-/* 366 */
+/* 363 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;!function() {
@@ -32564,7 +31774,7 @@
 	}();
 
 /***/ },
-/* 367 */
+/* 364 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32633,7 +31843,7 @@
 	}();
 
 /***/ },
-/* 368 */
+/* 365 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32750,7 +31960,7 @@
 	};
 
 /***/ },
-/* 369 */
+/* 366 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32764,15 +31974,15 @@
 
 	var _rxjs = __webpack_require__(2);
 
-	var _isotopeLayout = __webpack_require__(370);
+	var _isotopeLayout = __webpack_require__(367);
 
 	var _isotopeLayout2 = _interopRequireDefault(_isotopeLayout);
 
-	__webpack_require__(387);
+	__webpack_require__(383);
 
-	__webpack_require__(389);
+	__webpack_require__(385);
 
-	var _lodash = __webpack_require__(391);
+	var _lodash = __webpack_require__(387);
 
 	var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -32923,7 +32133,7 @@
 	}();
 
 /***/ },
-/* 370 */
+/* 367 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -32942,16 +32152,16 @@
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	        __webpack_require__(374),
 	        __webpack_require__(371),
-	        __webpack_require__(372),
-	        __webpack_require__(373),
-	        __webpack_require__(386),
-	        __webpack_require__(380),
+	        __webpack_require__(368),
+	        __webpack_require__(369),
+	        __webpack_require__(370),
+	        __webpack_require__(382),
+	        __webpack_require__(376),
 	        // include default layout modes
-	        __webpack_require__(381),
-	        __webpack_require__(384),
-	        __webpack_require__(385)
+	        __webpack_require__(377),
+	        __webpack_require__(380),
+	        __webpack_require__(381)
 	      ], __WEBPACK_AMD_DEFINE_RESULT__ = function( Outlayer, getSize, matchesSelector, utils, Item, LayoutMode ) {
 	        return factory( window, Outlayer, getSize, matchesSelector, utils, Item, LayoutMode );
 	      }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -33541,7 +32751,7 @@
 
 
 /***/ },
-/* 371 */
+/* 368 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -33756,7 +32966,7 @@
 
 
 /***/ },
-/* 372 */
+/* 369 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -33815,7 +33025,7 @@
 
 
 /***/ },
-/* 373 */
+/* 370 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -33832,7 +33042,7 @@
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	      __webpack_require__(372)
+	      __webpack_require__(369)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( matchesSelector ) {
 	      return factory( window, matchesSelector );
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -34057,7 +33267,7 @@
 
 
 /***/ },
-/* 374 */
+/* 371 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -34073,10 +33283,10 @@
 	  if ( true ) {
 	    // AMD - RequireJS
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	        __webpack_require__(375),
-	        __webpack_require__(376),
-	        __webpack_require__(377),
-	        __webpack_require__(379)
+	        __webpack_require__(347),
+	        __webpack_require__(372),
+	        __webpack_require__(373),
+	        __webpack_require__(375)
 	      ], __WEBPACK_AMD_DEFINE_RESULT__ = function( EvEmitter, getSize, utils, Item ) {
 	        return factory( window, EvEmitter, getSize, utils, Item);
 	      }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -35000,122 +34210,7 @@
 
 
 /***/ },
-/* 375 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
-	 * EvEmitter v1.0.3
-	 * Lil' event emitter
-	 * MIT License
-	 */
-
-	/* jshint unused: true, undef: true, strict: true */
-
-	( function( global, factory ) {
-	  // universal module definition
-	  /* jshint strict: false */ /* globals define, module, window */
-	  if ( true ) {
-	    // AMD - RequireJS
-	    !(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	  } else if ( typeof module == 'object' && module.exports ) {
-	    // CommonJS - Browserify, Webpack
-	    module.exports = factory();
-	  } else {
-	    // Browser globals
-	    global.EvEmitter = factory();
-	  }
-
-	}( typeof window != 'undefined' ? window : this, function() {
-
-	"use strict";
-
-	function EvEmitter() {}
-
-	var proto = EvEmitter.prototype;
-
-	proto.on = function( eventName, listener ) {
-	  if ( !eventName || !listener ) {
-	    return;
-	  }
-	  // set events hash
-	  var events = this._events = this._events || {};
-	  // set listeners array
-	  var listeners = events[ eventName ] = events[ eventName ] || [];
-	  // only add once
-	  if ( listeners.indexOf( listener ) == -1 ) {
-	    listeners.push( listener );
-	  }
-
-	  return this;
-	};
-
-	proto.once = function( eventName, listener ) {
-	  if ( !eventName || !listener ) {
-	    return;
-	  }
-	  // add event
-	  this.on( eventName, listener );
-	  // set once flag
-	  // set onceEvents hash
-	  var onceEvents = this._onceEvents = this._onceEvents || {};
-	  // set onceListeners object
-	  var onceListeners = onceEvents[ eventName ] = onceEvents[ eventName ] || {};
-	  // set flag
-	  onceListeners[ listener ] = true;
-
-	  return this;
-	};
-
-	proto.off = function( eventName, listener ) {
-	  var listeners = this._events && this._events[ eventName ];
-	  if ( !listeners || !listeners.length ) {
-	    return;
-	  }
-	  var index = listeners.indexOf( listener );
-	  if ( index != -1 ) {
-	    listeners.splice( index, 1 );
-	  }
-
-	  return this;
-	};
-
-	proto.emitEvent = function( eventName, args ) {
-	  var listeners = this._events && this._events[ eventName ];
-	  if ( !listeners || !listeners.length ) {
-	    return;
-	  }
-	  var i = 0;
-	  var listener = listeners[i];
-	  args = args || [];
-	  // once stuff
-	  var onceListeners = this._onceEvents && this._onceEvents[ eventName ];
-
-	  while ( listener ) {
-	    var isOnce = onceListeners && onceListeners[ listener ];
-	    if ( isOnce ) {
-	      // remove listener
-	      // remove before trigger to prevent recursion
-	      this.off( eventName, listener );
-	      // unset once flag
-	      delete onceListeners[ listener ];
-	    }
-	    // trigger listener
-	    listener.apply( this, args );
-	    // get next listener
-	    i += isOnce ? 0 : 1;
-	    listener = listeners[i];
-	  }
-
-	  return this;
-	};
-
-	return EvEmitter;
-
-	}));
-
-
-/***/ },
-/* 376 */
+/* 372 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -35330,7 +34425,7 @@
 
 
 /***/ },
-/* 377 */
+/* 373 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -35347,7 +34442,7 @@
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	      __webpack_require__(378)
+	      __webpack_require__(374)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( matchesSelector ) {
 	      return factory( window, matchesSelector );
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -35572,7 +34667,7 @@
 
 
 /***/ },
-/* 378 */
+/* 374 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -35631,7 +34726,7 @@
 
 
 /***/ },
-/* 379 */
+/* 375 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -35644,8 +34739,8 @@
 	  if ( true ) {
 	    // AMD - RequireJS
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	        __webpack_require__(375),
-	        __webpack_require__(376)
+	        __webpack_require__(347),
+	        __webpack_require__(372)
 	      ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	  } else if ( typeof module == 'object' && module.exports ) {
 	    // CommonJS - Browserify, Webpack
@@ -36188,7 +35283,7 @@
 
 
 /***/ },
-/* 380 */
+/* 376 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -36201,8 +35296,8 @@
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	        __webpack_require__(371),
-	        __webpack_require__(374)
+	        __webpack_require__(368),
+	        __webpack_require__(371)
 	      ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	  } else if ( typeof module == 'object' && module.exports ) {
 	    // CommonJS
@@ -36350,7 +35445,7 @@
 
 
 /***/ },
-/* 381 */
+/* 377 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -36365,8 +35460,8 @@
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	        __webpack_require__(380),
-	        __webpack_require__(382)
+	        __webpack_require__(376),
+	        __webpack_require__(378)
 	      ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	  } else if ( typeof module == 'object' && module.exports ) {
 	    // CommonJS
@@ -36429,7 +35524,7 @@
 
 
 /***/ },
-/* 382 */
+/* 378 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -36446,8 +35541,8 @@
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	        __webpack_require__(374),
-	        __webpack_require__(383)
+	        __webpack_require__(371),
+	        __webpack_require__(379)
 	      ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	  } else if ( typeof module == 'object' && module.exports ) {
 	    // CommonJS
@@ -36639,7 +35734,7 @@
 
 
 /***/ },
-/* 383 */
+/* 379 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -36854,7 +35949,7 @@
 
 
 /***/ },
-/* 384 */
+/* 380 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -36867,7 +35962,7 @@
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	        __webpack_require__(380)
+	        __webpack_require__(376)
 	      ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	  } else if ( typeof exports == 'object' ) {
 	    // CommonJS
@@ -36927,7 +36022,7 @@
 
 
 /***/ },
-/* 385 */
+/* 381 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -36940,7 +36035,7 @@
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	        __webpack_require__(380)
+	        __webpack_require__(376)
 	      ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	  } else if ( typeof module == 'object' && module.exports ) {
 	    // CommonJS
@@ -36986,7 +36081,7 @@
 
 
 /***/ },
-/* 386 */
+/* 382 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -36999,7 +36094,7 @@
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	        __webpack_require__(374)
+	        __webpack_require__(371)
 	      ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	  } else if ( typeof module == 'object' && module.exports ) {
 	    // CommonJS
@@ -37068,7 +36163,7 @@
 
 
 /***/ },
-/* 387 */
+/* 383 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -37085,8 +36180,8 @@
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	        __webpack_require__(388),
-	        __webpack_require__(380)
+	        __webpack_require__(384),
+	        __webpack_require__(376)
 	      ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	  } else if ( typeof module == 'object' && module.exports ) {
 	    // CommonJS
@@ -37219,7 +36314,7 @@
 
 
 /***/ },
-/* 388 */
+/* 384 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -37434,7 +36529,7 @@
 
 
 /***/ },
-/* 389 */
+/* 385 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(global) {/*!
@@ -43347,7 +42442,7 @@
 							if (global) {
 								_globals[n] = cl; //provides a way to avoid global namespace pollution. By default, the main classes like TweenLite, Power1, Strong, etc. are added to window unless a GreenSockGlobals is defined. So if you want to have things added to a custom object instead, just do something like window.GreenSockGlobals = {} before loading any GreenSock files. You can even set up an alias like window.GreenSockGlobals = windows.gs = {} so that you can access everything like gs.TweenLite. Also remember that ALL classes are added to the window.com.greensock object (in their respective packages, like com.greensock.easing.Power1, com.greensock.TweenLite, etc.)
 								hasModule = (typeof(module) !== "undefined" && module.exports);
-								if (!hasModule && "function" === "function" && __webpack_require__(390)){ //AMD
+								if (!hasModule && "function" === "function" && __webpack_require__(386)){ //AMD
 									!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function() { return cl; }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 								} else if (hasModule){ //node
 									if (ns === moduleName) {
@@ -45139,7 +44234,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 390 */
+/* 386 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {module.exports = __webpack_amd_options__;
@@ -45147,7 +44242,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, {}))
 
 /***/ },
-/* 391 */
+/* 387 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/**
@@ -61558,7 +60653,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)(module), (function() { return this; }())))
 
 /***/ },
-/* 392 */
+/* 388 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -61572,17 +60667,17 @@
 
 	var _index = __webpack_require__(1);
 
-	var _lodash = __webpack_require__(391);
+	var _lodash = __webpack_require__(387);
 
 	var _lodash2 = _interopRequireDefault(_lodash);
 
 	var _rxjs = __webpack_require__(2);
 
-	var _isotopeLayout = __webpack_require__(370);
+	var _isotopeLayout = __webpack_require__(367);
 
 	var _isotopeLayout2 = _interopRequireDefault(_isotopeLayout);
 
-	__webpack_require__(389);
+	__webpack_require__(385);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -61948,7 +61043,7 @@
 	}();
 
 /***/ },
-/* 393 */
+/* 389 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
