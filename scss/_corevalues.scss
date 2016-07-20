@@ -38,7 +38,7 @@ section#coreValues {
         .content-wrapper .content {
           pointer-events: none;
           padding-left: 30px !important;
-          @media (max-width: $break3) {
+          @media (max-width: $break-mobile) {
              padding-left: 10px !important;
            }
 
@@ -47,7 +47,7 @@ section#coreValues {
             transform-origin: left center;
             transition-delay: 0.25s;
             transform: scale(1.35);
-            @media (max-width: $break3){
+            @media (max-width: $break-mobile){
               transform: scale(1.1);
               overflow-wrap: break-word;
               word-wrap: break-word;
@@ -110,7 +110,7 @@ section#coreValues {
           color: white;
           cursor: url('/images/click-cursor-red.svg'), auto;
           transition: background-color 0.5s ease-in-out, transform 0.5s ease-in-out, padding 0.5s ease-in-out;
-          @media (max-width: $break3) {
+          @media (max-width: $break-mobile) {
              padding: 10px;
            }
 
@@ -120,10 +120,10 @@ section#coreValues {
             font-weight: normal;
             transition: transform 0.5s ease-in-out, max-width 0.5s ease-in-out;
             transform-origin: left top;
-            @media (max-width: $break1) {
+            @media (max-width: $break-laptop15) {
                font-size: 36px;
              }
-            @media (max-width: $break3){
+            @media (max-width: $break-mobile){
               font-size: 3vw;
               hyphens: auto;
               width: 100%;
@@ -136,7 +136,7 @@ section#coreValues {
             margin-top: 40px;
             max-height: 0;
             transition: max-height 0.5s ease-in-out;
-            @media (max-width: $break3){
+            @media (max-width: $break-mobile){
               margin-top: 15px;
 
             }
@@ -144,13 +144,13 @@ section#coreValues {
               font-size: 30px;
               margin-bottom: 20px;
 
-              @media (min-width: $break1) {
+              @media (min-width: $break-laptop15) {
                 font-size: 36px;
                 max-width: 900px;
                 margin-bottom: 30px;
               }
 
-              @media (max-width: $break3){
+              @media (max-width: $break-mobile){
                 font-size: 15px;
                 margin-bottom: 15px;
               }

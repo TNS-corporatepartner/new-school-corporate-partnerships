@@ -44,7 +44,7 @@ body {
 main {
   margin-right: 8px !important;
   // transition: opacity 1s ease-in-out;
-  @media (max-width: $break3){
+  @media (max-width: $break-mobile){
     margin-right: 0 !important;
   }
 }
@@ -63,7 +63,7 @@ main {
     fill: none;
     position: relative;
     transition: all .2s ease-in-out;
-    @media (max-width: $break3){
+    @media (max-width: $break-mobile){
       width: 30px;
       height: auto;
     }
@@ -102,7 +102,7 @@ main {
       transition: stroke 0.8s ease-in-out;
     }
   }
-  @media (max-width: $break3){
+  @media (max-width: $break-mobile){
     right: 10px;
     bottom: 10px;
     width: 120px;
@@ -118,7 +118,7 @@ header#header {
   background-color: $red;
   width: 140px;
   transition: .5s background ease-in-out;
-  @media (max-width: $break3){
+  @media (max-width: $break-mobile){
     padding: 10px 13px;
     width: 110px;
     right: 0;
@@ -133,7 +133,7 @@ header#header {
     text-align: center;
     -webkit-font-smoothing: antialiased;
     display: block;
-    @media (max-width: $break3){
+    @media (max-width: $break-mobile){
       font-size: 12px;
     }
 
@@ -179,7 +179,7 @@ body.fp-viewing-contact {
       border: 1px solid white;
       padding: 25px;
       cursor: url('/images/arrow-cursor-red.svg'), auto;
-      @media (max-width: $break3){
+      @media (max-width: $break-mobile){
         padding: 15px;
         border: none;
         padding-left: 0;
@@ -192,7 +192,7 @@ body.fp-viewing-contact {
       h2{
         color: $red;
         margin-bottom: 15px;
-        @media (max-width: $break3){
+        @media (max-width: $break-mobile){
           margin-bottom: 5px;
         }
       }
@@ -200,14 +200,14 @@ body.fp-viewing-contact {
       p {
         color: white;
         font-size: 24px;
-        @media (max-width: $break3){
+        @media (max-width: $break-mobile){
           font-size: 5vh;
         }
 
       }
       .contact {
         margin-top: 35px;
-        @media (max-width: $break3){
+        @media (max-width: $break-mobile){
           margin-top: 15px;
 
         }
@@ -313,7 +313,7 @@ body.fp-viewing-contact {
       }
     }
   }
-  @media (max-width: $break3){
+  @media (max-width: $break-mobile){
     display: none;
   }
 }

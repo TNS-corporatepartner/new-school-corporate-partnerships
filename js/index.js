@@ -11,7 +11,7 @@ export let app = {
   breakpoints: {
     $break1: 1440,
     $break2: 1024,
-    $break3: 800  
+    $break3: 800
   },
   variables: {
     $red: '#E82E21',
@@ -33,7 +33,7 @@ export let app = {
     4: null,
     5: null,
     6: null,
-    7: null    
+    7: null
   }
 }
 

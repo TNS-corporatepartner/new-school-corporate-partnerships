@@ -21,7 +21,6 @@ body.people-modal-open {
       }
     }
   }
-
 }
 
 
@@ -31,7 +30,8 @@ body.people-modal-open {
   top: 190px;
   width: 100vw;
   outline: none;
-  @media (max-width: $break3){
+
+  @media (max-width: $break-mobile){
     top: 60px;
   }
   .slider-inner {
@@ -42,7 +42,7 @@ body.people-modal-open {
       .grid {
         height: calc(100vh - 380px);
         max-height: calc(100vh - 380px)!important;
-        @media (max-width: $break3){
+        @media (max-width: $break-mobile){
           height: calc(100vh - 120px);
           max-height: calc(100vh - 120px) !important;
         }
@@ -50,7 +50,7 @@ body.people-modal-open {
           float: left;
           width: calc(50vh - 190px);
           height: calc(50vh - 190px);
-          @media (max-width: $break3){
+          @media (max-width: $break-mobile){
             width: calc(100vh - 120px);
             height: calc(100vh - 120px);
           }
@@ -76,15 +76,16 @@ body.people-modal-open {
             p {
               max-height: 200px;
               opacity: 1;
+              margin-top: 5px;
             }
           }
           &.video {
             width: calc(100vh - 380px);
             overflow: hidden;
             cursor: url(/images/click-cursor-black.svg), auto;
-            @media (max-width: $break3){
+            @media (max-width: $break-mobile){
               width: calc(200vh - 240px);
-            }            
+            }
             &:hover {
               .overlay {
                 background-color: transparentize($red, .3);
@@ -96,7 +97,7 @@ body.people-modal-open {
             .overlay{
               background-color: transparentize(black, .9);
               transition: background 1s ease;
-              @media (max-width: $break3){
+              @media (max-width: $break-mobile){
                 background-color: transparentize($red, .5);
                 &:before {
                   content:url(/images/play-button.svg);
@@ -114,25 +115,38 @@ body.people-modal-open {
             padding: 10px;
             bottom: 0;
             left: 0;
-            @media (max-width: $break3){
+            @media (max-width: $break-mobile){
               padding: 5px;
             }
+          }
+
+          h6{
+            margin-bottom: 0;
+            -webkit-font-smoothing: antialiased;
           }
 
           p {
             opacity: 0;
             max-height: 0;
             font-size: 18px;
-            margin-top: 5px;
-            transition: all 0.8s ease-in-out;
-            @media (max-width: $break3){
+            line-height: 1.2;
+            transition: opacity 0.8s ease-in-out, height 0.8s ease-in-out;
+            @media (max-width: $break-laptop13){
+              font-size: 16px;
+            }
+            @media (max-width: $break-tablet){
+              opacity: 1;
+              max-height: auto;
+              margin-top: 5px;
+            }
+            @media (max-width: $break-mobile){
               font-size: 15px;
             }
           }
 
           .overlay {
             position: absolute;
-            background-color: transparentize(black, .65);
+            background-color: transparentize(black, .6);
             background-blend-mode: multiply;
             display: flex;
             align-items: center;
@@ -159,7 +173,7 @@ body.people-modal-open {
   background-color: transparent;
   transition: all 0.4s ease-in-out;
   transform: scale(0.8);
-  @media (max-width: $break3){
+  @media (max-width: $break-mobile){
     height: 100vh;
     top: 0;
   }
@@ -170,7 +184,7 @@ body.people-modal-open {
     justify-content: center;
     iframe {
       height: 100%;
-      width: 100%;      
+      width: 100%;
     }
   }
   #closePersonModal {
