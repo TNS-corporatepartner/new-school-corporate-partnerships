@@ -1,5 +1,6 @@
 ---
 title: Parsons School of Design
+date: 2016-06-24 12:00:00 Z
 order: 1
 orientation: horz
 image: "/images/051815_parsons.jpg"

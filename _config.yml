@@ -138,7 +138,7 @@ baseurl:
 url: http://yourdomain.com
 introduction: The New School, in NYC, is the only university where a world-renowned
   art and design school comes together with acclaimed liberal arts, performing arts,
-  and graduate schools…to rethink everything.
+  and graduate schools…to rethink&nbsp;everything.
 twitter_username: jekyllrb
 github_username: jekyll
 markdown: kramdown

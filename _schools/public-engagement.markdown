@@ -1,5 +1,6 @@
 ---
 title: Schools of Public Engagement
+date: 2016-06-24 16:00:00 Z
 order: 5
 orientation: horz
 image: "/images/031713_public-engagement.jpg"

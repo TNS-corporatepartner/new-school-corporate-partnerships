@@ -1,5 +1,6 @@
 ---
 title: Eugene Lang College of Liberal Arts
+date: 2016-06-24 15:00:00 Z
 orientation: vert
 image: "/images/042015_lang.jpg"
 order: 4
