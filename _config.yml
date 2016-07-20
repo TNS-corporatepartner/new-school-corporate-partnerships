@@ -151,8 +151,7 @@ defaults:
       image:
       video:
       type:
-  -
-
+        
 exclude:
 - node_modules
 - scss
