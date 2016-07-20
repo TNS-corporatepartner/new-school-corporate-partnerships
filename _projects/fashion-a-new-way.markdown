@@ -1,7 +1,7 @@
 ---
 title: Fashion a new way to do business
 date: 2016-06-24 21:01:00 Z
-image: "/uploads/fashionBusiness.png"
+image: "/uploads/Mastercard%20Hackathon%202.jpg"
 question: How can financial transactions be seamless?
 programs:
 - Architecture
