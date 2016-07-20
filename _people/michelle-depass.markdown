@@ -1,6 +1,7 @@
 ---
 title: Michelle DePass
 date: 2016-07-20 15:45:00 Z
+position: 16
 type: Faculty
 image: "/uploads/michelle-depass.jpg"
 ---

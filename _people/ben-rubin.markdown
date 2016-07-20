@@ -1,6 +1,7 @@
 ---
 title: Ben Rubin
 date: 2016-07-20 15:44:00 Z
+position: 2
 type: Faculty
 image: "/uploads/ben-rubin.jpg"
 ---
