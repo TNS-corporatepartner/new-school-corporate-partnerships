@@ -1,6 +1,6 @@
 ---
 title: Hannah Arendt
-position: 32
+position: 18
 image: "/uploads/hannah-arendt.jpg"
 ---
 
