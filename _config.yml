@@ -125,16 +125,16 @@ defaults:
     path: ''
     type: people
   values:
-    image: 
-    video: 
-    type: 
+    image:
+    video:
+    type:
 contact:
   name: Debbie Gibb
   title: Vice President
   department: Corporate Partnerships &amp; Industry Development
   email: corporatepartner@newschool.edu
   phone: 123-456-7890
-Credits Text:
+credits_text:
 - Site Design and Development by [Familiar](http://familiar-studio.com)
 - 'Photo of Eleanor Roosevelt: This work is in the public domain because it was published
   in the United States between 1923 and 1963 and although there may or may not have
@@ -195,7 +195,7 @@ Credits Text:
 email: your-email@domain.com
 description: |
   Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
-baseurl: 
+baseurl:
 url: http://yourdomain.com
 introduction: The New School, in NYC, is the only university where a world-renowned
   art and design school comes together with acclaimed liberal arts, performing arts,
