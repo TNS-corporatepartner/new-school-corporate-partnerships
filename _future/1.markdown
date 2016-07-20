@@ -1,7 +1,8 @@
 ---
 title: Big Data
-video: http://familiar-temp.s3.amazonaws.com/nscp/BIGDATA-NEW.mp4
 position: 1
-poster: '/images/posters/BIGDATA.png'
+video: http://familiar-temp.s3.amazonaws.com/nscp/BIGDATA-NEW.mp4
+poster: "/images/posters/BIGDATA.png"
 question: How can data be&nbsp;empathetic?
 ---
+

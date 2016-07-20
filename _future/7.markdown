@@ -1,7 +1,8 @@
 ---
 title: Technology
-video: http://familiar-temp.s3.amazonaws.com/nscp/TECHNOLOGY-NEW.mp4
 position: 7
-poster: '/images/posters/TECHNOLOGY.png'
+video: http://familiar-temp.s3.amazonaws.com/nscp/TECHNOLOGY-NEW.mp4
+poster: "/images/posters/TECHNOLOGY.png"
 question: How can technology make us more&nbsp;human?
 ---
+

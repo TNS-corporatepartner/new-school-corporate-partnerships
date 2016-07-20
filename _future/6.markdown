@@ -1,7 +1,8 @@
 ---
 title: Work
-video: http://familiar-temp.s3.amazonaws.com/nscp/WORK.mp4
 position: 6
-poster: '/images/posters/WORK.png'
+video: http://familiar-temp.s3.amazonaws.com/nscp/WORK.mp4
+poster: "/images/posters/WORK.png"
 question: How can going back to school push business forward&nbsp;faster?
 ---
+
