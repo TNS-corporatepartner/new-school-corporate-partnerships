@@ -1479,6 +1479,9 @@ section#contactUs {
   background: #E1E1E1; }
   section#contactUs .section-headlines {
     color: white; }
+  section#contactUs .section-intro {
+    color: white;
+    background-color: #E82E21; }
   section#contactUs .panel-group {
     display: -ms-flexbox;
     display: flex;
