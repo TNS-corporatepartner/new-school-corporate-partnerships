@@ -1,5 +1,5 @@
 ---
-title: The New School for Social&nbsp;Research
+title: The New School for Social Research
 date: 2016-06-24 14:00:00 Z
 order: 3
 orientation: vert

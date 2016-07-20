@@ -31,11 +31,11 @@ export class OurApproach {
     })).timeScale(0.15)
 
     this.initStreams()
-    this.handleClicks()    
+    this.handleClicks()
 
-    if (window.innerWidth >= app.breakpoints.$break3) {      
+    if (window.innerWidth >= app.breakpoints.$break3) {
       this.handleSliderMovement()
-      this.handleHover()      
+      this.handleHover()
     }
 
     //fade out section intro
@@ -43,8 +43,8 @@ export class OurApproach {
       $(this.section.querySelector('.section-intro')).addClass('hidden')
       setTimeout(() => {
         $(this.section.querySelector('.section-headlines')).removeClass('hidden')
-      }, 1800)      
-    }, 750)    
+      }, 1800)
+    }, 750)
   }
 
   initStreams() {
@@ -103,7 +103,7 @@ export class OurApproach {
         } else if ( e.x > 0 && !this.tl.reversed() ) {
           this.tl.reversed(true)
         }
-      })    
+      })
 
     this.sliderLeave$.subscribe(() => {
       this.tl.timeScale(0.15)
@@ -305,7 +305,7 @@ export class OurApproach {
             duration: 400,
             complete: function() {
               modalContent.scrollTop = 0
-                            
+
               Velocity(modalContent, {
                 opacity: 1
               }, {

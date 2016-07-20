@@ -50,7 +50,7 @@
 
 				{% for cell in site.future %}
 				<div class="future-of-cell" data-title="{{cell.title}}" data-question="{{cell.question}}">
-					<div class="video-fs">												
+					<div class="video-fs">
 						<video loop="true" muted src="{{cell.video}}"></video>
 					</div>
 				</div>
@@ -326,17 +326,17 @@
 
 
 			</div>
-			<!-- <div id="siteCredits">
+			<div id="siteCredits">
 				<h6>Site Credits</h6>
 					<ul>
-						{% for credit in site.credits %}
+						{% for credit in site.credits_text %}
 						<li>
-							{{credit|markdownify | remove: '<p>' }}
+							{{credit}}
 						</li>
 
 						{% endfor %}
 					</ul>
-			</div> -->
+			</div>
 		</section>
 
 	</main>
