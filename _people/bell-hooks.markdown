@@ -1,6 +1,6 @@
 ---
 title: bell hooks
-position: 9
+position: 10
 image: "/uploads/bell-hooks.jpg"
 ---
 
