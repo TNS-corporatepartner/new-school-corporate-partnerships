@@ -6,7 +6,7 @@ collections:
     title: Are you ready to design the future?
     output: false
     introduction: Our partners understand the value of using design thinking to solve
-      real-world problems. Collaborate with us to design the future.
+      real-world problems. Collaborate with us to design the&nbsp;future.
   future:
     title: Imagine the Future of…
     output: false
@@ -14,17 +14,17 @@ collections:
     title: One University, Five Schools
     output: false
     introduction: Our unique structure provides the expertise of five schools collaborating
-      to reinvent everything and approach issues from multiple, integrated perspectives.
+      to reinvent everything and approach issues from multiple, integrated&nbsp;perspectives.
   people:
     title: Our History of Innovation
     output: false
     introduction: From our beginning in 1919, we’ve been a home for industry pioneers,
-      world changers, and innovative leaders.
+      world changers, and innovative&nbsp;leaders.
   projects:
     title: Our Multi-Dimensional Approach
     output: false
     introduction: We connect multiple disciplines to find unforeseen opportunities
-      and create unexpected possibilities for our partners.
+      and create unexpected possibilities for our&nbsp;partners.
     programs:
     - INTERIOR DESIGN
     - FASHION DESIGN AND SOCIETY
@@ -125,9 +125,9 @@ defaults:
     path: ''
     type: people
   values:
-    image: 
-    video: 
-    type: 
+    image:
+    video:
+    type:
 contact:
   name: Debbie Gibb
   title: Vice President
@@ -142,7 +142,7 @@ credits:
 email: your-email@domain.com
 description: |
   Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
-baseurl: 
+baseurl:
 url: http://yourdomain.com
 introduction: The New School, in NYC, is the only university where a world-renowned
   art and design school comes together with acclaimed liberal arts, performing arts,
