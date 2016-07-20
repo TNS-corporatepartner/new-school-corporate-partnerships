@@ -18,7 +18,9 @@ collections:
   people:
     title: Our History of Innovation
     output: false
-    introduction: From our beginning in 1919, we've been a home for industry pioneers, world changers, and innovative leaders. Browse through a small selection of our exceptional alumni, students, and faculty, past and&nbsp;present.
+    introduction: From our beginning in 1919, we've been a home for industry pioneers,
+      world changers, and innovative leaders. Browse through a small selection of
+      our exceptional alumni, students, and faculty, past and&nbsp;present.
   projects:
     title: Our Multi-Dimensional Approach
     output: false
@@ -124,9 +126,9 @@ defaults:
     path: ''
     type: people
   values:
-    image:
-    video:
-    type:
+    image: 
+    video: 
+    type: 
 contact:
   name: Debbie Gibb
   title: Vice President
@@ -194,7 +196,7 @@ credits_text:
 email: your-email@domain.com
 description: |
   Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
-baseurl:
+baseurl: 
 url: http://yourdomain.com
 introduction: The New School, in NYC, is the only university where a world-renowned
   art and design school comes together with acclaimed liberal arts, performing arts,
