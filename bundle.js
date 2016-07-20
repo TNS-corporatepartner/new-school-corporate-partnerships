@@ -74,7 +74,35 @@
 
 	var _contactUs = __webpack_require__(393);
 
-	var app = exports.app = {};
+	var app = exports.app = {
+	  breakpoints: {
+	    $break1: 1440,
+	    $break2: 1024,
+	    $break3: 800
+	  },
+	  variables: {
+	    $red: '#E82E21',
+	    $grayDarker: '#222'
+	  },
+	  constructors: {
+	    1: _intro.Intro,
+	    2: _futureOf.FutureOf,
+	    3: _coreValues.CoreValues,
+	    4: _ourSchool.OurSchool,
+	    5: _ourApproach.OurApproach,
+	    6: _ourPeople.OurPeople,
+	    7: _contactUs.ContactUs
+	  },
+	  instances: {
+	    1: null,
+	    2: null,
+	    3: null,
+	    4: null,
+	    5: null,
+	    6: null,
+	    7: null
+	  }
+	};
 
 	window.addEventListener('DOMContentLoaded', init);
 
@@ -90,31 +118,6 @@
 	  var introBg = document.getElementById('introBg');
 	  var line1 = document.getElementById('svgLine1');
 	  var line2 = document.getElementById('svgLine2');
-
-	  app.variables = {
-	    $red: '#E82E21',
-	    $grayDarker: '#222'
-	  };
-
-	  app.constructors = {
-	    1: _intro.Intro,
-	    2: _futureOf.FutureOf,
-	    3: _coreValues.CoreValues,
-	    4: _ourSchool.OurSchool,
-	    5: _ourApproach.OurApproach,
-	    6: _ourPeople.OurPeople,
-	    7: _contactUs.ContactUs
-	  };
-
-	  app.instances = {
-	    1: null,
-	    2: null,
-	    3: null,
-	    4: null,
-	    5: null,
-	    6: null,
-	    7: null
-	  };
 
 	  app.intro$ = initSplashContent().subscribe(function () {
 	    return console.log(null);
@@ -61565,6 +61568,8 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+	var _index = __webpack_require__(1);
+
 	var _lodash = __webpack_require__(391);
 
 	var _lodash2 = _interopRequireDefault(_lodash);
@@ -61623,10 +61628,13 @@
 	      }, 1800);
 	    }, 750);
 
-	    this.positionItems();
-	    this.handlePanning();
-	    this.handleHover();
 	    this.handleClick();
+
+	    if (window.innerWidth >= _index.app.breakpoints.$break3) {
+	      this.positionItems();
+	      this.handlePanning();
+	      this.handleHover();
+	    }
 
 	    $(this.hovers).on('mouseenter', function () {
 	      _this.tl.timeScale(0.55);
@@ -61875,8 +61883,6 @@
 	        modalContent.querySelector('blockquote').textContent = $(this).data('blockquote');
 	        modalContent.querySelector('.text-content').innerHTML = $(this).data('content');
 
-	        console.log($(this).data('image'));
-
 	        modal.querySelector('img').src = $(this).data('image');
 	        $.fn.fullpage.setAllowScrolling(false);
 
@@ -61901,6 +61907,9 @@
 	            }, {
 	              duration: 400,
 	              complete: function complete() {
+	                console.log(modalContent);
+	                modalContent.scrollTop = 0;
+
 	                Velocity(modalContent, {
 	                  opacity: 1
 	                }, {
