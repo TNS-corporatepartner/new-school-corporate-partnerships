@@ -30,6 +30,8 @@ body.people-modal-open {
   top: calc(50vh - 270px);
   width: 100vw;
   outline: none;
+
+  overflow: hidden;
   @media (max-height: 800px){
     top: calc(50vh - 230px);
   }
@@ -125,6 +127,8 @@ body.people-modal-open {
               }
             }
             .overlay{
+              top: 0;
+              left: 0;
               background-color: transparentize($red, .7);
               transition: background 1s ease;
               @media (max-width: $break-tablet){

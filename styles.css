@@ -1066,7 +1066,8 @@ body.people-modal-open #peopleSlider {
   left: 0;
   top: calc(50vh - 270px);
   width: 100vw;
-  outline: none; }
+  outline: none;
+  overflow: hidden; }
   @media (max-height: 800px) {
     #peopleSlider {
       top: calc(50vh - 230px); } }
@@ -1157,6 +1158,8 @@ body.people-modal-open #peopleSlider {
               #peopleSlider .slider-inner .cell .grid .person.video:hover .overlay:before {
                 content: url(/images/play-button.svg); }
             #peopleSlider .slider-inner .cell .grid .person.video .overlay {
+              top: 0;
+              left: 0;
               background-color: rgba(232, 46, 33, 0.3);
               transition: background 1s ease; }
               @media (max-width: 1024px) {
