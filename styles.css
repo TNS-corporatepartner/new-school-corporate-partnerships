@@ -1000,6 +1000,7 @@ section#ourSchool .school-links {
             font-size: 3.5vh; } }
 
 section#ourSchool #schoolModal {
+  transform: translate3d(0, 0, 0);
   position: absolute;
   background-color: rgba(34, 34, 34, 0.9);
   pointer-events: none;
@@ -1217,7 +1218,7 @@ body.people-modal-open #peopleSlider {
   pointer-events: none;
   background-color: transparent;
   transition: all 0.4s ease-in-out;
-  transform: scale(0.8); }
+  transform: scale(0.8), translate3d(0, 0, 0); }
   @media (max-width: 800px) {
     #personModal {
       height: 100vh;

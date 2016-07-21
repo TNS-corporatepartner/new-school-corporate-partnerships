@@ -47,7 +47,7 @@ export class OurSchool {
 
       modalContent.querySelector('.school-name').textContent = $(this).data('name')
       modalContent.querySelector('.school-description').textContent = $(this).data('description')
-      modalContent.querySelector('.img-container').style = `background-image: url(${ $(this).data('image-src') }`
+      modalContent.querySelector('.img-container').style.backgroundImage = `url(${ $(this).data('image-src') }`
 
       const startPos = {
           top: r.top,

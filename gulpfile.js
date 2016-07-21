@@ -42,7 +42,7 @@ gulp.task('styles', function(){
 // gulp.task('default', ['nodemon'], function () {})
 
 gulp.task('default', ['browser-sync'], function() {
-  gulp.watch('js/**/*.js', ['webpack']);
+  gulp.watch('scripts/**/*.js', ['webpack']);
   return gulp.watch('scss/*.scss', ['styles'])  
 })
 
