@@ -568,7 +568,8 @@ body.fp-viewing-contact #downArrow, body.fp-viewing-contact header#header {
       width: 10px; }
       #fp-nav ul li a {
         background-color: white;
-        transition: background .5s ease-in-out; }
+        transition: background .5s ease-in-out;
+        height: 12.5vh; }
         #fp-nav ul li a span {
           display: none; }
         #fp-nav ul li a.active {
@@ -1280,7 +1281,6 @@ body.approach-modal-open #ourApproach .section-headlines {
 #ourApproach {
   overflow: hidden; }
   #ourApproach .section-headlines {
-    background-image: linear-gradient(180deg, rgba(225, 225, 225, 0.5) 80%, transparent);
     max-width: none;
     width: 100%; }
     @media (max-width: 800px) {
