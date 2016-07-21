@@ -1,0 +1,241 @@
+body.school-modal-open {
+  #fixedLogo svg > g {
+    fill: white;
+    transition: fill 0.8s ease-in-out;
+    line {
+      stroke: white;
+      transition: stroke 0.8s ease-in-out;
+    }
+  }
+
+  section#ourSchool {
+    cursor: url('/images/close-cursor-red.svg'), auto;
+    .section-headlines h4,
+    .section-headlines h3  {
+      color: white;
+    }
+    #schoolModal {
+      opacity: 1;
+      pointer-events: auto;
+      z-index: 3;
+    }
+  }
+
+  .school{
+    filter:grayscale(100%) blur(10px);
+    opacity: .4;
+  }
+
+  #downArrow {
+    display: none;
+  }
+}
+section#ourSchool {
+  .section-headlines h4,
+  .section-headlines h3  {
+    transition: color 0.5s ease-in-out;
+  }
+
+  .intro-paragraph {
+    position: absolute;
+    top: 0; left: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 2vw;
+    background-color: $gray-light-trans;
+    transition: opacity 0.7s ease-in-out;
+    &.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    p {
+      font-size: 5vh;
+    }
+  }
+
+  .school-links {
+    position: relative;
+    height: 100%;
+    @media (max-width: $break-mobile){
+      height: calc(100vh - 120px);
+      display: flex;
+      align-items: center;
+    }
+    .school {
+      position: absolute;
+      cursor: url(/images/click-cursor-red.svg), auto;
+      @media (max-width: $break-mobile){
+        position: relative;
+        display: inline-block;
+        margin: 0 5px;
+        width: 54vh;
+      }
+      @media (min-width: 801px){
+        &.parsons {
+          left: 5%;
+          top: 25%;
+        }
+        &.eugene-lang {
+          left: 67%;
+          top: 60%;
+        }
+        &.public-engagement {
+          left: 75%;
+          top: 33%;
+        }
+        &.performing-arts {
+          left: 22%;
+          top: 58%;
+        }
+        &.social-research {
+          left: 52%;
+          top: 19%;
+          .img{
+            background-position: 20% 50%;
+          }
+        }
+      }
+
+      @media (min-width: 801px){
+        &.horz {
+          width: 20%;
+          height: 22%;
+          .text-container {
+            bottom: -100%;
+            h3 {
+              top: 15px;
+            }
+          }
+        }
+        &.vert {
+
+          display: flex;
+          align-items: center;
+          width: 15%;
+          height: 30%;
+          .text-container {
+            display: flex;
+            align-items: center;
+            margin-left: 15px;
+            h3 {
+              position: relative;
+            }
+          }
+          .img-container {
+            left: -100%;
+          }
+        }
+      }
+
+      .img-container {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0; left: 0;
+        overflow: hidden;
+        @media (max-width: $break-mobile){
+          position: relative;
+          height: 32vh;
+        }
+      }
+      .img {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0; left: 0;
+        margin-right: 20px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        transition: all .6s ease-in-out;
+      }
+      &:hover{
+        .img{
+          transform: scale(1.1);
+        }
+      }
+      &.not-hover{
+        .img{
+          filter: grayscale(100%);
+          opacity: .4;
+        }
+        .text-container h3{
+          color: $gray;
+        }
+      }
+      .text-container {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        @media (max-width: $break-mobile){
+          position: relative;
+          padding-top: 10px;
+          padding-right: 15px;
+          height: auto;
+        }
+        h3 {
+          position: absolute;
+          font-weight: normal;
+          font-size: 2.4vh;
+          line-height: 1.2;
+          color: $red;
+          transition: all 0.4s ease-in-out;
+          @media (max-width: $break-mobile){
+            position: relative;
+            font-size: 3.5vh;
+          }
+        }
+      }
+    }
+  }
+
+  #schoolModal {
+    position: absolute;
+    background-color: $gray-darker-trans;
+    pointer-events: none;
+    display: none;
+    align-items: center;
+
+    .content {
+      display: none;
+      height: calc(100vh - 360px);
+      width: 100vw;
+      align-items: center;
+      background-color: $gray-darker-trans;
+      color: white;
+      @media (max-width: $break-mobile){
+        height: 100vh;
+      }
+      .text-container {
+        width: 50%;
+        padding: 4vw;
+        -webkit-font-smoothing: antialiased;
+        .school-name {
+          line-height: 1.1;
+          text-transform: uppercase;
+          font-weight: normal;
+          margin-top: 20px;
+
+          font-family: $font-family-display;
+          margin-bottom: 15px;
+        }
+        p {
+          margin-bottom: 20px;
+        }
+
+        a {
+          color: white;
+          cursor: url(/images/click-cursor-red.svg), auto;
+        }
+      }
+      .img-container {
+        width: 50%;
+        height: 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+    }
+  }
+}

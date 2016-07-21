@@ -61,8 +61,7 @@ body.approach-modal-open {
   //   pointer-events: none;
   // }
   .approach-slider-inner {
-    // transform: translate3d(0, 0, 0);
-    will-change: transform;
+    transform: translate3d(0,0,0);
     position: absolute;
     height: 100%;
     .approach-grid {
