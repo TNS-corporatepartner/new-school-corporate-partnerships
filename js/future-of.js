@@ -68,39 +68,49 @@ export class FutureOf {
 
     if (!Modernizr.touchevents) {      
       if (!video.src) {
-        console.log(video.dataset.src)
         video.src = video.dataset.src
       }
       
-      video.play()  
-    }
+      //wait for asynchronus play method to complete
+      video.play().then(handleVideoSliderEvents.bind(this))  
+    } else {       
+      handleVideoSliderEvents.call(this) //touch-enabled devices
+    }          
+
+
+    function handleVideoSliderEvents() {
+      this.loadingWord.textContent = this.words[ this.flkty.selectedIndex ]
+      this.questionEl.textContent = this.questions[this.flkty.selectedIndex]
+      
+      $('body').addClass('show-question')
+
+      this.autoPlay = setTimeout(() => {
+        $('body').removeClass('show-question')
         
-    this.loadingWord.textContent = this.words[ this.flkty.selectedIndex ]
-    this.questionEl.textContent = this.questions[this.flkty.selectedIndex]
-    
-    $('body').addClass('show-question')
+        setTimeout(() => {
+          this.flkty.next()
+        }, 1500) // 5 seconds until next slide is called (1500ms + 3500ms)
+        
+      }, 3500) // 3.5 seconds until question is hidden
 
-    this.autoPlay = setTimeout(() => {
-      $('body').removeClass('show-question')
-      
-      setTimeout(() => {
-        this.flkty.next()
-      }, 1500) // 5 seconds until next slide is called (1500ms + 3500ms)
-      
-    }, 3500) // 3.5 seconds until question is hidden
+      this.flkty.once('scroll', ( progress ) => {
+        clearInterval(this.autoPlay)
+        
+        const previousVideo = this.flkty.selectedElement.querySelector('video')      
+        if (!Modernizr.touchevents) { 
+          previousVideo.pause()
+        }      
+        
+        this.flkty.once('settle', () => {        
+          if (!Modernizr.touchevents) { 
+            previousVideo.currentTime = 0
+            previousVideo.load()
+          }
 
-    this.flkty.once('scroll', ( progress ) => {
-      clearInterval(this.autoPlay)
-      
-      const previousVideo = this.flkty.selectedElement.querySelector('video')      
-      previousVideo.pause()      
-      
-      this.flkty.once('settle', () => {        
-        previousVideo.currentTime = 0
-        previousVideo.load()
-        this.playCellSequence()        
+          this.playCellSequence()        
+        })
       })
-    })    
+    }    
   }
 
   shuffler(o) {
