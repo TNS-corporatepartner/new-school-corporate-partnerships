@@ -1,6 +1,6 @@
 ---
 title: Ai WeiWei
-position: 3
+position: 2
 image: "/uploads/ai-weiwei.jpg"
 ---
 

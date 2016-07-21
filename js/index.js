@@ -230,6 +230,10 @@ function initGlobalStreams() {
     app.showContactModal()
   })
 
+  $('.credits-btn').on('click', function(e) {
+    $('#siteCredits').toggleClass('open');
+  })
+
 
   var move$ = Observable.fromEvent(window, 'mousemove')
 
