@@ -51,7 +51,7 @@
 				{% for cell in site.future %}
 				<div class="future-of-cell" data-title="{{cell.title}}" data-question="{{cell.question}}">
 					<div class="video-fs" style="background-image: url({{cell.poster}});">
-						<video loop="true" muted src="{{cell.video}}"></video>
+						<video loop="true" muted data-src="{{cell.video}}" preload="none"></video>
 					</div>
 				</div>
 				{% endfor %}

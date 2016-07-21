@@ -208,3 +208,4 @@ exclude:
 - node_modules
 - scss
 - bower_components
+- js

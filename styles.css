@@ -670,6 +670,9 @@ section#futureOf {
       opacity: 0; }
     section#futureOf .future-of-slider .future-of-cell .video-fs {
       opacity: .75; }
+      @media (max-width: 800px) {
+        section#futureOf .future-of-slider .future-of-cell .video-fs video {
+          display: none; } }
   section#futureOf .question {
     position: absolute;
     top: 50%;
