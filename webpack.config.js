@@ -1,6 +1,8 @@
-var path = require('path');
-var webpack = require('webpack');
- 
+var path = require('path')
+var webpack = require('webpack')
+var ExtractTextPlugin = require("extract-text-webpack-plugin")
+const autoprefixer = require('autoprefixer')
+
 module.exports = {
   entry: ['./scripts/index.js'],
   output: { path: __dirname, filename: 'bundle.js' },
@@ -13,9 +15,16 @@ module.exports = {
         query: {
           presets: ['es2015']
         }
-      }
+      },
+      {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract('style-loader', ['css-loader', 'postcss-loader', 'sass-loader'])        
+      }      
     ]
   },
+  postcss: [ 
+    autoprefixer({ browsers: ['last 2 versions'] }) 
+  ],
   resolve: {
     alias: {
       'jquery': 'jquery/src/jquery',
@@ -29,6 +38,7 @@ module.exports = {
     }
   },
   plugins: [
+    new ExtractTextPlugin('bundle.css'),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
@@ -36,4 +46,4 @@ module.exports = {
       Packery: 'isotope-packery'
     })
   ]
-};
+}
