@@ -4,7 +4,7 @@
   "description": "",
   "main": "scripts/index.js",
   "scripts": {
-    "start": "jekyll serve & webpack --watch",
+    "start": "jekyll serve & gulp",
     "build": "webpack -p",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
