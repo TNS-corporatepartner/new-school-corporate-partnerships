@@ -30,8 +30,8 @@ body.people-modal-open {
   top: calc(50vh - 270px);
   width: 100vw;
   outline: none;
-
   overflow: hidden;
+  transition: opacity 0.6s ease-in-out;
   @media (max-height: 800px){
     top: calc(50vh - 230px);
   }
@@ -40,6 +40,9 @@ body.people-modal-open {
   }
   @media (max-width: $break-mobile){
     top: 60px;
+  }
+  &.hidden {
+    opacity: 0;
   }
   .slider-inner {
     transform: translate3d(0,0,0);

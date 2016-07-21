@@ -8,10 +8,10 @@ export class OurPeople {
   constructor() {
     this.section = document.getElementById('ourPeople')
     this.sectionHeadlines = this.section.querySelector('.section-headlines')
-    this.sectionInto = this.section.querySelector('.section-intro')
+    this.sectionIntro = this.section.querySelector('.section-intro')
 
     setTimeout(() => {
-      $(this.sectionInto).addClass('hidden')
+      $(this.sectionIntro).addClass('hidden')
       
       setTimeout(() => {
         $(this.sectionHeadlines).removeClass('hidden')
@@ -42,6 +42,8 @@ export class OurPeople {
     const sliderInnerWidth = document.querySelector('.cell').offsetWidth * 3
     this.sliderInner.style.width = sliderInnerWidth + 'px'
     this.cellWidth = this.slider.querySelector('.cell').offsetWidth
+
+    $('#peopleSlider').removeClass('hidden')
 
     const tl = this.tl
 

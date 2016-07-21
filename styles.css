@@ -1067,7 +1067,8 @@ body.people-modal-open #peopleSlider {
   top: calc(50vh - 270px);
   width: 100vw;
   outline: none;
-  overflow: hidden; }
+  overflow: hidden;
+  transition: opacity 0.6s ease-in-out; }
   @media (max-height: 800px) {
     #peopleSlider {
       top: calc(50vh - 230px); } }
@@ -1077,6 +1078,8 @@ body.people-modal-open #peopleSlider {
   @media (max-width: 800px) {
     #peopleSlider {
       top: 60px; } }
+  #peopleSlider.hidden {
+    opacity: 0; }
   #peopleSlider .slider-inner {
     transform: translate3d(0, 0, 0);
     position: relative; }
