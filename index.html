@@ -50,7 +50,7 @@
 
 				{% for cell in site.future %}
 				<div class="future-of-cell" data-title="{{cell.title}}" data-question="{{cell.question}}">
-					<div class="video-fs" style="background-image: url({{cell.poster}});">												
+					<div class="video-fs" style="background-image: url({{cell.poster}});">
 						<video loop="true" muted src="{{cell.video}}"></video>
 					</div>
 				</div>
@@ -327,7 +327,7 @@
 
 			</div>
 			<div id="siteCredits">
-				<h6>Site Credits</h6>
+				<h6 class="credits-btn">Site Credits <span>&times;</span></h6>
 					<ul>
 						{% for credit in site.credits_text %}
 						<li>

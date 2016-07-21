@@ -418,13 +418,13 @@ body.fp-viewing-contact #downArrow, body.fp-viewing-contact header#header {
   display: none; }
 
 .contactUs {
-  background-color: #222222;
-  padding: 2vw; }
+  background-color: #222222; }
   .contactUs h3, .contactUs h6 {
     color: white; }
   .contactUs .content {
     display: -ms-flexbox;
-    display: flex; }
+    display: flex;
+    padding-left: 2vw; }
     .contactUs .content .debbie {
       margin-top: -6%;
       -webkit-font-smoothing: antialiased;
@@ -468,21 +468,66 @@ body.fp-viewing-contact #downArrow, body.fp-viewing-contact header#header {
             color: #E82E21; }
 
 #siteCredits {
-  clear: left;
   color: white;
   position: absolute;
-  bottom: 0px; }
-  #siteCredits h6 {
-    margin-bottom: 10px; }
+  bottom: 15px;
+  -webkit-font-smoothing: antialiased;
+  pointer-events: auto; }
+  #siteCredits h6.credits-btn {
+    position: absolute;
+    bottom: 0;
+    left: 15px;
+    font-size: 14px;
+    font-weight: normal;
+    cursor: url("/images/click-cursor-red.svg"), auto;
+    z-index: 10; }
+    #siteCredits h6.credits-btn:hover {
+      color: red; }
+    #siteCredits h6.credits-btn span {
+      font-size: 30px;
+      position: relative;
+      top: 3px;
+      margin-left: 5px;
+      opacity: 0;
+      transition: opacity .8s ease; }
   #siteCredits ul {
-    list-style: none; }
+    position: relative;
+    z-index: 5;
+    padding: 120px 2vw 5px 2vw;
+    opacity: 0;
+    list-style: none;
+    transition: opacity .8s ease;
+    margin-bottom: 50px;
+    color: rgba(255, 255, 255, 0.8);
+    background-image: linear-gradient(to bottom, rgba(34, 34, 34, 0) 0%, rgba(34, 34, 34, 0.95) 10%); }
+    @media (min-width: 1024px) {
+      #siteCredits ul {
+        -moz-column-count: 2;
+             column-count: 2;
+        -moz-column-gap: 20px;
+             column-gap: 20px; } }
+    @media (min-width: 1280px) {
+      #siteCredits ul {
+        -moz-column-count: 3;
+             column-count: 3; } }
   #siteCredits li {
     font-size: 12px;
+    line-height: 1.3;
     list-style: none;
-    margin-bottom: 5px;
-    padding-left: 0px; }
+    padding-bottom: 8px;
+    padding-left: 0px;
+    max-width: 850px;
+    /* Chrome, Safari, Opera */
+    page-break-inside: avoid;
+    /* Firefox */
+    break-inside: avoid; }
   #siteCredits a, #siteCredits a:visited {
-    color: white; }
+    color: white;
+    text-decoration: underline; }
+  #siteCredits.open ul {
+    opacity: 1; }
+  #siteCredits.open h6.credits-btn span {
+    opacity: 1; }
 
 #contactModal {
   display: none;
