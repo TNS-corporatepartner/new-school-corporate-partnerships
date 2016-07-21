@@ -674,6 +674,7 @@ section#futureOf {
         section#futureOf .future-of-slider .future-of-cell .video-fs video {
           display: none; } }
   section#futureOf .question {
+    pointer-events: none;
     position: absolute;
     top: 50%;
     left: 0;
