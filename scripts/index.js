@@ -1,3 +1,5 @@
+import '../scss/styles.scss'
+
 import './modernizr.js'
 import Velocity from 'velocity-animate'
 import $ from 'jquery'
