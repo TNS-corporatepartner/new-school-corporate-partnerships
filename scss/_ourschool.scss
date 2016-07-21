@@ -191,12 +191,12 @@ section#ourSchool {
   }
 
   #schoolModal {
+    transform: translate3d(0,0,0);
     position: absolute;
     background-color: $gray-darker-trans;
     pointer-events: none;
     display: none;
     align-items: center;
-
     .content {
       display: none;
       height: calc(100vh - 360px);
