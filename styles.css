@@ -1432,7 +1432,6 @@ body.approach-modal-open #ourApproach .section-headlines {
         -ms-flex-align: center;
             -ms-grid-row-align: center;
             align-items: center;
-        transition: top 1s ease-in-out, left 1s ease-in-out, opacity 1s ease-in-out, font-size 1s ease-in-out;
         pointer-events: none;
         font-size: 12px;
         float: left; }
@@ -1479,6 +1478,8 @@ body.approach-modal-open #ourApproach .section-headlines {
         @media (max-width: 800px) {
           #ourApproach #approachCanvas .approach-slider-inner .approach-grid .program {
             display: none; } }
+        #ourApproach #approachCanvas .approach-slider-inner .approach-grid .program.hidden {
+          opacity: 0; }
         #ourApproach #approachCanvas .approach-slider-inner .approach-grid .program.hover {
           font-size: 16px;
           z-index: 999; }

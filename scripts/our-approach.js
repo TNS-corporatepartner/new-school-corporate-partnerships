@@ -32,7 +32,7 @@ export class OurApproach {
     this.initStreams()
     this.handleClicks()
 
-    if (!Modernizr.touchevents) {
+    if (!Modernizr.touchevents || window.innerWidth >= $breakTablet) {
       this.handleSliderMovement()
       this.handleHover()
     }
@@ -90,6 +90,10 @@ export class OurApproach {
     this.gridWidth = document.querySelector('.approach-grid').offsetWidth
     this.slider.style.width = sliderWidth + 'px'
     Array.prototype.forEach.call(this.grids, (grid) => grid.style.left = this.gridWidth * -1 + 'px')
+
+    //reveal programs
+    $('.program').removeClass('hidden').css('transition', 'top 1s ease-in-out, left 1s ease-in-out, opacity 1s ease-in-out, font-size 1s ease-in-out')
+        
   }
 
   handleSliderMovement() {
