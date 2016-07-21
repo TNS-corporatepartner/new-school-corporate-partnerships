@@ -206,6 +206,4 @@ github_username: jekyll
 markdown: kramdown
 exclude:
 - node_modules
-- scss
-- bower_components
-- js
+- scripts

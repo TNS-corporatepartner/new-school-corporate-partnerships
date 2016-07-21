@@ -1,135 +1,35 @@
-$coreValuesBaseGray: #333;
+$coreValuesBaseGray: #222222;
 
 section#coreValues {
-
-  .section-intro {
-    background-color: $gray-dark;
-    h1 {
-      color: white;
-    }
-  }
-
   .core-values-slider {
+    // display: flex;
     height: 100vh;
-    &.uninitialized {
-      display: flex;
-      .core-values-cell {
-        width: auto;
-        padding: 0;
-        span.close-cell {
-          opacity: 0;
-          pointer-events: none;
-        }
-      }
-      .flickity-prev-next-button {
-        opacity: 0;
-      }
-    }
-    &.content-closed {
-      .core-values-cell .content {
-        left: calc(50% - 110px);
-        width: 220px;
-        h1 {
-          font-size: 2vh;
-        }
-      }
-      +.section-headlines .dynamic-text {
-        opacity: 0;
-      } 
-    }  
-
-    .core-values-cell {
-      position: relative;
-      display: flex;
-      flex-grow: 1;
-      flex-basis: 0%;
-      align-items: center;
+    &.full-width .core-values-cell {
       width: 100%;
+    }
+    .core-values-cell {
+      display: flex;
+      align-items: center;
+      width: 25%;
       height: 100vh;
       padding: 2vw;
-      transition: flex 0.5s ease-in-out, opacity 0.5s ease-in-out;
-      background-color: $coreValuesBaseGray;
-      &:hover {
-        flex-grow: 1.5;
-        .content h1{
-          border-bottom: 5px solid white;
-        }
+      h1 {
+        font-size: 2vw;
+        text-align: center;
+        color: white;
       }
-      &.sibling-is-hovered {
-        // added/removed by js
+      &:first-of-type {
+        background-color: $coreValuesBaseGray;
       }
-      &.opening {
-        flex-grow: 10;
+      &:nth-of-type(2) {
+        background-color: lighten($coreValuesBaseGray, 10%);
       }
-      &.sibling-is-opening {
-        flex-grow: 0;
-        opacity: 0;
-        padding: 0;
+      &:nth-of-type(3) {
+        background-color: lighten($coreValuesBaseGray, 30%);
       }
-
-      #particles-js {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100vw;
+      &:last-of-type {
+        background-color: lighten($coreValuesBaseGray, 50%);
       }
-      span.close-cell {
-        position: absolute;
-        top: 100px;
-        right: 20px;
-        opacity: 1;
-        transition: opacity 0.4s ease-in-out;
-        &:before {
-          content: 'x';
-          color: white;
-        }
-      }
-      .content {
-        position: absolute;
-        display: flex;        
-        overflow: hidden;
-        top: 0; left: 0;
-        height: 100%;
-        width: 600px; //must be width instead of max-width because of text positioning: absolute
-        padding: 2vw;
-        overflow: visible;
-        align-items: center;
-        transition: all 0.4s ease-in-out;
-        .content-inner {
-          position: relative;
-          width: 100%;
-          h1, .dynamic-text {
-            position: absolute; // so incoming text animates in place of outgoing text 
-            top: 0; left: 0;
-            width: 100%;            
-          }
-          h1 {
-            text-align: left;
-            color: white;
-            transition: font-size 0.4s ease-in-out;
-          }
-          .dynamic-text {
-            opacity: 0;
-            color: white;
-          }
-        }
-      }
-      canvas {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100vw;
-      }
-      #statusQuo canvas {
-        cursor: url('/images/status-quo-triangle.png'), auto;
-        transform: rotate(90deg);
-      }
-
-      #fearless canvas {
-        cursor: url('/images/down-cursor.svg'), auto;
-      }
-
     }
   }
 }
