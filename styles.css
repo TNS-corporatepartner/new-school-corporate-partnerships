@@ -568,7 +568,8 @@ body.fp-viewing-contact #downArrow, body.fp-viewing-contact header#header {
       width: 10px; }
       #fp-nav ul li a {
         background-color: white;
-        transition: background .5s ease-in-out; }
+        transition: background .5s ease-in-out;
+        height: 12.5vh; }
         #fp-nav ul li a span {
           display: none; }
         #fp-nav ul li a.active {
@@ -1066,7 +1067,9 @@ body.people-modal-open #peopleSlider {
   left: 0;
   top: calc(50vh - 270px);
   width: 100vw;
-  outline: none; }
+  outline: none;
+  overflow: hidden;
+  transition: opacity 0.6s ease-in-out; }
   @media (max-height: 800px) {
     #peopleSlider {
       top: calc(50vh - 230px); } }
@@ -1076,6 +1079,8 @@ body.people-modal-open #peopleSlider {
   @media (max-width: 800px) {
     #peopleSlider {
       top: 60px; } }
+  #peopleSlider.hidden {
+    opacity: 0; }
   #peopleSlider .slider-inner {
     transform: translate3d(0, 0, 0);
     position: relative; }
@@ -1157,6 +1162,8 @@ body.people-modal-open #peopleSlider {
               #peopleSlider .slider-inner .cell .grid .person.video:hover .overlay:before {
                 content: url(/images/play-button.svg); }
             #peopleSlider .slider-inner .cell .grid .person.video .overlay {
+              top: 0;
+              left: 0;
               background-color: rgba(232, 46, 33, 0.3);
               transition: background 1s ease; }
               @media (max-width: 1024px) {
@@ -1274,7 +1281,6 @@ body.approach-modal-open #ourApproach .section-headlines {
 #ourApproach {
   overflow: hidden; }
   #ourApproach .section-headlines {
-    background-image: linear-gradient(180deg, rgba(225, 225, 225, 0.5) 80%, transparent);
     max-width: none;
     width: 100%; }
     @media (max-width: 800px) {
@@ -1429,7 +1435,6 @@ body.approach-modal-open #ourApproach .section-headlines {
         -ms-flex-align: center;
             -ms-grid-row-align: center;
             align-items: center;
-        transition: top 1s ease-in-out, left 1s ease-in-out, opacity 1s ease-in-out, font-size 1s ease-in-out;
         pointer-events: none;
         font-size: 12px;
         float: left; }
@@ -1476,6 +1481,8 @@ body.approach-modal-open #ourApproach .section-headlines {
         @media (max-width: 800px) {
           #ourApproach #approachCanvas .approach-slider-inner .approach-grid .program {
             display: none; } }
+        #ourApproach #approachCanvas .approach-slider-inner .approach-grid .program.hidden {
+          opacity: 0; }
         #ourApproach #approachCanvas .approach-slider-inner .approach-grid .program.hover {
           font-size: 16px;
           z-index: 999; }

@@ -153,7 +153,7 @@
 								<div class="approach-grid approach-grid-{{forloop.index}}">
 
 									{% for program in projects.programs %}
-										<div class="program" data-id="{{program | slugify}}"><span>{{program}}</span></div>
+										<div class="program hidden" data-id="{{program | slugify}}"><span>{{program}}</span></div>
 									{% endfor %}
 
 									{% for project in site.projects %}
@@ -233,7 +233,7 @@
 		<section id="ourPeople" class="section">
 			{% assign peoples = site.people |sort:'position' %}
 
-			<div id="peopleSlider">
+			<div id="peopleSlider" class="hidden">
 
 				<div class="hover-area" id="hoverLeft"></div>
 				<div class="hover-area" id="hoverRight"></div>
@@ -276,31 +276,30 @@
 		</section>
 
 		<section id="contactUs" class="section">
-				<div class="panel-group">
+			<div class="panel-group">
 
-					{% assign partners = site.partner |sort:'position' %}
+				{% assign partners = site.partner |sort:'position' %}
 
-					{% for panel in partners %}
-						<div class="panel">
-							<div class="bg-img" style="background-image: url({{panel.image}}); background-position: {{ panel.backgroundPosition }}"></div>
-							<div class="panel-tint"></div>
-							<div class="content-wrapper">
-								<div class="content">
-									<h4>{{panel.title}}</h4>
-									{{panel.content}}
-								</div>
+				{% for panel in partners %}
+					<div class="panel">
+						<div class="bg-img" style="background-image: url({{panel.image}}); background-position: {{ panel.backgroundPosition }}"></div>
+						<div class="panel-tint"></div>
+						<div class="content-wrapper">
+							<div class="content">
+								<h4>{{panel.title}}</h4>
+								{{panel.content}}
 							</div>
 						</div>
-					{% endfor %}
-				</div>
+					</div>
+				{% endfor %}
+			</div>
 
-				<hgroup class="section-headlines hidden">
-					<h3>Are You Ready to Design the Future?</h3>
-				</hgroup>
-				<div class="section-intro">
-					<h1>{{partner.title}}</h1>
-				</div>
-
+			<hgroup class="section-headlines hidden">
+				<h3>Are You Ready to Design the Future?</h3>
+			</hgroup>
+			
+			<div class="section-intro">
+				<h1>{{partner.title}}</h1>
 			</div>
 		</section>
 
