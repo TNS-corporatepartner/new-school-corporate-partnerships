@@ -1587,6 +1587,7 @@ section#contactUs {
     display: flex;
     height: 100%; }
     section#contactUs .panel-group .panel {
+      transform: translate3d(0, 0, 0);
       position: relative;
       -ms-flex: 1 3 auto;
           flex: 1 3 auto;
@@ -1597,8 +1598,8 @@ section#contactUs {
       overflow: hidden;
       transition: flex-grow .65s ease-in-out, flex-shrink .65s ease-in-out, background-color .65s ease-in-out;
       transition: flex-grow .65s ease-in-out, flex-shrink .65s ease-in-out, background-color .65s ease-in-out, -ms-flex-positive .65s ease-in-out, -ms-flex-negative .65s ease-in-out;
-      background-color: #E82E21;
-      transform: translate3d(0, 0, 0); }
+      will-change: flex-grow, flex-shrink, background-color;
+      background-color: #E82E21; }
       section#contactUs .panel-group .panel.hover {
         background-color: white;
         -ms-flex: 3 1 auto;
@@ -1897,7 +1898,7 @@ h6 {
   background-size: cover;
   background-position: 50% 50%;
   background-repeat: no-repeat; }
-  .video-fs video {
+  .video-fs video, .video-fs .video-poster {
     min-width: 100%;
     min-height: 100%;
     position: absolute;
