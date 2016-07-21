@@ -207,3 +207,4 @@ markdown: kramdown
 exclude:
 - node_modules
 - scripts
+- scss
