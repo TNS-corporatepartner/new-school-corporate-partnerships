@@ -12,9 +12,9 @@ export class CoreValues {
     $('#coreValues .panel').on('mouseenter', this.openPanel)
     $('#coreValues .panel').on('mouseleave', this.closePanel)
 
-    particlesJS.load('visionary-thinking', '/js/particles/visionary.json')
-    particlesJS.load('couragously-innovative', '/js/particles/innovation.json')
-    particlesJS.load('global-diversity', '/js/particles/diversity.json')
+    particlesJS.load('visionary-thinking', '/particles/visionary.json')
+    particlesJS.load('couragously-innovative', '/particles/innovation.json')
+    particlesJS.load('global-diversity', '/particles/diversity.json')
 
     setTimeout(() => {
       $(this.sectionIntro).addClass('hidden')
