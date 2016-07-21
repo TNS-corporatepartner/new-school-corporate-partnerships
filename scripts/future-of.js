@@ -69,10 +69,19 @@ export class FutureOf {
     if (!Modernizr.touchevents) {      
       if (!video.src) {
         video.src = video.dataset.src
-      }
-      
+      }      
+
       //wait for asynchronus play method to complete
-      video.play().then(handleVideoSliderEvents.bind(this))  
+      const promise = video.play()
+
+      if (promise) {
+        promise.then(handleVideoSliderEvents.bind(this))
+      } else {
+        //handle firefox because firefox play method does not return a promise
+        video.play()
+        handleVideoSliderEvents.call(this)  
+      }
+        
     } else {       
       handleVideoSliderEvents.call(this) //touch-enabled devices
     }          
@@ -83,7 +92,7 @@ export class FutureOf {
       this.questionEl.textContent = this.questions[this.flkty.selectedIndex]
       
       $('body').addClass('show-question')
-
+      
       this.autoPlay = setTimeout(() => {
         $('body').removeClass('show-question')
         
