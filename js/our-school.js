@@ -1,4 +1,5 @@
 import Flickity from 'flickity'
+import Velocity from 'velocity-animate'
 
 export class OurSchool {
 
