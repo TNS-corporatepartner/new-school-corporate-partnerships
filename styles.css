@@ -1076,7 +1076,7 @@ body.people-modal-open #peopleSlider {
     #peopleSlider {
       top: 60px; } }
   #peopleSlider .slider-inner {
-    will-change: left;
+    transform: translate3d(0, 0, 0);
     position: relative; }
     #peopleSlider .slider-inner .cell {
       float: left;
@@ -1291,7 +1291,7 @@ body.approach-modal-open #ourApproach .section-headlines {
       height: calc(100vh - 150px);
       top: 90px; } }
   #ourApproach #approachCanvas .approach-slider-inner {
-    will-change: transform;
+    transform: translate3d(0, 0, 0);
     position: absolute;
     height: 100%; }
     #ourApproach #approachCanvas .approach-slider-inner .approach-grid {
@@ -1856,8 +1856,7 @@ h6 {
   left: 0;
   padding: 2vw;
   max-width: 90vw;
-  transition: opacity 1s ease-in-out;
-  will-change: opacity; }
+  transition: opacity 1s ease-in-out; }
   @media (max-width: 1280px) {
     .section-headlines {
       max-width: calc(100vw - 150px); } }
