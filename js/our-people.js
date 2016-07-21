@@ -31,7 +31,7 @@ export class OurPeople {
     })
     this.timeScale = 5
 
-    document.querySelectorAll('.grid').forEach(chunk => {
+    Array.prototype.forEach.call(document.querySelectorAll('.grid'), (chunk) => {
       new Isotope( chunk, {
         itemSelector: '.person',
         layoutMode: 'masonryHorizontal',

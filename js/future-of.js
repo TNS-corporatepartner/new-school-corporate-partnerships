@@ -1,5 +1,6 @@
 import {app} from './index.js'
 import Flickity from 'flickity'
+import Velocity from 'velocity-animate'
 import 'd3'
 
 export class FutureOf {
@@ -16,7 +17,7 @@ export class FutureOf {
     this.words = []
     this.questions = []
 
-    this.section.querySelectorAll('.future-of-cell').forEach((el) => {
+    Array.prototype.forEach.call(this.section.querySelectorAll('.future-of-cell'), (el) => {
       this.questions.push($(el).data('question'))
       this.words.push($(el).data('title'))
     })

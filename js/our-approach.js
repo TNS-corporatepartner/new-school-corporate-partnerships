@@ -1,8 +1,10 @@
-import {app} from './index.js'
+import 'gsap'
 import _ from 'lodash'
 import {Observable} from 'rxjs'
-import Isotope from 'isotope-layout'
-import 'gsap'
+import Velocity from 'velocity-animate'
+import {app} from './index.js'
+import Packery from 'packery'
+import 'particles.js'
 
 export class OurApproach {
   constructor() {
@@ -71,14 +73,14 @@ export class OurApproach {
     })
 
     //apply same randomized padding to programs in each grid
-    this.grids.forEach(grid => {
-      grid.querySelectorAll('.program').forEach( (program, index) => {
+    Array.prototype.forEach.call(this.grids, (grid) => {
+      Array.prototype.forEach.call(grid.querySelectorAll('.program'), (program, index) => {
         $(program).css(randomPadding[index])
       })
     })
 
     //initalize three identical packery grids
-    this.grids.forEach(grid => {
+    Array.prototype.forEach.call(this.grids, (grid) => {
       new Packery(grid, {
         itemSelector: '.program',
         isHorizontal: true,
@@ -90,7 +92,7 @@ export class OurApproach {
     const sliderWidth = document.querySelector('.approach-grid').offsetWidth * 3
     this.gridWidth = document.querySelector('.approach-grid').offsetWidth
     this.slider.style.width = sliderWidth + 'px'
-    this.grids.forEach(grid => grid.style.left = this.gridWidth * -1 + 'px')
+    Array.prototype.forEach.call(this.grids, (grid) => grid.style.left = this.gridWidth * -1 + 'px')
   }
 
   handleSliderMovement() {
@@ -147,7 +149,7 @@ export class OurApproach {
       $('.project').not(project).addClass('sibling-hover')
       $('.program').not(programEls).addClass('sibling-hover')
 
-      programEls.forEach( (program, index) => {
+      Array.prototype.forEach.call(programEls, (program, index) => {
         $(program).addClass('hover')
 
         //save last original position to reset on mouseleave
@@ -168,7 +170,7 @@ export class OurApproach {
         $('.project').removeClass('sibling-hover')
         $('.program').removeClass('sibling-hover')
 
-        programEls.forEach(el => {
+        Array.prototype.forEach.call(programEls, (el) => {
           $(el).removeClass('hover')
           el.style.left = el.lastLeft
           el.style.top = el.lastTop
