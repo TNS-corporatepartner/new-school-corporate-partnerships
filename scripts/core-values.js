@@ -12,9 +12,7 @@ export class CoreValues {
     $('#coreValues .panel').on('mouseenter', this.openPanel)
     $('#coreValues .panel').on('mouseleave', this.closePanel)
 
-    particlesJS.load('visionary-thinking', '/particles/visionary.json')
-    particlesJS.load('couragously-innovative', '/particles/innovation.json')
-    particlesJS.load('global-diversity', '/particles/diversity.json')
+    this.initParticles()
 
     setTimeout(() => {
       $(this.sectionIntro).addClass('hidden')
@@ -22,8 +20,17 @@ export class CoreValues {
       setTimeout(() => {
         $(this.sectionHeadlines).removeClass('hidden')
       }, 1800)      
-    }, 750)
-    
+    }, 750)    
+  }
+
+  initParticles() {
+    if (!window.pJSDom) {
+      window.pJSDom = []
+    }
+
+    particlesJS.load('visionary-thinking', '/particles/visionary.json')
+    particlesJS.load('couragously-innovative', '/particles/innovation.json')
+    particlesJS.load('global-diversity', '/particles/diversity.json')    
   }
 
   openPanel(e) {
@@ -36,5 +43,14 @@ export class CoreValues {
   closePanel(e) {
     e.stopPropagation()
     $('.panel-group .panel').removeClass('hover hover-sibling')
+  }
+
+  sleep() {    
+    //destroy particles js instances
+    Array.prototype.forEach.call( window.pJSDom, (pjs) => pjs.pJS.fn.vendors.destroypJS() )
+  }
+
+  awake() {
+    this.initParticles()
   }
 }
