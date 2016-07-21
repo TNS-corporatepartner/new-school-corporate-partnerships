@@ -64,7 +64,17 @@ export class FutureOf {
   }
 
   playCellSequence() {
-    this.flkty.selectedElement.querySelector('video').play()    
+    const video = this.flkty.selectedElement.querySelector('video')
+
+    if (!Modernizr.touchevents) {      
+      if (!video.src) {
+        console.log(video.dataset.src)
+        video.src = video.dataset.src
+      }
+      
+      video.play()  
+    }
+        
     this.loadingWord.textContent = this.words[ this.flkty.selectedIndex ]
     this.questionEl.textContent = this.questions[this.flkty.selectedIndex]
     
@@ -82,8 +92,8 @@ export class FutureOf {
     this.flkty.once('scroll', ( progress ) => {
       clearInterval(this.autoPlay)
       
-      const previousVideo = this.flkty.selectedElement.querySelector('video')
-      previousVideo.pause()
+      const previousVideo = this.flkty.selectedElement.querySelector('video')      
+      previousVideo.pause()      
       
       this.flkty.once('settle', () => {        
         previousVideo.currentTime = 0

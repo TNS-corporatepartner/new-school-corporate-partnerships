@@ -27,15 +27,12 @@ export class OurApproach {
       onReverseComplete: () => {
         this.tl.seek('5')
       }
-    }).add( new TweenMax(this.slider, '5', {
-      left: this.gridWidth * -1,
-      ease: Linear.easeNone
-    })).timeScale(0.15)
+    })
 
     this.initStreams()
     this.handleClicks()
 
-    if (window.innerWidth >= app.breakpoints.$break3) {
+    if (!Modernizr.touchevents) {
       this.handleSliderMovement()
       this.handleHover()
     }
@@ -96,6 +93,11 @@ export class OurApproach {
   }
 
   handleSliderMovement() {
+    this.tl.add( new TweenMax(this.slider, '5', {
+      left: this.gridWidth * -1,
+      ease: Linear.easeNone
+    })).timeScale(0.15)
+
     //reverese panning direction when mouse crosses y-center
     this.sliderMouse$
       .map(e => this.mouseCoords(e))

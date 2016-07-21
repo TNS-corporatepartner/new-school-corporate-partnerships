@@ -1,3 +1,4 @@
+import './modernizr.js'
 import Velocity from 'velocity-animate'
 import $ from 'jquery'
 import 'fullpage.js'
@@ -13,9 +14,10 @@ import { ContactUs } from './contact-us.js'
 
 export let app = {
   breakpoints: {
-    $break1: 1440,
-    $break2: 1024,
-    $break3: 800
+    $breakLaptop15: 1440,
+    $breakLaptop13: 1280,
+    $breakTablet: 1024,
+    $breakMobile: 800
   },
   variables: {
     $red: '#E82E21',

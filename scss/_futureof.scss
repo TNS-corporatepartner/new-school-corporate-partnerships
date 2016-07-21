@@ -26,6 +26,11 @@ section#futureOf {
       }
       .video-fs{
         opacity: .75;
+        video {
+          @media (max-width: $break-mobile) {
+            display: none;
+          }
+        }
       }
     }
   }
