@@ -198,13 +198,13 @@ export class OurApproach {
 
       const position2 = {
         left: left + width / 1.5,
-        top: top - 75,
+        top: top - 30,
         place: '02'
       }
 
       const position3 = {
-        left: left + 25,
-        top: top - 75,
+        left: left + 50,
+        top: top - 50,
         place: '03'
       }
 
@@ -252,8 +252,9 @@ export class OurApproach {
 
       // const positions = [position1, position1, position1, position1, position1, position1, position1, position1, position1, position1]
       const positions = [position1, position2, position3, position4, position5, position6, position7, position8, position9, position10]
-      const randomPositions = _.shuffle(positions).slice(0, programEls.length)
-      return randomPositions
+      return positions
+      // const randomPositions = _.shuffle(positions).slice(0, programEls.length)
+      // return randomPositions
     }
   }
 
