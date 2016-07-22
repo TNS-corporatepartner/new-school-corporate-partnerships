@@ -64,6 +64,7 @@ function init() {
     err => console.error(err),
     () => { //executes when initSplashContent stream completes
       window.removeEventListener('click', skipSplashAnimation)
+      window.removeEventListener('touchstart', skipSplashAnimation)
 
        $('main').fullpage({
         anchors:['intro', 'future', 'difference', 'schools', 'approach', 'people', 'partner','contact'],
@@ -198,6 +199,7 @@ function init() {
       }, 9200)
 
       window.addEventListener('click', skipSplashAnimation)
+      window.addEventListener('touchstart', skipSplashAnimation)
     })
   }
 }
