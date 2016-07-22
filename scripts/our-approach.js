@@ -41,6 +41,7 @@ export class OurApproach {
     setTimeout(() => {
       $(this.section.querySelector('.section-intro')).addClass('hidden')
       setTimeout(() => {
+        $(this.slider).addClass('accelerated')
         $(this.section.querySelector('.section-headlines')).removeClass('hidden')
       }, 1800)
     }, 750)

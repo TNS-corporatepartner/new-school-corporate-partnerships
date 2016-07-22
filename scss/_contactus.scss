@@ -13,19 +13,29 @@ section#contactUs {
   .panel-group {
     display: flex;
     height: 100%;
-    .panel {
-      transform: translate3d(0,0,0);
+    .panel {      
       position: relative;
-      flex: 1 3 auto;
+      flex-grow: 1;
+      flex-shrink: 3;
+      flex-basis: auto;
       display: flex;
       align-items: center;
       overflow: hidden;
-      transition: flex-grow .65s ease-in-out, flex-shrink .65s ease-in-out, background-color .65s ease-in-out;
-      will-change: flex-grow, flex-shrink, background-color;
-      background-color: $red;      
+      transition: flex .65s ease-in-out, background-color .65s ease-in-out;
+      background-color: $red;
+      &.accelerated {
+        transform: translate3d(0,0,0);
+        .content-wrapper .content h4 {
+          will-change: transform;
+        }
+        .panel-tint {
+          will-change: background-color;
+        }
+      }      
       &.hover {
         background-color: white;
-        flex: 3 1 auto;
+        flex-grow: 3;
+        flex-shrink: 1;        
         .bg-img {
           opacity: 1;
         }
@@ -51,7 +61,6 @@ section#contactUs {
           filter: blur(10px);
           opacity: .5;
         }
-
         .content h4 {
           transform: scale(0.5);
           opacity: 0.5;
@@ -129,7 +138,7 @@ section#contactUs {
 
 .btn{
   background-color: transparent;
-  transition: all .35s ease-in-out;
+  transition: background-color .35s ease-in-out, color .35s ease-in-out;
   display: inline-block;
   font-family: $font-family-display;
   font-size: 16px;

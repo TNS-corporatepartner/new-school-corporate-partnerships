@@ -59,10 +59,12 @@ body.approach-modal-open {
   //   border: 10px solid red;
   //   pointer-events: none;
   // }
-  .approach-slider-inner {
-    transform: translate3d(0,0,0);
+  .approach-slider-inner {    
     position: absolute;
     height: 100%;
+    &.accelerated {
+      transform: translate3d(0,0,0);
+    }
     .approach-grid {
       height: 100%;
       float: left;
