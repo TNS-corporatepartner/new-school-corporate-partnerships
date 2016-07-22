@@ -32,9 +32,13 @@ export class OurApproach {
     this.initStreams()
     this.handleClicks()
 
-    if (!Modernizr.touchevents || window.innerWidth >= $breakTablet) {
-      this.handleSliderMovement()
+
+    if (!Modernizr.touchevents) {
       this.handleHover()
+    }
+
+    if (!Modernizr.touchevents || window.innerWidth >= 1000) {
+      this.handleSliderMovement()
     }
 
     //fade out section intro
@@ -101,7 +105,9 @@ export class OurApproach {
     this.tl.add( new TweenMax(this.slider, '5', {
       left: this.gridWidth * -1,
       ease: Linear.easeNone
-    })).timeScale(0.15)
+    }))
+
+    this.tl.timeScale(0.05)
 
     //reverese panning direction when mouse crosses y-center
     this.sliderMouse$
@@ -115,7 +121,7 @@ export class OurApproach {
       })
 
     this.sliderLeave$.subscribe(() => {
-      this.tl.timeScale(0.15)
+      this.tl.timeScale(0.05)
     })
   }
 
@@ -130,7 +136,7 @@ export class OurApproach {
 
     this.skipLeave$.subscribe(() => {
       this.timeScaleTween && this.timeScaleTween.kill()
-      this.timeScaleTween = TweenMax.to(this.tl, 2, {timeScale: 0.15})
+      this.timeScaleTween = TweenMax.to(this.tl, 2, {timeScale: 0.05})
     })
 
     this.projectEnter$.subscribe((e) => {
@@ -185,7 +191,7 @@ export class OurApproach {
         })
 
         this.timeScaleTween && this.timeScaleTween.kill()
-        this.timescaleTween = TweenMax.to(this.tl, 1, {timeScale: 0.15})
+        this.timescaleTween = TweenMax.to(this.tl, 1, {timeScale: 0.05})
       })
 
     })
@@ -330,7 +336,7 @@ export class OurApproach {
         e.stopPropagation()
 
         this.timeScaleTween && this.timeScaleTween.kill()
-        this.timescaleTween = TweenMax.to(this.tl, 1, {timeScale: 0.15})
+        this.timescaleTween = TweenMax.to(this.tl, 1, {timeScale: 0.05})
 
         $.fn.fullpage.setAllowScrolling(true)
         $('body').removeClass('approach-modal-open')
