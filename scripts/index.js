@@ -190,13 +190,13 @@ function init() {
               duration: 900,
               display: 'none'
             })
-          }, 3400)
+          }, 5000)
         }
       })
 
       setTimeout(() => {
         obs.complete()
-      }, 9200)
+      }, 10800)
 
       window.addEventListener('click', skipSplashAnimation)
       window.addEventListener('touchstart', skipSplashAnimation)
