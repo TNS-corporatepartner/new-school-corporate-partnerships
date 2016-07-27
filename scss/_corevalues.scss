@@ -11,12 +11,13 @@ section#coreValues {
     display: flex;
     height: 100%;
     .panel {
+      transform: translate3d(0,0,0);
       position: relative;
       flex: 1 6 auto;
       display: flex;
       align-items: center;
       overflow: hidden;
-      transition: all 0.5s ease-in-out;
+      transition: flex 0.5s ease-in-out;
       &:before {
         content: '';
         opacity: 0.85;
@@ -27,26 +28,24 @@ section#coreValues {
         background-position: center;
         background-repeat: no-repeat;
         background-blend-mode: multiply;
-        transition: background-color 0.5s ease-in-out 0s, filter 0.5s linear 0s;
+        transition: background-color 0.5s ease-in-out 0s;
         transform-origin: center;
       }
       &.hover {
+        flex: 6 1 auto;
         &:before {
           background-color: transparent;
-        }
-        flex: 6 1 auto;
+        }        
         .content-wrapper .content {
           pointer-events: none;
           padding-left: 30px !important;
           @media (max-width: $break-mobile) {
              padding-left: 10px !important;
            }
-
           h4 {
-            max-width: 27vw;
-            transform-origin: left center;
+            // max-width: 27vw;            
             transition-delay: 0.25s;
-            transform: scale(1.35);
+            transform: scale(1.35) translate3d(0,0,0);
             @media (max-width: $break-mobile){
               transform: scale(1.1);
               overflow-wrap: break-word;
@@ -79,7 +78,6 @@ section#coreValues {
         &:before {
           background-color: $gray-darker-trans;
         }
-
         .content h4 {
           transform: scale(0.5);
           opacity: 0.5;
@@ -101,7 +99,7 @@ section#coreValues {
         .content {
           position: absolute;
           top: 50%;
-          transform: translateY(-50%);
+          transform: translate3d(0, -50%, 0);
           margin-top: 40px;
           width: 100%;
           padding: 30px;
@@ -109,17 +107,18 @@ section#coreValues {
           background-color: transparent;
           color: white;
           cursor: url('/images/click-cursor-red.svg'), auto;
-          transition: background-color 0.5s ease-in-out, transform 0.5s ease-in-out, padding 0.5s ease-in-out;
+          transition: background-color 0.5s ease-in-out, transform 0.5s ease-in-out;
           @media (max-width: $break-mobile) {
              padding: 10px;
            }
-
           h4 {
-            max-width: 0vw;
+            max-width: 27vw;
+            padding-top: 10px;
             font-size: 4.25vh;
             font-weight: normal;
-            transition: transform 0.5s ease-in-out, max-width 0.5s ease-in-out;
-            transform-origin: left top;
+            transform: scale(1) translate3d(0,0,0);
+            transition: transform 0.5s ease-in-out;
+            transform-origin: left center;
             @media (max-width: $break-laptop15) {
                font-size: 36px;
              }
