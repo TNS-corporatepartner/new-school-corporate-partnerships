@@ -64,21 +64,17 @@ export class FutureOf {
   }
 
   playCellSequence() {
-    const video = this.flkty.selectedElement.querySelector('video')
+    this.playingVideo = this.flkty.selectedElement.querySelector('video')
 
     if (!Modernizr.touchevents) {      
-      if (!video.src) {
-        video.src = video.dataset.src
-      }      
-
       //wait for asynchronus play method to complete
-      const promise = video.play()
+      const promise = this.playingVideo.play()
 
       if (promise) {
         promise.then(handleVideoSliderEvents.bind(this))
       } else {
         //handle firefox because firefox play method does not return a promise
-        video.play()
+        this.playingVideo.play()
         handleVideoSliderEvents.call(this)  
       }
         
@@ -101,25 +97,28 @@ export class FutureOf {
         
       }, 3500) // 3.5 seconds until question is hidden
 
-      const previousVideo = this.flkty.selectedElement.querySelector('video')
-
-      this.flkty.once('scroll', ( progress ) => {
-        clearInterval(this.autoPlay)
-                      
-        if (!Modernizr.touchevents) { 
-          previousVideo.pause()
-        }      
-        
-        this.flkty.once('settle', () => {        
-          if (!Modernizr.touchevents) { 
-            previousVideo.currentTime = 0
-            previousVideo.load()
-          }
-
-          this.playCellSequence()        
-        })
-      })
+      this.flktyScrollHandler = this.handleFlktyScroll.bind(this)
+      this.flkty.once('scroll', this.flktyScrollHandler)
     }    
+  }
+
+  handleFlktyScroll() {
+    const previousVideo = this.playingVideo
+
+    clearInterval(this.autoPlay)
+                  
+    if (!Modernizr.touchevents) { 
+      previousVideo.pause()
+    }      
+    
+    this.flkty.once('settle', () => {        
+      if (!Modernizr.touchevents) { 
+        previousVideo.currentTime = 0
+        previousVideo.load()
+      }
+
+      this.playCellSequence()        
+    })  
   }
 
   shuffler(o) {
@@ -147,6 +146,18 @@ export class FutureOf {
 
   sleep() {
     $('body').removeClass('show-question')
+
+    clearInterval(this.autoPlay)
+    this.flkty.off('scroll', this.flktyScrollHandler)
+
+    if (!Modernizr.touchevents) { 
+      this.playingVideo.currentTime = 0
+      this.playingVideo.load()
+    }    
+
+    if (this.playingVideo) {
+      this.playingVideo.pause()
+    } 
   }
 
   awake() {
