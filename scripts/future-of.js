@@ -59,7 +59,10 @@ export class FutureOf {
     }).then(() => {
       const cell = this.flkty.cells[ this.flkty.selectedIndex ].element
       Velocity(cell, {opacity: 1})
-      this.playCellSequence()      
+
+      if (!this.playingVideo) {
+        this.playCellSequence()
+      }            
     })
   }
 
