@@ -17,7 +17,10 @@ export class FutureOf {
     this.words = []
     this.questions = []
 
-    Array.prototype.forEach.call(this.section.querySelectorAll('.future-of-cell'), (el) => {
+    Array.prototype.forEach.call(this.section.querySelectorAll('.future-of-cell'), (el, i) => {
+      if (i === 0) {
+        this.questionEl.textContent = el.dataset.question
+      }
       this.questions.push($(el).data('question'))
       this.words.push($(el).data('title'))
     })
@@ -86,8 +89,8 @@ export class FutureOf {
     }          
 
     function handleVideoSliderEvents() {
-      this.loadingWord.textContent = this.words[ this.flkty.selectedIndex ]
-      this.questionEl.textContent = this.questions[this.flkty.selectedIndex]
+      // this.loadingWord.textContent = this.words[ this.flkty.selectedIndex ]
+      // this.questionEl.textContent = this.questions[this.flkty.selectedIndex]
       
       $('body').addClass('show-question')
       
@@ -100,12 +103,12 @@ export class FutureOf {
         
       }, 3500) // 3.5 seconds until question is hidden
 
-      this.flktyScrollHandler = this.handleFlktyScroll.bind(this)
+      this.flktyScrollHandler = this.flktyScrollStart.bind(this)
       this.flkty.once('scroll', this.flktyScrollHandler)
     }    
   }
 
-  handleFlktyScroll() {
+  flktyScrollStart() {
     const previousVideo = this.playingVideo
     $('body').removeClass('show-question')
 
@@ -116,6 +119,9 @@ export class FutureOf {
     }      
     
     this.flkty.once('settle', () => {        
+      this.loadingWord.textContent = this.words[ this.flkty.selectedIndex ]
+      this.questionEl.textContent = this.questions[this.flkty.selectedIndex]
+
       if (!Modernizr.touchevents) { 
         previousVideo.currentTime = 0
         previousVideo.load()
@@ -126,9 +132,10 @@ export class FutureOf {
   }
 
   shuffler(o) {
-    this.loadingWord = this.section.querySelector('.section-headlines .dynamic-text')
-
-    Velocity(this.loadingWord, {opacity: 1}, {duration: 1000})
+    // this.loadingWord = this.section.querySelector('.section-headlines .dynamic-text')
+    // $('body').addClass('show-question')
+    console.log(this.loadingWord)
+    this.loadingWord.classList.add('show-override')
 
     return new Promise(resolve => {
       const wordSwitcher = setInterval(() => {
@@ -139,6 +146,7 @@ export class FutureOf {
           clearInterval(wordSwitcher)
           this.loadingWord.textContent = o.words[o.words.length - 1]
           resolve()
+          this.loadingWord.classList.remove('show-override')
         } else {
           o.count++
           o.index++
