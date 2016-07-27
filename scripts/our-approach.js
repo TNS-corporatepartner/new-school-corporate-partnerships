@@ -67,14 +67,14 @@ export class OurApproach {
     //generate random padding from programs in first grid
     var randomPadding = Array.prototype.map.call(document.querySelector('.approach-grid').querySelectorAll('.program'), program => {
       return {
-        paddingTop: (Math.random() * 50) + 1,
+        paddingTop: 5,
         paddingRight: (Math.random() * 50) + 1,
         paddingLeft: (Math.random() * 50) + 1,
-        paddingBottom: (Math.random() * 50) + 1,
+        paddingBottom: 5
       }
-    })
+    })    
 
-    //apply same randomized padding to programs in each grid
+    // apply same randomized padding to programs in each grid
     Array.prototype.forEach.call(this.grids, (grid) => {
       Array.prototype.forEach.call(grid.querySelectorAll('.program'), (program, index) => {
         $(program).css(randomPadding[index])
@@ -259,9 +259,8 @@ export class OurApproach {
 
       // const positions = [position1, position1, position1, position1, position1, position1, position1, position1, position1, position1]
       const positions = [position1, position2, position3, position4, position5, position6, position7, position8, position9, position10]
-      return positions
-      // const randomPositions = _.shuffle(positions).slice(0, programEls.length)
-      // return randomPositions
+      const randomPositions = _.shuffle(positions).slice(0, programEls.length)
+      return randomPositions
     }
   }
 
