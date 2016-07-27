@@ -150,14 +150,11 @@ export class FutureOf {
     clearInterval(this.autoPlay)
     this.flkty.off('scroll', this.flktyScrollHandler)
 
-    if (!Modernizr.touchevents) { 
+    if (this.playingVideo && !Modernizr.touchevents) {
+      this.playingVideo.pause() 
       this.playingVideo.currentTime = 0
       this.playingVideo.load()
     }    
-
-    if (this.playingVideo) {
-      this.playingVideo.pause()
-    } 
   }
 
   awake() {
