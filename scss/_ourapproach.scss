@@ -342,6 +342,8 @@ body.approach-modal-open {
 
     .img-container {
       position: fixed;
+      right: 0;
+      top: 0;
       pointer-events: none;
       height: 100vh;
       display: flex;
