@@ -124,9 +124,6 @@ body.people-modal-open {
             &:hover {
               .overlay {
                 background-color: transparentize($red, .3);
-                &:before {
-                  content:url(/images/play-button.svg);
-                }
               }
             }
             .overlay{
@@ -134,6 +131,9 @@ body.people-modal-open {
               left: 0;
               background-color: transparentize($red, .7);
               transition: background 1s ease;
+              &:before {
+                content:url(/images/play-button.svg);
+              }                            
               @media (max-width: $break-tablet){
                 background-color: transparentize($red, .4);
                 &:before {

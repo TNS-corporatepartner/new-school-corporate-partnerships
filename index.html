@@ -326,7 +326,7 @@
 					<ul>
 						{% for credit in site.credits_text %}
 						<li>
-							{{credit}}
+							{{credit | markdownify | remove: '<p>' | remove: '</p>' }}
 						</li>
 
 						{% endfor %}

@@ -107,6 +107,7 @@ export class FutureOf {
 
   handleFlktyScroll() {
     const previousVideo = this.playingVideo
+    $('body').removeClass('show-question')
 
     clearInterval(this.autoPlay)
                   
