@@ -7,11 +7,11 @@ section#coreValues {
     }
   }
 
+
   .panel-group {
     display: flex;
     height: 100%;
     .panel {
-      transform: translate3d(0,0,0);
       position: relative;
       flex: 1 6 auto;
       display: flex;
@@ -31,6 +31,15 @@ section#coreValues {
         transition: background-color 0.5s ease-in-out 0s;
         transform-origin: center;
       }
+      &.accelerated {
+        transform: translate3d(0,0,0);
+        .content-wrapper .content {
+          transform: translate3d(0, -50%, 0);
+          h4 {
+            transform: scale(1) translate3d(0,0,0);
+          }
+        }
+      }      
       &.hover {
         flex: 6 1 auto;
         &:before {
@@ -42,8 +51,7 @@ section#coreValues {
           @media (max-width: $break-mobile) {
              padding-left: 10px !important;
            }
-          h4 {
-            // max-width: 27vw;            
+          h4 {  
             transition-delay: 0.25s;
             transform: scale(1.35) translate3d(0,0,0);
             @media (max-width: $break-mobile){
@@ -98,8 +106,7 @@ section#coreValues {
         width: 100%;
         .content {
           position: absolute;
-          top: 50%;
-          transform: translate3d(0, -50%, 0);
+          top: 50%;          
           margin-top: 40px;
           width: 100%;
           padding: 30px;
@@ -115,8 +122,7 @@ section#coreValues {
             max-width: 27vw;
             padding-top: 10px;
             font-size: 4.25vh;
-            font-weight: normal;
-            transform: scale(1) translate3d(0,0,0);
+            font-weight: normal;            
             transition: transform 0.5s ease-in-out;
             transform-origin: left center;
             @media (max-width: $break-laptop15) {

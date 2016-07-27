@@ -9,6 +9,7 @@ export class CoreValues {
     this.section = document.getElementById('coreValues')
     this.sectionIntro = this.section.querySelector('.section-intro')
     this.sectionHeadlines = this.section.querySelector('.section-headlines')
+    this.panels = this.section.querySelectorAll('.panel')
     $('#coreValues .panel').on('mouseenter', this.openPanel)
     $('#coreValues .panel').on('mouseleave', this.closePanel)
 
@@ -18,6 +19,9 @@ export class CoreValues {
       $(this.sectionIntro).addClass('hidden')
       
       setTimeout(() => {
+        //enable hardware acceleration after removing section intro
+        $(this.panels).addClass('accelerated')
+
         $(this.sectionHeadlines).removeClass('hidden')
       }, 1800)      
     }, 750)    

@@ -99,11 +99,9 @@ section#contactUs {
           transition: background-color 0.5s ease-in-out;
           @media (max-width: $break-mobile){
             margin-top: -20%;
-
           }
-
           h4 {
-            width: 30vw;
+            width: 20vw;
             font-size: 28px;
             font-weight: normal;
             transition: transform .65s ease-in-out;
