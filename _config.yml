@@ -137,7 +137,11 @@ contact:
   phone: 212.229.5667 x3174
 credits_text:
 - Site Design and Development by [Familiar](http://familiar-studio.com)
-- 'Photography: David Barron, BFA Photo, Michael DiVito, Carly Erickson (BFA Photo), Orlando Fernandez, Stefano Giovanni (stefanogiovannini.com), Jonathan Grassi, Hafenbar, Melissa Hom, Courtesy of the John D. and Catherine T. MacArthur Foundation, Ed Kavishe, Chad J. McNeeley, Yvette Pomerantz, Martin Seck, The New School, U.S. Navy, Scott Wynn' 
+- 'Photography: David Barron, BFA Photo, Michael DiVito, Carly Erickson (BFA Photo),
+  Orlando Fernandez, Stefano Giovanni (stefanogiovannini.com), Jonathan Grassi, Hafenbar,
+  Melissa Hom, Courtesy of the John D. and Catherine T. MacArthur Foundation, Ed Kavishe,
+  Chad J. McNeeley, Yvette Pomerantz, Martin Seck, The New School, U.S. Navy, Scott
+  Wynn'
 email: your-email@domain.com
 description: |
   Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
