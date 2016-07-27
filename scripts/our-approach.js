@@ -291,7 +291,7 @@ export class OurApproach {
       const projectImg = project.querySelector('.project-image').getBoundingClientRect()
 
       modalContent.querySelector('.title-content').textContent = $(project).data('title')
-      modalContent.querySelector('.label-group').textContent = $(project).data('programs').replace(/-/g, ' ').split(',').join(', ')
+      modalContent.querySelector('.label-group').textContent = $(project).data('programs').replace(/-/g, ' ').slice(0, -1).split(',').join(', ')
       modalContent.querySelector('blockquote').textContent = $(project).data('blockquote')
       modalContent.querySelector('.text-content').innerHTML = $(project).data('content')
 
@@ -299,6 +299,7 @@ export class OurApproach {
       $.fn.fullpage.setAllowScrolling(false)
 
       $('body').addClass('approach-modal-open')
+
 
       Velocity(modal, {
         left: projectImg.left,

@@ -5,4 +5,4 @@ position: 29
 image: "/uploads/tennessee-williams.jpg"
 ---
 
-Author and Playright
+Author and Playwright

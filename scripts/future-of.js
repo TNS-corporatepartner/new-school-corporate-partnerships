@@ -132,9 +132,6 @@ export class FutureOf {
   }
 
   shuffler(o) {
-    // this.loadingWord = this.section.querySelector('.section-headlines .dynamic-text')
-    // $('body').addClass('show-question')
-    console.log(this.loadingWord)
     this.loadingWord.classList.add('show-override')
 
     return new Promise(resolve => {
