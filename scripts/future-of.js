@@ -86,7 +86,6 @@ export class FutureOf {
       handleVideoSliderEvents.call(this) //touch-enabled devices
     }          
 
-
     function handleVideoSliderEvents() {
       this.loadingWord.textContent = this.words[ this.flkty.selectedIndex ]
       this.questionEl.textContent = this.questions[this.flkty.selectedIndex]
@@ -102,10 +101,11 @@ export class FutureOf {
         
       }, 3500) // 3.5 seconds until question is hidden
 
+      const previousVideo = this.flkty.selectedElement.querySelector('video')
+
       this.flkty.once('scroll', ( progress ) => {
         clearInterval(this.autoPlay)
-        
-        const previousVideo = this.flkty.selectedElement.querySelector('video')      
+                      
         if (!Modernizr.touchevents) { 
           previousVideo.pause()
         }      
