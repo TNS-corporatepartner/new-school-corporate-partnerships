@@ -1,5 +1,5 @@
 ---
-title: College of Performing&nbsp;Arts
+title: College of Performing Arts
 date: 2016-06-24 13:00:00 Z
 order: 2
 orientation: horz

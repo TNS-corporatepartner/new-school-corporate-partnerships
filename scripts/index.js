@@ -70,6 +70,7 @@ function init() {
         anchors:['intro', 'future', 'difference', 'schools', 'approach', 'people', 'partner','contact'],
         navigation: true,
         autoScrolling: platform.os.family === 'iOS' && window.screen.availWidth === 320 && window.screen.availHeight === 548 ? false : true,
+        touchSensitivity: 15,
         lockAnchors: true,
         afterRender: function() {
           if (!window.location.hash) {

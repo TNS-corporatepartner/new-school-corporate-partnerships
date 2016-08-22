@@ -36,9 +36,12 @@ export class OurPeople {
     this.timeScale = 5
     
     new Hammer(this.slider, {threshold: 10}).on('pan', (e) => {
+      const direction = e.velocityX * -1 >= 0 ? 'right' : 'left"'
       this.tl.timeScale(e.velocityX / -2)
+
       this.timeScaleTween && this.timeScaleTween.kill()
-      this.timeScaleTween = TweenMax.to(tl, 1.75, {timeScale: 0.05})      
+      const settleSpeed = direction === 'right' ? 0.05 : -0.05
+      this.timeScaleTween = TweenMax.to(tl, 1.75, {timeScale: settleSpeed})      
     })
     
 
@@ -94,7 +97,6 @@ export class OurPeople {
     }
     
     $('.person.video').on('mouseenter', () => {
-      // this.tl.timeScale(0.09)
       this.timeScaleTween && this.timeScaleTween.kill()
       this.timeScaleTween = TweenMax.to(tl, 1.75, {timeScale: 0})
     })
@@ -107,15 +109,12 @@ export class OurPeople {
     $('.hover-area').on('mouseenter', () => {
       this.timeScaleTween && this.timeScaleTween.kill()
       this.timeScaleTween = TweenMax.to(this.tl, 2, {timeScale: 1})
-      // this.tl.timeScale(1)
     });
 
     $('.hover-area').on('mouseleave', () => {
       this.timeScaleTween && this.timeScaleTween.kill()
       this.timeScaleTween = TweenMax.to(this.tl, 1.75, {timeScale: 0.05})
-      // this.tl.timeScale(0.05)
     })
-
 
     this.tl.add( new TweenMax(this.sliderInner, '5', {
       left: this.cellWidth * -1,
@@ -124,24 +123,6 @@ export class OurPeople {
     }))
 
     this.tl.timeScale(0.05)
-
-    // const mouseleave$ = Observable.fromEvent(this.slider, 'mouseleave')
-    //   .subscribe(() => {
-    //     this.tl.timeScale(0.05)
-    //   })
-
-
-    // const mousemove$ = Observable.fromEvent(this.slider, 'mousemove')
-    //   .map(e => this.mouseCoords(e))
-    //   .repeat()
-    //   .subscribe(e => {
-    //     if ( e.x < 0 && this.tl.reversed() ) {
-    //       this.tl.reversed(false)
-    //     } else if ( e.x > 0 && !this.tl.reversed() ) {
-    //       this.tl.reversed(true)
-    //     }
-
-    //   })
   }
 
 

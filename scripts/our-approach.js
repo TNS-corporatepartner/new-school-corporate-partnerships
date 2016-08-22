@@ -115,9 +115,12 @@ export class OurApproach {
     })
 
     new Hammer(this.slider, {threshold: 10}).on('pan', (e) => {
+      const direction = e.velocityX * -1 >= 0 ? 'right' : 'left"'
       this.tl.timeScale(e.velocityX / -2)
+
       this.timeScaleTween && this.timeScaleTween.kill()
-      this.timeScaleTween = TweenMax.to(this.tl, 1.75, {timeScale: 0.05})      
+      const settleSpeed = direction === 'right' ? 0.05 : -0.05
+      this.timeScaleTween = TweenMax.to(this.tl, 1.75, {timeScale: settleSpeed})      
     })    
   }
 
