@@ -33,7 +33,7 @@ section#futureOf {
     .future-of-cell {
       width: 100%;
       height: 100vh;
-      &:first-of-type {
+      &:last-of-type {
         opacity: 0;
       }
       .video-fs{

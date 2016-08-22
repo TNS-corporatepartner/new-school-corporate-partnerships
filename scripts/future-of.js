@@ -1,6 +1,7 @@
 import {app} from './index.js'
 import Flickity from 'flickity'
 import Velocity from 'velocity-animate'
+import _ from 'lodash'
 import 'd3'
 
 export class FutureOf {
@@ -32,19 +33,10 @@ export class FutureOf {
       words: ['The Workforce', 'Online', 'Research & Development', 'Big Data']
     }
 
-    this.flkty = new Flickity( this.slider, {
-      cellAlign: 'left',
-      contain: true,
-      wrapAround: true,
-      autoPlay: false
-    })
-
     setTimeout(() => {
       $(this.sectionIntro).addClass('hidden')
       
-      setTimeout(() => {
-        this.initVideos()
-      }, 2200)
+      setTimeout(this.initVideos.bind(this), 2200)
 
       setTimeout(() => {
         $(this.sectionHeadlines).removeClass('hidden')
@@ -60,75 +52,55 @@ export class FutureOf {
       index: 0,
       words: ['The Workforce', 'Online', 'Research & Development', 'Personalization', 'Data Privacy', 'Big Data']
     }).then(() => {
-      const cell = this.flkty.cells[ this.flkty.selectedIndex ].element
-      Velocity(cell, {opacity: 1})
-
-      if (!this.playingVideo) {
-        this.playCellSequence()
-      }            
+      if (app.activeScrollIndex === 2) {
+        this.initFlickity()
+      }
     })
   }
 
-  playCellSequence() {
-    this.playingVideo = this.flkty.selectedElement.querySelector('video')
+  initFlickity() {
+    this.flkty = new Flickity( this.slider, {
+      cellAlign: 'left',
+      contain: true,
+      wrapAround: true,
+      autoPlay: 6000,
+      initialIndex: 6,
+      pauseAutoPlayOnHover: false
+    })
 
-    if (!Modernizr.touchevents) {      
-      //wait for asynchronus play method to complete
-      const promise = this.playingVideo.play()
-
-      if (promise) {
-        promise.then(handleVideoSliderEvents.bind(this))
-      } else {
-        //handle firefox because firefox play method does not return a promise
-        this.playingVideo.play()
-        handleVideoSliderEvents.call(this)  
-      }
-        
-    } else {       
-      handleVideoSliderEvents.call(this) //touch-enabled devices
-    }          
-
-    function handleVideoSliderEvents() {
-      // this.loadingWord.textContent = this.words[ this.flkty.selectedIndex ]
-      // this.questionEl.textContent = this.questions[this.flkty.selectedIndex]
-      
-      $('body').addClass('show-question')
-      
-      this.autoPlay = setTimeout(() => {
-        $('body').removeClass('show-question')
-        
-        setTimeout(() => {
-          this.flkty.next()
-        }, 1500) // 5 seconds until next slide is called (1500ms + 3500ms)
-        
-      }, 3500) // 3.5 seconds until question is hidden
-
-      this.flktyScrollHandler = this.flktyScrollStart.bind(this)
-      this.flkty.once('scroll', this.flktyScrollHandler)
-    }    
-  }
-
-  flktyScrollStart() {
-    const previousVideo = this.playingVideo
-    $('body').removeClass('show-question')
-
-    clearInterval(this.autoPlay)
-                  
-    if (!Modernizr.touchevents) { 
-      previousVideo.pause()
-    }      
+    this.flkty.on('scroll', () => {
+      clearTimeout(this.autoPlayGuarentee)
+      $('body').removeClass('show-question')
+    })
     
-    this.flkty.once('settle', () => {        
+    this.flkty.on('settle', () => {
+      if (!Modernizr.touchevens) {
+        if (this.playingVideo) {
+          this.playingVideo.pause()
+          this.playingVideo.currentTime = 0
+        }
+
+        this.playingVideo = this.flkty.selectedElement.querySelector('video')
+        this.playingVideo.load()
+        this.playingVideo.play()
+      }
+
       this.loadingWord.textContent = this.words[ this.flkty.selectedIndex ]
       this.questionEl.textContent = this.questions[this.flkty.selectedIndex]
+      setTimeout(() => { $('body').addClass('show-question') }, 750)
 
-      if (!Modernizr.touchevents) { 
-        previousVideo.currentTime = 0
-        previousVideo.load()
-      }
+      this.autoPlayGuarentee = setTimeout(() => {
+        this.flkty.next()
+        this.flkty.player.play()        
+      }, 6100)
+    })
 
-      this.playCellSequence()        
-    })  
+    this.flkty.next()
+    
+    setTimeout(() => {
+      const cell = this.flkty.cells[this.flkty.cells.length - 1].element
+      Velocity(cell, {opacity: 1})
+    }, 1000)   
   }
 
   shuffler(o) {
@@ -156,17 +128,19 @@ export class FutureOf {
   sleep() {
     $('body').removeClass('show-question')
 
-    clearInterval(this.autoPlay)
-    this.flkty.off('scroll', this.flktyScrollHandler)
-
-    if (this.playingVideo && !Modernizr.touchevents) {
-      this.playingVideo.pause() 
-      this.playingVideo.currentTime = 0
-      this.playingVideo.load()
+    if (this.flkty) {
+      clearTimeout(this.autoPlayGuarentee)
+      this.flkty.player.pause()
     }    
   }
 
   awake() {
-    this.playCellSequence()
+    if (this.flkty) {
+      this.flkty.next()
+      this.flkty.player.play()
+    } else {
+      this.initFlickity()
+    }
+    
   }
 }
