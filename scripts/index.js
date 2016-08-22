@@ -94,18 +94,16 @@ function init() {
 
           initGlobalStreams()
         },
-        onLeave: function() {
+        onLeave: function(index, nextIndex) {
+          app.activeScrollIndex = nextIndex
           app.activeInstance.sleep && app.activeInstance.sleep()
         },
-        afterLoad: function(anchorLink, index) {
-
+        afterLoad: function(anchorLink, index) {        
           if (app.constructors[index]){
             if (!app.instances[index] ) {
-              app.instances[index] = new app.constructors[index]()
-              app.activeScrollIndex = index
+              app.instances[index] = new app.constructors[index]()              
               app.activeInstance = app.instances[index]
             } else {
-              app.activeScrollIndex = index
               app.activeInstance = app.instances[index]
               app.instances[index].awake && app.instances[index].awake()
             }

@@ -19,7 +19,9 @@ export class OurApproach {
     this.timeScaleTween = null // used as a reference to start and stop timescale animations
 
     //position projects and programs
-    this.positionItems()
+    if (!Modernizr.touchevents) {
+      this.positionItems()
+    }    
 
     //start infinitely looping animation
     this.tl = new TimelineMax({
@@ -282,8 +284,11 @@ export class OurApproach {
     this.projectClick$.subscribe((e) => {
       const project = e.currentTarget
       e.stopPropagation()
-      this.timeScaleTween && this.timeScaleTween.kill()
-      this.timescaleTween = TweenMax.to(this.tl, 1, {timeScale: 0})
+
+      if (!Modernizr.touchevents) {
+        this.timeScaleTween && this.timeScaleTween.kill()
+        this.timescaleTween = TweenMax.to(this.tl, 1, {timeScale: 0})
+      }
 
       const modal = document.getElementById('ourApproachModal')
       const modalContent = modal.querySelector('.content')
@@ -334,8 +339,10 @@ export class OurApproach {
       $(modal).one('click', (e) => {
         e.stopPropagation()
 
-        this.timeScaleTween && this.timeScaleTween.kill()
-        this.timescaleTween = TweenMax.to(this.tl, 1, {timeScale: 0.05})
+        if (!Modernizr.touchevents) {
+          this.timeScaleTween && this.timeScaleTween.kill()
+          this.timescaleTween = TweenMax.to(this.tl, 1, {timeScale: 0.05})
+        }
 
         $.fn.fullpage.setAllowScrolling(true)
         $('body').removeClass('approach-modal-open')
