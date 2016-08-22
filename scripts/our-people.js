@@ -1,8 +1,11 @@
+import {app} from './index'
 import {Observable, Subject} from 'rxjs'
 import Isotope from 'isotope-layout'
 import 'isotope-masonry-horizontal'
 import 'gsap'
 import _ from 'lodash'
+import Hammer from 'hammerjs'
+
 
 export class OurPeople {
   constructor() {
@@ -29,7 +32,15 @@ export class OurPeople {
         this.tl.seek('5')
       }
     })
+
     this.timeScale = 5
+    
+    new Hammer(this.slider, {threshold: 10}).on('pan', (e) => {
+      this.tl.timeScale(e.velocityX / -2)
+      this.timeScaleTween && this.timeScaleTween.kill()
+      this.timeScaleTween = TweenMax.to(tl, 1.75, {timeScale: 0.05})      
+    })
+    
 
     Array.prototype.forEach.call(document.querySelectorAll('.grid'), (chunk) => {
       new Isotope( chunk, {
@@ -85,12 +96,12 @@ export class OurPeople {
     $('.person.video').on('mouseenter', () => {
       // this.tl.timeScale(0.09)
       this.timeScaleTween && this.timeScaleTween.kill()
-      this.timeScaleTween = TweenMax.to(tl, 3, {timeScale: 0})
+      this.timeScaleTween = TweenMax.to(tl, 1.75, {timeScale: 0})
     })
 
     $('.person.video').on('mouseleave', () => {
       this.timeScaleTween && this.timeScaleTween.kill()
-      this.tl.timeScale(0.05)
+      this.timeScaleTween = TweenMax.to(tl, 1.75, {timeScale: 0})
     })
 
     $('.hover-area').on('mouseenter', () => {
@@ -101,7 +112,7 @@ export class OurPeople {
 
     $('.hover-area').on('mouseleave', () => {
       this.timeScaleTween && this.timeScaleTween.kill()
-      this.timeScaleTween = TweenMax.to(this.tl, 3, {timeScale: 0.05})
+      this.timeScaleTween = TweenMax.to(this.tl, 1.75, {timeScale: 0.05})
       // this.tl.timeScale(0.05)
     })
 
@@ -120,17 +131,17 @@ export class OurPeople {
     //   })
 
 
-    const mousemove$ = Observable.fromEvent(this.slider, 'mousemove')
-      .map(e => this.mouseCoords(e))
-      .repeat()
-      .subscribe(e => {
-        if ( e.x < 0 && this.tl.reversed() ) {
-          this.tl.reversed(false)
-        } else if ( e.x > 0 && !this.tl.reversed() ) {
-          this.tl.reversed(true)
-        }
+    // const mousemove$ = Observable.fromEvent(this.slider, 'mousemove')
+    //   .map(e => this.mouseCoords(e))
+    //   .repeat()
+    //   .subscribe(e => {
+    //     if ( e.x < 0 && this.tl.reversed() ) {
+    //       this.tl.reversed(false)
+    //     } else if ( e.x > 0 && !this.tl.reversed() ) {
+    //       this.tl.reversed(true)
+    //     }
 
-      })
+    //   })
   }
 
 

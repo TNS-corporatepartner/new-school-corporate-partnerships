@@ -4,6 +4,7 @@ import {Observable} from 'rxjs'
 import Velocity from 'velocity-animate'
 import {app} from './index.js'
 import Packery from 'packery'
+import Hammer from 'hammerjs'
 import 'particles.js'
 
 export class OurApproach {
@@ -57,7 +58,7 @@ export class OurApproach {
 
     this.projectEnter$ = Observable.fromEvent( this.projects, 'mouseenter' )
     this.projectLeave$ = Observable.fromEvent( this.projects, 'mouseleave' )
-    this.projectClick$ = Observable.fromEvent( this.projects, 'click' )
+    this.projectClick$ = Observable.fromEvent( this.projects, 'mouseup' )
 
     this.skipEnter$ = Observable.fromEvent( this.skips, 'mouseenter' )
     this.skipLeave$ = Observable.fromEvent( this.skips, 'mouseleave' )
@@ -109,20 +110,15 @@ export class OurApproach {
 
     this.tl.timeScale(0.05)
 
-    //reverese panning direction when mouse crosses y-center
-    this.sliderMouse$
-      .map(e => this.mouseCoords(e))
-      .subscribe(e => {
-        if ( e.x < 0 && this.tl.reversed() ) {
-          this.tl.reversed(false)
-        } else if ( e.x > 0 && !this.tl.reversed() ) {
-          this.tl.reversed(true)
-        }
-      })
-
     this.sliderLeave$.subscribe(() => {
       this.tl.timeScale(0.05)
     })
+
+    new Hammer(this.slider, {threshold: 10}).on('pan', (e) => {
+      this.tl.timeScale(e.velocityX / -2)
+      this.timeScaleTween && this.timeScaleTween.kill()
+      this.timeScaleTween = TweenMax.to(this.tl, 1.75, {timeScale: 0.05})      
+    })    
   }
 
   handleHover() {
@@ -157,7 +153,7 @@ export class OurApproach {
 
       //slow scroll to a stop
       this.timeScaleTween && this.timeScaleTween.kill()
-      this.timescaleTween = TweenMax.to(this.tl, 3, {timeScale:0})
+      this.timescaleTween = TweenMax.to(this.tl, 1.75, {timeScale:0})
 
       $('.project').not(project).addClass('sibling-hover')
       $('.program').not(programEls).addClass('sibling-hover')

@@ -5,7 +5,6 @@ import Velocity from 'velocity-animate'
 import $ from 'jquery'
 import 'fullpage.js'
 
-
 import {Observable} from 'rxjs'
 import {Intro} from './intro.js'
 import { FutureOf } from './future-of.js'
