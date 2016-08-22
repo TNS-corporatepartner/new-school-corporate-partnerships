@@ -781,6 +781,17 @@ section#coreValues {
       section#coreValues .panel-group .panel.hover-sibling .content h4 {
         transform: scale(0.5);
         opacity: 0.5; }
+      @media (max-width: 800px) {
+        section#coreValues .panel-group .panel {
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-position: center; }
+          section#coreValues .panel-group .panel:nth-of-type(1) {
+            background-image: url(assets/visionary-thinking-bg.6f7fd552482ea0edeaf4396640c0700d.png); }
+          section#coreValues .panel-group .panel:nth-of-type(2) {
+            background-image: url(assets/courageous-innovation-bg.dcf74565dbc6f8c70acdcf584e8cf25a.png); }
+          section#coreValues .panel-group .panel:nth-of-type(3) {
+            background-image: url(assets/global-diversity-bg.38a3e607be798cf75c1c3cf0ce166abf.png); } }
       section#coreValues .panel-group .panel .particles-container {
         width: 100vw;
         height: 100%; }

@@ -19,7 +19,11 @@ module.exports = {
       {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract('style-loader', ['css-loader', 'postcss-loader', 'sass-loader'])        
-      }      
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
+        loader: 'file?name=assets/[name].[hash].[ext]'
+      },            
     ]
   },
   postcss: [ 

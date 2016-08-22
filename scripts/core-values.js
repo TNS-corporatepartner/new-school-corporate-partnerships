@@ -1,5 +1,6 @@
 import Flickity from 'flickity'
 import {Observable} from 'rxjs'
+import {app} from './index'
 
 let sections = {}
 
@@ -13,7 +14,9 @@ export class CoreValues {
     $('#coreValues .panel').on('mouseenter', this.openPanel)
     $('#coreValues .panel').on('mouseleave', this.closePanel)
 
-    this.initParticles()
+    if (window.innerWidth > app.breakpoints.$breakMobile) {
+      this.initParticles()
+    }
 
     setTimeout(() => {
       $(this.sectionIntro).addClass('hidden')
@@ -51,10 +54,14 @@ export class CoreValues {
 
   sleep() {    
     //destroy particles js instances
-    Array.prototype.forEach.call( window.pJSDom, (pjs) => pjs.pJS.fn.vendors.destroypJS() )
+    if (window.innerWidth > app.breakpoints.$breakMobile) {
+      Array.prototype.forEach.call( window.pJSDom, (pjs) => pjs.pJS.fn.vendors.destroypJS() )
+    }
   }
 
   awake() {
-    this.initParticles()
+    if (window.innerWidth > app.breakpoints.$breakMobile) {
+      this.initParticles()
+    }
   }
 }
