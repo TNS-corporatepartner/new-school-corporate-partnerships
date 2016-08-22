@@ -34,7 +34,7 @@ module.exports = {
       'classie': 'desandro-classie',
       'masonry': 'masonry-layout',
       'isotope': 'isotope-layout',
-      'isotope/js/layout-mode': 'isotope'      
+      'isotope/js/layout-mode': 'isotope'     
     }
   },
   plugins: [
@@ -43,7 +43,8 @@ module.exports = {
       $: 'jquery',
       jQuery: 'jquery',
       Isotope: 'isotope-layout',
-      Packery: 'isotope-packery'
+      Packery: 'isotope-packery',
+      platform: 'platform'
     })
   ]
 }
