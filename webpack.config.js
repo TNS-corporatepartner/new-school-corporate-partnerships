@@ -34,7 +34,9 @@ module.exports = {
       'classie': 'desandro-classie',
       'masonry': 'masonry-layout',
       'isotope': 'isotope-layout',
-      'isotope/js/layout-mode': 'isotope'      
+      'isotope/js/layout-mode': 'isotope',
+      'scream': 'scream/dist/scream.js',      
+      'brim': 'brim/dist/brim.js'      
     }
   },
   plugins: [
@@ -43,7 +45,9 @@ module.exports = {
       $: 'jquery',
       jQuery: 'jquery',
       Isotope: 'isotope-layout',
-      Packery: 'isotope-packery'
+      Packery: 'isotope-packery',
+      scream: 'scream',
+      brim: 'brim'
     })
   ]
 }

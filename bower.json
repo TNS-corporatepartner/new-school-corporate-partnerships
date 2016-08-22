@@ -1,0 +1,21 @@
+{
+  "name": "ns",
+  "description": "",
+  "main": "scripts/index.js",
+  "authors": [
+    "Jason Pearson <jasonp.pdx@gmail.com> (jasonpearson.me)"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/familiar-studio/new-school-corporate-partnerships",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "scream": "^2.0.8",
+    "brim": "^1.0.11"
+  }
+}

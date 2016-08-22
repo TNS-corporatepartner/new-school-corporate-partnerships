@@ -1,6 +1,6 @@
 import '../scss/styles.scss'
-
 import './modernizr.js'
+
 import Velocity from 'velocity-animate'
 import $ from 'jquery'
 import 'fullpage.js'
@@ -59,60 +59,80 @@ function init() {
   var line1 = document.getElementById('svgLine1')
   var line2 = document.getElementById('svgLine2')
 
-  app.intro$ = initSplashContent().subscribe(
-    () => console.log(null),
-    err => console.error(err),
-    () => { //executes when initSplashContent stream completes
-      window.removeEventListener('click', skipSplashAnimation)
-      window.removeEventListener('touchstart', skipSplashAnimation)
 
-       $('main').fullpage({
-        anchors:['intro', 'future', 'difference', 'schools', 'approach', 'people', 'partner','contact'],
-        navigation: true,
-        lockAnchors: true,
-        afterRender: function() {
-          if (!window.location.hash) {
-            $.fn.fullpage.silentMoveTo('future', 1)
-          } else {
-            $.fn.fullpage.silentMoveTo(window.location.hash.slice(1), 1)
-          }
 
-          $('body').removeClass('intro-in-progress')
+  var scream,
+      brim;
 
-          //intro red-background animate to corner
-          Velocity(introBg, {
-            width: '140px',
-            height: '62px'
-          }, {
-            duration: 800,
-            display: 'none'
-          })
+  scream = gajus.Scream({
+      width: {
+          portrait: 320,
+          landscape: 640
+      }
+  });
 
-          Velocity(introLogo, {opacity: 0}, {display: 'none', duration: 450})
+  brim = gajus.Brim({
+      viewport: scream
+  });
 
-          initGlobalStreams()
-        },
-        onLeave: function() {
-          app.activeInstance.sleep && app.activeInstance.sleep()
-        },
-        afterLoad: function(anchorLink, index) {
+  brim.on('viewchange', function (e) {
+      document.body.className = e.viewName;
+  });
 
-          if (app.constructors[index]){
-            if (!app.instances[index] ) {
-              app.instances[index] = new app.constructors[index]()
-              app.activeScrollIndex = index
-              app.activeInstance = app.instances[index]
-            } else {
-              app.activeScrollIndex = index
-              app.activeInstance = app.instances[index]
-              app.instances[index].awake && app.instances[index].awake()
-            }
-          }
+  // app.intro$ = initSplashContent().subscribe(
+  //   () => console.log(null),
+  //   err => console.error(err),
+  //   () => { //executes when initSplashContent stream completes
+  //     window.removeEventListener('click', skipSplashAnimation)
+  //     window.removeEventListener('touchstart', skipSplashAnimation)
 
-        }
-      })
-    }
-  )
+  //      $('main').fullpage({
+  //       anchors:['intro', 'future', 'difference', 'schools', 'approach', 'people', 'partner','contact'],
+  //       navigation: true,
+  //       lockAnchors: true,
+  //       afterRender: function() {
+  //         if (!window.location.hash) {
+  //           $.fn.fullpage.silentMoveTo('future', 1)
+  //         } else {
+  //           $.fn.fullpage.silentMoveTo(window.location.hash.slice(1), 1)
+  //         }
+
+  //         $('body').removeClass('intro-in-progress')
+
+  //         //intro red-background animate to corner
+  //         Velocity(introBg, {
+  //           width: '140px',
+  //           height: '62px'
+  //         }, {
+  //           duration: 800,
+  //           display: 'none'
+  //         })
+
+  //         Velocity(introLogo, {opacity: 0}, {display: 'none', duration: 450})
+
+  //         initGlobalStreams()
+  //       },
+  //       onLeave: function() {
+  //         app.activeInstance.sleep && app.activeInstance.sleep()
+  //       },
+  //       afterLoad: function(anchorLink, index) {
+
+  //         if (app.constructors[index]){
+  //           if (!app.instances[index] ) {
+  //             app.instances[index] = new app.constructors[index]()
+  //             app.activeScrollIndex = index
+  //             app.activeInstance = app.instances[index]
+  //           } else {
+  //             app.activeScrollIndex = index
+  //             app.activeInstance = app.instances[index]
+  //             app.instances[index].awake && app.instances[index].awake()
+  //           }
+  //         }
+
+  //       }
+  //     })
+  //   }
+  // )
 
 
   app.showContactModal = function() {

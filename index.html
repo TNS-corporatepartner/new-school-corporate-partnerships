@@ -21,18 +21,38 @@
 	<link rel="apple-touch-icon" href="/appletouch-icon.png">
 	<link rel="shortcut icon" href="/favicon.ico" />
 
+	<style>
+
+		#brim-mask, #brim-main {
+			color: #fff;
+			pointer-events: none;
+			display: none; }
+
+		#brim-mask {
+			background: #663399; }
+
+		#brim-main {
+			background: #1E824C; }		
+	</style>
+
 </head>
 
 <body class="intro-in-progress">
 	<!--[if lt IE 8]>
 	<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 	<![endif]-->
-	<div id="rotate-text">
+
+	<!--<div id="mobileSafariHack"></div>-->
+
+	<div id="brim-main">
+
+	<!--<div id="rotate-text">
 		<p>For a better experience, please rotate your screen.</p>
-	</div>
+	</div>-->
 	<header id="header">
 		<a href="#">Partner With Us</a>
 	</header>
+	
 
 	<main>
 
@@ -452,6 +472,14 @@
 		</svg>
 	</div>
 
+	</div>
+
+	<div id="brim-mask">
+			aldjksf
+	</div>	
+
+	<script src="/scream.js"></script>
+	<script src="/brim.js"></script>
 	<script src="/bundle.js"></script>
 
 	<script>

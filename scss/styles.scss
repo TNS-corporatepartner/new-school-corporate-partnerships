@@ -275,3 +275,14 @@ h6{
 section > .placeholder-fs {
   border-bottom: 1px solid gray;
 }
+
+#mobileSafariHack {
+  // position: absolute;
+  height: calc(100% + 1px);
+  width: 100%;
+  background-color: rgba(0,0,0,0.8);
+}
+
+#brim-main {
+    pointer-events: none;
+}
