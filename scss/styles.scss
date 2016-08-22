@@ -227,11 +227,13 @@ h6{
   left: 0px;
   bottom: 0px;
   right: 0px;
-  overflow: hidden;
-  background-image: none;
+  overflow: hidden;  
   background-size: cover;
   background-position: 50% 50%;
   background-repeat: no-repeat; 
+  @media (min-width: 700px) {
+    background-image: none !important;
+  }
   video, .video-poster {
     min-width: 100%;
     min-height: 100%;
@@ -243,6 +245,9 @@ h6{
     visibility: visible;
     width: auto;
     height: auto;
+    @media (max-width: 700px) {
+      display: none;
+    }
   }
 }
 

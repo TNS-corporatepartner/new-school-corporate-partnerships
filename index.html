@@ -47,7 +47,7 @@
 
 				{% for cell in site.future %}
 				<div class="future-of-cell" data-title="{{cell.title}}" data-question="{{cell.question}}">
-					<div class="video-fs">
+					<div class="video-fs" style="background-image: url({{cell.poster}})">
 						<img class="video-poster" src="{{cell.poster}}">
 						<video autoplay="false" loop="true" muted src="{{cell.video}}"></video>
 					</div>
@@ -269,7 +269,7 @@
 
 			<div id="personModal">
 				<div class="content"></div>
-				<!--<div id="closePersonModal">&times;</div>-->
+				<div id="closePersonModal">&times;</div>
 			</div>
 		</section>
 
@@ -432,6 +432,7 @@
 				</g>
 			</g>
 		</svg>
+
 		<svg width="120px" height="17px" viewBox="0 0 120 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="overflow: visible;" class="visible-mobile">
 		    <g id="Page-1" stroke="none" stroke-width="1" fill-rule="evenodd" fill="#FFFFFF">
 		            <polygon id="Fill-1" points="2.33653333 12.8074667 119.693867 12.8074667 119.693867 10.9258667 2.33653333 10.9258667"></polygon>

@@ -30,7 +30,7 @@ body {
   &.intro-in-progress {
 
     #fixedLogo {
-      transform: translateY(150%);
+      transform: translateY(175%);
       svg > g {
         transition: none;
         line {
@@ -250,6 +250,9 @@ body.fp-viewing-contact {
     font-weight: normal;
     cursor: url('/images/click-cursor-red.svg'), auto;
     z-index: 10;
+    @media (max-width: $break-mobile) {
+      bottom: 30px;
+    }
     &:hover{
       color: red;
     }

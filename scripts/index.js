@@ -246,6 +246,10 @@ function initGlobalStreams() {
     $('#siteCredits').toggleClass('open');
   })
 
+  $('#downArrow').on('click', function() {
+    $.fn.fullpage.moveSectionDown()
+  })
+
 
   var move$ = Observable.fromEvent(window, 'mousemove')
 
@@ -286,8 +290,6 @@ function initGlobalStreams() {
       $('body').removeClass('partner-tray')
 
       if (app.activeScrollIndex == 1) {
-        $.fn.fullpage.moveSectionDown()
-      } else if ('down' === d) {
         $.fn.fullpage.moveSectionDown()
       } else if ('up' === d) {
         $.fn.fullpage.moveSectionUp()

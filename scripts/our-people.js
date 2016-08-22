@@ -65,16 +65,22 @@ export class OurPeople {
 
       $(modalContent).append(video)
 
-      $('#ourPeople').one('click', (e) => {
-        e.stopPropagation();
-        tl.play()
-
-        $('#ourPeople').removeClass('modal-open');
-        $('body').removeClass('people-modal-open')
-
-        modalContent.innerHTML = ''
-      })
+      if (window.innerWidth >= 700) {
+        $('#ourPeople').one('click', closeVideo)        
+      } else {
+        $('#closePersonModal').one('click', closeVideo)
+      }
     })
+
+    function closeVideo(e) {
+      e.stopPropagation();
+      tl.play()
+
+      $('#ourPeople').removeClass('modal-open');
+      $('body').removeClass('people-modal-open')
+
+      modalContent.innerHTML = ''      
+    }
     
     $('.person.video').on('mouseenter', () => {
       // this.tl.timeScale(0.09)
