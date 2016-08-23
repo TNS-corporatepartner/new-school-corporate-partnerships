@@ -90,7 +90,7 @@ section#contactUs {
         width: 100%;
         .content {
           position: absolute;
-          margin-top: -10%;
+          margin-top: -10%;          
           width: 100%;
           padding: 2vw;
           background-color: transparent;
@@ -102,15 +102,16 @@ section#contactUs {
           }
           h4 {
             width: 30vw;
+            line-height: 1.1em;
             font-size: 28px;
             font-weight: normal;
             transition: transform .65s ease-in-out;
             transform-origin: bottom left;
             @media (max-width: $break-mobile){
               font-size: 3vw;
-              overflow-wrap: break-word;
-              word-wrap: break-word;
-              hyphens: auto;
+              // overflow-wrap: break-word;
+              // word-wrap: break-word;
+              // hyphens: auto;
             }
           }
           p {

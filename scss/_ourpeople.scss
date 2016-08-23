@@ -94,14 +94,16 @@ body.people-modal-open {
           flex-wrap: wrap;
           background-position: center;
           background-repeat: no-repeat;
-          background-size: cover;
-          &:not(.video) {
-            filter: grayscale(1);
-            transition: filter 1s ease;
-            &:hover {
-              filter: grayscale(0);
-              .overlay {
-                opacity: .7;
+          background-size: cover;          
+          @media (min-width: $break-tablet) {
+            &:not(.video) {
+              filter: grayscale(1);
+              transition: filter 1s ease;
+              &:hover {              
+                filter: grayscale(0);
+                .overlay {
+                  opacity: .7;
+                }
               }
             }
           }
@@ -127,21 +129,24 @@ body.people-modal-open {
             @media (max-width: $break-mobile){
               width: calc(200vh - 240px);
             }
-            &:hover {
+            @media (min-width: $break-tablet) {
+              &:hover {
+                .overlay {
+                  background-color: transparentize($red, .3);
+                }
+              }       
               .overlay {
-                background-color: transparentize($red, .3);
-              }
-            }
+                background-color: transparentize($red, .7);
+                transition: background 1s ease;                
+              }       
+            }           
             .overlay{
               top: 0;
-              left: 0;
-              background-color: transparentize($red, .7);
-              transition: background 1s ease;
+              left: 0;              
               &:before {
                 content:url(/images/play-button.svg);
               }                            
-              @media (max-width: $break-tablet){
-                background-color: transparentize($red, .4);
+              @media (max-width: $break-tablet){                
                 &:before {
                   content:url(/images/play-button.svg);
                 }
