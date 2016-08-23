@@ -342,6 +342,17 @@ body.fp-viewing-contact {
   }
 }
 
+#closeContactModal {
+  position: absolute;
+  right: 15px;
+  top: 0px;
+  font-size: 50px;
+  color: $red;
+  @media (min-width: $break-tablet) {
+    display: none;
+  }
+}
+
 body.contact-modal-active {
   #contactModal .section-headlines {
     opacity: 1

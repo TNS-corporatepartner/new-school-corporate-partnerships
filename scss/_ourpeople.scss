@@ -94,10 +94,12 @@ body.people-modal-open {
           flex-wrap: wrap;
           background-position: center;
           background-repeat: no-repeat;
-          background-size: cover;          
+          background-size: cover;
+          &:not(.video) {
+            filter: grayscale(1);            
+          }          
           @media (min-width: $break-tablet) {
-            &:not(.video) {
-              filter: grayscale(1);
+            &:not(.video) {              
               transition: filter 1s ease;
               &:hover {              
                 filter: grayscale(0);
@@ -135,14 +137,14 @@ body.people-modal-open {
                   background-color: transparentize($red, .3);
                 }
               }       
-              .overlay {
-                background-color: transparentize($red, .7);
+              .overlay {                
                 transition: background 1s ease;                
               }       
             }           
             .overlay{
               top: 0;
-              left: 0;              
+              left: 0;
+              background-color: transparentize($red, .7);              
               &:before {
                 content:url(/images/play-button.svg);
               }                            

@@ -66,12 +66,12 @@ function init() {
       window.removeEventListener('click', skipSplashAnimation)
       window.removeEventListener('touchstart', skipSplashAnimation)
     
-      var isIphone5 = platform.os.family === 'iOS' && window.screen.availWidth <= 320 && window.screen.availHeight <= 568 ? true : false
-
+      app.isIphone5 = platform.os.family === 'iOS' && window.screen.availWidth <= 320 && window.screen.availHeight <= 568 ? true : false            
+      
        $('main').fullpage({
         anchors:['intro', 'future', 'difference', 'schools', 'approach', 'people', 'partner','contact'],
         navigation: true,
-        autoScrolling: isIphone5 ? false : true,
+        autoScrolling: app.isIphone5 ? false : true,
         touchSensitivity: 15,
         lockAnchors: true,
         afterRender: function() {
@@ -115,6 +115,8 @@ function init() {
       })
     }
   )
+
+  
 
 
   app.showContactModal = function() {
@@ -172,6 +174,11 @@ function init() {
 
   function initSplashContent() {
     return Observable.create(obs => {
+
+      if (app.isIphone5) {
+        obs.complete()
+        return
+      }
 
       //logo animate in
       Velocity(line1, {x1: 4.501, y1: 64.81, x2: 109.524, y2: 64.81}, {duration: 500})

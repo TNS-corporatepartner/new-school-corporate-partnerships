@@ -75,14 +75,17 @@ export class FutureOf {
     
     this.flkty.on('settle', () => {
       if (!Modernizr.touchevens) {
+
         if (this.playingVideo) {
           this.playingVideo.pause()
           this.playingVideo.currentTime = 0
         }
 
         this.playingVideo = this.flkty.selectedElement.querySelector('video')
-        this.playingVideo.load()
-        this.playingVideo.play()
+        if (this.playingVideo) {
+          this.playingVideo.load()
+          this.playingVideo.play()
+        }
       }
 
       this.loadingWord.textContent = this.words[ this.flkty.selectedIndex ]
@@ -141,6 +144,5 @@ export class FutureOf {
     } else {
       this.initFlickity()
     }
-    
   }
 }

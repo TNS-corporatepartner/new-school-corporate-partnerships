@@ -25,6 +25,17 @@ body.school-modal-open {
     }
   }
 
+  #closeSchoolModal {
+    position: absolute;
+    right: 15px;
+    top: 0px;
+    font-size: 50px;
+    color: $red;
+    @media (min-width: $break-tablet) {
+      display: none;
+    }
+  }
+
   .school{
     filter:grayscale(100%) blur(10px);
     opacity: .4;
