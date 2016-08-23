@@ -19,7 +19,7 @@ export class OurApproach {
     this.timeScaleTween = null // used as a reference to start and stop timescale animations
 
     //position projects and programs
-    if (!Modernizr.touchevents) {
+    if (window.innerWidth >= app.breakpoints.$breakMobile) {
       this.positionItems()
     }    
 
@@ -35,12 +35,11 @@ export class OurApproach {
     this.initStreams()
     this.handleClicks()
 
-
     if (!Modernizr.touchevents) {
       this.handleHover()
     }
 
-    if (!Modernizr.touchevents || window.innerWidth >= 1000) {
+    if (window.innerWidth >= app.breakpoints.$breakMobile) {
       this.handleSliderMovement()
     }
 
@@ -285,7 +284,7 @@ export class OurApproach {
       const project = e.currentTarget
       e.stopPropagation()
 
-      if (!Modernizr.touchevents) {
+      if (window.innerWidth >= app.breakpoints.$breakMobile) {
         this.timeScaleTween && this.timeScaleTween.kill()
         this.timescaleTween = TweenMax.to(this.tl, 1, {timeScale: 0})
       }
@@ -339,7 +338,7 @@ export class OurApproach {
       $(modal).one('click', (e) => {
         e.stopPropagation()
 
-        if (!Modernizr.touchevents) {
+        if (window.innerWidth >= app.breakpoints.$breakMobile) {
           this.timeScaleTween && this.timeScaleTween.kill()
           this.timescaleTween = TweenMax.to(this.tl, 1, {timeScale: 0.05})
         }

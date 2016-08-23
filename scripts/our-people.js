@@ -88,6 +88,7 @@ export class OurPeople {
 
     function closeVideo(e) {
       e.stopPropagation();
+      const modalContent = personModal.querySelector('.content')
       tl.play()
 
       $('#ourPeople').removeClass('modal-open');

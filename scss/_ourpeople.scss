@@ -232,8 +232,8 @@ body.people-modal-open {
     }
     position: absolute;
     z-index: 999;
-    top: 10px;
-    right: calc(50% - 30px);
+    top: -10px;
+    left: 20px;
     color: red;
     font-size: 60px;
   }
