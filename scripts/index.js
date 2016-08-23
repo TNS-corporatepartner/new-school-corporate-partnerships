@@ -65,19 +65,8 @@ function init() {
     () => { //executes when initSplashContent stream completes
       window.removeEventListener('click', skipSplashAnimation)
       window.removeEventListener('touchstart', skipSplashAnimation)
-
-      var isIphone5
-
-      // if (Math.abs(window.orientation) === 90) {
-      //   //landscape
-      //   isIphone5 = platform.os.family === 'iOS' && window.screen.availWidth === 548 && window.screen.availHeight === 320 ? true : false
-      //   console.log('landscape')
-      // } else {
-        //portrait
-        isIphone5 = platform.os.family === 'iOS' && window.screen.availWidth === 320 && window.screen.availHeight === 548 ? true : false
-        console.log('portrait')
-      // }
-
+    
+      var isIphone5 = platform.os.family === 'iOS' && window.screen.availWidth <= 320 && window.screen.availHeight <= 568 ? true : false
       console.log(window.screen.availWidth, window.screen.availHeight)
       console.log('iphone 5? ' + isIphone5)          
 
