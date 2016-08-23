@@ -1,4 +1,8 @@
 body.school-modal-open {
+  header {
+    display: none;
+  }
+
   #fixedLogo svg > g {
     fill: white;
     transition: fill 0.8s ease-in-out;
