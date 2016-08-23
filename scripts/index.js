@@ -66,10 +66,25 @@ function init() {
       window.removeEventListener('click', skipSplashAnimation)
       window.removeEventListener('touchstart', skipSplashAnimation)
 
+      var isIphone5
+
+      // if (Math.abs(window.orientation) === 90) {
+      //   //landscape
+      //   isIphone5 = platform.os.family === 'iOS' && window.screen.availWidth === 548 && window.screen.availHeight === 320 ? true : false
+      //   console.log('landscape')
+      // } else {
+        //portrait
+        isIphone5 = platform.os.family === 'iOS' && window.screen.availWidth === 320 && window.screen.availHeight === 548 ? true : false
+        console.log('portrait')
+      // }
+
+      console.log(window.screen.availWidth, window.screen.availHeight)
+      console.log('iphone 5? ' + isIphone5)          
+
        $('main').fullpage({
         anchors:['intro', 'future', 'difference', 'schools', 'approach', 'people', 'partner','contact'],
         navigation: true,
-        autoScrolling: platform.os.family === 'iOS' && window.screen.availWidth === 320 && window.screen.availHeight === 548 ? false : true,
+        autoScrolling: isIphone5 ? false : true,
         touchSensitivity: 15,
         lockAnchors: true,
         afterRender: function() {
