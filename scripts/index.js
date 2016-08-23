@@ -119,7 +119,7 @@ function init() {
 
   app.showContactModal = function() {
     $.fn.fullpage.setAllowScrolling(false)
-
+    
     Velocity(header, {opacity: 0}, {
       duration: 125,
       complete: function() {
@@ -131,7 +131,9 @@ function init() {
           duration: 500,
           display: 'flex',
           complete: function() {
-
+            
+            $('body').addClass('contact-modal-active')
+            
             Velocity(contactModal.querySelector('.content'), {
               opacity: 1
             }, {
@@ -146,6 +148,8 @@ function init() {
   }
 
   app.hideContactModal = function() {
+
+    $('body').removeClass('contact-modal-active')
 
     Velocity(contactModal.querySelector('.content'), {opacity: 0}, {
       display: 'none',

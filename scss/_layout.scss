@@ -323,7 +323,6 @@ body.fp-viewing-contact {
   display: none;
   position: absolute; z-index: 120;
   cursor: url('/images/close-cursor-red.svg'), auto;
-
   background-color: $red;
   top: 0;
   right: 0;
@@ -335,6 +334,17 @@ body.fp-viewing-contact {
 
   .content {
     display: none;
+  }
+
+  .section-headlines {
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+  }
+}
+
+body.contact-modal-active {
+  #contactModal .section-headlines {
+    opacity: 1
   }
 }
 
