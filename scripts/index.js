@@ -67,8 +67,6 @@ function init() {
       window.removeEventListener('touchstart', skipSplashAnimation)
     
       var isIphone5 = platform.os.family === 'iOS' && window.screen.availWidth <= 320 && window.screen.availHeight <= 568 ? true : false
-      console.log(window.screen.availWidth, window.screen.availHeight)
-      console.log('iphone 5? ' + isIphone5)          
 
        $('main').fullpage({
         anchors:['intro', 'future', 'difference', 'schools', 'approach', 'people', 'partner','contact'],
