@@ -73,6 +73,7 @@ body.approach-modal-open {
       float: left;
       @media (max-width: $break-mobile) {
         display: flex;
+        align-items: center;
         width: 100vw !important;
         left: 0 !important;
         &.approach-grid-2,
