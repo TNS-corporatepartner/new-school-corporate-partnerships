@@ -107,8 +107,8 @@ section#contactUs {
             font-weight: normal;
             transition: transform .65s ease-in-out;
             transform-origin: bottom left;
-            @media (max-width: $break-mobile){
-              font-size: 3vw;
+            @media (max-width: $break-tablet){
+              font-size: 2vw;
               // overflow-wrap: break-word;
               // word-wrap: break-word;
               // hyphens: auto;

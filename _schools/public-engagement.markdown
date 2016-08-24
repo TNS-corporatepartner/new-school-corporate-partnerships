@@ -1,5 +1,5 @@
 ---
-title: Schools of Public&nbsp;Engagement
+title: Schools of Public Engagement
 date: 2016-06-24 16:00:00 Z
 order: 5
 orientation: horz
