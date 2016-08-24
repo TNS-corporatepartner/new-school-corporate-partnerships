@@ -45,9 +45,21 @@ export let app = {
   }
 }
 
-window.addEventListener('DOMContentLoaded', init)
+window.addEventListener('DOMContentLoaded', function() {
+  if ( 
+    window.screen.orientation && window.screen.orientation.type === 'landscape-primary' ||
+    window.innerWidth > window.innerHeight
+  ) {
+    init()
+  } else {
+    window.addEventListener('orientationchange', init)          
+  }
+})
 
 function init() {
+  console.log('init')
+  window.removeEventListener('orientationchange', init)
+  
   let splashContent$ = null, initSplash = true
   var header = document.getElementById('header')
   var contactModal = document.getElementById('contactModal')
