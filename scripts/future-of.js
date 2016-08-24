@@ -52,7 +52,7 @@ export class FutureOf {
       index: 0,
       words: ['The Workforce', 'Online', 'Research & Development', 'Personalization', 'Data Privacy', 'Big Data']
     }).then(() => {
-      if (app.activeScrollIndex === 2) {
+      if (!this.hasSlept) {
         this.initFlickity()
       }
     })
@@ -68,42 +68,45 @@ export class FutureOf {
       pauseAutoPlayOnHover: false
     })
 
-    this.flkty.on('scroll', () => {
-      clearTimeout(this.autoPlayGuarentee)
-      $('body').removeClass('show-question')
-    })
-    
-    this.flkty.on('settle', () => {
-      if (!Modernizr.touchevens) {
-
-        if (this.playingVideo) {
-          this.playingVideo.pause()
-          this.playingVideo.currentTime = 0
-        }
-
-        this.playingVideo = this.flkty.selectedElement.querySelector('video')
-        if (this.playingVideo) {
-          this.playingVideo.load()
-          this.playingVideo.play()
-        }
-      }
-
-      this.loadingWord.textContent = this.words[ this.flkty.selectedIndex ]
-      this.questionEl.textContent = this.questions[this.flkty.selectedIndex]
-      setTimeout(() => { $('body').addClass('show-question') }, 750)
-
-      this.autoPlayGuarentee = setTimeout(() => {
-        this.flkty.next()
-        this.flkty.player.play()        
-      }, 6100)
-    })
-
-    this.flkty.next()
+    this.flkty.on('scroll', this.handleFlktyScroll.bind(this))
+    this.flkty.on('settle', this.handleFlktySettle.bind(this))
+    this.flkty.next()    
     
     setTimeout(() => {
       const cell = this.flkty.cells[this.flkty.cells.length - 1].element
       Velocity(cell, {opacity: 1})
     }, 1000)   
+  }
+
+  handleFlktyScroll() {
+    clearTimeout(this.autoPlayGuarentee)
+    $('body').removeClass('show-question')
+  }
+
+  handleFlktySettle() {
+    if (!Modernizr.touchevens) {
+
+      if (this.playingVideo) {
+        this.playingVideo.pause()
+        this.playingVideo.currentTime = 0
+      }
+
+      this.playingVideo = this.flkty.selectedElement.querySelector('video')
+
+      if (this.playingVideo) {
+        this.playingVideo.load()
+        this.playingVideo.play()
+      }
+    }
+
+    this.loadingWord.textContent = this.words[ this.flkty.selectedIndex ]
+    this.questionEl.textContent = this.questions[this.flkty.selectedIndex]
+    setTimeout(() => { $('body').addClass('show-question') }, 750)
+
+    this.autoPlayGuarentee = setTimeout(() => {
+      this.flkty.next()
+      this.flkty.player.play()        
+    }, 6100)
   }
 
   shuffler(o) {
@@ -130,6 +133,7 @@ export class FutureOf {
 
   sleep() {
     $('body').removeClass('show-question')
+    this.hasSlept =  true
 
     if (this.flkty) {
       clearTimeout(this.autoPlayGuarentee)
