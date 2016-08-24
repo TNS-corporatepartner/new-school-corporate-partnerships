@@ -73,9 +73,9 @@ section#ourSchool {
     position: relative;
     height: 100%;
     @media (max-width: $break-mobile){
-      height: calc(100vh - 120px);
+      height: calc(100vh - 200px);
       display: flex;
-      align-items: center;
+      align-items: flex-start;
     }
     .school {
       position: absolute;
@@ -151,7 +151,7 @@ section#ourSchool {
         overflow: hidden;
         @media (max-width: $break-mobile){
           position: relative;
-          height: 32vh;
+          height: 35vh;
         }
       }
       .img {
@@ -198,7 +198,7 @@ section#ourSchool {
           transition: all 0.4s ease-in-out;
           @media (max-width: $break-mobile){
             position: relative;
-            font-size: 3.5vh;
+            font-size: 3vh;
           }
         }
       }
