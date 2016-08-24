@@ -210,7 +210,6 @@ body.people-modal-open {
       }
     }
   }
-
 }
 
 #personModal {
@@ -243,10 +242,10 @@ body.people-modal-open {
     }
     position: absolute;
     z-index: 999;
-    top: -10px;
-    left: 20px;
+    top: 45px;
+    right: 14px;
     color: red;
-    font-size: 60px;
+    font-size: 45px;
   }
 }
 
@@ -259,6 +258,11 @@ section#ourPeople.modal-open{
       color: white;
     }
   }
+
+  #peopleSlider {
+    pointer-events: none;
+  }
+
   #personModal{
     opacity: 1;
     pointer-events: auto;
