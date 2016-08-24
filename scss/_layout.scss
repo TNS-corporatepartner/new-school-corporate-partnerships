@@ -319,7 +319,7 @@ body.fp-viewing-contact {
 
 #contactModal {
   display: none;
-  position: absolute; z-index: 120;
+  position: fixed; z-index: 120;
   cursor: url('/images/close-cursor-red.svg'), auto;
   background-color: $red;
   top: 0;

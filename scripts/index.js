@@ -66,12 +66,22 @@ function init() {
       window.removeEventListener('click', skipSplashAnimation)
       window.removeEventListener('touchstart', skipSplashAnimation)
     
-      app.isIphone5 = platform.os.family === 'iOS' && window.screen.availWidth <= 320 && window.screen.availHeight <= 568 ? true : false            
-      
+      if (window.screen.availWidth > window.screen.availHeight) {
+        var isLandscapeMeasurement = true 
+      }
+
+      const screenWidth = isLandscapeMeasurement ? 568 : 320 
+      const screenHeight = isLandscapeMeasurement ? 320 : 568 
+
+      app.isIphone5 = platform.os.family === 'iOS' && 
+                      window.screen.availWidth <= screenWidth && window.screen.availHeight <= screenHeight 
+                      ? true : false
+
+
        $('main').fullpage({
         anchors:['intro', 'future', 'difference', 'schools', 'approach', 'people', 'partner','contact'],
         navigation: true,
-        autoScrolling: app.isIphone5 ? false : true,
+        autoScrolling: true,
         touchSensitivity: 15,
         lockAnchors: true,
         afterRender: function() {
@@ -113,6 +123,14 @@ function init() {
 
         }
       })
+
+      if (app.isIphone5) {
+        $.fn.fullpage.setAutoScrolling(false);
+      }
+
+      window.addEventListener('orientationchange', function() {    
+        $.fn.fullpage.reBuild();
+      })      
     }
   )
 
@@ -174,11 +192,6 @@ function init() {
 
   function initSplashContent() {
     return Observable.create(obs => {
-
-      if (app.isIphone5) {
-        obs.complete()
-        return
-      }
 
       //logo animate in
       Velocity(line1, {x1: 4.501, y1: 64.81, x2: 109.524, y2: 64.81}, {duration: 500})
@@ -260,7 +273,6 @@ function initGlobalStreams() {
   $('#downArrow').on('click', function() {
     $.fn.fullpage.moveSectionDown()
   })
-
 
   var move$ = Observable.fromEvent(window, 'mousemove')
 
