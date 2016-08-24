@@ -57,7 +57,6 @@ window.addEventListener('DOMContentLoaded', function() {
 })
 
 function init() {
-  console.log('init')
   window.removeEventListener('orientationchange', init)
   
   let splashContent$ = null, initSplash = true
@@ -138,6 +137,7 @@ function init() {
 
       if (app.isIphone5) {
         $.fn.fullpage.setAutoScrolling(false);
+        $('body').addClass('is-iphone5')
       }
 
       window.addEventListener('orientationchange', function() {    
