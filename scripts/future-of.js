@@ -17,6 +17,9 @@ export class FutureOf {
     this.slider = document.querySelector('.future-of-slider')
     this.words = []
     this.questions = []
+    this.videos = document.querySelectorAll('#futureOf video')
+
+    console.log(this.videos)
 
     Array.prototype.forEach.call(this.section.querySelectorAll('.future-of-cell'), (el, i) => {
       if (i === 0) {
@@ -69,7 +72,7 @@ export class FutureOf {
     })
 
     this.flkty.on('scroll', this.handleFlktyScroll.bind(this))
-    this.flkty.on('settle', this.handleFlktySettle.bind(this))
+
     this.flkty.next()    
     
     setTimeout(() => {
@@ -78,24 +81,45 @@ export class FutureOf {
     }, 1000)   
   }
 
-  handleFlktyScroll() {
+  handleFlktyScroll(prog, xpos) {
+    const targetDistances = this.flkty.slides
+      .map( (slide, index) => slide.target - xpos)
+
+    const closestIndex = targetDistances
+      .map(dist => Math.abs(dist))
+      .indexOf(
+        Math.min.apply(null, targetDistances.map(dist => Math.abs(dist)))
+      )
+
+    const closestDistance = targetDistances.splice(closestIndex, 1)[0]        
+    const scrub = (0.22 / (closestDistance / 100 >= 1 ? closestDistance / 100 : 1)).toFixed(2)    
+
+    if (this.scrub !== scrub && scrub > 0.18 ) {
+      this.handleFlktySettle(closestIndex)
+      console.log('handle')      
+    } else if (scrub <= 0.18) {
+      this.videos[closestIndex].currentTime = scrub
+      console.log('scrub')
+    }
+
+    this.scrub = scrub
+    
     clearTimeout(this.autoPlayGuarentee)
     $('body').removeClass('show-question')
   }
 
-  handleFlktySettle() {
+  handleFlktySettle(index) {
     if (!Modernizr.touchevens) {
 
       if (this.playingVideo) {
         this.playingVideo.pause()
-        this.playingVideo.currentTime = 0
       }
 
-      this.playingVideo = this.flkty.selectedElement.querySelector('video')
+      // this.playingVideo = this.flkty.selectedElement.querySelector('video')
+      this.playingVideo = this.videos[index]
 
       if (this.playingVideo) {
-        this.playingVideo.load()
-        this.playingVideo.play()
+        this.playingVideo.play()        
       }
     }
 
