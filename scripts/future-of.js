@@ -19,8 +19,6 @@ export class FutureOf {
     this.questions = []
     this.videos = document.querySelectorAll('#futureOf video')
 
-    console.log(this.videos)
-
     Array.prototype.forEach.call(this.section.querySelectorAll('.future-of-cell'), (el, i) => {
       if (i === 0) {
         this.questionEl.textContent = el.dataset.question
@@ -82,6 +80,8 @@ export class FutureOf {
   }
 
   handleFlktyScroll(prog, xpos) {
+    $('body').removeClass('show-question')
+
     const targetDistances = this.flkty.slides
       .map( (slide, index) => slide.target - xpos)
 
@@ -96,16 +96,11 @@ export class FutureOf {
 
     if (this.scrub !== scrub && scrub > 0.18 ) {
       this.handleFlktySettle(closestIndex)
-      console.log('handle')      
     } else if (scrub <= 0.18) {
       this.videos[closestIndex].currentTime = scrub
-      console.log('scrub')
     }
 
-    this.scrub = scrub
-    
-    clearTimeout(this.autoPlayGuarentee)
-    $('body').removeClass('show-question')
+    this.scrub = scrub  
   }
 
   handleFlktySettle(index) {
@@ -123,14 +118,11 @@ export class FutureOf {
       }
     }
 
-    this.loadingWord.textContent = this.words[ this.flkty.selectedIndex ]
-    this.questionEl.textContent = this.questions[this.flkty.selectedIndex]
-    setTimeout(() => { $('body').addClass('show-question') }, 750)
-
-    this.autoPlayGuarentee = setTimeout(() => {
-      this.flkty.next()
-      this.flkty.player.play()        
-    }, 6100)
+    setTimeout(() => { 
+    this.loadingWord.textContent = this.words[ index ]
+    this.questionEl.textContent = this.questions[index]
+      $('body').addClass('show-question')     
+    }, 750)
   }
 
   shuffler(o) {
@@ -160,7 +152,6 @@ export class FutureOf {
     this.hasSlept =  true
 
     if (this.flkty) {
-      clearTimeout(this.autoPlayGuarentee)
       this.flkty.player.pause()
     }    
   }
