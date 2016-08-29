@@ -64,7 +64,7 @@ export class FutureOf {
       cellAlign: 'left',
       contain: true,
       wrapAround: true,
-      autoPlay: 5500,
+      autoPlay: 5450,
       initialIndex: 6,
       pauseAutoPlayOnHover: false
     })
