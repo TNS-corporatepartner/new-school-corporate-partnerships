@@ -36,14 +36,14 @@ export class FutureOf {
 
     setTimeout(() => {
       $(this.sectionIntro).addClass('hidden')
-      
+
       setTimeout(this.initVideos.bind(this), 2200)
 
       setTimeout(() => {
         $(this.sectionHeadlines).removeClass('hidden')
       }, 1800)
 
-    }, 750)    
+    }, 750)
   }
 
   initVideos() {
@@ -64,19 +64,19 @@ export class FutureOf {
       cellAlign: 'left',
       contain: true,
       wrapAround: true,
-      autoPlay: 6000,
+      autoPlay: 5500,
       initialIndex: 6,
       pauseAutoPlayOnHover: false
     })
 
     this.flkty.on('scroll', this.handleFlktyScroll.bind(this))
 
-    this.flkty.next()    
-    
+    this.flkty.next()
+
     setTimeout(() => {
       const cell = this.flkty.cells[this.flkty.cells.length - 1].element
       Velocity(cell, {opacity: 1})
-    }, 1000)   
+    }, 1000)
   }
 
   handleFlktyScroll(prog, xpos) {
@@ -91,8 +91,8 @@ export class FutureOf {
         Math.min.apply(null, targetDistances.map(dist => Math.abs(dist)))
       )
 
-    const closestDistance = targetDistances.splice(closestIndex, 1)[0]        
-    const scrub = (0.22 / (closestDistance / 100 >= 1 ? closestDistance / 100 : 1)).toFixed(2)    
+    const closestDistance = targetDistances.splice(closestIndex, 1)[0]
+    const scrub = (0.22 / (closestDistance / 100 >= 1 ? closestDistance / 100 : 1)).toFixed(2)
 
     if (this.scrub !== scrub && scrub > 0.18 ) {
       this.handleFlktySettle(closestIndex)
@@ -100,7 +100,7 @@ export class FutureOf {
       this.videos[closestIndex].currentTime = scrub
     }
 
-    this.scrub = scrub  
+    this.scrub = scrub
   }
 
   handleFlktySettle(index) {
@@ -114,14 +114,14 @@ export class FutureOf {
       this.playingVideo = this.videos[index]
 
       if (this.playingVideo) {
-        this.playingVideo.play()        
+        this.playingVideo.play()
       }
     }
 
-    setTimeout(() => { 
+    setTimeout(() => {
     this.loadingWord.textContent = this.words[ index ]
     this.questionEl.textContent = this.questions[index]
-      $('body').addClass('show-question')     
+      $('body').addClass('show-question')
     }, 750)
   }
 
@@ -153,7 +153,7 @@ export class FutureOf {
 
     if (this.flkty) {
       this.flkty.player.pause()
-    }    
+    }
   }
 
   awake() {
