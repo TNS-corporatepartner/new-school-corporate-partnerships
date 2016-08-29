@@ -1,7 +1,7 @@
 ---
 title: Sustainability
 position: 3
-video: http://familiar-temp.s3.amazonaws.com/nscp/SUSTAINABILITY.mp4
+video: http://familiar-temp.s3.amazonaws.com/nscp/SUSTAINABILITY-TRIM.mp4
 poster: "/images/posters/SUSTAINABILITY.png"
 mobilePoster: "/images/posters/MOBILESUSTAINABILITY.png"
 question: How can spending more be more&nbsp;profitable?
