@@ -1,3 +1,7 @@
+html.touchevents section#futureOf video {
+  pointer-events: none;
+}
+
 body.show-question {
   section#futureOf .question {
     transition-delay: 1.25s;
