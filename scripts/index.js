@@ -50,7 +50,7 @@ window.addEventListener('DOMContentLoaded', function() {
     window.screen.orientation && window.screen.orientation.type === 'landscape-primary' ||
     window.innerWidth > window.innerHeight
   ) {
-    init()
+    init()    
   } else {
     window.addEventListener('orientationchange', init)          
   }
