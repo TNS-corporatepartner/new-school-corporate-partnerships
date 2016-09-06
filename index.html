@@ -245,6 +245,7 @@
 							<div class="grid">
 								{% for person in peoples %}
 									<div class="person {% if person.video %}video{% endif %}" style="background-image:url('{{person.image}}');" data-src="{% if person.video %}{{person.video}}{% endif %}">
+										<video autoplay="false" src="https://player.vimeo.com/video/{{person.video}}"></video>
 										<div class="overlay"></div>
 										<hgroup>
 											<h6>{{ person.title }}</h6>

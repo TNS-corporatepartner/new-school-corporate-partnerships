@@ -61,30 +61,30 @@ export class OurPeople {
 
     const tl = this.tl
 
-    $('.person.video').on('click', function(e) {
-      e.stopPropagation()
+    // $('.person.video').on('click', function(e) {
+    //   e.stopPropagation()
 
-      tl.pause()
+    //   tl.pause()
 
-      const personModal = document.getElementById('personModal')
-      const modalContent = personModal.querySelector('.content')
-      const videoSrc = `https://player.vimeo.com/video/${$(this).data('src')}?autoplay=1&color=e82e21&title=0&byline=0&portrait=0`;
-      const video = $('<iframe frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>')
+    //   const personModal = document.getElementById('personModal')
+    //   const modalContent = personModal.querySelector('.content')
+    //   const videoSrc = `https://player.vimeo.com/video/${$(this).data('src')}?autoplay=1&color=e82e21&title=0&byline=0&portrait=0`;
+    //   const video = $('<iframe frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>')
 
-      video.attr('src', videoSrc)
-      video.attr('autoplay', true)
+    //   video.attr('src', videoSrc)
+    //   video.attr('autoplay', true)
 
-      $('#ourPeople').addClass('modal-open');
-      $('body').addClass('people-modal-open')
+    //   $('#ourPeople').addClass('modal-open');
+    //   $('body').addClass('people-modal-open')
 
-      $(modalContent).append(video)
+    //   $(modalContent).append(video)
 
-      if (window.innerWidth >= 700) {
-        $('#ourPeople').one('click', closeVideo)        
-      } else {
-        $('#closePersonModal').one('click', closeVideo)
-      }
-    })
+    //   if (window.innerWidth >= 700) {
+    //     $('#ourPeople').one('click', closeVideo)        
+    //   } else {
+    //     $('#closePersonModal').one('click', closeVideo)
+    //   }
+    // })
 
     function closeVideo(e) {
       e.stopPropagation();
