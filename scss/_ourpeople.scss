@@ -113,8 +113,7 @@ body.people-modal-open {
             &:hover {
               p {
                 max-height: 200px;
-                opacity: 1;
-                margin-top: 5px;
+                opacity: 1;                
               }
             }
           }
@@ -180,7 +179,8 @@ body.people-modal-open {
             max-height: 0;
             font-size: 18px;
             line-height: 1.2;
-            transition: all 0.8s ease-in-out;
+            margin-top: 5px;
+            transition: max-height 0.8s ease-in-out, opacity 0.8s ease-in-out;
             @media (max-width: $break-laptop13){
               font-size: 16px;
             }

@@ -104,10 +104,20 @@ export class OurPeople {
 
     $('.person.video').on('mouseleave', () => {
       this.timeScaleTween && this.timeScaleTween.kill()
-      this.timeScaleTween = TweenMax.to(tl, 1.75, {timeScale: 0})
+      this.timeScaleTween = TweenMax.to(tl, 1.75, {timeScale: 0.05})
     })
 
-    $('.hover-area').on('mouseenter', () => {
+    $('.hover-area').on('mouseenter', (e) => {      
+
+      const isScrollingForward = e.currentTarget.id === 'hoverRight'
+      const isReversed = this.tl.reversed()
+
+      if (isScrollingForward && isReversed) {
+        this.tl.reversed(false)
+      } else if( !isScrollingForward && !isReversed ) {
+        this.tl.reverse()
+      }
+
       this.timeScaleTween && this.timeScaleTween.kill()
       this.timeScaleTween = TweenMax.to(this.tl, 2, {timeScale: 1})
     });
