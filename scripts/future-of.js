@@ -40,7 +40,7 @@ export class FutureOf {
       setTimeout(this.initVideos.bind(this), 2200)
 
       setTimeout(() => {
-        $(this.sectionHeadlines).removeClass('hidden')
+        $(this.sectionHeadlines).removeClass('hidden')        
       }, 1800)
 
     }, 750)
@@ -55,6 +55,7 @@ export class FutureOf {
     }).then(() => {
       if (!this.hasSlept) {
         this.initFlickity()
+        $('body').addClass('show-question')
       }
     })
   }
@@ -69,7 +70,21 @@ export class FutureOf {
       pauseAutoPlayOnHover: false
     })
 
-    this.flkty.on('scroll', this.handleFlktyScroll.bind(this))
+    // this.flkty.on('dragStart', this.handleFlktyDragStart.bind(this))
+
+    this.flkty.on('select', this.playNextVideo.bind(this))
+
+    this.flkty.on('settle', () => {
+      this.loadingWord.textContent = this.words[ this.flkty.selectedIndex ]
+      this.questionEl.textContent = this.questions[ this.flkty.selectedIndex ]
+      $('body').addClass('show-question')
+
+      this.hideQuestionTimer = setTimeout(() => {
+        if (this.flkty.player.state === 'playing') {
+          $('body').removeClass('show-question')
+        }        
+      }, 4000)      
+    })        
 
     this.flkty.next()
 
@@ -79,50 +94,60 @@ export class FutureOf {
     }, 1000)
   }
 
-  handleFlktyScroll(prog, xpos) {
-    $('body').removeClass('show-question')
+  // handleFlktyDragStart() {
+  //   $('body').removeClass('show-question')
 
-    const targetDistances = this.flkty.slides
-      .map( (slide, index) => slide.target - xpos)
+  //   if (!Modernizr.touchevents) {
+  //     this.handleDragStartDragMove = _.throttle(this.handleFlktyDragMove.bind(this), 15)
+  //     this.flkty.on('dragMove', this.handleDragStartDragMove)
+  //   }
+  // }
 
-    const closestIndex = targetDistances
-      .map(dist => Math.abs(dist))
-      .indexOf(
-        Math.min.apply(null, targetDistances.map(dist => Math.abs(dist)))
-      )
+  handleFlktyDragMove(e, p, v) {
+    const cellWidth = this.flkty.selectedElement.offsetWidth
+    const startScrubPos = cellWidth * 0.15
+    const scrubSeconds = 2        
+    let scrubToTime
+    let scrubToIndex
 
-    const closestDistance = targetDistances.splice(closestIndex, 1)[0]
-    const scrub = (0.22 / (closestDistance / 100 >= 1 ? closestDistance / 100 : 1)).toFixed(2)
+    if ( v.x < 0 && Math.abs(v.x) > startScrubPos ) {
+      scrubToIndex = this.flkty.selectedIndex + 1 < this.flkty.cells.length ?
+        this.flkty.selectedIndex + 1 : 0
 
-    if (this.scrub !== scrub && scrub > 0.18 ) {
-      this.handleFlktySettle(closestIndex)
-    } else if (scrub <= 0.18) {
-      this.videos[closestIndex].currentTime = scrub
+      scrubToTime = scrubSeconds * Math.abs(v.x) / cellWidth
+
+    } else if (v.x > 0 && v.x > startScrubPos ) {      
+      scrubToIndex = this.flkty.selectedIndex - 1 >= 0 ?
+        this.flkty.selectedIndex - 1 : this.flkty.cells.length - 1
+
+      scrubToTime = scrubSeconds * v.x / cellWidth      
     }
 
-    this.scrub = scrub
+    if (scrubToIndex) {
+      this.videos[scrubToIndex].currentTime = scrubToTime.toFixed(3)
+    }
   }
 
-  handleFlktySettle(index) {
-    if (!Modernizr.touchevens) {
+  playNextVideo() {  
+    if (this.flkty.player.state !== 'playing') {
+      $('body').removeClass('show-question')
+    }
+        
+    clearTimeout(this.hideQuestionTimer)
 
+    if (!Modernizr.touchevens) {
+      // this.flkty.off('dragMove', this.handleDragStartDragMove)
+      
       if (this.playingVideo) {
         this.playingVideo.pause()
       }
 
-      // this.playingVideo = this.flkty.selectedElement.querySelector('video')
-      this.playingVideo = this.videos[index]
+      this.playingVideo = this.videos[this.flkty.selectedIndex]
 
       if (this.playingVideo) {
         this.playingVideo.play()
       }
     }
-
-    setTimeout(() => {
-    this.loadingWord.textContent = this.words[ index ]
-    this.questionEl.textContent = this.questions[index]
-      $('body').addClass('show-question')
-    }, 750)
   }
 
   shuffler(o) {
@@ -163,5 +188,5 @@ export class FutureOf {
     } else {
       this.initFlickity()
     }
-  }
+  }  
 }
