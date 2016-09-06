@@ -172,22 +172,21 @@ body.fp-viewing-contact {
 }
 
 .contactUs {
-
   background-color: rgb(34, 34, 34);
-
   h3, h6 {
     color: white;
   }
-
   .content {
     display: flex;
     padding-left: 2vw;
-
+    @media (max-width: $break-mobile) {
+      padding-top: 5vh;
+    }
     .debbie {
       margin-top: -6%;
       -webkit-font-smoothing: antialiased;
       border: 1px solid white;
-      padding: 25px;
+      padding: 25px;      
       cursor: url('/images/arrow-cursor-red.svg'), auto;
       @media (max-width: $break-mobile){
         padding: 15px;
@@ -211,7 +210,7 @@ body.fp-viewing-contact {
         color: white;
         font-size: 24px;
         @media (max-width: $break-mobile){
-          font-size: 5vh;
+          font-size: 3vh;
         }
 
       }
@@ -225,15 +224,12 @@ body.fp-viewing-contact {
           display: block;
           margin-bottom: 15px;
           color: white;
-          font-size: 16px;
-
+          // font-size: 16px;
           cursor: url('/images/click-cursor-red.svg'), auto;
           text-decoration: none;
-
           &:hover{
             color: $red;
           }
-
         }
       }
     }
@@ -261,7 +257,9 @@ body.fp-viewing-contact {
     cursor: url('/images/click-cursor-red.svg'), auto;
     z-index: 10;
     @media (max-width: $break-mobile) {
-      bottom: 30px;
+      bottom: 0;
+      left: 2vw;
+      font-size: 10px;
     }
     &:hover{
       color: red;
@@ -332,7 +330,6 @@ body.fp-viewing-contact {
   height: 64px;
   color: white;
   align-items: center;
-  padding: 2vw;
 
   .content {
     display: none;
