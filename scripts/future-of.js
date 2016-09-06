@@ -70,7 +70,7 @@ export class FutureOf {
       pauseAutoPlayOnHover: false
     })
 
-    this.flkty.on('dragStart', this.handleFlktyDragStart.bind(this))
+    // this.flkty.on('dragStart', this.handleFlktyDragStart.bind(this))
 
     this.flkty.on('select', this.playNextVideo.bind(this))
 
@@ -94,13 +94,14 @@ export class FutureOf {
     }, 1000)
   }
 
-  handleFlktyDragStart() {
-    $('body').removeClass('show-question')
-    if (!Modernizr.touchevents) {
-      this.handleDragStartDragMove = _.throttle(this.handleFlktyDragMove.bind(this), 15)
-      this.flkty.on('dragMove', this.handleDragStartDragMove)
-    }
-  }
+  // handleFlktyDragStart() {
+  //   $('body').removeClass('show-question')
+
+  //   if (!Modernizr.touchevents) {
+  //     this.handleDragStartDragMove = _.throttle(this.handleFlktyDragMove.bind(this), 15)
+  //     this.flkty.on('dragMove', this.handleDragStartDragMove)
+  //   }
+  // }
 
   handleFlktyDragMove(e, p, v) {
     const cellWidth = this.flkty.selectedElement.offsetWidth
@@ -135,7 +136,7 @@ export class FutureOf {
     clearTimeout(this.hideQuestionTimer)
 
     if (!Modernizr.touchevens) {
-      this.flkty.off('dragMove', this.handleDragStartDragMove)
+      // this.flkty.off('dragMove', this.handleDragStartDragMove)
       
       if (this.playingVideo) {
         this.playingVideo.pause()
