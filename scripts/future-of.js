@@ -25,6 +25,10 @@ export class FutureOf {
       }
       this.questions.push($(el).data('question'))
       this.words.push($(el).data('title'))
+
+      if (Modernizr.touchevents) {
+        $(el.querySelector('video')).attr('src', '')
+      }
     })
 
     this.shufflerConfig = {

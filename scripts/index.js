@@ -45,7 +45,7 @@ export let app = {
   }
 }
 
-window.addEventListener('DOMContentLoaded', function() {
+window.addEventListener('load', function() {
   if ( 
     window.screen.orientation && window.screen.orientation.type === 'landscape-primary' ||
     window.innerWidth > window.innerHeight
