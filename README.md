@@ -11,6 +11,8 @@ To modify content, login to [Siteleaf's Admin Panel](https://manage.siteleaf.com
 
 After clicking save, updates should immediately show up on the [live site](http://corporatepartner.newschool.edu/). 
 
+If you do not see the content you're looking to modify, try looking at the _config.yml file inside Github.
+
 
 ## Updating Content/Code via Github
 If you would like to modify the code directly, you will need to be added as a collaborator to [The Corporate Partners Repo](https://github.com/TNS-corporatepartner/new-school-corporate-partnerships). Collaborators can be added in the Settings panel of the repo.
