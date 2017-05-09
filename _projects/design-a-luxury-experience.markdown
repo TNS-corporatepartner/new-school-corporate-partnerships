@@ -1,7 +1,7 @@
 ---
 title: Design a Luxury Experience
 date: 2016-06-24 21:01:00 Z
-image: "/uploads/hack-healthcare.jpg"
+image: "/uploads/godiva.jpg"
 question: Can luxury be a sustainable enterprise?
 programs:
 - Journalism + Design
