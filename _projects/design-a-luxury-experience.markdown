@@ -1,18 +1,22 @@
 ---
-title: Design a Living Memorial2
+title: Design a Luxury Experience
 date: 2016-06-24 21:01:00 Z
-image: "/uploads/memorial.jpg"
-question: How can a digital experience provide physicality to ephemeral memories?
+image: "/uploads/hack-healthcare.jpg"
+question: Can luxury be a sustainable enterprise?
 programs:
-- Cultural Theory
-- Design and Technology
-- Graphic Design
-- Interface Design
-- Media Studies
+- Journalism + Design
+- Media Management
+- Nonprofit Management
+- Piano
+- Product Design
 ---
 
-Media Studies faculty and students bring to life the AIDS Memorial Quilt for the digital era. The AIDS Memorial Quilt, a breath-taking 1.3 million-square-foot quilt made by the families and friends of people lost to AIDS, is one of the largest ongoing pieces of community folk art in the world. Constantly traveling across the world in portions for exhibition value , the AIDS Memorial Quilt has never been seen in its entirety and cannot continue to withstand the physical contact it’s endured since 1987.  
+Godiva chocolates, however divine, don’t just appear out of thin air— they’re meticulously crafted, wrapped and marketed. But can the pleasure of indulging in them and the brand be conveyed in the in-store shopping experience?
 
-Seeking potential solutions, the creative minds at The New School revolutionized the quilt, and public interactivity, by developing “Aids Quilt Touch”, a comprehensive digital experience. Using the latest touch technology, viewers can for the first time see the quilt in its entirety and zoom in an out of panels at a finger’s touch. The comprehensive digital experience also acts as a vehicle for thoughtful discourse - people can search the quilt for their loved ones by name, add comments to their patches, and generate new narratives with a community of like minds.
+Godiva teamed up with students from The New School to find out. 
 
-Aids Quilt Touch won a Digital Humanities Implementation Grant from the National Endowment for the Humanities and entry into SIGGRAPH 2015, a national convention for cutting-edge computer graphics and interactive techniques.
+In 2016, the company launched Chocathon: Re-imagine the Godiva Chocolate Experience, a competition challenging students from various programs within The New School, including Parsons School of Design, to create a new store layout that focused on user experience, sustainability, and luxury. 
+
+The students rose to the challenge, channeling their ongoing commitment to sustainable design to deliver solutions that Godiva would find inspiring and effective. Through collaboration and mixing disciplines, these student teams designed a space for Godiva that allowed the company to take risks and innovate in ways that point to the future of sustainable chocolate making. 
+
+The winning proposed space was one in which Godiva could conduct research on their customers’ responses to their products and showcase new sustainable packaging designs and recipes that match their luxurious and thoughtfully considered brand.
