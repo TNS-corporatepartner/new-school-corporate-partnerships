@@ -1,5 +1,5 @@
 ---
-title: Design a Living Memorial
+title: Design a Living Memorial2
 date: 2016-06-24 21:01:00 Z
 image: "/uploads/memorial.jpg"
 question: How can a digital experience provide physicality to ephemeral memories?
