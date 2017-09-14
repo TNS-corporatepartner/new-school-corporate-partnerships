@@ -1,9 +1,9 @@
 ---
-title: Stimulate innovation & entrepreneurship
+title: Custom Executive Education
 date: 2016-06-24 21:00:00 Z
 position: 0
 image: "/uploads/workshop.jpg"
 backgroundPosition: 40%, 0%
 ---
 
-The New School offers opportunities to create new thinking for a new world. From incubating ideas to solving specific business challenges, The New School designs for both the issues of our time as well as those to come.
+Continuous innovation is the key to succeeding in today’s disruptive environment. Embed design thinking into your company’s DNA through executive education that integrates design tools with foundational business concepts. Empower your managers with a fresh perspective and new ways to solve problems.
